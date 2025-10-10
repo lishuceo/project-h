@@ -94,7 +94,18 @@ export class GameScene extends Phaser.Scene {
     if (state === GameState.PHYSICS_RUNNING) {
       // 检查是否所有像素块都已稳定
       if (this.physicsManager.allStable) {
-        this.stateManager.setState(GameState.CHECKING_ELIMINATION);
+        // 活跃像素块全部稳定，增量检查是否有新的不稳定像素块
+        const beforeCount = this.physicsManager.activeCount;
+        this.physicsManager.recheckStability();
+        const afterCount = this.physicsManager.activeCount;
+        
+        if (afterCount > beforeCount) {
+          // 发现新的不稳定像素块，继续物理模拟
+          console.log(`发现 ${afterCount - beforeCount} 个新的不稳定像素块，继续下落`);
+        } else {
+          // 真正全部稳定，进入消除检测
+          this.stateManager.setState(GameState.CHECKING_ELIMINATION);
+        }
       }
     } else if (state === GameState.CHECKING_ELIMINATION) {
       // 检查消除
@@ -107,24 +118,28 @@ export class GameScene extends Phaser.Scene {
    * 参考设计文档第8章
    */
   private checkAndPerformElimination(): void {
-    const eliminationClusters = this.eliminationSystem.checkElimination();
+    const eliminationResults = this.eliminationSystem.checkElimination();
 
-    if (eliminationClusters.length > 0) {
-      console.log(`发现 ${eliminationClusters.length} 个可消除集群`);
+    if (eliminationResults.length > 0) {
+      console.log(`发现 ${eliminationResults.length} 个可消除集群`);
       console.log(`消除前像素块总数: ${this.grid.getAllPixels().length}`);
 
-      // 计算并添加分数
+      // 计算并删除所有像素块
       let totalCells = 0;
-      eliminationClusters.forEach((cluster) => {
-        totalCells += cluster.cells.length;
-        console.log(`消除集群: ${cluster.cells.length}个逻辑格子`);
-        this.eliminationSystem.eliminateCluster(cluster);
+      let totalPixels = 0;
+      
+      eliminationResults.forEach((result) => {
+        totalCells += result.cluster.cells.length;
+        totalPixels += result.pixels.length;
+        console.log(`消除集群: ${result.cluster.cells.length}个逻辑格子, ${result.pixels.length}个像素块`);
+        // 直接删除像素块
+        this.eliminationSystem.eliminatePixels(result.pixels);
       });
 
       console.log(`消除后像素块总数: ${this.grid.getAllPixels().length}`);
 
       const score = this.scoringSystem.addEliminationScore(totalCells, true);
-      console.log(`消除 ${totalCells} 格，得分 ${score}`);
+      console.log(`消除 ${totalCells} 格 (${totalPixels}像素)，得分 ${score}`);
 
       // 重新检查稳定性并触发重力
       this.physicsManager.recheckStability();
@@ -370,6 +385,30 @@ export class GameScene extends Phaser.Scene {
         this.currentDraggedSlotIndex = -1;
         this.stateManager.setState(GameState.IDLE);
       }
+    });
+
+    // R键手动触发重力重新检查（调试用）
+    this.input.keyboard?.on('keydown-R', () => {
+      console.log('=== 手动触发重力重新检查 ===');
+      this.physicsManager.recheckStability();
+      if (this.physicsManager.activeCount > 0) {
+        this.stateManager.setState(GameState.PHYSICS_RUNNING);
+        console.log('切换到物理运行状态');
+      } else {
+        console.log('没有不稳定的像素块');
+      }
+    });
+
+    // G键显示网格调试信息（调试用）
+    this.input.keyboard?.on('keydown-G', () => {
+      const allPixels = this.grid.getAllPixels();
+      const stablePixels = allPixels.filter(p => p.isStable);
+      const unstablePixels = allPixels.filter(p => !p.isStable);
+      console.log(`=== 网格调试信息 ===`);
+      console.log(`总像素块: ${allPixels.length}`);
+      console.log(`稳定: ${stablePixels.length}`);
+      console.log(`不稳定: ${unstablePixels.length}`);
+      console.log(`活跃集合: ${this.physicsManager.activeCount}`);
     });
   }
 

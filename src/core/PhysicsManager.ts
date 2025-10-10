@@ -1,5 +1,6 @@
 import { PixelBlock } from '@/types';
 import { Grid } from './Grid';
+import { PIXEL_GRID_HEIGHT, PIXEL_GRID_WIDTH } from '@/config/constants';
 
 /**
  * 物理管理器 - 实现三方向下落物理系统
@@ -78,7 +79,8 @@ export class PhysicsManager {
       }
     }
 
-    if (movedCount > 0 || stabilizedCount > 0) {
+    // 只在有显著变化时输出日志
+    if (movedCount > 100 || stabilizedCount > 50 || this.activePixels.size % 100 === 0) {
       console.log(`物理更新: ${movedCount}个移动, ${stabilizedCount}个稳定, 剩余活跃: ${this.activePixels.size}`);
     }
   }
@@ -134,11 +136,8 @@ export class PhysicsManager {
    * 移动像素块到新位置
    */
   private movePixelTo(pixel: PixelBlock, newX: number, newY: number): void {
-    const oldX = pixel.x;
-    const oldY = pixel.y;
-    
     // 从旧位置移除
-    this.grid.setPixel(oldX, oldY, null);
+    this.grid.setPixel(pixel.x, pixel.y, null);
 
     // 更新坐标
     pixel.x = newX;
@@ -146,31 +145,6 @@ export class PhysicsManager {
 
     // 放置到新位置
     this.grid.setPixel(newX, newY, pixel);
-    
-    // 检查旧位置上方的像素块是否失去支撑
-    this.checkPixelAbove(oldX, oldY);
-  }
-  
-  /**
-   * 检查指定位置上方的像素块是否失去支撑
-   */
-  private checkPixelAbove(x: number, y: number): void {
-    // 检查正上方的像素块
-    if (y > 0) {
-      const abovePixel = this.grid.getPixel(x, y - 1);
-      if (abovePixel && abovePixel.isStable) {
-        // 检查该像素块是否还有支撑
-        const canMoveDown = this.canMoveTo(abovePixel.x, abovePixel.y + 1);
-        const canMoveLeftDown = this.canMoveTo(abovePixel.x - 1, abovePixel.y + 1);
-        const canMoveRightDown = this.canMoveTo(abovePixel.x + 1, abovePixel.y + 1);
-        
-        if (canMoveDown || canMoveLeftDown || canMoveRightDown) {
-          // 失去支撑，标记为不稳定
-          abovePixel.isStable = false;
-          this.activePixels.add(abovePixel);
-        }
-      }
-    }
   }
 
   /**
@@ -205,36 +179,104 @@ export class PhysicsManager {
    * 重新检查所有像素块的稳定性（消除后调用）
    * 参考设计文档8.4节
    * 
-   * 重要：需要按照三方向下落规则检查
-   * 注意：这个方法会被多次调用，直到所有像素块都稳定
+   * 重要：增量检查，只标记真正失去支撑的像素块
    */
   recheckStability(): void {
     const allPixels = this.grid.getAllPixels();
     
     console.log(`重新检查 ${allPixels.length} 个像素块的稳定性`);
     
-    let unstableCount = 0;
-    let alreadyActiveCount = 0;
+    let newUnstableCount = 0;
+    let alreadyActive = 0;
+    let stableCount = 0;
+    
+    // 从下往上检查每个像素块
+    allPixels.sort((a, b) => b.y - a.y);
     
     allPixels.forEach((pixel) => {
-      // 检查三个方向：正下、左下、右下
-      const canMoveDown = this.canMoveTo(pixel.x, pixel.y + 1);
-      const canMoveLeftDown = this.canMoveTo(pixel.x - 1, pixel.y + 1);
-      const canMoveRightDown = this.canMoveTo(pixel.x + 1, pixel.y + 1);
+      // 跳过已经在活跃集合中的像素块
+      if (this.activePixels.has(pixel)) {
+        alreadyActive++;
+        return;
+      }
       
-      // 如果任何一个方向可以移动，标记为不稳定
-      if (canMoveDown || canMoveLeftDown || canMoveRightDown) {
-        if (this.activePixels.has(pixel)) {
-          alreadyActiveCount++;
-        } else {
-          pixel.isStable = false;
-          this.activePixels.add(pixel);
-          unstableCount++;
-        }
+      // 只检查已稳定的像素块
+      if (!pixel.isStable) {
+        return;
+      }
+      
+      // 检查下方是否真的为空（不包括不稳定的像素块）
+      const hasRealSupport = this.hasRealSupportBelow(pixel.x, pixel.y);
+      
+      if (!hasRealSupport) {
+        // 失去真实支撑，标记为不稳定
+        pixel.isStable = false;
+        this.activePixels.add(pixel);
+        newUnstableCount++;
+      } else {
+        stableCount++;
       }
     });
     
-    console.log(`新增 ${unstableCount} 个不稳定像素块（已活跃: ${alreadyActiveCount}），总活跃: ${this.activePixels.size}`);
+    console.log(`重新检查结果: 新增不稳定=${newUnstableCount}, 已活跃=${alreadyActive}, 稳定=${stableCount}, 总活跃=${this.activePixels.size}`);
+  }
+  
+  /**
+   * 检查像素块是否真的稳定（三个方向都无法移动）
+   * 根据三方向下落规则，只要有一个方向可以移动就不稳定
+   */
+  private hasRealSupportBelow(x: number, y: number): boolean {
+    // 已经在底部
+    if (y >= PIXEL_GRID_HEIGHT - 1) {
+      return true;
+    }
+    
+    // 检查正下方
+    const canMoveDown = this.canMoveToStableOnly(x, y + 1);
+    if (canMoveDown) {
+      return false; // 可以向下移动，不稳定
+    }
+    
+    // 检查左下方
+    const canMoveLeftDown = this.canMoveToStableOnly(x - 1, y + 1);
+    if (canMoveLeftDown) {
+      return false; // 可以左斜下移动，不稳定
+    }
+    
+    // 检查右下方
+    const canMoveRightDown = this.canMoveToStableOnly(x + 1, y + 1);
+    if (canMoveRightDown) {
+      return false; // 可以右斜下移动，不稳定
+    }
+    
+    // 三个方向都被占用，稳定
+    return true;
+  }
+  
+  /**
+   * 检查目标位置是否可以移动到（只考虑稳定的像素块作为障碍）
+   */
+  private canMoveToStableOnly(x: number, y: number): boolean {
+    // 边界检查
+    if (!this.grid.isValidPixelPosition(x, y)) {
+      return false;
+    }
+    
+    // 检查目标位置
+    const pixel = this.grid.getPixel(x, y);
+    
+    // 如果位置为空，可以移动
+    if (!pixel) {
+      return true;
+    }
+    
+    // 如果有不稳定的像素块，认为可以移动（它会让开）
+    if (!pixel.isStable) {
+      return true;
+    }
+    
+    // 有稳定的像素块，不能移动
+    return false;
   }
 
   /**

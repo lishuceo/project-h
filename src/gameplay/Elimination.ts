@@ -15,25 +15,21 @@ export class EliminationSystem {
     this.grid = grid;
   }
 
-  // 保存像素集群用于消除
-  private currentPixelClusters: Array<{
-    color: Color;
-    pixels: PixelBlock[];
-    touchesLeft: boolean;
-    touchesRight: boolean;
-  }> = [];
-
   /**
-   * 检查并返回所有可消除的集群
+   * 检查并返回所有可消除的集群（包含像素块列表）
    * 在像素网格层面进行BFS，避免三角形堆积导致的断连
    */
-  checkElimination(): Cluster[] {
+  checkElimination(): Array<{
+    cluster: Cluster;
+    pixels: PixelBlock[];
+  }> {
     // 在像素网格层面查找连通集群
     const pixelClusters = this.findPixelClusters();
     
     console.log(`找到 ${pixelClusters.length} 个像素集群`);
-    pixelClusters.forEach((cluster, index) => {
-      console.log(`集群${index}: 颜色=${cluster.color}, 像素数=${cluster.pixels.length}, 触及左边界=${cluster.touchesLeft}, 触及右边界=${cluster.touchesRight}`);
+    // 只显示可能被消除的集群
+    pixelClusters.filter(c => c.touchesLeft || c.touchesRight).forEach((cluster, index) => {
+      console.log(`集群${index}: 颜色=${cluster.color}, 像素数=${cluster.pixels.length}, 触及左=${cluster.touchesLeft}, 触及右=${cluster.touchesRight}`);
     });
 
     // 筛选出同时触及左右边界的集群
@@ -43,11 +39,11 @@ export class EliminationSystem {
     
     console.log(`可消除集群数: ${eliminationClusters.length}`);
 
-    // 保存像素集群（用于后续删除）
-    this.currentPixelClusters = eliminationClusters;
-
-    // 转换为逻辑格子表示（用于后续处理）
-    return eliminationClusters.map(pc => this.pixelClusterToLogicalCluster(pc));
+    // 返回包含逻辑集群和像素块列表的结果
+    return eliminationClusters.map(pc => ({
+      cluster: this.pixelClusterToLogicalCluster(pc),
+      pixels: pc.pixels
+    }));
   }
   
   /**
@@ -186,36 +182,22 @@ export class EliminationSystem {
 
   /**
    * 执行消除（移除像素块）
-   * 直接删除像素集群中的所有像素块
+   * 直接删除像素块数组中的所有像素块
    */
-  eliminateCluster(cluster: Cluster): void {
-    // 找到对应的像素集群
-    const pixelCluster = this.currentPixelClusters.find(
-      pc => pc.color === cluster.color && pc.touchesLeft === cluster.touchesLeft && pc.touchesRight === cluster.touchesRight
-    );
-    
-    if (!pixelCluster) {
-      console.error('找不到对应的像素集群！');
-      return;
-    }
-    
-    console.log(`开始删除 ${pixelCluster.pixels.length} 个像素块`);
+  eliminatePixels(pixels: PixelBlock[]): void {
+    console.log(`开始删除 ${pixels.length} 个像素块`);
     let deletedCount = 0;
     
     // 直接删除所有像素块
-    pixelCluster.pixels.forEach(pixel => {
-      this.grid.setPixel(pixel.x, pixel.y, null);
-      deletedCount++;
+    pixels.forEach(pixel => {
+      const existing = this.grid.getPixel(pixel.x, pixel.y);
+      if (existing) {
+        this.grid.setPixel(pixel.x, pixel.y, null);
+        deletedCount++;
+      }
     });
     
     console.log(`实际删除了 ${deletedCount} 个像素块`);
-  }
-
-  /**
-   * 获取集群的像素块总数（用于计分）
-   */
-  getClusterPixelCount(cluster: Cluster): number {
-    return cluster.cells.length * 100; // 每个逻辑格子 = 100个像素块
   }
 }
 
