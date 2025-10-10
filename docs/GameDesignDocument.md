@@ -14,7 +14,29 @@
 3. 这种机制使方形方块自然形成**三角形堆积**（如沙堆）
 4. 高性能设计：每帧每个像素块只检查3个相邻格子
 
-**请重点阅读第5章"物理系统：重力与下落"！**
+**🔴 关键实现要点（AI必读）：**
+
+1. **消除判定必须在像素网格层面进行BFS**（第8.2节）
+   - ❌ 错误：在逻辑网格（12×22）进行BFS
+   - ✅ 正确：在像素网格（120×220）进行BFS
+   - 原因：三角形堆积导致逻辑格子中间为空，但像素层连续
+
+2. **消除时必须删除BFS找到的原始像素块**（第8.2.3节）
+   - ❌ 错误：通过逻辑坐标重新查找像素块
+   - ✅ 正确：直接删除BFS返回的像素块数组
+   - 原因：像素块可能滑落到逻辑格子之外
+
+3. **稳定性检查必须循环进行**（第8.4节）
+   - ❌ 错误：消除后只检查一次稳定性
+   - ✅ 正确：循环检查直到没有新的不稳定像素块
+   - 原因：像素块逐层失去支撑，需要多次检查
+
+4. **判定稳定时只计算稳定的像素块作为支撑**（第8.4.2节）
+   - ❌ 错误：不稳定的像素块也算支撑
+   - ✅ 正确：只有已稳定的像素块才能提供支撑
+   - 原因：不稳定的像素块会移走，不是真实支撑
+
+**请重点阅读第5章"物理系统"和第8章"消除机制"！**
 
 ---
 
@@ -833,65 +855,28 @@ function refillSlot(slotIndex) {
 
 ### 8.2 消除判定算法
 
-#### 8.2.1 逻辑网格转换
+**⚠️ 重要修正：必须在像素网格层面进行BFS！**
 
-首先，将像素网格转换回逻辑网格（用于高效计算）：
+由于三方向下落物理会导致像素块形成三角形堆积，**逻辑网格中间可能是空的**，但视觉上是连续的。因此必须在像素网格层面进行连通性判定。
 
-```javascript
-function buildLogicalGrid() {
-    const logicalGrid = Array(22).fill(null).map(() => Array(12).fill(null));
-    
-    // 遍历像素网格，统计每个逻辑格子的颜色
-    for (let logicalY = 0; logicalY < 22; logicalY++) {
-        for (let logicalX = 0; logicalX < 12; logicalX++) {
-            // 采样该逻辑格子对应的像素块区域
-            const color = sampleCellColor(logicalX, logicalY);
-            logicalGrid[logicalY][logicalX] = color;
-        }
-    }
-    return logicalGrid;
-}
+#### 8.2.1 像素网格BFS搜索
 
-function sampleCellColor(logicalX, logicalY) {
-    // 检查该逻辑格子对应的10x10像素块区域
-    const startX = logicalX * 10;
-    const startY = logicalY * 10;
-    
-    let colorCount = {};
-    let totalPixels = 0;
-    
-    for (let py = 0; py < 10; py++) {
-        for (let px = 0; px < 10; px++) {
-            const pixel = pixelGrid[startY + py][startX + px];
-            if (pixel) {
-                colorCount[pixel.color] = (colorCount[pixel.color] || 0) + 1;
-                totalPixels++;
-            }
-        }
-    }
-    
-    // 返回该格子中占比最高的颜色（如果有）
-    if (totalPixels === 0) return null;
-    const dominantColor = Object.keys(colorCount).reduce((a, b) => 
-        colorCount[a] > colorCount[b] ? a : b
-    );
-    return dominantColor;
-}
-```
-
-#### 8.2.2 连通集群搜索 (BFS)
+直接在120×220的像素网格上进行BFS：
 
 ```javascript
-function findConnectedClusters() {
-    const visited = Array(22).fill(null).map(() => Array(12).fill(false));
+function findConnectedPixelClusters() {
+    const visited = new Set(); // 使用"x,y"字符串作为key
     const clusters = [];
     
-    // 遍历整个逻辑网格
-    for (let y = 0; y < 22; y++) {
-        for (let x = 0; x < 12; x++) {
-            if (!visited[y][x] && logicalGrid[y][x] !== null) {
-                // 发现新的未访问格子，进行BFS
-                const cluster = bfsSearch(x, y, visited);
+    // 遍历整个像素网格
+    for (let y = 0; y < 220; y++) {
+        for (let x = 0; x < 120; x++) {
+            const pixel = pixelGrid[y][x];
+            const key = `${x},${y}`;
+            
+            if (pixel && !visited.has(key)) {
+                // 发现新的未访问像素块，进行BFS
+                const cluster = bfsPixelSearch(x, y, pixel.color, visited);
                 clusters.push(cluster);
             }
         }
@@ -900,47 +885,51 @@ function findConnectedClusters() {
     return clusters;
 }
 
-function bfsSearch(startX, startY, visited) {
-    const color = logicalGrid[startY][startX];
+function bfsPixelSearch(startX, startY, color, visited) {
     const queue = [{x: startX, y: startY}];
     const cluster = {
         color: color,
-        cells: [],
+        pixels: [],  // 保存像素块引用
         touchesLeft: false,
         touchesRight: false
     };
     
-    visited[startY][startX] = true;
+    visited.add(`${startX},${startY}`);
     
     while (queue.length > 0) {
         const {x, y} = queue.shift();
-        cluster.cells.push({x, y});
+        const pixel = pixelGrid[y][x];
         
-        // 检查是否触及边界
-        if (x === 0) cluster.touchesLeft = true;
-        if (x === 11) cluster.touchesRight = true;
-        
-        // 检查四个方向的相邻格子
-        const neighbors = [
-            {x: x-1, y: y},  // 左
-            {x: x+1, y: y},  // 右
-            {x: x, y: y-1},  // 上
-            {x: x, y: y+1}   // 下
-        ];
-        
-        for (const neighbor of neighbors) {
-            const {x: nx, y: ny} = neighbor;
+        if (pixel) {
+            cluster.pixels.push(pixel);
             
-            // 边界检查
-            if (nx < 0 || nx >= 12 || ny < 0 || ny >= 22) continue;
+            // 检查是否触及边界（像素网格边界）
+            if (x === 0) cluster.touchesLeft = true;
+            if (x === 119) cluster.touchesRight = true;
             
-            // 已访问检查
-            if (visited[ny][nx]) continue;
+            // 检查四个方向的相邻像素块
+            const neighbors = [
+                {x: x-1, y: y},  // 左
+                {x: x+1, y: y},  // 右
+                {x: x, y: y-1},  // 上
+                {x: x, y: y+1}   // 下
+            ];
             
-            // 颜色匹配检查
-            if (logicalGrid[ny][nx] === color) {
-                visited[ny][nx] = true;
-                queue.push(neighbor);
+            for (const {x: nx, y: ny} of neighbors) {
+                const key = `${nx},${ny}`;
+                
+                // 边界检查
+                if (nx < 0 || nx >= 120 || ny < 0 || ny >= 220) continue;
+                
+                // 已访问检查
+                if (visited.has(key)) continue;
+                
+                // 颜色匹配检查
+                const neighborPixel = pixelGrid[ny][nx];
+                if (neighborPixel && neighborPixel.color === color) {
+                    visited.add(key);
+                    queue.push({x: nx, y: ny});
+                }
             }
         }
     }
@@ -949,21 +938,65 @@ function bfsSearch(startX, startY, visited) {
 }
 ```
 
-#### 8.2.3 消除判定
+**为什么必须在像素层面？**
+
+```
+三角形堆积示例：
+
+视觉上（像素层）：     逻辑层：
+■■■■■■■■■■■■    ■■■□□□□□■■■
+  ■■■■■■■■■■        ■■□□□□□■■
+    ■■■■■■■■            ■■□□■■
+      ■■■■                  ■■
+
+像素层连续 ✅           逻辑层断开 ❌
+```
+
+#### 8.2.2 边界触及判定
 
 ```javascript
 function checkElimination() {
-    const clusters = findConnectedClusters();
-    const eliminationClusters = [];
+    const pixelClusters = findConnectedPixelClusters();
     
-    for (const cluster of clusters) {
-        // 判定条件：同时触及左边界（列0）和右边界（列11）
-        if (cluster.touchesLeft && cluster.touchesRight) {
-            eliminationClusters.push(cluster);
-        }
-    }
+    // 筛选同时触及左右边界的集群
+    const eliminationClusters = pixelClusters.filter(
+        cluster => cluster.touchesLeft && cluster.touchesRight
+    );
     
     return eliminationClusters;
+}
+```
+
+**关键**：边界判定也在像素层面（X=0 和 X=119）
+
+#### 8.2.3 消除执行
+
+**重要**：消除时必须删除BFS找到的原始像素块，而不是通过逻辑坐标重新查找！
+
+```javascript
+function eliminateCluster(pixelCluster) {
+    console.log(`开始删除 ${pixelCluster.pixels.length} 个像素块`);
+    
+    // 直接删除BFS找到的所有像素块
+    pixelCluster.pixels.forEach(pixel => {
+        pixelGrid[pixel.y][pixel.x] = null;
+    });
+    
+    console.log(`删除完成`);
+}
+```
+
+**错误做法**：❌ 通过逻辑格子坐标重新查找像素块
+```javascript
+// 错误！可能漏掉滑落到斜角的像素块
+for (const cell of cluster.cells) {
+    const startX = cell.x * 10;
+    const startY = cell.y * 10;
+    for (let py = 0; py < 10; py++) {
+        for (let px = 0; px < 10; px++) {
+            pixelGrid[startY + py][startX + px] = null;
+        }
+    }
 }
 ```
 
@@ -1025,9 +1058,98 @@ function playParticleAnimation(pixels) {
 }
 ```
 
-### 8.4 连锁消除机制
+### 8.4 连锁消除机制与稳定性重新检查
 
 **核心规则**：消除后触发的重力下落可能形成新的连接，从而触发新的消除
+
+**⚠️ 关键难点：消除后的稳定性检查**
+
+#### 8.4.1 消除后重力处理的挑战
+
+消除像素块后，上方的像素块失去支撑，但有一个微妙的问题：
+
+```
+消除前：               消除后：              第一次检查：          实际应该：
+  C                     C                    C（稳定）            C（不稳定）
+  B                     B                    B（稳定）            B（不稳定）
+  A                     A                    A（不稳定） ✓        A（不稳定）
+■■■ 消除这层  →    □□□ 空               □□□ 空             □□□ 空
+```
+
+**问题**：A下落后，B和C才失去支撑，但第一次检查时B和C看起来有支撑（因为A还在）。
+
+#### 8.4.2 正确的稳定性检查算法
+
+**方案1：增量检查（推荐）**
+
+只检查已稳定的像素块，判断它们下方是否**只有稳定的像素块**作为支撑：
+
+```javascript
+function recheckStability() {
+    const allPixels = getAllPixels();
+    let newUnstableCount = 0;
+    
+    allPixels.forEach(pixel => {
+        // 跳过已经不稳定的像素块
+        if (!pixel.isStable || activePixels.has(pixel)) {
+            return;
+        }
+        
+        // 检查三个方向是否有真实支撑（只计算稳定的像素块）
+        const hasSupport = hasStableSupportBelow(pixel.x, pixel.y);
+        
+        if (!hasSupport) {
+            pixel.isStable = false;
+            activePixels.add(pixel);
+            newUnstableCount++;
+        }
+    });
+    
+    return newUnstableCount;
+}
+
+function hasStableSupportBelow(x, y) {
+    // 检查正下方、左下方、右下方
+    // 只要有一个方向为空或有不稳定像素块，就认为没有真实支撑
+    const canMoveDown = isEmptyOrUnstable(x, y+1);
+    const canMoveLeftDown = isEmptyOrUnstable(x-1, y+1);
+    const canMoveRightDown = isEmptyOrUnstable(x+1, y+1);
+    
+    // 三个方向都必须被稳定的像素块占据
+    return !canMoveDown && !canMoveLeftDown && !canMoveRightDown;
+}
+
+function isEmptyOrUnstable(x, y) {
+    if (越界) return false;
+    const pixel = pixelGrid[y][x];
+    return pixel === null || !pixel.isStable;
+}
+```
+
+**方案2：循环检查**
+
+每次物理稳定后，自动再次检查：
+
+```javascript
+function gameLoop() {
+    updatePhysics();
+    
+    if (allPixelsStable()) {
+        // 再次检查是否有新的不稳定像素块
+        const newUnstable = recheckStability();
+        
+        if (newUnstable > 0) {
+            // 发现新的不稳定像素块，继续物理模拟
+            continue;
+        } else {
+            // 真正全部稳定，进入消除检测
+            checkElimination();
+        }
+    }
+}
+```
+
+#### 8.4.3 连锁消除流程
 
 ```javascript
 function handleEliminationChain() {
@@ -1044,15 +1166,15 @@ function handleEliminationChain() {
         
         chainCount++;
         
-        // 2. 执行消除
+        // 2. 执行消除（直接删除像素块）
         for (const cluster of eliminationClusters) {
-            const score = calculateScore(cluster.cells.length);
+            const score = calculateScore(cluster.pixels.length);
             totalScore += score * chainCount;  // 连锁加成
-            eliminateCluster(cluster);
+            eliminatePixels(cluster.pixels);
         }
         
-        // 3. 等待动画完成
-        await waitForAnimation(1000);
+        // 3. 重新检查稳定性
+        recheckStability();
         
         // 4. 等待所有像素块落定
         await waitForAllPixelsStable();
@@ -1702,6 +1824,371 @@ class ActiveBlockGroup {
 
 ---
 
+## 附录D：AI开发常见陷阱（必读）
+
+### 陷阱1：在逻辑网格层面进行消除判定 ❌
+
+**错误做法**：
+```javascript
+// 在12×22的逻辑网格上进行BFS
+const logicalGrid = buildLogicalGrid();
+const clusters = findClustersOnLogicalGrid(logicalGrid);
+```
+
+**问题**：三角形堆积导致逻辑格子中间为空，视觉连续的区域会被判定为多个断开的集群。
+
+**正确做法**：✅
+```javascript
+// 在120×220的像素网格上进行BFS
+const pixelClusters = findClustersOnPixelGrid();
+// 直接使用像素块引用
+```
+
+**参考章节**：第8.2节
+
+---
+
+### 陷阱2：通过逻辑坐标删除像素块 ❌
+
+**错误做法**：
+```javascript
+// BFS返回逻辑格子坐标
+const cluster = {cells: [{x: 5, y: 10}, ...]};
+
+// 尝试通过逻辑坐标删除像素块
+for (const cell of cluster.cells) {
+    const startX = cell.x * 10;
+    const startY = cell.y * 10;
+    for (let py = 0; py < 10; py++) {
+        for (let px = 0; px < 10; px++) {
+            pixelGrid[startY + py][startX + px] = null;
+        }
+    }
+}
+```
+
+**问题**：像素块可能滑落到逻辑格子范围之外，导致部分像素块没被删除（悬空残留）。
+
+**正确做法**：✅
+```javascript
+// BFS返回像素块引用数组
+const cluster = {pixels: [pixel1, pixel2, ...]};
+
+// 直接删除BFS找到的像素块
+cluster.pixels.forEach(pixel => {
+    pixelGrid[pixel.y][pixel.x] = null;
+});
+```
+
+**参考章节**：第8.2.3节
+
+---
+
+### 陷阱3：消除后只检查一次稳定性 ❌
+
+**错误做法**：
+```javascript
+// 消除像素块
+eliminatePixels(cluster.pixels);
+
+// 只检查一次
+recheckStability();
+
+// 立即进入消除检测
+checkElimination();
+```
+
+**问题**：第一批像素块下落后，它们上方的像素块才失去支撑，导致悬空残留。
+
+**正确做法**：✅
+```javascript
+// 消除像素块
+eliminatePixels(cluster.pixels);
+
+// 循环检查
+while (true) {
+    recheckStability();
+    
+    // 等待物理稳定
+    await waitForPhysicsStable();
+    
+    // 再次检查
+    const newUnstable = recheckStability();
+    
+    if (newUnstable === 0) {
+        break; // 真正全部稳定
+    }
+}
+
+// 进入消除检测
+checkElimination();
+```
+
+**参考章节**：第8.4.2节
+
+---
+
+### 陷阱4：错误的稳定性判定 ❌
+
+**错误做法**：
+```javascript
+function hasSupport(pixel) {
+    // 任何一个方向有像素块就认为稳定
+    const below = getPixel(x, y+1);
+    const leftBelow = getPixel(x-1, y+1);
+    const rightBelow = getPixel(x+1, y+1);
+    
+    return below || leftBelow || rightBelow; // 错误！
+}
+```
+
+**问题**：斜角的像素块虽然一侧有支撑，但另一侧为空，应该滑落！
+
+**正确做法**：✅
+```javascript
+function hasSupport(pixel) {
+    // 三个方向都必须被稳定的像素块占据
+    const canMoveDown = isEmpty(x, y+1);
+    const canMoveLeftDown = isEmpty(x-1, y+1);
+    const canMoveRightDown = isEmpty(x+1, y+1);
+    
+    // 只要有一个方向可以移动，就不稳定
+    return !canMoveDown && !canMoveLeftDown && !canMoveRightDown;
+}
+
+function isEmpty(x, y) {
+    const pixel = getPixel(x, y);
+    // 空位置或不稳定的像素块都认为可以移动
+    return pixel === null || !pixel.isStable;
+}
+```
+
+**参考章节**：第5.2节、第8.4.2节
+
+---
+
+### 陷阱5：不稳定像素块也算作支撑 ❌
+
+**错误做法**：
+```javascript
+function canMoveTo(x, y) {
+    const pixel = getPixel(x, y);
+    return pixel === null; // 只检查是否为空
+}
+```
+
+**问题**：下方有不稳定的像素块时，上方像素块会被错误地认为"无法移动"，但实际下方像素块会让开。
+
+**正确做法**：✅
+```javascript
+function canMoveToStableOnly(x, y) {
+    const pixel = getPixel(x, y);
+    
+    // 空位置，可以移动
+    if (pixel === null) return true;
+    
+    // 不稳定的像素块，认为可以移动（它会让开）
+    if (!pixel.isStable) return true;
+    
+    // 稳定的像素块，不能移动
+    return false;
+}
+```
+
+**参考章节**：第8.4.2节
+
+---
+
+### 陷阱6：级联稳定性检查导致无限增长 ❌
+
+**错误做法**：
+```javascript
+function movePixelTo(pixel, newX, newY) {
+    // 移动像素块
+    pixel.x = newX;
+    pixel.y = newY;
+    
+    // 检查上方的像素块
+    checkPixelAbove(pixel.x, pixel.y); // 危险！
+}
+
+function checkPixelAbove(x, y) {
+    const above = getPixel(x, y-1);
+    if (above && above.isStable) {
+        // 标记为不稳定
+        above.isStable = false;
+        activePixels.add(above); // 可能重复添加
+    }
+}
+```
+
+**问题**：每次移动都检查上方，导致活跃像素块数量爆炸性增长（从100增长到1000+）。
+
+**正确做法**：✅
+```javascript
+function movePixelTo(pixel, newX, newY) {
+    // 只移动，不做级联检查
+    pixel.x = newX;
+    pixel.y = newY;
+}
+
+// 只在消除后统一检查所有像素块
+function afterElimination() {
+    recheckStability(); // 一次性检查所有
+}
+```
+
+**参考章节**：第5.4.2节
+
+---
+
+## 附录E：实现检查清单
+
+开发AI应该验证以下关键点：
+
+### 消除系统检查清单
+
+- [ ] BFS在像素网格（120×220）层面进行
+- [ ] BFS返回像素块引用数组，不是逻辑坐标
+- [ ] 边界触及判定使用像素坐标（X=0 和 X=119）
+- [ ] 消除时直接删除BFS返回的像素块
+- [ ] 验证：消除前后像素块总数应该减少
+
+### 稳定性检查清单
+
+- [ ] 消除后调用`recheckStability()`
+- [ ] 物理稳定后自动再次检查稳定性
+- [ ] 发现新的不稳定像素块时继续物理模拟
+- [ ] 稳定性判定只计算稳定的像素块作为支撑
+- [ ] 验证：悬空的像素块会自动下落，无残留
+
+### 性能检查清单
+
+- [ ] 活跃像素块数量不会失控增长
+- [ ] 不在移动时进行级联检查
+- [ ] 使用Set追踪活跃像素块
+- [ ] 从下往上更新避免双重移动
+- [ ] 验证：大规模消除后帧率稳定
+
+---
+
+## 附录F：常见错误日志识别
+
+通过控制台日志快速识别问题：
+
+### 问题1：消除后像素块总数不变
+
+**日志特征**：
+```
+消除前像素块总数: 2400
+开始删除 1600 个像素块
+实际删除了 1600 个像素块
+消除后像素块总数: 2400  ← 应该是800！
+```
+
+**原因**：通过逻辑坐标删除，漏掉了滑落到斜角的像素块
+
+**解决方案**：使用像素层BFS，直接删除BFS返回的像素块引用
+
+---
+
+### 问题2：活跃像素块数量爆炸
+
+**日志特征**：
+```
+物理更新: 150个移动, 剩余活跃: 227  ← 从150增加到227！
+物理更新: 223个移动, 剩余活跃: 297  ← 继续增长！
+物理更新: 284个移动, 剩余活跃: 351
+```
+
+**原因**：在`movePixelTo`中进行级联检查，重复添加像素块
+
+**解决方案**：移除级联检查，只在消除后统一检查
+
+---
+
+### 问题3：标记为不稳定但不移动
+
+**日志特征**：
+```
+重新检查结果: 新增不稳定=79
+物理更新: 0个移动, 8个稳定, 剩余活跃: 0  ← 79个不稳定但0个移动！
+```
+
+**原因**：下方有不稳定的像素块，被错误地当作障碍物
+
+**解决方案**：稳定性判定只计算稳定的像素块作为支撑
+
+---
+
+### 问题4：视觉连续的区域未触发消除
+
+**日志特征**：
+```
+找到 2 个连通集群
+集群0: 颜色=16776960, 格子数=4, 触及左=true, 触及右=false
+集群1: 颜色=16776960, 格子数=9, 触及左=false, 触及右=true
+可消除集群数: 0  ← 明明是同色且视觉连续！
+```
+
+**原因**：在逻辑网格层面BFS，三角形堆积导致断连
+
+**解决方案**：改为在像素网格层面BFS
+
+---
+
+### 问题5：悬空残留的像素块
+
+**症状**：消除后有少量像素块悬浮在空中
+
+**调试方法**：
+```javascript
+// 按G键查看状态
+总像素块: 1600
+稳定: 1600  ← 全部标记为稳定
+不稳定: 0
+活跃集合: 0
+
+// 按R键手动检查
+重新检查结果: 新增不稳定=79  ← 发现悬空像素块！
+```
+
+**原因**：稳定性检查不完整或逻辑错误
+
+**解决方案**：
+1. 实现循环检查机制
+2. 修正稳定性判定逻辑（只计算稳定像素块作为支撑）
+
+---
+
+## 附录G：验收测试用例
+
+### 测试1：基础消除
+1. 放置方块形成横跨左右边界的连接
+2. 验证：触发消除，像素块被删除
+3. 验证：总数减少 = 删除数量
+4. 验证：无悬空残留
+
+### 测试2：三角形堆积消除
+1. 放置多个方形方块，形成三角形堆积
+2. 放置方块连接左右两侧的斜坡
+3. 验证：虽然逻辑层断开，但像素层连续，应触发消除
+4. 验证：BFS正确识别像素层连通性
+
+### 测试3：消除后稳定性
+1. 消除底层方块
+2. 验证：上方所有像素块自动下落
+3. 验证：无悬空残留
+4. 验证：最终形成紧密堆积
+
+### 测试4：性能测试
+1. 连续放置大量方块
+2. 触发大规模消除（1000+像素块）
+3. 验证：活跃像素块数量不会失控增长
+4. 验证：帧率保持稳定（30+ FPS）
+
+---
+
 ## 文档变更记录
 
 | 版本 | 日期 | 变更内容 |
@@ -1710,10 +2197,18 @@ class ActiveBlockGroup {
 | 2.0 | 2025-10-09 | 添加像素块概念 |
 | 3.0 | 2025-10-09 | 定义逻辑/物理双层系统 |
 | 4.0 | 2025-10-09 | 完整重写，移除墙体概念，明确消除机制 |
+| 4.1 | 2025-10-09 | 完整物理系统设计 |
+| **5.0** | **2025-10-10** | **重大修正：基于实际开发经验** |
+|  |  | - 修正消除判定：必须在像素网格层面BFS |
+|  |  | - 修正消除执行：直接删除像素块引用 |
+|  |  | - 添加稳定性循环检查机制 |
+|  |  | - 添加AI开发常见陷阱（附录D） |
+|  |  | - 添加错误日志识别（附录F） |
+|  |  | - 添加验收测试用例（附录G） |
 
 ---
 
-## 附录D：物理系统速查表
+## 附录H：物理系统速查表
 
 ### 核心算法总结
 
@@ -1825,17 +2320,29 @@ for each 像素块 from 下往上:
 - [ ] 平衡性调整
 - [ ] Bug修复
 
-**总计**: 约8-12周开发周期
+**总计**: 约8-12周开发周期（MVP可在4-6周完成）
 
 ---
 
-**文档版本**: 4.1  
+**文档版本**: 5.0  
 **最后更新**: 2025年10月10日  
-**更新内容**: 完整物理系统设计，三方向下落算法，山形堆积原理详解
+**更新内容**: 基于实际开发经验的重大修正，添加AI开发常见陷阱和解决方案
 
 ---
 
 **文档结束**
 
-此文档为AI开发提供了完整的游戏设计规范。特别强调了**三方向下落物理系统**，这是游戏独特视觉效果的核心。如有任何疑问或需要补充的内容，请及时更新此文档。
+此文档为AI开发提供了完整的游戏设计规范。
+
+**🔴 特别提醒**：本文档已根据实际开发经验进行重大修正，特别是：
+- 第8.2节：消除判定必须在像素网格层面BFS
+- 第8.4节：稳定性检查必须循环进行
+- 附录D：总结了所有常见陷阱和解决方案
+
+这些修正是确保游戏正确运行的**关键**。如果按照旧版本（逻辑网格BFS）实现，会导致：
+1. 视觉连续的区域无法消除
+2. 消除后有悬空残留
+3. 活跃像素块数量失控
+
+**强烈建议AI在开发前仔细阅读"核心技术要点"和"附录D：AI开发常见陷阱"！**
 
