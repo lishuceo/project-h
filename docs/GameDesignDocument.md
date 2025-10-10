@@ -208,16 +208,15 @@ logicalY = floor(pixelY / 10)
 
 ### 4.2 颜色系统
 
-方块颜色池（6种颜色）：
+方块颜色池（4种颜色）：
 1. 🔴 红色 (Red)
 2. 🔵 蓝色 (Blue)
 3. 🟢 绿色 (Green)
 4. 🟡 黄色 (Yellow)
-5. 🟣 紫色 (Purple)
-6. ⚪ 白色 (White)
+
 
 **颜色分配规则**：
-- 每个方块的颜色从6种颜色中随机选择
+- 每个方块的颜色从4种颜色中随机选择
 - 一个方块内的所有像素块颜色相同
 - 形状和颜色独立随机
 
@@ -826,13 +825,13 @@ function placeTetromino(tetromino, gridX, gridY) {
 
 每个新生成的方块：
 1. 形状：从7-Bag系统中抽取
-2. 颜色：从6种颜色中随机选择
+2. 颜色：从4种颜色中随机选择
 3. 初始状态：未旋转的标准形态
 
 ```javascript
 function refillSlot(slotIndex) {
     const shape = bagSystem.getNextShape();  // 7-Bag
-    const color = randomColor();             // 6色随机
+    const color = randomColor();             // 4色随机
     const tetromino = createTetromino(shape, color);
     slots[slotIndex] = tetromino;
 }
