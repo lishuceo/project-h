@@ -2,6 +2,7 @@ import Phaser from 'phaser';
 import { Grid } from '@/core/Grid';
 import { PhysicsManager } from '@/core/PhysicsManager';
 import { PixelRenderer } from '@/rendering/PixelRenderer';
+import { EliminationAnimation } from '@/rendering/EliminationAnimation';
 import { GameStateManager } from '@/core/GameStateManager';
 import { PreviewSlots } from '@/gameplay/PreviewSlots';
 import { EliminationSystem } from '@/gameplay/Elimination';
@@ -18,6 +19,7 @@ export class GameScene extends Phaser.Scene {
   private grid!: Grid;
   private physicsManager!: PhysicsManager;
   private pixelRenderer!: PixelRenderer;
+  private eliminationAnimation!: EliminationAnimation;
   private stateManager!: GameStateManager;
   private previewSlots!: PreviewSlots;
   private eliminationSystem!: EliminationSystem;
@@ -43,6 +45,7 @@ export class GameScene extends Phaser.Scene {
     this.grid = new Grid();
     this.physicsManager = new PhysicsManager(this.grid);
     this.pixelRenderer = new PixelRenderer(this, this.grid);
+    this.eliminationAnimation = new EliminationAnimation(this);
     this.stateManager = new GameStateManager(GameState.READY);
     this.previewSlots = new PreviewSlots();
     this.eliminationSystem = new EliminationSystem(this.grid);
@@ -116,6 +119,7 @@ export class GameScene extends Phaser.Scene {
   /**
    * 检查并执行消除
    * 参考设计文档第8章
+   * 带动画版本：先播放动画，动画完成后再删除像素块
    */
   private checkAndPerformElimination(): void {
     const eliminationResults = this.eliminationSystem.checkElimination();
@@ -124,27 +128,50 @@ export class GameScene extends Phaser.Scene {
       console.log(`发现 ${eliminationResults.length} 个可消除集群`);
       console.log(`消除前像素块总数: ${this.grid.getAllPixels().length}`);
 
-      // 计算并删除所有像素块
+      // 进入消除动画状态
+      this.stateManager.setState(GameState.ELIMINATING);
+
+      // 收集所有要消除的像素块
       let totalCells = 0;
       let totalPixels = 0;
+      const allPixelsToEliminate: PixelBlock[] = [];
       
       eliminationResults.forEach((result) => {
         totalCells += result.cluster.cells.length;
         totalPixels += result.pixels.length;
         console.log(`消除集群: ${result.cluster.cells.length}个逻辑格子, ${result.pixels.length}个像素块`);
-        // 直接删除像素块
-        this.eliminationSystem.eliminatePixels(result.pixels);
+        allPixelsToEliminate.push(...result.pixels);
       });
 
-      console.log(`消除后像素块总数: ${this.grid.getAllPixels().length}`);
+      // 提前计算分数和连锁等级（用于动画显示）
+      const baseScore = this.scoringSystem.calculateBaseScore(totalCells);
+      const nextChainLevel = this.scoringSystem.chainLevel + 1; // 下一个连锁等级
+      const score = baseScore * nextChainLevel;
 
-      const score = this.scoringSystem.addEliminationScore(totalCells, true);
-      console.log(`消除 ${totalCells} 格 (${totalPixels}像素)，得分 ${score}`);
+      // 播放消除动画（传递分数和连锁信息）
+      this.eliminationAnimation.playEliminationAnimation(
+        allPixelsToEliminate, 
+        score, 
+        nextChainLevel, 
+        () => {
+          // 动画完成后的回调：删除像素块并触发重力
+          
+          // 删除像素块
+          eliminationResults.forEach((result) => {
+            this.eliminationSystem.eliminatePixels(result.pixels);
+          });
 
-      // 重新检查稳定性并触发重力
-      this.physicsManager.recheckStability();
-      console.log(`切换到物理运行状态，活跃像素块: ${this.physicsManager.activeCount}`);
-      this.stateManager.setState(GameState.PHYSICS_RUNNING);
+          console.log(`消除后像素块总数: ${this.grid.getAllPixels().length}`);
+
+          // 正式记录分数（增加连锁）
+          this.scoringSystem.addEliminationScore(totalCells, true);
+          console.log(`消除 ${totalCells} 格 (${totalPixels}像素)，得分 ${score}`);
+
+        // 重新检查稳定性并触发重力
+        this.physicsManager.recheckStability();
+        console.log(`切换到物理运行状态，活跃像素块: ${this.physicsManager.activeCount}`);
+        this.stateManager.setState(GameState.PHYSICS_RUNNING);
+      });
     } else {
       // 无消除，重置连锁并返回空闲状态
       this.scoringSystem.resetChain();
@@ -218,13 +245,16 @@ export class GameScene extends Phaser.Scene {
    * 创建预览槽位UI
    */
   private createPreviewSlotsUI(): void {
-    const slotY = GAME_AREA_OFFSET_Y + 1150;
-    const slotSize = 100;
-    const slotSpacing = 120;
-    const startX = GAME_AREA_OFFSET_X + 50;
+    const slotY = GAME_AREA_OFFSET_Y + 1200; // 游戏区域底部 + 100px间距
+    const slotSize = 140; // 放大槽位 (原100)
+    const slotSpacing = 40; // 槽位之间的间距
+    
+    // 计算3个槽位的总宽度并居中
+    const totalWidth = slotSize * 3 + slotSpacing * 2;
+    const startX = (SCREEN_WIDTH - totalWidth) / 2 + slotSize / 2; // 居中对齐，加上半个槽位偏移
 
     for (let i = 0; i < 3; i++) {
-      const slotX = startX + i * slotSpacing;
+      const slotX = startX + i * (slotSize + slotSpacing);
 
       // 创建槽位容器
       const container = this.add.container(slotX, slotY);
@@ -276,17 +306,18 @@ export class GameScene extends Phaser.Scene {
         item.destroy();
       });
 
-      // 绘制方块预览
-      const cellSize = 20;
+      // 绘制方块预览（槽位放大后，方块也相应放大）
+      const cellSize = 28; // 放大方块格子 (原20)
+      const offset = -42; // 调整居中偏移 (原-30)
       tetromino.cells.forEach((cell) => {
         const rect = this.add.rectangle(
-          cell.x * cellSize - 30,
-          cell.y * cellSize - 30,
+          cell.x * cellSize + offset,
+          cell.y * cellSize + offset,
           cellSize - 2,
           cellSize - 2,
           tetromino.color
         );
-        rect.setStrokeStyle(1, 0xffffff, 0.5);
+        rect.setStrokeStyle(1.5, 0xffffff, 0.6); // 稍微加粗边框
         container.add(rect);
       });
     });

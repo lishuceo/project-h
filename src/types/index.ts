@@ -1,11 +1,11 @@
-// 颜色枚举（6种颜色）
+// 颜色枚举（当前使用4种颜色）
 export enum Color {
   RED = 0xff0000,
   BLUE = 0x0000ff,
   GREEN = 0x00ff00,
   YELLOW = 0xffff00,
-  PURPLE = 0xff00ff,
-  WHITE = 0xffffff,
+  PURPLE = 0xff00ff,  // 保留定义但不使用
+  WHITE = 0xffffff,   // 保留定义但不使用
 }
 
 // 方块形状枚举

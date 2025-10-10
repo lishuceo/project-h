@@ -149,15 +149,13 @@ export const TETROMINO_SHAPES: Record<ShapeType, LogicalCell[][]> = {
 };
 
 /**
- * 颜色池（6种颜色）
+ * 颜色池（4种颜色：红、黄、绿、蓝）
  */
 export const COLOR_POOL: Color[] = [
   Color.RED,
-  Color.BLUE,
-  Color.GREEN,
   Color.YELLOW,
-  Color.PURPLE,
-  Color.WHITE,
+  Color.GREEN,
+  Color.BLUE,
 ];
 
 /**
