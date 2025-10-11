@@ -22,8 +22,11 @@ const config: Phaser.Types.Core.GameConfig = {
     },
   },
   scale: {
-    mode: Phaser.Scale.FIT,
+    mode: Phaser.Scale.FIT, // 保持宽高比适配
     autoCenter: Phaser.Scale.CENTER_BOTH,
+    width: SCREEN_WIDTH,
+    height: SCREEN_HEIGHT,
+    parent: 'game-container',
   },
 };
 

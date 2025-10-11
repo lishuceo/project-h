@@ -17,14 +17,14 @@ export const ELIMINATION_ANIM_DURATION = 1000; // 毫秒
 export const PARTICLE_LIFETIME = 1000; // 毫秒
 
 // 游戏区域渲染尺寸
-export const GAME_AREA_WIDTH = PIXEL_GRID_WIDTH * PIXEL_SIZE; // 600像素
-export const GAME_AREA_HEIGHT = PIXEL_GRID_HEIGHT * PIXEL_SIZE; // 1100像素
+export const GAME_AREA_WIDTH = PIXEL_GRID_WIDTH * PIXEL_SIZE; // 720像素
+export const GAME_AREA_HEIGHT = PIXEL_GRID_HEIGHT * PIXEL_SIZE; // 900像素
 
-// 屏幕尺寸
-export const SCREEN_WIDTH = 800;
-export const SCREEN_HEIGHT = 1400;
+// 屏幕尺寸（9:16标准手机比例）
+export const SCREEN_WIDTH = 720;  // 720px宽度（正好容纳游戏区域）
+export const SCREEN_HEIGHT = 1280; // 16:9比例
 
 // 游戏区域偏移
 export const GAME_AREA_OFFSET_X = (SCREEN_WIDTH - GAME_AREA_WIDTH) / 2;
-export const GAME_AREA_OFFSET_Y = 100;
+export const GAME_AREA_OFFSET_Y = 80; // 顶部留白
 

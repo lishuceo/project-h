@@ -260,9 +260,9 @@ export class GameScene extends Phaser.Scene {
   private createPreviewSlotsUI(): void {
     // 游戏区域底部位置：GAME_AREA_OFFSET_Y + GAME_AREA_HEIGHT
     const gameAreaBottom = GAME_AREA_OFFSET_Y + (LOGICAL_GRID_HEIGHT * CELL_TO_PIXEL_RATIO * PIXEL_SIZE);
-    const slotY = gameAreaBottom + 120; // 游戏区域底部 + 60px间距
-    const slotSize = 180; // 放大槽位（原140）
-    const slotSpacing = 50; // 槽位之间的间距
+    const slotY = gameAreaBottom + 120; // 游戏区域底部 + 120px间距
+    const slotSize = 160; // 槽位大小（适配新屏幕）
+    const slotSpacing = 30; // 槽位之间的间距
     
     // 计算3个槽位的总宽度并居中
     const totalWidth = slotSize * 3 + slotSpacing * 2;
@@ -321,9 +321,9 @@ export class GameScene extends Phaser.Scene {
         item.destroy();
       });
 
-      // 绘制方块预览（槽位180px，方块也相应放大）
-      const cellSize = 36; // 放大方块格子（槽位180 / 5 ≈ 36）
-      const offset = -54; // 调整居中偏移（让方块在槽位中居中）
+      // 绘制方块预览（槽位160px，方块也相应放大）
+      const cellSize = 32; // 方块格子大小（槽位160 / 5 ≈ 32）
+      const offset = -48; // 调整居中偏移（让方块在槽位中居中）
       tetromino.cells.forEach((cell) => {
         const rect = this.add.rectangle(
           cell.x * cellSize + offset,

@@ -54,7 +54,7 @@ export class DragDropManager {
     }
 
     // 移动端优化：对触摸位置应用向上偏移
-    const TOUCH_OFFSET_Y = -100; // 向上偏移100px
+    const TOUCH_OFFSET_Y = -260; // 向上偏移100px
     const adjustedPointerY = pointerY + TOUCH_OFFSET_Y;
 
     // 转换为网格坐标（基于偏移后的位置）

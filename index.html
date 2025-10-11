@@ -2,7 +2,10 @@
 <html lang="zh-CN">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <!-- iOS全屏和状态栏配置 -->
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <title>像素流沙</title>
   <style>
     * {
@@ -11,25 +14,46 @@
       box-sizing: border-box;
     }
     
-    body {
-      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      min-height: 100vh;
-      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    html, body {
+      width: 100%;
+      height: 100%;
+      margin: 0;
+      padding: 0;
+      overflow: hidden; /* 禁止滚动 */
+      position: fixed; /* iOS禁止页面滚动 */
+      overscroll-behavior: none; /* 禁止过度滚动 */
+      -webkit-overflow-scrolling: touch;
+      touch-action: none; /* 禁止触摸手势 */
+      background: #1a1a2e; /* 深色背景 */
     }
     
     #game-container {
-      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
-      border-radius: 10px;
+      width: 100vw;
+      height: 100vh;
+      margin: 0;
+      padding: 0;
       overflow: hidden;
+    }
+    
+    #game-container canvas {
+      display: block;
     }
   </style>
 </head>
 <body>
   <div id="game-container"></div>
   <script type="module" src="/src/main.ts"></script>
+  <script>
+    // 禁止iOS页面拖动和缩放
+    document.addEventListener('touchmove', function(e) {
+      e.preventDefault();
+    }, { passive: false });
+    
+    // 禁止双指缩放
+    document.addEventListener('gesturestart', function(e) {
+      e.preventDefault();
+    });
+  </script>
 </body>
 </html>
 
