@@ -1,0 +1,344 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<doc>
+    <assembly>
+        <name>GameCore</name>
+    </assembly>
+    <members>
+        <member name="T:GameCore.Protocol.IBytesReplicable`1">
+            <summary />
+        </member>
+        <member name="M:GameCore.Protocol.IBytesReplicable`1.ReplicateFromBytes(System.ReadOnlySpan{System.Byte},`0@)">
+            <summary />
+            <param name="bytes" />
+            <param name="self" />
+            <returns />
+        </member>
+        <member name="M:GameCore.Protocol.IBytesReplicable`1.ToBytes(System.ReadOnlySpan{System.Byte}@)">
+            <summary>
+            May cause allocation. Use AsBytes() for performance.
+            </summary>
+            <param name="bytes" />
+            <returns />
+        </member>
+        <member name="T:GameCore.Protocol.IBytesReplicableUnmanaged`1">
+            <summary />
+        </member>
+        <member name="M:GameCore.Protocol.IBytesReplicableUnmanaged`1.GameCore#Protocol#IBytesReplicable{TSelf}#ToBytes(System.ReadOnlySpan{System.Byte}@)">
+            <summary />
+            <param name="bytes" />
+            <returns />
+        </member>
+        <member name="M:GameCore.Protocol.IBytesReplicableUnmanaged`1.ReplicateFromDouble(System.Double,`0@)">
+            <summary />
+            <param name="value" />
+            <param name="self" />
+            <returns />
+        </member>
+        <member name="M:GameCore.Protocol.IBytesReplicableUnmanaged`1.ReplicateFromBytes(System.ReadOnlySpan{System.Byte},`0@)">
+            <summary />
+            <param name="bytes" />
+            <param name="self" />
+            <returns />
+        </member>
+        <member name="M:GameCore.Protocol.IBytesReplicableUnmanaged`1.GameCore#Protocol#IBytesReplicable{TSelf}#ReplicateFromBytes(System.ReadOnlySpan{System.Byte},`0@)">
+            <summary />
+            <param name="bytes" />
+            <param name="self" />
+            <returns />
+        </member>
+        <member name="T:GameCore.Protocol.ProtoAbility">
+            <summary />
+        </member>
+        <member name="M:GameCore.Protocol.ProtoAbility.#ctor(GameCore.AbilitySystem.Ability)">
+            <summary />
+        </member>
+        <member name="P:GameCore.Protocol.ProtoAbility.ProtoEntity">
+            <summary />
+        </member>
+        <member name="P:GameCore.Protocol.ProtoAbility.AbilityId">
+            <summary />
+        </member>
+        <member name="P:GameCore.Protocol.ProtoAbility.Ability">
+            <summary />
+        </member>
+        <member name="M:GameCore.Protocol.ProtoAbility.op_Implicit(GameCore.AbilitySystem.Ability)~GameCore.Protocol.ProtoAbility">
+            <summary />
+        </member>
+        <member name="T:GameCore.Protocol.ProtoActorScope">
+            <summary />
+        </member>
+        <member name="M:GameCore.Protocol.ProtoActorScope.#ctor(GameCore.ActorSystem.IActorScope)">
+            <summary />
+        </member>
+        <member name="P:GameCore.Protocol.ProtoActorScope.ActorScopeId">
+            <summary />
+        </member>
+        <member name="P:GameCore.Protocol.ProtoActorScope.ActorScope">
+            <summary />
+        </member>
+        <member name="T:GameCore.Protocol.ProtoCooldown">
+            <summary />
+        </member>
+        <member name="M:GameCore.Protocol.ProtoCooldown.#ctor(GameCore.CooldownSystem.Cooldown)">
+            <summary />
+        </member>
+        <member name="P:GameCore.Protocol.ProtoCooldown.ProtoICooldownHost">
+            <summary />
+        </member>
+        <member name="P:GameCore.Protocol.ProtoCooldown.CooldownId">
+            <summary />
+        </member>
+        <member name="P:GameCore.Protocol.ProtoCooldown.Cooldown">
+            <summary />
+        </member>
+        <member name="M:GameCore.Protocol.ProtoCooldown.op_Implicit(GameCore.CooldownSystem.Cooldown)~GameCore.Protocol.ProtoCooldown">
+            <summary />
+        </member>
+        <member name="T:GameCore.Protocol.ProtoEntity">
+            <summary />
+        </member>
+        <member name="M:GameCore.Protocol.ProtoEntity.#ctor(GameCore.EntitySystem.Entity)">
+            <summary />
+        </member>
+        <member name="P:GameCore.Protocol.ProtoEntity.EntityId">
+            <summary />
+        </member>
+        <member name="P:GameCore.Protocol.ProtoEntity.Entity">
+            <summary />
+        </member>
+        <member name="M:GameCore.Protocol.ProtoEntity.op_Implicit(GameCore.EntitySystem.Entity)~GameCore.Protocol.ProtoEntity">
+            <summary />
+        </member>
+        <member name="M:GameCore.Protocol.ProtoEntity.op_Implicit(GameCore.Protocol.ProtoEntity)~GameCore.EntitySystem.Entity">
+            <summary />
+        </member>
+        <member name="T:GameCore.Protocol.ProtoEntityOrScenePoint">
+            <summary />
+        </member>
+        <member name="P:GameCore.Protocol.ProtoEntityOrScenePoint.ProtoEntity">
+            <summary />
+        </member>
+        <member name="P:GameCore.Protocol.ProtoEntityOrScenePoint.ProtoScenePoint">
+            <summary />
+        </member>
+        <member name="P:GameCore.Protocol.ProtoEntityOrScenePoint.Target">
+            <summary />
+        </member>
+        <member name="M:GameCore.Protocol.ProtoEntityOrScenePoint.#ctor(GameCore.BaseInterface.ITarget)">
+            <summary />
+        </member>
+        <member name="T:GameCore.Protocol.ProtoEntityOrScenePointOrAngleOrItemOrInventorySlot">
+            <summary />
+        </member>
+        <member name="T:GameCore.Protocol.ProtoEntityOrScenePointOrAngleOrItemOrInventorySlot.EType">
+            <summary />
+        </member>
+        <member name="F:GameCore.Protocol.ProtoEntityOrScenePointOrAngleOrItemOrInventorySlot.ProtoEntity">
+            <summary />
+        </member>
+        <member name="F:GameCore.Protocol.ProtoEntityOrScenePointOrAngleOrItemOrInventorySlot.ProtoScenePoint">
+            <summary />
+        </member>
+        <member name="F:GameCore.Protocol.ProtoEntityOrScenePointOrAngleOrItemOrInventorySlot.ProtoItem">
+            <summary />
+        </member>
+        <member name="F:GameCore.Protocol.ProtoEntityOrScenePointOrAngleOrItemOrInventorySlot.ProtoInventorySlot">
+            <summary />
+        </member>
+        <member name="F:GameCore.Protocol.ProtoEntityOrScenePointOrAngleOrItemOrInventorySlot.Angle">
+            <summary />
+        </member>
+        <member name="F:GameCore.Protocol.ProtoEntityOrScenePointOrAngleOrItemOrInventorySlot.Type">
+            <summary />
+        </member>
+        <member name="M:GameCore.Protocol.ProtoEntityOrScenePointOrAngleOrItemOrInventorySlot.#ctor(GameCore.BaseInterface.ICommandTarget)">
+            <summary />
+        </member>
+        <member name="P:GameCore.Protocol.ProtoEntityOrScenePointOrAngleOrItemOrInventorySlot.CommandTarget">
+            <summary />
+        </member>
+        <member name="T:GameCore.Protocol.ProtoIAttachedObject">
+            <summary />
+        </member>
+        <member name="M:GameCore.Protocol.ProtoIAttachedObject.#ctor(GameCore.BaseInterface.IAttachedObject)">
+            <summary />
+        </member>
+        <member name="P:GameCore.Protocol.ProtoIAttachedObject.ProtoHost">
+            <summary />
+        </member>
+        <member name="P:GameCore.Protocol.ProtoIAttachedObject.AttachedId">
+            <summary />
+        </member>
+        <member name="P:GameCore.Protocol.ProtoIAttachedObject.Attached">
+            <summary />
+        </member>
+        <member name="T:GameCore.Protocol.ProtoICooldownHost">
+            <summary />
+        </member>
+        <member name="M:GameCore.Protocol.ProtoICooldownHost.#ctor(GameCore.BaseInterface.ICooldownHost)">
+            <summary />
+        </member>
+        <member name="P:GameCore.Protocol.ProtoICooldownHost.HostId">
+            <summary />
+        </member>
+        <member name="P:GameCore.Protocol.ProtoICooldownHost.Host">
+            <summary />
+        </member>
+        <member name="T:GameCore.Protocol.ProtoIExtendableEnum`1">
+            <summary />
+        </member>
+        <member name="M:GameCore.Protocol.ProtoIExtendableEnum`1.#ctor(`0)">
+            <summary />
+        </member>
+        <member name="P:GameCore.Protocol.ProtoIExtendableEnum`1.EnumHash">
+            <summary />
+        </member>
+        <member name="P:GameCore.Protocol.ProtoIExtendableEnum`1.ExtendableEnum">
+            <summary />
+        </member>
+        <member name="T:GameCore.Protocol.ProtoIExtendedEnum">
+            <summary />
+        </member>
+        <member name="M:GameCore.Protocol.ProtoIExtendedEnum.#ctor(GameCore.BaseInterface.IExtendedEnum)">
+            <summary />
+        </member>
+        <member name="P:GameCore.Protocol.ProtoIExtendedEnum.EnumHash">
+            <summary />
+        </member>
+        <member name="P:GameCore.Protocol.ProtoIExtendedEnum.ExtendedEnum">
+            <summary />
+        </member>
+        <member name="T:GameCore.Protocol.ProtoIGameLink">
+            <summary />
+        </member>
+        <member name="M:GameCore.Protocol.ProtoIGameLink.#ctor(GameData.IGameLink)">
+            <summary />
+        </member>
+        <member name="P:GameCore.Protocol.ProtoIGameLink.LinkHash">
+            <summary />
+        </member>
+        <member name="P:GameCore.Protocol.ProtoIGameLink.GameLink">
+            <summary />
+        </member>
+        <member name="T:GameCore.Protocol.ProtoIGameLink`1">
+            <summary />
+        </member>
+        <member name="M:GameCore.Protocol.ProtoIGameLink`1.#ctor(GameData.IGameLink{`0})">
+            <summary />
+        </member>
+        <member name="P:GameCore.Protocol.ProtoIGameLink`1.LinkHash">
+            <summary />
+        </member>
+        <member name="P:GameCore.Protocol.ProtoIGameLink`1.GameLink">
+            <summary />
+        </member>
+        <member name="T:GameCore.Protocol.ProtoInventory">
+            <summary />
+        </member>
+        <member name="M:GameCore.Protocol.ProtoInventory.#ctor(GameCore.Container.Inventory)">
+            <summary />
+        </member>
+        <member name="P:GameCore.Protocol.ProtoInventory.ProtoHost">
+            <summary />
+        </member>
+        <member name="P:GameCore.Protocol.ProtoInventory.InventoryId">
+            <summary />
+        </member>
+        <member name="P:GameCore.Protocol.ProtoInventory.Inventory">
+            <summary />
+        </member>
+        <member name="T:GameCore.Protocol.ProtoInventorySlot">
+            <summary />
+        </member>
+        <member name="M:GameCore.Protocol.ProtoInventorySlot.#ctor(GameCore.Container.InventorySlot)">
+            <summary />
+        </member>
+        <member name="P:GameCore.Protocol.ProtoInventorySlot.ProtoInventory">
+            <summary />
+        </member>
+        <member name="P:GameCore.Protocol.ProtoInventorySlot.SlotIndex">
+            <summary />
+        </member>
+        <member name="P:GameCore.Protocol.ProtoInventorySlot.InventorySlot">
+            <summary />
+        </member>
+        <member name="M:GameCore.Protocol.ProtoInventorySlot.op_Implicit(GameCore.Container.InventorySlot)~GameCore.Protocol.ProtoInventorySlot">
+            <summary />
+        </member>
+        <member name="M:GameCore.Protocol.ProtoInventorySlot.op_Implicit(GameCore.Protocol.ProtoInventorySlot)~GameCore.Container.InventorySlot">
+            <summary />
+        </member>
+        <member name="T:GameCore.Protocol.ProtoItem">
+            <summary />
+        </member>
+        <member name="M:GameCore.Protocol.ProtoItem.#ctor(GameCore.ItemSystem.Item)">
+            <summary />
+        </member>
+        <member name="P:GameCore.Protocol.ProtoItem.ItemId">
+            <summary />
+        </member>
+        <member name="P:GameCore.Protocol.ProtoItem.Item">
+            <summary />
+        </member>
+        <member name="M:GameCore.Protocol.ProtoItem.op_Implicit(GameCore.ItemSystem.Item)~GameCore.Protocol.ProtoItem">
+            <summary />
+        </member>
+        <member name="M:GameCore.Protocol.ProtoItem.op_Implicit(GameCore.Protocol.ProtoItem)~GameCore.ItemSystem.Item">
+            <summary />
+        </member>
+        <member name="T:GameCore.Protocol.ProtoPlayer">
+            <summary />
+        </member>
+        <member name="P:GameCore.Protocol.ProtoPlayer.PlayerId">
+            <summary />
+        </member>
+        <member name="P:GameCore.Protocol.ProtoPlayer.Player">
+            <summary />
+        </member>
+        <member name="M:GameCore.Protocol.ProtoPlayer.op_Implicit(GameCore.PlayerAndUsers.Player)~GameCore.Protocol.ProtoPlayer">
+            <summary />
+        </member>
+        <member name="M:GameCore.Protocol.ProtoPlayer.op_Implicit(GameCore.Protocol.ProtoPlayer)~GameCore.PlayerAndUsers.Player">
+            <summary />
+        </member>
+        <member name="T:GameCore.Protocol.ProtoScene">
+            <summary />
+        </member>
+        <member name="P:GameCore.Protocol.ProtoScene.SceneId">
+            <summary />
+        </member>
+        <member name="P:GameCore.Protocol.ProtoScene.Scene">
+            <summary />
+        </member>
+        <member name="M:GameCore.Protocol.ProtoScene.op_Implicit(GameCore.SceneSystem.Scene)~GameCore.Protocol.ProtoScene">
+            <summary />
+        </member>
+        <member name="M:GameCore.Protocol.ProtoScene.op_Implicit(GameCore.Protocol.ProtoScene)~GameCore.SceneSystem.Scene">
+            <summary />
+        </member>
+        <member name="T:GameCore.Protocol.ProtoScenePoint">
+            <summary />
+        </member>
+        <member name="P:GameCore.Protocol.ProtoScenePoint.Scene">
+            <summary />
+        </member>
+        <member name="P:GameCore.Protocol.ProtoScenePoint.Vector">
+            <summary />
+        </member>
+        <member name="P:GameCore.Protocol.ProtoScenePoint.ScenePoint">
+            <summary />
+        </member>
+        <member name="M:GameCore.Protocol.ProtoScenePoint.op_Implicit(GameCore.Protocol.ProtoScenePoint)~GameCore.SceneSystem.ScenePoint">
+            <summary />
+        </member>
+        <member name="M:GameCore.Protocol.ProtoScenePoint.op_Implicit(GameCore.SceneSystem.ScenePoint)~GameCore.Protocol.ProtoScenePoint">
+            <summary />
+        </member>
+        <member name="T:GameCore.Protocol.ProtoType">
+            <summary />
+        </member>
+        <member name="P:GameCore.Protocol.ProtoType.Hash">
+            <summary />
+        </member>
+    </members>
+</doc>

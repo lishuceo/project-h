@@ -1,0 +1,347 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<doc>
+    <assembly>
+        <name>GameCore</name>
+    </assembly>
+    <members>
+        <member name="T:GameCore.TargetingSystem.Data.GameDataTargetingIndicator">
+            <summary />
+        </member>
+        <member name="P:GameCore.TargetingSystem.Data.GameDataTargetingIndicator.RangeActors">
+            <summary />
+        </member>
+        <member name="P:GameCore.TargetingSystem.Data.GameDataTargetingIndicator.CursorActors">
+            <summary />
+        </member>
+        <member name="P:GameCore.TargetingSystem.Data.GameDataTargetingIndicator.VectorConeActors">
+            <summary>
+            TODO: Implement GameDataActorSegmentedCone
+            </summary>
+        </member>
+        <member name="P:GameCore.TargetingSystem.Data.GameDataTargetingIndicator.VectorLineActors">
+            <summary />
+        </member>
+        <member name="P:GameCore.TargetingSystem.Data.GameDataTargetingIndicator.PreTargetingHighlightActors">
+            <summary />
+        </member>
+        <member name="P:GameCore.TargetingSystem.Data.GameDataTargetingIndicator.Flags">
+            <summary />
+        </member>
+        <member name="T:GameCore.TargetingSystem.Data.Struct.TargetingIndicatorFlags">
+            <summary />
+        </member>
+        <member name="P:GameCore.TargetingSystem.Data.Struct.TargetingIndicatorFlags.DebugDraw">
+            <summary>
+            Gets or sets a value indicating whether debug drawing is enabled. When set to true, debug shapes will be drawn in the game scene for debugging purposes. It only works for RangeActors and CursorActors, for VectorConeActors and VectorLineActors, they have their own debug drawing settings.
+            </summary>
+        </member>
+        <member name="T:GameCore.TargetingSystem.ITargetingInfo">
+            <summary />
+        </member>
+        <member name="P:GameCore.TargetingSystem.ITargetingInfo.ActorScope">
+            <summary />
+        </member>
+        <member name="P:GameCore.TargetingSystem.ITargetingInfo.Source">
+            <summary />
+        </member>
+        <member name="P:GameCore.TargetingSystem.ITargetingInfo.Caster">
+            <summary />
+        </member>
+        <member name="P:GameCore.TargetingSystem.ITargetingInfo.VectorConeAngle">
+            <summary>
+            If the targeting is a cone, the angle of the cone.
+            </summary>
+        </member>
+        <member name="P:GameCore.TargetingSystem.ITargetingInfo.CursorRadius">
+            <summary>
+            If the targeting cursor is an area-of-effect circle, the radius of the circle.
+            </summary>
+        </member>
+        <member name="P:GameCore.TargetingSystem.ITargetingInfo.VectorLineWidth">
+            <summary>
+            If the targeting is a line, the width of the line
+            </summary>
+        </member>
+        <member name="P:GameCore.TargetingSystem.ITargetingInfo.Range">
+            <summary>
+            The targeting range.
+            </summary>
+        </member>
+        <member name="P:GameCore.TargetingSystem.ITargetingInfo.AllowApproachBeyondRange">
+            <summary>
+            When true, the target will be considered in range even if it is out of the range, the caster will approach the target to the range.
+            </summary>
+        </member>
+        <member name="P:GameCore.TargetingSystem.ITargetingInfo.TargetingHighlightFilter">
+            <summary>
+            Filter used to determine which targets are highlighted when the targeting indicator is active.
+            </summary>
+        </member>
+        <member name="P:GameCore.TargetingSystem.ITargetingInfo.VectorHighlightLimit">
+            <summary>
+            The maximum number of vector line highlights to display.
+            Only works when the targeting indicator has highlight actors set.
+            </summary>
+        </member>
+        <member name="T:GameCore.TargetingSystem.RangeScaledVector">
+            <summary>
+            Represents a 2D vector command target, which can be used in targeting. 
+            The actual targeting position is scaled based on the casting range. 
+            The X and Y components of the vector are scaling factors. 
+            For example, if the X component is 2 and the Y component is 3, 
+            the actual target position will be (2 * range, 3 * range).
+            </summary>
+        </member>
+        <member name="M:GameCore.TargetingSystem.RangeScaledVector.#ctor(System.Single,System.Single)">
+            <summary>
+            Represents a 2D vector command target, which can be used in targeting. 
+            The actual targeting position is scaled based on the casting range. 
+            The X and Y components of the vector are scaling factors. 
+            For example, if the X component is 2 and the Y component is 3, 
+            the actual target position will be (2 * range, 3 * range).
+            </summary>
+        </member>
+        <member name="P:GameCore.TargetingSystem.RangeScaledVector.HorizontalFactor">
+            <summary />
+        </member>
+        <member name="P:GameCore.TargetingSystem.RangeScaledVector.VerticalFactor">
+            <summary />
+        </member>
+        <member name="M:GameCore.TargetingSystem.RangeScaledVector.op_Implicit(GameCore.TargetingSystem.RangeScaledVector)~System.Numerics.Vector2">
+            <summary />
+        </member>
+        <member name="M:GameCore.TargetingSystem.RangeScaledVector.op_Implicit(System.Numerics.Vector2)~GameCore.TargetingSystem.RangeScaledVector">
+            <summary />
+        </member>
+        <member name="M:GameCore.TargetingSystem.RangeScaledVector.Scale(System.Single)">
+            <summary>
+            Scales the vector by the given range.
+            </summary>
+            <param name="range">The range to scale the vector by.</param>
+            <returns>A scaled <see cref="T:System.Numerics.Vector2" />.</returns>
+        </member>
+        <member name="M:GameCore.TargetingSystem.RangeScaledVector.TargetPosition(GameCore.BaseInterface.ITarget,System.Single)">
+            <summary>
+            Calculates the target position based on the source position, interact radius and the range.
+            </summary>
+            <param name="source">The source target.</param>
+            <param name="range">The range to scale the vector by.</param>
+            <returns>A <see cref="T:GameCore.SceneSystem.ScenePoint" /> representing the target position.</returns>
+        </member>
+        <member name="M:GameCore.TargetingSystem.RangeScaledVector.ToAngle">
+            <summary />
+            <returns />
+        </member>
+        <member name="M:GameCore.TargetingSystem.RangeScaledVector.Equals(System.Object)">
+            <summary />
+            <param name="obj" />
+            <returns />
+        </member>
+        <member name="M:GameCore.TargetingSystem.RangeScaledVector.GetHashCode">
+            <summary />
+            <returns />
+        </member>
+        <member name="M:GameCore.TargetingSystem.RangeScaledVector.ToString">
+            <summary />
+            <returns />
+        </member>
+        <member name="P:GameCore.TargetingSystem.RangeScaledVector.Zero">
+            <summary />
+        </member>
+        <member name="P:GameCore.TargetingSystem.RangeScaledVector.UnitX">
+            <summary />
+        </member>
+        <member name="P:GameCore.TargetingSystem.RangeScaledVector.UnitY">
+            <summary />
+        </member>
+        <member name="M:GameCore.TargetingSystem.RangeScaledVector.op_Equality(GameCore.TargetingSystem.RangeScaledVector,GameCore.TargetingSystem.RangeScaledVector)">
+            <summary />
+        </member>
+        <member name="M:GameCore.TargetingSystem.RangeScaledVector.op_Inequality(GameCore.TargetingSystem.RangeScaledVector,GameCore.TargetingSystem.RangeScaledVector)">
+            <summary />
+        </member>
+        <member name="T:GameCore.TargetingSystem.TargetingIndicator">
+            <summary>
+            Provides visual targeting indicators for abilities and spells on the client side, including range displays, cursor effects, and target highlighting.
+            </summary>
+            <remarks>
+            The TargetingIndicator class manages the visual feedback system for player targeting actions, such as displaying ability ranges,
+            cursor indicators, targeting cones, and highlighted potential targets. It integrates with the ability system to provide
+            real-time visual feedback during target selection. The class supports various indicator types including circular ranges,
+            vector lines, cone effects, and individual target highlights.
+            </remarks>
+            <summary />
+        </member>
+        <member name="P:GameCore.TargetingSystem.TargetingIndicator.DebugDraw">
+            <summary>
+            Gets or sets the debug drawing interface for rendering debugging information.
+            </summary>
+            <value>The debug draw interface, or null if debug drawing is disabled.</value>
+        </member>
+        <member name="P:GameCore.TargetingSystem.TargetingIndicator.DebugDrawEnabled">
+            <summary>
+            Gets or sets a value indicating whether debug drawing is enabled for this targeting indicator.
+            </summary>
+            <value>True if debug drawing is enabled; otherwise, false.</value>
+            <remarks>
+            When enabled, additional visual debugging information such as range circles and geometric shapes
+            will be rendered to help with development and troubleshooting.
+            </remarks>
+        </member>
+        <member name="P:GameCore.TargetingSystem.TargetingIndicator.RangeActors">
+            <summary>
+            Gets or sets the collection of actors used to display ability range indicators.
+            </summary>
+            <remarks>
+            These actors typically show the maximum range of an ability as circular or other geometric shapes
+            around the caster. They help players understand the effective area of their abilities.
+            </remarks>
+        </member>
+        <member name="P:GameCore.TargetingSystem.TargetingIndicator.CursorActors">
+            <summary>
+            Gets or sets the collection of actors used to display cursor position indicators.
+            </summary>
+            <remarks>
+            These actors follow the player's cursor or target selection, providing visual feedback
+            about where an ability will be targeted when activated.
+            </remarks>
+        </member>
+        <member name="P:GameCore.TargetingSystem.TargetingIndicator.VectorConeActors">
+            <summary>
+            Gets or sets the collection of segmented actors used to display vector cone targeting indicators.
+            </summary>
+            <remarks>
+            Vector cone actors are used for abilities that affect targets in a cone-shaped area,
+            such as breath weapons or area-of-effect spells with directional targeting.
+            </remarks>
+        </member>
+        <member name="P:GameCore.TargetingSystem.TargetingIndicator.VectorLineActors">
+            <summary>
+            Gets or sets the collection of segmented rectangle actors used to display vector line targeting indicators.
+            </summary>
+            <remarks>
+            Vector line actors are used for abilities that affect targets in a straight line or rectangular area,
+            such as projectile spells or linear area effects.
+            </remarks>
+        </member>
+        <member name="P:GameCore.TargetingSystem.TargetingIndicator.HighlightActors">
+            <summary>
+            Gets or sets the dictionary mapping entities to their highlight actors for target preview.
+            </summary>
+            <remarks>
+            This collection manages visual highlights applied to potential targets before the ability is cast,
+            giving players feedback about which entities will be affected by their ability.
+            </remarks>
+        </member>
+        <member name="P:GameCore.TargetingSystem.TargetingIndicator.PendingHighlightTargets">
+            <summary>
+            Gets or sets the collection of entities that are pending highlight updates.
+            </summary>
+            <remarks>
+            This temporary collection tracks entities that need highlight effects added or updated
+            during the next update cycle, helping to manage highlight transitions efficiently.
+            </remarks>
+        </member>
+        <member name="M:GameCore.TargetingSystem.TargetingIndicator.CreateFromAbility(GameCore.AbilitySystem.AbilityExecute)">
+            <summary>
+            Creates a targeting indicator from an ability execution context.
+            </summary>
+            <param name="abilityExecute">The ability execution context containing targeting configuration.</param>
+            <returns>A new targeting indicator instance, or null if the ability doesn't support targeting indicators.</returns>
+            <remarks>
+            This factory method examines the ability's configuration to determine if it should display targeting
+            indicators and creates an appropriate indicator instance based on the ability's targeting requirements.
+            </remarks>
+        </member>
+        <member name="M:GameCore.TargetingSystem.TargetingIndicator.#ctor(GameCore.TargetingSystem.ITargetingInfo,GameData.IGameLink{GameCore.TargetingSystem.Data.GameDataTargetingIndicator})">
+            <summary>
+            Initializes a new instance of the TargetingIndicator class with the specified targeting information and data configuration.
+            </summary>
+            <param name="targetingInfo">The targeting information context providing source, range, and other targeting parameters.</param>
+            <param name="link">The game data link defining the visual configuration for this targeting indicator.</param>
+            <exception cref="T:System.ArgumentException">Thrown when the provided link has invalid data.</exception>
+            <remarks>
+            This constructor sets up all the visual actors and components based on the targeting indicator configuration,
+            including range displays, cursor effects, vector indicators, and highlight systems. The various actor types
+            are created and configured according to the targeting parameters such as range, cursor radius, and line width.
+            </remarks>
+        </member>
+        <member name="P:GameCore.TargetingSystem.TargetingIndicator.TargetingInfo">
+            <summary>
+            Gets the targeting information context that provides source, range, and other targeting parameters.
+            </summary>
+            <value>The targeting information interface containing all targeting-related data.</value>
+        </member>
+        <member name="P:GameCore.TargetingSystem.TargetingIndicator.Link">
+            <summary>
+            Gets the game data link that defines the visual configuration for this targeting indicator.
+            </summary>
+            <value>The game data link containing the targeting indicator configuration.</value>
+        </member>
+        <member name="P:GameCore.TargetingSystem.TargetingIndicator.Cache">
+            <summary>
+            Gets the cached targeting indicator data for efficient access to configuration properties.
+            </summary>
+            <value>The targeting indicator data object containing all configuration settings.</value>
+        </member>
+        <member name="M:GameCore.TargetingSystem.TargetingIndicator.UpdateCursorTarget(GameCore.TargetingSystem.RangeScaledVector)">
+            <summary>
+            Updates the cursor target position using a range-scaled vector for directional targeting.
+            </summary>
+            <param name="vector">The range-scaled vector indicating the target direction and distance.</param>
+            <remarks>
+            This method is used for abilities that target in a specific direction from the source,
+            calculating the final target position based on the vector and the ability's maximum range.
+            </remarks>
+        </member>
+        <member name="M:GameCore.TargetingSystem.TargetingIndicator.TargetFilter(GameCore.EntitySystem.Entity)">
+            <summary>
+            Determines whether the specified entity passes the targeting highlight filter.
+            </summary>
+            <param name="entity">The entity to test against the filter.</param>
+            <returns>True if the entity should be highlighted; otherwise, false.</returns>
+            <remarks>
+            This method applies the configured targeting filter to determine if an entity should
+            receive highlight effects. If no filter is configured, all entities are considered valid targets.
+            </remarks>
+        </member>
+        <member name="M:GameCore.TargetingSystem.TargetingIndicator.FindClosest(System.Collections.Generic.IEnumerable{GameCore.EntitySystem.Entity},System.UInt32)">
+            <summary>
+            Finds the closest entities from a collection, limited to a specified maximum amount.
+            </summary>
+            <param name="entities">The collection of entities to search through.</param>
+            <param name="amount">The maximum number of entities to return.</param>
+            <returns>An enumerable of the closest entities, up to the specified amount.</returns>
+            <remarks>
+            This method sorts entities by their distance from the targeting source and returns
+            the closest ones. It's used to limit highlighting effects when there are many potential targets.
+            </remarks>
+        </member>
+        <member name="M:GameCore.TargetingSystem.TargetingIndicator.UpdateHighlights">
+            <summary>
+            Updates the highlight effects for all pending target entities.
+            </summary>
+            <remarks>
+            This method manages the addition and removal of highlight actors for entities that are
+            entering or leaving the targeting area. It ensures that highlight effects are properly
+            synchronized with the current set of valid targets.
+            </remarks>
+        </member>
+        <member name="M:GameCore.TargetingSystem.TargetingIndicator.UpdateCursorTarget(GameCore.BaseInterface.ITarget)">
+            <summary>
+            Updates the cursor target position and refreshes all targeting indicators to reflect the new target.
+            </summary>
+            <param name="target">The new target position or entity to aim towards.</param>
+            <remarks>
+            This method updates all visual targeting elements including cursor actors, vector indicators,
+            and target highlights based on the new target position. It also handles range limitations
+            and updates debug drawing if enabled. The method performs entity searches to identify
+            potential targets within the ability's area of effect.
+            </remarks>
+        </member>
+        <member name="M:GameCore.TargetingSystem.TargetingIndicator.DisposeManaged">
+            <summary />
+            <returns />
+        </member>
+    </members>
+</doc>

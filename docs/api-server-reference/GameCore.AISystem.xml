@@ -1,0 +1,354 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<doc>
+    <assembly>
+        <name>GameCore</name>
+    </assembly>
+    <members>
+        <member name="T:GameCore.AISystem.Data.GameDataAINode">
+            <summary />
+        </member>
+        <member name="T:GameCore.AISystem.Data.GameDataAINodeCustom">
+            <summary />
+        </member>
+        <member name="T:GameCore.AISystem.Data.GameDataAINodeParallel">
+            <summary>
+            并行节点
+            <para>同时执行所有子节点，根据成功/失败策略决定整体结果</para></summary>
+            <remarks>
+                <para>
+                    <strong>执行逻辑</strong>：</para>
+                <list type="bullet">
+                    <item>
+                        <description>同时执行所有子节点（不考虑执行顺序）</description>
+                    </item>
+                    <item>
+                        <description>根据成功策略和失败策略决定整体结果</description>
+                    </item>
+                    <item>
+                        <description>即使某些子节点失败，其他子节点仍会继续执行</description>
+                    </item>
+                </list>
+                <para>
+                    <strong>成功策略</strong>：</para>
+                <list type="bullet">
+                    <item>
+                        <description>
+                            <see cref="F:GameCore.AISystem.Data.ParallelPolicy.RequireOne" />：任意一个子节点成功即返回成功</description>
+                    </item>
+                    <item>
+                        <description>
+                            <see cref="F:GameCore.AISystem.Data.ParallelPolicy.RequireAll" />：所有子节点都成功才返回成功</description>
+                    </item>
+                </list>
+                <para>
+                    <strong>失败策略</strong>：</para>
+                <list type="bullet">
+                    <item>
+                        <description>
+                            <see cref="F:GameCore.AISystem.Data.ParallelPolicy.RequireOne" />：任意一个子节点失败即返回失败</description>
+                    </item>
+                    <item>
+                        <description>
+                            <see cref="F:GameCore.AISystem.Data.ParallelPolicy.RequireAll" />：所有子节点都失败才返回失败</description>
+                    </item>
+                </list>
+                <para>
+                    <strong>使用场景</strong>：</para>
+                <list type="bullet">
+                    <item>
+                        <description>同时监听多个条件（如血量低 OR 敌人接近）</description>
+                    </item>
+                    <item>
+                        <description>并行执行多个独立的AI行为</description>
+                    </item>
+                    <item>
+                        <description>同时尝试多种策略</description>
+                    </item>
+                    <item>
+                        <description>复合条件检查（如移动 AND 攻击）</description>
+                    </item>
+                </list>
+                <para>
+                    <strong>与其他节点的区别</strong>：</para>
+                <list type="bullet">
+                    <item>
+                        <description>
+                            <see cref="T:GameCore.AISystem.Data.GameDataAINodeSelect" />：顺序尝试，任一成功就停止</description>
+                    </item>
+                    <item>
+                        <description>
+                            <see cref="T:GameCore.AISystem.Data.GameDataAINodeSequence" />：顺序执行，任一失败就停止</description>
+                    </item>
+                    <item>
+                        <description>
+                            <see cref="T:GameCore.AISystem.Data.GameDataAINodeParallel" />：并行执行，根据策略决定结果</description>
+                    </item>
+                </list>
+            </remarks>
+        </member>
+        <member name="P:GameCore.AISystem.Data.GameDataAINodeParallel.Nodes">
+            <summary>
+            子节点列表
+            <para>所有节点将同时执行，不考虑列表顺序</para></summary>
+        </member>
+        <member name="P:GameCore.AISystem.Data.GameDataAINodeParallel.SuccessPolicy">
+            <summary>
+            成功策略
+            <para>决定什么情况下并行节点返回成功</para></summary>
+            <value>
+                <see cref="F:GameCore.AISystem.Data.ParallelPolicy.RequireOne" />：任意一个子节点成功即返回成功（默认）<br /><see cref="F:GameCore.AISystem.Data.ParallelPolicy.RequireAll" />：所有子节点都成功才返回成功
+            </value>
+        </member>
+        <member name="P:GameCore.AISystem.Data.GameDataAINodeParallel.FailurePolicy">
+            <summary>
+            失败策略
+            <para>决定什么情况下并行节点返回失败</para></summary>
+            <value>
+                <see cref="F:GameCore.AISystem.Data.ParallelPolicy.RequireOne" />：任意一个子节点失败即返回失败<br /><see cref="F:GameCore.AISystem.Data.ParallelPolicy.RequireAll" />：所有子节点都失败才返回失败（默认）
+            </value>
+        </member>
+        <member name="T:GameCore.AISystem.Data.ParallelPolicy">
+            <summary>
+            并行节点策略枚举
+            <para>定义并行节点如何处理子节点的成功/失败条件</para></summary>
+        </member>
+        <member name="F:GameCore.AISystem.Data.ParallelPolicy.RequireOne">
+            <summary>
+            要求一个：任意一个子节点满足条件即可
+            <para>用于成功策略时：任一成功即成功</para><para>用于失败策略时：任一失败即失败</para></summary>
+        </member>
+        <member name="F:GameCore.AISystem.Data.ParallelPolicy.RequireAll">
+            <summary>
+            要求全部：所有子节点都必须满足条件
+            <para>用于成功策略时：全部成功才成功</para><para>用于失败策略时：全部失败才失败</para></summary>
+        </member>
+        <member name="T:GameCore.AISystem.Data.GameDataAINodeSelect">
+            <summary>
+            选择节点
+            任意一个子节点返回Ok则返回Ok，否则返回错误
+            </summary>
+        </member>
+        <member name="P:GameCore.AISystem.Data.GameDataAINodeSelect.Nodes">
+            <summary />
+        </member>
+        <member name="T:GameCore.AISystem.Data.GameDataAINodeSequence">
+            <summary>
+            序列节点
+            <para>依次执行所有子节点，所有子节点都返回Ok才返回Ok，任何一个失败则立即返回错误</para></summary>
+            <remarks>
+                <para>
+                    <strong>执行逻辑</strong>：</para>
+                <list type="bullet">
+                    <item>
+                        <description>按顺序执行每个子节点</description>
+                    </item>
+                    <item>
+                        <description>如果某个子节点返回失败，立即停止执行并返回该错误</description>
+                    </item>
+                    <item>
+                        <description>只有当所有子节点都成功时，才返回成功</description>
+                    </item>
+                </list>
+                <para>
+                    <strong>使用场景</strong>：</para>
+                <list type="bullet">
+                    <item>
+                        <description>实现"先A然后B然后C"的顺序逻辑</description>
+                    </item>
+                    <item>
+                        <description>组合多个必须按顺序完成的动作</description>
+                    </item>
+                    <item>
+                        <description>例如：扫描敌人 → 设置焦点 → 施法攻击</description>
+                    </item>
+                </list>
+                <para>
+                    <strong>与Select节点的区别</strong>：</para>
+                <list type="bullet">
+                    <item>
+                        <description>
+                            <see cref="T:GameCore.AISystem.Data.GameDataAINodeSelect" />：任意一个成功就返回成功（OR逻辑）</description>
+                    </item>
+                    <item>
+                        <description>
+                            <see cref="T:GameCore.AISystem.Data.GameDataAINodeSequence" />：所有节点都必须成功才返回成功（AND逻辑）</description>
+                    </item>
+                </list>
+            </remarks>
+        </member>
+        <member name="P:GameCore.AISystem.Data.GameDataAINodeSequence.Nodes">
+            <summary>
+            子节点列表
+            <para>按照列表顺序依次执行，所有节点都必须成功</para></summary>
+        </member>
+        <member name="T:GameCore.AISystem.Data.GameDataAINodeValidate">
+            <summary />
+        </member>
+        <member name="T:GameCore.AISystem.Data.GameDataAINodeValidateAttack">
+            <summary />
+        </member>
+        <member name="T:GameCore.AISystem.Data.GameDataAINodeValidateAttackOrMoveTo">
+            <summary />
+        </member>
+        <member name="T:GameCore.AISystem.Data.GameDataAINodeValidateCast">
+            <summary />
+        </member>
+        <member name="P:GameCore.AISystem.Data.GameDataAINodeValidateCast.Ability">
+            <summary>
+            Specific ability to cast. If null, will automatically find valid abilities.
+            </summary>
+        </member>
+        <member name="P:GameCore.AISystem.Data.GameDataAINodeValidateCast.IsAcquired">
+            <summary>
+            Whether this is an acquired cast (auto-cast/recast behavior)
+            </summary>
+        </member>
+        <member name="P:GameCore.AISystem.Data.GameDataAINodeValidateCast.DoRecast">
+            <summary>
+            Whether to enable recasting behavior
+            </summary>
+        </member>
+        <member name="T:GameCore.AISystem.Data.GameDataAINodeValidateFocus">
+            <summary>
+            AI节点：设置焦点目标
+            <para>用于AI系统中设置或清除当前的焦点目标。焦点目标通常用于AI的持续关注和决策。</para></summary>
+            <remarks>
+                <para>
+                    <strong>目标处理</strong>：</para>
+                <list type="bullet">
+                    <item>
+                        <description>如果指定了目标，将该目标设置为AI的焦点目标</description>
+                    </item>
+                    <item>
+                        <description>如果目标为空，将清除当前的焦点目标（设置为null）</description>
+                    </item>
+                    <item>
+                        <description>这种设计允许AI在不同情况下灵活地管理注意力</description>
+                    </item>
+                </list>
+                <para>
+                    <strong>使用场景</strong>：</para>
+                <list type="bullet">
+                    <item>
+                        <description>设置优先攻击目标</description>
+                    </item>
+                    <item>
+                        <description>标记需要持续关注的敌人</description>
+                    </item>
+                    <item>
+                        <description>清除过期或无效的焦点目标</description>
+                    </item>
+                </list>
+            </remarks>
+        </member>
+        <member name="T:GameCore.AISystem.Data.GameDataAINodeValidateMoveTo">
+            <summary />
+        </member>
+        <member name="T:GameCore.AISystem.Data.GameDataAINodeValidateScan">
+            <summary />
+        </member>
+        <member name="P:GameCore.AISystem.Data.GameDataAINodeValidateScan.IgnoreLeash">
+            <summary>
+            Whether to ignore leash restrictions when scanning for targets
+            </summary>
+        </member>
+        <member name="T:GameCore.AISystem.Data.GameDataAIThinkTree">
+            <summary />
+        </member>
+        <member name="P:GameCore.AISystem.Data.GameDataAIThinkTree.ScanFilters">
+            <summary />
+        </member>
+        <member name="P:GameCore.AISystem.Data.GameDataAIThinkTree.ScanSorts">
+            <summary />
+        </member>
+        <member name="P:GameCore.AISystem.Data.GameDataAIThinkTree.CombatBehaviorTree">
+            <summary />
+        </member>
+        <member name="T:GameCore.AISystem.Data.GameDataWaveAI">
+            <summary />
+        </member>
+        <member name="P:GameCore.AISystem.Data.GameDataWaveAI.AutoDisposeOnEmpty">
+            <summary>
+            If the wave AI will be disposed when all units are removed
+            </summary>
+        </member>
+        <member name="P:GameCore.AISystem.Data.GameDataWaveAI.InCombatMinimalDuration">
+            <summary>
+            The minimal duration of the wave AI in combat
+            </summary>
+        </member>
+        <member name="P:GameCore.AISystem.Data.GameDataWaveAI.MinimalApproachRange">
+            <summary />
+        </member>
+        <member name="P:GameCore.AISystem.Data.GameDataWaveAI.MinimalScanRange">
+            <summary />
+        </member>
+        <member name="P:GameCore.AISystem.Data.GameDataWaveAI.MaximalScanRange">
+            <summary />
+        </member>
+        <member name="P:GameCore.AISystem.Data.GameDataWaveAI.CombatLeash">
+            <summary>
+            The AI unit will not move further than this distance from the reset point in combat
+            </summary>
+        </member>
+        <member name="P:GameCore.AISystem.Data.GameDataWaveAI.CombatResetRange">
+            <summary>
+            The max distance between the AI unit and its reset point
+            The AI unit will move back to the reset point if it is further than this distance
+            </summary>
+        </member>
+        <member name="P:GameCore.AISystem.Data.GameDataWaveAI.WaveLeash">
+            <summary>
+            Used for group AI, the max distance between the group and the leader
+            </summary>
+        </member>
+        <member name="P:GameCore.AISystem.Data.GameDataWaveAI.EnableLinkedAggro">
+            <summary />
+        </member>
+        <member name="P:GameCore.AISystem.Data.GameDataWaveAI.EnableWaveFormation">
+            <summary />
+        </member>
+        <member name="P:GameCore.AISystem.Data.GameDataWaveAI.EnableCombat">
+            <summary>
+            If the wave AI units will try to enter combat when enemy is scanned in AIThinkTree
+            </summary>
+        </member>
+        <member name="P:GameCore.AISystem.Data.GameDataWaveAI.Type">
+            <summary>
+            The type of wave behavior (Guard, Move, Patrol)
+            </summary>
+        </member>
+        <member name="P:GameCore.AISystem.Data.GameDataWaveAI.MoveHysteresisFactor">
+            <summary>
+            Hysteresis factor for Move mode to prevent oscillation at range boundaries.
+            When switching from WaveAI to AIThinkTree control, the threshold becomes:
+            MinimalApproachRange * MoveHysteresisFactor (default 0.7)
+            This creates a buffer zone to ensure smooth control transitions.
+            </summary>
+        </member>
+        <member name="P:GameCore.AISystem.Data.GameDataWaveAI.MinControlDuration">
+            <summary>
+            Minimum time (in seconds) that each AI system must maintain control
+            before allowing a switch to prevent rapid oscillation between AI systems.
+            </summary>
+        </member>
+        <member name="F:GameCore.AISystem.Data.GameDataWaveAI.waveLeashSquared">
+            <summary />
+        </member>
+        <member name="F:GameCore.AISystem.Data.GameDataWaveAI.combatLeashSquared">
+            <summary />
+        </member>
+        <member name="F:GameCore.AISystem.Data.GameDataWaveAI.combatResetRangeSquared">
+            <summary />
+        </member>
+        <member name="P:GameCore.AISystem.Data.GameDataWaveAI.WaveLeashSquared">
+            <summary />
+        </member>
+        <member name="P:GameCore.AISystem.Data.GameDataWaveAI.CombatLeashSquared">
+            <summary />
+        </member>
+        <member name="P:GameCore.AISystem.Data.GameDataWaveAI.CombatResetRangeSquared">
+            <summary />
+        </member>
+    </members>
+</doc>

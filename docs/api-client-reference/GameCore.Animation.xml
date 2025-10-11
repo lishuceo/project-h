@@ -1,0 +1,1144 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<doc>
+    <assembly>
+        <name>GameCore</name>
+    </assembly>
+    <members>
+        <member name="T:GameCore.Animation.AnimatableVector2">
+            <summary>
+            Represents a 2D vector that supports arithmetic operations and can be used in animation contexts.
+            </summary>
+            <remarks>This struct provides arithmetic operators for combining and scaling vectors, as well as implicit
+            conversions to and from <see cref="T:System.Numerics.Vector2" />. It is designed to be used in scenarios where animatable 2D vector
+            values are required.</remarks>
+            <param name="value" />
+        </member>
+        <member name="M:GameCore.Animation.AnimatableVector2.#ctor(System.Numerics.Vector2)">
+            <summary>
+            Represents a 2D vector that supports arithmetic operations and can be used in animation contexts.
+            </summary>
+            <remarks>This struct provides arithmetic operators for combining and scaling vectors, as well as implicit
+            conversions to and from <see cref="T:System.Numerics.Vector2" />. It is designed to be used in scenarios where animatable 2D vector
+            values are required.</remarks>
+            <param name="value" />
+        </member>
+        <member name="F:GameCore.Animation.AnimatableVector2.Value">
+            <summary />
+        </member>
+        <member name="P:GameCore.Animation.AnimatableVector2.PrefersRealtimeAnimation">
+            <summary />
+        </member>
+        <member name="M:GameCore.Animation.AnimatableVector2.op_Addition(GameCore.Animation.AnimatableVector2,GameCore.Animation.AnimatableVector2)">
+            <summary />
+        </member>
+        <member name="M:GameCore.Animation.AnimatableVector2.op_Subtraction(GameCore.Animation.AnimatableVector2,GameCore.Animation.AnimatableVector2)">
+            <summary />
+        </member>
+        <member name="M:GameCore.Animation.AnimatableVector2.op_Multiply(GameCore.Animation.AnimatableVector2,System.Double)">
+            <summary />
+        </member>
+        <member name="M:GameCore.Animation.AnimatableVector2.op_Multiply(System.Double,GameCore.Animation.AnimatableVector2)">
+            <summary />
+        </member>
+        <member name="M:GameCore.Animation.AnimatableVector2.op_Division(GameCore.Animation.AnimatableVector2,System.Double)">
+            <summary />
+        </member>
+        <member name="M:GameCore.Animation.AnimatableVector2.op_Implicit(System.Numerics.Vector2)~GameCore.Animation.AnimatableVector2">
+            <summary />
+        </member>
+        <member name="M:GameCore.Animation.AnimatableVector2.op_Implicit(GameCore.Animation.AnimatableVector2)~System.Numerics.Vector2">
+            <summary />
+        </member>
+        <member name="T:GameCore.Animation.AnimatableVector3">
+            <summary>
+            Represents a 3D vector that supports arithmetic operations and can be used in animation contexts.
+            </summary>
+            <remarks>This struct provides arithmetic operators for combining and scaling vectors, as well as implicit
+            conversions to and from <see cref="T:System.Numerics.Vector3" />. It is designed to be used in scenarios where animatable 3D vector
+            values are required.</remarks>
+            <param name="value" />
+        </member>
+        <member name="M:GameCore.Animation.AnimatableVector3.#ctor(System.Numerics.Vector3)">
+            <summary>
+            Represents a 3D vector that supports arithmetic operations and can be used in animation contexts.
+            </summary>
+            <remarks>This struct provides arithmetic operators for combining and scaling vectors, as well as implicit
+            conversions to and from <see cref="T:System.Numerics.Vector3" />. It is designed to be used in scenarios where animatable 3D vector
+            values are required.</remarks>
+            <param name="value" />
+        </member>
+        <member name="F:GameCore.Animation.AnimatableVector3.Value">
+            <summary />
+        </member>
+        <member name="P:GameCore.Animation.AnimatableVector3.PrefersRealtimeAnimation">
+            <summary />
+        </member>
+        <member name="M:GameCore.Animation.AnimatableVector3.op_Addition(GameCore.Animation.AnimatableVector3,GameCore.Animation.AnimatableVector3)">
+            <summary />
+        </member>
+        <member name="M:GameCore.Animation.AnimatableVector3.op_Subtraction(GameCore.Animation.AnimatableVector3,GameCore.Animation.AnimatableVector3)">
+            <summary />
+        </member>
+        <member name="M:GameCore.Animation.AnimatableVector3.op_Multiply(GameCore.Animation.AnimatableVector3,System.Double)">
+            <summary />
+        </member>
+        <member name="M:GameCore.Animation.AnimatableVector3.op_Multiply(System.Double,GameCore.Animation.AnimatableVector3)">
+            <summary />
+        </member>
+        <member name="M:GameCore.Animation.AnimatableVector3.op_Division(GameCore.Animation.AnimatableVector3,System.Double)">
+            <summary />
+        </member>
+        <member name="M:GameCore.Animation.AnimatableVector3.op_Implicit(System.Numerics.Vector3)~GameCore.Animation.AnimatableVector3">
+            <summary />
+        </member>
+        <member name="M:GameCore.Animation.AnimatableVector3.op_Implicit(GameCore.Animation.AnimatableVector3)~System.Numerics.Vector3">
+            <summary />
+        </member>
+        <member name="T:GameCore.Animation.ArithmeticAggregator`1">
+            <summary>
+            Aggregates multiple <see cref="T:GameCore.Animation.ArithmeticMixer`1" /> instances, each identified by a unique key,
+            and computes a final combined <typeparamref name="TArithmetic" /> value. Notifies subscribers via the
+            <see cref="E:GameCore.Animation.ArithmeticAggregator`1.OnValueChanged" /> event when the aggregated value changes.
+            </summary>
+        </member>
+        <member name="F:GameCore.Animation.ArithmeticAggregator`1.mixers">
+            <summary />
+        </member>
+        <member name="F:GameCore.Animation.ArithmeticAggregator`1.animations">
+            <summary />
+        </member>
+        <member name="F:GameCore.Animation.ArithmeticAggregator`1.lastFinal">
+            <summary />
+        </member>
+        <member name="M:GameCore.Animation.ArithmeticAggregator`1.#ctor">
+            <summary />
+        </member>
+        <member name="M:GameCore.Animation.ArithmeticAggregator`1.#ctor(System.Action{System.Nullable{`0}})">
+            <summary>
+            Initializes a new instance of the <see cref="T:GameCore.Animation.ArithmeticAggregator`1" /> class and subscribes to value change notifications.
+            </summary>
+            <param name="onValueChanged">An action to invoke when the aggregated value changes.</param>
+        </member>
+        <member name="E:GameCore.Animation.ArithmeticAggregator`1.OnValueChanged">
+            <summary>
+            Occurs when the aggregated value changes.
+            </summary>
+        </member>
+        <member name="M:GameCore.Animation.ArithmeticAggregator`1.SetMixer(System.Object,GameCore.Animation.ArithmeticMixer{`0})">
+            <summary>
+            Sets or updates a <see cref="T:GameCore.Animation.ArithmeticMixer`1" /> for the specified key and updates the aggregated value.
+            </summary>
+            <param name="key">The unique key identifying the mixer.</param>
+            <param name="mixer">The <see cref="T:GameCore.Animation.ArithmeticMixer`1" /> to associate with the key.</param>
+        </member>
+        <member name="M:GameCore.Animation.ArithmeticAggregator`1.AnimateMixer(System.Object,GameCore.Animation.ArithmeticAnimation{GameCore.Animation.ArithmeticMixer{`0}})">
+            <summary>
+            Starts an animation for the specified key using the provided <see cref="!:ArithmeticAnimation&lt;ArithmeticMixer&lt;TArithmetic&gt;&gt;" />.
+            The animation will update the associated mixer value over time.
+            </summary>
+            <param name="key">The unique key identifying the mixer to animate.</param>
+            <param name="animation">The animation to apply to the mixer.</param>
+            <returns>The started animation.</returns>
+        </member>
+        <member name="M:GameCore.Animation.ArithmeticAggregator`1.AnimateMixer(System.Object,GameCore.Animation.ArithmeticMixer{`0},System.TimeSpan,System.Boolean,System.Nullable{GameCore.Animation.Enum.RepeatBehavior})">
+            <summary>
+            Starts an animation that blends the mixer associated with the specified key to a target value over a given duration.
+            </summary>
+            <param name="key">The unique key identifying the mixer to animate.</param>
+            <param name="blendTo">The target mixer value to blend to.</param>
+            <param name="blendTime">The duration of the blend animation.</param>
+            <param name="autoReverse">Whether the animation should automatically reverse when finished.</param>
+            <param name="repeatBehavior">Specifies how the animation repeats. If <c>null</c>, a default repeat behavior is used.</param>
+            <returns>The started animation.</returns>
+        </member>
+        <member name="M:GameCore.Animation.ArithmeticAggregator`1.AnimateMixer(System.Object,GameCore.Animation.ArithmeticMixer{`0},GameCore.Animation.ArithmeticMixer{`0},System.TimeSpan,System.Boolean,System.Nullable{GameCore.Animation.Enum.RepeatBehavior})">
+            <summary>
+            Starts an animation that blends the mixer associated with the specified key from a starting value to a target value over a given duration.
+            </summary>
+            <param name="key">The unique key identifying the mixer to animate.</param>
+            <param name="blendFrom">The starting mixer value for the animation.</param>
+            <param name="blendTo">The target mixer value to blend to.</param>
+            <param name="blendTime">The duration of the blend animation.</param>
+            <param name="autoReverse">Whether the animation should automatically reverse when finished.</param>
+            <param name="repeatBehavior">Specifies how the animation repeats. If <c>null</c>, a default repeat behavior is used.</param>
+            <returns>The started animation.</returns>
+        </member>
+        <member name="M:GameCore.Animation.ArithmeticAggregator`1.ClearAnimation(System.Object,GameCore.Animation.Enum.CancelBehavior)">
+            <summary>
+            Cancels and removes any running animation associated with the specified key.
+            </summary>
+            <param name="key">The unique key identifying the animation to clear.</param>
+            <param name="cancelBehavior">Specifies how the animation should be canceled. Defaults to <see cref="F:GameCore.Animation.Enum.CancelBehavior.Hold" />.</param>
+        </member>
+        <member name="M:GameCore.Animation.ArithmeticAggregator`1.GetMixer(System.Object)">
+            <summary>
+            Retrieves the <see cref="T:GameCore.Animation.ArithmeticMixer`1" /> associated with the specified key.
+            </summary>
+            <param name="key">The key used to locate the mixer. Must not be <see langword="null" />.</param>
+            <returns>The <see cref="T:GameCore.Animation.ArithmeticMixer`1" /> associated with the specified key, or <see langword="null" /> if no mixer is found.</returns>
+        </member>
+        <member name="M:GameCore.Animation.ArithmeticAggregator`1.RemoveMixer(System.Object)">
+            <summary>
+            Removes the <see cref="T:GameCore.Animation.ArithmeticMixer`1" /> associated with the specified key and updates the aggregated value.
+            </summary>
+            <param name="key">The unique key identifying the mixer to remove.</param>
+        </member>
+        <member name="M:GameCore.Animation.ArithmeticAggregator`1.ClearAll">
+            <summary>
+            Clears all active animations and resets the internal state.
+            </summary>
+            <remarks>This method cancels all currently running animations and removes them from the internal
+            collection. After calling this method, the system will have no active animations or mixers.</remarks>
+        </member>
+        <member name="M:GameCore.Animation.ArithmeticAggregator`1.GetFinalValue">
+            <summary>
+            Gets the final aggregated <typeparamref name="TArithmetic" /> value by combining all mixers.
+            Returns <c>null</c> if there are no mixers.
+            </summary>
+            <returns>The aggregated <typeparamref name="TArithmetic" /> value, or <c>null</c> if none exist.</returns>
+        </member>
+        <member name="T:GameCore.Animation.ArithmeticAnimation`1">
+            <summary />
+        </member>
+        <member name="P:GameCore.Animation.ArithmeticAnimation`1.EasingFunction">
+            <summary>
+            property for easing function, if null use linear interpolation.
+            Will automatically be cleared when the animation is stopped.
+            </summary>
+        </member>
+        <member name="P:GameCore.Animation.ArithmeticAnimation`1.From">
+            <summary />
+        </member>
+        <member name="P:GameCore.Animation.ArithmeticAnimation`1.To">
+            <summary />
+        </member>
+        <member name="P:GameCore.Animation.ArithmeticAnimation`1.By">
+            <summary />
+        </member>
+        <member name="P:GameCore.Animation.ArithmeticAnimation`1.OnUpdate">
+            <summary>
+            Gets or sets the action to be invoked when an update occurs. 
+            Will automatically be cleared when the animation is stopped.
+            </summary>
+        </member>
+        <member name="P:GameCore.Animation.ArithmeticAnimation`1.FromValueGetter">
+            <summary>
+            Only used if From is null. If set, this will be used to get the starting value of the animation.
+            Will automatically be cleared when the animation is stopped.
+            </summary>
+        </member>
+        <member name="M:GameCore.Animation.ArithmeticAnimation`1.Start">
+            <summary />
+            <returns />
+        </member>
+        <member name="M:GameCore.Animation.ArithmeticAnimation`1.Cancel(GameCore.Animation.Enum.CancelBehavior)">
+            <summary />
+            <param name="cancelBehavior" />
+            <returns />
+        </member>
+        <member name="M:GameCore.Animation.ArithmeticAnimation`1.Update(System.Int32)">
+            <summary />
+            <param name="deltaTime" />
+            <returns />
+        </member>
+        <member name="M:GameCore.Animation.ArithmeticAnimation`1.StopSynchronous(System.Boolean)">
+            <summary />
+            <param name="completed" />
+            <returns />
+        </member>
+        <member name="T:GameCore.Animation.ArithmeticMixer`1">
+            <summary>
+            Represents a weighted value of a generic type <typeparamref name="TArithmetic" /> for mixing and aggregation.
+            Provides methods and operators to combine multiple values with associated weights,
+            enabling smooth blending and accumulation of any animatable value.
+            </summary>
+            <remarks>
+            Initializes a new instance of the <see cref="T:GameCore.Animation.ArithmeticMixer`1" /> struct with the specified value and weight.
+            </remarks>
+            <param name="value">The animatable value.</param>
+            <param name="weight">The weight associated with the value. Defaults to 1.0.</param>
+            <summary />
+        </member>
+        <member name="M:GameCore.Animation.ArithmeticMixer`1.#ctor(`0,System.Double)">
+            <summary>
+            Represents a weighted value of a generic type <typeparamref name="TArithmetic" /> for mixing and aggregation.
+            Provides methods and operators to combine multiple values with associated weights,
+            enabling smooth blending and accumulation of any animatable value.
+            </summary>
+            <remarks>
+            Initializes a new instance of the <see cref="T:GameCore.Animation.ArithmeticMixer`1" /> struct with the specified value and weight.
+            </remarks>
+            <param name="value">The animatable value.</param>
+            <param name="weight">The weight associated with the value. Defaults to 1.0.</param>
+        </member>
+        <member name="F:GameCore.Animation.ArithmeticMixer`1.Value">
+            <summary>
+            The value being mixed or aggregated.
+            </summary>
+        </member>
+        <member name="F:GameCore.Animation.ArithmeticMixer`1.Weight">
+            <summary>
+            Gets or sets the weight of the value. 0 means no contribution.
+            </summary>
+        </member>
+        <member name="M:GameCore.Animation.ArithmeticMixer`1.op_Implicit(`0)~GameCore.Animation.ArithmeticMixer{`0}">
+            <summary>
+            Implicitly converts a <typeparamref name="TArithmetic" /> to an <see cref="T:GameCore.Animation.ArithmeticMixer`1" /> with default weight.
+            </summary>
+            <param name="value">The value to convert.</param>
+        </member>
+        <member name="M:GameCore.Animation.ArithmeticMixer`1.Mix(GameCore.Animation.ArithmeticMixer{`0})">
+            <summary>
+            Mixes this value with another <see cref="T:GameCore.Animation.ArithmeticMixer`1" />, producing a new weighted average value.
+            </summary>
+            <param name="other">The other mixer to combine with.</param>
+            <returns>A new <see cref="T:GameCore.Animation.ArithmeticMixer`1" /> representing the mixed value and combined weight.</returns>
+        </member>
+        <member name="M:GameCore.Animation.ArithmeticMixer`1.op_Implicit(GameCore.Animation.ArithmeticMixer{`0})~`0">
+            <summary>
+            Implicitly converts an <see cref="T:GameCore.Animation.ArithmeticMixer`1" /> to a <typeparamref name="TArithmetic" /> by returning its value.
+            </summary>
+            <param name="mixer">The mixer to convert.</param>
+        </member>
+        <member name="P:GameCore.Animation.ArithmeticMixer`1.PrefersRealtimeAnimation">
+            <summary />
+        </member>
+        <member name="M:GameCore.Animation.ArithmeticMixer`1.GameCore#Animation#IArithmeticAnimatable{GameCore#Animation#ArithmeticMixer{TArithmetic}}#op_Addition(GameCore.Animation.ArithmeticMixer{`0},GameCore.Animation.ArithmeticMixer{`0})">
+            <summary />
+        </member>
+        <member name="M:GameCore.Animation.ArithmeticMixer`1.GameCore#Animation#IArithmeticAnimatable{GameCore#Animation#ArithmeticMixer{TArithmetic}}#op_Subtraction(GameCore.Animation.ArithmeticMixer{`0},GameCore.Animation.ArithmeticMixer{`0})">
+            <summary />
+        </member>
+        <member name="M:GameCore.Animation.ArithmeticMixer`1.GameCore#Animation#IArithmeticAnimatable{GameCore#Animation#ArithmeticMixer{TArithmetic}}#op_Multiply(GameCore.Animation.ArithmeticMixer{`0},System.Double)">
+            <summary />
+        </member>
+        <member name="M:GameCore.Animation.ArithmeticMixer`1.GameCore#Animation#IArithmeticAnimatable{GameCore#Animation#ArithmeticMixer{TArithmetic}}#op_Multiply(System.Double,GameCore.Animation.ArithmeticMixer{`0})">
+            <summary />
+        </member>
+        <member name="M:GameCore.Animation.ArithmeticMixer`1.GameCore#Animation#IArithmeticAnimatable{GameCore#Animation#ArithmeticMixer{TArithmetic}}#op_Division(GameCore.Animation.ArithmeticMixer{`0},System.Double)">
+            <summary />
+        </member>
+        <member name="T:GameCore.Animation.ArithmeticNumber`1">
+            <summary>
+            Wraps numeric types with arithmetic operations to make them usable in <see cref="T:GameCore.Animation.ArithmeticMixer`1" />,
+            <see cref="T:GameCore.Animation.ArithmeticAnimation`1" /> and <see cref="T:GameCore.Animation.ArithmeticTuple`2" />.
+            For non-complex animations, consider using <see cref="T:GameCore.Animation.NumberAnimation`1" /> instead.
+            </summary>
+            <typeparam name="T">The underlying numeric type that implements <see cref="T:System.Numerics.INumber`1" /></typeparam>
+        </member>
+        <member name="M:GameCore.Animation.ArithmeticNumber`1.#ctor(`0)">
+            <summary>
+            Wraps numeric types with arithmetic operations to make them usable in <see cref="T:GameCore.Animation.ArithmeticMixer`1" />,
+            <see cref="T:GameCore.Animation.ArithmeticAnimation`1" /> and <see cref="T:GameCore.Animation.ArithmeticTuple`2" />.
+            For non-complex animations, consider using <see cref="T:GameCore.Animation.NumberAnimation`1" /> instead.
+            </summary>
+            <typeparam name="T">The underlying numeric type that implements <see cref="T:System.Numerics.INumber`1" /></typeparam>
+        </member>
+        <member name="F:GameCore.Animation.ArithmeticNumber`1.Value">
+            <summary />
+        </member>
+        <member name="P:GameCore.Animation.ArithmeticNumber`1.PrefersRealtimeAnimation">
+            <summary />
+        </member>
+        <member name="M:GameCore.Animation.ArithmeticNumber`1.op_Addition(GameCore.Animation.ArithmeticNumber{`0},GameCore.Animation.ArithmeticNumber{`0})">
+            <summary />
+        </member>
+        <member name="M:GameCore.Animation.ArithmeticNumber`1.op_Subtraction(GameCore.Animation.ArithmeticNumber{`0},GameCore.Animation.ArithmeticNumber{`0})">
+            <summary />
+        </member>
+        <member name="M:GameCore.Animation.ArithmeticNumber`1.op_Multiply(GameCore.Animation.ArithmeticNumber{`0},System.Double)">
+            <summary />
+        </member>
+        <member name="M:GameCore.Animation.ArithmeticNumber`1.op_Multiply(System.Double,GameCore.Animation.ArithmeticNumber{`0})">
+            <summary />
+        </member>
+        <member name="M:GameCore.Animation.ArithmeticNumber`1.op_Division(GameCore.Animation.ArithmeticNumber{`0},System.Double)">
+            <summary />
+        </member>
+        <member name="M:GameCore.Animation.ArithmeticNumber`1.op_Implicit(`0)~GameCore.Animation.ArithmeticNumber{`0}">
+            <summary />
+        </member>
+        <member name="M:GameCore.Animation.ArithmeticNumber`1.op_Implicit(GameCore.Animation.ArithmeticNumber{`0})~`0">
+            <summary />
+        </member>
+        <member name="T:GameCore.Animation.ArithmeticTuple`2">
+            <summary>
+            Represents a tuple of arithmetic animatable values that can be used in animation contexts.
+            </summary>
+            <typeparam name="T1">The first animatable type</typeparam>
+            <typeparam name="T2">The second animatable type</typeparam>
+        </member>
+        <member name="M:GameCore.Animation.ArithmeticTuple`2.#ctor(`0,`1)">
+            <summary>
+            Represents a tuple of arithmetic animatable values that can be used in animation contexts.
+            </summary>
+            <typeparam name="T1">The first animatable type</typeparam>
+            <typeparam name="T2">The second animatable type</typeparam>
+        </member>
+        <member name="P:GameCore.Animation.ArithmeticTuple`2.PrefersRealtimeAnimation">
+            <summary />
+        </member>
+        <member name="M:GameCore.Animation.ArithmeticTuple`2.op_Addition(GameCore.Animation.ArithmeticTuple{`0,`1},GameCore.Animation.ArithmeticTuple{`0,`1})">
+            <summary />
+        </member>
+        <member name="M:GameCore.Animation.ArithmeticTuple`2.op_Subtraction(GameCore.Animation.ArithmeticTuple{`0,`1},GameCore.Animation.ArithmeticTuple{`0,`1})">
+            <summary />
+        </member>
+        <member name="M:GameCore.Animation.ArithmeticTuple`2.op_Multiply(GameCore.Animation.ArithmeticTuple{`0,`1},System.Double)">
+            <summary />
+        </member>
+        <member name="M:GameCore.Animation.ArithmeticTuple`2.op_Multiply(System.Double,GameCore.Animation.ArithmeticTuple{`0,`1})">
+            <summary />
+        </member>
+        <member name="M:GameCore.Animation.ArithmeticTuple`2.op_Division(GameCore.Animation.ArithmeticTuple{`0,`1},System.Double)">
+            <summary />
+        </member>
+        <member name="T:GameCore.Animation.ArithmeticTuple`3">
+            <summary>
+            Represents a tuple of three arithmetic animatable values that can be used in animation contexts.
+            </summary>
+            <typeparam name="T1">The first animatable type</typeparam>
+            <typeparam name="T2">The second animatable type</typeparam>
+            <typeparam name="T3">The third animatable type</typeparam>
+        </member>
+        <member name="M:GameCore.Animation.ArithmeticTuple`3.#ctor(`0,`1,`2)">
+            <summary>
+            Represents a tuple of three arithmetic animatable values that can be used in animation contexts.
+            </summary>
+            <typeparam name="T1">The first animatable type</typeparam>
+            <typeparam name="T2">The second animatable type</typeparam>
+            <typeparam name="T3">The third animatable type</typeparam>
+        </member>
+        <member name="P:GameCore.Animation.ArithmeticTuple`3.PrefersRealtimeAnimation">
+            <summary />
+        </member>
+        <member name="M:GameCore.Animation.ArithmeticTuple`3.op_Addition(GameCore.Animation.ArithmeticTuple{`0,`1,`2},GameCore.Animation.ArithmeticTuple{`0,`1,`2})">
+            <summary />
+        </member>
+        <member name="M:GameCore.Animation.ArithmeticTuple`3.op_Subtraction(GameCore.Animation.ArithmeticTuple{`0,`1,`2},GameCore.Animation.ArithmeticTuple{`0,`1,`2})">
+            <summary />
+        </member>
+        <member name="M:GameCore.Animation.ArithmeticTuple`3.op_Multiply(GameCore.Animation.ArithmeticTuple{`0,`1,`2},System.Double)">
+            <summary />
+        </member>
+        <member name="M:GameCore.Animation.ArithmeticTuple`3.op_Multiply(System.Double,GameCore.Animation.ArithmeticTuple{`0,`1,`2})">
+            <summary />
+        </member>
+        <member name="M:GameCore.Animation.ArithmeticTuple`3.op_Division(GameCore.Animation.ArithmeticTuple{`0,`1,`2},System.Double)">
+            <summary />
+        </member>
+        <member name="T:GameCore.Animation.ArithmeticTuple`4">
+            <summary>
+            Represents a tuple of four arithmetic animatable values that can be used in animation contexts.
+            </summary>
+            <typeparam name="T1">The first animatable type</typeparam>
+            <typeparam name="T2">The second animatable type</typeparam>
+            <typeparam name="T3">The third animatable type</typeparam>
+            <typeparam name="T4">The fourth animatable type</typeparam>
+        </member>
+        <member name="M:GameCore.Animation.ArithmeticTuple`4.#ctor(`0,`1,`2,`3)">
+            <summary>
+            Represents a tuple of four arithmetic animatable values that can be used in animation contexts.
+            </summary>
+            <typeparam name="T1">The first animatable type</typeparam>
+            <typeparam name="T2">The second animatable type</typeparam>
+            <typeparam name="T3">The third animatable type</typeparam>
+            <typeparam name="T4">The fourth animatable type</typeparam>
+        </member>
+        <member name="P:GameCore.Animation.ArithmeticTuple`4.PrefersRealtimeAnimation">
+            <summary />
+        </member>
+        <member name="M:GameCore.Animation.ArithmeticTuple`4.op_Addition(GameCore.Animation.ArithmeticTuple{`0,`1,`2,`3},GameCore.Animation.ArithmeticTuple{`0,`1,`2,`3})">
+            <summary />
+        </member>
+        <member name="M:GameCore.Animation.ArithmeticTuple`4.op_Subtraction(GameCore.Animation.ArithmeticTuple{`0,`1,`2,`3},GameCore.Animation.ArithmeticTuple{`0,`1,`2,`3})">
+            <summary />
+        </member>
+        <member name="M:GameCore.Animation.ArithmeticTuple`4.op_Multiply(GameCore.Animation.ArithmeticTuple{`0,`1,`2,`3},System.Double)">
+            <summary />
+        </member>
+        <member name="M:GameCore.Animation.ArithmeticTuple`4.op_Multiply(System.Double,GameCore.Animation.ArithmeticTuple{`0,`1,`2,`3})">
+            <summary />
+        </member>
+        <member name="M:GameCore.Animation.ArithmeticTuple`4.op_Division(GameCore.Animation.ArithmeticTuple{`0,`1,`2,`3},System.Double)">
+            <summary />
+        </member>
+        <member name="T:GameCore.Animation.ArithmeticTuple`5">
+            <summary>
+            Represents a tuple of five arithmetic animatable values that can be used in animation contexts.
+            This is a generic implementation for tuples with more than 4 elements.
+            </summary>
+            <typeparam name="T1">The first animatable type</typeparam>
+            <typeparam name="T2">The second animatable type</typeparam>
+            <typeparam name="T3">The third animatable type</typeparam>
+            <typeparam name="T4">The fourth animatable type</typeparam>
+            <typeparam name="T5">The fifth animatable type</typeparam>
+        </member>
+        <member name="M:GameCore.Animation.ArithmeticTuple`5.#ctor(`0,`1,`2,`3,`4)">
+            <summary>
+            Represents a tuple of five arithmetic animatable values that can be used in animation contexts.
+            This is a generic implementation for tuples with more than 4 elements.
+            </summary>
+            <typeparam name="T1">The first animatable type</typeparam>
+            <typeparam name="T2">The second animatable type</typeparam>
+            <typeparam name="T3">The third animatable type</typeparam>
+            <typeparam name="T4">The fourth animatable type</typeparam>
+            <typeparam name="T5">The fifth animatable type</typeparam>
+        </member>
+        <member name="P:GameCore.Animation.ArithmeticTuple`5.PrefersRealtimeAnimation">
+            <summary />
+        </member>
+        <member name="M:GameCore.Animation.ArithmeticTuple`5.op_Addition(GameCore.Animation.ArithmeticTuple{`0,`1,`2,`3,`4},GameCore.Animation.ArithmeticTuple{`0,`1,`2,`3,`4})">
+            <summary />
+        </member>
+        <member name="M:GameCore.Animation.ArithmeticTuple`5.op_Subtraction(GameCore.Animation.ArithmeticTuple{`0,`1,`2,`3,`4},GameCore.Animation.ArithmeticTuple{`0,`1,`2,`3,`4})">
+            <summary />
+        </member>
+        <member name="M:GameCore.Animation.ArithmeticTuple`5.op_Multiply(GameCore.Animation.ArithmeticTuple{`0,`1,`2,`3,`4},System.Double)">
+            <summary />
+        </member>
+        <member name="M:GameCore.Animation.ArithmeticTuple`5.op_Multiply(System.Double,GameCore.Animation.ArithmeticTuple{`0,`1,`2,`3,`4})">
+            <summary />
+        </member>
+        <member name="M:GameCore.Animation.ArithmeticTuple`5.op_Division(GameCore.Animation.ArithmeticTuple{`0,`1,`2,`3,`4},System.Double)">
+            <summary />
+        </member>
+        <member name="T:GameCore.Animation.ArithmeticTuple`6">
+            <summary>
+            Represents a tuple of six arithmetic animatable values that can be used in animation contexts.
+            This is a generic implementation for tuples with more than 4 elements.
+            </summary>
+            <typeparam name="T1">The first animatable type</typeparam>
+            <typeparam name="T2">The second animatable type</typeparam>
+            <typeparam name="T3">The third animatable type</typeparam>
+            <typeparam name="T4">The fourth animatable type</typeparam>
+            <typeparam name="T5">The fifth animatable type</typeparam>
+            <typeparam name="T6">The sixth animatable type</typeparam>
+        </member>
+        <member name="M:GameCore.Animation.ArithmeticTuple`6.#ctor(`0,`1,`2,`3,`4,`5)">
+            <summary>
+            Represents a tuple of six arithmetic animatable values that can be used in animation contexts.
+            This is a generic implementation for tuples with more than 4 elements.
+            </summary>
+            <typeparam name="T1">The first animatable type</typeparam>
+            <typeparam name="T2">The second animatable type</typeparam>
+            <typeparam name="T3">The third animatable type</typeparam>
+            <typeparam name="T4">The fourth animatable type</typeparam>
+            <typeparam name="T5">The fifth animatable type</typeparam>
+            <typeparam name="T6">The sixth animatable type</typeparam>
+        </member>
+        <member name="P:GameCore.Animation.ArithmeticTuple`6.PrefersRealtimeAnimation">
+            <summary />
+        </member>
+        <member name="M:GameCore.Animation.ArithmeticTuple`6.op_Addition(GameCore.Animation.ArithmeticTuple{`0,`1,`2,`3,`4,`5},GameCore.Animation.ArithmeticTuple{`0,`1,`2,`3,`4,`5})">
+            <summary />
+        </member>
+        <member name="M:GameCore.Animation.ArithmeticTuple`6.op_Subtraction(GameCore.Animation.ArithmeticTuple{`0,`1,`2,`3,`4,`5},GameCore.Animation.ArithmeticTuple{`0,`1,`2,`3,`4,`5})">
+            <summary />
+        </member>
+        <member name="M:GameCore.Animation.ArithmeticTuple`6.op_Multiply(GameCore.Animation.ArithmeticTuple{`0,`1,`2,`3,`4,`5},System.Double)">
+            <summary />
+        </member>
+        <member name="M:GameCore.Animation.ArithmeticTuple`6.op_Multiply(System.Double,GameCore.Animation.ArithmeticTuple{`0,`1,`2,`3,`4,`5})">
+            <summary />
+        </member>
+        <member name="M:GameCore.Animation.ArithmeticTuple`6.op_Division(GameCore.Animation.ArithmeticTuple{`0,`1,`2,`3,`4,`5},System.Double)">
+            <summary />
+        </member>
+        <member name="T:GameCore.Animation.ArithmeticTuple`7">
+            <summary>
+            Represents a tuple of seven arithmetic animatable values that can be used in animation contexts.
+            This is a generic implementation for tuples with more than 4 elements.
+            </summary>
+            <typeparam name="T1">The first animatable type</typeparam>
+            <typeparam name="T2">The second animatable type</typeparam>
+            <typeparam name="T3">The third animatable type</typeparam>
+            <typeparam name="T4">The fourth animatable type</typeparam>
+            <typeparam name="T5">The fifth animatable type</typeparam>
+            <typeparam name="T6">The sixth animatable type</typeparam>
+            <typeparam name="T7">The seventh animatable type</typeparam>
+        </member>
+        <member name="M:GameCore.Animation.ArithmeticTuple`7.#ctor(`0,`1,`2,`3,`4,`5,`6)">
+            <summary>
+            Represents a tuple of seven arithmetic animatable values that can be used in animation contexts.
+            This is a generic implementation for tuples with more than 4 elements.
+            </summary>
+            <typeparam name="T1">The first animatable type</typeparam>
+            <typeparam name="T2">The second animatable type</typeparam>
+            <typeparam name="T3">The third animatable type</typeparam>
+            <typeparam name="T4">The fourth animatable type</typeparam>
+            <typeparam name="T5">The fifth animatable type</typeparam>
+            <typeparam name="T6">The sixth animatable type</typeparam>
+            <typeparam name="T7">The seventh animatable type</typeparam>
+        </member>
+        <member name="P:GameCore.Animation.ArithmeticTuple`7.PrefersRealtimeAnimation">
+            <summary />
+        </member>
+        <member name="M:GameCore.Animation.ArithmeticTuple`7.op_Addition(GameCore.Animation.ArithmeticTuple{`0,`1,`2,`3,`4,`5,`6},GameCore.Animation.ArithmeticTuple{`0,`1,`2,`3,`4,`5,`6})">
+            <summary />
+        </member>
+        <member name="M:GameCore.Animation.ArithmeticTuple`7.op_Subtraction(GameCore.Animation.ArithmeticTuple{`0,`1,`2,`3,`4,`5,`6},GameCore.Animation.ArithmeticTuple{`0,`1,`2,`3,`4,`5,`6})">
+            <summary />
+        </member>
+        <member name="M:GameCore.Animation.ArithmeticTuple`7.op_Multiply(GameCore.Animation.ArithmeticTuple{`0,`1,`2,`3,`4,`5,`6},System.Double)">
+            <summary />
+        </member>
+        <member name="M:GameCore.Animation.ArithmeticTuple`7.op_Multiply(System.Double,GameCore.Animation.ArithmeticTuple{`0,`1,`2,`3,`4,`5,`6})">
+            <summary />
+        </member>
+        <member name="M:GameCore.Animation.ArithmeticTuple`7.op_Division(GameCore.Animation.ArithmeticTuple{`0,`1,`2,`3,`4,`5,`6},System.Double)">
+            <summary />
+        </member>
+        <member name="T:GameCore.Animation.ArithmeticTuple`8">
+            <summary>
+            Represents a tuple of eight arithmetic animatable values that can be used in animation contexts.
+            This is a generic implementation for tuples with more than 4 elements.
+            </summary>
+            <typeparam name="T1">The first animatable type</typeparam>
+            <typeparam name="T2">The second animatable type</typeparam>
+            <typeparam name="T3">The third animatable type</typeparam>
+            <typeparam name="T4">The fourth animatable type</typeparam>
+            <typeparam name="T5">The fifth animatable type</typeparam>
+            <typeparam name="T6">The sixth animatable type</typeparam>
+            <typeparam name="T7">The seventh animatable type</typeparam>
+            <typeparam name="T8">The eighth animatable type</typeparam>
+        </member>
+        <member name="M:GameCore.Animation.ArithmeticTuple`8.#ctor(`0,`1,`2,`3,`4,`5,`6,`7)">
+            <summary>
+            Represents a tuple of eight arithmetic animatable values that can be used in animation contexts.
+            This is a generic implementation for tuples with more than 4 elements.
+            </summary>
+            <typeparam name="T1">The first animatable type</typeparam>
+            <typeparam name="T2">The second animatable type</typeparam>
+            <typeparam name="T3">The third animatable type</typeparam>
+            <typeparam name="T4">The fourth animatable type</typeparam>
+            <typeparam name="T5">The fifth animatable type</typeparam>
+            <typeparam name="T6">The sixth animatable type</typeparam>
+            <typeparam name="T7">The seventh animatable type</typeparam>
+            <typeparam name="T8">The eighth animatable type</typeparam>
+        </member>
+        <member name="P:GameCore.Animation.ArithmeticTuple`8.PrefersRealtimeAnimation">
+            <summary />
+        </member>
+        <member name="M:GameCore.Animation.ArithmeticTuple`8.op_Addition(GameCore.Animation.ArithmeticTuple{`0,`1,`2,`3,`4,`5,`6,`7},GameCore.Animation.ArithmeticTuple{`0,`1,`2,`3,`4,`5,`6,`7})">
+            <summary />
+        </member>
+        <member name="M:GameCore.Animation.ArithmeticTuple`8.op_Subtraction(GameCore.Animation.ArithmeticTuple{`0,`1,`2,`3,`4,`5,`6,`7},GameCore.Animation.ArithmeticTuple{`0,`1,`2,`3,`4,`5,`6,`7})">
+            <summary />
+        </member>
+        <member name="M:GameCore.Animation.ArithmeticTuple`8.op_Multiply(GameCore.Animation.ArithmeticTuple{`0,`1,`2,`3,`4,`5,`6,`7},System.Double)">
+            <summary />
+        </member>
+        <member name="M:GameCore.Animation.ArithmeticTuple`8.op_Multiply(System.Double,GameCore.Animation.ArithmeticTuple{`0,`1,`2,`3,`4,`5,`6,`7})">
+            <summary />
+        </member>
+        <member name="M:GameCore.Animation.ArithmeticTuple`8.op_Division(GameCore.Animation.ArithmeticTuple{`0,`1,`2,`3,`4,`5,`6,`7},System.Double)">
+            <summary />
+        </member>
+        <member name="T:GameCore.Animation.EasingFunction.BackEase">
+            <summary>
+                This class implements an easing function that backs up before going to the destination.
+            </summary>
+        </member>
+        <member name="P:GameCore.Animation.EasingFunction.BackEase.Amplitude">
+            <summary>
+            Specifies how much the function will pull back
+            </summary>
+        </member>
+        <member name="M:GameCore.Animation.EasingFunction.BackEase.EaseInCore(System.Double)">
+            <summary />
+            <param name="normalizedTime" />
+            <returns />
+        </member>
+        <member name="T:GameCore.Animation.EasingFunction.BounceEase">
+            <summary>
+                This class implements an easing function that can be used to simulate bouncing
+            </summary>
+        </member>
+        <member name="P:GameCore.Animation.EasingFunction.BounceEase.Bounces">
+            <summary>
+            Specifies the number of bounces.  This does not include the final half bounce.
+            </summary>
+        </member>
+        <member name="P:GameCore.Animation.EasingFunction.BounceEase.Bounciness">
+            <summary>
+                Specifies the amount of bounciness.  This corresponds to the scale difference between a bounce and the next bounce.  
+                For example, Bounciness = 2.0 corresponds to the next bounce being twice as high and taking twice as long.
+            </summary>
+        </member>
+        <member name="M:GameCore.Animation.EasingFunction.BounceEase.EaseInCore(System.Double)">
+            <summary />
+            <param name="normalizedTime" />
+            <returns />
+        </member>
+        <member name="T:GameCore.Animation.EasingFunction.CircleEase">
+            <summary>
+                This class implements an easing function that gives a circular curve toward the destination.
+            </summary>
+        </member>
+        <member name="M:GameCore.Animation.EasingFunction.CircleEase.EaseInCore(System.Double)">
+            <summary />
+            <param name="normalizedTime" />
+            <returns />
+        </member>
+        <member name="T:GameCore.Animation.EasingFunction.CubicEase">
+            <summary>
+                This class implements an easing function that gives a cubic curve toward the destination
+            </summary>
+        </member>
+        <member name="M:GameCore.Animation.EasingFunction.CubicEase.EaseInCore(System.Double)">
+            <summary />
+            <param name="normalizedTime" />
+            <returns />
+        </member>
+        <member name="T:GameCore.Animation.EasingFunction.EasingFunctionBase">
+            <summary />
+        </member>
+        <member name="P:GameCore.Animation.EasingFunction.EasingFunctionBase.EasingMode">
+            <summary />
+        </member>
+        <member name="M:GameCore.Animation.EasingFunction.EasingFunctionBase.Ease(System.Double)">
+            <summary />
+            <param name="normalizedTime" />
+            <returns />
+        </member>
+        <member name="M:GameCore.Animation.EasingFunction.EasingFunctionBase.EaseInCore(System.Double)">
+            <summary />
+            <param name="normalizedTime" />
+            <returns />
+        </member>
+        <member name="T:GameCore.Animation.EasingFunction.ElasticEase">
+            <summary>
+                This class implements an easing function that gives an elastic/springy curve
+            </summary>
+        </member>
+        <member name="P:GameCore.Animation.EasingFunction.ElasticEase.Oscillations">
+            <summary>
+            Specifies the number of oscillations
+            </summary>
+        </member>
+        <member name="P:GameCore.Animation.EasingFunction.ElasticEase.Springiness">
+            <summary>
+            Specifies the amount of springiness
+            </summary>
+        </member>
+        <member name="M:GameCore.Animation.EasingFunction.ElasticEase.EaseInCore(System.Double)">
+            <summary />
+            <param name="normalizedTime" />
+            <returns />
+        </member>
+        <member name="T:GameCore.Animation.EasingFunction.ExponentialEase">
+            <summary>
+                This class implements an easing function that gives an exponential curve
+            </summary>
+        </member>
+        <member name="P:GameCore.Animation.EasingFunction.ExponentialEase.Exponent">
+            <summary>
+            Specifies the factor which controls the shape of easing.
+            </summary>
+        </member>
+        <member name="M:GameCore.Animation.EasingFunction.ExponentialEase.EaseInCore(System.Double)">
+            <summary />
+            <param name="normalizedTime" />
+            <returns />
+        </member>
+        <member name="T:GameCore.Animation.EasingFunction.IEasingFunction">
+            <summary>
+                This interface represents a transformation of normalizedTime.  Animations use it to 
+                transform their progress before computing an interpolation.  Classes that implement
+                this interface can control the pace at which an animation is performed.
+            </summary>
+        </member>
+        <member name="M:GameCore.Animation.EasingFunction.IEasingFunction.Ease(System.Double)">
+            <summary>
+                Transforms normalized time to control the pace of an animation.
+            </summary>
+            <param name="normalizedTime">normalized time (progress) of the animation</param>
+            <returns>transformed progress</returns>
+        </member>
+        <member name="T:GameCore.Animation.EasingFunction.PowerEase">
+            <summary>
+                This class implements an easing function that gives a polynomial curve of arbitrary degree.
+                If the curve you desire is cubic, quadratic, quartic, or quintic it is better to use the 
+                specialized easing functions.
+            </summary>
+        </member>
+        <member name="P:GameCore.Animation.EasingFunction.PowerEase.Power">
+            <summary>
+            Specifies the power for the polynomial equation.
+            </summary>
+        </member>
+        <member name="M:GameCore.Animation.EasingFunction.PowerEase.EaseInCore(System.Double)">
+            <summary />
+            <param name="normalizedTime" />
+            <returns />
+        </member>
+        <member name="T:GameCore.Animation.EasingFunction.QuadraticEase">
+            <summary>
+                This class implements an easing function that gives a quadratic curve toward the destination
+            </summary>
+        </member>
+        <member name="M:GameCore.Animation.EasingFunction.QuadraticEase.EaseInCore(System.Double)">
+            <summary />
+            <param name="normalizedTime" />
+            <returns />
+        </member>
+        <member name="T:GameCore.Animation.EasingFunction.QuarticEase">
+            <summary>
+                This class implements an easing function that gives a quartic curve toward the destination
+            </summary>
+        </member>
+        <member name="M:GameCore.Animation.EasingFunction.QuarticEase.EaseInCore(System.Double)">
+            <summary />
+            <param name="normalizedTime" />
+            <returns />
+        </member>
+        <member name="T:GameCore.Animation.EasingFunction.QuinticEase">
+            <summary>
+                This class implements an easing function that gives a quintic curve toward the destination
+            </summary>
+        </member>
+        <member name="M:GameCore.Animation.EasingFunction.QuinticEase.EaseInCore(System.Double)">
+            <summary />
+            <param name="normalizedTime" />
+            <returns />
+        </member>
+        <member name="T:GameCore.Animation.EasingFunction.SineEase">
+            <summary />
+        </member>
+        <member name="M:GameCore.Animation.EasingFunction.SineEase.EaseInCore(System.Double)">
+            <summary />
+            <param name="normalizedTime" />
+            <returns />
+        </member>
+        <member name="F:GameCore.Animation.Enum.CancelBehavior.Hold">
+            <summary>
+            Keep the current value of the animation on cancel.
+            </summary>
+        </member>
+        <member name="F:GameCore.Animation.Enum.CancelBehavior.Start">
+            <summary>
+            Set the value to the start value of the animation on cancel.
+            </summary>
+        </member>
+        <member name="F:GameCore.Animation.Enum.CancelBehavior.End">
+            <summary>
+            Set the value to the end value of the animation on cancel.
+            </summary>
+        </member>
+        <member name="T:GameCore.Animation.Enum.EasingMode">
+            <summary>
+                This enum defines the modes in which classes deriving from EasingFunctioBase
+                can will perform their easing.
+            </summary>
+        </member>
+        <member name="T:GameCore.Animation.Enum.RepeatBehavior">
+            <summary />
+        </member>
+        <member name="P:GameCore.Animation.Enum.RepeatBehavior.Behavior">
+            <summary />
+        </member>
+        <member name="P:GameCore.Animation.Enum.RepeatBehavior.Count">
+            <summary />
+        </member>
+        <member name="P:GameCore.Animation.Enum.RepeatBehavior.Duration">
+            <summary />
+        </member>
+        <member name="M:GameCore.Animation.Enum.RepeatBehavior.#ctor(GameCore.Animation.Enum.ERepeatBehavior)">
+            <summary />
+        </member>
+        <member name="P:GameCore.Animation.Enum.RepeatBehavior.Forever">
+            <summary />
+        </member>
+        <member name="M:GameCore.Animation.Enum.RepeatBehavior.op_Implicit(GameCore.Animation.Enum.ERepeatBehavior)~GameCore.Animation.Enum.RepeatBehavior">
+            <summary />
+        </member>
+        <member name="M:GameCore.Animation.Enum.RepeatBehavior.op_Implicit(System.Int32)~GameCore.Animation.Enum.RepeatBehavior">
+            <summary />
+        </member>
+        <member name="M:GameCore.Animation.Enum.RepeatBehavior.op_Implicit(System.TimeSpan)~GameCore.Animation.Enum.RepeatBehavior">
+            <summary />
+        </member>
+        <member name="T:GameCore.Animation.IArithmeticAnimatable`1">
+            <summary />
+        </member>
+        <member name="P:GameCore.Animation.IArithmeticAnimatable`1.PrefersRealtimeAnimation">
+            <summary />
+        </member>
+        <member name="M:GameCore.Animation.IArithmeticAnimatable`1.op_Addition(`0,`0)">
+            <summary />
+        </member>
+        <member name="M:GameCore.Animation.IArithmeticAnimatable`1.Add(`0,`0)">
+            <summary />
+            <param name="left" />
+            <param name="right" />
+            <returns />
+        </member>
+        <member name="M:GameCore.Animation.IArithmeticAnimatable`1.op_Subtraction(`0,`0)">
+            <summary />
+        </member>
+        <member name="M:GameCore.Animation.IArithmeticAnimatable`1.Subtract(`0,`0)">
+            <summary />
+            <param name="left" />
+            <param name="right" />
+            <returns />
+        </member>
+        <member name="M:GameCore.Animation.IArithmeticAnimatable`1.op_Multiply(`0,System.Double)">
+            <summary />
+        </member>
+        <member name="M:GameCore.Animation.IArithmeticAnimatable`1.Multiply(`0,System.Double)">
+            <summary />
+            <param name="left" />
+            <param name="right" />
+            <returns />
+        </member>
+        <member name="M:GameCore.Animation.IArithmeticAnimatable`1.op_Division(`0,System.Double)">
+            <summary />
+        </member>
+        <member name="M:GameCore.Animation.IArithmeticAnimatable`1.Divide(`0,System.Double)">
+            <summary />
+            <param name="left" />
+            <param name="right" />
+            <returns />
+        </member>
+        <member name="M:GameCore.Animation.IArithmeticAnimatable`1.op_Multiply(System.Double,`0)">
+            <summary />
+        </member>
+        <member name="M:GameCore.Animation.IArithmeticAnimatable`1.Multiply(System.Double,`0)">
+            <summary />
+            <param name="left" />
+            <param name="right" />
+            <returns />
+        </member>
+        <member name="T:GameCore.Animation.NumberAnimation`1">
+            <summary>
+            An animation class that animates a number from one value to another over a specified duration. Requires to be manually started.
+            </summary>
+            <typeparam name="T" />
+        </member>
+        <member name="P:GameCore.Animation.NumberAnimation`1.EasingFunction">
+            <summary>
+            property for easing function, if null use linear interpolation
+            </summary>
+        </member>
+        <member name="P:GameCore.Animation.NumberAnimation`1.From">
+            <summary />
+        </member>
+        <member name="P:GameCore.Animation.NumberAnimation`1.To">
+            <summary />
+        </member>
+        <member name="P:GameCore.Animation.NumberAnimation`1.By">
+            <summary />
+        </member>
+        <member name="P:GameCore.Animation.NumberAnimation`1.OnUpdate">
+            <summary />
+        </member>
+        <member name="P:GameCore.Animation.NumberAnimation`1.FromValueGetter">
+            <summary>
+            Only used if From is null. If set, this will be used to get the starting value of the animation.
+            </summary>
+        </member>
+        <member name="M:GameCore.Animation.NumberAnimation`1.Start">
+            <summary />
+            <returns />
+        </member>
+        <member name="M:GameCore.Animation.NumberAnimation`1.Cancel(GameCore.Animation.Enum.CancelBehavior)">
+            <summary />
+            <param name="cancelBehavior" />
+            <returns />
+        </member>
+        <member name="M:GameCore.Animation.NumberAnimation`1.Update(System.Int32)">
+            <summary />
+            <param name="deltaTime" />
+            <returns />
+        </member>
+        <member name="T:GameCore.Animation.TimelineAnimation">
+            <summary>
+            Represents an abstract base class for timeline-based animations that can be played, reversed, and repeated over time.
+            </summary>
+            <remarks>
+            TimelineAnimation provides a framework for creating time-based animations that integrate with the game's tick system
+            and async/await patterns. It supports various playback modes including auto-reverse, repeat counts, and duration-based
+            repetition. Derived classes implement the specific animation logic by overriding the Update method.
+            </remarks>
+            <example>
+                <code>
+            // Create a custom animation
+            var animation = new MyAnimation()
+            {
+                Duration = TimeSpan.FromSeconds(2),
+                AutoReverse = true,
+                RepeatBehavior = 3 // Repeat 3 times
+            };
+            
+            await animation; // Wait for animation to complete
+            </code>
+            </example>
+            <param name="adjustment">Optional time adjustment in milliseconds to apply to the animation start time.</param>
+        </member>
+        <member name="M:GameCore.Animation.TimelineAnimation.#ctor(System.Int32)">
+            <summary>
+            Represents an abstract base class for timeline-based animations that can be played, reversed, and repeated over time.
+            </summary>
+            <remarks>
+            TimelineAnimation provides a framework for creating time-based animations that integrate with the game's tick system
+            and async/await patterns. It supports various playback modes including auto-reverse, repeat counts, and duration-based
+            repetition. Derived classes implement the specific animation logic by overriding the Update method.
+            </remarks>
+            <example>
+                <code>
+            // Create a custom animation
+            var animation = new MyAnimation()
+            {
+                Duration = TimeSpan.FromSeconds(2),
+                AutoReverse = true,
+                RepeatBehavior = 3 // Repeat 3 times
+            };
+            
+            await animation; // Wait for animation to complete
+            </code>
+            </example>
+            <param name="adjustment">Optional time adjustment in milliseconds to apply to the animation start time.</param>
+        </member>
+        <member name="F:GameCore.Animation.TimelineAnimation.deltaTime">
+            <summary />
+        </member>
+        <member name="F:GameCore.Animation.TimelineAnimation.remainingTimeTotal">
+            <summary />
+        </member>
+        <member name="F:GameCore.Animation.TimelineAnimation.durationInMilliseconds">
+            <summary />
+        </member>
+        <member name="P:GameCore.Animation.TimelineAnimation.IsInReverse">
+            <summary>
+            Gets a value indicating whether the animation is currently playing in reverse.
+            </summary>
+            <value>True if the animation is playing backwards; otherwise, false.</value>
+            <remarks>
+            This property is automatically managed when AutoReverse is enabled. When the animation
+            reaches the end of its duration, it will reverse direction if AutoReverse is true.
+            </remarks>
+        </member>
+        <member name="P:GameCore.Animation.TimelineAnimation.CurrentCount">
+            <summary>
+            Gets the current repeat count of the animation.
+            </summary>
+            <value>The number of times the animation has completed its cycle.</value>
+            <remarks>
+            This value increments each time the animation completes a full cycle. For auto-reversing
+            animations, a complete cycle includes both forward and reverse playback.
+            </remarks>
+        </member>
+        <member name="P:GameCore.Animation.TimelineAnimation.AutoReverse">
+            <summary>
+            Gets or sets a value indicating whether the animation should automatically reverse direction when it reaches the end.
+            </summary>
+            <value>True to enable auto-reverse; otherwise, false.</value>
+            <remarks>
+            When enabled, the animation will play forward to the end, then backward to the beginning,
+            creating a ping-pong effect. This counts as one complete cycle for repeat behavior purposes.
+            </remarks>
+        </member>
+        <member name="P:GameCore.Animation.TimelineAnimation.Duration">
+            <summary>
+            Gets or sets the duration of one animation cycle.
+            </summary>
+            <value>The time span representing the duration of a single animation cycle.</value>
+            <remarks>
+            This defines how long it takes for the animation to complete one forward playback.
+            For auto-reversing animations, the total cycle time is twice this duration.
+            </remarks>
+        </member>
+        <member name="P:GameCore.Animation.TimelineAnimation.RepeatBehavior">
+            <summary>
+            Gets or sets the repeat behavior that controls how the animation repeats.
+            </summary>
+            <value>A RepeatBehavior value specifying the repetition pattern.</value>
+            <remarks>
+            This can be set to a specific count, a duration, or forever. The default is 1,
+            meaning the animation plays once and then stops.
+            </remarks>
+        </member>
+        <member name="P:GameCore.Animation.TimelineAnimation.AdjustByFrameDelta">
+            <summary>
+            Gets or sets a value indicating whether adjustments should be applied relative to the frame delta time. Basically, if you want to use the game tick or real time.
+            Animation that may affect the game state should use <c>false</c>, while animations that are purely visual can use <c>true</c>.
+            </summary>
+            <value>True to use real frame delta time; false to use fixed game tick time.</value>
+            <remarks>
+            Animations that may affect the game state should use <c>false</c> for consistent timing,
+            while animations that are purely visual can use <c>true</c> for smoother real-time playback.
+            </remarks>
+        </member>
+        <member name="M:GameCore.Animation.TimelineAnimation.Pause(System.Boolean)">
+            <summary>
+            Pauses or resumes the animation playback.
+            </summary>
+            <param name="on">True to pause the animation; false to resume it.</param>
+            <remarks>
+            When paused, the animation will stop advancing and remain at its current position.
+            This method has no effect if the animation has already completed.
+            </remarks>
+        </member>
+        <member name="M:GameCore.Animation.TimelineAnimation.GetResult">
+            <summary>
+            Gets the result value of the animation when it completes.
+            </summary>
+            <returns>The final time value of the animation, depending on the repeat behavior.</returns>
+            <remarks>
+            For duration-based repeat behavior, returns the remaining total time.
+            For other behaviors, returns the current time position, accounting for reverse playback.
+            </remarks>
+        </member>
+        <member name="M:GameCore.Animation.TimelineAnimation.ThinkAction(System.Int32)">
+            <summary>
+            Advances the animation by the specified time delta.
+            </summary>
+            <param name="delta">The time delta since the last update in milliseconds.</param>
+            <remarks>
+            This method is called automatically by the thinking system. It updates the animation's
+            time position, handles direction changes for auto-reverse, and calls the Update method
+            for derived classes to implement their specific animation logic.
+            </remarks>
+        </member>
+        <member name="M:GameCore.Animation.TimelineAnimation.Update(System.Int32)">
+            <summary>
+            Updates the animation state based on the current time position.
+            </summary>
+            <param name="deltaTime">The current time position in the animation in milliseconds.</param>
+            <remarks>
+            This abstract method must be implemented by derived classes to define the specific
+            animation behavior. It is called every frame while the animation is active.
+            </remarks>
+        </member>
+        <member name="M:GameCore.Animation.TimelineAnimation.Cancel(GameCore.Animation.Enum.CancelBehavior)">
+            <summary>
+            Cancels the animation with the specified cancellation behavior.
+            </summary>
+            <param name="cancelBehavior">The behavior to apply when cancelling the animation.</param>
+            <remarks>
+            This abstract method must be implemented by derived classes to define how the animation
+            should handle cancellation, such as jumping to the end state or holding the current state.
+            </remarks>
+        </member>
+        <member name="M:GameCore.Animation.TimelineAnimation.ThinkFinish">
+            <summary>
+            Determines whether the animation should finish based on its repeat behavior and current state.
+            </summary>
+            <returns>True if the animation should complete; otherwise, false.</returns>
+            <remarks>
+            This method handles the complex logic for determining animation completion based on
+            repeat behavior, auto-reverse settings, and current cycle counts.
+            </remarks>
+        </member>
+        <member name="M:GameCore.Animation.TimelineAnimation.Start">
+            <summary>
+            Starts the animation and initializes its state.
+            </summary>
+            <remarks>
+            This method sets up the initial animation state including time position, duration,
+            and repeat behavior configuration. It then calls the base Start method to begin execution.
+            </remarks>
+        </member>
+    </members>
+</doc>

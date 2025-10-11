@@ -1,0 +1,229 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<doc>
+    <assembly>
+        <name>GameCore</name>
+    </assembly>
+    <members>
+        <member name="T:GameCore.ScopeData.DamageType">
+            <summary>
+            Contains game data links for different types of damage that can be dealt in the game.
+            </summary>
+        </member>
+        <member name="F:GameCore.ScopeData.DamageType.Physical">
+            <summary>
+            Physical damage type - typically reduced by armor.
+            </summary>
+        </member>
+        <member name="F:GameCore.ScopeData.DamageType.Magical">
+            <summary>
+            Magical damage type - typically reduced by magic resistance.
+            </summary>
+        </member>
+        <member name="F:GameCore.ScopeData.DamageType.Pure">
+            <summary>
+            Pure damage type - bypasses armor and magic resistance.
+            </summary>
+        </member>
+        <member name="T:GameCore.ScopeData.UnitProperty">
+            <summary>
+            Contains game data links for unit properties that define characteristics and capabilities of game units.
+            </summary>
+        </member>
+        <member name="F:GameCore.ScopeData.UnitProperty.LifeMax">
+            <summary>
+            Maximum health points of a unit.
+            </summary>
+        </member>
+        <member name="F:GameCore.ScopeData.UnitProperty.ManaMax">
+            <summary>
+            Maximum mana points of a unit.
+            </summary>
+        </member>
+        <member name="F:GameCore.ScopeData.UnitProperty.Sight">
+            <summary>
+            Vision range of a unit.
+            </summary>
+        </member>
+        <member name="F:GameCore.ScopeData.UnitProperty.Armor">
+            <summary>
+            Physical damage reduction capability.
+            </summary>
+        </member>
+        <member name="F:GameCore.ScopeData.UnitProperty.MagicResistance">
+            <summary>
+            Magical damage reduction capability.
+            </summary>
+        </member>
+        <member name="F:GameCore.ScopeData.UnitProperty.MoveSpeed">
+            <summary>
+            Movement speed of the unit.
+            </summary>
+        </member>
+        <member name="F:GameCore.ScopeData.UnitProperty.ShrubSight">
+            <summary>
+            Vision range through shrubs and obstacles.
+            </summary>
+        </member>
+        <member name="F:GameCore.ScopeData.UnitProperty.Height">
+            <summary>
+            Physical height of the unit.
+            </summary>
+        </member>
+        <member name="F:GameCore.ScopeData.UnitProperty.SightBlockRadius">
+            <summary>
+            Radius around the unit that blocks sight.
+            </summary>
+        </member>
+        <member name="F:GameCore.ScopeData.UnitProperty.TurningSpeed">
+            <summary>
+            Speed at which the unit can rotate.
+            </summary>
+        </member>
+        <member name="F:GameCore.ScopeData.UnitProperty.AttackRange">
+            <summary>
+            Maximum distance from which the unit can attack.
+            </summary>
+        </member>
+        <member name="F:GameCore.ScopeData.UnitProperty.AttackDamage">
+            <summary>
+            The damage of the unit's attack.
+            </summary>
+        </member>
+        <member name="F:GameCore.ScopeData.UnitProperty.InventoryPickUpRange">
+            <summary>
+            Range within which the unit can pick up items.
+            </summary>
+        </member>
+        <member name="F:GameCore.ScopeData.UnitProperty.LevelMax">
+            <summary>
+            Maximum level the unit can reach.
+            </summary>
+        </member>
+        <member name="F:GameCore.ScopeData.UnitProperty.ExperienceDistributionMultiplier">
+            <summary>
+            Multiplier for experience distribution calculations.
+            </summary>
+        </member>
+        <member name="T:GameCore.ScopeData.AI">
+            <summary />
+            <summary />
+        </member>
+        <member name="F:GameCore.ScopeData.AI.Default">
+            <summary>
+            Default AI for units. It just randomly cast abilities on nearby enemies.
+            </summary>
+        </member>
+        <member name="T:GameCore.ScopeData.ActorScope">
+            <summary>
+            Id cannot conflict with Unit
+            </summary>
+        </member>
+        <member name="F:GameCore.ScopeData.ActorScope.Default">
+            <summary />
+        </member>
+        <member name="T:GameCore.ScopeData.GameMode">
+            <summary>
+            Contains game data links for game mode configurations.
+            </summary>
+        </member>
+        <member name="F:GameCore.ScopeData.GameMode.Default">
+            <summary>
+            The default game mode configuration.
+            </summary>
+        </member>
+        <member name="T:GameCore.ScopeData.Gameplay">
+            <summary>
+            Contains game data links for gameplay settings and rules.
+            </summary>
+        </member>
+        <member name="F:GameCore.ScopeData.Gameplay.Default">
+            <summary>
+            The default gameplay configuration.
+            </summary>
+        </member>
+        <member name="T:GameCore.ScopeData.ItemQuality">
+            <summary />
+            <summary />
+        </member>
+        <member name="F:GameCore.ScopeData.ItemQuality.Poor">
+            <summary>
+            垃圾品质
+            </summary>
+        </member>
+        <member name="F:GameCore.ScopeData.ItemQuality.Common">
+            <summary>
+            普通品质
+            </summary>
+        </member>
+        <member name="F:GameCore.ScopeData.ItemQuality.Uncommon">
+            <summary>
+            优秀品质
+            </summary>
+        </member>
+        <member name="F:GameCore.ScopeData.ItemQuality.Rare">
+            <summary>
+            精良品质
+            </summary>
+        </member>
+        <member name="F:GameCore.ScopeData.ItemQuality.Epic">
+            <summary>
+            史诗品质
+            </summary>
+        </member>
+        <member name="F:GameCore.ScopeData.ItemQuality.Legendary">
+            <summary>
+            传说品质
+            </summary>
+        </member>
+        <member name="F:GameCore.ScopeData.ItemQuality.Mythic">
+            <summary>
+            神话品质
+            </summary>
+        </member>
+        <member name="T:GameCore.ScopeData.PlayerSettings">
+            <summary>
+            Contains game data links for player-specific settings and configurations.
+            </summary>
+        </member>
+        <member name="F:GameCore.ScopeData.PlayerSettings.Default">
+            <summary>
+            The default player settings configuration.
+            </summary>
+        </member>
+        <member name="T:GameCore.ScopeData.Rule">
+            <summary>
+            Contains game data links for game rules and mechanics.
+            </summary>
+        </member>
+        <member name="F:GameCore.ScopeData.Rule.DefaultExperienceGrant">
+            <summary>
+            Default rules for experience point distribution.
+            </summary>
+        </member>
+        <member name="F:GameCore.ScopeData.Rule.DefaultDisplayInfo">
+            <summary>
+            Default rules for display information and UI presentation.
+            </summary>
+        </member>
+        <member name="T:GameCore.ScopeData.Actor">
+            <summary>
+            Contains game data links for actor system configurations.
+            </summary>
+        </member>
+        <member name="F:GameCore.ScopeData.Actor.ScopeStaticSiteTransient">
+            <summary>
+            Static site actor for transient scope operations.
+            </summary>
+        </member>
+        <member name="F:GameCore.ScopeData.Actor.ScopeStaticSitePersist">
+            <summary>
+            Static site actor for persistent scope operations.
+            </summary>
+        </member>
+        <member name="M:GameCore.ScopeData.OnRegisterGameClass">
+            <summary>
+            Called during game class registration phase to initialize scope data.
+            </summary>
+        </member>
+    </members>
+</doc>

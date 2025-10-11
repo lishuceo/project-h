@@ -1,0 +1,83 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<doc>
+    <assembly>
+        <name>GameCore</name>
+    </assembly>
+    <members>
+        <member name="T:GameCore.CameraSystem.Enum.CameraPositionMode">
+            <summary>
+            Specifies the mode used to position the camera in a 3D scene.
+            </summary>
+            <remarks>
+            This enumeration defines the two primary modes for camera positioning:
+            <list type="bullet"><item><term>FocalPoint</term><description>
+            Positions the camera based on a focal point in the scene, typically used for targeting a specific object or area.
+            </description></item><item><term>CameraLocation</term><description>
+            Positions the camera based on the camera's location, often used for first-person or free-camera perspectives.
+            </description></item></list>
+            Use this enumeration to configure how the camera interacts with the scene, depending on the desired perspective or interaction model.
+            </remarks>
+        </member>
+        <member name="F:GameCore.CameraSystem.Enum.CameraPositionMode.FocalPoint">
+            <summary>
+            Positions the camera based on a focal point in the scene, typically used for targeting a specific object or area.
+            </summary>
+        </member>
+        <member name="F:GameCore.CameraSystem.Enum.CameraPositionMode.CameraLocation">
+            <summary>
+            Positions the camera based on the camera's location, often used for first-person or free-camera perspectives.
+            </summary>
+        </member>
+        <member name="T:GameCore.CameraSystem.Enum.CameraTargetingMode">
+            <summary>
+            Specifies the mode used to determine how the camera targets or interacts with entities or the scene.
+            </summary>
+            <remarks>
+            This enumeration defines the primary modes for camera targeting:
+            <list type="bullet"><item><term>FollowTarget</term><description>
+            The camera follows a target entity, maintaining a specified distance and angle. 
+            This is commonly used for third-person or chase camera perspectives.
+            </description></item><item><term>StaticPosition</term><description>
+            The camera remains in a fixed position and does not follow any target entity. 
+            This is useful for cutscenes or overview perspectives.
+            </description></item><item><term>GestureDriven</term><description>
+            The camera is controlled by user gestures, allowing for free interaction. 
+            This is often used in touch-based or VR environments.
+            </description></item></list></remarks>
+        </member>
+        <member name="F:GameCore.CameraSystem.Enum.CameraTargetingMode.Follow">
+            <summary>
+            The camera follows a target entity, maintaining a specified distance and angle from it.
+            </summary>
+        </member>
+        <member name="F:GameCore.CameraSystem.Enum.CameraTargetingMode.Static">
+            <summary>
+            The camera is in a fixed position and does not follow any target entity.
+            </summary>
+        </member>
+        <member name="F:GameCore.CameraSystem.Enum.CameraTargetingMode.Gesture">
+            <summary>
+            Represents a gesture-driven mode for the camera, allowing for user interaction through gestures.
+            </summary>
+        </member>
+        <member name="T:GameCore.CameraSystem.Struct.CameraRotation">
+            <summary />
+        </member>
+        <member name="M:GameCore.CameraSystem.Struct.CameraRotation.#ctor(GameCore.BaseType.Angle,GameCore.BaseType.Angle,GameCore.BaseType.Angle)">
+            <summary />
+        </member>
+        <member name="P:GameCore.CameraSystem.Struct.CameraRotation.Yaw">
+            <summary />
+        </member>
+        <member name="P:GameCore.CameraSystem.Struct.CameraRotation.Pitch">
+            <summary />
+        </member>
+        <member name="P:GameCore.CameraSystem.Struct.CameraRotation.Roll">
+            <summary />
+        </member>
+        <member name="M:GameCore.CameraSystem.Struct.CameraRotation.ToVector3">
+            <summary />
+            <returns />
+        </member>
+    </members>
+</doc>

@@ -1,0 +1,95 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<doc>
+    <assembly>
+        <name>GameCore</name>
+    </assembly>
+    <members>
+        <member name="T:GameCore.DisplayInfo.Data.GameDataRuleDisplayInfo">
+            <summary />
+        </member>
+        <member name="P:GameCore.DisplayInfo.Data.GameDataRuleDisplayInfo.DisplayNameGetter">
+            <summary />
+        </member>
+        <member name="P:GameCore.DisplayInfo.Data.GameDataRuleDisplayInfo.DescriptionGetter">
+            <summary />
+        </member>
+        <member name="P:GameCore.DisplayInfo.Data.GameDataRuleDisplayInfo.IconGetter">
+            <summary />
+        </member>
+        <member name="T:GameCore.DisplayInfo.Data.IDisplayInfoData">
+            <summary />
+        </member>
+        <member name="P:GameCore.DisplayInfo.Data.IDisplayInfoData.DisplayName">
+            <summary>
+            Gets the display name of the object.
+            </summary>
+        </member>
+        <member name="P:GameCore.DisplayInfo.Data.IDisplayInfoData.Description">
+            <summary>
+            Gets the description of the object.
+            </summary>
+        </member>
+        <member name="P:GameCore.DisplayInfo.Data.IDisplayInfoData.Icon">
+            <summary>
+            Gets the icon associated with the object.
+            </summary>
+        </member>
+        <member name="T:GameCore.DisplayInfo.IDisplayInfo">
+            <summary />
+        </member>
+        <member name="F:GameCore.DisplayInfo.IDisplayInfo.ruleDisplayInfo">
+            <summary />
+        </member>
+        <member name="P:GameCore.DisplayInfo.IDisplayInfo.Cache">
+            <summary />
+        </member>
+        <member name="P:GameCore.DisplayInfo.IDisplayInfo.DisplayName">
+            <summary>
+            Gets the display name of the object.
+            </summary>
+        </member>
+        <member name="P:GameCore.DisplayInfo.IDisplayInfo.Description">
+            <summary>
+            Gets the description of the object.
+            </summary>
+        </member>
+        <member name="P:GameCore.DisplayInfo.IDisplayInfo.Icon">
+            <summary>
+            Gets the icon associated with the object.
+            </summary>
+        </member>
+        <member name="P:GameCore.DisplayInfo.IDisplayInfo.Stack">
+            <summary>
+            Gets the current stack value for display purposes, or <see langword="null" /> if no stack is defined.
+            </summary>
+        </member>
+        <member name="P:GameCore.DisplayInfo.IDisplayInfo.Level">
+            <summary>
+            Gets the current level value for display purposes, or <see langword="null" /> if the level is not set.
+            </summary>
+        </member>
+        <member name="P:GameCore.DisplayInfo.IDisplayInfo.Quality">
+            <summary />
+        </member>
+        <member name="P:GameCore.DisplayInfo.IDisplayInfo.Cooldown">
+            <summary>
+            Gets the cooldown duration, in seconds, for display purposes, or <see langword="null" /> if no cooldown is defined.
+            </summary>
+        </member>
+        <member name="P:GameCore.DisplayInfo.IDisplayInfo.CoolDownMax">
+            <summary>
+            Gets the maximum cooldown duration, in seconds, for display purposes, or <see langword="null" /> if no maximum cooldown is defined.
+            </summary>
+        </member>
+        <member name="P:GameCore.DisplayInfo.IDisplayInfo.ChargeCooldown">
+            <summary>
+            Gets the charge cooldown duration, in seconds, for display purposes, or <see langword="null" /> if no IDisplayInfo cooldown is defined.
+            </summary>
+        </member>
+        <member name="P:GameCore.DisplayInfo.IDisplayInfo.ChargeCooldownMax">
+            <summary>
+            Gets the maximum charge cooldown duration, in seconds, for display purposes, or <see langword="null" /> if no maximum cooldown is defined.
+            </summary>
+        </member>
+    </members>
+</doc>

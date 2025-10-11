@@ -1,0 +1,148 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<doc>
+    <assembly>
+        <name>GameCore</name>
+    </assembly>
+    <members>
+        <member name="T:GameCore.VitalSystem.Data.GameDataVital">
+            <summary>
+            表示活力值系统的数据配置，定义单位的活力值属性。活力是生命值、法力值、怒气值等拥有当前值/最大值的属性的统称。
+            </summary>
+            <remarks>
+            此类用于配置单位的活力值相关属性，包括当前活力值类型和最大活力值的引用。
+            它作为活力值系统的数据基础，允许灵活地定义不同单位的活力值特征。
+            </remarks>
+        </member>
+        <member name="P:GameCore.VitalSystem.Data.GameDataVital.Current">
+            <summary>
+            获取或设置当前活力值属性的类型
+            </summary>
+            <remarks>
+            定义此活力值数据所对应的具体属性类型，例如生命值、魔法值等。
+            这个属性决定了活力值组件将管理哪种类型的数值。
+            </remarks>
+        </member>
+        <member name="P:GameCore.VitalSystem.Data.GameDataVital.Max">
+            <summary>
+            获取或设置最大活力值属性的数据链接
+            </summary>
+            <remarks>
+            引用定义最大活力值的单位属性数据。这个链接指向具体的单位属性配置，
+            允许系统动态获取和计算单位的最大活力值上限。
+            </remarks>
+        </member>
+        <member name="T:GameCore.VitalSystem.Vital">
+            <summary>
+            Represents a vital property of an entity such as health, mana, or energy that has current and maximum values with regeneration.
+            </summary>
+            <remarks>
+            The Vital class manages dynamic properties that typically change during gameplay, such as health points, mana points,
+            or stamina. Each vital has a current value, maximum value, and regeneration rate. The system automatically handles
+            clamping values within valid ranges and applies regeneration over time. Vitals are implemented as tag components,
+            meaning each entity can have one vital per property type.
+            </remarks>
+        </member>
+        <member name="P:GameCore.VitalSystem.Vital.PropertyMax">
+            <summary>
+            Gets the game data link that defines how the maximum value of this vital is calculated.
+            </summary>
+            <value>A game data link to the unit property configuration that determines the maximum value.</value>
+            <remarks>
+            The maximum value may be influenced by various factors such as level, equipment, buffs, and other modifiers.
+            The actual maximum value is calculated dynamically through the unit property system.
+            </remarks>
+        </member>
+        <member name="F:GameCore.VitalSystem.Vital.UnitPropertyComplex">
+            <summary />
+        </member>
+        <member name="F:GameCore.VitalSystem.Vital.vitalHashCode">
+            <summary />
+        </member>
+        <member name="M:GameCore.VitalSystem.Vital.#ctor(GameCore.EntitySystem.Entity,GameCore.BaseType.PropertyVital,GameData.IGameLink{GameCore.Data.GameDataUnitProperty})">
+            <param name="host">The entity that owns this vital property.</param>
+            <param name="tag">The property tag that identifies this vital type.</param>
+            <param name="propertyMax">The game data link that defines the maximum value calculation for this vital.</param>
+        </member>
+        <member name="T:GameCore.VitalSystem.Vital.Property">
+            <summary>
+            Defines the different properties of a vital that can be modified.
+            </summary>
+        </member>
+        <member name="F:GameCore.VitalSystem.Vital.Property.Current">
+            <summary>
+            The current value of the vital (e.g., current health points).
+            </summary>
+        </member>
+        <member name="F:GameCore.VitalSystem.Vital.Property.Regen">
+            <summary>
+            The regeneration rate of the vital (how much it recovers per tick).
+            </summary>
+        </member>
+        <member name="P:GameCore.VitalSystem.Vital.Current">
+            <summary>
+            Gets the current value of this vital property.
+            </summary>
+            <value>The current amount of this vital (e.g., current health points).</value>
+            <remarks>
+            This value represents the actual usable amount of the vital resource. It will always be
+            between 0 and the maximum value, unless modifications are pending finalization.
+            </remarks>
+        </member>
+        <member name="P:GameCore.VitalSystem.Vital.Max">
+            <summary>
+            Gets the maximum value of this vital property.
+            </summary>
+            <value>The maximum amount this vital can reach (e.g., maximum health points).</value>
+            <remarks>
+            The maximum value is calculated dynamically based on the entity's properties, level,
+            equipment, and other modifiers. This value may change as the entity's stats change.
+            </remarks>
+        </member>
+        <member name="P:GameCore.VitalSystem.Vital.Regen">
+            <summary>
+            Gets or sets the regeneration rate of this vital property.
+            </summary>
+            <value>The rate at which this vital regenerates per tick.</value>
+            <remarks>
+            Positive values indicate regeneration (healing over time), while negative values indicate
+            degeneration (damage over time). The actual regeneration is applied each game tick.
+            </remarks>
+        </member>
+        <member name="M:GameCore.VitalSystem.Vital.Think(System.Int32)">
+            <summary>
+            Processes the regeneration logic for this vital on each game tick.
+            </summary>
+            <param name="delta">The time delta since the last tick (currently unused).</param>
+            <remarks>
+            This method is called automatically by the game's thinking system. It applies regeneration
+            and schedules finalization to ensure values stay within valid ranges. The method only
+            processes regeneration on the server side.
+            </remarks>
+        </member>
+        <member name="M:GameCore.VitalSystem.Vital.TickFinalizer">
+            <summary>
+            Finalizes vital values by clamping them within valid ranges and updating thinking status.
+            </summary>
+            <remarks>
+            This method ensures that the current value stays between 0 and the maximum value.
+            It also determines whether this vital needs to continue thinking based on its regeneration
+            rate and current value. This method is called automatically at the end of each tick.
+            </remarks>
+        </member>
+        <member name="M:GameCore.VitalSystem.Vital.DisposeManaged">
+            <summary>
+            Releases managed resources used by this vital.
+            </summary>
+            <remarks>
+            This method is called when the vital is being disposed. It cleans up references
+            to the unit property system and calls the base disposal method.
+            </remarks>
+        </member>
+        <member name="M:GameCore.VitalSystem.Vital.ToString">
+            <summary>
+            Returns a string representation of this vital showing its current state.
+            </summary>
+            <returns>A formatted string containing the vital's tag, current/max values, regeneration rate, and sync ID.</returns>
+        </member>
+    </members>
+</doc>

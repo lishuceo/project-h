@@ -1,0 +1,55 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<doc>
+    <!-- 此文件由XMLDocSplitter自动生成，包含对各命名空间子文件的引用 -->
+    <includes>
+        <include file="GameCore.AbilitySystem.xml" namespace="GameCore.AbilitySystem" />
+        <include file="GameCore.ActorSystem.xml" namespace="GameCore.ActorSystem" />
+        <include file="GameCore.AISystem.xml" namespace="GameCore.AISystem" />
+        <include file="GameCore.Animation.xml" namespace="GameCore.Animation" />
+        <include file="GameCore.BaseInterface.xml" namespace="GameCore.BaseInterface" />
+        <include file="GameCore.BaseType.xml" namespace="GameCore.BaseType" />
+        <include file="GameCore.Behavior.xml" namespace="GameCore.Behavior" />
+        <include file="GameCore.BuffSystem.xml" namespace="GameCore.BuffSystem" />
+        <include file="GameCore.CameraSystem.xml" namespace="GameCore.CameraSystem" />
+        <include file="GameCore.Collection.xml" namespace="GameCore.Collection" />
+        <include file="GameCore.CollisionSystem.xml" namespace="GameCore.CollisionSystem" />
+        <include file="GameCore.Components.xml" namespace="GameCore.Components" />
+        <include file="GameCore.Container.xml" namespace="GameCore.Container" />
+        <include file="GameCore.CooldownSystem.xml" namespace="GameCore.CooldownSystem" />
+        <include file="GameCore.CostSystem.xml" namespace="GameCore.CostSystem" />
+        <include file="GameCore.Data.xml" namespace="GameCore.Data" />
+        <include file="GameCore.DisplayInfo.xml" namespace="GameCore.DisplayInfo" />
+        <include file="GameCore.Drawing.xml" namespace="GameCore.Drawing" />
+        <include file="GameCore.EntitySystem.xml" namespace="GameCore.EntitySystem" />
+        <include file="GameCore.Event.xml" namespace="GameCore.Event" />
+        <include file="GameCore.Execution.xml" namespace="GameCore.Execution" />
+        <include file="GameCore.Extension.xml" namespace="GameCore.Extension" />
+        <include file="GameCore.GameSystem.xml" namespace="GameCore.GameSystem" />
+        <include file="GameCore.Interface.xml" namespace="GameCore.Interface" />
+        <include file="GameCore.ItemSystem.xml" namespace="GameCore.ItemSystem" />
+        <include file="GameCore.Leveling.xml" namespace="GameCore.Leveling" />
+        <include file="GameCore.Localization.xml" namespace="GameCore.Localization" />
+        <include file="GameCore.ModelAnimation.xml" namespace="GameCore.ModelAnimation" />
+        <include file="GameCore.OrderSystem.xml" namespace="GameCore.OrderSystem" />
+        <include file="GameCore.PhysicsSystem.xml" namespace="GameCore.PhysicsSystem" />
+        <include file="GameCore.Platform.xml" namespace="GameCore.Platform" />
+        <include file="GameCore.PlayerAndUsers.xml" namespace="GameCore.PlayerAndUsers" />
+        <include file="GameCore.Properties.xml" namespace="GameCore.Properties" />
+        <include file="GameCore.Protocol.xml" namespace="GameCore.Protocol" />
+        <include file="GameCore.ProtocolClientTransient.xml" namespace="GameCore.ProtocolClientTransient" />
+        <include file="GameCore.ProtocolServerTransient.xml" namespace="GameCore.ProtocolServerTransient" />
+        <include file="GameCore.ResourceType.xml" namespace="GameCore.ResourceType" />
+        <include file="GameCore.RewardSystem.xml" namespace="GameCore.RewardSystem" />
+        <include file="GameCore.SceneSystem.xml" namespace="GameCore.SceneSystem" />
+        <include file="GameCore.ScopeData.xml" namespace="GameCore.ScopeData" />
+        <include file="GameCore.ScopeScript.xml" namespace="GameCore.ScopeScript" />
+        <include file="GameCore.Shape.xml" namespace="GameCore.Shape" />
+        <include file="GameCore.Standard.xml" namespace="GameCore.Standard" />
+        <include file="GameCore.Struct.xml" namespace="GameCore.Struct" />
+        <include file="GameCore.TargetingSystem.xml" namespace="GameCore.TargetingSystem" />
+        <include file="GameCore.TaskSystem.xml" namespace="GameCore.TaskSystem" />
+        <include file="GameCore.Timers.xml" namespace="GameCore.Timers" />
+        <include file="GameCore.UserCloudData.xml" namespace="GameCore.UserCloudData" />
+        <include file="GameCore.VitalSystem.xml" namespace="GameCore.VitalSystem" />
+    </includes>
+</doc>

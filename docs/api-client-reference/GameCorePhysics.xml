@@ -1,0 +1,179 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>GameCorePhysics</name>
+    </assembly>
+    <members>
+        <member name="T:GameCorePhysics.Actor.PhysicsActor">
+            <summary>
+            物理Actor
+            </summary>
+            <parent cref="T:GameCore.BaseType.DisposableObject"/>
+        </member>
+        <member name="P:GameCorePhysics.Actor.PhysicsActor.PhysicsActorApiProvider">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:GameCorePhysics.Actor.PhysicsActor.#ctor(GameCore.PlayerAndUsers.Player,GameData.GameLink{GameCore.EntitySystem.Data.GameDataUnit,GameCore.EntitySystem.Data.GameDataUnit},GameCore.SceneSystem.Scene,System.Numerics.Vector3,System.Numerics.Vector3)">
+            <summary>
+            物理Actor构造函数
+            </summary>
+            <param name = "unitLink">数编 Link </param>
+            <param name = "scene">场景</param>
+            <param name = "position">位置</param>
+            <param name = "rotation">旋转（欧拉角）</param>
+        </member>
+        <member name="M:GameCorePhysics.Actor.PhysicsActor.#ctor(GameCore.EntitySystem.Unit)">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:GameCorePhysics.Actor.PhysicsActor.ApplyForce(System.Numerics.Vector3)">
+            <summary>
+            
+            </summary>
+            <param name="force"></param>
+            <returns></returns>
+        </member>
+        <member name="M:GameCorePhysics.Actor.PhysicsActor.ApplyImpulse(System.Numerics.Vector3)">
+            <summary>
+            
+            </summary>
+            <param name="impulse"></param>
+            <returns></returns>
+        </member>
+        <member name="M:GameCorePhysics.Actor.PhysicsActor.ApplyPhysicsAttribute">
+            <summary>
+            
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:GameCorePhysics.Actor.PhysicsActor.GetNode">
+            <summary>
+            
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:GameCorePhysics.Actor.PhysicsActor.DestroyImmediately(GameCorePhysics.Actor.PhysicsActor)">
+            <summary>
+            
+            </summary>
+            <param name="actor"></param>
+            <returns></returns>
+        </member>
+        <member name="M:GameCorePhysics.Actor.PhysicsActor.GetPrimitiveLink(GameCore.Shape.Data.PrimitiveShape)">
+            <summary>
+            获取基础形状的数据Link
+            </summary>
+            <param name = "shape"></param>
+            <returns></returns>
+        </member>
+        <member name="F:GameCorePhysics.Actor.PhysicsActor.actorId_">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:GameCorePhysics.Actor.PhysicsActor.node_">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:GameCorePhysics.Actor.PhysicsActor.uuid">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:GameCorePhysics.Actor.PhysicsActor.MaxUnitCountPerPlayer">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:GameCorePhysics.Actor.PhysicsActor.DisposeManaged">
+            <summary>
+             C# 的~析构函数是在垃圾回收时调用的，主动删除的话其实用的是 <see cref = "M:GameCore.BaseType.DisposableObject.Destroy(System.Boolean)"/> 方法
+             另外建议建立一个 HashSet 来存储所有的 PhysicsActor 确保单位不会被GC。
+            </summary>
+        </member>
+        <member name="T:GameCorePhysics.Actor.PrimitiveShapeData">
+            <summary>
+            
+            </summary>
+            <implements>
+            <see cref="T:GameCore.BaseInterface.IGameClass"/>
+            </implements>
+        </member>
+        <member name="F:GameCorePhysics.Actor.PrimitiveShapeData.PhysicsBoxModel">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:GameCorePhysics.Actor.PrimitiveShapeData.PhysicsSphereModel">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:GameCorePhysics.Actor.PrimitiveShapeData.PhysicsCylinderModel">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:GameCorePhysics.Actor.PrimitiveShapeData.PhysicsPlaneModel">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:GameCorePhysics.Actor.PrimitiveShapeData.PhysicsConeModel">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:GameCorePhysics.Actor.PrimitiveShapeData.PhysicsCapsuleModel">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:GameCorePhysics.Actor.PrimitiveShapeData.PhysicsBox">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:GameCorePhysics.Actor.PrimitiveShapeData.PhysicsSphere">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:GameCorePhysics.Actor.PrimitiveShapeData.PhysicsCylinder">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:GameCorePhysics.Actor.PrimitiveShapeData.PhysicsPlane">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:GameCorePhysics.Actor.PrimitiveShapeData.PhysicsCone">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:GameCorePhysics.Actor.PrimitiveShapeData.PhysicsCapsule">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:GameCorePhysics.Actor.PrimitiveShapeData.Initialize">
+            <summary>
+            
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:GameCorePhysics.Actor.PrimitiveShapeData.OnRegisterGameClass">
+            <summary>
+            
+            </summary>
+            <returns></returns>
+        </member>
+    </members>
+</doc>

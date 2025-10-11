@@ -1,0 +1,1505 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<doc>
+    <assembly>
+        <name>GameCore</name>
+    </assembly>
+    <members>
+        <member name="T:GameCore.ModelAnimation.Animation">
+            <summary>
+            Represents a runtime animation instance that wraps engine-level animation functionality
+            and provides high-level control over animation playback, timing, and state management.
+            </summary>
+            <remarks>
+            The Animation class serves as the primary interface for controlling individual animations
+            in the game world. It bridges the gap between the low-level engine animation system
+            (<see cref="T:EngineInterface.GoInterface.IViewAnimation" />) and the high-level game logic, providing a clean API
+            for animation management.
+            
+            Key features:
+            - Priority-based animation management with automatic suppression
+            - Smooth blending between animations with configurable timing
+            - Real-time playback control (speed, looping, offset)
+            - Event-driven state notifications
+            - Automatic resource management and cleanup
+            - Integration with the actor system for spatial coordination
+            
+            Animation instances are typically created through <see cref="!:IActorAnimationPlayable" />
+            interface methods rather than direct construction, ensuring proper integration with
+            the actor lifecycle and animation management systems.
+            </remarks>
+            <example>
+                <code>
+            // Play an animation with custom parameters
+            var animation = actor.PlayAnimation(walkAnimationLink, new AnimationPlayParam {
+                Priority = 50,
+                Speed = 1.2f,
+                IsLooping = true,
+                BlendIn = TimeSpan.FromSeconds(0.25f)
+            });
+            
+            // Monitor animation state
+            animation.StateChanged += (state) =&gt; {
+                if (state == AnimationStateEvent.Finished) {
+                    // Animation completed
+                }
+            };
+            
+            // Control playback
+            animation.Speed = 0.8f;
+            animation.Stop(TimeSpan.FromSeconds(0.5f));
+            </code>
+            </example>
+            <summary />
+            <summary />
+            <summary />
+        </member>
+        <member name="F:GameCore.ModelAnimation.Animation._animationCache">
+            <summary />
+        </member>
+        <member name="P:GameCore.ModelAnimation.Animation.Actor">
+            <summary />
+        </member>
+        <member name="F:GameCore.ModelAnimation.Animation.viewAnimation">
+            <summary />
+        </member>
+        <member name="M:GameCore.ModelAnimation.Animation.GetByViewAnimation(EngineInterface.GoInterface.IViewAnimation)">
+            <summary />
+            <param name="viewAnimation" />
+            <returns />
+        </member>
+        <member name="M:GameCore.ModelAnimation.Animation.GetOrCreateEngineAnimation(EngineInterface.GoInterface.IViewAnimation)">
+            <summary>
+            Retrieves an existing Animation instance for the given IViewAnimation, or creates one if it does not exist.
+            This is intended for engine/internal use when an Animation is created by the engine without a link.
+            For normal usage, prefer the <see cref="T:GameCore.ModelAnimation.AnimationSequence" /> or <see cref="T:GameCore.ModelAnimation.Animation" /> constructors.
+            </summary>
+            <param name="viewAnimation">The engine-side animation object.</param>
+            <returns>
+            The corresponding Animation instance.
+            Null if the actor associated with the viewAnimation does not exist.
+            </returns>
+        </member>
+        <member name="P:GameCore.ModelAnimation.Animation.AnimationResource">
+            <summary>
+            Gets the animation resource file that this animation instance is playing.
+            </summary>
+            <value>The animation resource file path as a <see cref="T:GameCore.ResourceType.Animation" />.</value>
+            <remarks>
+            This property provides access to the original animation resource that was used to create
+            this animation instance. It can be used for debugging, logging, or to identify which
+            animation file is currently being played.
+            </remarks>
+        </member>
+        <member name="P:GameCore.ModelAnimation.Animation.IsValid">
+            <summary>
+            Gets a value indicating whether this animation instance is valid and ready for use.
+            </summary>
+            <value>True if the animation is valid and the underlying view animation is active; otherwise, false.</value>
+            <remarks>
+            An animation is considered valid when both the base object validity checks pass and
+            the underlying engine animation is in a valid state (Phase &gt;= 0). Invalid animations
+            should not be used for playback control and may indicate the animation has been
+            destroyed or encountered an error.
+            </remarks>
+        </member>
+        <member name="P:GameCore.ModelAnimation.Animation.IsActivePlaying">
+            <summary>
+            Gets a value indicating whether this animation is currently actively playing.
+            </summary>
+            <value>True if the animation is in the active playing state; otherwise, false.</value>
+            <remarks>
+            This property returns true only when the animation is in the current actor's active
+            animation list and is not suppressed by higher priority animations and not paused.
+            An animation can exist but not be actively playing if it has been suppressed by
+            a higher priority animation or if it has been paused.
+            
+            Use this property to check if an animation is actually contributing to the visual
+            appearance of the actor, as opposed to just existing in the animation system.
+            </remarks>
+        </member>
+        <member name="P:GameCore.ModelAnimation.Animation.Priority">
+            <summary>
+            Gets or sets the priority of this animation instance.
+            </summary>
+            <value>The priority value, where higher numbers indicate higher priority.</value>
+            <remarks>
+            Animation priority determines which animation is visible when multiple animations
+            are playing on the same actor. Higher priority animations will suppress lower
+            priority animations, causing them to be paused until the higher priority animation
+            completes or is stopped.
+            
+            Priority can be changed at runtime to dynamically adjust animation precedence.
+            This is useful for implementing dynamic animation systems where the importance
+            of animations can change based on game state.
+            </remarks>
+        </member>
+        <member name="P:GameCore.ModelAnimation.Animation.LogicLayer">
+            <summary>
+            Gets the logic layer that this animation belongs to.
+            </summary>
+            <value>The <see cref="T:EngineInterface.Enum.AnimationLogicLayer" /> that categorizes this animation.</value>
+            <remarks>
+            Logic layers provide a way to categorize animations and control their interactions.
+            Animations on different logic layers can play simultaneously without interfering
+            with each other, while animations on the same layer compete based on priority.
+            
+            This property is read-only and is set when the animation is created.
+            </remarks>
+        </member>
+        <member name="P:GameCore.ModelAnimation.Animation.Duration">
+            <summary>
+            Gets the total duration of this animation.
+            </summary>
+            <value>The total duration as a <see cref="T:System.TimeSpan" />.</value>
+            <remarks>
+            This represents the total length of the animation from start to finish.
+            For looping animations, this is the duration of one complete loop.
+            The duration is determined by the animation resource file and cannot be changed at runtime.
+            </remarks>
+        </member>
+        <member name="P:GameCore.ModelAnimation.Animation.IsLooping">
+            <summary>
+            Gets or sets a value indicating whether this animation should loop continuously.
+            </summary>
+            <value>True if the animation should loop; otherwise, false.</value>
+            <remarks>
+            When set to true, the animation will automatically restart from the beginning
+            when it reaches the end, creating a continuous loop. When set to false, the
+            animation will play once and then stop.
+            
+            This property can be changed at runtime to dynamically control looping behavior.
+            </remarks>
+        </member>
+        <member name="P:GameCore.ModelAnimation.Animation.IsSuppressed">
+            <summary>
+            Gets a value indicating whether this animation is currently suppressed by a higher priority animation.
+            </summary>
+            <value>True if the animation is suppressed; otherwise, false.</value>
+            <remarks>
+            A suppressed animation is paused and not contributing to the actor's visual appearance
+            due to a higher priority animation being active on the same logic layer. The animation
+            will automatically resume when the higher priority animation finishes or is stopped.
+            
+            This property is read-only and reflects the current state of the animation system.
+            </remarks>
+        </member>
+        <member name="P:GameCore.ModelAnimation.Animation.ShouldPauseOnSuppressed">
+            <summary>
+            Gets or sets a value indicating whether this animation should pause when suppressed.
+            </summary>
+            <value>True if the animation should pause when suppressed; otherwise, false.</value>
+            <remarks>
+            When set to true, the animation will pause its timeline when suppressed by a higher
+            priority animation, resuming from the same point when it becomes active again.
+            When set to false, the animation continues to advance its timeline even when suppressed,
+            which may result in missing portions of the animation when it becomes active again.
+            
+            This setting is useful for animations that need to maintain timing synchronization
+            with other systems even when not visible.
+            </remarks>
+        </member>
+        <member name="P:GameCore.ModelAnimation.Animation.PlayingOffset">
+            <summary>
+            Gets or sets the current playback time offset within the animation.
+            </summary>
+            <value>The time offset from the beginning of the animation as a <see cref="T:System.TimeSpan" />.</value>
+            <remarks>
+            This property allows you to jump to specific time points in the animation timeline.
+            The value represents the elapsed time from the start of the animation, so setting
+            it to TimeSpan.FromSeconds(2.5) will jump to 2.5 seconds into the animation.
+            
+            Setting this property will immediately jump the animation to the specified time offset,
+            which can be useful for synchronizing animations, implementing scrubbing functionality,
+            or creating specific timing effects.
+            
+            The offset should not exceed the animation's total duration. Values beyond the
+            duration may cause unexpected behavior or be clamped to the animation's length.
+            </remarks>
+        </member>
+        <member name="F:GameCore.ModelAnimation.Animation.speed">
+            <summary />
+        </member>
+        <member name="F:GameCore.ModelAnimation.Animation.paused">
+            <summary />
+        </member>
+        <member name="P:GameCore.ModelAnimation.Animation.Speed">
+            <summary>
+            Gets or sets the playback speed multiplier for this animation.
+            </summary>
+            <value>The speed multiplier, where 1.0 is normal speed, 0.5 is half speed, and 2.0 is double speed.</value>
+            <remarks>
+            This property allows you to dynamically control the playback speed of the animation.
+            Values less than 1.0 slow down the animation, while values greater than 1.0 speed it up.
+            A value of 0.0 will effectively pause the animation.
+            
+            Speed changes take effect immediately and can be used to create effects like slow motion,
+            fast-forward, or to synchronize animations with dynamic game timing.
+            
+            Note: If you want to pause the animation while preserving the ability to resume at the same speed,
+            use the <see cref="P:GameCore.ModelAnimation.Animation.Paused" /> property instead of setting Speed to 0.
+            </remarks>
+        </member>
+        <member name="P:GameCore.ModelAnimation.Animation.Paused">
+            <summary />
+        </member>
+        <member name="P:GameCore.ModelAnimation.Animation.EngineAnimationType">
+            <summary>
+            Gets the engine-specific animation type for this animation instance.
+            </summary>
+            <value>The <see cref="P:GameCore.ModelAnimation.Animation.EngineAnimationType" /> that categorizes this animation at the engine level.</value>
+            <remarks>
+            This property provides access to the engine-level animation type, which is used internally
+            by the animation system for optimization and behavior control. This is primarily useful
+            for debugging and advanced animation system development.
+            </remarks>
+        </member>
+        <member name="M:GameCore.ModelAnimation.Animation.FadeBlendWeight(System.Single,System.TimeSpan)">
+            <summary>
+            Gradually fades the blend weight of this animation to a target value over a specified duration.
+            </summary>
+            <param name="targetWeight">The target blend weight to fade to, typically between 0.0 and 1.0.</param>
+            <param name="fadeTime">The duration over which the fade should occur.</param>
+            <returns>True if the fade was successfully initiated; otherwise, false.</returns>
+            <remarks>
+            Blend weight fading allows for smooth transitions in animation visibility without completely
+            stopping the animation. This is useful for creating dynamic blending effects where animations
+            need to gradually appear or disappear while maintaining their timeline position.
+            
+            A target weight of 0.0 will make the animation completely invisible, while 1.0 will make it
+            fully visible. Values between 0.0 and 1.0 create partial blending effects.
+            
+            The fade operates independently of the animation's priority system, allowing for complex
+            blending scenarios where multiple animations contribute to the final appearance.
+            </remarks>
+        </member>
+        <member name="M:GameCore.ModelAnimation.Animation.Stop(System.Nullable{System.TimeSpan})">
+            <summary>
+            Stops the animation with an optional fade-out transition.
+            </summary>
+            <param name="fadeOutTime">The duration over which the animation should fade out before stopping. If null, uses the default fade time of 0.15 seconds.</param>
+            <returns>True if the stop was successfully initiated; otherwise, false.</returns>
+            <remarks>
+            This method gracefully terminates the animation, optionally providing a smooth fade-out
+            transition to avoid abrupt visual changes. The fade-out allows the animation to blend
+            smoothly to its final state or to other animations that may become active.
+            
+            Once stopped, the animation cannot be restarted - a new animation instance must be created
+            to play the same animation again. The animation resources will be automatically cleaned up
+            when the stop process completes.
+            
+            If other animations were suppressed by this animation, they will automatically resume
+            when this animation stops, creating a smooth transition in the animation system.
+            </remarks>
+        </member>
+        <member name="E:GameCore.ModelAnimation.Animation.StateChanged">
+            <summary>
+            Occurs when the animation state changes, providing notifications for key animation events.
+            </summary>
+            <remarks>
+            This event is fired when significant state changes occur in the animation lifecycle,
+            such as when the animation starts, finishes, or is removed from the system.
+            
+            The event provides <see cref="T:EngineInterface.Enum.AnimationStateEvent" /> values that indicate the specific
+            type of state change that occurred:
+            - <see cref="F:EngineInterface.Enum.AnimationStateEvent.Surfaced" />: Animation became active (started playing or resumed from suppression)
+            - <see cref="F:EngineInterface.Enum.AnimationStateEvent.Suppressed" />: Animation was suppressed by a higher priority animation
+            - <see cref="F:EngineInterface.Enum.AnimationStateEvent.Completed" />: Animation finished playing normally
+            - <see cref="F:EngineInterface.Enum.AnimationStateEvent.Removed" />: Animation was removed from the system
+            
+            This event is essential for implementing animation-driven game logic, such as triggering
+            effects when animations complete, chaining animations together, or cleaning up resources
+            when animations are removed.
+            </remarks>
+        </member>
+        <member name="E:GameCore.ModelAnimation.Animation.TimelineEventTriggered">
+            <summary>
+            Occurs when a timeline event marker is triggered during animation playback.
+            </summary>
+            <remarks>
+            This event is fired when the animation timeline reaches predefined event markers that are
+            defined in the <see cref="P:GameCore.ResourceType.Data.GameDataModel.Events" /> data. These markers allow developers to synchronize game
+            logic with specific moments in the animation, such as footstep sounds, weapon impacts,
+            or particle effects.
+            
+            Timeline events have a duration and can trigger twice during playback:
+            - At the start of the event duration (when the boolean parameter is true)
+            - At the end of the event duration (when the boolean parameter is false)
+            
+            The event provides two parameters:
+            - <paramref name="eventName" />: The name/identifier of the timeline event as defined in the animation
+            - <paramref name="isStart" />: True if this is the start of the event duration, false if it's the end
+            
+            Timeline events are frame-accurate and will trigger at the exact moments specified in the animation,
+            taking into account the current playback speed and time offset. This ensures precise synchronization
+            between animation and gameplay elements.
+            
+            This event is particularly useful for:
+            - Playing sound effects with proper start/stop timing
+            - Triggering particle effects that need specific durations
+            - Implementing frame-perfect gameplay mechanics with duration-based logic
+            - Synchronizing UI animations with character actions that have timing windows
+            </remarks>
+            <example>
+                <code>
+            animation.TimelineEventTriggered += (eventName, isStart) =&gt; {
+                switch (eventName.ToString()) {
+                    case "footstep":
+                        if (isStart) PlayFootstepSound();
+                        break;
+                    case "shield_active":
+                        if (isStart) EnableShieldEffect();
+                        else DisableShieldEffect();
+                        break;
+                    case "vulnerability_window":
+                        SetVulnerabilityState(isStart);
+                        break;
+                }
+            };
+            </code>
+            </example>
+        </member>
+        <member name="P:GameCore.ModelAnimation.Animation.Link">
+            <summary />
+        </member>
+        <member name="P:GameCore.ModelAnimation.Animation.Cache">
+            <summary />
+        </member>
+        <member name="M:GameCore.ModelAnimation.Animation.#ctor(GameData.IGameLink{GameCore.ModelAnimation.Data.GameDataAnimationSimple},GameCore.Interface.IActor,EngineInterface.GoInterface.IViewAnimation)">
+            <summary />
+        </member>
+        <member name="M:GameCore.ModelAnimation.Animation.ViewAnimationTimedEventTriggered(EngineCommon.UTF8String,System.Boolean)">
+            <summary />
+            <param name="eventName" />
+            <param name="isStart" />
+            <returns />
+        </member>
+        <member name="M:GameCore.ModelAnimation.Animation.#ctor(GameCore.Interface.IActor,EngineInterface.GoInterface.IViewAnimation)">
+            <summary />
+        </member>
+        <member name="M:GameCore.ModelAnimation.Animation.GameCore#ModelAnimation#IAnimationSwingController#Backswing">
+            <summary />
+            <returns />
+        </member>
+        <member name="M:GameCore.ModelAnimation.Animation.GameCore#ModelAnimation#IAnimationSwingController#Pause(System.Boolean)">
+            <summary />
+            <param name="on" />
+            <returns />
+        </member>
+        <member name="M:GameCore.ModelAnimation.Animation.GameCore#ModelAnimation#IAnimationSwingController#Stop(System.Nullable{System.TimeSpan})">
+            <summary />
+            <param name="fadeOutTime" />
+            <returns />
+        </member>
+        <member name="M:GameCore.ModelAnimation.Animation.Swing">
+            <summary />
+            <returns />
+        </member>
+        <member name="F:GameCore.ModelAnimation.Animation.disposedByStop">
+            <summary />
+        </member>
+        <member name="M:GameCore.ModelAnimation.Animation.DisposeManaged">
+            <summary />
+            <returns />
+        </member>
+        <member name="T:GameCore.ModelAnimation.AnimationBracket">
+            <summary>
+            Represents a bracket animation controller that manages lifecycle-based animations
+            following the Birth → Stand → Death pattern commonly used for temporary effects and actors.
+            </summary>
+            <remarks>
+            AnimationBracket provides a specialized animation controller for managing three-stage
+            animation sequences that follow a predictable lifecycle pattern. This pattern is commonly
+            used for:
+            - Temporary visual effects that appear, persist, and disappear
+            - Enemy spawn sequences with birth, idle, and death animations
+            - Environmental objects with activation, active, and deactivation states
+            - UI elements with show, display, and hide transitions
+            
+            The bracket system automatically manages the transitions between stages and can be
+            configured to either loop the stand animation indefinitely or play through all
+            stages once (one-shot mode).
+            
+            Key features:
+            - Automatic stage progression with configurable timing
+            - Support for both looping and one-shot playback modes
+            - Optional actor destruction when the death animation completes
+            - Integration with the priority-based animation system
+            - Ability to skip the birth animation for immediate activation
+            </remarks>
+            <example>
+                <code>
+            // Create a bracket animation for a magical effect
+            var bracketData = new GameDataAnimationBracket {
+                BirthStandDeathAnimation = new BirthStandDeathAnimation {
+                    BirthAnimation = "magic_appear",
+                    StandAnimation = "magic_loop",
+                    DeathAnimation = "magic_vanish"
+                },
+                ForceOneShot = false,     // Birth → Stand (loop) → Death
+                KillOnFinish = true       // Destroy actor when death completes
+            };
+            
+            var bracket = actor.PlayAnimationBracket(bracketData.CachePlayParam);
+            
+            // Manually stop the bracket (triggers death animation)
+            bracket.Stop();
+            </code>
+            </example>
+            <summary />
+            <summary />
+        </member>
+        <member name="P:GameCore.ModelAnimation.AnimationBracket.Link">
+            <summary />
+        </member>
+        <member name="P:GameCore.ModelAnimation.AnimationBracket.Cache">
+            <summary />
+        </member>
+        <member name="M:GameCore.ModelAnimation.AnimationBracket.#ctor(GameData.IGameLink{GameCore.ModelAnimation.Data.GameDataAnimationBracket},GameCore.Interface.IActor,EngineInterface.GoInterface.IViewAnimation)">
+            <summary />
+        </member>
+        <member name="M:GameCore.ModelAnimation.AnimationBracket.AdjustDurationByCastTime(GameCore.AbilitySystem.AbilityActive)">
+            <summary />
+            <param name="abilityActive" />
+            <returns />
+        </member>
+        <member name="M:GameCore.ModelAnimation.AnimationBracket.Stop(System.Boolean)">
+            <summary>
+            Stops the bracket animation sequence, optionally skipping the death animation.
+            </summary>
+            <param name="skipDeath">If true, the death animation will be skipped and the bracket will stop immediately. If false, the death animation will play before stopping if the bracket is currently playing stand animation.</param>
+            <returns>True if the stop was successfully initiated; otherwise, false.</returns>
+            <remarks>
+            This method triggers the termination of the bracket animation sequence. By default,
+            it will transition to the death animation stage and play it to completion before
+            stopping. If skipDeath is true, the sequence will stop immediately without playing
+            the death animation.
+            
+            If the bracket is configured with KillOnFinish set to true, the associated actor
+            will be destroyed when the death animation completes (or immediately if skipDeath is true).
+            
+            This method is typically called when the bracket animation needs to be terminated
+            prematurely, such as when the associated effect or actor is no longer needed.
+            </remarks>
+        </member>
+        <member name="M:GameCore.ModelAnimation.AnimationBracket.SwitchToNextStage">
+            <summary />
+            <returns />
+        </member>
+        <member name="M:GameCore.ModelAnimation.AnimationBracket.Stop(System.Nullable{System.TimeSpan})">
+            <summary />
+            <param name="fadeOutTime" />
+            <returns />
+        </member>
+        <member name="P:GameCore.ModelAnimation.AnimationBracket.Stage">
+            <summary />
+        </member>
+        <member name="M:GameCore.ModelAnimation.AnimationBracket.GameCore#ModelAnimation#IAnimationSwingController#Backswing">
+            <summary />
+            <returns />
+        </member>
+        <member name="M:GameCore.ModelAnimation.AnimationBracket.GameCore#ModelAnimation#IAnimationSwingController#Pause(System.Boolean)">
+            <summary />
+            <param name="on" />
+            <returns />
+        </member>
+        <member name="M:GameCore.ModelAnimation.AnimationBracket.GameCore#ModelAnimation#IAnimationSwingController#Stop(System.Nullable{System.TimeSpan})">
+            <summary />
+            <param name="fadeOutTime" />
+            <returns />
+        </member>
+        <member name="M:GameCore.ModelAnimation.AnimationBracket.GameCore#ModelAnimation#IAnimationSwingController#Swing">
+            <summary />
+            <returns />
+        </member>
+        <member name="M:GameCore.ModelAnimation.AnimationBracket.DisposeManaged">
+            <summary />
+            <returns />
+        </member>
+        <member name="T:GameCore.ModelAnimation.AnimationSequence">
+            <summary>
+            Represents a runtime controller for animation sequences that orchestrates playback, manages timing,
+            and coordinates events during complex animation sequences.
+            </summary>
+            <remarks>
+            AnimationSequence serves as the runtime execution engine for <see cref="T:GameCore.ModelAnimation.Data.GameDataAnimationSequence" />
+            configurations, providing real-time control over multi-layered animation playback. It manages the
+            coordination of multiple animation playbacks, actor spawning, and event triggering with precise timing.
+            
+            Key capabilities include:
+            - Playback control with pause, resume, and stop functionality
+            - Dynamic switching between different playbacks within the sequence
+            - Event triggering at precise time offsets with contextual information
+            - Automatic management of spawned actors and their lifecycles
+            - Timeline synchronization across all sequence elements
+            
+            The sequence operates as a state machine that can be controlled during runtime, allowing for
+            interactive sequences, conditional branching, and dynamic response to game events. This makes
+            it suitable for cutscenes, complex ability animations, environmental sequences, and any scenario
+            requiring precise coordination of multiple visual and gameplay elements.
+            
+            Events are fired through the <see cref="E:GameCore.ModelAnimation.AnimationSequence.EventTriggered" /> event, providing detailed context
+            about timing, sequence state, and the specific event that occurred.
+            </remarks>
+            <example>
+                <code>
+            var sequence = new AnimationSequence(sequenceDataLink);
+            
+            // Subscribe to sequence events
+            sequence.EventTriggered += (args) =&gt;
+            {
+                if (args.EventKey == SequenceEventKey.ApplyDamage)
+                {
+                    ApplyDamage(args.Elapsed, args.PlaybackIndex);
+                }
+            };
+            
+            // Start the sequence
+            sequence.Play(targetActor, triggerEvents: true);
+            
+            // Control playback as needed
+            sequence.Pause();
+            sequence.SwitchToPlayback(2);
+            sequence.Resume();
+            </code>
+            </example>
+            <summary />
+            <summary />
+            <summary />
+            <summary />
+        </member>
+        <member name="P:GameCore.ModelAnimation.AnimationSequence.Actor">
+            <summary />
+        </member>
+        <member name="P:GameCore.ModelAnimation.AnimationSequence.EventsEnabled">
+            <summary />
+        </member>
+        <member name="M:GameCore.ModelAnimation.AnimationSequence.SwitchToPlayback(System.Nullable{System.Int32})">
+            <summary>
+            Switches to the specified playback within the animation sequence.
+            </summary>
+            <param name="playbackIndex">The zero-based index of the playback to switch to. If null, advances to the next playback in sequence.</param>
+            <remarks>
+            This method allows dynamic control over which playback configuration is currently active within
+            the sequence. Each playback represents a different animation configuration with its own timing,
+            blending, and duration settings as defined in the sequence data.
+            
+            When switching playbacks:
+            - The current playback will blend out according to its blend settings
+            - The target playback will blend in smoothly to avoid jarring transitions
+            - Any spawned actors from the previous playback may be affected based on their lifecycle settings
+            - Events associated with the new playback will be scheduled according to the new timeline
+            
+            If playbackIndex is null, the sequence will advance to the next playback in the list.
+            If already at the last playback, the behavior depends on the sequence's loop settings.
+            </remarks>
+            <exception cref="T:System.ArgumentOutOfRangeException">Thrown when playbackIndex is negative or exceeds the available playbacks.</exception>
+        </member>
+        <member name="M:GameCore.ModelAnimation.AnimationSequence.Pause">
+            <summary>
+            Pauses the animation sequence, suspending all playback, timing, and event processing.
+            </summary>
+            <remarks>
+            When paused, the sequence maintains its current state but stops all progression:
+            - Animation playbacks are paused at their current frame
+            - Event timers are suspended (events will not fire)
+            - Spawned actors remain active but their sequence-controlled behaviors are paused
+            - The sequence can be resumed from exactly the same point using <see cref="M:GameCore.ModelAnimation.AnimationSequence.Resume" />
+            
+            This is useful for implementing pause functionality in games, waiting for external conditions,
+            or creating interactive moments where the sequence waits for user input.
+            
+            Calling Pause() on an already paused sequence has no effect.
+            </remarks>
+        </member>
+        <member name="M:GameCore.ModelAnimation.AnimationSequence.Resume">
+            <summary>
+            Resumes a paused animation sequence, continuing from where it was paused.
+            </summary>
+            <remarks>
+            Resume restores the sequence to active playback state:
+            - Animation playbacks continue from their paused frame
+            - Event timers resume counting down from their suspended state
+            - All sequence elements continue their progression as if no pause occurred
+            - The timing remains consistent with the original sequence timeline
+            
+            This method only affects paused sequences. Calling Resume() on an already playing
+            sequence has no effect.
+            
+            The sequence will fire any events that should have occurred during the pause period
+            if their timing has been reached when resuming.
+            </remarks>
+        </member>
+        <member name="M:GameCore.ModelAnimation.AnimationSequence.Stop">
+            <summary>
+            Stops the animation sequence completely, ending all playback and cleaning up resources.
+            </summary>
+            <remarks>
+            Stop performs a complete shutdown of the sequence:
+            - All animation playbacks are immediately stopped
+            - Spawned actors are despawned according to their cleanup settings
+            - Pending events are cancelled and will not fire
+            - The sequence returns to its initial state
+            - Resources are cleaned up to prevent memory leaks
+            
+            Unlike pause, stopping a sequence cannot be resumed - it must be restarted from the beginning
+            with a new <see cref="!:Play" /> call. This is typically used when the sequence should be
+            completely terminated, such as when switching to a different sequence or ending a cutscene.
+            
+            Calling Stop() on an already stopped sequence has no effect.
+            </remarks>
+        </member>
+        <member name="E:GameCore.ModelAnimation.AnimationSequence.EventTriggered">
+            <summary>
+            Occurs when a sequence event is triggered, providing detailed context about the event and sequence state.
+            </summary>
+            <remarks>
+            This event is fired whenever a <see cref="T:GameCore.ModelAnimation.Data.Struct.SequenceEvent" /> reaches its scheduled
+            time offset within the animation sequence. The event provides comprehensive context through
+            <see cref="T:GameCore.ModelAnimation.Struct.SequenceEventArgs" />, including:
+            
+            - The sequence instance that triggered the event
+            - The specific event key that was triggered
+            - Timing information (elapsed time since sequence start)
+            - The playback index that was active when the event fired
+            
+            Event handlers can use this information to:
+            - Coordinate gameplay actions with animation timing
+            - Trigger sound effects, particle systems, or other visual elements
+            - Apply damage, healing, or other game mechanics at precise moments
+            - Implement interactive elements or conditional sequence branching
+            - Log or debug sequence behavior
+            
+            Events are fired in the order they are scheduled, and if a sequence event has
+            <see cref="P:GameCore.ModelAnimation.Data.Struct.SequenceEvent.PauseSequence" /> set to true, the sequence
+            will automatically pause after firing this event.
+            </remarks>
+        </member>
+        <member name="E:GameCore.ModelAnimation.AnimationSequence.Removed">
+            <summary />
+        </member>
+        <member name="E:GameCore.ModelAnimation.AnimationSequence.PlaybackIndexChanged">
+            <summary />
+        </member>
+        <member name="F:GameCore.ModelAnimation.AnimationSequence.viewAnimationSequence">
+            <summary />
+        </member>
+        <member name="P:GameCore.ModelAnimation.AnimationSequence.PlaybackIndex">
+            <summary />
+        </member>
+        <member name="M:GameCore.ModelAnimation.AnimationSequence.#ctor(GameData.IGameLink{GameCore.ModelAnimation.Data.GameDataAnimationSequence},GameCore.Interface.IActor,EngineInterface.GoInterface.IViewAnimationSequence,System.Boolean)">
+            <summary />
+        </member>
+        <member name="M:GameCore.ModelAnimation.AnimationSequence.GameCore#ModelAnimation#IAnimationSwingController#Backswing">
+            <summary />
+            <returns />
+        </member>
+        <member name="M:GameCore.ModelAnimation.AnimationSequence.GameCore#ModelAnimation#IAnimationSwingController#Pause(System.Boolean)">
+            <summary />
+            <param name="on" />
+            <returns />
+        </member>
+        <member name="M:GameCore.ModelAnimation.AnimationSequence.GameCore#ModelAnimation#IAnimationSwingController#Stop(System.Nullable{System.TimeSpan})">
+            <summary />
+            <param name="fadeOutTime" />
+            <returns />
+        </member>
+        <member name="M:GameCore.ModelAnimation.AnimationSequence.GameCore#ModelAnimation#IAnimationSwingController#Swing">
+            <summary />
+            <returns />
+        </member>
+        <member name="M:GameCore.ModelAnimation.AnimationSequence.DisposeManaged">
+            <summary />
+            <returns />
+        </member>
+        <member name="P:GameCore.ModelAnimation.AnimationSequence.Link">
+            <summary />
+        </member>
+        <member name="P:GameCore.ModelAnimation.AnimationSequence.Cache">
+            <summary />
+        </member>
+        <member name="T:GameCore.ModelAnimation.Data.GameDataAnimationBracket">
+            <summary>
+            Represents the configuration data for a bracket animation that manages lifecycle-based 
+            animations following the Birth → Stand → Death pattern.
+            </summary>
+            <remarks>
+            GameDataAnimationBracket provides configuration for three-stage animation sequences
+            that follow a predictable lifecycle pattern. This is commonly used for:
+            - Temporary visual effects that appear, persist, and disappear
+            - Enemy or character spawn sequences
+            - Environmental objects with activation, active, and deactivation states
+            - UI elements with show, display, and hide transitions
+            
+            The bracket system provides automatic management of stage transitions and supports
+            both looping and one-shot playback modes, making it ideal for effects that need
+            predictable lifecycle management.
+            </remarks>
+        </member>
+        <member name="P:GameCore.ModelAnimation.Data.GameDataAnimationBracket.BirthStandDeathAnimation">
+            <summary>
+            Gets or sets the birth, stand, and death animation configuration for this bracket.
+            </summary>
+            <value>The <see cref="P:GameCore.ModelAnimation.Data.GameDataAnimationBracket.BirthStandDeathAnimation" /> configuration containing the three animation stages.</value>
+            <remarks>
+            This property defines the three animation resources that will be used for each stage
+            of the bracket animation lifecycle:
+            - Birth: The initial animation played when the bracket starts
+            - Stand: The looping animation played during the active phase
+            - Death: The final animation played when the bracket ends
+            
+            If this property is null, the bracket animation will not have any animations to play.
+            </remarks>
+        </member>
+        <member name="P:GameCore.ModelAnimation.Data.GameDataAnimationBracket.LogicLayer">
+            <summary>
+            Gets or sets the logic layer that this bracket animation will be played on.
+            </summary>
+            <value>The animation logic layer. Default is <see cref="F:EngineInterface.Enum.AnimationLogicLayer.Normal" />.</value>
+            <remarks>
+            Logic layers provide a way to categorize animations and control their interactions.
+            Bracket animations on different logic layers can play simultaneously without 
+            interfering with each other, while animations on the same layer compete based on priority.
+            </remarks>
+        </member>
+        <member name="P:GameCore.ModelAnimation.Data.GameDataAnimationBracket.Priority">
+            <summary>
+            Gets or sets the priority of this bracket animation.
+            </summary>
+            <value>The priority value, where higher numbers indicate higher priority. Default is 0.</value>
+            <remarks>
+            Animation priority determines which animation is visible when multiple animations
+            are playing on the same actor and logic layer. Higher priority bracket animations
+            will suppress lower priority animations, causing them to be paused until the
+            higher priority animation completes or is stopped.
+            
+            The priority applies to all stages of the bracket animation (birth, stand, and death).
+            </remarks>
+        </member>
+        <member name="P:GameCore.ModelAnimation.Data.GameDataAnimationBracket.ForceOneShot">
+            <summary>
+            Gets or sets a value indicating whether the bracket should play all stages once (one-shot mode)
+            or loop the stand animation indefinitely.
+            </summary>
+            <value>True for one-shot mode (Birth → Stand → Death); false for looping mode (Birth → Stand loop → Death on stop).</value>
+            <remarks>
+            When set to true, the bracket will play through all three stages sequentially:
+            Birth animation → Stand animation (once) → Death animation, then stop.
+            
+            When set to false, the bracket will play the Birth animation once, then loop
+            the Stand animation indefinitely until manually stopped, at which point the
+            Death animation will play.
+            
+            One-shot mode is useful for effects with predetermined durations, while looping
+            mode is ideal for effects that need to persist until external conditions change.
+            </remarks>
+        </member>
+        <member name="P:GameCore.ModelAnimation.Data.GameDataAnimationBracket.KillOnFinish">
+            <summary>
+            Gets or sets a value indicating whether the associated actor should be destroyed
+            when the bracket animation completes.
+            </summary>
+            <value>True to destroy the actor when the animation completes; otherwise, false.</value>
+            <remarks>
+            When set to true, the actor associated with this bracket animation will be
+            automatically destroyed when the death animation completes. This is useful
+            for temporary effects, spawned enemies, or other actors that should be cleaned
+            up when their animation lifecycle ends.
+            
+            When set to false, the actor will remain in the scene after the animation
+            completes, allowing it to be reused or controlled by other systems.
+            </remarks>
+        </member>
+        <member name="P:GameCore.ModelAnimation.Data.GameDataAnimationBracket.SkipBirthAnimation">
+            <summary>
+            Gets or sets a value indicating whether the birth animation should be skipped.
+            </summary>
+            <value>True to skip the birth animation and start directly with the stand animation; otherwise, false.</value>
+            <remarks>
+            When set to true, the bracket will skip the birth animation and immediately
+            begin playing the stand animation. This is useful when you want the effect
+            to appear instantly without any spawn/appear animation.
+            
+            This setting is particularly useful for effects that need to be synchronized
+            with other systems or when the birth animation is not needed for the desired
+            visual effect.
+            </remarks>
+        </member>
+        <member name="F:GameCore.ModelAnimation.Data.GameDataAnimationBracket._cachePlayParam">
+            <summary />
+        </member>
+        <member name="P:GameCore.ModelAnimation.Data.GameDataAnimationBracket.CachePlayParam">
+            <summary>
+            Gets the cached animation bracket play parameters constructed from this configuration.
+            </summary>
+            <value>The cached <see cref="T:EngineInterface.BaseType.AnimationBracketPlayParam" /> instance.</value>
+            <remarks>
+            This property provides a cached version of the bracket animation parameters that can be
+            used directly with the animation system without needing to construct new parameter
+            objects each time. The cache is lazily initialized and reused for performance.
+            
+            The cached parameters include all the configuration settings from this bracket,
+            including the birth/stand/death animation names, priority, logic layer, and behavioral flags.
+            
+            TODO: The cache should be invalidated and rebuilt when animation parameters change.
+            Currently, changes to the configuration properties will not automatically update
+            the cached parameters.
+            </remarks>
+        </member>
+        <member name="M:GameCore.ModelAnimation.Data.GameDataAnimationBracket.CreateSwingController(GameCore.ActorSystem.IActorAnimationPlayable,System.Nullable{System.TimeSpan})">
+            <summary />
+            <param name="animationPlayable" />
+            <param name="totalTime" />
+            <returns />
+        </member>
+        <member name="T:GameCore.ModelAnimation.Data.GameDataAnimationSequence">
+            <summary>
+            Represents a comprehensive animation sequence configuration that orchestrates multiple animation playbacks,
+            actor creations, and event triggers over time to create complex, synchronized animation experiences.
+            </summary>
+            <remarks>
+            GameDataAnimationSequence serves as a high-level animation composition tool that allows you to:
+            - Orchestrate multiple animation playbacks with precise timing and blending
+            - Spawn and manage temporary actors during specific moments in the sequence
+            - Trigger events at designated time offsets for game logic integration
+            
+            This class is particularly useful for creating cutscenes, complex ability animations, environmental
+            sequences, or any scenario where multiple visual and gameplay elements need to be synchronized
+            with precise timing control.
+            
+            The sequence execution follows this pattern:
+            1. Animation playbacks are initiated according to their individual timing configurations
+            2. Sequence actors are created at their specified spawn offsets and remain active for their configured durations
+            3. Sequence events are triggered at their designated time offsets
+            4. All elements are coordinated to create a cohesive, synchronized experience
+            </remarks>
+            <example>
+                <code>
+            var complexSequence = new GameDataAnimationSequence
+            {
+                Playbacks = [
+                    new AnimationPlayback { AnimationRaw = "character_cast_start", PlaybackDuration = TimeSpan.FromSeconds(1) },
+                    new AnimationPlayback { AnimationRaw = "character_cast_loop", PlaybackDuration = TimeSpan.FromSeconds(2), IsLooping = true }
+                ],
+                SequenceActors = [
+                    new SequenceActorSpawn { Actor = magicCircleActor, SpawnOffset = TimeSpan.FromSeconds(0.5), Duration = TimeSpan.FromSeconds(2.0) }
+                ],
+                SequenceEvents = [
+                    new SequenceEvent { EventKey = SequenceEventKey.StartMagicEffect, Offset = TimeSpan.FromSeconds(0.8) }
+                ]
+            };
+            </code>
+            </example>
+        </member>
+        <member name="P:GameCore.ModelAnimation.Data.GameDataAnimationSequence.Playbacks">
+            <summary>
+            Gets or sets the collection of animation playbacks that will be executed during the sequence.
+            </summary>
+            <value>A list of <see cref="T:GameCore.ResourceType.Data.Struct.AnimationPlayback" /> configurations that define how animations are played within the sequence.</value>
+            <remarks>
+            The playbacks in this collection are processed according to the sequential order. 
+            </remarks>
+        </member>
+        <member name="P:GameCore.ModelAnimation.Data.GameDataAnimationSequence.SequenceActors">
+            <summary>
+            Gets or sets the collection of actors that will be dynamically created and managed during the animation sequence.
+            </summary>
+            <value>A list of <see cref="T:GameCore.ModelAnimation.Data.Struct.SequenceActorSpawn" /> configurations that define when and how actors are spawned during the sequence.</value>
+            <remarks>
+            Sequence actors provide a way to dynamically spawn temporary visual or gameplay elements that are
+            synchronized with the animation timeline. These actors are automatically created at their specified
+            <see cref="P:GameCore.ModelAnimation.Data.Struct.SequenceActorSpawn.SpawnOffset" /> and remain active for their specified <see cref="P:GameCore.ModelAnimation.Data.Struct.SequenceActorSpawn.Duration" />.
+            
+            All sequence actors are automatically attached to the parent actor that is playing the sequence,
+            ensuring proper spatial relationships and lifecycle management. This is ideal for effects like:
+            - Particle systems that should appear during specific moments
+            - Temporary visual elements like magic circles or weapon trails
+            - Supporting actors that enhance the main animation sequence
+            </remarks>
+        </member>
+        <member name="P:GameCore.ModelAnimation.Data.GameDataAnimationSequence.SequenceEvents">
+            <summary>
+            Gets or sets the collection of events that will be triggered at specific time offsets during the animation sequence.
+            </summary>
+            <value>A list of <see cref="T:GameCore.ModelAnimation.Data.Struct.SequenceEvent" /> configurations that define when and what events are triggered during the sequence.</value>
+            <remarks>
+            Sequence events provide integration points between the animation system and game logic, allowing
+            the sequence to communicate with other systems at precise moments. Events are triggered based on
+            their <see cref="P:GameCore.ModelAnimation.Data.Struct.SequenceEvent.Offset" /> relative to the sequence start time.
+            
+            Events can optionally pause the sequence execution using <see cref="P:GameCore.ModelAnimation.Data.Struct.SequenceEvent.PauseSequence" />,
+            which is useful for creating interactive moments or waiting for external conditions before continuing.
+            </remarks>
+        </member>
+        <member name="P:GameCore.ModelAnimation.Data.GameDataAnimationSequence.TriggerEvents">
+            <summary />
+        </member>
+        <member name="M:GameCore.ModelAnimation.Data.GameDataAnimationSequence.CreateSwingController(GameCore.ActorSystem.IActorAnimationPlayable,System.Nullable{System.TimeSpan})">
+            <summary />
+            <param name="animationPlayable" />
+            <param name="totalTime" />
+            <returns />
+        </member>
+        <member name="T:GameCore.ModelAnimation.Data.GameDataAnimationSimple">
+            <summary>
+            Represents the configuration data for a simple animation that can be played on game actors.
+            </summary>
+            <remarks>
+            GameDataAnimationSimple provides all the necessary configuration parameters for playing
+            a single animation with specific timing, priority, and blending characteristics. This
+            class serves as the data definition that is used to create <see cref="T:GameCore.ModelAnimation.Animation" />
+            instances at runtime.
+            
+            The configuration includes:
+            - Animation resource file reference
+            - Playback parameters (speed, looping, timing)
+            - Priority and layer settings for animation conflict resolution
+            - Blending parameters for smooth transitions
+            - Body part targeting for partial animation support
+            
+            This class is typically used in game data files and can be referenced by actors
+            or other systems that need to play animations with consistent parameters.
+            </remarks>
+        </member>
+        <member name="P:GameCore.ModelAnimation.Data.GameDataAnimationSimple.File">
+            <summary>
+            Gets or sets the animation resource file that will be played.
+            </summary>
+            <value>The animation resource file reference.</value>
+            <remarks>
+            This property specifies the actual animation file that will be loaded and played
+            when this animation configuration is used. The file should be a valid animation
+            resource that has been imported into the game's resource system.
+            </remarks>
+        </member>
+        <member name="P:GameCore.ModelAnimation.Data.GameDataAnimationSimple.LogicLayer">
+            <summary>
+            Gets or sets the logic layer that this animation will be played on.
+            </summary>
+            <value>The animation logic layer. Default is <see cref="F:EngineInterface.Enum.AnimationLogicLayer.Normal" />.</value>
+            <remarks>
+            Logic layers provide a way to categorize animations and control their interactions.
+            Animations on different logic layers can play simultaneously without interfering
+            with each other, while animations on the same layer compete based on priority.
+            
+            Common layer usage:
+            - Normal: Standard gameplay animations
+            - Additive: Overlay animations that blend with other animations
+            - Override: High-priority animations that override others
+            </remarks>
+        </member>
+        <member name="P:GameCore.ModelAnimation.Data.GameDataAnimationSimple.Priority">
+            <summary>
+            Gets or sets the priority of this animation.
+            </summary>
+            <value>The priority value, where higher numbers indicate higher priority. Default is 0.</value>
+            <remarks>
+            Animation priority determines which animation is visible when multiple animations
+            are playing on the same actor and logic layer. Higher priority animations will
+            suppress lower priority animations, causing them to be paused until the higher
+            priority animation completes or is stopped.
+            
+            Priority values are typically organized as follows:
+            - 0-50: Idle and ambient animations
+            - 51-100: Movement animations
+            - 101-200: Action animations
+            - 201+: Critical or override animations
+            </remarks>
+        </member>
+        <member name="P:GameCore.ModelAnimation.Data.GameDataAnimationSimple.BodyPart">
+            <summary>
+            Gets or sets the body part that this animation affects.
+            </summary>
+            <value>The body part specification. Default is <see cref="F:EngineInterface.Enum.AnimationBodyPart.FullBody" />.</value>
+            <remarks>
+            Body part specification allows for partial animation support where different
+            parts of the character can be animated independently. This enables complex
+            animation blending scenarios such as:
+            - Upper body combat animations while lower body continues walking
+            - Facial expressions independent of body movement
+            - Separate arm animations for dual-wielding characters
+            
+            FullBody animations will affect the entire character model, while specific
+            body part animations will only affect their designated portions.
+            </remarks>
+        </member>
+        <member name="P:GameCore.ModelAnimation.Data.GameDataAnimationSimple.Speed">
+            <summary>
+            Gets or sets the playback speed multiplier for this animation.
+            </summary>
+            <value>The speed multiplier, where 1.0 is normal speed. Default is 1.0.</value>
+            <remarks>
+            This property controls the playback speed of the animation. Values less than 1.0
+            slow down the animation, while values greater than 1.0 speed it up. The speed
+            affects the entire animation timeline proportionally.
+            
+            Common speed values:
+            - 0.5: Half speed (slow motion effect)
+            - 1.0: Normal speed
+            - 1.5: 50% faster
+            - 2.0: Double speed
+            
+            Speed can be changed at runtime through the Animation instance after playback begins.
+            </remarks>
+        </member>
+        <member name="P:GameCore.ModelAnimation.Data.GameDataAnimationSimple.BlendIn">
+            <summary>
+            Gets or sets the blend-in time for smooth transitions when this animation becomes active.
+            </summary>
+            <value>The blend-in duration. Default is 0.15 seconds.</value>
+            <remarks>
+            The blend-in time determines how smoothly this animation transitions in when it becomes
+            the active animation. This occurs in several scenarios:
+            - When this animation starts playing and needs to blend from a previous animation
+            - When this animation resumes after being suppressed by a higher priority animation
+            - When this animation's priority is dynamically changed, causing it to become active
+            
+            During the blend-in period, the animation system will smoothly interpolate between
+            the previous animation state and this animation, creating a natural transition
+            without abrupt changes.
+            
+            Setting this to zero will cause immediate switching with no transition period.
+            Longer blend times create smoother transitions but may delay the visual impact
+            of the new animation.
+            </remarks>
+            <example>
+            A typical use case: If a character has a sleeping animation and a standing animation,
+            but no specific transition animation between them, you can set a longer blend-in time
+            (like 2 seconds) for the sleeping animation. This will cause the character to smoothly
+            transition from standing to lying down over 2 seconds, effectively creating a
+            low-cost transition animation.
+            </example>
+        </member>
+        <member name="P:GameCore.ModelAnimation.Data.GameDataAnimationSimple.StartOffset">
+            <summary>
+            Gets or sets the time offset from the beginning of the animation where playback should start.
+            </summary>
+            <value>The start offset duration. Default is zero (start from beginning).</value>
+            <remarks>
+            This property allows you to skip the initial portion of an animation and start
+            playback from a specific point in the timeline. This is useful for:
+            - Skipping slow wind-up portions of animations
+            - Starting animations at their most impactful moments
+            - Synchronizing animations with external events
+            - Creating variations of the same animation with different starting points
+            
+            The offset is measured from the beginning of the animation, so an offset of
+            1 second will skip the first second of the animation and begin playback from
+            the 1-second mark.
+            </remarks>
+        </member>
+        <member name="P:GameCore.ModelAnimation.Data.GameDataAnimationSimple.IsLooping">
+            <summary>
+            Gets or sets a value indicating whether this animation should loop continuously.
+            </summary>
+            <value>True if the animation should loop; otherwise, false. Default is false.</value>
+            <remarks>
+            When set to true, the animation will automatically restart from the beginning
+            when it reaches the end, creating a continuous loop. This is commonly used for:
+            - Idle animations that should repeat indefinitely
+            - Environmental animations like flowing water or spinning objects
+            - Background animations that provide continuous movement
+            
+            When set to false, the animation will play once and then stop, which is
+            appropriate for:
+            - One-time actions like attacks or spell casting
+            - Transition animations between states
+            - Cutscene animations with specific timing requirements
+            
+            The looping behavior can be changed at runtime through the Animation instance.
+            </remarks>
+        </member>
+        <member name="F:GameCore.ModelAnimation.Data.GameDataAnimationSimple._cachePlayParam">
+            <summary />
+        </member>
+        <member name="P:GameCore.ModelAnimation.Data.GameDataAnimationSimple.CachePlayParam">
+            <summary>
+            Gets the cached animation play parameters constructed from this configuration.
+            </summary>
+            <value>The cached <see cref="T:EngineInterface.BaseType.AnimationPlayParam" /> instance.</value>
+            <remarks>
+            This property provides a cached version of the animation parameters that can be
+            used directly with the animation system without needing to construct new parameter
+            objects each time. The cache is lazily initialized and reused for performance.
+            
+            TODO: The cache should be invalidated and rebuilt when animation parameters change.
+            Currently, changes to the configuration properties will not automatically update
+            the cached parameters.
+            </remarks>
+        </member>
+        <member name="M:GameCore.ModelAnimation.Data.GameDataAnimationSimple.CreateSwingController(GameCore.ActorSystem.IActorAnimationPlayable,System.Nullable{System.TimeSpan})">
+            <summary />
+            <param name="animationPlayable" />
+            <param name="totalTime" />
+            <returns />
+        </member>
+        <member name="T:GameCore.ModelAnimation.Data.Struct.SequenceActorSpawn">
+            <summary>
+            Represents a configuration for spawning and managing a temporary actor during an animation sequence,
+            defining what actor to spawn, when to spawn it, and how long it should exist.
+            </summary>
+            <remarks>
+            SequenceActorSpawn provides precise temporal control over actor lifecycle within animation sequences.
+            This enables the creation of synchronized visual effects, temporary objects, and supporting elements
+            that enhance the main animation with perfect timing coordination.
+            
+            The spawned actor will be automatically attached to the parent actor playing the sequence,
+            ensuring proper spatial relationships and automatic cleanup when the sequence completes.
+            
+            Common use cases include:
+            - Particle effects that appear during specific animation moments
+            - Temporary visual elements like magic circles, auras, or weapon trails
+            - Supporting actors that provide context or enhancement to the main animation
+            - Environmental effects synchronized with character actions
+            </remarks>
+            <example>
+                <code>
+            var magicEffect = new SequenceActorSpawn
+            {
+                Actor = magicCircleData,           // What to spawn
+                SpawnOffset = TimeSpan.FromSeconds(1.2),  // When to spawn (1.2s into sequence)
+                Duration = TimeSpan.FromSeconds(2.5)      // How long to show (2.5 seconds total)
+            };
+            </code>
+            </example>
+        </member>
+        <member name="P:GameCore.ModelAnimation.Data.Struct.SequenceActorSpawn.Actor">
+            <summary>
+            Gets or sets the actor configuration that will be spawned during the animation sequence.
+            </summary>
+            <value>A game data link to the <see cref="T:GameCore.ActorSystem.Data.GameDataActor" /> that defines the actor to be spawned.</value>
+            <remarks>
+            This property references the actor definition that will be instantiated and attached to the
+            parent actor playing the sequence. The spawned actor will inherit spatial positioning from
+            the parent and will be automatically managed throughout its lifecycle.
+            
+            The actor can be any valid game actor including visual effects, temporary objects, UI elements,
+            or complex nested actor hierarchies that enhance the animation sequence.
+            </remarks>
+        </member>
+        <member name="P:GameCore.ModelAnimation.Data.Struct.SequenceActorSpawn.SpawnOffset">
+            <summary>
+            Gets or sets the time offset from the animation sequence start when this actor should be spawned.
+            </summary>
+            <value>The time span representing when the actor spawning should occur relative to the sequence beginning. Default is zero (spawn immediately).</value>
+            <remarks>
+            This offset allows precise synchronization of actor spawning with specific moments in the animation
+            sequence. A value of zero means the actor spawns immediately when the sequence starts, while positive
+            values delay the spawn until that time offset is reached.
+            
+            The timing is calculated from the sequence start time, not from any individual animation playback
+            within the sequence, ensuring consistent timing regardless of animation complexity.
+            </remarks>
+        </member>
+        <member name="P:GameCore.ModelAnimation.Data.Struct.SequenceActorSpawn.Duration">
+            <summary>
+            Gets or sets how long the spawned actor should remain active and visible in the sequence.
+            </summary>
+            <value>The time span representing the total lifetime of the spawned actor. Default is zero (instantaneous).</value>
+            <remarks>
+            This duration controls the total lifespan of the spawned actor from its spawn time. The actor
+            will be automatically despawned (destroyed) when this duration expires, calculated from the
+            <see cref="P:GameCore.ModelAnimation.Data.Struct.SequenceActorSpawn.SpawnOffset" /> time.
+            
+            For example, if SpawnOffset is 2 seconds and Duration is 3 seconds, the actor will:
+            - Spawn at 2 seconds into the sequence
+            - Remain active for 3 seconds 
+            - Be automatically despawned at 5 seconds into the sequence
+            
+            A duration of zero creates an instantaneous effect that spawns and immediately despawns,
+            which can be useful for one-time triggers or very brief visual effects.
+            </remarks>
+        </member>
+        <member name="T:GameCore.ModelAnimation.Data.Struct.SequenceEvent">
+            <summary>
+            Represents a timed event that will be triggered at a specific moment during an animation sequence,
+            providing integration points between the animation system and game logic.
+            </summary>
+            <remarks>
+            SequenceEvent enables precise synchronization between visual animations and gameplay mechanics
+            by allowing events to be triggered at exact time offsets within an animation sequence.
+            This creates opportunities for perfect timing coordination between animations and game systems.
+            
+            Events can optionally pause the sequence execution, which is useful for creating interactive
+            moments, waiting for external conditions, or ensuring critical timing dependencies are met
+            before the sequence continues.
+            
+            Common use cases include:
+            - Triggering sound effects at specific animation moments
+            - Applying damage or healing at precise timing during ability animations
+            - Signaling animation phase completions to other game systems
+            - Creating synchronization points for multiplayer or networked scenarios
+            - Triggering particle effects or environmental changes
+            - Notifying UI systems of animation milestones
+            </remarks>
+            <example>
+                <code>
+            var damageEvent = new SequenceEvent
+            {
+                EventKey = SequenceEventKey.ApplyDamage,    // What event to trigger
+                Offset = TimeSpan.FromSeconds(1.8),         // When to trigger (1.8s into sequence)
+                PauseSequence = false                       // Don't pause sequence execution
+            };
+            
+            var interactiveEvent = new SequenceEvent
+            {
+                EventKey = SequenceEventKey.WaitForPlayerInput,
+                Offset = TimeSpan.FromSeconds(2.5),
+                PauseSequence = true                        // Pause until external condition met
+            };
+            </code>
+            </example>
+        </member>
+        <member name="P:GameCore.ModelAnimation.Data.Struct.SequenceEvent.EventKey">
+            <summary>
+            Gets or sets the event key that identifies which event will be triggered when this sequence event activates.
+            </summary>
+            <value>A <see cref="T:GameCore.ModelAnimation.Enum.SequenceEventKey" /> that specifies which event should be triggered by the animation system.</value>
+            <remarks>
+            This event key serves as the strongly-typed identifier that game systems will use to respond to the triggered event.
+            Using an enum-based key system provides better type safety, IntelliSense support, and prevents typos
+            compared to string-based event names.
+            
+            Event keys are used by event aggregators, message systems, or direct event handlers
+            to determine what action should be taken when the event is triggered at the specified timing.
+            The enum-based approach ensures compile-time validation of event types.
+            </remarks>
+        </member>
+        <member name="P:GameCore.ModelAnimation.Data.Struct.SequenceEvent.Offset">
+            <summary>
+            Gets or sets the time offset from the animation sequence start when this event should be triggered.
+            </summary>
+            <value>The time span representing when the event should be triggered relative to the sequence beginning. Default is zero (trigger immediately).</value>
+            <remarks>
+            This offset provides precise timing control for event triggering within the animation sequence.
+            A value of zero means the event triggers immediately when the sequence starts, while positive
+            values delay the event trigger until that time offset is reached.
+            
+            The timing is calculated from the sequence start time, ensuring consistent event timing
+            regardless of the complexity or number of animation playbacks within the sequence.
+            This allows for reliable synchronization between visual animations and gameplay events.
+            </remarks>
+        </member>
+        <member name="P:GameCore.ModelAnimation.Data.Struct.SequenceEvent.PauseSequence">
+            <summary>
+            Gets or sets a value indicating whether the animation sequence should pause execution when this event is triggered.
+            </summary>
+            <value>
+                <c>true</c> if the sequence should pause when this event triggers; otherwise, <c>false</c>. Default is <c>false</c>.</value>
+            <remarks>
+            When set to <c>true</c>, this property causes the entire animation sequence to pause execution
+            when the event is triggered, allowing for interactive moments or external condition dependencies.
+            The sequence will remain paused until explicitly resumed by external game logic.
+            
+            This feature is particularly useful for:
+            - Creating interactive cutscenes that wait for player input
+            - Synchronizing with external systems that may have variable timing
+            - Implementing conditional animation flows based on game state
+            - Ensuring critical events are properly processed before animation continues
+            
+            When <c>false</c> (default), the event is triggered and the sequence continues normal execution
+            without interruption, suitable for fire-and-forget events like sound effects or damage application.
+            </remarks>
+        </member>
+        <member name="T:GameCore.ModelAnimation.Enum.BracketStage">
+            <summary>
+            Specifies the stages of a bracket animation lifecycle.
+            </summary>
+            <remarks>
+            BracketStage represents the different phases that a bracket animation goes through
+            during its lifecycle. Each stage corresponds to a specific animation that is played
+            during that phase of the bracket's execution.
+            </remarks>
+        </member>
+        <member name="F:GameCore.ModelAnimation.Enum.BracketStage.Stopped">
+            <summary>
+            Represents a state where the operation has been stopped.
+            </summary>
+            <remarks>This value is typically used to indicate that the animation is no longer running on the actor, basically destroyed.</remarks>
+        </member>
+        <member name="F:GameCore.ModelAnimation.Enum.BracketStage.None">
+            <summary>
+            No specific stage is active or the bracket is not running.
+            </summary>
+        </member>
+        <member name="F:GameCore.ModelAnimation.Enum.BracketStage.Birth">
+            <summary>
+            The birth stage, where the initial spawn/appear animation is played.
+            </summary>
+            <remarks>
+            This stage is typically used for spawn effects, appearance animations,
+            or any initial visual effect that introduces the object to the scene.
+            The birth animation is played once when the bracket starts (unless skipped).
+            </remarks>
+        </member>
+        <member name="F:GameCore.ModelAnimation.Enum.BracketStage.Stand">
+            <summary>
+            The stand stage, where the main/idle animation is played.
+            </summary>
+            <remarks>
+            This stage represents the active phase of the bracket animation.
+            Depending on the configuration, the stand animation may loop indefinitely
+            or play once before proceeding to the death stage. This is typically
+            used for idle animations, sustained effects, or looping behaviors.
+            </remarks>
+        </member>
+        <member name="F:GameCore.ModelAnimation.Enum.BracketStage.Death">
+            <summary>
+            The death stage, where the final despawn/disappear animation is played.
+            </summary>
+            <remarks>
+            This stage is used for destruction effects, disappearance animations,
+            or any final visual effect before the bracket completes. The death
+            animation is played once when the bracket is stopped or completes its cycle.
+            After the death animation, the bracket may destroy the associated actor
+            if configured to do so.
+            </remarks>
+        </member>
+        <member name="T:GameCore.ModelAnimation.IAnimationSwingController">
+            <summary>
+            Controller for animations that have the abstract concept of preswing, swing, and backswing stages.
+            Typically used for ability casting and melee attacks.
+            </summary>
+        </member>
+        <member name="M:GameCore.ModelAnimation.IAnimationSwingController.Stop(System.Nullable{System.TimeSpan})">
+            <summary>
+            Stops the current animation.
+            </summary>
+        </member>
+        <member name="M:GameCore.ModelAnimation.IAnimationSwingController.Pause(System.Boolean)">
+            <summary>
+            Pauses or resumes the animation.
+            </summary>
+            <param name="on">True to pause, false to resume.</param>
+        </member>
+        <member name="M:GameCore.ModelAnimation.IAnimationSwingController.Swing">
+            <summary>
+            Switches the animation to the swing stage from the preswing stage.
+            </summary>
+        </member>
+        <member name="M:GameCore.ModelAnimation.IAnimationSwingController.Backswing">
+            <summary>
+            Switches the animation to the backswing stage from the swing stage.
+            </summary>
+        </member>
+        <member name="T:GameCore.ModelAnimation.Struct.SequenceEventArgs">
+            <summary>
+            Provides data for animation sequence events, containing information about the event context,
+            timing, and the sequence state when the event was triggered.
+            </summary>
+            <remarks>
+            SequenceEventArgs is passed to event handlers when animation sequence events are triggered,
+            providing comprehensive context about the event occurrence. This includes the sequence that
+            triggered the event, the specific event type, timing information, and the current playback state.
+            
+            This information enables event handlers to:
+            - Identify which sequence triggered the event
+            - Determine the specific type of event that occurred
+            - Access timing information for synchronization purposes
+            - Know which playback within the sequence was active when the event fired
+            - Make decisions based on the current sequence state
+            
+            The class is immutable by design to ensure event data integrity and prevent accidental
+            modifications during event handling.
+            </remarks>
+            <param name="sequence">The animation sequence that triggered the event.</param>
+            <param name="eventKey">The specific event key that was triggered.</param>
+            <param name="elapsed">The time elapsed since the sequence started when the event was triggered.</param>
+            <param name="playbackIndex">The index of the playback that was active when the event was triggered.</param>
+        </member>
+        <member name="M:GameCore.ModelAnimation.Struct.SequenceEventArgs.#ctor(GameCore.ModelAnimation.AnimationSequence,GameCore.ModelAnimation.Enum.SequenceEventKey,System.TimeSpan,System.Int32,GameCore.ModelAnimation.Animation)">
+            <summary>
+            Provides data for animation sequence events, containing information about the event context,
+            timing, and the sequence state when the event was triggered.
+            </summary>
+            <remarks>
+            SequenceEventArgs is passed to event handlers when animation sequence events are triggered,
+            providing comprehensive context about the event occurrence. This includes the sequence that
+            triggered the event, the specific event type, timing information, and the current playback state.
+            
+            This information enables event handlers to:
+            - Identify which sequence triggered the event
+            - Determine the specific type of event that occurred
+            - Access timing information for synchronization purposes
+            - Know which playback within the sequence was active when the event fired
+            - Make decisions based on the current sequence state
+            
+            The class is immutable by design to ensure event data integrity and prevent accidental
+            modifications during event handling.
+            </remarks>
+            <param name="sequence">The animation sequence that triggered the event.</param>
+            <param name="eventKey">The specific event key that was triggered.</param>
+            <param name="elapsed">The time elapsed since the sequence started when the event was triggered.</param>
+            <param name="playbackIndex">The index of the playback that was active when the event was triggered.</param>
+        </member>
+        <member name="P:GameCore.ModelAnimation.Struct.SequenceEventArgs.Sequence">
+            <summary>
+            Gets the animation sequence that triggered this event.
+            </summary>
+            <value>The <see cref="T:GameCore.ModelAnimation.AnimationSequence" /> instance that was playing when the event occurred.</value>
+            <remarks>
+            This property provides access to the sequence that generated the event, allowing event handlers
+            to access sequence-specific data, configuration, or state information. The sequence reference
+            can be used to query additional information about the animation or to control sequence playback
+            in response to the event.
+            </remarks>
+        </member>
+        <member name="P:GameCore.ModelAnimation.Struct.SequenceEventArgs.EventKey">
+            <summary>
+            Gets the event key that identifies the type of event that was triggered.
+            </summary>
+            <value>A <see cref="T:GameCore.ModelAnimation.Enum.SequenceEventKey" /> value that specifies which event was triggered.</value>
+            <remarks>
+            This strongly-typed event key allows event handlers to determine exactly which type of event
+            occurred and respond accordingly. The enum-based approach provides compile-time type safety
+            and prevents errors that could occur with string-based event identification.
+            
+            Event handlers typically use this key in switch statements or conditional logic to execute
+            the appropriate response for different event types.
+            </remarks>
+        </member>
+        <member name="P:GameCore.ModelAnimation.Struct.SequenceEventArgs.Elapsed">
+            <summary>
+            Gets the time elapsed since the sequence started when this event was triggered.
+            </summary>
+            <value>A <see cref="T:System.TimeSpan" /> representing the total time from sequence start to event trigger.</value>
+            <remarks>
+            This timing information is crucial for synchronization and can be used by event handlers to:
+            - Coordinate with other time-based systems
+            - Calculate relative timing for effects or actions
+            - Determine the exact moment in the sequence timeline when the event occurred
+            - Implement time-sensitive logic based on sequence progression
+            
+            The elapsed time is measured from the sequence start time, providing a consistent reference
+            point regardless of sequence complexity or playback modifications.
+            </remarks>
+        </member>
+        <member name="P:GameCore.ModelAnimation.Struct.SequenceEventArgs.PlaybackIndex">
+            <summary>
+            Gets the index of the playback that was active when this event was triggered.
+            </summary>
+            <value>The zero-based index of the playback in the sequence's playback list.</value>
+            <remarks>
+            This index corresponds to the position of the active playback in the sequence's
+            <see cref="P:GameCore.ModelAnimation.Data.GameDataAnimationSequence.Playbacks" /> collection.
+            
+            The playback index is useful for:
+            - Identifying which specific animation was playing when the event occurred
+            - Applying playback-specific logic or effects
+            - Coordinating events with particular animation phases
+            - Debugging and logging sequence behavior
+            
+            Note that multiple playbacks may be active simultaneously in complex sequences,
+            but this index represents the primary or triggering playback for this specific event.
+            </remarks>
+        </member>
+        <member name="P:GameCore.ModelAnimation.Struct.SequenceEventArgs.Animation">
+            <summary>
+            Gets the playback animation instance that was active when this event was triggered.
+            </summary>
+            <value>The <see cref="P:GameCore.ModelAnimation.Struct.SequenceEventArgs.Animation" /> instance that was playing when the event occurred.</value>
+            <remarks>
+            This property provides access to the animation that was active when the event occurred, allowing event handlers to access animation-specific data or state information.
+            </remarks>
+        </member>
+    </members>
+</doc>

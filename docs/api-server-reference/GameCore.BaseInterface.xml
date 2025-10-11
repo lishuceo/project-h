@@ -1,0 +1,1087 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<doc>
+    <assembly>
+        <name>GameCore</name>
+    </assembly>
+    <members>
+        <member name="T:GameCore.BaseInterface.IAttachedData">
+            <summary />
+        </member>
+        <member name="P:GameCore.BaseInterface.IAttachedData.Categories">
+            <summary />
+        </member>
+        <member name="P:GameCore.BaseInterface.IAttachedData.StackStart">
+            <summary />
+        </member>
+        <member name="P:GameCore.BaseInterface.IAttachedData.InstanceMax">
+            <summary />
+        </member>
+        <member name="P:GameCore.BaseInterface.IAttachedData.SyncType">
+            <summary />
+        </member>
+        <member name="M:GameCore.BaseInterface.IAttachedData.Replicate(GameCore.BaseInterface.ICooldownHost,System.Nullable{System.Int32})">
+            <summary />
+            <param name="host" />
+            <param name="syncId" />
+            <returns />
+        </member>
+        <member name="T:GameCore.BaseInterface.IAttachedData`1">
+            <summary />
+        </member>
+        <member name="T:GameCore.BaseInterface.IAttachedObject">
+            <summary />
+        </member>
+        <member name="P:GameCore.BaseInterface.IAttachedObject.SyncId">
+            <summary />
+        </member>
+        <member name="P:GameCore.BaseInterface.IAttachedObject.GameCore#BaseType#ISyncIdOwner#SyncId">
+            <summary />
+        </member>
+        <member name="P:GameCore.BaseInterface.IAttachedObject.Host">
+            <summary />
+        </member>
+        <member name="M:GameCore.BaseInterface.IAttachedObject.Destroy(System.Boolean)">
+            <summary />
+            <param name="isHostDispose" />
+            <returns />
+        </member>
+        <member name="P:GameCore.BaseInterface.IAttachedObject.IsValid">
+            <summary />
+        </member>
+        <member name="P:GameCore.BaseInterface.IAttachedObject.IsSynced">
+            <summary />
+        </member>
+        <member name="M:GameCore.BaseInterface.IAttachedObject.GetBySyncId(GameCore.BaseInterface.ICooldownHost,System.Int32)">
+            <summary />
+            <param name="host" />
+            <param name="syncId" />
+            <returns />
+        </member>
+        <member name="M:GameCore.BaseInterface.IAttachedObject.Replicate(GameCore.BaseInterface.ICooldownHost,System.Nullable{System.Int32},GameCore.BaseInterface.IAttachedData)">
+            <summary />
+            <param name="host" />
+            <param name="ownerSyncId" />
+            <param name="gameData" />
+            <returns />
+        </member>
+        <member name="T:GameCore.BaseInterface.IAttachedObject.ComponentKeyValue">
+            <summary />
+            <summary />
+        </member>
+        <member name="M:GameCore.BaseInterface.IAttachedObject.ComponentKeyValue.#ctor(System.Int32,System.ReadOnlySpan{System.Byte})">
+            <summary />
+            <summary />
+        </member>
+        <member name="P:GameCore.BaseInterface.IAttachedObject.ComponentKeyValue.Key">
+            <summary />
+        </member>
+        <member name="P:GameCore.BaseInterface.IAttachedObject.ComponentKeyValue.Value">
+            <summary />
+        </member>
+        <member name="M:GameCore.BaseInterface.IAttachedObject.ReplicateFromKeyValue(System.Int32,System.ReadOnlySpan{System.Byte})">
+            <summary />
+            <param name="keyHash" />
+            <param name="value" />
+            <returns />
+        </member>
+        <member name="M:GameCore.BaseInterface.IAttachedObject.ReplicateFromKeyValue(System.Enum,System.ReadOnlySpan{System.Byte})">
+            <summary />
+            <param name="propertyEnum" />
+            <param name="value" />
+            <returns />
+        </member>
+        <member name="T:GameCore.BaseInterface.IAttachedObject`1">
+            <summary>
+            AttachedObject Fact Check
+            1.  Apply Modification on activation - ok
+            2.  Remove Modification on deactivation and removal - ok
+            3.  Apply Modification on stack change - ok
+            4.  StackParam enable and removal per instance - ok
+            5.  Create actors on link enabled - TODO
+            6.  Destroy actors on link disabled - TODO
+            7.  Apply unit states and immunity on link attached - ok
+            8.  Remove unit states and immunity on link detached - ok
+            9.  Apply Category and Link disable on link attached - ok
+            10. Remove Category and Link disable on link detached - ok
+            </summary>
+            <typeparam name="TCategory" />
+        </member>
+        <member name="P:GameCore.BaseInterface.IAttachedObject`1.GameCore#BaseInterface#IPropertyOwner#PropertyHost">
+            <summary />
+        </member>
+        <member name="T:GameCore.BaseInterface.IAttachedObject`2">
+            <summary>
+            IAttachedObject that has a manager on the host.
+            </summary>
+            <typeparam name="TSelf" />
+            <typeparam name="TCategory" />
+        </member>
+        <member name="P:GameCore.BaseInterface.IAttachedObject`2.StackStart">
+            <summary />
+        </member>
+        <member name="P:GameCore.BaseInterface.IAttachedObject`2.InstanceMax">
+            <summary />
+        </member>
+        <member name="P:GameCore.BaseInterface.IAttachedObject`2.StackMax">
+            <summary />
+        </member>
+        <member name="P:GameCore.BaseInterface.IAttachedObject`2.InstanceComparison">
+            <summary />
+        </member>
+        <member name="P:GameCore.BaseInterface.IAttachedObject`2.MergeAction">
+            <summary />
+        </member>
+        <member name="P:GameCore.BaseInterface.IAttachedObject`2.Manager">
+            <summary />
+        </member>
+        <member name="P:GameCore.BaseInterface.IAttachedObject`2.IsActivated">
+            <summary />
+        </member>
+        <member name="P:GameCore.BaseInterface.IAttachedObject`2.IsEnabled">
+            <summary />
+        </member>
+        <member name="P:GameCore.BaseInterface.IAttachedObject`2.IsInstanceEnabled">
+            <summary />
+        </member>
+        <member name="P:GameCore.BaseInterface.IAttachedObject`2.IsLinkEnabled">
+            <summary />
+        </member>
+        <member name="P:GameCore.BaseInterface.IAttachedObject`2.IsHidden">
+            <summary />
+        </member>
+        <member name="M:GameCore.BaseInterface.IAttachedObject`2.HasState(GameCore.BaseType.AttachedObjectState)">
+            <summary />
+            <param name="state" />
+            <returns />
+        </member>
+        <member name="P:GameCore.BaseInterface.IAttachedObject`2.RegisterHostDeath">
+            <summary />
+        </member>
+        <member name="P:GameCore.BaseInterface.IAttachedObject`2.RegisterHostRevive">
+            <summary />
+        </member>
+        <member name="P:GameCore.BaseInterface.IAttachedObject`2.DisableOnDeath">
+            <summary />
+        </member>
+        <member name="P:GameCore.BaseInterface.IAttachedObject`2.RemoveOnDeath">
+            <summary />
+        </member>
+        <member name="M:GameCore.BaseInterface.IAttachedObject`2.ProcessHostDeathImplement">
+            <summary />
+            <returns />
+        </member>
+        <member name="M:GameCore.BaseInterface.IAttachedObject`2.ProcessHostDeath">
+            <summary />
+            <returns />
+        </member>
+        <member name="M:GameCore.BaseInterface.IAttachedObject`2.ProcessHostReviveImplement">
+            <summary />
+            <returns />
+        </member>
+        <member name="M:GameCore.BaseInterface.IAttachedObject`2.ProcessHostRevive">
+            <summary />
+            <returns />
+        </member>
+        <member name="M:GameCore.BaseInterface.IAttachedObject`2.AddState(GameCore.BaseType.AttachedObjectState)">
+            <summary />
+            <param name="state" />
+            <returns />
+        </member>
+        <member name="M:GameCore.BaseInterface.IAttachedObject`2.RemoveState(GameCore.BaseType.AttachedObjectState)">
+            <summary />
+            <param name="state" />
+            <returns />
+        </member>
+        <member name="M:GameCore.BaseInterface.IAttachedObject`2.OnAttached">
+            <summary>
+            Called when the object is successfully attached to its host.
+            </summary>
+        </member>
+        <member name="P:GameCore.BaseInterface.IAttachedObject`2.ModificationManager">
+            <summary />
+        </member>
+        <member name="T:GameCore.BaseInterface.ICommandHandler">
+            <summary />
+        </member>
+        <member name="P:GameCore.BaseInterface.ICommandHandler.Host">
+            <summary />
+        </member>
+        <member name="T:GameCore.BaseInterface.ICommandTarget">
+            <summary>
+            Defines an interface for objects that can be targeted by commands in the game.
+            </summary>
+            <remarks>
+            This interface serves as a marker for objects that can receive command-based interactions
+            from players, AI, or other game systems. It's used in conjunction with the command and targeting
+            systems to identify valid command recipients.
+            </remarks>
+        </member>
+        <member name="T:GameCore.BaseInterface.IContextTypeService`2">
+            <summary />
+        </member>
+        <member name="M:GameCore.BaseInterface.IContextTypeService`2.CreateInstance(`0)">
+            <summary />
+            <param name="content" />
+            <returns />
+        </member>
+        <member name="T:GameCore.BaseInterface.ICooldownHost">
+            <summary>
+            Defines the interface for objects that can host cooldowns and manage attached objects with synchronization support.
+            </summary>
+            <remarks>
+            ICooldownHost extends ICooldownOwner and IPropertyHost to provide a comprehensive hosting environment for objects
+            that need to manage cooldowns, properties, and attached child objects. This interface is typically implemented
+            by entities and units that serve as containers for abilities, items, and other game components. It handles
+            synchronization of attached objects between server and client, maintains registration for lookup purposes,
+            and provides property-based storage for complex data structures. The interface supports the attachment system
+            used throughout the game for abilities, items, effects, and other dynamic components.
+            </remarks>
+        </member>
+        <member name="F:GameCore.BaseInterface.ICooldownHost.ComponentsListHash">
+            <summary />
+        </member>
+        <member name="F:GameCore.BaseInterface.ICooldownHost.RegisteredHosts">
+            <summary />
+        </member>
+        <member name="M:GameCore.BaseInterface.ICooldownHost.GetById(System.Int32)">
+            <summary>
+            Retrieves a cooldown host by its unique identifier.
+            </summary>
+            <param name="viewActorId">The unique identifier of the view actor associated with the host.</param>
+            <returns>The cooldown host with the specified ID, or null if not found.</returns>
+        </member>
+        <member name="P:GameCore.BaseInterface.ICooldownHost.GameCore#BaseInterface#ICooldownOwner#CooldownHost">
+            <summary>
+            Gets the cooldown host for this cooldown owner (returns itself).
+            </summary>
+            <value>This instance as the cooldown host.</value>
+        </member>
+        <member name="M:GameCore.BaseInterface.ICooldownHost.GetBySyncId(System.Int32)">
+            <summary>
+            Retrieves an attached object by its synchronization identifier.
+            </summary>
+            <param name="syncId">The synchronization ID of the attached object to retrieve.</param>
+            <returns>The attached object with the specified sync ID, or null if not found.</returns>
+            <remarks>
+            This method provides fast lookup of attached objects by their unique synchronization identifiers,
+            which are used for network synchronization and cross-reference operations.
+            </remarks>
+        </member>
+        <member name="M:GameCore.BaseInterface.ICooldownHost.Register">
+            <summary>
+            Registers this cooldown host in the global lookup table.
+            </summary>
+            <returns>True if registration was successful; otherwise, throws an exception.</returns>
+            <exception cref="T:System.IO.InvalidDataException">Thrown when the registration ID conflicts with an existing host.</exception>
+            <remarks>
+            Registration enables global lookup of this host by its view actor ID, which is essential
+            for network synchronization and cross-object references. Each host must have a unique ID.
+            </remarks>
+        </member>
+        <member name="M:GameCore.BaseInterface.ICooldownHost.Unregister">
+            <summary>
+            Unregisters this cooldown host from the global lookup table.
+            </summary>
+            <returns>True if unregistration was successful; otherwise, false.</returns>
+            <remarks>
+            Unregistration should be called during host disposal to prevent memory leaks and
+            ensure proper cleanup of global references.
+            </remarks>
+        </member>
+        <member name="P:GameCore.BaseInterface.ICooldownHost.ViewActor">
+            <summary>
+            Gets the core actor that represents this host in the engine.
+            </summary>
+            <value>The view actor associated with this cooldown host.</value>
+        </member>
+        <member name="P:GameCore.BaseInterface.ICooldownHost.LazyAttachedChildren">
+            <summary>
+            Gets the lazy-initialized dictionary of attached child objects.
+            </summary>
+            <value>A lazy-initialized dictionary for efficient memory usage when no children are attached.</value>
+        </member>
+        <member name="P:GameCore.BaseInterface.ICooldownHost.AttachedChildren">
+            <summary>
+            Gets the dictionary of attached child objects, creating it if necessary.
+            </summary>
+            <value>The dictionary containing all attached objects indexed by their sync IDs.</value>
+        </member>
+        <member name="M:GameCore.BaseInterface.ICooldownHost.DisposeAttachedChildrenPool">
+            <summary>
+            Disposes all attached child objects and cleans up the attachment pool.
+            </summary>
+            <remarks>
+            This method is called during host disposal to ensure all attached objects are properly
+            destroyed and their resources are released. It only disposes children if the lazy
+            collection has been initialized.
+            </remarks>
+        </member>
+        <member name="M:GameCore.BaseInterface.ICooldownHost.AddAttached(GameCore.BaseInterface.IAttachedObject)">
+            <summary>
+            Adds an attached object to this host's collection of children.
+            </summary>
+            <param name="attached">The attached object to add.</param>
+            <returns>True if the object was successfully added; otherwise, false.</returns>
+            <remarks>
+            This method handles the registration of attached objects and their synchronization setup.
+            Only synchronized objects can be added, and each object must have a unique sync ID within the host.
+            On the server, this also triggers network synchronization to inform clients of the new attachment.
+            </remarks>
+        </member>
+        <member name="M:GameCore.BaseInterface.ICooldownHost.RemoveAttached(GameCore.BaseInterface.IAttachedObject)">
+            <summary>
+            Removes an attached object from this host's collection of children.
+            </summary>
+            <param name="attached">The attached object to remove.</param>
+            <returns>True if the object was successfully removed; otherwise, false.</returns>
+            <remarks>
+            This method handles the deregistration of attached objects and cleanup of synchronization data.
+            On the server, it also triggers network synchronization to inform clients of the removal.
+            </remarks>
+        </member>
+        <member name="P:GameCore.BaseInterface.ICooldownHost.SyncIds">
+            <summary>
+            Gets or sets the collection of synchronization ID lists for different properties.
+            </summary>
+            <value>A dictionary mapping property types to sets of synchronization IDs.</value>
+        </member>
+        <member name="M:GameCore.BaseInterface.ICooldownHost.GetSyncIdList(GameCore.BaseInterface.IExtendedEnum)">
+            <summary>
+            Retrieves or creates a synchronization ID list for the specified property.
+            </summary>
+            <param name="property">The property to get the sync ID list for.</param>
+            <returns>A set of synchronization IDs associated with the property.</returns>
+            <remarks>
+            This method manages synchronized lists of object IDs for properties, enabling efficient
+            synchronization of collections between server and client. Lists are created on demand
+            and populated from network data on the client side.
+            </remarks>
+        </member>
+        <member name="M:GameCore.BaseInterface.ICooldownHost.SyncIdListAdd(GameCore.BaseInterface.IExtendedEnum,GameCore.BaseInterface.IAttachedObject)">
+            <summary>
+            Adds an attached object to a synchronized property list.
+            </summary>
+            <param name="property">The property to add the object to.</param>
+            <param name="attached">The attached object to add.</param>
+            <remarks>
+            This method adds the object's sync ID to the specified property list and triggers
+            network synchronization on the server to inform clients of the change.
+            </remarks>
+        </member>
+        <member name="M:GameCore.BaseInterface.ICooldownHost.SyncIdListRemove(GameCore.BaseInterface.IExtendedEnum,GameCore.BaseInterface.IAttachedObject)">
+            <summary>
+            Removes an attached object from a synchronized property list.
+            </summary>
+            <param name="property">The property to remove the object from.</param>
+            <param name="attached">The attached object to remove.</param>
+            <remarks>
+            This method removes the object's sync ID from the specified property list and triggers
+            network synchronization on the server to inform clients of the change.
+            </remarks>
+        </member>
+        <member name="M:GameCore.BaseInterface.ICooldownHost.SyncIdListAdd(GameCore.BaseInterface.IExtendedEnum,System.Int32)">
+            <inheritdoc cref="M:GameCore.BaseInterface.ICooldownHost.SyncIdListAdd(GameCore.BaseInterface.IExtendedEnum,GameCore.BaseInterface.IAttachedObject)" />
+        </member>
+        <member name="M:GameCore.BaseInterface.ICooldownHost.SyncIdListRemove(GameCore.BaseInterface.IExtendedEnum,System.Int32)">
+            <inheritdoc cref="M:GameCore.BaseInterface.ICooldownHost.SyncIdListRemove(GameCore.BaseInterface.IExtendedEnum,GameCore.BaseInterface.IAttachedObject)" />
+        </member>
+        <member name="M:GameCore.BaseInterface.ICooldownHost.ReplicateComponent(System.Int32,System.Boolean)">
+            <summary>
+            Creates a client-side replica of a component based on synchronized data.
+            </summary>
+            <param name="ownerId">The synchronization ID of the component to replicate.</param>
+            <param name="logNoGameData">Whether to log warnings when game data is not found.</param>
+            <returns>The replicated attached object, or null if replication failed.</returns>
+            <remarks>
+            This method is used on the client side to create local instances of components
+            that exist on the server. It retrieves the game data link and creates an appropriate
+            attached object instance for client-side representation.
+            </remarks>
+        </member>
+        <member name="T:GameCore.BaseInterface.ICooldownOwner">
+            <summary />
+        </member>
+        <member name="M:GameCore.BaseInterface.ICooldownOwner.GetCooldownWithHash(System.Int32,System.Int64)">
+            <summary />
+            <param name="hostActorId" />
+            <param name="propertyHash" />
+            <returns />
+        </member>
+        <member name="M:GameCore.BaseInterface.ICooldownOwner.LogUnknownCooldownDelayed(GameCore.BaseInterface.ICooldownHost,System.Int64)">
+            <summary />
+            <param name="host" />
+            <param name="propertyHash" />
+            <returns />
+        </member>
+        <member name="P:GameCore.BaseInterface.ICooldownOwner.LazyCooldownPool">
+            <summary />
+        </member>
+        <member name="P:GameCore.BaseInterface.ICooldownOwner.CooldownPool">
+            <summary />
+        </member>
+        <member name="M:GameCore.BaseInterface.ICooldownOwner.GetOrCreateCooldown(GameData.IGameLink{GameCore.CooldownSystem.Data.GameDataCooldown})">
+            <summary />
+            <param name="link" />
+            <returns />
+        </member>
+        <member name="M:GameCore.BaseInterface.ICooldownOwner.DisposeCooldownPool">
+            <summary />
+            <returns />
+        </member>
+        <member name="P:GameCore.BaseInterface.ICooldownOwner.CooldownHost">
+            <summary />
+        </member>
+        <member name="P:GameCore.BaseInterface.ICooldownOwner.GameCore#BaseInterface#IPropertyOwner#PropertyHost">
+            <summary />
+        </member>
+        <member name="M:GameCore.BaseInterface.ICooldownOwner.OnCooldownWithHash(System.Int32,System.Int64)">
+            <summary />
+            <param name="hostActorId" />
+            <param name="propertyHash" />
+            <returns />
+        </member>
+        <member name="M:GameCore.BaseInterface.ICooldownOwner.OnCooldownUpdateWithHash(System.Int32,System.Int64,System.TimeSpan)">
+            <summary />
+            <param name="hostActorId" />
+            <param name="propertyHash" />
+            <param name="remainingTime" />
+            <returns />
+        </member>
+        <member name="M:GameCore.BaseInterface.ICooldownOwner.OnCooldownStoppedEarlyWithHash(System.Int32,System.Int64)">
+            <summary />
+            <param name="hostActorId" />
+            <param name="propertyHash" />
+            <returns />
+        </member>
+        <member name="M:GameCore.BaseInterface.ICooldownOwner.OnPropertyChangedDouble(System.Int32,System.Int64,System.Double)">
+            <summary />
+            <param name="hostActorId" />
+            <param name="propertyHash" />
+            <param name="value" />
+            <returns />
+        </member>
+        <member name="M:GameCore.BaseInterface.ICooldownOwner.OnPropertyChangedBytes(System.Int32,System.Int64,System.ReadOnlySpan{System.Byte})">
+            <summary />
+            <param name="hostActorId" />
+            <param name="propertyHash" />
+            <param name="valueSpan" />
+            <returns />
+        </member>
+        <member name="M:GameCore.BaseInterface.ICooldownOwner.ReplicateFromKeyValue(System.Enum,System.ReadOnlySpan{System.Byte})">
+            <summary />
+            <param name="key" />
+            <param name="valueSpan" />
+            <returns />
+        </member>
+        <member name="T:GameCore.BaseInterface.IExtendedEnum">
+            <summary>
+            Base interface for extended enums that can be dynamically registered and retrieved.
+            </summary>
+            <remarks>
+            This interface provides the foundation for the GameCore enum extension system,
+            allowing enums to be extended at runtime and providing efficient lookup mechanisms
+            through hash-based mapping.
+            </remarks>
+        </member>
+        <member name="P:GameCore.BaseInterface.IExtendedEnum.InnerValue">
+            <summary>
+            Gets the underlying enum value wrapped by this extended enum.
+            </summary>
+        </member>
+        <member name="P:GameCore.BaseInterface.IExtendedEnum.EnumMap">
+            <summary>
+            Gets the global map of all registered extended enum instances indexed by their hash codes.
+            </summary>
+            <remarks>
+            This static dictionary maintains all extended enum instances for efficient lookup.
+            Values are registered during enum initialization.
+            TODO: Consider if storing IExtendedEnum is necessary, or if storing only the inner enum would suffice.
+            </remarks>
+        </member>
+        <member name="P:GameCore.BaseInterface.IExtendedEnum.InnerEnumMapFrozen">
+            <summary>
+            Gets the frozen dictionary used for optimized enum lookups.
+            </summary>
+            <remarks>
+            This is created lazily from <see cref="P:GameCore.BaseInterface.IExtendedEnum.EnumMap" /> to provide fast, read-only access
+            to enum instances during runtime operations.
+            </remarks>
+        </member>
+        <member name="M:GameCore.BaseInterface.IExtendedEnum.FromHashCode(System.Int32)">
+            <summary>
+            Retrieves an extended enum instance by its hash code.
+            </summary>
+            <param name="hashCode">The hash code of the enum to retrieve.</param>
+            <returns>The extended enum instance if found; otherwise, <c>null</c>.</returns>
+            <remarks>
+            This method provides efficient lookup of extended enum instances using their
+            hash codes, which are computed consistently across the extension system.
+            </remarks>
+        </member>
+        <member name="M:GameCore.BaseInterface.IExtendedEnum.InnerEnumFromHashCode(System.Int32)">
+            <summary>
+            Retrieves the inner enum value by its hash code.
+            </summary>
+            <param name="hashCode">The hash code of the enum to retrieve.</param>
+            <returns>The inner enum value if found; otherwise, <c>null</c>.</returns>
+            <remarks>
+            This method provides direct access to the underlying enum value without
+            the extended enum wrapper, useful for performance-critical scenarios.
+            </remarks>
+        </member>
+        <member name="T:GameCore.BaseInterface.IExtendableEnum">
+            <summary>
+            Marker interface for extendable enums that inherit from <see cref="T:GameCore.BaseInterface.IExtendedEnum" />.
+            </summary>
+            <remarks>
+            This interface serves as a marker to identify enums that participate in the
+            extension system without adding additional functionality.
+            </remarks>
+        </member>
+        <member name="T:GameCore.BaseInterface.IExtendableEnum`1">
+            <summary>
+            Generic interface for strongly-typed extendable enums.
+            </summary>
+            <typeparam name="TSelf">The concrete type implementing this interface.</typeparam>
+            <remarks>
+            This interface provides type-safe factory methods for creating instances of
+            extendable enums from their underlying enum values, enabling the extension
+            system to work with specific enum types while maintaining type safety.
+            </remarks>
+        </member>
+        <member name="M:GameCore.BaseInterface.IExtendableEnum`1.MakeInstance(System.Enum)">
+            <summary>
+            Creates an instance of the extendable enum from an enum value.
+            </summary>
+            <param name="enumValue">The enum value to wrap.</param>
+            <returns>A new instance of <typeparamref name="TSelf" /> wrapping the enum value.</returns>
+            <remarks>
+            This method provides a generic way to create extendable enum instances
+            and delegates to the type-specific <see cref="M:GameCore.BaseInterface.IExtendableEnum`1.Make(System.Enum)" /> method.
+            </remarks>
+        </member>
+        <member name="M:GameCore.BaseInterface.IExtendableEnum`1.Make(System.Enum)">
+            <summary>
+            Creates an instance of the extendable enum from an enum value.
+            </summary>
+            <param name="enumValue">The enum value to wrap.</param>
+            <returns>A new instance of <typeparamref name="TSelf" /> wrapping the enum value.</returns>
+            <remarks>
+            This abstract method must be implemented by concrete extendable enum types
+            to provide type-specific instance creation logic.
+            </remarks>
+        </member>
+        <member name="T:GameCore.BaseInterface.IGameClass">
+            <summary>
+            Register game classes that are used in the game setups.
+            </summary>
+        </member>
+        <member name="M:GameCore.BaseInterface.IGameClass.OnRegisterGameClass">
+            <summary />
+            <returns />
+        </member>
+        <member name="T:GameCore.BaseInterface.IHostedObject">
+            <summary>
+            Defines an interface for objects that are hosted by other entities and can manage cooldowns.
+            </summary>
+            <remarks>
+            This interface represents objects that exist as components or attachments to host entities,
+            inheriting cooldown management capabilities from <see cref="T:GameCore.BaseInterface.ICooldownHost" />. Hosted objects
+            typically depend on their host for lifecycle management, positioning, and other contextual
+            information while providing their own cooldown-based functionality.
+            </remarks>
+        </member>
+        <member name="T:GameCore.BaseInterface.IKillable">
+            <summary>
+            Defines an interface for entities that can be killed and potentially revived.
+            </summary>
+            <remarks>
+            This interface provides death state management and control for game entities.
+            It supports different death types and contexts, allowing for varied death behaviors
+            and revival mechanics. On the server side, it provides methods to kill and revive entities,
+            while both server and client can check the death state.
+            </remarks>
+        </member>
+        <member name="P:GameCore.BaseInterface.IKillable.IsDead">
+            <summary>
+            Gets a value indicating whether this entity is currently dead.
+            </summary>
+        </member>
+        <member name="T:GameCore.BaseInterface.IObjectManager`1">
+            <summary>
+            Defines a generic interface for managing collections or groups of objects of a specific type.
+            </summary>
+            <typeparam name="TObject">The type of objects to be managed by this manager.</typeparam>
+            <remarks>
+            This interface serves as a marker and base contract for object management systems within the game.
+            Implementations are expected to provide specific management functionality for their object types,
+            such as creation, destruction, tracking, and lifecycle management. The interface itself is empty
+            to allow maximum flexibility for implementing classes to define their own management contracts.
+            </remarks>
+        </member>
+        <member name="T:GameCore.BaseInterface.IPropertyHost">
+            <summary />
+        </member>
+        <member name="M:GameCore.BaseInterface.IPropertyHost.HostPropertyHash(GameCore.BaseInterface.IExtendedEnum)">
+            <summary />
+            <param name="property" />
+            <returns />
+        </member>
+        <member name="M:GameCore.BaseInterface.IPropertyHost.GetPropertyWithHash``1(System.Int64)">
+            <summary />
+            <typeparam name="T" />
+            <param name="propertyHash" />
+            <returns />
+        </member>
+        <member name="M:GameCore.BaseInterface.IPropertyHost.GetComponentProperty``2(System.Int32,``0)">
+            <summary />
+            <typeparam name="T" />
+            <typeparam name="TValue" />
+            <param name="ownerSyncId" />
+            <param name="property" />
+            <returns />
+        </member>
+        <member name="M:GameCore.BaseInterface.IPropertyHost.GetPropertiesWithHash(System.Boolean)">
+            <summary />
+            <param name="modifiedOnly" />
+            <returns />
+        </member>
+        <member name="M:GameCore.BaseInterface.IPropertyHost.GetBytesPropertiesWithHash(System.Boolean)">
+            <summary />
+            <param name="modifiedOnly" />
+            <returns />
+        </member>
+        <member name="T:GameCore.BaseInterface.IPropertyOwner">
+            <summary />
+        </member>
+        <member name="M:GameCore.BaseInterface.IPropertyOwner.ComponentPropertyHash``1(System.Int32,``0)">
+            <summary />
+            <typeparam name="T" />
+            <param name="ComponentSyncId" />
+            <param name="property" />
+            <returns />
+        </member>
+        <member name="P:GameCore.BaseInterface.IPropertyOwner.PropertyHost">
+            <summary />
+        </member>
+        <member name="T:GameCore.BaseInterface.IPropertyOwner`1">
+            <summary />
+        </member>
+        <member name="M:GameCore.BaseInterface.IPropertyOwner`1.PropertyHash(`0)">
+            <summary />
+            <param name="property" />
+            <returns />
+        </member>
+        <member name="M:GameCore.BaseInterface.IPropertyOwner`1.GetPropertyGeneric``1(`0)">
+            <summary />
+            <typeparam name="TValue" />
+            <param name="property" />
+            <returns />
+        </member>
+        <member name="M:GameCore.BaseInterface.IPropertyOwner`1.GetProperty``1(`0)">
+            <summary />
+            <typeparam name="TValue" />
+            <param name="property" />
+            <returns />
+        </member>
+        <member name="T:GameCore.BaseInterface.PropertyOwnerExtension">
+            <summary />
+        </member>
+        <member name="M:GameCore.BaseInterface.PropertyOwnerExtension.GetProperty``2(GameCore.BaseInterface.IPropertyOwner{``0},``0)">
+            <summary />
+            <typeparam name="T" />
+            <typeparam name="TValue" />
+            <param name="owner" />
+            <param name="property" />
+            <returns />
+        </member>
+        <member name="T:GameCore.BaseInterface.ISortedThink">
+            <summary />
+        </member>
+        <member name="F:GameCore.BaseInterface.ISortedThink.sortedThinkers">
+            <summary />
+        </member>
+        <member name="F:GameCore.BaseInterface.ISortedThink.dirtyThinkers">
+            <summary />
+        </member>
+        <member name="T:GameCore.BaseInterface.ISortedThink.SortedThinks">
+            <summary />
+            <summary />
+        </member>
+        <member name="P:GameCore.BaseInterface.ISortedThink.SortedThinks.Instance">
+            <summary />
+        </member>
+        <member name="M:GameCore.BaseInterface.ISortedThink.SortedThinks.Think(System.Int32)">
+            <summary />
+            <param name="delta" />
+            <returns />
+        </member>
+        <member name="M:GameCore.BaseInterface.ISortedThink.SortedThinks.RegisterThinker(GameCore.BaseInterface.ISortedThink)">
+            <summary />
+            <param name="thinker" />
+            <returns />
+        </member>
+        <member name="M:GameCore.BaseInterface.ISortedThink.SortedThinks.UnregisterThinker(GameCore.BaseInterface.ISortedThink)">
+            <summary />
+            <param name="thinker" />
+            <returns />
+        </member>
+        <member name="M:GameCore.BaseInterface.ISortedThink.SortedThinks.TickFinalizer">
+            <summary />
+            <returns />
+        </member>
+        <member name="P:GameCore.BaseInterface.ISortedThink.Priority">
+            <summary />
+        </member>
+        <member name="P:GameCore.BaseInterface.ISortedThink.GameCore#BaseInterface#IThinker#DoesThink">
+            <summary />
+        </member>
+        <member name="T:GameCore.BaseInterface.IStateOwner`1">
+            <summary>
+            Defines an interface for objects that can manage states and immunities of a specific type.
+            </summary>
+            <typeparam name="T">The type of state that this owner can manage. Must be a non-null type.</typeparam>
+            <remarks>
+            This interface provides a system for managing both active states and immunities to states.
+            States represent conditions or effects that are active on the object, while immunities prevent
+            certain states from being applied.
+            </remarks>
+        </member>
+        <member name="M:GameCore.BaseInterface.IStateOwner`1.HasState(`0)">
+            <summary>
+            Determines whether this object currently has the specified state.
+            </summary>
+            <param name="state">The state to check for.</param>
+            <returns>
+                <c>true</c> if the object has the state; otherwise, <c>false</c>.</returns>
+        </member>
+        <member name="T:GameCore.BaseInterface.ITarget">
+            <summary>
+            Defines the interface for objects that can be targeted by abilities, movement, or other game systems.
+            </summary>
+            <remarks>
+            ITarget provides a unified interface for all objects that can serve as targets in the game world,
+            including entities, units, scene points, and other interactive objects. It standardizes position access,
+            validity checking, range calculations, visibility determination, and other targeting-related operations.
+            The interface supports both server-side and client-side targeting logic with appropriate abstractions
+            for multiplayer scenarios. All targeting systems in the game rely on this interface for consistent
+            behavior across different object types.
+            </remarks>
+        </member>
+        <member name="P:GameCore.BaseInterface.ITarget.Position">
+            <summary>
+            Gets the position of this target in the game world.
+            </summary>
+            <value>The scene point representing the target's current position.</value>
+        </member>
+        <member name="P:GameCore.BaseInterface.ITarget.Unit">
+            <summary>
+            Gets the unit associated with this target, if applicable.
+            </summary>
+            <value>The unit representation of this target, or null if this target is not a unit.</value>
+        </member>
+        <member name="P:GameCore.BaseInterface.ITarget.Entity">
+            <summary>
+            Gets the entity associated with this target, if applicable.
+            </summary>
+            <value>The entity representation of this target, or null if this target is not an entity.</value>
+        </member>
+        <member name="P:GameCore.BaseInterface.ITarget.Facing">
+            <summary>
+            Gets the facing direction of this target, if applicable.
+            </summary>
+            <value>The direction this target is facing, or null if the target has no facing direction.</value>
+        </member>
+        <member name="P:GameCore.BaseInterface.ITarget.Scene">
+            <summary>
+            Gets the scene that contains this target.
+            </summary>
+            <value>The scene where this target is located.</value>
+        </member>
+        <member name="P:GameCore.BaseInterface.ITarget.IsValid">
+            <summary>
+            Gets a value indicating whether this target is valid and can be used for targeting operations.
+            </summary>
+            <value>True if the target is valid; otherwise, false.</value>
+        </member>
+        <member name="P:GameCore.BaseInterface.ITarget.CanChangePosition">
+            <summary>
+            Gets a value indicating whether this target's position can be changed.
+            </summary>
+            <value>True if the target can move or be moved; otherwise, false.</value>
+            <remarks>
+            Static targets like waypoints or fixed positions return false, while dynamic targets
+            like units return true. This affects how movement and positioning systems interact with the target.
+            </remarks>
+        </member>
+        <member name="P:GameCore.BaseInterface.ITarget.ApproachableTarget">
+            <summary>
+            Gets the approachable target interface for pathfinding and movement systems.
+            </summary>
+            <value>An interface that provides pathfinding information for reaching this target.</value>
+        </member>
+        <member name="M:GameCore.BaseInterface.ITarget.IsValidTargetTo(GameCore.EntitySystem.Entity,System.Boolean)">
+            <summary>
+            Determines whether this target is valid for targeting by the specified caster.
+            </summary>
+            <param name="caster">The entity attempting to target this object.</param>
+            <param name="isRequest">Whether this is a targeting request that requires visibility.</param>
+            <returns>True if this target can be targeted by the caster; otherwise, false.</returns>
+            <remarks>
+            This method checks basic targeting validity such as being in the same scene.
+            Derived implementations may add additional checks for visibility, relationships, or other factors.
+            </remarks>
+        </member>
+        <member name="M:GameCore.BaseInterface.ITarget.IsInRange(GameCore.EntitySystem.Entity,System.Double,System.Boolean)">
+            <summary>
+            Determines whether this target is within the specified range of the caster.
+            </summary>
+            <param name="caster">The entity checking range to this target.</param>
+            <param name="range">The maximum range to check.</param>
+            <param name="isRequest">Whether this is a targeting request that requires validity.</param>
+            <returns>True if the target is within range; otherwise, false.</returns>
+            <remarks>
+            Range calculation includes the interaction radii of both the caster and target to account
+            for object sizes. The method also verifies targeting validity before checking distance.
+            </remarks>
+        </member>
+        <member name="M:GameCore.BaseInterface.ITarget.SameScene(GameCore.BaseInterface.ITarget)">
+            <summary>
+            Determines whether this target is in the same scene as another target.
+            </summary>
+            <param name="target">The target to compare scenes with.</param>
+            <returns>True if both targets are in the same scene; otherwise, false.</returns>
+            <remarks>
+            Scene comparison is fundamental for many targeting operations, as cross-scene targeting
+            is typically not supported. This method provides a standard way to check scene compatibility.
+            </remarks>
+        </member>
+        <member name="M:GameCore.BaseInterface.ITarget.CanBeSeen(GameCore.EntitySystem.Entity)">
+            <summary>
+            Determines whether this target can be seen by the specified caster.
+            </summary>
+            <param name="caster">The entity attempting to see this target.</param>
+            <returns>True if this target is visible to the caster; otherwise, false.</returns>
+            <remarks>
+            Visibility rules vary by implementation and may consider factors such as line of sight,
+            fog of war, stealth effects, and player relationships. This method must be implemented
+            by concrete target types to provide appropriate visibility logic.
+            </remarks>
+        </member>
+        <member name="P:GameCore.BaseInterface.ITarget.InteractRadius">
+            <summary>
+            Gets the interaction radius of this target for range and collision calculations.
+            </summary>
+            <value>The radius around this target used for interaction range calculations.</value>
+            <remarks>
+            The interaction radius affects how close other objects need to be to interact with this target.
+            Larger objects typically have larger interaction radii to account for their size.
+            </remarks>
+        </member>
+        <member name="M:GameCore.BaseInterface.ITarget.AngleTo(GameCore.BaseInterface.ITarget)">
+            <summary>
+            Calculates the angle from this target to another target.
+            </summary>
+            <param name="target">The target to calculate the angle to.</param>
+            <returns>The angle to the target, or null if they are at the same position or in different scenes.</returns>
+            <remarks>
+            If the targets are at the same position, this method returns the current facing direction.
+            Otherwise, it calculates the angle based on the relative positions of the two targets.
+            </remarks>
+        </member>
+        <member name="M:GameCore.BaseInterface.ITarget.VectorTargetPosition(GameCore.BaseInterface.ITarget,System.Double)">
+            <summary>
+            Calculates a position at a specified distance in the direction of another target.
+            </summary>
+            <param name="target">The target to calculate the vector towards.</param>
+            <param name="vectorLength">The distance from this target's position.</param>
+            <returns>The calculated scene point, or null if the targets are in different scenes.</returns>
+            <remarks>
+            This method is useful for positioning effects, projectiles, or other objects at a specific
+            distance in the direction of a target. The vector length is adjusted by this target's
+            interaction radius to account for object size.
+            </remarks>
+        </member>
+        <member name="T:GameCore.BaseInterface.IThinker">
+            <summary>
+            Defines an interface for objects that require regular update processing each game tick.
+            </summary>
+            <remarks>
+            The thinking system allows objects to perform per-frame logic such as AI processing,
+            animation updates, timers, or other time-based behaviors. Objects can enable or disable
+            their thinking state dynamically to optimize performance by only processing active objects.
+            </remarks>
+        </member>
+        <member name="F:GameCore.BaseInterface.IThinker.thinkState">
+            <summary />
+        </member>
+        <member name="M:GameCore.BaseInterface.IThinker.Think(System.Int32)">
+            <summary>
+            Performs the object's per-tick thinking logic.
+            </summary>
+            <param name="delta">The time elapsed since the last tick, in milliseconds.</param>
+            <remarks>
+            This method is called every game tick when <see cref="P:GameCore.BaseInterface.IThinker.DoesThink" /> is true.
+            Implementations should perform their frame-based logic here, such as AI decisions,
+            state updates, or timer processing.
+            </remarks>
+        </member>
+        <member name="P:GameCore.BaseInterface.IThinker.DoesThink">
+            <summary>
+            Gets or sets a value indicating whether this object should be included in the thinking system.
+            </summary>
+            <remarks>
+            When set to true, the object is registered with the game's thinking system and <see cref="M:GameCore.BaseInterface.IThinker.Think(System.Int32)" />
+            will be called each tick. When set to false, the object is unregistered and stops receiving
+            think calls, improving performance for inactive objects.
+            </remarks>
+        </member>
+        <member name="T:GameCore.BaseInterface.IThinkerStaggered">
+            <summary />
+        </member>
+        <member name="F:GameCore.BaseInterface.IThinkerStaggered.thinkState">
+            <summary />
+        </member>
+        <member name="P:GameCore.BaseInterface.IThinkerStaggered.StaggeredCount">
+            <summary />
+        </member>
+        <member name="M:GameCore.BaseInterface.IThinkerStaggered.Think">
+            <summary>
+            Only think when DoesThink = true;
+            </summary>
+        </member>
+        <member name="P:GameCore.BaseInterface.IThinkerStaggered.DoesThink">
+            <summary />
+        </member>
+        <member name="T:GameCore.BaseInterface.IThinkerStaggered.StaggeredThinkers">
+            <summary />
+            <summary />
+        </member>
+        <member name="M:GameCore.BaseInterface.IThinkerStaggered.StaggeredThinkers.#ctor(System.Int32)">
+            <summary />
+        </member>
+        <member name="F:GameCore.BaseInterface.IThinkerStaggered.StaggeredThinkers.staggeredCount">
+            <summary />
+        </member>
+        <member name="F:GameCore.BaseInterface.IThinkerStaggered.StaggeredThinkers._thinkers">
+            <summary />
+        </member>
+        <member name="F:GameCore.BaseInterface.IThinkerStaggered.StaggeredThinkers.pendingAdd">
+            <summary />
+        </member>
+        <member name="F:GameCore.BaseInterface.IThinkerStaggered.StaggeredThinkers.pendingRemove">
+            <summary />
+        </member>
+        <member name="F:GameCore.BaseInterface.IThinkerStaggered.StaggeredThinkers.staggeredIndex">
+            <summary />
+        </member>
+        <member name="F:GameCore.BaseInterface.IThinkerStaggered.StaggeredThinkers.staggeredThinkers">
+            <summary />
+        </member>
+        <member name="M:GameCore.BaseInterface.IThinkerStaggered.StaggeredThinkers.GetOrCreate(System.Int32)">
+            <summary />
+            <param name="staggeredCount" />
+            <returns />
+        </member>
+        <member name="F:GameCore.BaseInterface.IThinkerStaggered.StaggeredThinkers._currentIndex">
+            <summary />
+        </member>
+        <member name="P:GameCore.BaseInterface.IThinkerStaggered.StaggeredThinkers.IsThinking">
+            <summary />
+        </member>
+        <member name="M:GameCore.BaseInterface.IThinkerStaggered.StaggeredThinkers.Think(System.Int32)">
+            <summary />
+            <param name="delta" />
+            <returns />
+        </member>
+        <member name="M:GameCore.BaseInterface.IThinkerStaggered.StaggeredThinkers.Add(GameCore.BaseInterface.IThinkerStaggered)">
+            <summary />
+            <param name="thinker" />
+            <returns />
+        </member>
+        <member name="M:GameCore.BaseInterface.IThinkerStaggered.StaggeredThinkers.Remove(GameCore.BaseInterface.IThinkerStaggered)">
+            <summary />
+            <param name="thinker" />
+            <returns />
+        </member>
+        <member name="M:GameCore.BaseInterface.IThinkerStaggered.StaggeredThinkers.TickFinalizer">
+            <summary />
+            <returns />
+        </member>
+        <member name="T:GameCore.BaseInterface.ITickFinalizer">
+            <summary>
+            Defines an interface for objects that need to perform cleanup or finalization operations at the end of each game tick.
+            </summary>
+            <remarks>
+            This interface is used for objects that need to execute logic after all other tick processing has completed.
+            Implementations should register themselves using <see cref="M:GameCore.BaseInterface.ITickFinalizer.PendingFinalizer" /> to be included in the finalization process.
+            </remarks>
+        </member>
+        <member name="M:GameCore.BaseInterface.ITickFinalizer.TickFinalizer">
+            <summary>
+            Performs finalization operations at the end of a game tick.
+            </summary>
+            <remarks>
+            This method is called after all other tick processing has completed for the current frame.
+            It should be used for cleanup operations, state finalization, or any logic that needs to run
+            after all other systems have updated.
+            </remarks>
+        </member>
+        <member name="M:GameCore.BaseInterface.ITickFinalizer.PendingFinalizer">
+            <summary>
+            Registers this object to be processed during the tick finalization phase.
+            </summary>
+            <remarks>
+            Call this method to ensure that <see cref="M:GameCore.BaseInterface.ITickFinalizer.TickFinalizer" /> will be called at the end of the current or next tick.
+            The object will be automatically managed by the game's tick finalization system.
+            </remarks>
+        </member>
+        <member name="T:GameCore.BaseInterface.IUnitModificationData">
+            <summary>
+            Defines data for modifying unit properties, states, and immunities.
+            </summary>
+            <remarks>
+            This interface represents a collection of modifications that can be applied to units,
+            including property changes, state additions/removals, and immunity grants.
+            It's commonly used by abilities, items, and other game systems that need to modify
+            unit characteristics temporarily or permanently.
+            </remarks>
+        </member>
+        <member name="P:GameCore.BaseInterface.IUnitModificationData.Modifications">
+            <summary>
+            Gets a list of property modifications to apply to the unit.
+            </summary>
+            <remarks>
+            These modifications can change unit attributes like damage, armor, speed, etc.
+            Each modification specifies the property to change and how to change it.
+            </remarks>
+        </member>
+        <member name="P:GameCore.BaseInterface.IUnitModificationData.AddStates">
+            <summary>
+            Gets a list of states to add to the unit.
+            </summary>
+            <remarks>
+            States represent temporary or permanent conditions that affect unit behavior,
+            such as buffs, debuffs, or special status effects.
+            </remarks>
+        </member>
+        <member name="P:GameCore.BaseInterface.IUnitModificationData.RemoveStates">
+            <summary>
+            Gets a list of states to remove from the unit.
+            </summary>
+            <remarks>
+            This can be used to clear specific states or conditions from the unit,
+            such as removing debuffs or clearing temporary effects.
+            </remarks>
+        </member>
+        <member name="P:GameCore.BaseInterface.IUnitModificationData.ImmuneStates">
+            <summary>
+            Gets a list of states that the unit should become immune to.
+            </summary>
+            <remarks>
+            Immune states prevent the unit from being affected by specific conditions,
+            providing protection against certain types of effects or abilities.
+            </remarks>
+        </member>
+    </members>
+</doc>

@@ -1,0 +1,1836 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>GameUI</name>
+    </assembly>
+    <members>
+        <member name="T:GameUI.Control.Advanced.JoystickDynamic">
+        <summary>
+        动态游戏摇杆控件。跟随手指/鼠标移动，没有固定中心点，中心点会随着手指移动而调整。
+        </summary>
+        </member>
+        <member name="P:GameUI.Control.Advanced.JoystickDynamic.DefaultTemplate">
+        <summary>
+        获取摇杆的默认模板链接。
+        </summary>
+        </member>
+        <member name="M:GameUI.Control.Advanced.JoystickDynamic.#ctor(GameData.IGameLink{GameUI.Control.Data.GameDataControlJoystickDynamic})">
+        <summary>
+        使用指定模板链接初始化摇杆实例。
+        </summary>
+        <param name = "link">摇杆模板数据链接。</param>
+        </member>
+        <member name="M:GameUI.Control.Advanced.JoystickDynamic.#ctor">
+        <summary>
+        使用默认模板初始化摇杆实例。
+        </summary>
+        </member>
+        <member name="P:GameUI.Control.Advanced.JoystickDynamic.InputValue">
+        <summary>
+        摇杆的当前输入值，范围为 (-1, -1) 到 (1, 1)
+        </summary>
+        </member>
+        <member name="P:GameUI.Control.Advanced.JoystickDynamic.Radius">
+        <summary>
+        摇杆操作半径（像素）
+        </summary>
+        </member>
+        <member name="P:GameUI.Control.Advanced.JoystickDynamic.KnobSize">
+        <summary>
+        摇杆头的大小（像素）
+        </summary>
+        </member>
+        <member name="P:GameUI.Control.Advanced.JoystickDynamic.IsEnabled">
+        <summary>
+        是否启用摇杆功能
+        </summary>
+        </member>
+        <member name="P:GameUI.Control.Advanced.JoystickDynamic.IsActive">
+        <summary>
+        摇杆是否当前激活
+        </summary>
+        </member>
+        <member name="P:GameUI.Control.Advanced.JoystickDynamic.FollowSensitivity">
+        <summary>
+        中心点跟随的敏感度（0-1），越大跟随越快
+        </summary>
+        </member>
+        <member name="E:GameUI.Control.Advanced.JoystickDynamic.ValueChanged">
+        <summary>
+        摇杆值改变时触发的事件
+        </summary>
+        </member>
+        <member name="E:GameUI.Control.Advanced.JoystickDynamic.Activated">
+        <summary>
+        摇杆激活时触发的事件
+        </summary>
+        </member>
+        <member name="E:GameUI.Control.Advanced.JoystickDynamic.Deactivated">
+        <summary>
+        摇杆停用时触发的事件
+        </summary>
+        </member>
+        <member name="E:GameUI.Control.Advanced.JoystickDynamic.CenterChanged">
+        <summary>
+        摇杆中心位置改变时触发的事件
+        </summary>
+        </member>
+        <member name="F:GameUI.Control.Advanced.JoystickDynamic.backgroundControl">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="F:GameUI.Control.Advanced.JoystickDynamic.knobControl">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="F:GameUI.Control.Advanced.JoystickDynamic.activationArea">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="F:GameUI.Control.Advanced.JoystickDynamic.isDragging">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="F:GameUI.Control.Advanced.JoystickDynamic.dynamicCenterPosition">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="F:GameUI.Control.Advanced.JoystickDynamic.lastPointerPosition">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="F:GameUI.Control.Advanced.JoystickDynamic.initialPointerPosition">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="M:GameUI.Control.Advanced.JoystickDynamic.GenerateChildren">
+        <summary>
+        
+        </summary>
+        <returns></returns>
+        </member>
+        <member name="M:GameUI.Control.Advanced.JoystickDynamic.UpdateAppearance">
+        <summary>
+        更新摇杆的外观设置
+        </summary>
+        </member>
+        <member name="M:GameUI.Control.Advanced.JoystickDynamic.ForceDeactivate">
+        <summary>
+        手动停用摇杆
+        </summary>
+        </member>
+        <member name="P:GameUI.Control.Advanced.JoystickDynamic.CurrentCenterPosition">
+        <summary>
+        获取当前动态中心位置
+        </summary>
+        </member>
+        <member name="T:GameUI.Control.Advanced.JoystickCenterChangedEventArgs">
+        <summary>
+        摇杆中心位置改变事件参数
+        </summary>
+        </member>
+        <member name="P:GameUI.Control.Advanced.JoystickCenterChangedEventArgs.OldCenter">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="P:GameUI.Control.Advanced.JoystickCenterChangedEventArgs.NewCenter">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="M:GameUI.Control.Advanced.JoystickCenterChangedEventArgs.#ctor(System.Numerics.Vector2,System.Numerics.Vector2)">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="T:GameUI.Control.Advanced.JoystickFloat">
+        <summary>
+        浮动游戏摇杆控件。在用户触摸/点击位置动态出现，位置固定直到操作结束。
+        </summary>
+        </member>
+        <member name="P:GameUI.Control.Advanced.JoystickFloat.DefaultTemplate">
+        <summary>
+        获取摇杆的默认模板链接。
+        </summary>
+        </member>
+        <member name="M:GameUI.Control.Advanced.JoystickFloat.#ctor(GameData.IGameLink{GameUI.Control.Data.GameDataControlJoystickFloat})">
+        <summary>
+        使用指定模板链接初始化摇杆实例。
+        </summary>
+        <param name = "link">摇杆模板数据链接。</param>
+        </member>
+        <member name="M:GameUI.Control.Advanced.JoystickFloat.#ctor">
+        <summary>
+        使用默认模板初始化摇杆实例。
+        </summary>
+        </member>
+        <member name="P:GameUI.Control.Advanced.JoystickFloat.InputValue">
+        <summary>
+        摇杆的当前输入值，范围为 (-1, -1) 到 (1, 1)
+        </summary>
+        </member>
+        <member name="P:GameUI.Control.Advanced.JoystickFloat.Radius">
+        <summary>
+        摇杆操作半径（像素）
+        </summary>
+        </member>
+        <member name="P:GameUI.Control.Advanced.JoystickFloat.KnobSize">
+        <summary>
+        摇杆头的大小（像素）
+        </summary>
+        </member>
+        <member name="P:GameUI.Control.Advanced.JoystickFloat.IsEnabled">
+        <summary>
+        是否启用摇杆功能
+        </summary>
+        </member>
+        <member name="P:GameUI.Control.Advanced.JoystickFloat.IsActive">
+        <summary>
+        摇杆是否当前可见/激活
+        </summary>
+        </member>
+        <member name="E:GameUI.Control.Advanced.JoystickFloat.ValueChanged">
+        <summary>
+        摇杆值改变时触发的事件
+        </summary>
+        </member>
+        <member name="E:GameUI.Control.Advanced.JoystickFloat.Activated">
+        <summary>
+        摇杆激活时触发的事件
+        </summary>
+        </member>
+        <member name="E:GameUI.Control.Advanced.JoystickFloat.Deactivated">
+        <summary>
+        摇杆停用时触发的事件
+        </summary>
+        </member>
+        <member name="F:GameUI.Control.Advanced.JoystickFloat.backgroundControl">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="F:GameUI.Control.Advanced.JoystickFloat.knobControl">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="F:GameUI.Control.Advanced.JoystickFloat.activationArea">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="F:GameUI.Control.Advanced.JoystickFloat.isDragging">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="F:GameUI.Control.Advanced.JoystickFloat.floatCenterPosition">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="M:GameUI.Control.Advanced.JoystickFloat.GenerateChildren">
+        <summary>
+        
+        </summary>
+        <returns></returns>
+        </member>
+        <member name="M:GameUI.Control.Advanced.JoystickFloat.UpdateAppearance">
+        <summary>
+        更新摇杆的外观设置
+        </summary>
+        </member>
+        <member name="M:GameUI.Control.Advanced.JoystickFloat.ForceDeactivate">
+        <summary>
+        手动停用摇杆
+        </summary>
+        </member>
+        <member name="T:GameUI.Control.Advanced.JoystickActivatedEventArgs">
+        <summary>
+        摇杆激活事件参数
+        </summary>
+        </member>
+        <member name="P:GameUI.Control.Advanced.JoystickActivatedEventArgs.Position">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="M:GameUI.Control.Advanced.JoystickActivatedEventArgs.#ctor(System.Numerics.Vector2)">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="T:GameUI.Control.Advanced.JoystickNormal">
+        <summary>
+        普通游戏摇杆控件。具有固定的中心位置，摇杆头可以在固定半径内拖动。
+        </summary>
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="P:GameUI.Control.Advanced.JoystickNormal.DefaultTemplate">
+        <summary>
+        获取摇杆的默认模板链接。
+        </summary>
+        </member>
+        <member name="M:GameUI.Control.Advanced.JoystickNormal.#ctor(GameData.IGameLink{GameUI.Control.Data.GameDataControlJoystickNormal})">
+        <summary>
+        使用指定模板链接初始化摇杆实例。
+        </summary>
+        <param name = "link">摇杆模板数据链接。</param>
+        </member>
+        <member name="M:GameUI.Control.Advanced.JoystickNormal.#ctor">
+        <summary>
+        使用默认模板初始化摇杆实例。
+        </summary>
+        </member>
+        <member name="P:GameUI.Control.Advanced.JoystickNormal.InputValue">
+        <summary>
+        摇杆的当前输入值，范围为 (-1, -1) 到 (1, 1)
+        </summary>
+        </member>
+        <member name="P:GameUI.Control.Advanced.JoystickNormal.Radius">
+        <summary>
+        摇杆操作半径（像素）
+        </summary>
+        </member>
+        <member name="P:GameUI.Control.Advanced.JoystickNormal.KnobSize">
+        <summary>
+        摇杆头的大小（像素）
+        </summary>
+        </member>
+        <member name="P:GameUI.Control.Advanced.JoystickNormal.IsEnabled">
+        <summary>
+        是否启用摇杆功能
+        </summary>
+        </member>
+        <member name="E:GameUI.Control.Advanced.JoystickNormal.ValueChanged">
+        <summary>
+        摇杆值改变时触发的事件
+        </summary>
+        </member>
+        <member name="E:GameUI.Control.Advanced.JoystickNormal.DragStarted">
+        <summary>
+        摇杆开始拖动时触发的事件
+        </summary>
+        </member>
+        <member name="E:GameUI.Control.Advanced.JoystickNormal.DragEnded">
+        <summary>
+        摇杆结束拖动时触发的事件
+        </summary>
+        </member>
+        <member name="F:GameUI.Control.Advanced.JoystickNormal.backgroundControl">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="F:GameUI.Control.Advanced.JoystickNormal.knobControl">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="F:GameUI.Control.Advanced.JoystickNormal.isDragging">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="F:GameUI.Control.Advanced.JoystickNormal.centerPosition">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="M:GameUI.Control.Advanced.JoystickNormal.GenerateChildren">
+        <summary>
+        
+        </summary>
+        <returns></returns>
+        </member>
+        <member name="M:GameUI.Control.Advanced.JoystickNormal.UpdateAppearance">
+        <summary>
+        更新摇杆的外观设置
+        </summary>
+        </member>
+        <member name="P:GameUI.Control.Advanced.JoystickNormal.BackgroundPanel">
+        <summary>
+        获取摇杆背景控件
+        </summary>
+        </member>
+        <member name="P:GameUI.Control.Advanced.JoystickNormal.KnobPanel">
+        <summary>
+        获取摇杆头控件
+        </summary>
+        </member>
+        <member name="P:GameUI.Control.Advanced.JoystickNormal.IsDragging">
+        <summary>
+        摇杆是否正在被拖动
+        </summary>
+        </member>
+        <member name="M:GameUI.Control.Advanced.JoystickNormal.SetBackgroundStyle(GameUI.Brush.ColorBrush)">
+        <summary>
+        设置摇杆背景样式
+        </summary>
+        <param name = "background">背景画刷</param>
+        </member>
+        <member name="M:GameUI.Control.Advanced.JoystickNormal.SetKnobStyle(GameUI.Brush.ColorBrush)">
+        <summary>
+        设置摇杆头样式
+        </summary>
+        <param name = "background">背景画刷</param>
+        </member>
+        <member name="M:GameUI.Control.Advanced.JoystickNormal.SetBackgroundImage(System.String)">
+        <summary>
+        设置摇杆背景图像
+        </summary>
+        <param name = "imagePath">图像路径</param>
+        </member>
+        <member name="M:GameUI.Control.Advanced.JoystickNormal.SetKnobImage(System.String)">
+        <summary>
+        设置摇杆头图像
+        </summary>
+        <param name = "imagePath">图像路径</param>
+        </member>
+        <member name="T:GameUI.Control.Advanced.JoystickValueChangedEventArgs">
+        <summary>
+        摇杆值改变事件参数
+        </summary>
+        </member>
+        <member name="P:GameUI.Control.Advanced.JoystickValueChangedEventArgs.OldValue">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="P:GameUI.Control.Advanced.JoystickValueChangedEventArgs.NewValue">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="M:GameUI.Control.Advanced.JoystickValueChangedEventArgs.#ctor(System.Numerics.Vector2,System.Numerics.Vector2)">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="T:GameUI.Control.Advanced.TextButton">
+        <summary>
+        表示带有内置文本支持的高级按钮控件
+        </summary>
+        <remarks>
+        TextButton是对Button的封装，内部管理一个Label子控件来显示文本。
+        它提供了更简洁的API来处理带文本的按钮，避免手动管理Label子控件。
+        相比传统的Button + Label组合，TextButton提供了统一的文本设置接口。
+        </remarks>
+        </member>
+        <member name="P:GameUI.Control.Advanced.TextButton.DefaultTemplate">
+        <summary>
+        获取TextButton的默认模板链接
+        </summary>
+        </member>
+        <member name="F:GameUI.Control.Advanced.TextButton._textLabel">
+        <summary>
+        内部的Label控件，用于显示文本
+        </summary>
+        </member>
+        <member name="M:GameUI.Control.Advanced.TextButton.#ctor(GameData.IGameLink{GameUI.Control.Data.GameDataControlTextButton})">
+        <summary>
+        使用指定模板链接初始化TextButton实例
+        </summary>
+        <param name = "link">按钮模板数据链接</param>
+        </member>
+        <member name="M:GameUI.Control.Advanced.TextButton.#ctor">
+        <summary>
+        使用默认模板初始化TextButton实例
+        </summary>
+        </member>
+        <member name="M:GameUI.Control.Advanced.TextButton.#ctor(System.String)">
+        <summary>
+        使用指定文本初始化TextButton实例
+        </summary>
+        <param name = "text">按钮文本</param>
+        </member>
+        <member name="P:GameUI.Control.Advanced.TextButton.Text">
+        <summary>
+        获取或设置按钮显示的文本内容
+        </summary>
+        </member>
+        <member name="P:GameUI.Control.Advanced.TextButton.Font">
+        <summary>
+        获取或设置文本字体
+        </summary>
+        </member>
+        <member name="P:GameUI.Control.Advanced.TextButton.FontSize">
+        <summary>
+        获取或设置文本字体大小
+        </summary>
+        </member>
+        <member name="P:GameUI.Control.Advanced.TextButton.TextColor">
+        <summary>
+        获取或设置文本颜色
+        </summary>
+        </member>
+        <member name="P:GameUI.Control.Advanced.TextButton.Bold">
+        <summary>
+        获取或设置文本是否为粗体
+        </summary>
+        </member>
+        <member name="P:GameUI.Control.Advanced.TextButton.Italic">
+        <summary>
+        获取或设置文本是否为斜体
+        </summary>
+        </member>
+        <member name="P:GameUI.Control.Advanced.TextButton.TextWrap">
+        <summary>
+        获取或设置文本是否自动换行
+        </summary>
+        </member>
+        <member name="P:GameUI.Control.Advanced.TextButton.LineSpacingRatio">
+        <summary>
+        获取或设置行间距比例
+        </summary>
+        </member>
+        <member name="P:GameUI.Control.Advanced.TextButton.TextHorizontalAlignment">
+        <summary>
+        获取或设置文本的水平内容对齐方式
+        </summary>
+        </member>
+        <member name="P:GameUI.Control.Advanced.TextButton.TextVerticalAlignment">
+        <summary>
+        获取或设置文本的垂直内容对齐方式
+        </summary>
+        </member>
+        <member name="P:GameUI.Control.Advanced.TextButton.StrokeSize">
+        <summary>
+        获取或设置文本描边大小
+        </summary>
+        </member>
+        <member name="P:GameUI.Control.Advanced.TextButton.StrokeColor">
+        <summary>
+        获取或设置文本描边颜色
+        </summary>
+        </member>
+        <member name="P:GameUI.Control.Advanced.TextButton.ShadowOffset">
+        <summary>
+        获取或设置文本阴影偏移
+        </summary>
+        </member>
+        <member name="P:GameUI.Control.Advanced.TextButton.ShadowColor">
+        <summary>
+        获取或设置文本阴影颜色
+        </summary>
+        </member>
+        <member name="M:GameUI.Control.Advanced.TextButton.Dispose(System.Boolean)">
+        <summary>
+        重写Dispose方法，确保正确清理内部Label
+        </summary>
+        </member>
+        <member name="T:GameUI.Control.Extensions.BuilderExtensions">
+        <summary>
+        现代化的控件构建扩展，提供直观、一致的API
+        </summary>
+        </member>
+        <member name="M:GameUI.Control.Extensions.BuilderExtensions.Data``1(``0,System.Object)">
+        <summary>
+        设置控件的数据上下文
+        </summary>
+        </member>
+        <member name="M:GameUI.Control.Extensions.BuilderExtensions.Show``1(``0)">
+        <summary>
+        显示控件
+        </summary>
+        </member>
+        <member name="M:GameUI.Control.Extensions.BuilderExtensions.Hide``1(``0)">
+        <summary>
+        隐藏控件
+        </summary>
+        </member>
+        <member name="M:GameUI.Control.Extensions.BuilderExtensions.Visibility``1(``0,System.Boolean)">
+        <summary>
+        设置控件可见性
+        </summary>
+        </member>
+        <member name="M:GameUI.Control.Extensions.BuilderExtensions.Enable``1(``0)">
+        <summary>
+        启用控件
+        </summary>
+        </member>
+        <member name="M:GameUI.Control.Extensions.BuilderExtensions.Disable``1(``0)">
+        <summary>
+        禁用控件
+        </summary>
+        </member>
+        <member name="M:GameUI.Control.Extensions.BuilderExtensions.Enabled``1(``0,System.Boolean)">
+        <summary>
+        设置控件启用状态
+        </summary>
+        </member>
+        <member name="M:GameUI.Control.Extensions.BuilderExtensions.AddToRoot``1(``0)">
+        <summary>
+        添加控件到UI根容器（视觉树根部）
+        </summary>
+        </member>
+        <member name="M:GameUI.Control.Extensions.BuilderExtensions.AddToParent``1(``0,GameUI.Control.Control)">
+        <summary>
+        添加控件到指定父容器
+        </summary>
+        </member>
+        <member name="M:GameUI.Control.Extensions.BuilderExtensions.AddToParent``1(``0,GameUI.Control.Control,System.Int32)">
+        <summary>
+        添加控件到指定父容器的指定位置
+        </summary>
+        </member>
+        <member name="M:GameUI.Control.Extensions.BuilderExtensions.RemoveFromParent``1(``0)">
+        <summary>
+        从父容器中移除控件
+        </summary>
+        </member>
+        <member name="M:GameUI.Control.Extensions.BuilderExtensions.FullScreen``1(``0)">
+        <summary>
+        让控件占据整个屏幕/视口大小（响应式）
+        </summary>
+        <remarks>
+        使用flex拉伸机制而非固定尺寸，能自动响应屏幕旋转和分辨率变化
+        </remarks>
+        </member>
+        <member name="M:GameUI.Control.Extensions.BuilderExtensions.ScreenStretch``1(``0,System.Single,System.Single)">
+        <summary>
+        让控件占据屏幕的指定拉伸比例（响应式）
+        </summary>
+        <remarks>
+        使用flex拉伸机制，能自动响应屏幕变化
+        </remarks>
+        </member>
+        <member name="M:GameUI.Control.Extensions.BuilderExtensions.Background``1(``0,System.Drawing.Color)">
+        <summary>
+        设置背景颜色
+        </summary>
+        </member>
+        <member name="M:GameUI.Control.Extensions.BuilderExtensions.Background``1(``0,GameUI.Brush.ColorBrush)">
+        <summary>
+        设置背景画刷
+        </summary>
+        </member>
+        <member name="M:GameUI.Control.Extensions.BuilderExtensions.Background``1(``0,GameUI.Brush.SolidColorBrush)">
+        <summary>
+        设置背景画刷（固定颜色）
+        </summary>
+        </member>
+        <member name="M:GameUI.Control.Extensions.BuilderExtensions.Opacity``1(``0,System.Single)">
+        <summary>
+        设置透明度
+        </summary>
+        </member>
+        <member name="M:GameUI.Control.Extensions.BuilderExtensions.Rounded``1(``0,System.Single)">
+        <summary>
+        设置圆角半径
+        </summary>
+        </member>
+        <member name="M:GameUI.Control.Extensions.BuilderExtensions.Layer``1(``0,System.Int32)">
+        <summary>
+        设置Z轴层级
+        </summary>
+        </member>
+        <member name="T:GameUI.Control.Extensions.BuilderExtensions.ITextControl">
+        <summary>
+        文本控件的统一接口
+        </summary>
+        </member>
+        <member name="P:GameUI.Control.Extensions.BuilderExtensions.ITextControl.Text">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="P:GameUI.Control.Extensions.BuilderExtensions.ITextControl.TextColor">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="P:GameUI.Control.Extensions.BuilderExtensions.ITextControl.FontSize">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="P:GameUI.Control.Extensions.BuilderExtensions.ITextControl.Bold">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="P:GameUI.Control.Extensions.BuilderExtensions.ITextControl.Italic">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="M:GameUI.Control.Extensions.BuilderExtensions.Text``1(``0,System.String)">
+        <summary>
+        设置文本内容
+        </summary>
+        </member>
+        <member name="M:GameUI.Control.Extensions.BuilderExtensions.TextColor``1(``0,System.Drawing.Color)">
+        <summary>
+        设置文本颜色
+        </summary>
+        </member>
+        <member name="M:GameUI.Control.Extensions.BuilderExtensions.FontSize``1(``0,System.Int32)">
+        <summary>
+        设置字体大小
+        </summary>
+        </member>
+        <member name="M:GameUI.Control.Extensions.BuilderExtensions.Bold``1(``0,System.Boolean)">
+        <summary>
+        设置粗体文本
+        </summary>
+        </member>
+        <member name="M:GameUI.Control.Extensions.BuilderExtensions.Italic``1(``0,System.Boolean)">
+        <summary>
+        设置斜体文本
+        </summary>
+        </member>
+        <member name="M:GameUI.Control.Extensions.BuilderExtensions.TextStyle``1(``0,System.Nullable{System.Int32},System.Nullable{System.Drawing.Color},System.Nullable{System.Boolean},System.Nullable{System.Boolean})">
+        <summary>
+        设置文本样式组合
+        </summary>
+        </member>
+        <member name="M:GameUI.Control.Extensions.BuilderExtensions.Text(GameUI.Control.Primitive.Label,System.String)">
+        <summary>
+        
+        </summary>
+        <param name="label"></param>
+        <param name="text"></param>
+        <returns></returns>
+        </member>
+        <member name="M:GameUI.Control.Extensions.BuilderExtensions.TextColor(GameUI.Control.Primitive.Label,System.Drawing.Color)">
+        <summary>
+        
+        </summary>
+        <param name="label"></param>
+        <param name="color"></param>
+        <returns></returns>
+        </member>
+        <member name="M:GameUI.Control.Extensions.BuilderExtensions.FontSize(GameUI.Control.Primitive.Label,System.Int32)">
+        <summary>
+        
+        </summary>
+        <param name="label"></param>
+        <param name="size"></param>
+        <returns></returns>
+        </member>
+        <member name="M:GameUI.Control.Extensions.BuilderExtensions.Bold(GameUI.Control.Primitive.Label,System.Boolean)">
+        <summary>
+        
+        </summary>
+        <param name="label"></param>
+        <param name="bold"></param>
+        <returns></returns>
+        </member>
+        <member name="M:GameUI.Control.Extensions.BuilderExtensions.Italic(GameUI.Control.Primitive.Label,System.Boolean)">
+        <summary>
+        
+        </summary>
+        <param name="label"></param>
+        <param name="italic"></param>
+        <returns></returns>
+        </member>
+        <member name="M:GameUI.Control.Extensions.BuilderExtensions.Text(GameUI.Control.Advanced.TextButton,System.String)">
+        <summary>
+        
+        </summary>
+        <param name="button"></param>
+        <param name="text"></param>
+        <returns></returns>
+        </member>
+        <member name="M:GameUI.Control.Extensions.BuilderExtensions.TextColor(GameUI.Control.Advanced.TextButton,System.Drawing.Color)">
+        <summary>
+        
+        </summary>
+        <param name="button"></param>
+        <param name="color"></param>
+        <returns></returns>
+        </member>
+        <member name="M:GameUI.Control.Extensions.BuilderExtensions.FontSize(GameUI.Control.Advanced.TextButton,System.Int32)">
+        <summary>
+        
+        </summary>
+        <param name="button"></param>
+        <param name="size"></param>
+        <returns></returns>
+        </member>
+        <member name="M:GameUI.Control.Extensions.BuilderExtensions.Bold(GameUI.Control.Advanced.TextButton,System.Boolean)">
+        <summary>
+        
+        </summary>
+        <param name="button"></param>
+        <param name="bold"></param>
+        <returns></returns>
+        </member>
+        <member name="M:GameUI.Control.Extensions.BuilderExtensions.Italic(GameUI.Control.Advanced.TextButton,System.Boolean)">
+        <summary>
+        
+        </summary>
+        <param name="button"></param>
+        <param name="italic"></param>
+        <returns></returns>
+        </member>
+        <member name="M:GameUI.Control.Extensions.BuilderExtensions.Add``1(``0,GameUI.Control.Control)">
+        <summary>
+        添加子控件
+        </summary>
+        </member>
+        <member name="M:GameUI.Control.Extensions.BuilderExtensions.Add``1(``0,GameUI.Control.Control[])">
+        <summary>
+        添加多个子控件
+        </summary>
+        </member>
+        <member name="M:GameUI.Control.Extensions.BuilderExtensions.Add``1(``0,System.Collections.Generic.IEnumerable{GameUI.Control.Control})">
+        <summary>
+        添加子控件集合
+        </summary>
+        </member>
+        <member name="M:GameUI.Control.Extensions.BuilderExtensions.Click``1(``0,System.Action)">
+        <summary>
+        设置点击事件（统一的命名）
+        </summary>
+        </member>
+        <member name="M:GameUI.Control.Extensions.BuilderExtensions.Click``1(``0,System.EventHandler{GameUI.Control.Struct.PointerEventArgs})">
+        <summary>
+        设置详细点击事件
+        </summary>
+        </member>
+        <member name="M:GameUI.Control.Extensions.BuilderExtensions.Scrollable(GameUI.Control.Primitive.PanelScrollable,System.Boolean)">
+        <summary>
+        启用滚动
+        </summary>
+        </member>
+        <member name="M:GameUI.Control.Extensions.BuilderExtensions.VScroll(GameUI.Control.Primitive.PanelScrollable)">
+        <summary>
+        设置垂直滚动
+        </summary>
+        </member>
+        <member name="M:GameUI.Control.Extensions.BuilderExtensions.HScroll(GameUI.Control.Primitive.PanelScrollable)">
+        <summary>
+        设置水平滚动
+        </summary>
+        </member>
+        <member name="M:GameUI.Control.Extensions.BuilderExtensions.ScrollBar(GameUI.Control.Primitive.PanelScrollable,System.Single,System.Nullable{System.Drawing.Color})">
+        <summary>
+        设置滚动条样式
+        </summary>
+        </member>
+        <member name="M:GameUI.Control.Extensions.BuilderExtensions.ScrollTo(GameUI.Control.Primitive.PanelScrollable,System.Single)">
+        <summary>
+        设置滚动位置（0-1之间）
+        </summary>
+        </member>
+        <member name="T:GameUI.Control.Extensions.UI">
+        <summary>
+        现代化的UI构建器，提供简洁的静态方法
+        </summary>
+        </member>
+        <member name="M:GameUI.Control.Extensions.UI.Panel">
+        <summary>
+        
+        </summary>
+        <returns></returns>
+        </member>
+        <member name="M:GameUI.Control.Extensions.UI.Button">
+        <summary>
+        
+        </summary>
+        <returns></returns>
+        </member>
+        <member name="M:GameUI.Control.Extensions.UI.TextButton">
+        <summary>
+        
+        </summary>
+        <returns></returns>
+        </member>
+        <member name="M:GameUI.Control.Extensions.UI.TextButton(System.String)">
+        <summary>
+        
+        </summary>
+        <param name="text"></param>
+        <returns></returns>
+        </member>
+        <member name="M:GameUI.Control.Extensions.UI.Label">
+        <summary>
+        
+        </summary>
+        <returns></returns>
+        </member>
+        <member name="M:GameUI.Control.Extensions.UI.Label(System.String)">
+        <summary>
+        
+        </summary>
+        <param name="text"></param>
+        <returns></returns>
+        </member>
+        <member name="M:GameUI.Control.Extensions.UI.ScrollPanel">
+        <summary>
+        
+        </summary>
+        <returns></returns>
+        </member>
+        <member name="M:GameUI.Control.Extensions.UI.Title(System.String,System.Int32)">
+        <summary>
+        创建标题
+        </summary>
+        </member>
+        <member name="M:GameUI.Control.Extensions.UI.Subtitle(System.String,System.Int32)">
+        <summary>
+        创建副标题
+        </summary>
+        </member>
+        <member name="M:GameUI.Control.Extensions.UI.Body(System.String,System.Int32)">
+        <summary>
+        创建正文
+        </summary>
+        </member>
+        <member name="M:GameUI.Control.Extensions.UI.Caption(System.String,System.Int32)">
+        <summary>
+        创建说明文字
+        </summary>
+        </member>
+        <member name="M:GameUI.Control.Extensions.UI.Primary(System.String)">
+        <summary>
+        创建主要按钮
+        </summary>
+        </member>
+        <member name="M:GameUI.Control.Extensions.UI.Secondary(System.String)">
+        <summary>
+        创建次要按钮
+        </summary>
+        </member>
+        <member name="M:GameUI.Control.Extensions.UI.Success(System.String)">
+        <summary>
+        创建成功按钮
+        </summary>
+        </member>
+        <member name="M:GameUI.Control.Extensions.UI.Danger(System.String)">
+        <summary>
+        创建危险按钮
+        </summary>
+        </member>
+        <member name="M:GameUI.Control.Extensions.UI.VStack(GameUI.Control.Control[])">
+        <summary>
+        垂直堆叠
+        </summary>
+        </member>
+        <member name="M:GameUI.Control.Extensions.UI.VStack(System.Single,GameUI.Control.Control[])">
+        <summary>
+        垂直堆叠（带间距）
+        </summary>
+        </member>
+        <member name="M:GameUI.Control.Extensions.UI.HStack(GameUI.Control.Control[])">
+        <summary>
+        水平堆叠
+        </summary>
+        </member>
+        <member name="M:GameUI.Control.Extensions.UI.HStack(System.Single,GameUI.Control.Control[])">
+        <summary>
+        水平堆叠（带间距）
+        </summary>
+        </member>
+        <member name="M:GameUI.Control.Extensions.UI.Center(GameUI.Control.Control)">
+        <summary>
+        居中容器
+        </summary>
+        </member>
+        <member name="M:GameUI.Control.Extensions.UI.Card(GameUI.Control.Control,System.Single)">
+        <summary>
+        卡片容器
+        </summary>
+        </member>
+        <member name="M:GameUI.Control.Extensions.UI.VScroll(GameUI.Control.Control)">
+        <summary>
+        垂直滚动容器
+        </summary>
+        </member>
+        <member name="M:GameUI.Control.Extensions.UI.HScroll(GameUI.Control.Control)">
+        <summary>
+        水平滚动容器
+        </summary>
+        </member>
+        <member name="M:GameUI.Control.Extensions.UI.List(GameUI.Control.Control[])">
+        <summary>
+        列表容器（带样式的垂直滚动）
+        </summary>
+        </member>
+        <member name="M:GameUI.Control.Extensions.UI.HDivider(System.Single,System.Nullable{System.Drawing.Color})">
+        <summary>
+        水平分隔线
+        </summary>
+        </member>
+        <member name="M:GameUI.Control.Extensions.UI.VDivider(System.Single,System.Nullable{System.Drawing.Color})">
+        <summary>
+        垂直分隔线
+        </summary>
+        </member>
+        <member name="M:GameUI.Control.Extensions.UI.Space(System.Single)">
+        <summary>
+        固定间距
+        </summary>
+        </member>
+        <member name="M:GameUI.Control.Extensions.UI.Spacer">
+        <summary>
+        弹性间距（占用剩余空间）
+        </summary>
+        </member>
+        <member name="T:GameUI.Control.Extensions.Colors">
+        <summary>
+        现代化设计系统颜色
+        </summary>
+        </member>
+        <member name="F:GameUI.Control.Extensions.Colors.Primary">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="F:GameUI.Control.Extensions.Colors.Secondary">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="F:GameUI.Control.Extensions.Colors.Success">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="F:GameUI.Control.Extensions.Colors.Warning">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="F:GameUI.Control.Extensions.Colors.Error">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="F:GameUI.Control.Extensions.Colors.Background">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="F:GameUI.Control.Extensions.Colors.Surface">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="F:GameUI.Control.Extensions.Colors.Elevated">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="F:GameUI.Control.Extensions.Colors.OnPrimary">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="F:GameUI.Control.Extensions.Colors.OnSecondary">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="F:GameUI.Control.Extensions.Colors.OnSuccess">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="F:GameUI.Control.Extensions.Colors.OnWarning">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="F:GameUI.Control.Extensions.Colors.OnError">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="F:GameUI.Control.Extensions.Colors.OnSurface">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="F:GameUI.Control.Extensions.Colors.OnBackground">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="F:GameUI.Control.Extensions.Colors.Divider">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="F:GameUI.Control.Extensions.Colors.ScrollBar">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="F:GameUI.Control.Extensions.Colors.Disabled">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="F:GameUI.Control.Extensions.Colors.Transparent">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="T:GameUI.Control.Extensions.LayoutExtensions">
+        <summary>
+        为控件提供Flexbox风格的布局扩展方法，使布局更加直观和AI友好
+        </summary>
+        </member>
+        <member name="M:GameUI.Control.Extensions.LayoutExtensions.Size``1(``0,System.Single,System.Single)">
+        <summary>
+        设置控件的宽度和高度
+        </summary>
+        <param name = "control">目标控件</param>
+        <param name = "width">宽度</param>
+        <param name = "height">高度</param>
+        <returns>控件本身，支持链式调用</returns>
+        </member>
+        <member name="M:GameUI.Control.Extensions.LayoutExtensions.Width``1(``0,System.Single)">
+        <summary>
+        设置控件的宽度
+        </summary>
+        <param name = "control">目标控件</param>
+        <param name = "width">宽度</param>
+        <returns>控件本身，支持链式调用</returns>
+        </member>
+        <member name="M:GameUI.Control.Extensions.LayoutExtensions.Height``1(``0,System.Single)">
+        <summary>
+        设置控件的高度
+        </summary>
+        <param name = "control">目标控件</param>
+        <param name = "height">高度</param>
+        <returns>控件本身，支持链式调用</returns>
+        </member>
+        <member name="M:GameUI.Control.Extensions.LayoutExtensions.AutoWidth``1(``0)">
+        <summary>
+        设置控件宽度为自动
+        </summary>
+        <param name = "control">目标控件</param>
+        <returns>控件本身，支持链式调用</returns>
+        </member>
+        <member name="M:GameUI.Control.Extensions.LayoutExtensions.AutoHeight``1(``0)">
+        <summary>
+        设置控件高度为自动
+        </summary>
+        <param name = "control">目标控件</param>
+        <returns>控件本身，支持链式调用</returns>
+        </member>
+        <member name="M:GameUI.Control.Extensions.LayoutExtensions.AutoSize``1(``0)">
+        <summary>
+        设置控件宽高都为自动
+        </summary>
+        <param name = "control">目标控件</param>
+        <returns>控件本身，支持链式调用</returns>
+        </member>
+        <member name="M:GameUI.Control.Extensions.LayoutExtensions.Position``1(``0,System.Single,System.Single)">
+        <summary>
+        设置控件的位置
+        </summary>
+        <param name = "control">目标控件</param>
+        <param name = "x">X坐标</param>
+        <param name = "y">Y坐标</param>
+        <returns>控件本身，支持链式调用</returns>
+        </member>
+        <member name="M:GameUI.Control.Extensions.LayoutExtensions.PositionType``1(``0,GameUI.Enum.UIPositionType)">
+        <summary>
+        设置控件的位置类型
+        </summary>
+        <param name = "control">目标控件</param>
+        <param name = "positionType">位置类型</param>
+        <returns>控件本身，支持链式调用</returns>
+        </member>
+        <member name="M:GameUI.Control.Extensions.LayoutExtensions.Margin``1(``0,GameUI.Struct.Thickness)">
+        <summary>
+        设置控件的外边距
+        </summary>
+        <param name = "control">目标控件</param>
+        <param name = "margin">外边距</param>
+        <returns>控件本身，支持链式调用</returns>
+        </member>
+        <member name="M:GameUI.Control.Extensions.LayoutExtensions.Margin``1(``0,System.Single)">
+        <summary>
+        设置控件的外边距（统一值）
+        </summary>
+        <param name = "control">目标控件</param>
+        <param name = "margin">外边距</param>
+        <returns>控件本身，支持链式调用</returns>
+        </member>
+        <member name="M:GameUI.Control.Extensions.LayoutExtensions.Margin``1(``0,System.Single,System.Single)">
+        <summary>
+        设置控件的外边距（水平和垂直）
+        </summary>
+        <param name = "control">目标控件</param>
+        <param name = "horizontal">水平外边距</param>
+        <param name = "vertical">垂直外边距</param>
+        <returns>控件本身，支持链式调用</returns>
+        </member>
+        <member name="M:GameUI.Control.Extensions.LayoutExtensions.Padding``1(``0,GameUI.Struct.Thickness)">
+        <summary>
+        设置控件的内边距
+        </summary>
+        <param name = "control">目标控件</param>
+        <param name = "padding">内边距</param>
+        <returns>控件本身，支持链式调用</returns>
+        </member>
+        <member name="M:GameUI.Control.Extensions.LayoutExtensions.Padding``1(``0,System.Single)">
+        <summary>
+        设置控件的内边距（统一值）
+        </summary>
+        <param name = "control">目标控件</param>
+        <param name = "padding">内边距</param>
+        <returns>控件本身，支持链式调用</returns>
+        </member>
+        <member name="M:GameUI.Control.Extensions.LayoutExtensions.Padding``1(``0,System.Single,System.Single)">
+        <summary>
+        设置控件的内边距（水平和垂直）
+        </summary>
+        <param name = "control">目标控件</param>
+        <param name = "horizontal">水平内边距</param>
+        <param name = "vertical">垂直内边距</param>
+        <returns>控件本身，支持链式调用</returns>
+        </member>
+        <member name="M:GameUI.Control.Extensions.LayoutExtensions.Padding``1(``0,System.Single,System.Single,System.Single,System.Single)">
+        <summary>
+        设置控件的内边距（左、上、右、下）
+        </summary>
+        <param name = "control">目标控件</param>
+        <param name = "left">左内边距</param>
+        <param name = "top">上内边距</param>
+        <param name = "right">右内边距</param>
+        <param name = "bottom">下内边距</param>
+        <returns>控件本身，支持链式调用</returns>
+        </member>
+        <member name="M:GameUI.Control.Extensions.LayoutExtensions.AlignHorizontal``1(``0,GameUI.Enum.HorizontalAlignment)">
+        <summary>
+        设置控件的水平对齐方式
+        </summary>
+        <param name = "control">目标控件</param>
+        <param name = "alignment">对齐方式</param>
+        <returns>控件本身，支持链式调用</returns>
+        </member>
+        <member name="M:GameUI.Control.Extensions.LayoutExtensions.AlignVertical``1(``0,GameUI.Enum.VerticalAlignment)">
+        <summary>
+        设置控件的垂直对齐方式
+        </summary>
+        <param name = "control">目标控件</param>
+        <param name = "alignment">对齐方式</param>
+        <returns>控件本身，支持链式调用</returns>
+        </member>
+        <member name="M:GameUI.Control.Extensions.LayoutExtensions.Center``1(``0)">
+        <summary>
+        设置控件居中对齐
+        </summary>
+        <param name = "control">目标控件</param>
+        <returns>控件本身，支持链式调用</returns>
+        </member>
+        <member name="M:GameUI.Control.Extensions.LayoutExtensions.AlignLeft``1(``0)">
+        <summary>
+        设置控件左对齐
+        </summary>
+        <param name = "control">目标控件</param>
+        <returns>控件本身，支持链式调用</returns>
+        </member>
+        <member name="M:GameUI.Control.Extensions.LayoutExtensions.AlignRight``1(``0)">
+        <summary>
+        设置控件右对齐
+        </summary>
+        <param name = "control">目标控件</param>
+        <returns>控件本身，支持链式调用</returns>
+        </member>
+        <member name="M:GameUI.Control.Extensions.LayoutExtensions.AlignTop``1(``0)">
+        <summary>
+        设置控件顶部对齐
+        </summary>
+        <param name = "control">目标控件</param>
+        <returns>控件本身，支持链式调用</returns>
+        </member>
+        <member name="M:GameUI.Control.Extensions.LayoutExtensions.AlignBottom``1(``0)">
+        <summary>
+        设置控件底部对齐
+        </summary>
+        <param name = "control">目标控件</param>
+        <returns>控件本身，支持链式调用</returns>
+        </member>
+        <member name="M:GameUI.Control.Extensions.LayoutExtensions.StretchHorizontal``1(``0)">
+        <summary>
+        设置控件水平拉伸
+        </summary>
+        <param name = "control">目标控件</param>
+        <returns>控件本身，支持链式调用</returns>
+        </member>
+        <member name="M:GameUI.Control.Extensions.LayoutExtensions.StretchVertical``1(``0)">
+        <summary>
+        设置控件垂直拉伸
+        </summary>
+        <param name = "control">目标控件</param>
+        <returns>控件本身，支持链式调用</returns>
+        </member>
+        <member name="M:GameUI.Control.Extensions.LayoutExtensions.FillParent``1(``0)">
+        <summary>
+        设置控件填满父容器
+        </summary>
+        <param name = "control">目标控件</param>
+        <returns>控件本身，支持链式调用</returns>
+        </member>
+        <member name="M:GameUI.Control.Extensions.LayoutExtensions.ContentAlignHorizontal``1(``0,GameUI.Enum.HorizontalContentAlignment)">
+        <summary>
+        设置控件子元素的水平对齐方式
+        </summary>
+        <param name = "control">目标控件</param>
+        <param name = "alignment">对齐方式</param>
+        <returns>控件本身，支持链式调用</returns>
+        </member>
+        <member name="M:GameUI.Control.Extensions.LayoutExtensions.ContentAlignVertical``1(``0,GameUI.Enum.VerticalContentAlignment)">
+        <summary>
+        设置控件子元素的垂直对齐方式
+        </summary>
+        <param name = "control">目标控件</param>
+        <param name = "alignment">对齐方式</param>
+        <returns>控件本身，支持链式调用</returns>
+        </member>
+        <member name="M:GameUI.Control.Extensions.LayoutExtensions.ContentCenter``1(``0)">
+        <summary>
+        设置控件子元素居中对齐
+        </summary>
+        <param name = "control">目标控件</param>
+        <returns>控件本身，支持链式调用</returns>
+        </member>
+        <member name="M:GameUI.Control.Extensions.LayoutExtensions.GrowRatio``1(``0,System.Single,System.Single)">
+        <summary>
+        设置控件的增长比例（flex-grow）
+        </summary>
+        <remarks>
+        当父容器有多余空间时，控件按此比例增长。对应CSS的flex-grow属性。
+        </remarks>
+        <param name = "control">目标控件</param>
+        <param name = "widthGrow">宽度增长比例</param>
+        <param name = "heightGrow">高度增长比例</param>
+        <returns>控件本身，支持链式调用</returns>
+        </member>
+        <member name="M:GameUI.Control.Extensions.LayoutExtensions.ShrinkRatio``1(``0,System.Single,System.Single)">
+        <summary>
+        设置控件的收缩比例（flex-shrink）
+        </summary>
+        <remarks>
+        当父容器空间不足时，控件按此比例收缩。对应CSS的flex-shrink属性。
+        </remarks>
+        <param name = "control">目标控件</param>
+        <param name = "widthShrink">宽度收缩比例</param>
+        <param name = "heightShrink">高度收缩比例</param>
+        <returns>控件本身，支持链式调用</returns>
+        </member>
+        <member name="M:GameUI.Control.Extensions.LayoutExtensions.GrowWidth``1(``0,System.Single)">
+        <summary>
+        设置控件的水平增长比例
+        </summary>
+        <param name = "control">目标控件</param>
+        <param name = "grow">增长比例</param>
+        <returns>控件本身，支持链式调用</returns>
+        </member>
+        <member name="M:GameUI.Control.Extensions.LayoutExtensions.GrowHeight``1(``0,System.Single)">
+        <summary>
+        设置控件的垂直增长比例
+        </summary>
+        <param name = "control">目标控件</param>
+        <param name = "grow">增长比例</param>
+        <returns>控件本身，支持链式调用</returns>
+        </member>
+        <member name="M:GameUI.Control.Extensions.LayoutExtensions.ShrinkWidth``1(``0,System.Single)">
+        <summary>
+        设置控件的水平收缩比例
+        </summary>
+        <param name = "control">目标控件</param>
+        <param name = "shrink">收缩比例</param>
+        <returns>控件本身，支持链式调用</returns>
+        </member>
+        <member name="M:GameUI.Control.Extensions.LayoutExtensions.ShrinkHeight``1(``0,System.Single)">
+        <summary>
+        设置控件的垂直收缩比例
+        </summary>
+        <param name = "control">目标控件</param>
+        <param name = "shrink">收缩比例</param>
+        <returns>控件本身，支持链式调用</returns>
+        </member>
+        <member name="M:GameUI.Control.Extensions.LayoutExtensions.Flex``1(``0,System.Single)">
+        <summary>
+        设置控件在Flex布局中占用比例权重
+        </summary>
+        <param name = "control">目标控件</param>
+        <param name = "flex">Flex权重</param>
+        <returns>控件本身，支持链式调用</returns>
+        </member>
+        <member name="M:GameUI.Control.Extensions.LayoutExtensions.AspectRatio``1(``0,System.Single)">
+        <summary>
+        设置控件的宽高比
+        </summary>
+        <param name = "control">目标控件</param>
+        <param name = "ratio">宽高比（宽度/高度）</param>
+        <returns>控件本身，支持链式调用</returns>
+        </member>
+        <member name="M:GameUI.Control.Extensions.LayoutExtensions.VStack``1(``0,System.Single)">
+        <summary>
+        快速设置常用的垂直堆叠布局
+        </summary>
+        <param name = "control">目标控件</param>
+        <param name = "spacing">子元素间距</param>
+        <returns>控件本身，支持链式调用</returns>
+        </member>
+        <member name="M:GameUI.Control.Extensions.LayoutExtensions.HStack``1(``0,System.Single)">
+        <summary>
+        快速设置常用的水平堆叠布局
+        </summary>
+        <param name = "control">目标控件</param>
+        <param name = "spacing">子元素间距</param>
+        <returns>控件本身，支持链式调用</returns>
+        </member>
+        <member name="M:GameUI.Control.Extensions.LayoutExtensions.FlowVertical``1(``0)">
+        <summary>
+        设置控件为垂直流式布局
+        </summary>
+        <param name = "control">目标控件</param>
+        <returns>控件本身，支持链式调用</returns>
+        </member>
+        <member name="M:GameUI.Control.Extensions.LayoutExtensions.FlowHorizontal``1(``0)">
+        <summary>
+        设置控件为水平流式布局
+        </summary>
+        <param name = "control">目标控件</param>
+        <returns>控件本身，支持链式调用</returns>
+        </member>
+        <member name="M:GameUI.Control.Extensions.LayoutExtensions.Grid``1(``0,System.Int32,System.Int32,System.Single)">
+        <summary>
+        设置控件为网格布局
+        </summary>
+        <param name = "control">目标控件</param>
+        <param name = "rows">行数</param>
+        <param name = "columns">列数</param>
+        <param name = "spacing">间距</param>
+        <returns>控件本身，支持链式调用</returns>
+        </member>
+        <member name="M:GameUI.Control.Extensions.LayoutExtensions.MinSize``1(``0,System.Single,System.Single)">
+        <summary>
+        设置控件的最小尺寸（基础尺寸）
+        </summary>
+        <remarks>
+        在这个UI库的Flexbox布局模型中，Width/Height实际上就是控件的最小尺寸。
+        当设置了增长比例时，控件会从这个基础尺寸开始拉伸，不会小于这个值。
+        </remarks>
+        <param name = "control">目标控件</param>
+        <param name = "minWidth">最小宽度（基础宽度）</param>
+        <param name = "minHeight">最小高度（基础高度）</param>
+        <returns>控件本身，支持链式调用</returns>
+        </member>
+        <member name="M:GameUI.Control.Extensions.LayoutExtensions.MinWidth``1(``0,System.Single)">
+        <summary>
+        设置控件的最小宽度（基础宽度）
+        </summary>
+        <param name = "control">目标控件</param>
+        <param name = "minWidth">最小宽度</param>
+        <returns>控件本身，支持链式调用</returns>
+        </member>
+        <member name="M:GameUI.Control.Extensions.LayoutExtensions.MinHeight``1(``0,System.Single)">
+        <summary>
+        设置控件的最小高度（基础高度）
+        </summary>
+        <param name = "control">目标控件</param>
+        <param name = "minHeight">最小高度</param>
+        <returns>控件本身，支持链式调用</returns>
+        </member>
+        <member name="M:GameUI.Control.Extensions.LayoutExtensions.MaxSize``1(``0,System.Single,System.Single)">
+        <summary>
+        设置控件的最大尺寸（通过禁用收缩实现）
+        </summary>
+        <remarks>
+        这个UI库使用Flexbox模型，没有传统的MaxSize概念。
+        此方法通过设置收缩比例为0来防止控件收缩，从而限制最大尺寸。
+        </remarks>
+        <param name = "control">目标控件</param>
+        <param name = "maxWidth">最大宽度</param>
+        <param name = "maxHeight">最大高度</param>
+        <returns>控件本身，支持链式调用</returns>
+        </member>
+        <member name="M:GameUI.Control.Extensions.LayoutExtensions.MaxWidth``1(``0,System.Single)">
+        <summary>
+        设置控件的最大宽度（通过禁用水平收缩实现）
+        </summary>
+        <param name = "control">目标控件</param>
+        <param name = "maxWidth">最大宽度</param>
+        <returns>控件本身，支持链式调用</returns>
+        </member>
+        <member name="M:GameUI.Control.Extensions.LayoutExtensions.MaxHeight``1(``0,System.Single)">
+        <summary>
+        设置控件的最大高度（通过禁用垂直收缩实现）
+        </summary>
+        <param name = "control">目标控件</param>
+        <param name = "maxHeight">最大高度</param>
+        <returns>控件本身，支持链式调用</returns>
+        </member>
+        <member name="M:GameUI.Control.Extensions.LayoutExtensions.SizeRange``1(``0,System.Single,System.Single,System.Single,System.Single)">
+        <summary>
+        设置控件的尺寸范围（最小到最大）
+        </summary>
+        <remarks>
+        在Flexbox模型中，通过设置基础尺寸和控制拉伸/收缩比例来实现尺寸约束。
+        </remarks>
+        <param name = "control">目标控件</param>
+        <param name = "minWidth">最小宽度</param>
+        <param name = "minHeight">最小高度</param>
+        <param name = "maxWidth">最大宽度</param>
+        <param name = "maxHeight">最大高度</param>
+        <returns>控件本身，支持链式调用</returns>
+        </member>
+        <member name="M:GameUI.Control.Extensions.LayoutExtensions.FlexCSS``1(``0,System.Single,System.Single,System.Single)">
+        <summary>
+        使用CSS风格的flex参数设置控件
+        </summary>
+        <remarks>
+        模拟CSS的 flex: grow shrink basis 语法，最直观的设置方式。
+        </remarks>
+        <param name = "control">目标控件</param>
+        <param name = "grow">增长比例 (flex-grow)</param>
+        <param name = "shrink">收缩比例 (flex-shrink)</param>
+        <param name = "basis">基础尺寸 (flex-basis)</param>
+        <returns>控件本身，支持链式调用</returns>
+        </member>
+        <member name="M:GameUI.Control.Extensions.LayoutExtensions.FlexAuto``1(``0)">
+        <summary>
+        设置控件为自动增长（等同于flex: 1）
+        </summary>
+        <param name = "control">目标控件</param>
+        <returns>控件本身，支持链式调用</returns>
+        </member>
+        <member name="M:GameUI.Control.Extensions.LayoutExtensions.FlexNone``1(``0)">
+        <summary>
+        设置控件为不伸缩（等同于flex: none）
+        </summary>
+        <param name = "control">目标控件</param>
+        <returns>控件本身，支持链式调用</returns>
+        </member>
+        <member name="M:GameUI.Control.Extensions.LayoutExtensions.FixedSize``1(``0,System.Single,System.Single)">
+        <summary>
+        设置控件为固定尺寸（不拉伸不收缩）
+        </summary>
+        <remarks>
+        相当于CSS中的 flex: none，控件保持固定尺寸，不参与flex布局的拉伸和收缩。
+        </remarks>
+        <param name = "control">目标控件</param>
+        <param name = "width">固定宽度</param>
+        <param name = "height">固定高度</param>
+        <returns>控件本身，支持链式调用</returns>
+        </member>
+        <member name="M:GameUI.Control.Extensions.LayoutExtensions.FlexSize``1(``0,System.Single,System.Single,System.Single)">
+        <summary>
+        设置控件为基础尺寸，允许按比例拉伸
+        </summary>
+        <remarks>
+        这是Flexbox布局的标准用法：设置基础尺寸，然后根据flex比例分配剩余空间。
+        </remarks>
+        <param name = "control">目标控件</param>
+        <param name = "baseWidth">基础宽度</param>
+        <param name = "baseHeight">基础高度</param>
+        <param name = "flexGrow">拉伸比例（flex-grow）</param>
+        <returns>控件本身，支持链式调用</returns>
+        </member>
+        <member name="M:GameUI.Control.Extensions.LayoutExtensions.ResponsiveSize``1(``0,System.Single,System.Single,System.Single,System.Single)">
+        <summary>
+        设置控件为响应式尺寸（可拉伸可收缩）
+        </summary>
+        <remarks>
+        控件会根据容器大小动态调整，适合响应式布局。
+        </remarks>
+        <param name = "control">目标控件</param>
+        <param name = "preferredWidth">首选宽度</param>
+        <param name = "preferredHeight">首选高度</param>
+        <param name = "flexGrow">拉伸比例</param>
+        <param name = "flexShrink">收缩比例</param>
+        <returns>控件本身，支持链式调用</returns>
+        </member>
+        <member name="M:GameUI.Control.Extensions.LayoutExtensions.AutoWidthFixedHeight``1(``0,System.Single)">
+        <summary>
+        设置控件宽度为内容适应，高度固定
+        </summary>
+        <remarks>
+        宽度自动适应内容，高度保持固定值。常用于按钮、标签等控件。
+        </remarks>
+        <param name = "control">目标控件</param>
+        <param name = "height">固定高度</param>
+        <returns>控件本身，支持链式调用</returns>
+        </member>
+        <member name="M:GameUI.Control.Extensions.LayoutExtensions.FixedWidthAutoHeight``1(``0,System.Single)">
+        <summary>
+        设置控件高度为内容适应，宽度固定
+        </summary>
+        <remarks>
+        高度自动适应内容，宽度保持固定值。常用于垂直文本显示。
+        </remarks>
+        <param name = "control">目标控件</param>
+        <param name = "width">固定宽度</param>
+        <returns>控件本身，支持链式调用</returns>
+        </member>
+        <member name="M:GameUI.Control.Extensions.LayoutExtensions.AutoSizeFixed``1(``0)">
+        <summary>
+        设置控件为内容自适应尺寸（不参与flex拉伸）
+        </summary>
+        <remarks>
+        宽度和高度都根据内容自动调整，且不参与flex布局的拉伸和收缩。
+        这是对已有AutoSize方法的增强版本。
+        </remarks>
+        <param name = "control">目标控件</param>
+        <returns>控件本身，支持链式调用</returns>
+        </member>
+        <member name="M:GameUI.Control.Extensions.LayoutExtensions.CornerRadius``1(``0,System.Single)">
+        <summary>
+        为控件添加圆角
+        </summary>
+        <param name = "control">目标控件</param>
+        <param name = "radius">圆角半径</param>
+        <returns>控件本身，支持链式调用</returns>
+        </member>
+        <member name="M:GameUI.Control.Extensions.LayoutExtensions.ZIndex``1(``0,System.Int32)">
+        <summary>
+        设置控件的Z轴层级
+        </summary>
+        <param name = "control">目标控件</param>
+        <param name = "zIndex">Z轴层级</param>
+        <returns>控件本身，支持链式调用</returns>
+        </member>
+        <member name="T:GameUI.Control.GameEntryLoadingSystem">
+        <summary>
+        GameEntry Loading系统，在游戏初始化时自动显示Loading界面
+        </summary>
+        <remarks>
+        这个系统实现了IGameClass接口，会在游戏启动时自动注册，
+        并在适当的时机显示Loading界面，提供更好的用户体验。
+        </remarks>
+        </member>
+        <member name="F:GameUI.Control.GameEntryLoadingSystem._startupLoading">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="F:GameUI.Control.GameEntryLoadingSystem._uiLoading">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="F:GameUI.Control.GameEntryLoadingSystem._isInitialized">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="M:GameUI.Control.GameEntryLoadingSystem.OnRegisterGameClass">
+        <summary>
+        
+        </summary>
+        <returns></returns>
+        </member>
+        <member name="M:GameUI.Control.GameEntryLoadingSystem.ShowLoading(System.String,System.Boolean,System.Boolean)">
+        <summary>
+        手动显示Loading界面（用于其他系统）
+        </summary>
+        </member>
+        <member name="M:GameUI.Control.GameEntryLoadingSystem.HideAllLoading">
+        <summary>
+        隐藏所有Loading界面
+        </summary>
+        </member>
+        <member name="T:GameUI.Control.LoadingUI">
+        <summary>
+        现代化的加载界面控件，提供进度显示、加载文本和动画效果
+        </summary>
+        </member>
+        <member name="F:GameUI.Control.LoadingUI._backgroundMask">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="F:GameUI.Control.LoadingUI._loadingCard">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="F:GameUI.Control.LoadingUI._loadingText">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="F:GameUI.Control.LoadingUI._progressBar">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="F:GameUI.Control.LoadingUI._progressText">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="F:GameUI.Control.LoadingUI._cancelButton">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="F:GameUI.Control.LoadingUI._isVisible">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="F:GameUI.Control.LoadingUI._currentProgress">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="F:GameUI.Control.LoadingUI._loadingMessage">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="F:GameUI.Control.LoadingUI._showCancelButton">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="F:GameUI.Control.LoadingUI._showProgress">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="F:GameUI.Control.LoadingUI._showProgressText">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="P:GameUI.Control.LoadingUI.Progress">
+        <summary>
+        当前加载进度 (0.0 - 1.0)
+        </summary>
+        </member>
+        <member name="P:GameUI.Control.LoadingUI.LoadingMessage">
+        <summary>
+        加载文本消息
+        </summary>
+        </member>
+        <member name="P:GameUI.Control.LoadingUI.ShowCancelButton">
+        <summary>
+        是否显示取消按钮
+        </summary>
+        </member>
+        <member name="P:GameUI.Control.LoadingUI.ShowProgress">
+        <summary>
+        是否显示进度条
+        </summary>
+        </member>
+        <member name="P:GameUI.Control.LoadingUI.ShowProgressText">
+        <summary>
+        是否显示进度文本
+        </summary>
+        </member>
+        <member name="E:GameUI.Control.LoadingUI.CancelRequested">
+        <summary>
+        取消按钮点击事件
+        </summary>
+        </member>
+        <member name="M:GameUI.Control.LoadingUI.#ctor">
+        <summary>
+        创建LoadingUI实例
+        </summary>
+        </member>
+        <member name="M:GameUI.Control.LoadingUI.Show(System.String,System.Single)">
+        <summary>
+        显示加载界面
+        </summary>
+        </member>
+        <member name="M:GameUI.Control.LoadingUI.Hide">
+        <summary>
+        隐藏加载界面
+        </summary>
+        </member>
+        <member name="M:GameUI.Control.LoadingUI.UpdateProgress(System.Single,System.String)">
+        <summary>
+        更新加载进度
+        </summary>
+        </member>
+        <member name="M:GameUI.Control.LoadingUI.SetComplete(System.String)">
+        <summary>
+        设置加载完成状态
+        </summary>
+        </member>
+        <member name="M:GameUI.Control.LoadingUI.SetFailed(System.String)">
+        <summary>
+        设置加载失败状态
+        </summary>
+        </member>
+        <member name="M:GameUI.Control.LoadingUI.CreateSimple(System.String)">
+        <summary>
+        创建简单的加载界面
+        </summary>
+        </member>
+        <member name="M:GameUI.Control.LoadingUI.CreateWithProgress(System.String,System.Boolean)">
+        <summary>
+        创建带进度的加载界面
+        </summary>
+        </member>
+        <member name="M:GameUI.Control.LoadingUI.CreateFull(System.String)">
+        <summary>
+        创建全功能加载界面
+        </summary>
+        </member>
+        <member name="T:GameUI.Control.LoadingUIExamples">
+        <summary>
+        LoadingUI使用示例，展示如何在GameEntry中集成Loading界面
+        </summary>
+        </member>
+        <member name="M:GameUI.Control.LoadingUIExamples.ShowGameStartupLoading">
+        <summary>
+        游戏启动时的资源加载示例
+        </summary>
+        </member>
+        <member name="M:GameUI.Control.LoadingUIExamples.ShowSceneTransitionLoading(System.String)">
+        <summary>
+        场景切换时的加载示例
+        </summary>
+        </member>
+        <member name="M:GameUI.Control.LoadingUIExamples.ShowNetworkConnectingLoading">
+        <summary>
+        网络连接时的等待示例
+        </summary>
+        </member>
+        <member name="T:GameUI.Control.LoadingUIExtensions">
+        <summary>
+        LoadingUI的扩展方法，提供便捷的链式调用
+        </summary>
+        </member>
+        <member name="M:GameUI.Control.LoadingUIExtensions.Message(GameUI.Control.LoadingUI,System.String)">
+        <summary>
+        设置加载消息
+        </summary>
+        </member>
+        <member name="M:GameUI.Control.LoadingUIExtensions.Progress(GameUI.Control.LoadingUI,System.Single)">
+        <summary>
+        设置进度值
+        </summary>
+        </member>
+        <member name="M:GameUI.Control.LoadingUIExtensions.WithCancel(GameUI.Control.LoadingUI)">
+        <summary>
+        显示取消按钮
+        </summary>
+        </member>
+        <member name="M:GameUI.Control.LoadingUIExtensions.WithoutProgress(GameUI.Control.LoadingUI)">
+        <summary>
+        隐藏进度条
+        </summary>
+        </member>
+        <member name="M:GameUI.Control.LoadingUIExtensions.Show(GameUI.Control.LoadingUI,System.String)">
+        <summary>
+        显示并返回自身
+        </summary>
+        </member>
+    </members>
+</doc>

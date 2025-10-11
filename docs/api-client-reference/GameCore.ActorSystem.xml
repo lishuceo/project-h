@@ -1,0 +1,3546 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<doc>
+    <assembly>
+        <name>GameCore</name>
+    </assembly>
+    <members>
+        <member name="T:GameCore.ActorSystem.Data.GameDataActorModel">
+            <summary />
+        </member>
+        <member name="P:GameCore.ActorSystem.Data.GameDataActorModel.Model">
+            <summary />
+        </member>
+        <member name="P:GameCore.ActorSystem.Data.GameDataActorModel.AssetRadius">
+            <summary />
+        </member>
+        <member name="P:GameCore.ActorSystem.Data.GameDataActorModel.AssetVolume">
+            <summary />
+        </member>
+        <member name="P:GameCore.ActorSystem.Data.GameDataActorModel.ViewActorAsyncType">
+            <summary />
+        </member>
+        <member name="M:GameCore.ActorSystem.Data.GameDataActorModel.CreateActor(GameCore.ActorSystem.IActorScope,System.Boolean,GameCore.SceneSystem.Scene)">
+            <summary />
+            <param name="scope" />
+            <param name="skipBirth" />
+            <param name="scene" />
+            <returns />
+        </member>
+        <member name="T:GameCore.ActorSystem.Data.GameDataActorParticle">
+            <summary />
+        </member>
+        <member name="P:GameCore.ActorSystem.Data.GameDataActorParticle.Particle">
+            <summary />
+        </member>
+        <member name="P:GameCore.ActorSystem.Data.GameDataActorParticle.Fade">
+            <summary />
+        </member>
+        <member name="P:GameCore.ActorSystem.Data.GameDataActorParticle.PlaySpeed">
+            <summary />
+        </member>
+        <member name="P:GameCore.ActorSystem.Data.GameDataActorParticle.AutoPlay">
+            <summary />
+        </member>
+        <member name="P:GameCore.ActorSystem.Data.GameDataActorParticle.CreationFilterLevel">
+            <summary />
+        </member>
+        <member name="P:GameCore.ActorSystem.Data.GameDataActorParticle.AnimTrailSetting">
+            <summary />
+        </member>
+        <member name="P:GameCore.ActorSystem.Data.GameDataActorParticle.AssetRadius">
+            <summary />
+        </member>
+        <member name="P:GameCore.ActorSystem.Data.GameDataActorParticle.AssetVolume">
+            <summary />
+        </member>
+        <member name="P:GameCore.ActorSystem.Data.GameDataActorParticle.ViewActorAsyncType">
+            <summary />
+        </member>
+        <member name="M:GameCore.ActorSystem.Data.GameDataActorParticle.CreateActor(GameCore.ActorSystem.IActorScope,System.Boolean,GameCore.SceneSystem.Scene)">
+            <summary />
+            <param name="scope" />
+            <param name="skipBirth" />
+            <param name="scene" />
+            <returns />
+        </member>
+        <member name="T:GameCore.ActorSystem.Data.GameDataActorScope">
+            <summary />
+        </member>
+        <member name="P:GameCore.ActorSystem.Data.GameDataActorScope.IgnoreTerrainHeight">
+            <summary />
+        </member>
+        <member name="P:GameCore.ActorSystem.Data.GameDataActorScope.SyncType">
+            <summary />
+        </member>
+        <member name="P:GameCore.ActorSystem.Data.GameDataActorScope.DebugDrawSettings">
+            <summary />
+        </member>
+        <member name="T:GameCore.ActorSystem.Data.GameDataActorSegmented">
+            <summary />
+        </member>
+        <member name="P:GameCore.ActorSystem.Data.GameDataActorSegmented.SegmentedFlags">
+            <summary />
+        </member>
+        <member name="P:GameCore.ActorSystem.Data.GameDataActorSegmented.HeightTest">
+            <summary />
+        </member>
+        <member name="T:GameCore.ActorSystem.Data.GameDataActorSegmentedRectangle">
+            <summary />
+        </member>
+        <member name="P:GameCore.ActorSystem.Data.GameDataActorSegmentedRectangle.LaunchActor">
+            <summary />
+        </member>
+        <member name="P:GameCore.ActorSystem.Data.GameDataActorSegmentedRectangle.ImpactActor">
+            <summary />
+        </member>
+        <member name="P:GameCore.ActorSystem.Data.GameDataActorSegmentedRectangle.CenterActor">
+            <summary />
+        </member>
+        <member name="P:GameCore.ActorSystem.Data.GameDataActorSegmentedRectangle.LaunchLength">
+            <summary />
+        </member>
+        <member name="P:GameCore.ActorSystem.Data.GameDataActorSegmentedRectangle.ImpactLength">
+            <summary />
+        </member>
+        <member name="P:GameCore.ActorSystem.Data.GameDataActorSegmentedRectangle.CenterLength">
+            <summary />
+        </member>
+        <member name="P:GameCore.ActorSystem.Data.GameDataActorSegmentedRectangle.LaunchWidth">
+            <summary />
+        </member>
+        <member name="P:GameCore.ActorSystem.Data.GameDataActorSegmentedRectangle.ImpactWidth">
+            <summary />
+        </member>
+        <member name="P:GameCore.ActorSystem.Data.GameDataActorSegmentedRectangle.CenterWidth">
+            <summary />
+        </member>
+        <member name="M:GameCore.ActorSystem.Data.GameDataActorSegmentedRectangle.CreateActor(GameCore.ActorSystem.IActorScope,System.Boolean,GameCore.SceneSystem.Scene)">
+            <summary />
+            <param name="scope" />
+            <param name="skipBirth" />
+            <param name="scene" />
+            <returns />
+        </member>
+        <member name="T:GameCore.ActorSystem.Data.GameDataActorSegmentedSector">
+            <summary />
+        </member>
+        <member name="P:GameCore.ActorSystem.Data.GameDataActorSegmentedSector.RadiusActor">
+            <summary />
+        </member>
+        <member name="P:GameCore.ActorSystem.Data.GameDataActorSegmentedSector.Radius">
+            <summary />
+        </member>
+        <member name="M:GameCore.ActorSystem.Data.GameDataActorSegmentedSector.CreateActor(GameCore.ActorSystem.IActorScope,System.Boolean,GameCore.SceneSystem.Scene)">
+            <summary />
+            <param name="scope" />
+            <param name="skipBirth" />
+            <param name="scene" />
+            <returns />
+        </member>
+        <member name="T:GameCore.ActorSystem.Data.GameDataActorSite">
+            <summary />
+        </member>
+        <member name="M:GameCore.ActorSystem.Data.GameDataActorSite.CreateActor(GameCore.ActorSystem.IActorScope,System.Boolean,GameCore.SceneSystem.Scene)">
+            <summary />
+            <param name="scope" />
+            <param name="skipBirth" />
+            <param name="scene" />
+            <returns />
+        </member>
+        <member name="T:GameCore.ActorSystem.Data.GameDataActorSound">
+            <summary />
+        </member>
+        <member name="P:GameCore.ActorSystem.Data.GameDataActorSound.Sound">
+            <summary />
+        </member>
+        <member name="P:GameCore.ActorSystem.Data.GameDataActorSound.LoopCount">
+            <summary>
+            Null stands for infinite loop.
+            </summary>
+        </member>
+        <member name="P:GameCore.ActorSystem.Data.GameDataActorSound.Is2D">
+            <summary>
+            The sound will be played in 2D space, which means it will not be affected by the camera position and rotation.
+            </summary>
+        </member>
+        <member name="P:GameCore.ActorSystem.Data.GameDataActorSound.PlayMode">
+            <summary />
+        </member>
+        <member name="P:GameCore.ActorSystem.Data.GameDataActorSound.AutoPlay">
+            <summary />
+        </member>
+        <member name="P:GameCore.ActorSystem.Data.GameDataActorSound.RolloffFactor">
+            <summary>
+            Defines the rolloff factor for audio attenuation. A higher value indicates a steeper decrease in volume with
+            distance. Only works when Is2D is false.
+            </summary>
+        </member>
+        <member name="P:GameCore.ActorSystem.Data.GameDataActorSound.CutoffDistance">
+            <summary>
+            Represents the distance beyond which the sound will be completely cut off. Only works when Is2D is false.
+            </summary>
+        </member>
+        <member name="P:GameCore.ActorSystem.Data.GameDataActorSound.MaxInstanceCount">
+            <summary>
+            Specifies the maximum number of instances allowed. This is a hard limit based on sound link, and if exceeded, new instance will not be played, and if the sound is set to KillOnFinish, it will be killed.
+            </summary>
+        </member>
+        <member name="P:GameCore.ActorSystem.Data.GameDataActorSound.MaxAudibleCount">
+            <summary>
+            Specifies the maximum number of audible instance allowed. This is a hard limit based on sound link, and if exceeded, the sound will be played, but it will not be audible.
+            </summary>
+        </member>
+        <member name="P:GameCore.ActorSystem.Data.GameDataActorSound.ViewActorAsyncType">
+            <summary />
+        </member>
+        <member name="M:GameCore.ActorSystem.Data.GameDataActorSound.CreateActor(GameCore.ActorSystem.IActorScope,System.Boolean,GameCore.SceneSystem.Scene)">
+            <summary />
+            <param name="scope" />
+            <param name="skipBirth" />
+            <param name="scene" />
+            <returns />
+        </member>
+        <member name="T:GameCore.ActorSystem.Data.GameDataActorText">
+            <summary />
+        </member>
+        <member name="P:GameCore.ActorSystem.Data.GameDataActorText.Font">
+            <summary />
+        </member>
+        <member name="P:GameCore.ActorSystem.Data.GameDataActorText.FontSize">
+            <summary />
+        </member>
+        <member name="P:GameCore.ActorSystem.Data.GameDataActorText.Text">
+            <summary />
+        </member>
+        <member name="P:GameCore.ActorSystem.Data.GameDataActorText.Color">
+            <summary />
+        </member>
+        <member name="P:GameCore.ActorSystem.Data.GameDataActorText.WrapWidth">
+            <summary />
+        </member>
+        <member name="P:GameCore.ActorSystem.Data.GameDataActorText.HorizontalAlignment">
+            <summary />
+        </member>
+        <member name="P:GameCore.ActorSystem.Data.GameDataActorText.VerticalAlignment">
+            <summary />
+        </member>
+        <member name="P:GameCore.ActorSystem.Data.GameDataActorText.ViewActorAsyncType">
+            <summary />
+        </member>
+        <member name="M:GameCore.ActorSystem.Data.GameDataActorText.CreateActor(GameCore.ActorSystem.IActorScope,System.Boolean,GameCore.SceneSystem.Scene)">
+            <summary />
+            <param name="scope" />
+            <param name="skipBirth" />
+            <param name="scene" />
+            <returns />
+        </member>
+        <member name="T:GameCore.ActorSystem.Data.IGameDataActorDualEndPoints">
+            <summary />
+        </member>
+        <member name="P:GameCore.ActorSystem.Data.IGameDataActorDualEndPoints.LaunchSocket">
+            <summary />
+        </member>
+        <member name="T:GameCore.ActorSystem.Data.IGameDataActorScope">
+            <summary />
+        </member>
+        <member name="P:GameCore.ActorSystem.Data.IGameDataActorScope.SyncType">
+            <summary />
+        </member>
+        <member name="P:GameCore.ActorSystem.Data.IGameDataActorScope.DebugDrawSettings">
+            <summary />
+        </member>
+        <member name="T:GameCore.ActorSystem.Data.IGameDataActorScopeOverride">
+            <summary />
+        </member>
+        <member name="P:GameCore.ActorSystem.Data.IGameDataActorScopeOverride.ImpactActorsOverride">
+            <summary />
+        </member>
+        <member name="T:GameCore.ActorSystem.Data.IGameDataActorScopeOwner">
+            <summary />
+        </member>
+        <member name="P:GameCore.ActorSystem.Data.IGameDataActorScopeOwner.ActorArray">
+            <summary />
+        </member>
+        <member name="P:GameCore.ActorSystem.Data.IGameDataActorScopeOwner.ImpactActors">
+            <summary />
+        </member>
+        <member name="T:GameCore.ActorSystem.Data.Struct.AnimTrailSetting">
+            <summary>
+            定义动画轨迹的配置设置，控制轨迹效果的外观和行为
+            </summary>
+            <remarks>
+            AnimTrailSetting 类用于配置各种轨迹类型的视觉效果，如刀光、剑气粒子等。
+            它定义了轨迹的起始和结束附着点、宽度以及渲染模式，为创建丰富的视觉效果提供了灵活的配置选项。
+            </remarks>
+        </member>
+        <member name="P:GameCore.ActorSystem.Data.Struct.AnimTrailSetting.SocketA">
+            <summary>
+            获取或设置轨迹的第一个附着点名称
+            </summary>
+            <remarks>
+            附着点 A 通常作为轨迹的起始点或其中一个端点。
+            附着点名称对应于 3D 模型中定义的骨骼或挂载点。
+            </remarks>
+        </member>
+        <member name="P:GameCore.ActorSystem.Data.Struct.AnimTrailSetting.SocketB">
+            <summary>
+            获取或设置轨迹的第二个附着点名称
+            </summary>
+            <remarks>
+            附着点 B 通常作为轨迹的结束点或另一个端点。
+            与附着点 A 配合，定义了轨迹的空间范围和方向。
+            </remarks>
+        </member>
+        <member name="P:GameCore.ActorSystem.Data.Struct.AnimTrailSetting.Width">
+            <summary>
+            获取或设置轨迹的宽度
+            </summary>
+            <remarks>
+            定义轨迹效果的视觉宽度，影响轨迹在屏幕上的粗细程度。
+            较大的值会创建更粗的轨迹效果，较小的值则创建更细的轨迹。
+            </remarks>
+        </member>
+        <member name="P:GameCore.ActorSystem.Data.Struct.AnimTrailSetting.Mode">
+            <summary>
+            获取或设置轨迹的渲染模式
+            </summary>
+            <remarks>
+            控制轨迹在附着点之间的绘制方式和方向。
+            默认模式为从附着点 A 到附着点 B 的直线轨迹。
+            </remarks>
+        </member>
+        <member name="T:GameCore.ActorSystem.Data.Struct.DebugDrawSettings">
+            <summary />
+        </member>
+        <member name="P:GameCore.ActorSystem.Data.Struct.DebugDrawSettings.PreferredColor">
+            <summary />
+        </member>
+        <member name="P:GameCore.ActorSystem.Data.Struct.DebugDrawSettings.Enabled">
+            <summary>
+            Determines whether debug drawing is enabled by default. If true, debug shapes will be drawn in the game scene for debugging purposes. Actors and ActorScopes can still draw debug shapes manually even if this is false.
+            </summary>
+        </member>
+        <member name="T:GameCore.ActorSystem.Data.Struct.MaterialPropertyAnimation">
+            <summary />
+        </member>
+        <member name="P:GameCore.ActorSystem.Data.Struct.MaterialPropertyAnimation.PropertyName">
+            <summary />
+        </member>
+        <member name="P:GameCore.ActorSystem.Data.Struct.MaterialPropertyAnimation.StartValue">
+            <summary />
+        </member>
+        <member name="P:GameCore.ActorSystem.Data.Struct.MaterialPropertyAnimation.EndValue">
+            <summary />
+        </member>
+        <member name="T:GameCore.ActorSystem.Data.Struct.MiniMapIcon">
+            <summary>
+            定义小地图图标的配置，包含不同状态和朝向下的图标资源
+            </summary>
+            <remarks>
+            MiniMapIcon 类用于配置 Actor 在小地图上的显示方式。它支持多种图标状态，
+            包括友方、敌方、旋转等不同情况下的图标显示，以及层级控制。
+            这样可以为玩家提供清晰的小地图视觉信息。
+            </remarks>
+        </member>
+        <member name="P:GameCore.ActorSystem.Data.Struct.MiniMapIcon.Icon">
+            <summary>
+            获取或设置默认的小地图图标
+            </summary>
+            <remarks>
+            这是最基本的图标，在没有特殊状态时显示。
+            通常用于中性或友方单位的默认表示。
+            </remarks>
+        </member>
+        <member name="P:GameCore.ActorSystem.Data.Struct.MiniMapIcon.IconRotated">
+            <summary>
+            获取或设置带有旋转方向的小地图图标
+            </summary>
+            <remarks>
+            当需要显示单位朝向时使用的图标，通常包含箭头或方向指示器。
+            可以根据单位的实际朝向进行旋转显示。
+            </remarks>
+        </member>
+        <member name="P:GameCore.ActorSystem.Data.Struct.MiniMapIcon.IconEnemy">
+            <summary>
+            获取或设置敌方单位的小地图图标
+            </summary>
+            <remarks>
+            专门用于显示敌方单位的图标，通常使用不同的颜色或样式来区分敌友。
+            帮助玩家快速识别小地图上的威胁。
+            </remarks>
+        </member>
+        <member name="P:GameCore.ActorSystem.Data.Struct.MiniMapIcon.IconEnemyRotated">
+            <summary>
+            获取或设置敌方单位带有旋转方向的小地图图标
+            </summary>
+            <remarks>
+            敌方单位的朝向图标，结合了敌方标识和方向指示。
+            让玩家既能识别敌方单位，又能了解其朝向。
+            </remarks>
+        </member>
+        <member name="P:GameCore.ActorSystem.Data.Struct.MiniMapIcon.IconSelfRotated">
+            <summary>
+            获取或设置玩家自身单位带有旋转方向的小地图图标
+            </summary>
+            <remarks>
+            专门用于显示玩家控制的单位的朝向图标，通常具有特殊的视觉样式。
+            帮助玩家快速定位和识别自己的单位。
+            </remarks>
+        </member>
+        <member name="P:GameCore.ActorSystem.Data.Struct.MiniMapIcon.ZIndex">
+            <summary>
+            获取或设置图标的 Z 轴顺序，决定其相对于其他元素的堆叠顺序
+            </summary>
+            <remarks>
+            数值越高的图标会渲染在上层，覆盖数值较低的图标。
+            用于控制不同类型图标在小地图上的显示优先级。
+            </remarks>
+        </member>
+        <member name="T:GameCore.ActorSystem.Data.Enum.ActorSegmentedFlags">
+            <summary />
+        </member>
+        <member name="P:GameCore.ActorSystem.Data.Enum.ActorSegmentedFlags.ForwardAnimPlay">
+            <summary />
+        </member>
+        <member name="P:GameCore.ActorSystem.Data.Enum.ActorSegmentedFlags.DebugDraw">
+            <summary />
+        </member>
+        <member name="T:GameCore.ActorSystem.Data.Enum.ActorSegmentedHeight">
+            <summary>
+            定义 Actor 分段高度的配置选项，控制 Actor 链条中各部分的垂直位置分布
+            </summary>
+            <remarks>
+            此枚举用于配置由多个分段组成的 Actor（如激光束、闪电链等）的高度分布模式。
+            不同的高度模式会影响分段 Actor 的视觉表现和空间定位。
+            </remarks>
+        </member>
+        <member name="F:GameCore.ActorSystem.Data.Enum.ActorSegmentedHeight.LaunchSite">
+            <summary>
+            启动点高度 - 所有分段使用启动点的高度
+            </summary>
+            <remarks>
+            所有分段都保持在启动点的原始高度，不进行高度调整。
+            适用于需要保持水平线性分布的效果。
+            </remarks>
+        </member>
+        <member name="F:GameCore.ActorSystem.Data.Enum.ActorSegmentedHeight.LaunchSiteGround">
+            <summary>
+            启动点地面高度 - 使用启动点的地面高度
+            </summary>
+            <remarks>
+            所有分段都调整到启动点所在位置的地面高度。
+            适用于需要沿地面分布的效果，如地面冲击波等。
+            </remarks>
+        </member>
+        <member name="F:GameCore.ActorSystem.Data.Enum.ActorSegmentedHeight.AllGrounded">
+            <summary>
+            全部贴地 - 每个分段都调整到其所在位置的地面高度
+            </summary>
+            <remarks>
+            每个分段独立调整到其所在位置的地面高度，形成跟随地形的效果。
+            适用于需要贴合地形变化的效果，如沿地面传播的魔法等。
+            </remarks>
+        </member>
+        <member name="T:GameCore.ActorSystem.Data.Enum.AnimTrailMode">
+            <summary>
+            定义动画轨迹的渲染模式，控制轨迹效果在不同附着点之间的绘制方式
+            </summary>
+            <remarks>
+            动画轨迹模式用于配置如刀光、剑气粒子等拥有多个端点的粒子效果的渲染方向和起终点。
+            不同的模式决定了轨迹从哪个点开始，到哪个点结束，以及是否有中心点参与。
+            </remarks>
+        </member>
+        <member name="F:GameCore.ActorSystem.Data.Enum.AnimTrailMode.FromCenterToSocketAB">
+            <summary>
+            从中心点到附着点 A 和 B - 创建从中心分叉到两个端点的轨迹
+            </summary>
+            <remarks>
+            轨迹从一个中心位置开始，同时延伸到附着点 A 和附着点 B。
+            适用于需要从一个源点向多个目标发射的效果，如分裂闪电或多目标法术。
+            </remarks>
+        </member>
+        <member name="F:GameCore.ActorSystem.Data.Enum.AnimTrailMode.FromSocketAToSocketB">
+            <summary>
+            从附着点 A 到附着点 B - 创建直接连接两个附着点的轨迹
+            </summary>
+            <remarks>
+            轨迹从附着点 A 开始，直接延伸到附着点 B。
+            适用于点对点的连接效果，如激光束、链条或直线型魔法攻击。
+            </remarks>
+        </member>
+        <member name="F:GameCore.ActorSystem.Data.Enum.AnimTrailMode.FromSocketBToSocketA">
+            <summary>
+            从附着点 B 到附着点 A - 创建从 B 到 A 方向的轨迹
+            </summary>
+            <remarks>
+            轨迹从附着点 B 开始，直接延伸到附着点 A。
+            与 FromSocketAToSocketB 相反的方向，用于需要反向连接的效果。
+            </remarks>
+        </member>
+        <member name="T:GameCore.ActorSystem.Data.Enum.MaterialPriority">
+            <summary>
+            定义材质的渲染优先级，控制材质在渲染管线中的处理顺序
+            </summary>
+            <remarks>
+            材质优先级用于解决渲染顺序冲突，确保重要的视觉效果能够正确显示。
+            较高优先级的材质会在较低优先级之后渲染，从而覆盖在其上方。
+            这对于 UI 元素、特效和透明物体的正确显示非常重要。
+            </remarks>
+        </member>
+        <member name="F:GameCore.ActorSystem.Data.Enum.MaterialPriority.Priority1">
+            <summary>
+            优先级 1 - 最低优先级，最先渲染
+            </summary>
+            <remarks>
+            适用于背景元素、地形和其他应该在底层显示的材质。
+            </remarks>
+        </member>
+        <member name="F:GameCore.ActorSystem.Data.Enum.MaterialPriority.Priority2">
+            <summary>
+            优先级 2 - 较低优先级
+            </summary>
+            <remarks>
+            适用于一般的 3D 模型和环境对象。
+            </remarks>
+        </member>
+        <member name="F:GameCore.ActorSystem.Data.Enum.MaterialPriority.Priority3">
+            <summary>
+            优先级 3 - 中等优先级
+            </summary>
+            <remarks>
+            适用于角色模型、重要的游戏对象和中层视觉效果。
+            </remarks>
+        </member>
+        <member name="F:GameCore.ActorSystem.Data.Enum.MaterialPriority.Priority4">
+            <summary>
+            优先级 4 - 较高优先级
+            </summary>
+            <remarks>
+            适用于粒子效果、光晕和需要显示在大多数对象之上的元素。
+            </remarks>
+        </member>
+        <member name="F:GameCore.ActorSystem.Data.Enum.MaterialPriority.Priority5">
+            <summary>
+            优先级 5 - 最高优先级，最后渲染
+            </summary>
+            <remarks>
+            适用于 UI 元素、HUD、文字和必须显示在最顶层的视觉效果。
+            </remarks>
+        </member>
+        <member name="T:GameCore.ActorSystem.Data.Enum.ParentRemovalProcedure">
+            <summary>
+            定义当父级 Actor 被移除时，子 Actor 的处理程序
+            </summary>
+            <remarks>
+            此枚举控制 Actor 层级关系中，当父级对象被销毁或移除时，
+            其子级对象应该如何响应。不同的处理方式适用于不同类型的 Actor 关系和使用场景。
+            </remarks>
+        </member>
+        <member name="F:GameCore.ActorSystem.Data.Enum.ParentRemovalProcedure.Default">
+            <summary>
+            默认处理 - 如果是单位 Actor 则分离，否则移除
+            </summary>
+            <remarks>
+            如果 Actor 是单位类型，当父级被移除时会从父级分离但继续存在；
+            如果是其他类型的 Actor，则会被一同移除。
+            这提供了基于 Actor 类型的智能默认行为。
+            </remarks>
+        </member>
+        <member name="F:GameCore.ActorSystem.Data.Enum.ParentRemovalProcedure.Remove">
+            <summary>
+            移除处理 - Actor 会在父级移除时自动移除自身
+            </summary>
+            <remarks>
+            当父级被移除时，子 Actor 也会被自动销毁。
+            适用于生命周期完全依赖于父级的 Actor，如特效、附属装饰等。
+            </remarks>
+        </member>
+        <member name="F:GameCore.ActorSystem.Data.Enum.ParentRemovalProcedure.Detach">
+            <summary>
+            分离处理 - Actor 会从父级分离但不会被自动移除
+            </summary>
+            <remarks>
+            当父级被移除时，子 Actor 会从层级关系中分离出来，
+            但会继续独立存在，不会被自动销毁。
+            适用于具有独立生命周期的 Actor。
+            </remarks>
+        </member>
+        <member name="T:GameCore.ActorSystem.Data.Enum.SoundPlayMode">
+            <summary>
+            定义音频播放的模式，控制多个音频文件的播放顺序和选择方式
+            </summary>
+            <remarks>
+            当一个 Actor 包含多个音频文件时，播放模式决定了系统如何选择和播放这些音频。
+            不同的播放模式可以创建不同的音频体验，如按顺序播放或随机播放。
+            </remarks>
+        </member>
+        <member name="F:GameCore.ActorSystem.Data.Enum.SoundPlayMode.Sequential">
+            <summary>
+            顺序播放 - 按照预定义的顺序依次播放音频文件
+            </summary>
+            <remarks>
+            音频文件将按照它们在列表中的顺序依次播放。
+            适用于需要保持特定播放顺序的场景，如故事叙述、音乐序列等。
+            </remarks>
+        </member>
+        <member name="F:GameCore.ActorSystem.Data.Enum.SoundPlayMode.Random">
+            <summary>
+            随机播放 - 随机选择音频文件进行播放
+            </summary>
+            <remarks>
+            系统将随机选择一个音频文件进行播放，增加音频的多样性。
+            适用于环境音效、战斗音效等需要变化的场景。
+            </remarks>
+        </member>
+        <member name="T:GameCore.ActorSystem.Data.Enum.TextHorizontalAlignment">
+            <summary>
+            Defines the horizontal alignment options for text rendering.
+            </summary>
+        </member>
+        <member name="F:GameCore.ActorSystem.Data.Enum.TextHorizontalAlignment.Left">
+            <summary>
+            Aligns text to the left edge of the container.
+            </summary>
+        </member>
+        <member name="F:GameCore.ActorSystem.Data.Enum.TextHorizontalAlignment.Center">
+            <summary>
+            Centers text horizontally within the container.
+            </summary>
+        </member>
+        <member name="F:GameCore.ActorSystem.Data.Enum.TextHorizontalAlignment.Right">
+            <summary>
+            Aligns text to the right edge of the container.
+            </summary>
+        </member>
+        <member name="T:GameCore.ActorSystem.Data.Enum.TextVerticalAlignment">
+            <summary>
+            定义文本渲染的垂直对齐选项
+            </summary>
+            <remarks>
+            垂直对齐选项控制文本在容器或边界框内的垂直位置。
+            这些选项通常与水平对齐配合使用，以精确控制文本的显示位置。
+            </remarks>
+        </member>
+        <member name="F:GameCore.ActorSystem.Data.Enum.TextVerticalAlignment.Top">
+            <summary>
+            顶部对齐 - 文本与容器的顶部边缘对齐
+            </summary>
+            <remarks>
+            文本的第一行贴近容器的顶部边界显示。
+            </remarks>
+        </member>
+        <member name="F:GameCore.ActorSystem.Data.Enum.TextVerticalAlignment.Center">
+            <summary>
+            居中对齐 - 文本在容器内垂直居中
+            </summary>
+            <remarks>
+            文本块在容器的垂直方向上居中显示，上下留有相等的空间。
+            </remarks>
+        </member>
+        <member name="F:GameCore.ActorSystem.Data.Enum.TextVerticalAlignment.Bottom">
+            <summary>
+            底部对齐 - 文本与容器的底部边缘对齐
+            </summary>
+            <remarks>
+            文本的最后一行贴近容器的底部边界显示。
+            </remarks>
+        </member>
+        <member name="T:GameCore.ActorSystem.Data.GameDataActor">
+            <summary>
+            Represents the base data class for actor configurations, defining common properties and behaviors for all actor types.
+            GameData normally generated from the Data Editor, but can also be created programmatically.
+            </summary>
+            <remarks>
+            This abstract class provides the foundation for all actor data types in the game, including visual elements,
+            effects, models, and other interactive objects. It defines properties for positioning, scaling, attachment,
+            and other common actor characteristics that are used by the actor system to create and manage actors.
+            </remarks>
+        </member>
+        <member name="P:GameCore.ActorSystem.Data.GameDataActor.IsTransient">
+            <summary>
+            Gets a value indicating whether actors created from this data are transient (temporary).
+            </summary>
+            <remarks>
+            Transient actors are typically short-lived effects or animations that don't persist
+            and may be cleaned up more aggressively by the system.
+            </remarks>
+        </member>
+        <member name="P:GameCore.ActorSystem.Data.GameDataActor.Socket">
+            <summary>
+            Gets or sets the socket name for attachment points on the parent actor.
+            </summary>
+            <remarks>
+            When specified, the actor will attach to a named socket on its parent actor,
+            allowing for precise positioning relative to specific attachment points.
+            </remarks>
+        </member>
+        <member name="P:GameCore.ActorSystem.Data.GameDataActor.Rotation">
+            <summary>
+            Gets or sets the rotation offset applied to the actor.
+            </summary>
+            <remarks>
+            This rotation is applied in addition to any inherited rotation from parent actors,
+            unless <see cref="P:GameCore.ActorSystem.Data.GameDataActor.InheritRotation" /> is set to false.
+            </remarks>
+        </member>
+        <member name="P:GameCore.ActorSystem.Data.GameDataActor.InheritRotation">
+            <summary>
+            Gets or sets a value indicating whether the actor should inherit rotation from its parent.
+            </summary>
+            <remarks>
+            When true (default), the actor will apply its parent's rotation in addition to its own.
+            When false, only the actor's local rotation is used.
+            </remarks>
+        </member>
+        <member name="P:GameCore.ActorSystem.Data.GameDataActor.Offset">
+            <summary>
+            Gets or sets the position offset applied to the actor relative to its attachment point.
+            </summary>
+            <remarks>
+            This offset is applied after any parent transformations and socket positioning.
+            </remarks>
+        </member>
+        <member name="P:GameCore.ActorSystem.Data.GameDataActor.InheritScale">
+            <summary>
+            Gets or sets a value indicating whether the actor should inherit scale from its parent.
+            </summary>
+            <remarks>
+            When true, the actor will be affected by its parent's scale transformations.
+            </remarks>
+        </member>
+        <member name="P:GameCore.ActorSystem.Data.GameDataActor.AutoScale">
+            <summary>
+            Gets or sets a value indicating whether the actor should automatically scale based on its scope.
+            </summary>
+            <remarks>
+            This is similar to <see cref="P:GameCore.ActorSystem.Data.GameDataActor.InheritScale" /> but specifically inherits scale from the actor scope
+            rather than just the immediate parent.
+            </remarks>
+        </member>
+        <member name="P:GameCore.ActorSystem.Data.GameDataActor.Scale">
+            <summary>
+            Gets or sets a uniform scale factor applied to the actor.
+            </summary>
+            <remarks>
+            This scale is applied to all dimensions of the actor. Use <see cref="P:GameCore.ActorSystem.Data.GameDataActor.ScaleVector" />
+            for non-uniform scaling along different axes.
+            </remarks>
+        </member>
+        <member name="P:GameCore.ActorSystem.Data.GameDataActor.ScaleVector">
+            <summary>
+            Gets or sets a non-uniform scale vector applied to the actor.
+            </summary>
+            <remarks>
+            This allows different scaling factors for X, Y, and Z axes. If both <see cref="P:GameCore.ActorSystem.Data.GameDataActor.Scale" />
+            and <see cref="P:GameCore.ActorSystem.Data.GameDataActor.ScaleVector" /> are specified, they are combined.
+            </remarks>
+        </member>
+        <member name="P:GameCore.ActorSystem.Data.GameDataActor.AttachForwardOnce">
+            <summary>
+            Gets or sets a value indicating whether the actor should face forward once when attached.
+            </summary>
+            <remarks>
+            When true, the actor will be oriented to face forward relative to its attachment point
+            at the time of attachment, but won't continue to update its facing afterward.
+            </remarks>
+        </member>
+        <member name="P:GameCore.ActorSystem.Data.GameDataActor.MiniMapIcon">
+            <summary>
+            Gets or sets the minimap icon configuration for this actor, if any.
+            </summary>
+            <remarks>
+            When specified, the actor will appear on the minimap with the configured icon and properties.
+            </remarks>
+        </member>
+        <member name="P:GameCore.ActorSystem.Data.GameDataActor.ParentRemovalProcedure">
+            <summary>
+            Gets or sets the procedure to follow when the actor's parent is removed.
+            </summary>
+            <remarks>
+            This determines how the actor should behave when its parent actor is destroyed or removed,
+            such as whether to also be destroyed, detached, or remain in place.
+            </remarks>
+        </member>
+        <member name="P:GameCore.ActorSystem.Data.GameDataActor.ReleaseOnGC">
+            <summary>
+            Gets or sets a value indicating whether the actor should be released during garbage collection.
+            </summary>
+            <remarks>
+            When true, the actor's resources will be released during garbage collection cycles,
+            which can help with memory management for frequently created and destroyed actors.
+            </remarks>
+        </member>
+        <member name="P:GameCore.ActorSystem.Data.GameDataActor.AssetVolume">
+            <summary>
+            Gets the volume dimensions of the actor's asset, if applicable.
+            </summary>
+            <remarks>
+            This represents the 3D bounding box of the actor's visual representation.
+            Base implementation returns null; derived classes may override for specific asset types.
+            </remarks>
+        </member>
+        <member name="P:GameCore.ActorSystem.Data.GameDataActor.AssetRadius">
+            <summary>
+            Gets the radius of the actor's asset, if applicable.
+            </summary>
+            <remarks>
+            This represents the spherical bounding radius of the actor's visual representation.
+            Base implementation returns null; derived classes may override for specific asset types.
+            </remarks>
+        </member>
+        <member name="P:GameCore.ActorSystem.Data.GameDataActor.ViewActorAsyncType">
+            <summary>
+            Gets the type of view actor used for client-side rendering.
+            </summary>
+            <remarks>
+            This determines what kind of rendering actor will be created on the client side
+            to display this actor. Default is the standard actor type.
+            </remarks>
+        </member>
+        <member name="M:GameCore.ActorSystem.Data.GameDataActor.CreateActor(GameCore.ActorSystem.IActorScope,System.Boolean,GameCore.SceneSystem.Scene)">
+            <summary>
+            Creates an actor instance from this data configuration.
+            </summary>
+            <param name="scope">The actor scope that will manage the created actor.</param>
+            <param name="skipBirth">Whether to skip birth animations or effects.</param>
+            <param name="scene">The scene to create the actor in, if different from the scope's scene.</param>
+            <returns>A new actor instance, or null if creation failed.</returns>
+            <remarks>
+            This method must be implemented by derived classes to define how specific actor types
+            are instantiated from their data configurations.
+            </remarks>
+        </member>
+        <member name="T:GameCore.ActorSystem.Data.GameDataActorAction">
+            <summary />
+        </member>
+        <member name="P:GameCore.ActorSystem.Data.GameDataActorAction.LaunchSocket">
+            <summary />
+        </member>
+        <member name="P:GameCore.ActorSystem.Data.GameDataActorAction.ImpactSocket">
+            <summary />
+        </member>
+        <member name="P:GameCore.ActorSystem.Data.GameDataActorAction.ViewActorAsyncType">
+            <summary />
+        </member>
+        <member name="P:GameCore.ActorSystem.Data.GameDataActorAction.GameData#IGameData{GameCore#ActorSystem#Data#IGameDataActorDualEndPoints}#Link">
+            <summary />
+        </member>
+        <member name="M:GameCore.ActorSystem.Data.GameDataActorAction.CreateActor(GameCore.ActorSystem.IActorScope,System.Boolean,GameCore.SceneSystem.Scene)">
+            <summary />
+            <param name="scope" />
+            <param name="skipBirth" />
+            <param name="scene" />
+            <returns />
+        </member>
+        <member name="T:GameCore.ActorSystem.Data.GameDataActorAdditionModel">
+            <summary />
+        </member>
+        <member name="P:GameCore.ActorSystem.Data.GameDataActorAdditionModel.Model">
+            <summary />
+        </member>
+        <member name="P:GameCore.ActorSystem.Data.GameDataActorAdditionModel.CullHostMesh">
+            <summary>
+            Determines whether the host mesh should be culled when the actor is attached to a host.
+            This helps prevent rendering issues, such as overlapping meshes, when the host mesh is 
+            covered by the attached actor (e.g., a unit covered by cloth). 
+            Default value is <c>false</c>.
+            </summary>
+        </member>
+        <member name="P:GameCore.ActorSystem.Data.GameDataActorAdditionModel.ViewActorAsyncType">
+            <summary />
+        </member>
+        <member name="M:GameCore.ActorSystem.Data.GameDataActorAdditionModel.CreateActor(GameCore.ActorSystem.IActorScope,System.Boolean,GameCore.SceneSystem.Scene)">
+            <summary />
+            <param name="scope" />
+            <param name="skipBirth" />
+            <param name="scene" />
+            <returns />
+        </member>
+        <member name="T:GameCore.ActorSystem.Data.GameDataActorBeam">
+            <summary />
+        </member>
+        <member name="P:GameCore.ActorSystem.Data.GameDataActorBeam.Beam">
+            <summary />
+        </member>
+        <member name="P:GameCore.ActorSystem.Data.GameDataActorBeam.LaunchSocket">
+            <summary />
+        </member>
+        <member name="P:GameCore.ActorSystem.Data.GameDataActorBeam.ImpactSocket">
+            <summary />
+        </member>
+        <member name="P:GameCore.ActorSystem.Data.GameDataActorBeam.Fade">
+            <summary />
+        </member>
+        <member name="P:GameCore.ActorSystem.Data.GameDataActorBeam.AutoPlay">
+            <summary />
+        </member>
+        <member name="P:GameCore.ActorSystem.Data.GameDataActorBeam.Duration">
+            <summary />
+        </member>
+        <member name="P:GameCore.ActorSystem.Data.GameDataActorBeam.ViewActorAsyncType">
+            <summary />
+        </member>
+        <member name="P:GameCore.ActorSystem.Data.GameDataActorBeam.GameData#IGameData{GameCore#ActorSystem#Data#IGameDataActorDualEndPoints}#Link">
+            <summary />
+        </member>
+        <member name="M:GameCore.ActorSystem.Data.GameDataActorBeam.CreateActor(GameCore.ActorSystem.IActorScope,System.Boolean,GameCore.SceneSystem.Scene)">
+            <summary />
+            <param name="scope" />
+            <param name="skipBirth" />
+            <param name="scene" />
+            <returns />
+        </member>
+        <member name="T:GameCore.ActorSystem.Data.GameDataActorBSD">
+            <summary />
+        </member>
+        <member name="P:GameCore.ActorSystem.Data.GameDataActorBSD.IsTransient">
+            <summary />
+        </member>
+        <member name="P:GameCore.ActorSystem.Data.GameDataActorBSD.ForceOneShot">
+            <summary />
+        </member>
+        <member name="P:GameCore.ActorSystem.Data.GameDataActorBSD.KillOnFinish">
+            <summary />
+        </member>
+        <member name="T:GameCore.ActorSystem.Data.GameDataActorGrid">
+            <summary>
+            Defines the configuration data for grid actors, including visual appearance and behavioral settings.
+            </summary>
+            <remarks>
+                <para>This class contains all the static configuration that determines how a grid actor behaves and appears in the game.</para>
+                <para>Grid actors can be used for various purposes including building placement guides, area visualization, and tile-based game mechanics.</para>
+                <para>The visual representation is controlled through state models that define different appearances for grid cells.</para>
+            </remarks>
+        </member>
+        <member name="P:GameCore.ActorSystem.Data.GameDataActorGrid.GridSize">
+            <summary>
+            Gets or sets the default size of each grid cell in world units.
+            </summary>
+            <value>
+            The size of each grid cell in world space units. The default value is 128.0f.
+            </value>
+            <remarks>
+                <para>This value defines the initial spacing between grid lines when the actor is created.</para>
+                <para>The actual grid size can be dynamically adjusted after creation through the <see cref="P:GameCore.ActorSystem.ActorGrid.Axis" /> property.</para>
+                <para>Larger values create more spaced-out grids, while smaller values create denser grids.</para>
+            </remarks>
+        </member>
+        <member name="P:GameCore.ActorSystem.Data.GameDataActorGrid.StateModels">
+            <summary>
+            Gets or sets the collection of 3D models used to represent different visual states of grid cells.
+            </summary>
+            <value>
+            A list of model links where each index corresponds to a specific cell state.
+            Can contain <c>null</c> entries for states that should not display any model.
+            The default is an empty collection.
+            </value>
+            <remarks>
+                <para>Each element in the list represents a different visual state that grid cells can display.</para>
+                <para>State values are used as indices into this collection:</para>
+                <list type="bullet">
+                    <item>
+                        <description>State 0: Uses StateModels[0] (or no model if null or empty)</description>
+                    </item>
+                    <item>
+                        <description>State 1: Uses StateModels[1]</description>
+                    </item>
+                    <item>
+                        <description>And so on...</description>
+                    </item>
+                </list>
+                <para>If a state value exceeds the collection size, no model will be displayed for that cell.</para>
+                <para>Null entries are valid and result in invisible/empty cells for those states.</para>
+            </remarks>
+            <example>
+                <code>
+            // Example configuration:
+            // StateModels[0] = null           // State 0: Empty cell
+            // StateModels[1] = WallModel      // State 1: Wall
+            // StateModels[2] = FloorModel     // State 2: Floor
+            // StateModels[3] = DecorModel     // State 3: Decoration
+            </code>
+            </example>
+        </member>
+        <member name="P:GameCore.ActorSystem.Data.GameDataActorGrid.ViewActorAsyncType">
+            <summary />
+        </member>
+        <member name="M:GameCore.ActorSystem.Data.GameDataActorGrid.CreateActor(GameCore.ActorSystem.IActorScope,System.Boolean,GameCore.SceneSystem.Scene)">
+            <summary>
+            Creates a new <see cref="T:GameCore.ActorSystem.ActorGrid" /> instance based on this configuration data.
+            </summary>
+            <param name="scope">The scope that will manage the created actor's lifecycle. Can be <c>null</c>.</param>
+            <param name="skipBirth">If <c>true</c>, skips the actor's birth process during creation.</param>
+            <param name="scene">The scene in which to create the actor. Can be <c>null</c>.</param>
+            <returns>
+            A new <see cref="T:GameCore.ActorSystem.ActorGrid" /> instance configured with this data, or <c>null</c> if creation fails.
+            </returns>
+            <remarks>
+            This method is only available on the client side where full grid functionality is supported.
+            The created actor will use the settings defined in this configuration object.
+            </remarks>
+        </member>
+        <member name="T:GameCore.ActorSystem.Data.GameDataActorHighlight">
+            <summary />
+        </member>
+        <member name="P:GameCore.ActorSystem.Data.GameDataActorHighlight.From">
+            <summary />
+        </member>
+        <member name="P:GameCore.ActorSystem.Data.GameDataActorHighlight.To">
+            <summary />
+        </member>
+        <member name="P:GameCore.ActorSystem.Data.GameDataActorHighlight.AutoReverse">
+            <summary />
+        </member>
+        <member name="P:GameCore.ActorSystem.Data.GameDataActorHighlight.Duration">
+            <summary />
+        </member>
+        <member name="P:GameCore.ActorSystem.Data.GameDataActorHighlight.RepeatBehavior">
+            <summary />
+        </member>
+        <member name="P:GameCore.ActorSystem.Data.GameDataActorHighlight.Weight">
+            <summary />
+        </member>
+        <member name="M:GameCore.ActorSystem.Data.GameDataActorHighlight.CreateActor(GameCore.ActorSystem.IActorScope,System.Boolean,GameCore.SceneSystem.Scene)">
+            <summary />
+            <param name="scope" />
+            <param name="skipBirth" />
+            <param name="scene" />
+            <returns />
+        </member>
+        <member name="T:GameCore.ActorSystem.Data.GameDataActorHostModifier">
+            <summary />
+        </member>
+        <member name="T:GameCore.ActorSystem.Data.GameDataActorMaterial">
+            <summary />
+        </member>
+        <member name="P:GameCore.ActorSystem.Data.GameDataActorMaterial.Material">
+            <summary />
+        </member>
+        <member name="P:GameCore.ActorSystem.Data.GameDataActorMaterial.PropertyAnimations">
+            <summary />
+        </member>
+        <member name="P:GameCore.ActorSystem.Data.GameDataActorMaterial.Priority">
+            <summary />
+        </member>
+        <member name="P:GameCore.ActorSystem.Data.GameDataActorMaterial.IntroDuration">
+            <summary>
+            When the material is applied to a model, it will play the property animations from start to end within this duration.
+            </summary>
+        </member>
+        <member name="P:GameCore.ActorSystem.Data.GameDataActorMaterial.OutroDuration">
+            <summary>
+            When the material is removed from a model, it will play the property animations from end to start within this duration.
+            </summary>
+        </member>
+        <member name="P:GameCore.ActorSystem.Data.GameDataActorMaterial.ViewActorAsyncType">
+            <summary />
+        </member>
+        <member name="M:GameCore.ActorSystem.Data.GameDataActorMaterial.CreateActor(GameCore.ActorSystem.IActorScope,System.Boolean,GameCore.SceneSystem.Scene)">
+            <summary />
+            <param name="scope" />
+            <param name="skipBirth" />
+            <param name="scene" />
+            <returns />
+        </member>
+        <member name="T:GameCore.ActorSystem.Enum.ScopeAction">
+            <summary>
+            定义 Actor 作用域可以执行的操作类型
+            </summary>
+            <remarks>
+            这个枚举用于标识不同类型的作用域操作，这些操作影响作用域内 Actor 的行为和表现。
+            作用域操作通常在特定游戏事件或触发条件下执行。
+            </remarks>
+        </member>
+        <member name="F:GameCore.ActorSystem.Enum.ScopeAction.Normal">
+            <summary>
+            这是干啥的？忘记了。
+            </summary>
+        </member>
+        <member name="F:GameCore.ActorSystem.Enum.ScopeAction.Impact">
+            <summary>
+            撞击操作 - 触发撞击效果和相关 Actor
+            </summary>
+            <remarks>
+            当执行此操作时，作用域会触发撞击相关的视觉效果、声音效果或其他 Actor。
+            通常用于碰撞检测、技能命中或其他需要产生撞击反馈的场景。
+            </remarks>
+        </member>
+        <member name="T:GameCore.ActorSystem.Enum.TintColorType">
+            <summary>
+            Defines the blending mode for applying tint colors to actor models.
+            </summary>
+            <remarks>
+            This enumeration determines how tint colors interact with the actor's original texture colors.
+            Different blending modes provide various visual effects for team colors, status indicators, 
+            material adjustments, and other color-based visual feedback systems.
+            </remarks>
+        </member>
+        <member name="F:GameCore.ActorSystem.Enum.TintColorType.Factor">
+            <summary>
+            Multiplies the tint color with the actor's base color.
+            </summary>
+            <remarks>
+            In factor mode, each color channel is multiplied: Result = BaseColor * TintColor.
+            This creates a darkening or color-shifting effect while preserving the original texture's detail.
+            Useful for creating subtle color variations, shadows, or material property changes.
+            White (255,255,255) tint has no effect, while black (0,0,0) creates complete darkness.
+            </remarks>
+        </member>
+        <member name="F:GameCore.ActorSystem.Enum.TintColorType.Override">
+            <summary>
+            Blends the tint color over the actor's base color using alpha compositing.
+            </summary>
+            <remarks>
+            In override mode, the tint color is alpha-blended with the base color: 
+            Result = BaseColor * (1 - TintAlpha) + TintColor * TintAlpha.
+            The alpha channel of the tint color controls the blend strength:
+            - Alpha = 1.0 (255): Complete color replacement
+            - Alpha = 0.5 (128): 50% blend between base and tint
+            - Alpha = 0.0 (0): No tint effect, original color preserved
+            Ideal for team colors, health status indicators, and overlay effects.
+            </remarks>
+        </member>
+        <member name="T:GameCore.ActorSystem.IActorAnimationPlayable">
+            <summary>
+            表示可以播放动画的Actor接口
+            </summary>
+        </member>
+        <member name="M:GameCore.ActorSystem.IActorAnimationPlayable.PlayAnimationSequence(GameData.IGameLink{GameCore.ModelAnimation.Data.GameDataAnimationSequence},System.Single)">
+            <summary>
+            播放动画序列，使用游戏数据中的触发事件设置
+            </summary>
+            <param name="link">动画序列的游戏数据链接</param>
+            <returns>创建的动画序列对象，如果失败则返回null</returns>
+        </member>
+        <member name="M:GameCore.ActorSystem.IActorAnimationPlayable.PlayAnimationSequence(GameData.IGameLink{GameCore.ModelAnimation.Data.GameDataAnimationSequence},System.Boolean,System.Single)">
+            <summary>
+            播放动画序列，指定是否触发事件
+            </summary>
+            <param name="link">动画序列的游戏数据链接</param>
+            <param name="triggerEvents">是否触发动画序列中的事件</param>
+            <returns>创建的动画序列对象，如果失败则返回null</returns>
+        </member>
+        <member name="M:GameCore.ActorSystem.IActorAnimationPlayable.PlayAnimation(GameCore.ResourceType.Animation,EngineInterface.BaseType.AnimationPlayParam)">
+            <summary>
+            播放动画文件
+            </summary>
+            <param name="animationFile">动画文件资源</param>
+            <param name="param">可选的动画播放参数</param>
+            <returns>创建的动画对象，如果失败则返回null</returns>
+        </member>
+        <member name="M:GameCore.ActorSystem.IActorAnimationPlayable.PlayAnimation(GameData.IGameLink{GameCore.ModelAnimation.Data.GameDataAnimationSimple})">
+            <summary>
+            播放动画，使用游戏数据链接
+            </summary>
+            <param name="link">动画的游戏数据链接</param>
+            <returns>创建的动画对象，如果失败则返回null</returns>
+        </member>
+        <member name="M:GameCore.ActorSystem.IActorAnimationPlayable.PlayAnimationBracket(GameData.IGameLink{GameCore.ModelAnimation.Data.GameDataAnimationBracket})">
+            <summary />
+            <param name="link" />
+            <returns />
+        </member>
+        <member name="M:GameCore.ActorSystem.IActorAnimationPlayable.StopAnimationOfLayer(EngineInterface.Enum.AnimationLogicLayer)">
+            <summary />
+            <param name="logicLayer" />
+            <returns />
+        </member>
+        <member name="M:GameCore.ActorSystem.IActorAnimationPlayable.SetBirthStandDeathAnimation(EngineCommon.UTF8String,EngineCommon.UTF8String,EngineCommon.UTF8String)">
+            <summary />
+            <param name="birth" />
+            <param name="stand" />
+            <param name="death" />
+            <returns />
+        </member>
+        <member name="M:GameCore.ActorSystem.IActorAnimationPlayable.SetAnimationMapping(EngineCommon.UTF8String,EngineCommon.UTF8String)">
+            <summary />
+            <param name="alias" />
+            <param name="animationRaw" />
+            <returns />
+        </member>
+        <member name="M:GameCore.ActorSystem.IActorAnimationPlayable.ClearAnimationMapping(EngineCommon.UTF8String)">
+            <summary />
+            <param name="alias" />
+            <returns />
+        </member>
+        <member name="M:GameCore.ActorSystem.IActorAnimationPlayable.GetAnimationInstances">
+            <summary />
+            <returns />
+        </member>
+        <member name="T:GameCore.ActorSystem.IActorAnimationPlayableExtensions">
+            <summary>
+            IActorAnimationPlayable接口的扩展方法
+            </summary>
+        </member>
+        <member name="M:GameCore.ActorSystem.IActorAnimationPlayableExtensions.PlayAnimationSequence(GameCore.ActorSystem.IActorAnimationPlayable,GameData.IGameLink{GameCore.ModelAnimation.Data.GameDataAnimationSequence})">
+            <summary>
+            播放动画序列，使用游戏数据中的触发事件设置
+            </summary>
+            <param name="actor">可播放动画的Actor</param>
+            <param name="link">动画序列的游戏数据链接</param>
+            <returns>创建的动画序列对象，如果失败则返回null</returns>
+        </member>
+        <member name="M:GameCore.ActorSystem.IActorAnimationPlayableExtensions.PlayAnimationSequence(GameCore.ActorSystem.IActorAnimationPlayable,GameData.IGameLink{GameCore.ModelAnimation.Data.GameDataAnimationSequence},System.Boolean)">
+            <summary>
+            播放动画序列，指定是否触发事件
+            </summary>
+            <param name="actor">可播放动画的Actor</param>
+            <param name="link">动画序列的游戏数据链接</param>
+            <param name="triggerEvents">是否触发动画序列中的事件</param>
+            <returns>创建的动画序列对象，如果失败则返回null</returns>
+        </member>
+        <member name="M:GameCore.ActorSystem.IActorAnimationPlayableExtensions.PlayAnimation(GameCore.ActorSystem.IActorAnimationPlayable,GameCore.ResourceType.Animation,EngineInterface.BaseType.AnimationPlayParam)">
+            <summary>
+            播放动画文件
+            </summary>
+            <param name="actor">可播放动画的Actor</param>
+            <param name="animationFile">动画文件资源</param>
+            <param name="param">可选的动画播放参数</param>
+            <returns>创建的动画对象，如果失败则返回null</returns>
+        </member>
+        <member name="M:GameCore.ActorSystem.IActorAnimationPlayableExtensions.PlayAnimation(GameCore.ActorSystem.IActorAnimationPlayable,GameData.IGameLink{GameCore.ModelAnimation.Data.GameDataAnimationSimple})">
+            <summary>
+            播放动画，使用游戏数据链接
+            </summary>
+            <param name="actor">可播放动画的Actor</param>
+            <param name="link">动画的游戏数据链接</param>
+            <returns>创建的动画对象，如果失败则返回null</returns>
+        </member>
+        <member name="M:GameCore.ActorSystem.IActorAnimationPlayableExtensions.StopAnimationOfLayer(GameCore.ActorSystem.IActorAnimationPlayable,EngineInterface.Enum.AnimationLogicLayer)">
+            <summary />
+            <param name="actor" />
+            <param name="logicLayer" />
+            <returns />
+        </member>
+        <member name="M:GameCore.ActorSystem.IActorAnimationPlayableExtensions.SetBirthStandDeathAnimation(GameCore.ActorSystem.IActorAnimationPlayable,EngineCommon.UTF8String,EngineCommon.UTF8String,EngineCommon.UTF8String)">
+            <summary />
+            <param name="actor" />
+            <param name="birth" />
+            <param name="stand" />
+            <param name="death" />
+            <returns />
+        </member>
+        <member name="M:GameCore.ActorSystem.IActorAnimationPlayableExtensions.SetAnimationMapping(GameCore.ActorSystem.IActorAnimationPlayable,EngineCommon.UTF8String,EngineCommon.UTF8String)">
+            <summary />
+            <param name="actor" />
+            <param name="alias" />
+            <param name="animationRaw" />
+            <returns />
+        </member>
+        <member name="M:GameCore.ActorSystem.IActorAnimationPlayableExtensions.ClearAnimationMapping(GameCore.ActorSystem.IActorAnimationPlayable,EngineCommon.UTF8String)">
+            <summary />
+            <param name="actor" />
+            <param name="alias" />
+            <returns />
+        </member>
+        <member name="M:GameCore.ActorSystem.IActorAnimationPlayableExtensions.GetAnimationInstances(GameCore.ActorSystem.IActorAnimationPlayable)">
+            <summary />
+            <param name="actor" />
+            <returns />
+        </member>
+        <member name="T:GameCore.ActorSystem.IActorColorizable">
+            <summary>
+            Defines the interface for actors that support color-based visual effects.
+            </summary>
+            <remarks>
+            IActorColorizable provides a standardized way to apply color effects to game actors,
+            including temporary highlights and persistent tint colors. This supports selection indicators, 
+            status effects, damage indicators, spell effects, team colors, material adjustments, and other 
+            visual feedback mechanisms. The interface supports both static colors and animated color transitions, 
+            with the ability to layer multiple effects using weighted aggregation. All color effects use HDR 
+            (High Dynamic Range) colors for enhanced visual fidelity.
+            </remarks>
+        </member>
+        <member name="P:GameCore.ActorSystem.IActorColorizable.HighlightAggregator">
+            <summary>
+            Gets the arithmetic aggregator used to combine multiple highlight effects.
+            </summary>
+            <value>The aggregator that manages and blends multiple highlight colors, or null if not initialized.</value>
+            <remarks>
+            The highlight aggregator combines multiple highlight effects using arithmetic blending operations.
+            This allows for complex visual effects where multiple systems can contribute to the final
+            highlight appearance simultaneously, such as selection + damage + spell effect highlights.
+            </remarks>
+        </member>
+        <member name="M:GameCore.ActorSystem.IActorColorizable.AnimateHighlight(GameCore.Drawing.HdrColor,GameCore.Drawing.HdrColor,System.TimeSpan,System.Boolean,System.Nullable{GameCore.Animation.Enum.RepeatBehavior},System.Object,System.Double)">
+            <summary>
+            Creates an animated highlight transition between two specific colors.
+            </summary>
+            <param name="from">The starting color of the highlight animation.</param>
+            <param name="to">The ending color of the highlight animation.</param>
+            <param name="blendTime">The duration of the color transition.</param>
+            <param name="autoReverse">Whether to automatically reverse the animation back to the starting color.</param>
+            <param name="repeatBehavior">The repeat behavior for the animation (e.g., loop count, infinite).</param>
+            <param name="key">Optional identifier for this highlight effect, used for later removal or modification.</param>
+            <param name="weight">The blending weight of this highlight relative to others (default: 1.0).</param>
+            <returns>The created animation object for controlling the highlight transition.</returns>
+            <remarks>
+            This method creates a smooth color transition animation for visual effects like pulsing damage indicators,
+            charging spell effects, or selection feedback. The animation can be configured to loop, reverse, or play once.
+            Multiple animations can run simultaneously with different weights affecting the final appearance.
+            </remarks>
+        </member>
+        <member name="M:GameCore.ActorSystem.IActorColorizable.AnimateHighlight(GameCore.Drawing.HdrColor,System.TimeSpan,System.Boolean,System.Nullable{GameCore.Animation.Enum.RepeatBehavior},System.Object,System.Double)">
+            <summary>
+            Creates an animated highlight transition from the current color to a target color.
+            </summary>
+            <param name="color">The target color for the highlight animation.</param>
+            <param name="blendTime">The duration of the color transition.</param>
+            <param name="autoReverse">Whether to automatically reverse the animation back to the starting color.</param>
+            <param name="repeatBehavior">The repeat behavior for the animation (e.g., loop count, infinite).</param>
+            <param name="key">Optional identifier for this highlight effect, used for later removal or modification.</param>
+            <param name="weight">The blending weight of this highlight relative to others (default: 1.0).</param>
+            <returns>The created animation object for controlling the highlight transition.</returns>
+            <remarks>
+            This is a convenience method that animates from the current highlight state to the specified color.
+            It's particularly useful for creating highlight effects that build upon existing highlights
+            rather than replacing them entirely.
+            </remarks>
+        </member>
+        <member name="M:GameCore.ActorSystem.IActorColorizable.ClearAllHighlights">
+            <summary>
+            Removes all highlight effects from this actor.
+            </summary>
+            <remarks>
+            This method clears all active highlight effects, including both static highlights and
+            running animations. It effectively resets the actor to its default appearance.
+            Use this when you need to completely clear all visual highlighting effects.
+            </remarks>
+        </member>
+        <member name="M:GameCore.ActorSystem.IActorColorizable.ClearHighlight(System.Object)">
+            <summary>
+            Removes a specific highlight effect identified by its key.
+            </summary>
+            <param name="key">The identifier of the highlight effect to remove.</param>
+            <remarks>
+            This method removes only the highlight effect associated with the specified key,
+            leaving other highlight effects intact. This allows for selective removal of
+            specific effects while maintaining others, such as removing a damage indicator
+            while keeping a selection highlight active.
+            </remarks>
+        </member>
+        <member name="M:GameCore.ActorSystem.IActorColorizable.InitializeHighlightAggregator">
+            <summary>
+            Initializes the highlight aggregator system for this actor.
+            </summary>
+            <remarks>
+            This method must be called before using any highlight functionality. It sets up
+            the internal systems needed to manage and blend multiple highlight effects.
+            After calling this method, the HighlightAggregator property will be non-null
+            and ready for use.
+            </remarks>
+        </member>
+        <member name="M:GameCore.ActorSystem.IActorColorizable.SetHighlight(GameCore.Drawing.HdrColor,System.Object,System.Double)">
+            <summary>
+            Sets a static highlight color for this actor.
+            </summary>
+            <param name="color">The highlight color to apply.</param>
+            <param name="key">Optional identifier for this highlight effect.</param>
+            <param name="weight">The blending weight of this highlight relative to others (default: 1.0).</param>
+            <remarks>
+            This method applies a static (non-animated) highlight color to the actor.
+            Unlike animated highlights, static highlights remain constant until explicitly
+            changed or removed. Multiple static highlights can be applied simultaneously
+            and will be blended together based on their weights.
+            </remarks>
+        </member>
+        <member name="P:GameCore.ActorSystem.IActorColorizable.TintColorAggregators">
+            <summary>
+            Gets the arithmetic aggregators used to combine multiple tint color effects for different tint types.
+            </summary>
+            <value>A dictionary mapping tint types to their respective aggregators, or null if not initialized.</value>
+            <remarks>
+            The tint color system supports multiple tint types, allowing different blending modes for various visual effects. 
+            Each tint type has its own arithmetic aggregator that combines multiple tint effects using arithmetic blending operations. 
+            Factor type provides multiplicative blending while Override type provides alpha-composited blending.
+            This design allows for separate management of different visual effect categories.
+            </remarks>
+        </member>
+        <member name="M:GameCore.ActorSystem.IActorColorizable.AnimateTintColor(GameCore.Drawing.HdrColor,GameCore.ActorSystem.Enum.TintColorType,System.TimeSpan,System.Boolean,System.Nullable{GameCore.Animation.Enum.RepeatBehavior},System.Object,System.Double)">
+            <summary>
+            Creates an animated tint color transition from the current color to a target color using the specified tint type.
+            </summary>
+            <param name="color">The target color for the tint animation.</param>
+            <param name="tintColorType">The tint blending mode to use (default: Factor for multiplicative blending).</param>
+            <param name="blendTime">The duration of the color transition.</param>
+            <param name="autoReverse">Whether to automatically reverse the animation back to the starting color.</param>
+            <param name="repeatBehavior">The repeat behavior for the animation (e.g., loop count, infinite).</param>
+            <param name="key">Optional identifier for this tint effect, used for later removal or modification.</param>
+            <param name="weight">The blending weight of this tint relative to others (default: 1.0).</param>
+            <returns>The created animation object for controlling the tint transition.</returns>
+            <remarks>
+            This convenience method animates from the current tint state to the specified color using the specified blending mode.
+            It's useful for creating smooth transitions when changing team colors, status indicators,
+            or other persistent color effects. Different tint types provide various visual blending behaviors.
+            </remarks>
+        </member>
+        <member name="M:GameCore.ActorSystem.IActorColorizable.AnimateTintColor(GameCore.Drawing.HdrColor,GameCore.Drawing.HdrColor,GameCore.ActorSystem.Enum.TintColorType,System.TimeSpan,System.Boolean,System.Nullable{GameCore.Animation.Enum.RepeatBehavior},System.Object,System.Double)">
+            <summary>
+            Creates an animated tint color transition between two specific colors using the specified tint type.
+            </summary>
+            <param name="from">The starting color of the tint animation.</param>
+            <param name="to">The ending color of the tint animation.</param>
+            <param name="tintColorType">The tint blending mode to use (default: Factor for multiplicative blending).</param>
+            <param name="blendTime">The duration of the color transition.</param>
+            <param name="autoReverse">Whether to automatically reverse the animation back to the starting color.</param>
+            <param name="repeatBehavior">The repeat behavior for the animation (e.g., loop count, infinite).</param>
+            <param name="key">Optional identifier for this tint effect, used for later removal or modification.</param>
+            <param name="weight">The blending weight of this tint relative to others (default: 1.0).</param>
+            <returns>The created animation object for controlling the tint transition.</returns>
+            <remarks>
+            This method creates a smooth color transition animation between two specific colors using the specified blending mode.
+            It's useful for creating complex visual effects like pulsing damage indicators, charging spell effects,
+            or selection feedback with precise color control.
+            </remarks>
+        </member>
+        <member name="M:GameCore.ActorSystem.IActorColorizable.ClearTintColor">
+            <summary>
+            Completely disables all tint color effects for all tint types on this actor.
+            </summary>
+            <remarks>
+            This method clears all active tint color effects across all tint types, including both static tints and
+            running animations. It completely resets the actor's tint colors to their default state.
+            Use this when you need to completely clear all persistent color modifications across the entire model.
+            </remarks>
+        </member>
+        <member name="M:GameCore.ActorSystem.IActorColorizable.ResetTintColorByType(GameCore.ActorSystem.Enum.TintColorType)">
+            <summary>
+            Resets tint color effects for a specific tint type to their default state.
+            </summary>
+            <param name="tintColorType">The tint type to reset (default: Factor).</param>
+            <remarks>
+            This method removes all tint color effects for the specified tint type, including both static tints and
+            running animations, while leaving other tint types intact. This allows for selective reset of specific
+            blending modes while maintaining other color effects on the model.
+            </remarks>
+        </member>
+        <member name="M:GameCore.ActorSystem.IActorColorizable.ClearTintColorByKey(System.Object,GameCore.ActorSystem.Enum.TintColorType)">
+            <summary>
+            Removes a specific tint color effect identified by its key from a specific tint type.
+            </summary>
+            <param name="key">The identifier of the tint color effect to remove.</param>
+            <param name="tintColorType">The tint type to modify (default: Factor).</param>
+            <remarks>
+            This method removes only the tint color effect associated with the specified key from the specified tint type,
+            leaving other tint effects intact. This allows for selective removal of specific color modifications
+            while maintaining others, such as removing a health status tint while keeping team color active.
+            </remarks>
+        </member>
+        <member name="M:GameCore.ActorSystem.IActorColorizable.InitializeTintColorAggregators">
+            <summary>
+            Initializes the tint color aggregator system for this actor.
+            </summary>
+            <remarks>
+            This method must be called before using any tint color functionality. It sets up
+            the internal systems needed to manage and blend multiple tint color effects across different tint types.
+            After calling this method, the TintColorAggregators property will be non-null and ready for use.
+            </remarks>
+        </member>
+        <member name="M:GameCore.ActorSystem.IActorColorizable.SetTintColor(GameCore.Drawing.HdrColor,GameCore.ActorSystem.Enum.TintColorType,System.Object,System.Double)">
+            <summary>
+            Sets a static tint color for this actor using the specified tint type.
+            </summary>
+            <param name="color">The tint color to apply.</param>
+            <param name="tintColorType">The tint blending mode to use (default: Factor for multiplicative blending).</param>
+            <param name="key">Optional identifier for this tint effect.</param>
+            <param name="weight">The blending weight of this tint relative to others (default: 1.0).</param>
+            <remarks>
+            This method applies a static (non-animated) tint color using the specified blending mode.
+            Tint colors are persistent modifications that remain active until explicitly changed or removed.
+            Multiple tint colors can be applied simultaneously and will be blended together based on their weights.
+            Different tint types provide various visual blending behaviors. Common uses include team colors,
+            health status indicators, and material property adjustments.
+            </remarks>
+        </member>
+        <member name="M:GameCore.ActorSystem.IActorColorizable.InitializeColorAggregators">
+            <summary>
+            Initializes both highlight and tint color aggregator systems for this actor.
+            </summary>
+            <remarks>
+            This convenience method initializes both color effect systems in one call.
+            It's equivalent to calling both InitializeHighlightAggregator() and 
+            InitializeTintColorAggregators(). After calling this method, both aggregator
+            properties will be non-null and ready for use.
+            </remarks>
+        </member>
+        <member name="M:GameCore.ActorSystem.IActorColorizable.ClearAllColorEffects">
+            <summary>
+            Removes all color effects from this actor, including both highlights and tint colors.
+            </summary>
+            <remarks>
+            This method clears all active color effects, resetting the actor to its default
+            appearance. It's equivalent to calling both ClearAllHighlights() and ClearTintColor().
+            Use this for complete visual reset or when changing contexts that require clean state.
+            </remarks>
+        </member>
+        <member name="T:GameCore.ActorSystem.IActorDualEndPoints">
+            <summary />
+        </member>
+        <member name="P:GameCore.ActorSystem.IActorDualEndPoints.LaunchSiteContext">
+            <summary />
+        </member>
+        <member name="M:GameCore.ActorSystem.IActorDualEndPoints.SetLaunchSite(GameCore.ActorSystem.IActorEndPointContext)">
+            <summary />
+            <param name="site" />
+            <returns />
+        </member>
+        <member name="M:GameCore.ActorSystem.IActorDualEndPoints.GameCore#Interface#IActor#OnAddedToScope(GameCore.ActorSystem.IActorScope)">
+            <summary />
+            <param name="actorScope" />
+            <returns />
+        </member>
+        <member name="T:GameCore.ActorSystem.IActorEndPointContext">
+            <summary />
+        </member>
+        <member name="M:GameCore.ActorSystem.IActorEndPointContext.AsLaunchSiteFor(GameCore.ActorSystem.IActorDualEndPoints)">
+            <summary />
+            <param name="actor" />
+            <returns />
+        </member>
+        <member name="P:GameCore.ActorSystem.IActorEndPointContext.WorldPosition">
+            <summary />
+        </member>
+        <member name="T:GameCore.ActorSystem.IActorPlayable">
+            <summary>
+            Defines an interface for actors that can be played, controlled, or have their playback speed adjusted.
+            </summary>
+            <remarks>
+            This interface extends basic actor functionality to support playback control, typically used for
+            animations, effects, or other time-based actors that can be started, stopped, or have their
+            timing modified. It's commonly implemented by actors that contain animations or sequences.
+            </remarks>
+        </member>
+        <member name="M:GameCore.ActorSystem.IActorPlayable.Play">
+            <summary>
+            Starts playing the actor's animation, effect, or sequence.
+            </summary>
+            <returns>
+                <c>true</c> if playback was successfully started; otherwise, <c>false</c>.</returns>
+            <remarks>
+            This method initiates the actor's playback functionality, such as starting animations,
+            sound effects, or other time-based sequences. The return value indicates whether
+            the play operation was successful.
+            </remarks>
+        </member>
+        <member name="M:GameCore.ActorSystem.IActorPlayable.SetPlaySpeed(System.Single)">
+            <summary>
+            Sets the playback speed multiplier for the actor's animation or sequence.
+            </summary>
+            <param name="speed">The speed multiplier (1.0 = normal speed, 0.5 = half speed, 2.0 = double speed).</param>
+            <returns>
+                <c>true</c> if the speed was successfully set; otherwise, <c>false</c>.</returns>
+            <remarks>
+            This method allows dynamic control of playback timing, enabling effects like slow motion
+            or fast-forward. A speed of 1.0 represents normal playback, values less than 1.0 slow down
+            playback, and values greater than 1.0 speed up playback.
+            </remarks>
+        </member>
+        <member name="T:GameCore.ActorSystem.IActorScope">
+            <summary>
+            定义 Actor 作用域接口，管理一组相关 Actor 的生命周期和行为
+            </summary>
+            <remarks>
+            Actor 作用域是一个容器，用于管理一组逻辑上相关的 Actor 对象。它提供了统一的
+            生命周期管理、可见性控制、动作执行等功能。作用域可以是瞬态的或持久的，并支持
+            在客户端和服务端之间的同步。
+            </remarks>
+        </member>
+        <member name="P:GameCore.ActorSystem.IActorScope.Id">
+            <summary>
+            获取作用域的唯一标识符
+            </summary>
+        </member>
+        <member name="P:GameCore.ActorSystem.IActorScope.Context">
+            <summary>
+            获取作用域的上下文信息
+            </summary>
+            <remarks>
+            上下文包含作用域的配置、父级信息、以及其他运行时状态。
+            </remarks>
+        </member>
+        <member name="P:GameCore.ActorSystem.IActorScope.MainActor">
+            <summary>
+            获取作用域的主要 Actor（如果存在）
+            </summary>
+            <remarks>
+            主要 Actor 通常是作用域的核心对象，其他 Actor 可能围绕它进行操作。
+            对于作用域拥有者，返回其自身作用域的同步 Actor。
+            </remarks>
+        </member>
+        <member name="P:GameCore.ActorSystem.IActorScope.Host">
+            <summary>
+            获取作用域的宿主 Actor
+            </summary>
+            <remarks>
+            宿主 Actor 是承载此作用域的父级 Actor，通常用于确定作用域的位置和变换。
+            </remarks>
+        </member>
+        <member name="P:GameCore.ActorSystem.IActorScope.IsTransient">
+            <summary>
+            获取一个值，指示作用域是否为瞬态
+            </summary>
+            <remarks>
+            瞬态作用域通常用于临时效果，生命周期较短，而非瞬态作用域则用于持久对象。
+            </remarks>
+        </member>
+        <member name="P:GameCore.ActorSystem.IActorScope.ImpactActors">
+            <summary>
+            获取撞击时要创建的 Actor 数据链接列表
+            </summary>
+            <remarks>
+            当执行撞击操作时，这些 Actor 将被创建并添加到作用域中，通常用于视觉效果或音效。
+            </remarks>
+        </member>
+        <member name="M:GameCore.ActorSystem.IActorScope.Kill">
+            <summary>
+            终止作用域，播放死亡动画并执行清理
+            </summary>
+            <remarks>
+            与 <see cref="M:GameCore.ActorSystem.IActorScope.Destroy" /> 不同，此方法会播放适当的死亡动画和效果。
+            </remarks>
+        </member>
+        <member name="M:GameCore.ActorSystem.IActorScope.Destroy">
+            <summary>
+            销毁作用域和其中的所有 Actor，不播放死亡动画
+            </summary>
+        </member>
+        <member name="M:GameCore.ActorSystem.IActorScope.GetById(System.Int32)">
+            <summary>
+            根据 ID 获取作用域实例
+            </summary>
+            <param name="id">作用域的唯一标识符</param>
+            <returns>对应的作用域实例，如果未找到则返回 <c>null</c></returns>
+        </member>
+        <member name="M:GameCore.ActorSystem.IActorScope.Add(GameCore.ActorSystem.Actor)">
+            <summary>
+            向作用域添加 Actor
+            </summary>
+            <param name="actor">要添加的 Actor</param>
+            <returns>如果成功添加则返回 <c>true</c>；否则返回 <c>false</c></returns>
+            <remarks>
+            添加 Actor 时会处理附加、缩放、作用域分配等操作，并触发相应的事件回调。
+            </remarks>
+        </member>
+        <member name="M:GameCore.ActorSystem.IActorScope.Remove(GameCore.ActorSystem.Actor)">
+            <summary>
+            从作用域移除 Actor
+            </summary>
+            <param name="actor">要移除的 Actor</param>
+            <returns>如果成功移除则返回 <c>true</c>；否则返回 <c>false</c></returns>
+        </member>
+        <member name="M:GameCore.ActorSystem.IActorScope.HandleAction(GameCore.ActorSystem.Enum.ScopeAction)">
+            <summary>
+            处理作用域操作
+            </summary>
+            <param name="action">要处理的操作类型</param>
+            <exception cref="T:System.ArgumentOutOfRangeException">当传入无效的操作类型时抛出</exception>
+            <remarks>
+            根据不同的操作类型执行相应的逻辑，如创建撞击效果 Actor 等。
+            </remarks>
+        </member>
+        <member name="P:GameCore.ActorSystem.IActorScope.AttachSite">
+            <summary>
+            获取附加点 Actor
+            </summary>
+            <remarks>
+            通常与主要 Actor 相同，用作其他 Actor 的附加目标。
+            </remarks>
+        </member>
+        <member name="P:GameCore.ActorSystem.IActorScope.SourceSite">
+            <summary>
+            获取源 Actor 的附加点，延迟创建
+            </summary>
+            <remarks>
+            源 Actor 附加点用于标识作用域的源头位置，只在需要时创建。
+            </remarks>
+        </member>
+        <member name="P:GameCore.ActorSystem.IActorScope.EnsuredSourceSite">
+            <summary>
+            获取确保有效的源 Actor 附加点
+            </summary>
+            <remarks>
+            与 <see cref="P:GameCore.ActorSystem.IActorScope.SourceSite" /> 不同，此属性保证返回有效的 Actor 实例，如果不存在则会创建。
+            </remarks>
+        </member>
+        <member name="P:GameCore.ActorSystem.IActorScope.ClientActors">
+            <summary>
+            获取客户端 Actor 集合
+            </summary>
+            <remarks>
+            包含当前作用域中所有客户端 Actor 的集合，用于管理和遍历。
+            </remarks>
+        </member>
+        <member name="T:GameCore.ActorSystem.IActorScopeContext">
+            <summary>
+            定义 Actor 作用域上下文接口，提供作用域运行所需的环境信息和配置
+            </summary>
+            <remarks>
+            作用域上下文包含了作用域运行所需的所有环境信息，包括目标、来源、配置数据、
+            位置信息、缩放参数等。它为作用域的创建和管理提供了统一的数据访问接口。
+            </remarks>
+        </member>
+        <member name="P:GameCore.ActorSystem.IActorScopeContext.IsValid">
+            <summary>
+            获取一个值，指示此上下文是否有效
+            </summary>
+            <remarks>
+            当目标和来源都不为 <c>null</c> 时，上下文被认为是有效的。
+            此属性使用 MemberNotNullWhen 特性来提供编译时的空值检查保证。
+            </remarks>
+        </member>
+        <member name="P:GameCore.ActorSystem.IActorScopeContext.IsTransient">
+            <summary>
+            获取一个值，指示此上下文是否为瞬态
+            </summary>
+            <remarks>
+            瞬态上下文通常用于临时效果和短期存在的作用域。
+            默认返回 <c>false</c>，派生类可以重写此属性以提供不同的行为。
+            </remarks>
+        </member>
+        <member name="P:GameCore.ActorSystem.IActorScopeContext.Target">
+            <summary>
+            获取作用域的目标对象
+            </summary>
+            <remarks>
+            目标对象是作用域操作的主要对象，通常决定了作用域的位置和行为。
+            </remarks>
+        </member>
+        <member name="P:GameCore.ActorSystem.IActorScopeContext.Source">
+            <summary>
+            获取作用域的来源对象
+            </summary>
+            <remarks>
+            默认情况下，来源对象与目标对象相同。派生类可以重写此属性以提供不同的来源。
+            </remarks>
+        </member>
+        <member name="P:GameCore.ActorSystem.IActorScopeContext.Link">
+            <summary>
+            获取作用域拥有者的数据链接
+            </summary>
+            <remarks>
+            此链接指向定义作用域行为和配置的数据对象。
+            </remarks>
+        </member>
+        <member name="P:GameCore.ActorSystem.IActorScopeContext.OverrideLink">
+            <summary>
+            获取作用域覆盖配置的数据链接
+            </summary>
+            <remarks>
+            覆盖链接可以提供特殊的配置来修改作用域的默认行为。
+            默认返回 <c>null</c>，表示没有覆盖配置。
+            </remarks>
+        </member>
+        <member name="P:GameCore.ActorSystem.IActorScopeContext.Cache">
+            <summary>
+            获取缓存的作用域拥有者数据
+            </summary>
+            <remarks>
+            从数据链接中获取的实际配置数据，用于作用域的行为定义。
+            </remarks>
+        </member>
+        <member name="P:GameCore.ActorSystem.IActorScopeContext.Player">
+            <summary>
+            获取拥有此作用域的玩家
+            </summary>
+            <remarks>
+            用于确定作用域的所有权和权限管理。
+            </remarks>
+        </member>
+        <member name="P:GameCore.ActorSystem.IActorScopeContext.Scale">
+            <summary>
+            获取作用域的缩放因子
+            </summary>
+            <remarks>
+            用于调整作用域中 Actor 的整体大小。如果为 <c>null</c>，则使用默认缩放。
+            </remarks>
+        </member>
+        <member name="P:GameCore.ActorSystem.IActorScopeContext.Volume">
+            <summary>
+            获取作用域的体积参数
+            </summary>
+            <remarks>
+            用于 3D 缩放计算，定义作用域在三个维度上的大小。
+            </remarks>
+        </member>
+        <member name="P:GameCore.ActorSystem.IActorScopeContext.Radius">
+            <summary>
+            获取作用域的半径参数
+            </summary>
+            <remarks>
+            用于径向缩放计算。默认返回 <c>null</c>，派生类可以重写以提供半径信息。
+            </remarks>
+        </member>
+        <member name="P:GameCore.ActorSystem.IActorScopeContext.Position">
+            <summary>
+            获取作用域在场景中的位置
+            </summary>
+            <remarks>
+            基于目标对象的位置确定作用域的空间坐标。如果上下文无效，会抛出异常。
+            </remarks>
+            <exception cref="T:System.IO.InvalidDataException">当上下文无效时抛出</exception>
+        </member>
+        <member name="P:GameCore.ActorSystem.IActorScopeContext.Host">
+            <summary>
+            获取作用域的宿主 Actor
+            </summary>
+            <remarks>
+            宿主 Actor 用于作用域的附加和位置同步。通常是目标对象的同步 Actor 接口。
+            </remarks>
+        </member>
+        <member name="P:GameCore.ActorSystem.IActorScopeContext.Facing">
+            <summary>
+            获取作用域的朝向角度
+            </summary>
+            <remarks>
+            定义作用域在空间中的旋转方向，影响其中 Actor 的排列和朝向。
+            </remarks>
+        </member>
+        <member name="P:GameCore.ActorSystem.IActorScopeContext.ImpactActors">
+            <summary>
+            获取撞击时要创建的 Actor 列表
+            </summary>
+            <remarks>
+            优先使用覆盖配置中的撞击 Actor，如果没有覆盖则使用缓存配置中的撞击 Actor。
+            这些 Actor 会在执行撞击操作时被创建和管理。
+            </remarks>
+        </member>
+        <member name="T:GameCore.ActorSystem.IActorScopeOwner">
+            <summary>
+            定义 Actor 作用域拥有者接口，管理和创建作用域实例
+            </summary>
+            <remarks>
+            作用域拥有者负责管理其关联的 Actor 作用域的生命周期，包括创建、初始化和维护作用域。
+            它决定何时需要创建作用域，以及创建何种类型的作用域（瞬态或持久）。
+            </remarks>
+        </member>
+        <member name="P:GameCore.ActorSystem.IActorScopeOwner.SelfScope">
+            <summary>
+            获取自身作为作用域的实例
+            </summary>
+            <remarks>
+            当对象本身就是一个作用域时，返回自身的作用域接口；否则返回 <c>null</c>。
+            </remarks>
+        </member>
+        <member name="P:GameCore.ActorSystem.IActorScopeOwner.StandaloneScopeLink">
+            <summary>
+            当对象本身不是作用域时，获取其独立的作用域链接
+            </summary>
+        </member>
+        <member name="P:GameCore.ActorSystem.IActorScopeOwner.ActorScope">
+            <summary>
+            获取或设置关联的 Actor 作用域
+            </summary>
+            <remarks>
+            存储由此拥有者创建和管理的作用域实例。内部设置器允许系统管理作用域的分配。
+            </remarks>
+        </member>
+        <member name="M:GameCore.ActorSystem.IActorScopeOwner.CreateDefaultChildren">
+            <summary />
+            <returns />
+        </member>
+        <member name="T:GameCore.ActorSystem.IActorTimelineAsset">
+            <summary>
+            Stands for actors that have timeline lifespan, and can trigger timed events, such as sounds.
+            </summary>
+        </member>
+        <member name="E:GameCore.ActorSystem.IActorTimelineAsset.TimelineEventTriggered">
+            <summary>
+            Occurs when a timed event is triggered, providing the event name and a boolean indicating whether the event was just started or completed. true indicates start, false indicates completion.
+            </summary>
+            <remarks>This event is raised whenever a specific timed action is completed. Subscribers can use the
+            provided parameters to handle the event appropriately.</remarks>
+        </member>
+        <member name="M:GameCore.ActorSystem.IActorTimelineAsset.OnTimedEventTriggered(EngineCommon.UTF8String,System.Boolean)">
+            <summary />
+            <param name="msg" />
+            <param name="isStart" />
+            <returns />
+        </member>
+        <member name="T:GameCore.ActorSystem.IActorVisual">
+            <summary />
+        </member>
+        <member name="P:GameCore.ActorSystem.IActorVisual.Scale">
+            <summary />
+        </member>
+        <member name="P:GameCore.ActorSystem.IActorVisual.Rotation">
+            <summary />
+        </member>
+        <member name="P:GameCore.ActorSystem.IActorVisual.ShowShadow">
+            <summary />
+        </member>
+        <member name="M:GameCore.ActorSystem.IActorVisual.SetOffset(System.Numerics.Vector3)">
+            <summary />
+            <param name="offset" />
+            <returns />
+        </member>
+        <member name="T:GameCore.ActorSystem.Struct.GridAxis">
+            <summary>
+            Represents the axis vectors that define the orientation and scale of a grid in 3D space.
+            </summary>
+        </member>
+        <member name="M:GameCore.ActorSystem.Struct.GridAxis.#ctor(System.Numerics.Vector3,System.Numerics.Vector3)">
+            <summary>
+            Initializes a new instance of the <see cref="T:GameCore.ActorSystem.Struct.GridAxis" /> struct.
+            </summary>
+            <param name="x">The X-axis vector defining the direction and scale of the grid's X dimension.</param>
+            <param name="y">The Y-axis vector defining the direction and scale of the grid's Y dimension.</param>
+        </member>
+        <member name="P:GameCore.ActorSystem.Struct.GridAxis.X">
+            <summary>
+            Gets the X-axis vector that defines the direction and scale of the grid's X dimension.
+            </summary>
+        </member>
+        <member name="P:GameCore.ActorSystem.Struct.GridAxis.Y">
+            <summary>
+            Gets the Y-axis vector that defines the direction and scale of the grid's Y dimension.
+            </summary>
+        </member>
+        <member name="T:GameCore.ActorSystem.Struct.GridBounds">
+            <summary>
+            Represents a grid bounds with X and Y dimensions in grid cell units.
+            </summary>
+        </member>
+        <member name="M:GameCore.ActorSystem.Struct.GridBounds.#ctor(System.Int32,System.Int32,System.Int32,System.Int32)">
+            <summary>
+            Initializes a new instance of the <see cref="T:GameCore.ActorSystem.Struct.GridBounds" /> struct.
+            </summary>
+            <param name="x">The X offset of the grid bounds origin in world coordinates.</param>
+            <param name="y">The Y offset of the grid bounds origin in world coordinates.</param>
+            <param name="dimensionX">The size of the grid bounds in X direction in grid cells.</param>
+            <param name="dimensionY">The size of the grid bounds in Y direction in grid cells.</param>
+        </member>
+        <member name="M:GameCore.ActorSystem.Struct.GridBounds.#ctor(System.Drawing.Rectangle)">
+            <summary>
+            Initializes a new instance of the <see cref="T:GameCore.ActorSystem.Struct.GridBounds" /> struct from a Rectangle.
+            </summary>
+            <param name="rect">The rectangle to convert from.</param>
+        </member>
+        <member name="P:GameCore.ActorSystem.Struct.GridBounds.OffsetX">
+            <summary>
+            Gets the X offset of the grid bounds origin in world coordinates.
+            </summary>
+        </member>
+        <member name="P:GameCore.ActorSystem.Struct.GridBounds.OffsetY">
+            <summary>
+            Gets the Y offset of the grid bounds origin in world coordinates.
+            </summary>
+        </member>
+        <member name="P:GameCore.ActorSystem.Struct.GridBounds.DimensionX">
+            <summary>
+            Gets the size of the grid bounds in X direction in grid cells.
+            </summary>
+        </member>
+        <member name="P:GameCore.ActorSystem.Struct.GridBounds.DimensionY">
+            <summary>
+            Gets the size of the grid bounds in Y direction in grid cells.
+            </summary>
+        </member>
+        <member name="M:GameCore.ActorSystem.Struct.GridBounds.Contains(GameCore.ActorSystem.Struct.GridIndex)">
+            <summary>
+            Checks if the specified grid index is within this bounds.
+            </summary>
+            <param name="index">The grid index to check.</param>
+            <returns>True if the index is within the bounds; otherwise, false.</returns>
+        </member>
+        <member name="M:GameCore.ActorSystem.Struct.GridBounds.Contains(System.Int32,System.Int32)">
+            <summary>
+            Checks if the specified coordinates are within this bounds.
+            </summary>
+            <param name="x">The X coordinate to check.</param>
+            <param name="y">The Y coordinate to check.</param>
+            <returns>True if the coordinates are within the bounds; otherwise, false.</returns>
+        </member>
+        <member name="M:GameCore.ActorSystem.Struct.GridBounds.op_Implicit(GameCore.ActorSystem.Struct.GridBounds)~System.Drawing.Rectangle">
+            <summary>
+            Implicitly converts a <see cref="T:GameCore.ActorSystem.Struct.GridBounds" /> to a <see cref="T:System.Drawing.Rectangle" />.
+            </summary>
+            <param name="bounds">The grid bounds to convert.</param>
+            <returns>A rectangle with the same coordinates and dimensions.</returns>
+        </member>
+        <member name="M:GameCore.ActorSystem.Struct.GridBounds.op_Implicit(System.Drawing.Rectangle)~GameCore.ActorSystem.Struct.GridBounds">
+            <summary>
+            Implicitly converts a <see cref="T:System.Drawing.Rectangle" /> to a <see cref="T:GameCore.ActorSystem.Struct.GridBounds" />.
+            </summary>
+            <param name="rect">The rectangle to convert.</param>
+            <returns>A grid bounds with the same coordinates and dimensions.</returns>
+        </member>
+        <member name="M:GameCore.ActorSystem.Struct.GridBounds.ToString">
+            <summary>
+            Returns a string representation of the grid bounds.
+            </summary>
+            <returns>A string in the format "GridBounds(OffsetX, OffsetY, DimensionX, DimensionY)".</returns>
+        </member>
+        <member name="T:GameCore.ActorSystem.Struct.GridIndex">
+            <summary>
+            Represents a grid index with X and Y coordinates for addressing grid cells.
+            </summary>
+        </member>
+        <member name="M:GameCore.ActorSystem.Struct.GridIndex.#ctor(System.Int32,System.Int32)">
+            <summary>
+            Initializes a new instance of the <see cref="T:GameCore.ActorSystem.Struct.GridIndex" /> struct.
+            </summary>
+            <param name="x">The X coordinate of the grid index.</param>
+            <param name="y">The Y coordinate of the grid index.</param>
+        </member>
+        <member name="P:GameCore.ActorSystem.Struct.GridIndex.X">
+            <summary>
+            Gets the X coordinate of the grid index.
+            </summary>
+        </member>
+        <member name="P:GameCore.ActorSystem.Struct.GridIndex.Y">
+            <summary>
+            Gets the Y coordinate of the grid index.
+            </summary>
+        </member>
+        <member name="M:GameCore.ActorSystem.Struct.GridIndex.ToString">
+            <summary />
+            <returns />
+        </member>
+        <member name="M:GameCore.ActorSystem.Struct.GridIndex.op_Implicit(GameCore.ActorSystem.Struct.GridIndex)~System.Drawing.Point">
+            <summary>
+            Implicitly converts a <see cref="T:GameCore.ActorSystem.Struct.GridIndex" /> to a <see cref="T:System.Drawing.Point" />.
+            </summary>
+            <param name="index">The grid index to convert.</param>
+            <returns>A point with the same X and Y coordinates.</returns>
+        </member>
+        <member name="M:GameCore.ActorSystem.Struct.GridIndex.op_Implicit(System.Drawing.Point)~GameCore.ActorSystem.Struct.GridIndex">
+            <summary>
+            Implicitly converts a <see cref="T:System.Drawing.Point" /> to a <see cref="T:GameCore.ActorSystem.Struct.GridIndex" />.
+            </summary>
+            <param name="point">The point to convert.</param>
+            <returns>A grid index with the same X and Y coordinates.</returns>
+        </member>
+        <member name="T:GameCore.ActorSystem.Struct.IGridStateManager">
+            <summary>
+            Interface for managing grid cell states.
+            </summary>
+        </member>
+        <member name="P:GameCore.ActorSystem.Struct.IGridStateManager.Item(GameCore.ActorSystem.Struct.GridIndex)">
+            <summary>
+            Gets or sets the state of a specific grid cell.
+            </summary>
+            <param name="index">The grid index of the cell.</param>
+            <returns>The state value of the cell, or 0 if not set.</returns>
+        </member>
+        <member name="M:GameCore.ActorSystem.Struct.IGridStateManager.IsValidIndex(GameCore.ActorSystem.Struct.GridIndex)">
+            <summary>
+            Checks if the specified grid index is valid.
+            </summary>
+            <param name="index">The grid index to validate.</param>
+            <returns>True if the index is valid; otherwise, false.</returns>
+        </member>
+        <member name="M:GameCore.ActorSystem.Struct.IGridStateManager.Clear">
+            <summary>
+            Clears all grid states by resetting them to default value (0) and clearing the internal collection.
+            </summary>
+        </member>
+        <member name="T:GameCore.ActorSystem.Struct.GridState">
+            <summary>
+            Manages the state of grid cells for an ActorGrid.
+            </summary>
+        </member>
+        <member name="F:GameCore.ActorSystem.Struct.GridState._gridStates">
+            <summary />
+        </member>
+        <member name="F:GameCore.ActorSystem.Struct.GridState._updateCallback">
+            <summary />
+        </member>
+        <member name="F:GameCore.ActorSystem.Struct.GridState._validationCallback">
+            <summary />
+        </member>
+        <member name="M:GameCore.ActorSystem.Struct.GridState.#ctor(GameCore.ActorSystem.ActorGrid)">
+            <summary>
+            Initializes a new instance of the <see cref="T:GameCore.ActorSystem.Struct.GridState" /> class.
+            </summary>
+            <param name="actorGrid">The actor grid that owns this state manager.</param>
+        </member>
+        <member name="M:GameCore.ActorSystem.Struct.GridState.#ctor(System.Func{GameCore.ActorSystem.Struct.GridIndex,System.Int32,System.Boolean},System.Func{GameCore.ActorSystem.Struct.GridIndex,System.Boolean})">
+            <summary>
+            Initializes a new instance of the <see cref="T:GameCore.ActorSystem.Struct.GridState" /> class with custom callbacks.
+            </summary>
+            <param name="updateCallback">Callback function to update the visual representation.</param>
+            <param name="validationCallback">Optional callback function to validate grid indices.</param>
+        </member>
+        <member name="P:GameCore.ActorSystem.Struct.GridState.Item(GameCore.ActorSystem.Struct.GridIndex)">
+            <inheritdoc />
+        </member>
+        <member name="P:GameCore.ActorSystem.Struct.GridState.Item(System.Int32,System.Int32)">
+            <summary>
+            Gets or sets the state of a specific grid cell.
+            </summary>
+            <param name="x">The x index of the cell.</param>
+            <param name="y">The y index of the cell.</param>
+            <returns>The state value of the cell, or 0 if not set.</returns>
+        </member>
+        <member name="M:GameCore.ActorSystem.Struct.GridState.IsValidIndex(GameCore.ActorSystem.Struct.GridIndex)">
+            <inheritdoc />
+        </member>
+        <member name="M:GameCore.ActorSystem.Struct.GridState.Clear">
+            <inheritdoc />
+        </member>
+        <member name="T:GameCore.ActorSystem.Actor">
+            <summary />
+            <summary>
+            Represents the base class for all actors in the game world, providing visual representation and interactive capabilities.
+            </summary>
+            <remarks>
+            Actors are objects that can be displayed on the client side within the game world, such as effects, models, animations, 
+            sounds, and other visual elements. They are managed by actor scopes and can be attached to entities or other actors to 
+            create complex visual hierarchies. Actors can be transient (temporary) or persistent based on their configuration and 
+            scope.
+            </remarks>
+            <summary />
+            <summary />
+        </member>
+        <member name="F:GameCore.ActorSystem.Actor._actorsByViewActorId">
+            <summary />
+        </member>
+        <member name="M:GameCore.ActorSystem.Actor.GetByViewActorId(System.Int32)">
+            <summary>
+            Get actor by ViewActor's Id, only work for model and particle actors, and only work if the actor is not transient, and not destroyed or Garbage collected.
+            </summary>
+            <param name="viewActorId" />
+            <returns />
+        </member>
+        <member name="F:GameCore.ActorSystem.Actor._viewAsyncActor">
+            <summary />
+        </member>
+        <member name="P:GameCore.ActorSystem.Actor.GameCore#Interface#IActor#ViewAsyncActor">
+            <summary />
+        </member>
+        <member name="P:GameCore.ActorSystem.Actor.CreationFilterLevel">
+            <summary />
+        </member>
+        <member name="M:GameCore.ActorSystem.Actor.#ctor(GameData.IGameLink{GameCore.ActorSystem.Data.GameDataActor},System.Boolean,GameCore.ActorSystem.IActorScope,GameCore.SceneSystem.Scene,GameCore.PlayerAndUsers.Player)">
+            <summary />
+        </member>
+        <member name="P:GameCore.ActorSystem.Actor.Facing">
+            <summary />
+        </member>
+        <member name="P:GameCore.ActorSystem.Actor.Position">
+            <summary />
+        </member>
+        <member name="P:GameCore.ActorSystem.Actor.WorldPosition">
+            <summary />
+        </member>
+        <member name="P:GameCore.ActorSystem.Actor.Rotation">
+            <summary>
+            获取或设置Actor的旋转角度（欧拉角，以度为单位）
+            </summary>
+            <remarks>
+                <para>
+            重要注意事项：
+            </para>
+                <list type="bullet">
+                    <item>
+                        <description>
+            旋转是相对于父对象的本地坐标系进行的。
+            </description>
+                    </item>
+                    <item>
+                        <description>
+            旋转顺序：先绕X轴，再绕Y轴，最后绕Z轴（欧拉角顺序）。
+            </description>
+                    </item>
+                    <item>
+                        <description>
+            若设置附着后的旋转，需要在调用AttachTo之后设置旋转，因为AttachTo会重置旋转值。
+            正确的操作顺序是：AttachTo → Rotation → SetOffset
+            </description>
+                    </item>
+                    <item>
+                        <description>
+            旋转不会影响偏移值，但会影响子对象的坐标系。
+            </description>
+                    </item>
+                    <item>
+                        <description>
+            常用的旋转值：
+            <list type="bullet"><item><description>new Vector3(0, 0, 90) - 绕Z轴旋转90度</description></item><item><description>new Vector3(90, 0, 0) - 绕X轴旋转90度（水平放置）</description></item><item><description>new Vector3(180, 0, 0) - 绕X轴旋转180度（倒置）</description></item><item><description>new Vector3(0, 90, 0) - 绕Y轴旋转90度</description></item></list></description>
+                    </item>
+                </list>
+                <para>
+            示例用法：
+            </para>
+                <code>
+            // 将轮子附着到车身
+            wheel.AttachTo(carBody);
+            // 设置轮子水平放置
+            wheel.Rotation = new Vector3(90, 0, 0);
+            // 设置轮子位置
+            wheel.SetOffset(wheelPosition);
+            </code>
+            </remarks>
+        </member>
+        <member name="M:GameCore.ActorSystem.Actor.SetOffset(System.Numerics.Vector3)">
+            <summary>
+            设置Actor相对于其父对象的偏移量
+            </summary>
+            <param name="vector3">偏移向量，相对于父对象的本地坐标系</param>
+            <remarks>
+                <para>
+            重要注意事项：
+            </para>
+                <list type="bullet">
+                    <item>
+                        <description>
+            偏移值会自动受到父对象缩放的影响。如果父对象在某个轴上缩放了2倍，
+            那么该轴上的偏移值也会被放大2倍。
+            </description>
+                    </item>
+                    <item>
+                        <description>
+            偏移是相对于附着绑点计算的。
+            </description>
+                    </item>
+                    <item>
+                        <description>
+            在调用AttachTo之后设置偏移，因为AttachTo可能会重置之前的偏移值。
+            </description>
+                    </item>
+                    <item>
+                        <description>
+            偏移值通常需要根据父对象的实际尺寸来计算，而不是标准尺寸。
+            例如：如果父对象是圆柱体，标准高度100，缩放0.5f，实际高度50，
+            那么要在顶部放置子对象，偏移应该是50而不是100。
+            </description>
+                    </item>
+                </list>
+                <para>
+            示例用法：
+            </para>
+                <code>
+            // 将头部附着到身体上
+            head.AttachTo(body);
+            // 设置头部在身体顶部，考虑身体的实际高度
+            head.SetOffset(new Vector3(0, 0, bodyHeight * scale));
+            </code>
+            </remarks>
+        </member>
+        <member name="P:GameCore.ActorSystem.Actor.GroundZ">
+            <summary>
+            Gets or sets the ground Z-coordinate value. It's really just a calculated Z-coordinate value offset from the ground, there is no 'UseGroundHeight' state internally.
+            </summary>
+        </member>
+        <member name="M:GameCore.ActorSystem.Actor.Attach(GameCore.Interface.IActor,System.Nullable{EngineCommon.UTF8String})">
+            <summary />
+            <param name="child" />
+            <param name="socket" />
+            <returns />
+        </member>
+        <member name="M:GameCore.ActorSystem.Actor.AttachTo(GameCore.Interface.IActor,System.Nullable{EngineCommon.UTF8String})">
+            <summary />
+            <param name="parent" />
+            <param name="socket" />
+            <returns />
+        </member>
+        <member name="M:GameCore.ActorSystem.Actor.Detach(System.Boolean)">
+            <summary />
+            <param name="resetBearings" />
+            <returns />
+        </member>
+        <member name="P:GameCore.ActorSystem.Actor.Scale">
+            <summary />
+        </member>
+        <member name="P:GameCore.ActorSystem.Actor.GameCore#Interface#IActor#Parent">
+            <summary />
+        </member>
+        <member name="P:GameCore.ActorSystem.Actor.ShouldRemoveWithParent">
+            <summary />
+        </member>
+        <member name="F:GameCore.ActorSystem.Actor._player">
+            <summary />
+        </member>
+        <member name="P:GameCore.ActorSystem.Actor.Player">
+            <summary>
+            Gets or sets the player that owns this actor.
+            </summary>
+            <remarks>
+            If no player is explicitly set, the actor will use the player from its scope context
+            or fall back to the default player.
+            </remarks>
+        </member>
+        <member name="P:GameCore.ActorSystem.Actor.Scope">
+            <summary>
+            Gets or sets the actor scope that manages this actor's lifecycle and context.
+            </summary>
+            <remarks>
+            The scope provides context information such as position, targets, and other actors
+            within the same logical group. This property is managed internally by the scope system.
+            </remarks>
+        </member>
+        <member name="P:GameCore.ActorSystem.Actor.Context">
+            <summary>
+            Gets the context information from the actor's scope, if available.
+            </summary>
+            <remarks>
+            The context provides access to targets, position, scale, and other environmental
+            information that affects how the actor behaves and appears.
+            </remarks>
+        </member>
+        <member name="P:GameCore.ActorSystem.Actor.Parent">
+            <summary>
+            Gets the parent actor in the attachment hierarchy.
+            </summary>
+            <value>
+            Have to be set via AttachTo, cannot be set directly.
+            </value>
+            <remarks>
+            The parent relationship determines visual hierarchy and can affect transformations
+            like position, rotation, and scale inheritance. Use the AttachTo method to establish
+            parent-child relationships between actors.
+            </remarks>
+        </member>
+        <member name="P:GameCore.ActorSystem.Actor.IsTransient">
+            <summary>
+            Gets a value indicating whether this actor is transient (temporary).
+            </summary>
+            <remarks>
+            Transient actors are typically short-lived effects or animations that are not
+            persisted and may be cleaned up more aggressively.
+            Transient actors are often fire and forget, they will kill themselves after they 
+            are done playing 'OneShot' animations/effects/sounds. While persistent actors are 
+            designed to be long-lived and persistent, they will have to be killed manually.
+            This value is determined by the actor's data configuration and its scope settings.
+            </remarks>
+        </member>
+        <member name="F:GameCore.ActorSystem.Actor._forceNoFade">
+            <summary />
+        </member>
+        <member name="M:GameCore.ActorSystem.Actor.Kill">
+            <summary />
+            <returns />
+        </member>
+        <member name="M:GameCore.ActorSystem.Actor.Destroy(System.Boolean,System.Boolean)">
+            <summary />
+            <param name="forceNoFade" />
+            <param name="isHostDispose" />
+            <returns />
+        </member>
+        <member name="M:GameCore.ActorSystem.Actor.DisposeManaged">
+            <summary />
+            <returns />
+        </member>
+        <member name="M:GameCore.ActorSystem.Actor.DisposeUnmanaged(System.Boolean)">
+            <summary>
+            Only destroy the view actor when not finalizing.
+            </summary>
+            <param name="finalizing" />
+        </member>
+        <member name="P:GameCore.ActorSystem.Actor.Link">
+            <summary />
+        </member>
+        <member name="P:GameCore.ActorSystem.Actor.Cache">
+            <summary />
+        </member>
+        <member name="P:GameCore.ActorSystem.Actor.HasDelayedInitialization">
+            <summary>
+            Some actor will need to wait for 1 tick to Initialize.
+            </summary>
+        </member>
+        <member name="M:GameCore.ActorSystem.Actor.DelayedInitialization">
+            <summary />
+            <returns />
+        </member>
+        <member name="M:GameCore.ActorSystem.Actor.ToString">
+            <summary>
+            Returns a string representation of this unit including its type and friendly name.
+            </summary>
+            <returns>A formatted string describing this unit.</returns>
+        </member>
+        <member name="T:GameCore.ActorSystem.ActorAction">
+            <summary />
+            <summary />
+        </member>
+        <member name="M:GameCore.ActorSystem.ActorAction.#ctor(GameData.IGameLink{GameCore.ActorSystem.Data.GameDataActorAction},System.Boolean,GameCore.ActorSystem.IActorScope,GameCore.SceneSystem.Scene,GameCore.PlayerAndUsers.Player)">
+            <summary />
+        </member>
+        <member name="P:GameCore.ActorSystem.ActorAction.HasDelayedInitialization">
+            <summary />
+        </member>
+        <member name="M:GameCore.ActorSystem.ActorAction.DelayedInitialization">
+            <summary />
+            <returns />
+        </member>
+        <member name="P:GameCore.ActorSystem.ActorAction.GameData#Interface#IGameObject{GameCore#ActorSystem#Data#IGameDataActorDualEndPoints}#Link">
+            <summary />
+        </member>
+        <member name="P:GameCore.ActorSystem.ActorAction.GameData#Interface#IGameObject{GameCore#ActorSystem#Data#IGameDataActorDualEndPoints}#Cache">
+            <summary />
+        </member>
+        <member name="F:GameCore.ActorSystem.ActorAction.launchSiteContext">
+            <summary />
+        </member>
+        <member name="P:GameCore.ActorSystem.ActorAction.LaunchSiteContext">
+            <summary />
+        </member>
+        <member name="M:GameCore.ActorSystem.ActorAction.SetImpactSite(GameCore.ActorSystem.AttachContext)">
+            <summary />
+            <param name="site" />
+            <returns />
+        </member>
+        <member name="T:GameCore.ActorSystem.ActorAdditionModel">
+            <summary />
+        </member>
+        <member name="M:GameCore.ActorSystem.ActorAdditionModel.#ctor(GameData.IGameLink{GameCore.ActorSystem.Data.GameDataActorAdditionModel},System.Boolean,GameCore.ActorSystem.IActorScope,GameCore.SceneSystem.Scene,GameCore.PlayerAndUsers.Player)">
+            <summary />
+        </member>
+        <member name="T:GameCore.ActorSystem.ActorBeam">
+            <summary>
+            Represents a beam effect actor that renders directional visual effects like lasers, lightning, or energy beams.
+            </summary>
+            <remarks>
+            ActorBeam is specialized for creating linear visual effects that typically extend from one point to another.
+            Common uses include laser beams, lightning bolts, energy rays, magical beams, and other directional effects.
+            It implements IActorPlayable to support playback control and can be configured for automatic playback.
+            The beam actor integrates with the game's visual effects system and supports various timing controls,
+            though speed adjustment may have limitations depending on the beam type.
+            </remarks>
+            <summary />
+        </member>
+        <member name="M:GameCore.ActorSystem.ActorBeam.#ctor(GameData.IGameLink{GameCore.ActorSystem.Data.GameDataActorBeam},System.Boolean,GameCore.ActorSystem.IActorScope,GameCore.SceneSystem.Scene,GameCore.PlayerAndUsers.Player)">
+            <summary>
+            Represents a beam effect actor that renders directional visual effects like lasers, lightning, or energy beams.
+            </summary>
+            <remarks>
+            ActorBeam is specialized for creating linear visual effects that typically extend from one point to another.
+            Common uses include laser beams, lightning bolts, energy rays, magical beams, and other directional effects.
+            It implements IActorPlayable to support playback control and can be configured for automatic playback.
+            The beam actor integrates with the game's visual effects system and supports various timing controls,
+            though speed adjustment may have limitations depending on the beam type.
+            </remarks>
+        </member>
+        <member name="M:GameCore.ActorSystem.ActorBeam.Play">
+            <summary>
+            Starts playing the beam effect.
+            </summary>
+            <returns>True if the beam effect was successfully started; otherwise, false.</returns>
+            <remarks>
+            This method initiates the beam effect playback. Once started, the beam will be rendered
+            with its configured visual properties and animations. The method tracks the play state
+            to prevent duplicate playback commands and ensure proper effect management.
+            </remarks>
+        </member>
+        <member name="M:GameCore.ActorSystem.ActorBeam.SetPlaySpeed(System.Single)">
+            <summary>
+            Sets the playback speed multiplier for the beam effect.
+            </summary>
+            <param name="speed">The speed multiplier (1.0 = normal speed, 0.5 = half speed, 2.0 = double speed).</param>
+            <returns>True if the speed was successfully set; otherwise, false.</returns>
+            <remarks>
+            Setting play speed for beam effects may not be supported or may have limited effect
+            depending on the specific beam implementation and visual system. Some beam effects
+            are designed with fixed timing that cannot be easily modified. This method provides
+            the interface for speed control but actual support varies by beam type.
+            </remarks>
+        </member>
+        <member name="F:GameCore.ActorSystem.ActorBeam.played">
+            <summary />
+        </member>
+        <member name="P:GameCore.ActorSystem.ActorBeam.HasDelayedInitialization">
+            <summary>
+            Gets a value indicating whether this beam actor requires delayed initialization.
+            </summary>
+            <value>True if auto-play is enabled and delayed initialization is needed; otherwise, false.</value>
+            <remarks>
+            When auto-play is enabled, the beam effect will be automatically started during
+            the delayed initialization phase, which occurs after the actor has been fully set up
+            and positioned. This ensures the beam appears at the correct location with proper timing.
+            </remarks>
+        </member>
+        <member name="M:GameCore.ActorSystem.ActorBeam.DelayedInitialization">
+            <summary>
+            Performs delayed initialization of the beam actor.
+            </summary>
+            <remarks>
+            This method is called during the delayed initialization phase and automatically
+            starts the beam effect if auto-play is enabled and the effect hasn't been
+            manually started yet. This provides automatic beam playback for fire-and-forget scenarios.
+            </remarks>
+        </member>
+        <member name="P:GameCore.ActorSystem.ActorBeam.GameData#Interface#IGameObject{GameCore#ActorSystem#Data#IGameDataActorDualEndPoints}#Link">
+            <summary />
+        </member>
+        <member name="P:GameCore.ActorSystem.ActorBeam.GameData#Interface#IGameObject{GameCore#ActorSystem#Data#IGameDataActorDualEndPoints}#Cache">
+            <summary />
+        </member>
+        <member name="F:GameCore.ActorSystem.ActorBeam.launchSiteContext">
+            <summary />
+        </member>
+        <member name="P:GameCore.ActorSystem.ActorBeam.LaunchSiteContext">
+            <summary />
+        </member>
+        <member name="M:GameCore.ActorSystem.ActorBeam.GameCore#Interface#IActor#OnAddedToScope(GameCore.ActorSystem.IActorScope)">
+            <summary />
+            <param name="actorScope" />
+            <returns />
+        </member>
+        <member name="M:GameCore.ActorSystem.ActorBeam.SetImpactSite(GameCore.ActorSystem.AttachContext)">
+            <summary />
+            <param name="site" />
+            <returns />
+        </member>
+        <member name="T:GameCore.ActorSystem.ActorGrid">
+            <summary>
+            Represents a grid actor that can display and manage a 2D grid overlay in the game world.
+            On the client side, provides full grid functionality including visual representation and state management.
+            On the server side, serves as a lightweight type container for message transport and type matching.
+            </summary>
+            <remarks>
+                <para>The grid can be used for various purposes such as:</para>
+                <list type="bullet">
+                    <item>
+                        <description>Building placement guides</description>
+                    </item>
+                    <item>
+                        <description>Area highlighting and selection</description>
+                    </item>
+                    <item>
+                        <description>Tile-based game mechanics</description>
+                    </item>
+                    <item>
+                        <description>Visual debugging overlays</description>
+                    </item>
+                </list>
+            </remarks>
+        </member>
+        <member name="F:GameCore.ActorSystem.ActorGrid._axis">
+            <summary />
+        </member>
+        <member name="P:GameCore.ActorSystem.ActorGrid.Axis">
+            <summary>
+            Gets or sets the axis vectors that define the orientation and scale of the grid in 3D space.
+            </summary>
+            <value>
+            A <see cref="T:GameCore.ActorSystem.Struct.GridAxis" /> containing X and Y axis vectors that determine the grid's orientation and cell size.
+            By default, uses orthogonal X and Y axes with the size defined by <see cref="P:GameCore.ActorSystem.Data.GameDataActorGrid.GridSize" />.
+            </value>
+            <remarks>
+                <para>Changing this property will update the visual representation of the grid in the game world.</para>
+                <para>If the update fails, an exception will be logged but the operation will not throw.</para>
+            </remarks>
+        </member>
+        <member name="P:GameCore.ActorSystem.ActorGrid.OffsetX">
+            <summary>
+            Gets the X offset of the grid bounds origin in grid cell units.
+            </summary>
+            <value>The X offset in grid cell coordinates.</value>
+            <remarks>
+                <para>This is a read-only property. To change the offset, use the <see cref="P:GameCore.ActorSystem.ActorGrid.Bounds" /> property.</para>
+                <para>The offset represents the starting position of the grid in the grid coordinate system.</para>
+            </remarks>
+        </member>
+        <member name="P:GameCore.ActorSystem.ActorGrid.OffsetY">
+            <summary>
+            Gets the Y offset of the grid bounds origin in grid cell units.
+            </summary>
+            <value>The Y offset in grid cell coordinates.</value>
+            <remarks>
+                <para>This is a read-only property. To change the offset, use the <see cref="P:GameCore.ActorSystem.ActorGrid.Bounds" /> property.</para>
+                <para>The offset represents the starting position of the grid in the grid coordinate system.</para>
+            </remarks>
+        </member>
+        <member name="P:GameCore.ActorSystem.ActorGrid.DimensionX">
+            <summary>
+            Gets the size of the grid bounds in X direction in grid cells.
+            </summary>
+            <value>The width of the grid in grid cell units.</value>
+            <remarks>
+                <para>This is a read-only property. To change the dimension, use the <see cref="P:GameCore.ActorSystem.ActorGrid.Bounds" /> property.</para>
+                <para>The dimension represents the number of grid cells along the X axis.</para>
+            </remarks>
+        </member>
+        <member name="P:GameCore.ActorSystem.ActorGrid.DimensionY">
+            <summary>
+            Gets the size of the grid bounds in Y direction in grid cells.
+            </summary>
+            <value>The height of the grid in grid cell units.</value>
+            <remarks>
+                <para>This is a read-only property. To change the dimension, use the <see cref="P:GameCore.ActorSystem.ActorGrid.Bounds" /> property.</para>
+                <para>The dimension represents the number of grid cells along the Y axis.</para>
+            </remarks>
+        </member>
+        <member name="F:GameCore.ActorSystem.ActorGrid._bounds">
+            <summary />
+        </member>
+        <member name="P:GameCore.ActorSystem.ActorGrid.Bounds">
+            <summary>
+            Gets or sets the bounds that define the area covered by the grid in grid cell coordinates.
+            </summary>
+            <value>
+            A <see cref="T:GameCore.ActorSystem.Struct.GridBounds" /> representing the grid's coverage area in grid cell units.
+            By default, starts at (0, 0) with zero dimensions, making the grid invisible until valid bounds are set.
+            </value>
+            <remarks>
+                <para>The bounds determine which portion of the grid space will display the grid overlay.</para>
+                <para>The <see cref="P:GameCore.ActorSystem.ActorGrid.OffsetX" /> and <see cref="P:GameCore.ActorSystem.ActorGrid.OffsetY" /> represent the grid's starting position in grid cell coordinates.</para>
+                <para>The <see cref="P:GameCore.ActorSystem.ActorGrid.DimensionX" /> and <see cref="P:GameCore.ActorSystem.ActorGrid.DimensionY" /> represent the number of grid cells in each dimension.</para>
+                <para>Setting invalid bounds will result in a logged exception, but the operation will not throw.</para>
+                <para>The grid will only be visible when bounds have positive dimensions.</para>
+            </remarks>
+        </member>
+        <member name="F:GameCore.ActorSystem.ActorGrid._stickToGround">
+            <summary />
+        </member>
+        <member name="P:GameCore.ActorSystem.ActorGrid.StickToGround">
+            <summary>
+            Gets or sets a value indicating whether the grid should automatically align itself to the ground surface.
+            </summary>
+            <value>
+                <c>true</c> if the grid should stick to the ground; otherwise, <c>false</c>.
+            The default value is <c>true</c>.
+            </value>
+            <remarks>
+                <para>When enabled, the grid will automatically adjust its vertical position to follow the terrain or ground surface.</para>
+                <para>This is useful for building placement grids that need to conform to uneven terrain.</para>
+                <para>If the setting fails to apply, an exception will be logged but the operation will not throw.</para>
+            </remarks>
+        </member>
+        <member name="P:GameCore.ActorSystem.ActorGrid.GridStates">
+            <summary>
+            Gets the state manager for all cells in the grid.
+            </summary>
+            <value>
+            A <see cref="T:GameCore.ActorSystem.Struct.GridState" /> instance that manages the visual state of individual grid cells.
+            Use indexers to get or set the state of specific cells using <see cref="T:GameCore.ActorSystem.Struct.GridIndex" /> coordinates.
+            </value>
+            <remarks>
+                <para>Each cell can have different visual states represented by integer values.</para>
+                <para>The available visual representations are defined by <see cref="P:GameCore.ActorSystem.Data.GameDataActorGrid.StateModels" />.</para>
+                <para>State changes are immediately reflected in the game's visual representation.</para>
+            </remarks>
+            <example>
+                <code>
+            // Set the state of cell at position (5, 3) to state 1
+            actorGrid.GridStates[5, 3] = 1;
+            
+            // Get the current state of a cell
+            int currentState = actorGrid.GridStates[5, 3];
+            </code>
+            </example>
+        </member>
+        <member name="M:GameCore.ActorSystem.ActorGrid.#ctor(GameData.IGameLink{GameCore.ActorSystem.Data.GameDataActorGrid},System.Boolean,GameCore.ActorSystem.IActorScope,GameCore.SceneSystem.Scene,GameCore.PlayerAndUsers.Player)">
+            <summary>
+            Initializes a new instance of the <see cref="T:GameCore.ActorSystem.ActorGrid" /> class.
+            </summary>
+            <param name="link">The game data link that defines the grid's configuration and appearance.</param>
+            <param name="skipBirth">If <c>true</c>, skips the actor's birth process.</param>
+            <param name="scope">The scope that manages this actor's lifecycle. Can be <c>null</c>.</param>
+            <param name="scene">The scene to which this grid belongs. Can be <c>null</c>.</param>
+            <param name="forcePlayer">Forces the grid to be associated with a specific player. Can be <c>null</c>.</param>
+            <remarks>
+                <para>The grid is initialized with default orthogonal axes and zero bounds.</para>
+                <para>Set the <see cref="P:GameCore.ActorSystem.ActorGrid.Bounds" /> property to make the grid visible.</para>
+            </remarks>
+        </member>
+        <member name="T:GameCore.ActorSystem.ActorHighlight">
+            <summary>
+            Represents an actor that provides highlighting effects for other actors, typically used for selection, targeting, or status indication.
+            </summary>
+            <remarks>
+            ActorHighlight is a specialized actor that attaches to other actors to provide visual highlighting effects.
+            It integrates with the highlight aggregation system to create smooth color transitions and animations.
+            The highlight can be configured with different colors, durations, and animation behaviors such as auto-reverse
+            and repeat patterns. This is commonly used for UI feedback, target selection, and status visualization.
+            </remarks>
+            <param name="link">The game data link defining the configuration for this highlight actor.</param>
+            <param name="skipBirth">Whether to skip birth animations or effects.</param>
+            <param name="scope">The actor scope that will manage this actor's lifecycle.</param>
+            <param name="scene">The scene to create the actor in, if different from the scope's scene.</param>
+            <param name="forcePlayer">Optional player to override the default player assignment.</param>
+        </member>
+        <member name="M:GameCore.ActorSystem.ActorHighlight.#ctor(GameData.IGameLink{GameCore.ActorSystem.Data.GameDataActorHighlight},System.Boolean,GameCore.ActorSystem.IActorScope,GameCore.SceneSystem.Scene,GameCore.PlayerAndUsers.Player)">
+            <summary>
+            Represents an actor that provides highlighting effects for other actors, typically used for selection, targeting, or status indication.
+            </summary>
+            <remarks>
+            ActorHighlight is a specialized actor that attaches to other actors to provide visual highlighting effects.
+            It integrates with the highlight aggregation system to create smooth color transitions and animations.
+            The highlight can be configured with different colors, durations, and animation behaviors such as auto-reverse
+            and repeat patterns. This is commonly used for UI feedback, target selection, and status visualization.
+            </remarks>
+            <param name="link">The game data link defining the configuration for this highlight actor.</param>
+            <param name="skipBirth">Whether to skip birth animations or effects.</param>
+            <param name="scope">The actor scope that will manage this actor's lifecycle.</param>
+            <param name="scene">The scene to create the actor in, if different from the scope's scene.</param>
+            <param name="forcePlayer">Optional player to override the default player assignment.</param>
+        </member>
+        <member name="M:GameCore.ActorSystem.ActorHighlight.Detach(System.Boolean)">
+            <summary>
+            Detaches this highlight actor from its parent and removes it from the highlight aggregation system.
+            </summary>
+            <param name="resetBearings">Whether to reset the actor's position and rotation when detaching.</param>
+            <returns>True if the detachment was successful; otherwise, false.</returns>
+            <remarks>
+            When detaching, this method ensures that the highlight effect is properly removed from the
+            parent actor's highlight aggregator to prevent visual artifacts and memory leaks.
+            </remarks>
+        </member>
+        <member name="M:GameCore.ActorSystem.ActorHighlight.DisposeManaged">
+            <summary>
+            Releases managed resources used by this highlight actor.
+            </summary>
+            <remarks>
+            This method ensures that the highlight effect is properly removed from the parent actor's
+            highlight aggregator during disposal to prevent memory leaks and visual artifacts.
+            </remarks>
+        </member>
+        <member name="T:GameCore.ActorSystem.ActorHostModifier">
+            <summary />
+        </member>
+        <member name="M:GameCore.ActorSystem.ActorHostModifier.#ctor(GameData.IGameLink{GameCore.ActorSystem.Data.GameDataActorHostModifier},System.Boolean,GameCore.ActorSystem.IActorScope,GameCore.SceneSystem.Scene,GameCore.PlayerAndUsers.Player)">
+            <summary />
+        </member>
+        <member name="T:GameCore.ActorSystem.ActorMaterial">
+            <summary />
+        </member>
+        <member name="M:GameCore.ActorSystem.ActorMaterial.#ctor(GameData.IGameLink{GameCore.ActorSystem.Data.GameDataActorMaterial},System.Boolean,GameCore.ActorSystem.IActorScope,GameCore.SceneSystem.Scene,GameCore.PlayerAndUsers.Player)">
+            <summary />
+        </member>
+        <member name="T:GameCore.ActorSystem.ActorModel">
+            <summary>
+            Represents a 3D model actor that can be displayed in the game world.
+            </summary>
+            <remarks>
+            ActorModel is used to render 3D models, meshes, and other geometric objects in the game.
+            It supports highlighting effects and integrates with the actor management system for
+            lifecycle control. The model actor can be either transient (temporary) or persistent
+            based on its configuration and intended usage.
+            </remarks>
+            <summary />
+            <summary />
+        </member>
+        <member name="M:GameCore.ActorSystem.ActorModel.#ctor(GameData.IGameLink{GameCore.ActorSystem.Data.GameDataActorModel},System.Boolean,GameCore.ActorSystem.IActorScope,GameCore.SceneSystem.Scene,GameCore.PlayerAndUsers.Player)">
+            <summary>
+            Initializes a new instance of the ActorModel class with the specified configuration.
+            </summary>
+            <param name="link">The game data link defining the configuration for this model actor.</param>
+            <param name="skipBirth">Whether to skip birth animations or effects.</param>
+            <param name="scope">The actor scope that will manage this actor's lifecycle.</param>
+            <param name="scene">The scene to create the actor in, if different from the scope's scene.</param>
+            <param name="forcePlayer">Optional player to override the default player assignment.</param>
+            <remarks>
+            On the client side, non-transient model actors are registered in a global lookup
+            for efficient retrieval and management. This registration is automatically handled
+            during construction and cleaned up during disposal.
+            </remarks>
+        </member>
+        <member name="M:GameCore.ActorSystem.ActorModel.DisposeManaged">
+            <summary>
+            Releases managed resources used by this model actor.
+            </summary>
+            <remarks>
+            This method cleans up highlight aggregators and removes the actor from global
+            lookup tables if it was registered. It ensures proper resource management and
+            prevents memory leaks when the model actor is destroyed.
+            </remarks>
+        </member>
+        <member name="P:GameCore.ActorSystem.ActorModel.HighlightAggregator">
+            <summary />
+        </member>
+        <member name="P:GameCore.ActorSystem.ActorModel.TintColorAggregators">
+            <summary />
+        </member>
+        <member name="M:GameCore.ActorSystem.ActorModel.InitializeHighlightAggregator">
+            <summary />
+            <returns />
+        </member>
+        <member name="M:GameCore.ActorSystem.ActorModel.SetHighlight(GameCore.Drawing.HdrColor,System.Object,System.Double)">
+            <summary />
+            <param name="color" />
+            <param name="key" />
+            <param name="weight" />
+            <returns />
+        </member>
+        <member name="M:GameCore.ActorSystem.ActorModel.ClearHighlight(System.Object)">
+            <summary />
+            <param name="key" />
+            <returns />
+        </member>
+        <member name="M:GameCore.ActorSystem.ActorModel.ClearAllHighlights">
+            <summary />
+            <returns />
+        </member>
+        <member name="M:GameCore.ActorSystem.ActorModel.AnimateHighlight(GameCore.Drawing.HdrColor,System.TimeSpan,System.Boolean,System.Nullable{GameCore.Animation.Enum.RepeatBehavior},System.Object,System.Double)">
+            <summary />
+            <param name="color" />
+            <param name="blendTime" />
+            <param name="autoReverse" />
+            <param name="repeatBehavior" />
+            <param name="key" />
+            <param name="weight" />
+            <returns />
+        </member>
+        <member name="M:GameCore.ActorSystem.ActorModel.AnimateHighlight(GameCore.Drawing.HdrColor,GameCore.Drawing.HdrColor,System.TimeSpan,System.Boolean,System.Nullable{GameCore.Animation.Enum.RepeatBehavior},System.Object,System.Double)">
+            <summary />
+            <param name="from" />
+            <param name="to" />
+            <param name="blendTime" />
+            <param name="autoReverse" />
+            <param name="repeatBehavior" />
+            <param name="key" />
+            <param name="weight" />
+            <returns />
+        </member>
+        <member name="M:GameCore.ActorSystem.ActorModel.InitializeTintColorAggregators">
+            <summary />
+            <returns />
+        </member>
+        <member name="M:GameCore.ActorSystem.ActorModel.SetTintColor(GameCore.Drawing.HdrColor,GameCore.ActorSystem.Enum.TintColorType,System.Object,System.Double)">
+            <summary />
+            <param name="color" />
+            <param name="tintColorType" />
+            <param name="key" />
+            <param name="weight" />
+            <returns />
+        </member>
+        <member name="M:GameCore.ActorSystem.ActorModel.ClearTintColorByKey(System.Object,GameCore.ActorSystem.Enum.TintColorType)">
+            <summary />
+            <param name="key" />
+            <param name="tintColorType" />
+            <returns />
+        </member>
+        <member name="M:GameCore.ActorSystem.ActorModel.ResetTintColorByType(GameCore.ActorSystem.Enum.TintColorType)">
+            <summary />
+            <param name="tintColorType" />
+            <returns />
+        </member>
+        <member name="M:GameCore.ActorSystem.ActorModel.ClearTintColor">
+            <summary />
+            <returns />
+        </member>
+        <member name="M:GameCore.ActorSystem.ActorModel.AnimateTintColor(GameCore.Drawing.HdrColor,GameCore.ActorSystem.Enum.TintColorType,System.TimeSpan,System.Boolean,System.Nullable{GameCore.Animation.Enum.RepeatBehavior},System.Object,System.Double)">
+            <summary />
+            <param name="color" />
+            <param name="tintColorType" />
+            <param name="blendTime" />
+            <param name="autoReverse" />
+            <param name="repeatBehavior" />
+            <param name="key" />
+            <param name="weight" />
+            <returns />
+        </member>
+        <member name="M:GameCore.ActorSystem.ActorModel.AnimateTintColor(GameCore.Drawing.HdrColor,GameCore.Drawing.HdrColor,GameCore.ActorSystem.Enum.TintColorType,System.TimeSpan,System.Boolean,System.Nullable{GameCore.Animation.Enum.RepeatBehavior},System.Object,System.Double)">
+            <summary />
+            <param name="from" />
+            <param name="to" />
+            <param name="tintColorType" />
+            <param name="blendTime" />
+            <param name="autoReverse" />
+            <param name="repeatBehavior" />
+            <param name="key" />
+            <param name="weight" />
+            <returns />
+        </member>
+        <member name="M:GameCore.ActorSystem.ActorModel.InitializeColorAggregators">
+            <summary />
+            <returns />
+        </member>
+        <member name="M:GameCore.ActorSystem.ActorModel.ClearAllColorEffects">
+            <summary />
+            <returns />
+        </member>
+        <member name="F:GameCore.ActorSystem.ActorModel._showShadow">
+            <summary />
+        </member>
+        <member name="P:GameCore.ActorSystem.ActorModel.ShowShadow">
+            <summary>
+            获取或设置是否显示阴影
+            </summary>
+        </member>
+        <member name="T:GameCore.ActorSystem.ActorParticle">
+            <summary>
+            Represents a particle effect actor that can display particle systems and visual effects in the game world.
+            </summary>
+            <remarks>
+            ActorParticle is designed to render particle effects such as explosions, magic spells, environmental effects,
+            and other visual phenomena. It implements IActorPlayable to support playback control and can be configured
+            for automatic playback. The particle actor integrates with the game's visual effects system and supports
+            various timing and animation controls.
+            </remarks>
+            <summary />
+        </member>
+        <member name="M:GameCore.ActorSystem.ActorParticle.Play">
+            <summary>
+            Starts playing the particle effect.
+            </summary>
+            <returns>True if the particle effect was successfully started; otherwise, false.</returns>
+            <remarks>
+            This method initiates the particle effect playback. Once started, the particle system
+            will begin emitting and animating particles according to its configuration. The method
+            tracks the play state to prevent duplicate playback commands.
+            </remarks>
+        </member>
+        <member name="M:GameCore.ActorSystem.ActorParticle.SetPlaySpeed(System.Single)">
+            <summary>
+            Sets the playback speed multiplier for the particle effect.
+            </summary>
+            <param name="speed">The speed multiplier (1.0 = normal speed, 0.5 = half speed, 2.0 = double speed).</param>
+            <returns>True if the speed was successfully set; otherwise, false.</returns>
+            <remarks>
+            This method allows dynamic control of particle effect timing, enabling effects like slow motion
+            or fast-forward. A speed of 1.0 represents normal playback, values less than 1.0 slow down
+            the effect, and values greater than 1.0 speed up the effect.
+            </remarks>
+        </member>
+        <member name="F:GameCore.ActorSystem.ActorParticle.played">
+            <summary />
+        </member>
+        <member name="P:GameCore.ActorSystem.ActorParticle.HasDelayedInitialization">
+            <summary>
+            Gets a value indicating whether this particle actor requires delayed initialization.
+            </summary>
+            <value>True if auto-play is enabled and delayed initialization is needed; otherwise, false.</value>
+            <remarks>
+            When auto-play is enabled, the particle effect will be automatically started during
+            the delayed initialization phase, which occurs after the actor has been fully set up.
+            </remarks>
+        </member>
+        <member name="M:GameCore.ActorSystem.ActorParticle.DelayedInitialization">
+            <summary>
+            Performs delayed initialization of the particle actor.
+            </summary>
+            <remarks>
+            This method is called during the delayed initialization phase and automatically
+            starts the particle effect if auto-play is enabled and the effect hasn't been
+            manually started yet.
+            </remarks>
+        </member>
+        <member name="M:GameCore.ActorSystem.ActorParticle.DisposeManaged">
+            <summary>
+            Releases managed resources used by this particle actor.
+            </summary>
+            <remarks>
+            This method cleans up the particle actor and removes it from global lookup tables
+            if it was registered as a non-transient actor. It ensures proper resource management
+            when the particle effect is destroyed.
+            </remarks>
+        </member>
+        <member name="M:GameCore.ActorSystem.ActorParticle.#ctor(GameData.IGameLink{GameCore.ActorSystem.Data.GameDataActorParticle},System.Boolean,GameCore.ActorSystem.IActorScope,GameCore.SceneSystem.Scene,GameCore.PlayerAndUsers.Player)">
+            <summary>
+            Initializes a new instance of the ActorParticle class with the specified configuration.
+            </summary>
+            <param name="link">The game data link defining the configuration for this particle actor.</param>
+            <param name="skipBirth">Whether to skip birth animations or effects.</param>
+            <param name="scope">The actor scope that will manage this actor's lifecycle.</param>
+            <param name="scene">The scene to create the actor in, if different from the scope's scene.</param>
+            <param name="forcePlayer">Optional player to override the default player assignment.</param>
+            <remarks>
+            On the client side, non-transient particle actors are registered in a global lookup
+            for efficient retrieval and management. This registration is automatically handled
+            during construction and cleaned up during disposal.
+            </remarks>
+        </member>
+        <member name="F:GameCore.ActorSystem.ActorParticle._showShadow">
+            <summary />
+        </member>
+        <member name="P:GameCore.ActorSystem.ActorParticle.ShowShadow">
+            <summary>
+            获取或设置是否显示阴影
+            </summary>
+        </member>
+        <member name="T:GameCore.ActorSystem.ActorScope">
+            <summary />
+            <summary>
+            Represents a scope that manages a group of actors sharing the same context and lifecycle.
+            </summary>
+            <param name="context">The context information that defines the scope's environment and parameters.</param>
+            <remarks>
+            Actor scopes provide a way to group related actors together and manage their collective lifecycle.
+            They maintain context information such as position, targets, visibility, and other shared properties
+            that affect all actors within the scope. Scopes can be transient (temporary) or persistent based
+            on their intended usage patterns.
+            </remarks>
+            <summary />
+        </member>
+        <member name="M:GameCore.ActorSystem.ActorScope.#ctor(GameCore.ActorSystem.IActorScopeContext)">
+            <summary>
+            Represents a scope that manages a group of actors sharing the same context and lifecycle.
+            </summary>
+            <param name="context">The context information that defines the scope's environment and parameters.</param>
+            <remarks>
+            Actor scopes provide a way to group related actors together and manage their collective lifecycle.
+            They maintain context information such as position, targets, visibility, and other shared properties
+            that affect all actors within the scope. Scopes can be transient (temporary) or persistent based
+            on their intended usage patterns.
+            </remarks>
+        </member>
+        <member name="P:GameCore.ActorSystem.ActorScope.Id">
+            <summary>
+            Gets the unique identifier for this actor scope.
+            </summary>
+            <remarks>
+            By default, this returns the hash code of the scope instance. Derived classes may override
+            this to provide more specific identification logic.
+            </remarks>
+        </member>
+        <member name="P:GameCore.ActorSystem.ActorScope.Context">
+            <summary>
+            Gets the context information that defines this scope's environment and parameters.
+            </summary>
+            <remarks>
+            The context provides information such as position, targets, player ownership, scale,
+            and other environmental factors that affect actors within this scope.
+            </remarks>
+        </member>
+        <member name="P:GameCore.ActorSystem.ActorScope.Host">
+            <summary>
+            Gets the host object that owns this actor scope, if any.
+            </summary>
+            <remarks>
+            The host is typically an entity or other object that serves as the primary owner
+            or anchor point for the actors managed by this scope.
+            </remarks>
+        </member>
+        <member name="P:GameCore.ActorSystem.ActorScope.GameCore#ActorSystem#IActorScope#MainActor">
+            <summary>
+            Gets the main actor for this scope. Base implementation returns null.
+            </summary>
+            <remarks>
+            Some specialized scopes may designate a primary actor that represents the scope's
+            main visual element. The base ActorScope does not define a main actor.
+            </remarks>
+        </member>
+        <member name="M:GameCore.ActorSystem.ActorScope.Kill">
+            <summary>
+            Terminates all actors in this scope and marks the scope for cleanup.
+            </summary>
+            <remarks>
+            This method should be implemented by derived classes to define how actors
+            are terminated when the scope is being shut down.
+            </remarks>
+        </member>
+        <member name="M:GameCore.ActorSystem.ActorScope.GameCore#ActorSystem#IActorScope#Destroy">
+            <summary>
+            Destroys this actor scope and cleans up its resources.
+            </summary>
+            <remarks>
+            This method is called when the scope needs to be completely removed from the game.
+            It delegates to the virtual Destroy method to allow customization by derived classes.
+            </remarks>
+        </member>
+        <member name="P:GameCore.ActorSystem.ActorScope.SourceSite">
+            <summary>
+            Gets the source site actor for this scope, if any.
+            </summary>
+            <remarks>
+            The source site represents the primary visual anchor point for actors in this scope.
+            This property must be implemented by derived classes.
+            </remarks>
+        </member>
+        <member name="P:GameCore.ActorSystem.ActorScope.EnsuredSourceSite">
+            <summary>
+            Gets the ensured source site actor, creating it if necessary.
+            </summary>
+            <remarks>
+            This property guarantees that a source site actor exists, creating one if needed.
+            It provides a reliable anchor point for actor attachments and positioning.
+            </remarks>
+        </member>
+        <member name="P:GameCore.ActorSystem.ActorScope.AttachSite">
+            <summary>
+            Gets the attach site actor for this scope, if any.
+            </summary>
+            <remarks>
+            The attach site represents the preferred attachment point for new actors
+            being added to this scope.
+            </remarks>
+        </member>
+        <member name="P:GameCore.ActorSystem.ActorScope.ClientActors">
+            <summary>
+            Gets the collection of client-side actors managed by this scope.
+            </summary>
+            <remarks>
+            This collection tracks actors that are specifically managed on the client side
+            for rendering and visual effects. Base implementation returns null.
+            </remarks>
+        </member>
+        <member name="T:GameCore.ActorSystem.ActorScopePersist">
+            <summary />
+            <summary />
+            <summary />
+            <summary />
+            <summary />
+            <summary />
+            <summary />
+            <summary />
+        </member>
+        <member name="P:GameCore.ActorSystem.ActorScopePersist.GameCore#Interface#IActor#ShouldRemoveWithParent">
+            <summary />
+        </member>
+        <member name="M:GameCore.ActorSystem.ActorScopePersist.#ctor(EngineInterface.GoInterface.IViewActor,GameCore.ActorSystem.IActorScopeOwner,GameData.IGameLink{GameCore.ActorSystem.Data.GameDataActorScope})">
+            <summary />
+        </member>
+        <member name="P:GameCore.ActorSystem.ActorScopePersist.AttachSite">
+            <summary />
+        </member>
+        <member name="P:GameCore.ActorSystem.ActorScopePersist.SourceSite">
+            <summary />
+        </member>
+        <member name="P:GameCore.ActorSystem.ActorScopePersist.EnsuredSourceSite">
+            <summary />
+        </member>
+        <member name="F:GameCore.ActorSystem.ActorScopePersist._clientActors">
+            <summary />
+        </member>
+        <member name="P:GameCore.ActorSystem.ActorScopePersist.ClientActors">
+            <summary />
+        </member>
+        <member name="M:GameCore.ActorSystem.ActorScopePersist.ReplicateForCoreActor(EngineInterface.GoInterface.IViewActor,System.Int32)">
+            <summary />
+            <param name="coreActor" />
+            <param name="linkHash" />
+            <returns />
+        </member>
+        <member name="T:GameCore.ActorSystem.ActorScopePersist.ReplicateContext">
+            <summary />
+            <summary />
+        </member>
+        <member name="M:GameCore.ActorSystem.ActorScopePersist.ReplicateContext.#ctor(EngineInterface.GoInterface.ICoreActor)">
+            <summary />
+        </member>
+        <member name="F:GameCore.ActorSystem.ActorScopePersist.ReplicateContext.coreActor">
+            <summary />
+        </member>
+        <member name="F:GameCore.ActorSystem.ActorScopePersist.ReplicateContext.source">
+            <summary />
+        </member>
+        <member name="P:GameCore.ActorSystem.ActorScopePersist.ReplicateContext.Link">
+            <summary />
+        </member>
+        <member name="P:GameCore.ActorSystem.ActorScopePersist.ReplicateContext.Source">
+            <summary />
+        </member>
+        <member name="P:GameCore.ActorSystem.ActorScopePersist.ReplicateContext.Target">
+            <summary />
+        </member>
+        <member name="P:GameCore.ActorSystem.ActorScopePersist.ReplicateContext.Host">
+            <summary />
+        </member>
+        <member name="P:GameCore.ActorSystem.ActorScopePersist.ReplicateContext.OverrideLink">
+            <summary />
+        </member>
+        <member name="P:GameCore.ActorSystem.ActorScopePersist.ReplicateContext.Player">
+            <summary />
+        </member>
+        <member name="P:GameCore.ActorSystem.ActorScopePersist.ReplicateContext.Scale">
+            <summary />
+        </member>
+        <member name="P:GameCore.ActorSystem.ActorScopePersist.ReplicateContext.Volume">
+            <summary />
+        </member>
+        <member name="P:GameCore.ActorSystem.ActorScopePersist.ReplicateContext.Radius">
+            <summary />
+        </member>
+        <member name="P:GameCore.ActorSystem.ActorScopePersist.ReplicateContext.Facing">
+            <summary />
+        </member>
+        <member name="P:GameCore.ActorSystem.ActorScopePersist.ReplicateContext.ActorScope">
+            <summary />
+        </member>
+        <member name="P:GameCore.ActorSystem.ActorScopePersist.Link">
+            <summary />
+        </member>
+        <member name="P:GameCore.ActorSystem.ActorScopePersist.Cache">
+            <summary />
+        </member>
+        <member name="M:GameCore.ActorSystem.ActorScopePersist.ToString">
+            <summary />
+            <returns />
+        </member>
+        <member name="P:GameCore.ActorSystem.ActorScopePersist.Id">
+            <summary />
+        </member>
+        <member name="F:GameCore.ActorSystem.ActorScopePersist._viewActor">
+            <summary />
+        </member>
+        <member name="P:GameCore.ActorSystem.ActorScopePersist.Scene">
+            <summary />
+        </member>
+        <member name="P:GameCore.ActorSystem.ActorScopePersist.Position">
+            <summary />
+        </member>
+        <member name="P:GameCore.ActorSystem.ActorScopePersist.IsValid">
+            <summary />
+        </member>
+        <member name="M:GameCore.ActorSystem.ActorScopePersist.IsAncestorOf(GameCore.Interface.IActorSync)">
+            <summary />
+            <param name="other" />
+            <returns />
+        </member>
+        <member name="P:GameCore.ActorSystem.ActorScopePersist.Scope">
+            <summary />
+        </member>
+        <member name="P:GameCore.ActorSystem.ActorScopePersist.GameCore#Interface#IActor#Facing">
+            <summary />
+        </member>
+        <member name="P:GameCore.ActorSystem.ActorScopePersist.Scale">
+            <summary />
+        </member>
+        <member name="P:GameCore.ActorSystem.ActorScopePersist.Player">
+            <summary />
+        </member>
+        <member name="P:GameCore.ActorSystem.ActorScopePersist.GameCore#Interface#IActor#Parent">
+            <summary />
+        </member>
+        <member name="M:GameCore.ActorSystem.ActorScopePersist.GameCore#Interface#IActor#Destroy(System.Boolean)">
+            <summary />
+            <param name="forceNoFade" />
+            <returns />
+        </member>
+        <member name="P:GameCore.ActorSystem.ActorScopePersist.GameCore#Interface#IActor#ViewAsyncActor">
+            <summary />
+        </member>
+        <member name="M:GameCore.ActorSystem.ActorScopePersist.GameCore#Interface#IActor#Attach(GameCore.Interface.IActor,System.Nullable{EngineCommon.UTF8String})">
+            <summary />
+            <param name="child" />
+            <param name="socket" />
+            <returns />
+        </member>
+        <member name="M:GameCore.ActorSystem.ActorScopePersist.GameCore#Interface#IActor#AttachTo(GameCore.Interface.IActor,System.Nullable{EngineCommon.UTF8String})">
+            <summary />
+            <param name="parent" />
+            <param name="socket" />
+            <returns />
+        </member>
+        <member name="M:GameCore.ActorSystem.ActorScopePersist.GameCore#Interface#IActor#Detach(System.Boolean)">
+            <summary />
+            <param name="resetBearings" />
+            <returns />
+        </member>
+        <member name="P:GameCore.ActorSystem.ActorScopePersist.GameCore#BaseInterface#ICooldownHost#ViewActor">
+            <summary />
+        </member>
+        <member name="P:GameCore.ActorSystem.ActorScopePersist.GameCore#BaseInterface#ICooldownHost#LazyAttachedChildren">
+            <summary />
+        </member>
+        <member name="P:GameCore.ActorSystem.ActorScopePersist.GameCore#BaseInterface#ICooldownHost#SyncIds">
+            <summary />
+        </member>
+        <member name="P:GameCore.ActorSystem.ActorScopePersist.GameCore#BaseInterface#ICooldownOwner#LazyCooldownPool">
+            <summary />
+        </member>
+        <member name="M:GameCore.ActorSystem.ActorScopePersist.Kill">
+            <summary />
+            <returns />
+        </member>
+        <member name="M:GameCore.ActorSystem.ActorScopePersist.DisposeManaged">
+            <summary />
+            <returns />
+        </member>
+        <member name="M:GameCore.ActorSystem.ActorScopePersist.DisposeUnmanaged(System.Boolean)">
+            <summary />
+            <param name="finalizing" />
+            <returns />
+        </member>
+        <member name="M:GameCore.ActorSystem.ActorScopePersist.GameCore#BaseInterface#IPropertyHost#GetPropertiesWithHash(System.Boolean)">
+            <summary />
+            <param name="modifiedOnly" />
+            <returns />
+        </member>
+        <member name="M:GameCore.ActorSystem.ActorScopePersist.GameCore#BaseInterface#IPropertyHost#GetBytesPropertiesWithHash(System.Boolean)">
+            <summary />
+            <param name="modifiedOnly" />
+            <returns />
+        </member>
+        <member name="M:GameCore.ActorSystem.ActorScopePersist.GameCore#BaseInterface#IPropertyHost#GetPropertyWithHash``1(System.Int64)">
+            <summary />
+            <typeparam name="T" />
+            <param name="propertyHash" />
+            <returns />
+        </member>
+        <member name="P:GameCore.ActorSystem.ActorScopePersist.SyncId">
+            <summary />
+        </member>
+        <member name="P:GameCore.ActorSystem.ActorScopePersist.SyncIdType">
+            <summary />
+        </member>
+        <member name="P:GameCore.ActorSystem.ActorScopePersist.GameCore#BaseInterface#IPropertyOwner#PropertyHost">
+            <summary />
+        </member>
+        <member name="M:GameCore.ActorSystem.ActorScopePersist.GetProperty``1(GameCore.ActorSystem.Enum.PropertyActorScopePersist)">
+            <summary />
+            <typeparam name="TValue" />
+            <param name="property" />
+            <returns />
+        </member>
+        <member name="T:GameCore.ActorSystem.ActorScopeTransient">
+            <summary />
+            <summary />
+        </member>
+        <member name="M:GameCore.ActorSystem.ActorScopeTransient.#ctor(GameCore.ActorSystem.IActorScopeContext)">
+            <summary />
+        </member>
+        <member name="P:GameCore.ActorSystem.ActorScopeTransient.StaticSite">
+            <summary />
+        </member>
+        <member name="P:GameCore.ActorSystem.ActorScopeTransient.AttachSite">
+            <summary />
+        </member>
+        <member name="M:GameCore.ActorSystem.ActorScopeTransient.Kill">
+            <summary>
+            Only work if there is no host
+            </summary>
+        </member>
+        <member name="P:GameCore.ActorSystem.ActorScopeTransient.SourceSite">
+            <summary />
+        </member>
+        <member name="P:GameCore.ActorSystem.ActorScopeTransient.EnsuredSourceSite">
+            <summary />
+        </member>
+        <member name="M:GameCore.ActorSystem.ActorScopeTransient.DisposeManaged">
+            <summary />
+            <returns />
+        </member>
+        <member name="M:GameCore.ActorSystem.ActorScopeTransient.DisposeUnmanaged(System.Boolean)">
+            <summary />
+            <param name="finalizing" />
+            <returns />
+        </member>
+        <member name="T:GameCore.ActorSystem.ActorSegmented">
+            <summary>
+            Represents an abstract base class for segmented actors that can display directional effects such as beams, projectiles, or area indicators.
+            </summary>
+            <remarks>
+            Segmented actors are special visual effects that extend from one point to another, often used for spells, projectiles,
+            beams, or area-of-effect indicators. They consist of multiple segments that can be arranged in a line, with optional
+            launch and impact effects at the endpoints. The actor automatically calculates its orientation and length based on
+            the positions of its start and end points.
+            </remarks>
+        </member>
+        <member name="M:GameCore.ActorSystem.ActorSegmented.#ctor(GameData.IGameLink{GameCore.ActorSystem.Data.GameDataActorSegmented},System.Boolean,GameCore.ActorSystem.IActorScope,GameCore.SceneSystem.Scene,GameCore.PlayerAndUsers.Player)">
+            <summary>
+            Initializes a new instance of the ActorSegmented class on the client side.
+            </summary>
+            <param name="link">The game data link defining the configuration for this segmented actor.</param>
+            <param name="skipBirth">Whether to skip birth animations or effects.</param>
+            <param name="scope">The actor scope that will manage this actor's lifecycle.</param>
+            <param name="scene">The scene to create the actor in, if different from the scope's scene.</param>
+            <param name="forcePlayer">Optional player to override the default player assignment.</param>
+            <remarks>
+            On the client side, this constructor also initializes debug drawing capabilities if enabled
+            in the segmented actor's configuration flags.
+            </remarks>
+        </member>
+        <member name="M:GameCore.ActorSystem.ActorSegmented.UpdateForward">
+            <summary>
+            Updates the forward direction and length of the segmented actor based on its end point.
+            </summary>
+            <returns>True if the forward direction was successfully updated; otherwise, false.</returns>
+            <remarks>
+            This method calculates the orientation and actual length of the segmented actor by examining
+            the positions of its start point (current position) and end point (ForwardEndPoint).
+            The actor's rotation is updated to face toward the end point, and the actual length is
+            either set to the specified Length property or calculated from the distance between points.
+            </remarks>
+        </member>
+        <member name="F:GameCore.ActorSystem.ActorSegmented.forwardAngleCache">
+            <summary />
+        </member>
+        <member name="F:GameCore.ActorSystem.ActorSegmented.positionCache">
+            <summary />
+        </member>
+        <member name="F:GameCore.ActorSystem.ActorSegmented.forwardPositionCache">
+            <summary />
+        </member>
+        <member name="P:GameCore.ActorSystem.ActorSegmented.DebugDraw">
+            <summary>
+            Gets or sets the debug drawing interface for rendering debugging information.
+            </summary>
+            <value>The debug draw interface, or null if debug drawing is disabled.</value>
+        </member>
+        <member name="P:GameCore.ActorSystem.ActorSegmented.DebugDrawEnabled">
+            <summary>
+            Gets or sets a value indicating whether debug drawing is enabled for this segmented actor.
+            </summary>
+            <value>True if debug drawing is enabled; otherwise, false.</value>
+            <remarks>
+            When enabled, additional visual debugging information will be rendered to help with
+            development and troubleshooting of the segmented actor's positioning and orientation.
+            </remarks>
+        </member>
+        <member name="P:GameCore.ActorSystem.ActorSegmented.ForwardEndPoint">
+            <summary>
+            Gets or sets the end point context that defines where the segmented actor should point toward.
+            </summary>
+            <value>The actor end point context providing the target position and configuration.</value>
+            <remarks>
+            This property determines the forward direction and target of the segmented actor.
+            When set, the actor will orient itself to point from its current position toward this end point.
+            </remarks>
+        </member>
+        <member name="P:GameCore.ActorSystem.ActorSegmented.ActualLength">
+            <summary>
+            Gets the actual calculated length of the segmented actor.
+            </summary>
+            <value>The actual length in world units, calculated from the start and end positions.</value>
+            <remarks>
+            This property reflects the real length of the segmented actor after UpdateForward() has been called.
+            It may differ from the Length property if the Length is null, in which case it's calculated from positions.
+            </remarks>
+        </member>
+        <member name="P:GameCore.ActorSystem.ActorSegmented.Length">
+            <summary>
+            Gets or sets the desired length of the segmented actor.
+            </summary>
+            <value>The desired length in world units, or null to use the calculated distance between points.</value>
+            <remarks>
+            When set to a specific value, this overrides the calculated distance between start and end points.
+            When null, the actor will calculate its length based on the actual distance to the ForwardEndPoint.
+            </remarks>
+        </member>
+        <member name="P:GameCore.ActorSystem.ActorSegmented.LaunchActor">
+            <summary>
+            Gets the actor displayed at the launch point (start) of the segmented effect.
+            </summary>
+            <value>The launch actor, or null if no launch effect is configured.</value>
+            <remarks>
+            This actor is typically used for effects such as muzzle flashes, spell origins, or other
+            visual indicators at the start point of the segmented effect.
+            </remarks>
+        </member>
+        <member name="P:GameCore.ActorSystem.ActorSegmented.ImpactActor">
+            <summary>
+            Gets the actor displayed at the impact point (end) of the segmented effect.
+            </summary>
+            <value>The impact actor, or null if no impact effect is configured.</value>
+            <remarks>
+            This actor is typically used for effects such as explosions, spell impacts, or other
+            visual indicators at the end point of the segmented effect.
+            </remarks>
+        </member>
+        <member name="P:GameCore.ActorSystem.ActorSegmented.Segments">
+            <summary>
+            Gets the collection of segment actors that make up the body of the segmented effect.
+            </summary>
+            <remarks>
+            These actors are arranged in sequence to create the visual representation of the segmented effect,
+            such as beam segments, projectile trails, or area indicator sections.
+            </remarks>
+        </member>
+        <member name="P:GameCore.ActorSystem.ActorSegmented.CenterActors">
+            <summary>
+            Gets a read-only view of the center segment actors.
+            </summary>
+            <value>A read-only list of actors representing the central segments of the effect.</value>
+            <remarks>
+            This property provides external access to the segment actors without allowing direct modification
+            of the internal collection.
+            </remarks>
+        </member>
+        <member name="M:GameCore.ActorSystem.ActorSegmented.DisposeManaged">
+            <summary>
+            Releases managed resources used by this segmented actor.
+            </summary>
+            <remarks>
+            This method cleans up all segment actors, launch and impact actors, debug drawing resources,
+            and cached position data when the segmented actor is being disposed.
+            </remarks>
+        </member>
+        <member name="T:GameCore.ActorSystem.ActorSegmentedRectangle">
+            <summary />
+        </member>
+        <member name="M:GameCore.ActorSystem.ActorSegmentedRectangle.#ctor(GameData.IGameLink{GameCore.ActorSystem.Data.GameDataActorSegmentedRectangle},System.Boolean,GameCore.ActorSystem.IActorScope,GameCore.SceneSystem.Scene,GameCore.PlayerAndUsers.Player)">
+            <summary />
+        </member>
+        <member name="F:GameCore.ActorSystem.ActorSegmentedRectangle.width">
+            <summary />
+        </member>
+        <member name="P:GameCore.ActorSystem.ActorSegmentedRectangle.Width">
+            <summary />
+        </member>
+        <member name="M:GameCore.ActorSystem.ActorSegmentedRectangle.UpdateForward">
+            <summary />
+            <returns />
+        </member>
+        <member name="T:GameCore.ActorSystem.ActorSegmentedSector">
+            <summary />
+        </member>
+        <member name="M:GameCore.ActorSystem.ActorSegmentedSector.#ctor(GameData.IGameLink{GameCore.ActorSystem.Data.GameDataActorSegmentedSector},System.Boolean,GameCore.ActorSystem.IActorScope,GameCore.SceneSystem.Scene,GameCore.PlayerAndUsers.Player)">
+            <summary />
+        </member>
+        <member name="M:GameCore.ActorSystem.ActorSegmentedSector.UpdateForward">
+            <summary />
+            <returns />
+        </member>
+        <member name="T:GameCore.ActorSystem.ActorSite">
+            <summary />
+        </member>
+        <member name="M:GameCore.ActorSystem.ActorSite.#ctor(GameData.IGameLink{GameCore.ActorSystem.Data.GameDataActor},System.Boolean,GameCore.ActorSystem.IActorScope,GameCore.SceneSystem.Scene,GameCore.PlayerAndUsers.Player)">
+            <summary />
+        </member>
+        <member name="M:GameCore.ActorSystem.ActorSite.ToString">
+            <summary />
+            <returns />
+        </member>
+        <member name="T:GameCore.ActorSystem.ActorSound">
+            <summary />
+            <summary />
+        </member>
+        <member name="M:GameCore.ActorSystem.ActorSound.#ctor(GameData.IGameLink{GameCore.ActorSystem.Data.GameDataActorSound},System.Boolean,GameCore.ActorSystem.IActorScope,GameCore.SceneSystem.Scene,GameCore.PlayerAndUsers.Player)">
+            <summary />
+        </member>
+        <member name="M:GameCore.ActorSystem.ActorSound.Play">
+            <summary />
+            <returns />
+        </member>
+        <member name="M:GameCore.ActorSystem.ActorSound.SetPlaySpeed(System.Single)">
+            <summary />
+            <param name="speed" />
+            <returns />
+        </member>
+        <member name="F:GameCore.ActorSystem.ActorSound.played">
+            <summary />
+        </member>
+        <member name="E:GameCore.ActorSystem.ActorSound.TimelineEventTriggered">
+            <summary />
+        </member>
+        <member name="P:GameCore.ActorSystem.ActorSound.HasDelayedInitialization">
+            <summary />
+        </member>
+        <member name="M:GameCore.ActorSystem.ActorSound.DelayedInitialization">
+            <summary />
+            <returns />
+        </member>
+        <member name="M:GameCore.ActorSystem.ActorSound.GameCore#ActorSystem#IActorTimelineAsset#OnTimedEventTriggered(EngineCommon.UTF8String,System.Boolean)">
+            <summary />
+            <param name="msg" />
+            <param name="isStart" />
+            <returns />
+        </member>
+        <member name="M:GameCore.ActorSystem.ActorSound.DisposeManaged">
+            <summary />
+            <returns />
+        </member>
+        <member name="T:GameCore.ActorSystem.ActorText">
+            <summary />
+        </member>
+        <member name="M:GameCore.ActorSystem.ActorText.#ctor(GameData.IGameLink{GameCore.ActorSystem.Data.GameDataActorText},System.Boolean,GameCore.ActorSystem.IActorScope,GameCore.SceneSystem.Scene,GameCore.PlayerAndUsers.Player)">
+            <summary />
+        </member>
+        <member name="T:GameCore.ActorSystem.AttachContext">
+            <summary />
+        </member>
+        <member name="M:GameCore.ActorSystem.AttachContext.#ctor(GameCore.Interface.IActor,System.Nullable{EngineCommon.UTF8String})">
+            <summary />
+        </member>
+        <member name="P:GameCore.ActorSystem.AttachContext.Parent">
+            <summary />
+        </member>
+        <member name="P:GameCore.ActorSystem.AttachContext.Socket">
+            <summary />
+        </member>
+        <member name="M:GameCore.ActorSystem.AttachContext.AsLaunchSiteFor(GameCore.ActorSystem.IActorDualEndPoints)">
+            <summary />
+            <param name="actor" />
+            <returns />
+        </member>
+        <member name="P:GameCore.ActorSystem.AttachContext.WorldPosition">
+            <summary />
+        </member>
+        <member name="M:GameCore.ActorSystem.AttachContext.ToString">
+            <summary />
+            <returns />
+        </member>
+    </members>
+</doc>

@@ -1,0 +1,41 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<doc>
+    <assembly>
+        <name>GameCore</name>
+    </assembly>
+    <members>
+        <member name="P:GameCore.ScopeScript.LastCreatedUnit">
+            <summary>
+            Gets or sets the most recently created unit in the game.
+            </summary>
+            <value>The last created unit instance, or <c>null</c> if no unit has been created yet.</value>
+            <remarks>
+            This property is automatically updated whenever a new unit is created through the game's
+            unit creation systems. It provides convenient access for scripts and debugging tools that
+            need to reference the most recent unit without maintaining explicit references.
+            </remarks>
+        </member>
+        <member name="P:GameCore.ScopeScript.LastCreatedActor">
+            <summary>
+            Gets or sets the most recently created actor in the game.
+            </summary>
+            <value>The last created actor instance, or <c>null</c> if no actor has been created yet.</value>
+            <remarks>
+            This property is automatically updated whenever a new actor is created through the game's
+            actor creation systems. Actors represent visual and interactive elements in the game world,
+            and this reference is useful for immediate manipulation or attachment operations.
+            </remarks>
+        </member>
+        <member name="P:GameCore.ScopeScript.LastCreatedItem">
+            <summary>
+            Gets or sets the most recently created item in the game.
+            </summary>
+            <value>The last created item instance, or <c>null</c> if no item has been created yet.</value>
+            <remarks>
+            This property is automatically updated whenever a new item is created through the game's
+            item creation systems. Items represent collectible objects, equipment, and other inventory
+            entities in the game world.
+            </remarks>
+        </member>
+    </members>
+</doc>

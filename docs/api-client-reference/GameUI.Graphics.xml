@@ -1,0 +1,1619 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>GameUI</name>
+    </assembly>
+    <members>
+        <member name="T:GameUI.Brush.ColorBrush">
+        <summary>
+        表示颜色画刷的基类。
+        </summary>
+        </member>
+        <member name="M:GameUI.Brush.ColorBrush.ToRgbaHex">
+        <summary>
+        转换为 RGBA 十六进制字符串。
+        </summary>
+        <returns>RGBA 格式的颜色字符串。</returns>
+        </member>
+        <member name="T:GameUI.Brush.SolidColorBrush">
+        <summary>
+        表示单色画刷。
+        </summary>
+        </member>
+        <member name="M:GameUI.Brush.SolidColorBrush.#ctor(System.Drawing.Color)">
+        <summary>
+        表示单色画刷。
+        </summary>
+        </member>
+        <member name="P:GameUI.Brush.SolidColorBrush.Color">
+        <summary>
+        获取或设置画刷的颜色。
+        </summary>
+        </member>
+        <member name="M:GameUI.Brush.SolidColorBrush.op_Implicit(System.Drawing.Color)~GameUI.Brush.SolidColorBrush">
+        <summary>
+        隐式转换 Color 为 SolidColorBrush。
+        </summary>
+        <param name = "color">颜色值。</param>
+        </member>
+        <member name="M:GameUI.Brush.SolidColorBrush.op_Implicit(GameUI.Brush.SolidColorBrush)~System.Drawing.Color">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="M:GameUI.Brush.SolidColorBrush.ToRgbaHex">
+        <inheritdoc/>
+        </member>
+        <member name="M:GameUI.Brush.SolidColorBrush.ToString">
+        <inheritdoc/>
+        </member>
+        <member name="T:GameUI.Brush.GradientBrush">
+        <summary>
+        表示渐变色画刷。
+        </summary>
+        </member>
+        <member name="P:GameUI.Brush.GradientBrush.TopLeft">
+        <summary>
+        获取或设置左上角颜色。
+        </summary>
+        </member>
+        <member name="P:GameUI.Brush.GradientBrush.TopRight">
+        <summary>
+        获取或设置右上角颜色。
+        </summary>
+        </member>
+        <member name="P:GameUI.Brush.GradientBrush.BottomLeft">
+        <summary>
+        获取或设置左下角颜色。
+        </summary>
+        </member>
+        <member name="P:GameUI.Brush.GradientBrush.BottomRight">
+        <summary>
+        获取或设置右下角颜色。
+        </summary>
+        </member>
+        <member name="M:GameUI.Brush.GradientBrush.ToRgbaHex">
+        <inheritdoc/>
+        </member>
+        <member name="M:GameUI.Control.Primitive.Canvas.DrawPath(GameUI.Graphics.PathF)">
+        <summary>
+        绘制完整路径的轮廓
+        </summary>
+        <param name = "path">要绘制的路径对象</param>
+        <remarks>
+        <para>根据PathF对象中定义的路径操作序列绘制完整的路径轮廓。</para>
+        <para>支持的路径操作包括：移动、直线、二次贝塞尔曲线、三次贝塞尔曲线、圆弧和路径闭合。</para>
+        <para>如果路径为空或包含0个操作，则不执行任何绘制。</para>
+        <para>绘制使用当前的StrokePaint和StrokeSize设置。</para>
+        </remarks>
+        <example>
+        <code>
+        var path = new PathF();
+        path.MoveTo(10, 10);
+        path.LineTo(100, 10);
+        path.LineTo(100, 100);
+        path.Close();
+        
+        canvas.StrokePaint = new SolidPaint(Color.Blue);
+        canvas.StrokeSize = 2.0f;
+        canvas.DrawPath(path); // 绘制蓝色矩形轮廓
+        </code>
+        </example>
+        </member>
+        <member name="M:GameUI.Control.Primitive.Canvas.FillPath(GameUI.Graphics.PathF,System.Nullable{GameUI.Control.Enum.WindingMode})">
+        <summary>
+        填充路径
+        </summary>
+        <param name = "path">要填充的路径对象</param>
+        <param name = "windingMode">可选的路径缠绕模式，为null时使用DefaultPathWinding</param>
+        <remarks>
+        <para>根据PathF对象中定义的路径操作序列填充封闭区域。</para>
+        <para>支持的路径操作包括：移动、直线、二次贝塞尔曲线、三次贝塞尔曲线、圆弧和路径闭合。</para>
+        <para>如果路径为空或包含0个操作，则不执行任何填充。</para>
+        <para>填充使用当前的FillPaint设置。</para>
+        <para>缠绕模式决定了复杂路径的填充规则：</para>
+        <list type="bullet">
+        <item><description>NonZero: 非零缠绕规则，适用于大多数普通形状</description></item>
+        <item><description>EvenOdd: 奇偶规则，常用于创建镂空效果</description></item>
+        </list>
+        <para>如果提供了windingMode参数，会临时使用该模式进行填充，之后恢复到DefaultPathWinding。</para>
+        </remarks>
+        <example>
+        <code>
+        var path = new PathF();
+        path.MoveTo(10, 10);
+        path.LineTo(100, 10);
+        path.LineTo(100, 100);
+        path.LineTo(10, 100);
+        path.Close();
+        
+        canvas.FillPaint = new SolidPaint(Color.Blue);
+        canvas.FillPath(path); // 使用默认缠绕模式填充
+        
+        // 或者指定特定的缠绕模式
+        canvas.FillPath(path, WindingMode.EvenOdd); // 使用奇偶规则填充
+        </code>
+        </example>
+        </member>
+        <member name="M:GameUI.Control.Advanced.JoystickNormal.SetBackgroundStyle(GameUI.Brush.ColorBrush)">
+        <summary>
+        设置摇杆背景样式
+        </summary>
+        <param name = "background">背景画刷</param>
+        </member>
+        <member name="M:GameUI.Control.Advanced.JoystickNormal.SetKnobStyle(GameUI.Brush.ColorBrush)">
+        <summary>
+        设置摇杆头样式
+        </summary>
+        <param name = "background">背景画刷</param>
+        </member>
+        <member name="M:GameUI.Control.Extensions.BuilderExtensions.Background``1(``0,GameUI.Brush.ColorBrush)">
+        <summary>
+        设置背景画刷
+        </summary>
+        </member>
+        <member name="M:GameUI.Control.Extensions.BuilderExtensions.Background``1(``0,GameUI.Brush.SolidColorBrush)">
+        <summary>
+        设置背景画刷（固定颜色）
+        </summary>
+        </member>
+        <member name="T:GameUI.Graphics.ArcFlattener">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="F:GameUI.Graphics.ArcFlattener._cx">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="F:GameUI.Graphics.ArcFlattener._cy">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="F:GameUI.Graphics.ArcFlattener._diameter">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="F:GameUI.Graphics.ArcFlattener._radius">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="F:GameUI.Graphics.ArcFlattener._fx">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="F:GameUI.Graphics.ArcFlattener._fy">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="F:GameUI.Graphics.ArcFlattener._sweep">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="F:GameUI.Graphics.ArcFlattener._startAngle">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="F:GameUI.Graphics.ArcFlattener._startPoint">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="M:GameUI.Graphics.ArcFlattener.#ctor(System.Single,System.Single,System.Single,System.Single,System.Single,System.Single,System.Boolean)">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="M:GameUI.Graphics.ArcFlattener.CreateFlattenedPath(System.Single)">
+        <summary>
+        
+        </summary>
+        <param name="flatness"></param>
+        <returns></returns>
+        </member>
+        <member name="T:GameUI.Graphics.BoxGradientPaint">
+        <summary>
+        表示在矩形区域内创建渐变的盒式渐变画笔，支持可选的圆角和羽化效果
+        </summary>
+        <remarks>
+        <para>盒式渐变适用于创建柔和的矩形背景、按钮效果和边框面板。</para>
+        <para>渐变从指定矩形中心的起始颜色过渡到边缘的结束颜色。</para>
+        <para>当半径为0时，创建尖锐的矩形渐变。当半径>0时，创建圆角矩形渐变。</para>
+        </remarks>
+        <param name = "rectangle">渐变效果的矩形区域</param>
+        <param name = "cornerRadius">圆角矩形效果的圆角半径。使用0表示尖角</param>
+        <param name = "feather">控制渐变过渡柔和度的羽化距离</param>
+        <param name = "startColor">渐变中心的颜色</param>
+        <param name = "endColor">渐变边缘的颜色</param>
+        </member>
+        <member name="M:GameUI.Graphics.BoxGradientPaint.#ctor(System.Drawing.RectangleF,System.Single,System.Single,System.Drawing.Color,System.Drawing.Color)">
+        <summary>
+        表示在矩形区域内创建渐变的盒式渐变画笔，支持可选的圆角和羽化效果
+        </summary>
+        <remarks>
+        <para>盒式渐变适用于创建柔和的矩形背景、按钮效果和边框面板。</para>
+        <para>渐变从指定矩形中心的起始颜色过渡到边缘的结束颜色。</para>
+        <para>当半径为0时，创建尖锐的矩形渐变。当半径>0时，创建圆角矩形渐变。</para>
+        </remarks>
+        <param name = "rectangle">渐变效果的矩形区域</param>
+        <param name = "cornerRadius">圆角矩形效果的圆角半径。使用0表示尖角</param>
+        <param name = "feather">控制渐变过渡柔和度的羽化距离</param>
+        <param name = "startColor">渐变中心的颜色</param>
+        <param name = "endColor">渐变边缘的颜色</param>
+        </member>
+        <member name="P:GameUI.Graphics.BoxGradientPaint.StartColor">
+        <summary>
+        获取渐变中心的颜色
+        </summary>
+        </member>
+        <member name="P:GameUI.Graphics.BoxGradientPaint.EndColor">
+        <summary>
+        获取渐变边缘的颜色
+        </summary>
+        </member>
+        <member name="P:GameUI.Graphics.BoxGradientPaint.Rectangle">
+        <summary>
+        获取渐变效果的矩形区域
+        </summary>
+        </member>
+        <member name="P:GameUI.Graphics.BoxGradientPaint.CornerRadius">
+        <summary>
+        获取圆角矩形效果的圆角半径
+        </summary>
+        <value>圆角半径值。使用0表示尖角，正值表示圆角。</value>
+        </member>
+        <member name="P:GameUI.Graphics.BoxGradientPaint.Feather">
+        <summary>
+        获取控制渐变过渡柔和度的羽化距离
+        </summary>
+        <value>羽化距离。值越大，过渡越柔和。</value>
+        </member>
+        <member name="M:GameUI.Graphics.BoxGradientPaint.CreateUnmanagedGradient">
+        <summary>
+        
+        </summary>
+        <returns></returns>
+        </member>
+        <member name="T:GameUI.Graphics.Enum.LineCap">
+        <summary>
+        定义线条端点的样式
+        </summary>
+        <remarks>
+        <para>线条端点样式决定了线条两端的形状外观。</para>
+        <para>不同的端点样式适用于不同的设计需求：</para>
+        <list type="bullet">
+        <item><description>Butt: 适用于精确的技术图形和简洁的线条</description></item>
+        <item><description>Round: 适用于柔和的设计和艺术图形</description></item>
+        <item><description>Square: 适用于需要加强端点视觉重量的场合</description></item>
+        </list>
+        </remarks>
+        <example>
+        <code>
+        // 设置圆形端点
+        canvas.LineCap = LineCap.Round;
+        canvas.StrokeSize = 8f;
+        canvas.DrawLine(10, 10, 100, 10); // 绘制带圆形端点的粗线
+        
+        // 设置方形端点
+        canvas.LineCap = LineCap.Square;
+        canvas.DrawLine(10, 20, 100, 20); // 端点会向外延伸
+        </code>
+        </example>
+        </member>
+        <member name="F:GameUI.Graphics.Enum.LineCap.Butt">
+        <summary>
+        平头端点 - 线条在端点处平齐截止
+        </summary>
+        <remarks>
+        <para>线条在端点处直接截止，不向外延伸。</para>
+        <para>这是最简洁的端点样式，线条长度等于指定的长度。</para>
+        <para>适用于技术绘图和需要精确控制线条长度的场合。</para>
+        </remarks>
+        </member>
+        <member name="F:GameUI.Graphics.Enum.LineCap.Round">
+        <summary>
+        圆形端点 - 线条端点为半圆形
+        </summary>
+        <remarks>
+        <para>在线条两端添加半圆形的端点，半圆的直径等于线条宽度。</para>
+        <para>创建柔和、圆润的视觉效果，线条总长度会增加一个线条宽度。</para>
+        <para>适用于艺术设计和需要柔和外观的界面元素。</para>
+        </remarks>
+        </member>
+        <member name="F:GameUI.Graphics.Enum.LineCap.Square">
+        <summary>
+        方形端点 - 线条端点为方形，向外延伸线条宽度的一半
+        </summary>
+        <remarks>
+        <para>在线条两端添加方形的端点，向外延伸线条宽度的一半。</para>
+        <para>增强端点的视觉重量，线条总长度会增加一个线条宽度。</para>
+        <para>适用于需要强调端点或创建厚重感的设计。</para>
+        </remarks>
+        </member>
+        <member name="T:GameUI.Graphics.Enum.LineJoin">
+        <summary>
+        定义线条连接处的样式
+        </summary>
+        <remarks>
+        <para>线条连接样式决定了两条线段相交时连接点的外观。</para>
+        <para>不同的连接样式适用于不同的设计需求：</para>
+        <list type="bullet">
+        <item><description>Miter: 适用于需要锐利边角的技术图形和建筑设计</description></item>
+        <item><description>Round: 适用于柔和的艺术设计和有机形状</description></item>
+        <item><description>Bevel: 适用于需要控制尖角长度或创建现代简洁效果的场合</description></item>
+        </list>
+        <para>连接样式与MiterLimit属性配合使用，可以精确控制连接效果。</para>
+        </remarks>
+        <example>
+        <code>
+        // 设置圆形连接
+        canvas.LineJoin = LineJoin.Round;
+        canvas.StrokeSize = 8f;
+        canvas.DrawTriangle(50, 10, 10, 90, 90, 90); // 绘制带圆角连接的三角形
+        
+        // 设置斜接连接并限制斜接长度
+        canvas.LineJoin = LineJoin.Miter;
+        canvas.MiterLimit = 5.0f;
+        // 绘制尖角形状，过尖的角会自动变为斜切
+        </code>
+        </example>
+        </member>
+        <member name="F:GameUI.Graphics.Enum.LineJoin.Miter">
+        <summary>
+        斜接连接 - 线条在连接处以尖角相接
+        </summary>
+        <remarks>
+        <para>通过延伸线条的外边缘直到它们相交来创建尖锐的角。</para>
+        <para>当两条线段的夹角很小时，斜接可能会变得很长。</para>
+        <para>可以通过MiterLimit属性控制最大斜接长度，超过限制时自动切换为斜切连接。</para>
+        <para>适用于技术绘图、建筑图纸和需要精确角度的场合。</para>
+        </remarks>
+        </member>
+        <member name="F:GameUI.Graphics.Enum.LineJoin.Round">
+        <summary>
+        圆形连接 - 线条在连接处以圆弧相接
+        </summary>
+        <remarks>
+        <para>使用圆弧来连接两条线段的外边缘，创建平滑的圆角效果。</para>
+        <para>圆弧的半径等于线条宽度的一半。</para>
+        <para>消除了尖锐的角，创造柔和、友好的视觉效果。</para>
+        <para>适用于艺术设计、UI界面元素和需要柔和外观的图形。</para>
+        </remarks>
+        </member>
+        <member name="F:GameUI.Graphics.Enum.LineJoin.Bevel">
+        <summary>
+        斜切连接 - 线条在连接处以平角相接
+        </summary>
+        <remarks>
+        <para>通过在连接点处切断线条的外边缘来创建平角连接。</para>
+        <para>避免了过长的尖角，同时保持了角的存在感。</para>
+        <para>连接长度受到控制，适用于各种角度而不会产生过度延伸。</para>
+        <para>适用于现代设计、简洁的图标和需要控制角度大小的场合。</para>
+        </remarks>
+        </member>
+        <member name="T:GameUI.Graphics.Enum.PaintApply">
+        <summary>
+        定义画笔的应用方式
+        </summary>
+        </member>
+        <member name="F:GameUI.Graphics.Enum.PaintApply.Fill">
+        <summary>
+        填充 - 将画笔应用于形状的内部填充
+        </summary>
+        </member>
+        <member name="F:GameUI.Graphics.Enum.PaintApply.Stroke">
+        <summary>
+        描边 - 将画笔应用于形状的轮廓线条
+        </summary>
+        </member>
+        <member name="T:GameUI.Graphics.Enum.PathOperation">
+        <summary>
+        定义路径中可以执行的各种操作类型
+        </summary>
+        <remarks>
+        <para>路径操作枚举定义了构建复杂路径时可以使用的所有基本操作。</para>
+        <para>这些操作可以组合使用来创建各种复杂的几何形状和曲线。</para>
+        <para>路径通常以Move操作开始，然后通过各种绘制操作来构建形状，最后可选择性地使用Close操作闭合路径。</para>
+        </remarks>
+        <example>
+        <code>
+        var path = new PathF();
+        // Move操作：移动到起点
+        path.MoveTo(10, 10);
+        // Line操作：绘制直线
+        path.LineTo(100, 10);
+        // AddCircle操作：添加圆形
+        path.AddCircle(new PointF(50, 50), 20);
+        // Close操作：闭合路径
+        path.Close();
+        </code>
+        </example>
+        </member>
+        <member name="F:GameUI.Graphics.Enum.PathOperation.Move">
+        <summary>
+        移动操作
+        </summary>
+        <remarks>
+        <para>将当前绘制位置移动到指定点，不绘制任何内容。</para>
+        <para>这是开始新路径或新子路径的标准方式。</para>
+        <para>通常是路径的第一个操作，也可以用于创建不连续的路径段。</para>
+        </remarks>
+        </member>
+        <member name="F:GameUI.Graphics.Enum.PathOperation.Line">
+        <summary>
+        直线操作
+        </summary>
+        <remarks>
+        <para>从当前位置绘制一条直线到指定点。</para>
+        <para>绘制完成后，当前位置更新为直线的终点。</para>
+        </remarks>
+        </member>
+        <member name="F:GameUI.Graphics.Enum.PathOperation.Quad">
+        <summary>
+        二次贝塞尔曲线操作
+        </summary>
+        <remarks>
+        <para>从当前位置绘制一条二次贝塞尔曲线到指定点。</para>
+        <para>二次贝塞尔曲线使用一个控制点来定义曲线的形状。</para>
+        <para>适用于创建简单的平滑曲线。</para>
+        </remarks>
+        </member>
+        <member name="F:GameUI.Graphics.Enum.PathOperation.Cubic">
+        <summary>
+        三次贝塞尔曲线操作
+        </summary>
+        <remarks>
+        <para>从当前位置绘制一条三次贝塞尔曲线到指定点。</para>
+        <para>三次贝塞尔曲线使用两个控制点来提供更精细的曲线控制。</para>
+        <para>适用于创建复杂的平滑曲线和专业的图形设计。</para>
+        </remarks>
+        </member>
+        <member name="F:GameUI.Graphics.Enum.PathOperation.Arc">
+        <summary>
+        圆弧操作
+        </summary>
+        <remarks>
+        <para>绘制一个圆弧，连接当前位置和指定点。</para>
+        <para>圆弧的形状由两个控制点和半径参数定义。</para>
+        <para>适用于创建圆滑的转角和弧形连接。</para>
+        </remarks>
+        </member>
+        <member name="F:GameUI.Graphics.Enum.PathOperation.AddRectangle">
+        <summary>
+        添加矩形操作
+        </summary>
+        <remarks>
+        <para>在路径中添加一个矩形子路径。</para>
+        <para>矩形作为一个独立的闭合子路径添加到当前路径中。</para>
+        <para>不影响当前绘制位置。</para>
+        </remarks>
+        </member>
+        <member name="F:GameUI.Graphics.Enum.PathOperation.AddRoundedRectangle">
+        <summary>
+        添加圆角矩形操作
+        </summary>
+        <remarks>
+        <para>在路径中添加一个带圆角的矩形子路径。</para>
+        <para>圆角矩形作为一个独立的闭合子路径添加到当前路径中。</para>
+        <para>圆角半径可以自定义，适用于现代UI设计。</para>
+        </remarks>
+        </member>
+        <member name="F:GameUI.Graphics.Enum.PathOperation.AddCircle">
+        <summary>
+        添加圆形操作
+        </summary>
+        <remarks>
+        <para>在路径中添加一个圆形子路径。</para>
+        <para>圆形作为一个独立的闭合子路径添加到当前路径中。</para>
+        <para>不影响当前绘制位置。</para>
+        </remarks>
+        </member>
+        <member name="F:GameUI.Graphics.Enum.PathOperation.AddEllipse">
+        <summary>
+        添加椭圆操作
+        </summary>
+        <remarks>
+        <para>在路径中添加一个椭圆子路径。</para>
+        <para>椭圆作为一个独立的闭合子路径添加到当前路径中。</para>
+        <para>可以指定不同的X轴和Y轴半径来创建各种椭圆形状。</para>
+        </remarks>
+        </member>
+        <member name="F:GameUI.Graphics.Enum.PathOperation.AddCircleArc">
+        <summary>
+        添加圆弧操作
+        </summary>
+        <remarks>
+        <para>在路径中添加一个圆弧子路径。</para>
+        <para>可以指定起始角度、结束角度和旋转方向来创建精确的圆弧。</para>
+        <para>适用于创建扇形、弧形装饰和部分圆形。</para>
+        </remarks>
+        </member>
+        <member name="F:GameUI.Graphics.Enum.PathOperation.AddEllipseArc">
+        <summary>
+        添加椭圆弧操作
+        </summary>
+        <remarks>
+        <para>在路径中添加一个椭圆弧子路径。</para>
+        <para>可以指定不同的X轴和Y轴半径，以及起始角度、结束角度和旋转方向。</para>
+        <para>提供最大的灵活性来创建各种弧形形状。</para>
+        </remarks>
+        </member>
+        <member name="F:GameUI.Graphics.Enum.PathOperation.Close">
+        <summary>
+        闭合路径操作
+        </summary>
+        <remarks>
+        <para>通过绘制一条从当前位置到路径起点的直线来闭合当前路径。</para>
+        <para>闭合路径对于填充操作很重要，确保形状完全封闭。</para>
+        <para>闭合后，当前位置回到路径的起点。</para>
+        </remarks>
+        </member>
+        <member name="T:GameUI.Graphics.GeometryUtil">
+        <summary>
+        提供几何计算和图形变换的实用工具方法
+        </summary>
+        </member>
+        <member name="F:GameUI.Graphics.GeometryUtil.Epsilon">
+        <summary>
+        用于浮点数比较的精度常量
+        </summary>
+        </member>
+        <member name="F:GameUI.Graphics.GeometryUtil.DegreesToRadiansConstant">
+        <summary>
+        角度转弧度的转换常量 (π/180)
+        </summary>
+        </member>
+        <member name="F:GameUI.Graphics.GeometryUtil.RadiansToDegreesConstant">
+        <summary>
+        弧度转角度的转换常量 (180/π)
+        </summary>
+        </member>
+        <member name="T:GameUI.Graphics.GeometryUtil.CommonAnglesInRadians">
+        <summary>
+        一些常用角度的弧度值常量，避免重复计算
+        </summary>
+        </member>
+        <member name="F:GameUI.Graphics.GeometryUtil.CommonAnglesInRadians.Degrees0">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="F:GameUI.Graphics.GeometryUtil.CommonAnglesInRadians.Degrees30">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="F:GameUI.Graphics.GeometryUtil.CommonAnglesInRadians.Degrees45">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="F:GameUI.Graphics.GeometryUtil.CommonAnglesInRadians.Degrees60">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="F:GameUI.Graphics.GeometryUtil.CommonAnglesInRadians.Degrees90">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="F:GameUI.Graphics.GeometryUtil.CommonAnglesInRadians.Degrees120">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="F:GameUI.Graphics.GeometryUtil.CommonAnglesInRadians.Degrees135">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="F:GameUI.Graphics.GeometryUtil.CommonAnglesInRadians.Degrees180">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="F:GameUI.Graphics.GeometryUtil.CommonAnglesInRadians.Degrees270">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="F:GameUI.Graphics.GeometryUtil.CommonAnglesInRadians.Degrees360">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="M:GameUI.Graphics.GeometryUtil.GetDistance(System.Single,System.Single,System.Single,System.Single)">
+        <summary>
+        计算两点之间的距离
+        </summary>
+        <param name = "x1">第一个点的X坐标</param>
+        <param name = "y1">第一个点的Y坐标</param>
+        <param name = "x2">第二个点的X坐标</param>
+        <param name = "y2">第二个点的Y坐标</param>
+        <returns>两点之间的欧几里得距离</returns>
+        </member>
+        <member name="M:GameUI.Graphics.GeometryUtil.GetAngleAsDegrees(System.Single,System.Single,System.Single,System.Single)">
+        <summary>
+        计算从第一个点到第二个点的角度（以度为单位）
+        </summary>
+        <param name = "x1">第一个点的X坐标</param>
+        <param name = "y1">第一个点的Y坐标</param>
+        <param name = "x2">第二个点的X坐标</param>
+        <param name = "y2">第二个点的Y坐标</param>
+        <returns>角度值（度）</returns>
+        </member>
+        <member name="M:GameUI.Graphics.GeometryUtil.DegreesToRadians(System.Single)">
+        <summary>
+        将角度从度转换为弧度
+        </summary>
+        <param name = "angle">以度为单位的角度</param>
+        <returns>以弧度为单位的角度</returns>
+        </member>
+        <member name="M:GameUI.Graphics.GeometryUtil.DegreesToRadians(System.Double)">
+        <summary>
+        将角度从度转换为弧度（双精度版本）
+        </summary>
+        <param name = "angle">以度为单位的角度</param>
+        <returns>以弧度为单位的角度</returns>
+        </member>
+        <member name="M:GameUI.Graphics.GeometryUtil.RadiansToDegrees(System.Single)">
+        <summary>
+        将角度从弧度转换为度
+        </summary>
+        <param name = "angle">以弧度为单位的角度</param>
+        <returns>以度为单位的角度</returns>
+        </member>
+        <member name="M:GameUI.Graphics.GeometryUtil.RadiansToDegrees(System.Double)">
+        <summary>
+        将角度从弧度转换为度（双精度版本）
+        </summary>
+        <param name = "angle">以弧度为单位的角度</param>
+        <returns>以度为单位的角度</returns>
+        </member>
+        <member name="M:GameUI.Graphics.GeometryUtil.RotatePoint(System.Drawing.PointF,System.Single)">
+        <summary>
+        围绕原点旋转点
+        </summary>
+        <param name = "point">要旋转的点</param>
+        <param name = "angle">旋转角度（度）</param>
+        <returns>旋转后的点</returns>
+        </member>
+        <member name="M:GameUI.Graphics.GeometryUtil.RotatePoint(System.Drawing.PointF,System.Drawing.PointF,System.Single)">
+        <summary>
+        围绕指定中心点旋转点
+        </summary>
+        <param name = "center">旋转中心点</param>
+        <param name = "point">要旋转的点</param>
+        <param name = "angle">旋转角度（度）</param>
+        <returns>旋转后的点</returns>
+        </member>
+        <member name="M:GameUI.Graphics.GeometryUtil.GetSweep(System.Single,System.Single,System.Boolean)">
+        <summary>
+        计算弧形扫描角度
+        </summary>
+        <param name = "angle1">起始角度</param>
+        <param name = "angle2">结束角度</param>
+        <param name = "clockwise">是否顺时针方向</param>
+        <returns>扫描角度</returns>
+        </member>
+        <member name="M:GameUI.Graphics.GeometryUtil.PolarToPoint(System.Single,System.Single,System.Single)">
+        <summary>
+        将极坐标转换为笛卡尔坐标点
+        </summary>
+        <param name = "angleInRadians">角度（弧度）</param>
+        <param name = "fx">X轴缩放因子</param>
+        <param name = "fy">Y轴缩放因子</param>
+        <returns>转换后的点</returns>
+        </member>
+        <member name="M:GameUI.Graphics.GeometryUtil.EllipseAngleToPoint(System.Single,System.Single,System.Single,System.Single,System.Single)">
+        <summary>
+        获取椭圆上对应于给定角度的点
+        </summary>
+        <param name = "x">边界矩形的X位置</param>
+        <param name = "y">边界矩形的Y位置</param>
+        <param name = "width">边界矩形的宽度</param>
+        <param name = "height">边界矩形的高度</param>
+        <param name = "angleInDegrees">角度（度）</param>
+        <returns>椭圆上的点</returns>
+        </member>
+        <member name="M:GameUI.Graphics.GeometryUtil.GetOppositePoint(System.Drawing.PointF,System.Drawing.PointF)">
+        <summary>
+        获取相对于枢轴点的对称点
+        </summary>
+        <param name = "pivot">枢轴点</param>
+        <param name = "oppositePoint">要获取对称点的点</param>
+        <returns>对称点</returns>
+        </member>
+        <member name="M:GameUI.Graphics.GeometryUtil.IsLineIntersectingLine(System.Single,System.Single,System.Single,System.Single,System.Single,System.Single,System.Single,System.Single)">
+        <summary>
+        检查两条线段是否相交
+        </summary>
+        <param name = "x0">第一条线段起点的X坐标</param>
+        <param name = "y0">第一条线段起点的Y坐标</param>
+        <param name = "x1">第一条线段终点的X坐标</param>
+        <param name = "y1">第一条线段终点的Y坐标</param>
+        <param name = "x2">第二条线段起点的X坐标</param>
+        <param name = "y2">第二条线段起点的Y坐标</param>
+        <param name = "x3">第二条线段终点的X坐标</param>
+        <param name = "y3">第二条线段终点的Y坐标</param>
+        <returns>如果两条线段相交则返回true</returns>
+        </member>
+        <member name="M:GameUI.Graphics.GeometryUtil.GetFactor(System.Single,System.Single,System.Single)">
+        <summary>
+        计算在给定范围内某个值的比例因子
+        </summary>
+        <param name = "aMin">最小值</param>
+        <param name = "aMax">最大值</param>
+        <param name = "aValue">当前值</param>
+        <returns>比例因子（0.0到1.0之间）</returns>
+        </member>
+        <member name="M:GameUI.Graphics.GeometryUtil.GetLinearValue(System.Single,System.Single,System.Single)">
+        <summary>
+        根据比例因子在给定范围内计算线性值
+        </summary>
+        <param name = "aMin">最小值</param>
+        <param name = "aMax">最大值</param>
+        <param name = "aFactor">比例因子（0.0到1.0之间）</param>
+        <returns>计算得出的线性值</returns>
+        </member>
+        <member name="T:GameUI.Graphics.GradientPaint">
+        <summary>
+        表示在多种颜色之间过渡的渐变画笔的抽象基类
+        </summary>
+        <remarks>
+        <para>渐变画笔创建平滑的颜色过渡，用于高级视觉效果。</para>
+        <para>派生类包括<see cref = "T:GameUI.Graphics.LinearGradientPaint"/>、<see cref = "T:GameUI.Graphics.RadialGradientPaint"/>和<see cref = "T:GameUI.Graphics.BoxGradientPaint"/>。</para>
+        </remarks>
+        </member>
+        <member name="P:GameUI.Graphics.GradientPaint.StartColor">
+        <summary>
+        获取渐变的起始颜色
+        </summary>
+        </member>
+        <member name="P:GameUI.Graphics.GradientPaint.EndColor">
+        <summary>
+        获取渐变的结束颜色
+        </summary>
+        </member>
+        <member name="P:GameUI.Graphics.GradientPaint.UnmanagedGradient">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="M:GameUI.Graphics.GradientPaint.CreateUnmanagedGradient">
+        <summary>
+        
+        </summary>
+        <returns></returns>
+        </member>
+        <member name="M:GameUI.Graphics.GradientPaint.Apply(GameUI.Control.Primitive.Canvas,GameUI.Graphics.Enum.PaintApply)">
+        <summary>
+        将此渐变画笔应用到指定的画布上进行填充或描边操作
+        </summary>
+        <param name = "canvas">要应用渐变的画布</param>
+        <param name = "apply">指定是将渐变应用于填充还是描边操作</param>
+        <exception cref = "T:System.InvalidOperationException">
+        当画布无效或渐变创建失败时抛出。
+        </exception>
+        </member>
+        <member name="T:GameUI.Graphics.LinearGradientPaint">
+        <summary>
+        表示沿着由起点和终点定义的直线进行颜色过渡的线性渐变画笔
+        </summary>
+        <param name = "startPoint">线性渐变的起始点</param>
+        <param name = "endPoint">线性渐变的结束点</param>
+        <param name = "startColor">渐变起始点的颜色</param>
+        <param name = "endColor">渐变结束点的颜色</param>
+        </member>
+        <member name="M:GameUI.Graphics.LinearGradientPaint.#ctor(System.Drawing.PointF,System.Drawing.PointF,System.Drawing.Color,System.Drawing.Color)">
+        <summary>
+        表示沿着由起点和终点定义的直线进行颜色过渡的线性渐变画笔
+        </summary>
+        <param name = "startPoint">线性渐变的起始点</param>
+        <param name = "endPoint">线性渐变的结束点</param>
+        <param name = "startColor">渐变起始点的颜色</param>
+        <param name = "endColor">渐变结束点的颜色</param>
+        </member>
+        <member name="P:GameUI.Graphics.LinearGradientPaint.StartPoint">
+        <summary>
+        获取线性渐变的起始点
+        </summary>
+        </member>
+        <member name="P:GameUI.Graphics.LinearGradientPaint.EndPoint">
+        <summary>
+        获取线性渐变的结束点
+        </summary>
+        </member>
+        <member name="P:GameUI.Graphics.LinearGradientPaint.StartColor">
+        <summary>
+        获取渐变起始点的颜色
+        </summary>
+        </member>
+        <member name="P:GameUI.Graphics.LinearGradientPaint.EndColor">
+        <summary>
+        获取渐变结束点的颜色
+        </summary>
+        </member>
+        <member name="M:GameUI.Graphics.LinearGradientPaint.CreateUnmanagedGradient">
+        <summary>
+        
+        </summary>
+        <returns></returns>
+        </member>
+        <member name="T:GameUI.Graphics.Paint">
+        <summary>
+        表示可用于填充形状的不同类型画笔的抽象基类
+        </summary>
+        <remarks>
+        Paint用于Canvas.Fill和Canvas.Stroke方法，而<see cref = "N:GameUI.Brush"/>用于控件。
+        </remarks>
+        </member>
+        <member name="P:GameUI.Graphics.Paint.IsTransparent">
+        <summary>
+        获取一个值，指示此画笔是否具有透明区域
+        </summary>
+        <remarks>
+        派生类应重写此属性以正确指示其透明度。
+        </remarks>
+        </member>
+        <member name="M:GameUI.Graphics.Paint.op_Implicit(System.Drawing.Color)~GameUI.Graphics.Paint">
+        <summary>
+        提供从<see cref = "T:System.Drawing.Color"/>到<see cref = "T:GameUI.Graphics.Paint"/>的隐式转换
+        </summary>
+        <param name = "color">要转换的颜色</param>
+        <returns>使用指定颜色的<see cref = "T:GameUI.Graphics.SolidPaint"/>实例</returns>
+        </member>
+        <member name="T:GameUI.Graphics.PathF">
+        <summary>
+        表示一个2D图形路径，支持直线、曲线、圆弧等多种路径元素的构建和操作。
+        该类提供了创建复杂几何形状、路径变换、边界计算等功能。
+        </summary>
+        </member>
+        <member name="F:GameUI.Graphics.PathF.K_RATIO">
+        <summary>
+        用于创建圆形和椭圆的贝塞尔曲线控制点的理想比例常数
+        </summary>
+        </member>
+        <member name="F:GameUI.Graphics.PathF._arcAngles">
+        <summary>
+        存储圆弧的角度信息
+        </summary>
+        </member>
+        <member name="F:GameUI.Graphics.PathF._arcClockwise">
+        <summary>
+        存储圆弧的绘制方向（顺时针或逆时针）
+        </summary>
+        </member>
+        <member name="F:GameUI.Graphics.PathF._arcRadii">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="F:GameUI.Graphics.PathF._points">
+        <summary>
+        存储路径中的所有点坐标
+        </summary>
+        </member>
+        <member name="F:GameUI.Graphics.PathF._lineLengths">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="F:GameUI.Graphics.PathF._operations">
+        <summary>
+        存储路径操作序列（移动、直线、曲线等）
+        </summary>
+        </member>
+        <member name="F:GameUI.Graphics.PathF._subPathCount">
+        <summary>
+        子路径的数量
+        </summary>
+        </member>
+        <member name="F:GameUI.Graphics.PathF._subPathsClosed">
+        <summary>
+        记录每个子路径是否闭合
+        </summary>
+        </member>
+        <member name="F:GameUI.Graphics.PathF._cachedBounds">
+        <summary>
+        缓存的边界矩形，用于提高性能
+        </summary>
+        </member>
+        <member name="M:GameUI.Graphics.PathF.#ctor(System.Collections.Generic.List{System.Drawing.PointF},System.Collections.Generic.List{System.Single},System.Collections.Generic.List{System.Boolean},System.Collections.Generic.List{System.Single},System.Collections.Generic.List{System.Single},System.Collections.Generic.List{GameUI.Graphics.Enum.PathOperation},System.Int32)">
+        <summary>
+        使用指定的点、圆弧信息和操作序列创建PathF实例
+        </summary>
+        <param name = "points">路径点集合</param>
+        <param name = "arcSizes">圆弧角度集合</param>
+        <param name = "arcClockwise">圆弧方向集合</param>
+        <param name = "operations">路径操作集合</param>
+        <param name = "subPathCount">子路径数量</param>
+        </member>
+        <member name="M:GameUI.Graphics.PathF.#ctor(GameUI.Graphics.PathF)">
+        <summary>
+        通过复制现有路径创建新的PathF实例
+        </summary>
+        <param name = "path">要复制的路径</param>
+        </member>
+        <member name="M:GameUI.Graphics.PathF.#ctor(System.Drawing.PointF)">
+        <summary>
+        使用指定起始点创建PathF实例
+        </summary>
+        <param name = "point">起始点坐标</param>
+        </member>
+        <member name="M:GameUI.Graphics.PathF.#ctor(System.Single,System.Single)">
+        <summary>
+        使用指定起始坐标创建PathF实例
+        </summary>
+        <param name = "x">起始点X坐标</param>
+        <param name = "y">起始点Y坐标</param>
+        </member>
+        <member name="M:GameUI.Graphics.PathF.#ctor">
+        <summary>
+        创建空的PathF实例
+        </summary>
+        </member>
+        <member name="P:GameUI.Graphics.PathF.SubPathCount">
+        <summary>
+        获取子路径的数量
+        </summary>
+        </member>
+        <member name="P:GameUI.Graphics.PathF.Closed">
+        <summary>
+        获取路径是否已闭合
+        </summary>
+        </member>
+        <member name="P:GameUI.Graphics.PathF.FirstPoint">
+        <summary>
+        获取路径的第一个点
+        </summary>
+        </member>
+        <member name="P:GameUI.Graphics.PathF.LastPoint">
+        <summary>
+        获取路径的最后一个点
+        </summary>
+        </member>
+        <member name="P:GameUI.Graphics.PathF.Count">
+        <summary>
+        获取路径中点的总数
+        </summary>
+        </member>
+        <member name="P:GameUI.Graphics.PathF.OperationCount">
+        <summary>
+        获取路径操作的总数
+        </summary>
+        </member>
+        <member name="P:GameUI.Graphics.PathF.SegmentCountExcludingOpenAndClose">
+        <summary>
+        获取排除开始和结束操作后的路径段数量
+        </summary>
+        <remarks>
+        该属性返回路径中除Move和Close操作之外的操作数量，主要用于计算实际的绘制段数。
+        </remarks>
+        </member>
+        <member name="P:GameUI.Graphics.PathF.SegmentTypes">
+        <summary>
+        获取路径操作序列（移动、直线、曲线等）
+        </summary>
+        </member>
+        <member name="P:GameUI.Graphics.PathF.Points">
+        <summary>
+        获取路径中的所有点坐标
+        </summary>
+        </member>
+        <member name="P:GameUI.Graphics.PathF.LastPointIndex">
+        <summary>
+        获取路径中最后一个点的索引
+        </summary>
+        </member>
+        <member name="P:GameUI.Graphics.PathF.Item(System.Int32)">
+        <summary>
+        获取或设置指定索引位置的点坐标
+        </summary>
+        <param name = "index">点的索引</param>
+        <returns>指定索引位置的点坐标，如果索引无效则返回默认值</returns>
+        </member>
+        <member name="M:GameUI.Graphics.PathF.SetPoint(System.Int32,System.Single,System.Single)">
+        <summary>
+        设置路径中的点
+        </summary>
+        <param name = "index">点的索引</param>
+        <param name = "x">点的X坐标</param>
+        <param name = "y">点的Y坐标</param>
+        </member>
+        <member name="M:GameUI.Graphics.PathF.SetPoint(System.Int32,System.Drawing.PointF)">
+        <summary>
+        设置路径中的点
+        </summary>
+        <param name = "index">点的索引</param>
+        <param name = "point">点的坐标</param>
+        </member>
+        <member name="M:GameUI.Graphics.PathF.GetSegmentType(System.Int32)">
+        <summary>
+        获取路径操作序列（移动、直线、曲线等）
+        </summary>
+        </member>
+        <member name="M:GameUI.Graphics.PathF.GetArcAngle(System.Int32)">
+        <summary>
+        获取圆弧角度
+        </summary>
+        <param name = "aIndex">圆弧索引</param>
+        <returns>圆弧角度</returns>
+        </member>
+        <member name="M:GameUI.Graphics.PathF.SetArcAngle(System.Int32,System.Single)">
+        <summary>
+        设置圆弧角度
+        </summary>
+        <param name = "aIndex">圆弧索引</param>
+        <param name = "aValue">新的圆弧角度</param>
+        </member>
+        <member name="M:GameUI.Graphics.PathF.SetArcRadius(System.Int32,System.Single)">
+        <summary>
+        设置圆弧半径
+        </summary>
+        <param name = "aIndex">圆弧索引</param>
+        <param name = "aValue">新的圆弧半径</param>
+        </member>
+        <member name="M:GameUI.Graphics.PathF.GetArcRadius(System.Int32)">
+        <summary>
+        获取圆弧半径
+        </summary>
+        <param name = "aIndex">圆弧索引</param>
+        <returns>圆弧半径</returns>
+        </member>
+        <member name="M:GameUI.Graphics.PathF.GetLineLength(System.Int32)">
+        <summary>
+        获取线段长度
+        </summary>
+        <param name = "aIndex">线段索引</param>
+        <returns>线段长度</returns>
+        </member>
+        <member name="M:GameUI.Graphics.PathF.SetLineLength(System.Int32,System.Single)">
+        <summary>
+        设置线段长度
+        </summary>
+        <param name = "aIndex">线段索引</param>
+        <param name = "aValue">新的线段长度</param>
+        </member>
+        <member name="M:GameUI.Graphics.PathF.GetArcClockwise(System.Int32)">
+        <summary>
+        获取圆弧方向
+        </summary>
+        <param name = "aIndex">圆弧索引</param>
+        <returns>圆弧方向（顺时针或逆时针）</returns>
+        </member>
+        <member name="M:GameUI.Graphics.PathF.SetArcClockwise(System.Int32,System.Boolean)">
+        <summary>
+        设置圆弧方向
+        </summary>
+        <param name = "aIndex">圆弧索引</param>
+        <param name = "aValue">新的圆弧方向</param>
+        </member>
+        <member name="M:GameUI.Graphics.PathF.MoveTo(System.Single,System.Single)">
+        <summary>
+        移动到指定坐标（开始新的子路径）
+        </summary>
+        <param name = "x">目标X坐标</param>
+        <param name = "y">目标Y坐标</param>
+        <returns>当前PathF实例，支持链式调用</returns>
+        </member>
+        <member name="M:GameUI.Graphics.PathF.MoveTo(System.Drawing.PointF)">
+        <summary>
+        移动到指定坐标（开始新的子路径）
+        </summary>
+        <param name = "point">目标点坐标</param>
+        <returns>当前PathF实例，支持链式调用</returns>
+        </member>
+        <member name="M:GameUI.Graphics.PathF.Close">
+        <summary>
+        闭合当前子路径
+        </summary>
+        </member>
+        <member name="M:GameUI.Graphics.PathF.Open">
+        <summary>
+        打开当前子路径
+        </summary>
+        </member>
+        <member name="M:GameUI.Graphics.PathF.LineTo(System.Single,System.Single)">
+        <summary>
+        从当前位置绘制直线到指定坐标
+        </summary>
+        <param name = "x">目标X坐标</param>
+        <param name = "y">目标Y坐标</param>
+        <returns>当前PathF实例，支持链式调用</returns>
+        </member>
+        <member name="M:GameUI.Graphics.PathF.LineTo(System.Drawing.PointF)">
+        <summary>
+        从当前位置绘制直线到指定坐标
+        </summary>
+        <param name = "point">目标点坐标</param>
+        <returns>当前PathF实例，支持链式调用</returns>
+        </member>
+        <member name="M:GameUI.Graphics.PathF.InsertLineTo(System.Drawing.PointF,System.Int32)">
+        <summary>
+        在指定位置插入直线到路径
+        </summary>
+        <param name = "point">要插入的点</param>
+        <param name = "index">插入位置</param>
+        <returns>当前PathF实例，支持链式调用</returns>
+        </member>
+        <member name="M:GameUI.Graphics.PathF.AddEllipseArc(System.Drawing.PointF,System.Single,System.Single,System.Single,System.Single,System.Single,System.Boolean)">
+        <summary>
+        添加椭圆弧到路径
+        </summary>
+        <param name = "center">椭圆中心点</param>
+        <param name = "radiusX">X轴半径</param>
+        <param name = "radiusY">Y轴半径</param>
+        <param name = "rotation">椭圆旋转角度（度）</param>
+        <param name = "startAngle">起始角度（度）</param>
+        <param name = "endAngle">结束角度（度）</param>
+        <param name = "clockwise">是否顺时针方向</param>
+        <returns>当前PathF实例，支持链式调用</returns>
+        </member>
+        <member name="M:GameUI.Graphics.PathF.AddCircleArc(System.Drawing.PointF,System.Single,System.Single,System.Single,System.Boolean)">
+        <summary>
+        添加圆弧到路径
+        </summary>
+        <param name = "center">圆心</param>
+        <param name = "radius">半径</param>
+        <param name = "startAngle">起始角度（度）</param>
+        <param name = "endAngle">结束角度（度）</param>
+        <param name = "clockwise">是否顺时针方向</param>
+        <returns>当前PathF实例，支持链式调用</returns>
+        </member>
+        <member name="M:GameUI.Graphics.PathF.ArcTo(System.Drawing.PointF,System.Drawing.PointF,System.Single)">
+        <summary>
+        从当前位置绘制圆弧到指定位置
+        </summary>
+        <param name = "controlPoint1">第一个控制点</param>
+        <param name = "controlPoint2">第二个控制点</param>
+        <param name = "radius">圆弧半径</param>
+        <returns>当前PathF实例，支持链式调用</returns>
+        </member>
+        <member name="M:GameUI.Graphics.PathF.QuadTo(System.Single,System.Single,System.Single,System.Single)">
+        <summary>
+        绘制二次贝塞尔曲线
+        </summary>
+        <param name = "cx">控制点X坐标</param>
+        <param name = "cy">控制点Y坐标</param>
+        <param name = "x">终点X坐标</param>
+        <param name = "y">终点Y坐标</param>
+        <returns>当前PathF实例，支持链式调用</returns>
+        </member>
+        <member name="M:GameUI.Graphics.PathF.QuadTo(System.Drawing.PointF,System.Drawing.PointF)">
+        <summary>
+        绘制二次贝塞尔曲线
+        </summary>
+        <param name = "controlPoint">控制点</param>
+        <param name = "point">终点</param>
+        <returns>当前PathF实例，支持链式调用</returns>
+        </member>
+        <member name="M:GameUI.Graphics.PathF.InsertQuadTo(System.Drawing.PointF,System.Drawing.PointF,System.Int32)">
+        <summary>
+        在指定位置插入二次贝塞尔曲线到路径
+        </summary>
+        <param name = "controlPoint">控制点</param>
+        <param name = "point">终点</param>
+        <param name = "index">插入位置</param>
+        <returns>当前PathF实例，支持链式调用</returns>
+        </member>
+        <member name="M:GameUI.Graphics.PathF.CurveTo(System.Single,System.Single,System.Single,System.Single,System.Single,System.Single)">
+        <summary>
+        绘制三次贝塞尔曲线
+        </summary>
+        <param name = "c1X">第一个控制点X坐标</param>
+        <param name = "c1Y">第一个控制点Y坐标</param>
+        <param name = "c2X">第二个控制点X坐标</param>
+        <param name = "c2Y">第二个控制点Y坐标</param>
+        <param name = "x">终点X坐标</param>
+        <param name = "y">终点Y坐标</param>
+        <returns>当前PathF实例，支持链式调用</returns>
+        </member>
+        <member name="M:GameUI.Graphics.PathF.CurveTo(System.Drawing.PointF,System.Drawing.PointF,System.Drawing.PointF)">
+        <summary>
+        绘制三次贝塞尔曲线
+        </summary>
+        <param name = "controlPoint1">第一个控制点</param>
+        <param name = "controlPoint2">第二个控制点</param>
+        <param name = "point">终点</param>
+        <returns>当前PathF实例，支持链式调用</returns>
+        </member>
+        <member name="M:GameUI.Graphics.PathF.InsertCurveTo(System.Drawing.PointF,System.Drawing.PointF,System.Drawing.PointF,System.Int32)">
+        <summary>
+        在指定位置插入三次贝塞尔曲线到路径
+        </summary>
+        <param name = "controlPoint1">第一个控制点</param>
+        <param name = "controlPoint2">第二个控制点</param>
+        <param name = "point">终点</param>
+        <param name = "index">插入位置</param>
+        <returns>当前PathF实例，支持链式调用</returns>
+        </member>
+        <member name="M:GameUI.Graphics.PathF.AddRectangle(System.Single,System.Single,System.Single,System.Single)">
+        <summary>
+        添加矩形到路径
+        </summary>
+        <param name = "x">矩形左上角X坐标</param>
+        <param name = "y">矩形左上角Y坐标</param>
+        <param name = "w">矩形宽度</param>
+        <param name = "h">矩形高度</param>
+        <returns>当前PathF实例，支持链式调用</returns>
+        </member>
+        <member name="M:GameUI.Graphics.PathF.AddRoundedRectangle(System.Single,System.Single,System.Single,System.Single,System.Single)">
+        <summary>
+        添加圆角矩形到路径
+        </summary>
+        <param name = "x">矩形左上角X坐标</param>
+        <param name = "y">矩形左上角Y坐标</param>
+        <param name = "w">矩形宽度</param>
+        <param name = "h">矩形高度</param>
+        <param name = "cornerRadius">圆角半径</param>
+        <returns>当前PathF实例，支持链式调用</returns>
+        </member>
+        <member name="M:GameUI.Graphics.PathF.AddCircle(System.Drawing.PointF,System.Single)">
+        <summary>
+        添加圆形到路径
+        </summary>
+        <param name = "center">圆心</param>
+        <param name = "radius">半径</param>
+        <returns>当前PathF实例，支持链式调用</returns>
+        </member>
+        <member name="M:GameUI.Graphics.PathF.AddEllipse(System.Drawing.PointF,System.Single,System.Single)">
+        <summary>
+        添加椭圆到路径
+        </summary>
+        <param name = "center">椭圆中心点</param>
+        <param name = "radiusX">X轴半径</param>
+        <param name = "radiusY">Y轴半径</param>
+        <returns>当前PathF实例，支持链式调用</returns>
+        </member>
+        <member name="M:GameUI.Graphics.PathF.GetSegmentPointIndex(System.Int32)">
+        <summary>
+        获取路径中点的索引
+        </summary>
+        <param name = "index">路径操作索引</param>
+        <returns>点的索引</returns>
+        </member>
+        <member name="M:GameUI.Graphics.PathF.GetSegmentInfo(System.Int32,System.Int32@,System.Int32@,System.Int32@,System.Int32@,System.Int32@)">
+        <summary>
+        获取路径操作信息
+        </summary>
+        <param name = "segmentIndex">路径操作索引</param>
+        <param name = "pointIndex">点索引</param>
+        <param name = "arcAngleIndex">圆弧角度索引</param>
+        <param name = "arcClockwiseIndex">圆弧方向索引</param>
+        <returns>路径操作类型</returns>
+        </member>
+        <member name="M:GameUI.Graphics.PathF.GetSegmentForPoint(System.Int32)">
+        <summary>
+        获取路径中点的索引
+        </summary>
+        <param name = "pointIndex">点的索引</param>
+        <returns>路径操作索引</returns>
+        </member>
+        <member name="M:GameUI.Graphics.PathF.GetPointsForSegment(System.Int32)">
+        <summary>
+        获取路径中点的集合
+        </summary>
+        <param name = "segmentIndex">路径操作索引</param>
+        <returns>点的集合</returns>
+        </member>
+        <member name="M:GameUI.Graphics.PathF.RemoveAllSegmentsAfter(System.Int32)">
+        <summary>
+        移除路径中指定索引后的所有操作和点
+        </summary>
+        <param name = "segmentIndex">路径操作索引</param>
+        </member>
+        <member name="M:GameUI.Graphics.PathF.RemoveSegment(System.Int32)">
+        <summary>
+        移除路径中指定索引的操作和点
+        </summary>
+        <param name = "segmentIndex">路径操作索引</param>
+        </member>
+        <member name="M:GameUI.Graphics.PathF.Rotate(System.Single,System.Drawing.PointF)">
+        <summary>
+        旋转路径
+        </summary>
+        <param name = "angleAsDegrees">旋转角度（度）</param>
+        <param name = "pivot">旋转中心点</param>
+        <returns>旋转后的路径</returns>
+        </member>
+        <member name="M:GameUI.Graphics.PathF.GetRotatedPoint(System.Int32,System.Drawing.PointF,System.Single)">
+        <summary>
+        获取旋转后的点
+        </summary>
+        <param name = "pointIndex">点的索引</param>
+        <param name = "pivotPoint">旋转中心点</param>
+        <param name = "angle">旋转角度（度）</param>
+        <returns>旋转后的点</returns>
+        </member>
+        <member name="M:GameUI.Graphics.PathF.Transform(System.Numerics.Matrix3x2)">
+        <summary>
+        使用变换矩阵对路径进行变换
+        </summary>
+        <param name = "transform">3x2变换矩阵</param>
+        </member>
+        <member name="M:GameUI.Graphics.PathF.Separate">
+        <summary>
+        分离路径
+        </summary>
+        <returns>分离后的路径集合</returns>
+        </member>
+        <member name="M:GameUI.Graphics.PathF.Reverse">
+        <summary>
+        反转路径
+        </summary>
+        <returns>反转后的路径</returns>
+        </member>
+        <member name="M:GameUI.Graphics.PathF.AppendEllipse(System.Drawing.RectangleF)">
+        <summary>
+        添加椭圆形状到路径
+        </summary>
+        <param name = "rect">椭圆的边界矩形</param>
+        </member>
+        <member name="M:GameUI.Graphics.PathF.AppendEllipse(System.Single,System.Single,System.Single,System.Single)">
+        <summary>
+        添加椭圆形状到路径
+        </summary>
+        <param name = "x">椭圆边界框左上角X坐标</param>
+        <param name = "y">椭圆边界框左上角Y坐标</param>
+        <param name = "w">椭圆边界框宽度</param>
+        <param name = "h">椭圆边界框高度</param>
+        </member>
+        <member name="M:GameUI.Graphics.PathF.AppendCircle(System.Drawing.PointF,System.Single)">
+        <summary>
+        添加圆形到路径
+        </summary>
+        <param name = "center">圆心坐标</param>
+        <param name = "r">半径</param>
+        </member>
+        <member name="M:GameUI.Graphics.PathF.AppendCircle(System.Single,System.Single,System.Single)">
+        <summary>
+        添加圆形到路径
+        </summary>
+        <param name = "cx">圆心X坐标</param>
+        <param name = "cy">圆心Y坐标</param>
+        <param name = "r">半径</param>
+        </member>
+        <member name="M:GameUI.Graphics.PathF.AppendRectangle(System.Drawing.RectangleF,System.Boolean)">
+        <summary>
+        添加矩形到路径
+        </summary>
+        <param name = "rect">矩形区域</param>
+        <param name = "includeLast">是否包含最后一条边</param>
+        </member>
+        <member name="M:GameUI.Graphics.PathF.AppendRectangle(System.Single,System.Single,System.Single,System.Single,System.Boolean)">
+        <summary>
+        添加矩形到路径
+        </summary>
+        <param name = "x">矩形左上角X坐标</param>
+        <param name = "y">矩形左上角Y坐标</param>
+        <param name = "w">矩形宽度</param>
+        <param name = "h">矩形高度</param>
+        <param name = "includeLast">是否包含最后一条边</param>
+        </member>
+        <member name="M:GameUI.Graphics.PathF.AppendRoundedRectangle(System.Drawing.RectangleF,System.Single,System.Boolean)">
+        <summary>
+        添加圆角矩形到路径
+        </summary>
+        <param name = "rect">矩形区域</param>
+        <param name = "cornerRadius">圆角半径</param>
+        <param name = "includeLast">是否包含最后一条边</param>
+        </member>
+        <member name="M:GameUI.Graphics.PathF.AppendRoundedRectangle(System.Single,System.Single,System.Single,System.Single,System.Single,System.Boolean)">
+        <summary>
+        添加圆角矩形到路径
+        </summary>
+        <param name = "x">矩形左上角X坐标</param>
+        <param name = "y">矩形左上角Y坐标</param>
+        <param name = "w">矩形宽度</param>
+        <param name = "h">矩形高度</param>
+        <param name = "cornerRadius">圆角半径</param>
+        <param name = "includeLast">是否包含最后一条边</param>
+        </member>
+        <member name="M:GameUI.Graphics.PathF.AppendRoundedRectangle(System.Drawing.RectangleF,System.Single,System.Single,System.Single,System.Single,System.Boolean)">
+        <summary>
+        添加圆角矩形到路径
+        </summary>
+        <param name = "rect">矩形区域</param>
+        <param name = "topLeftCornerRadius">左上角圆角半径</param>
+        <param name = "topRightCornerRadius">右上角圆角半径</param>
+        <param name = "bottomLeftCornerRadius">左下角圆角半径</param>
+        <param name = "bottomRightCornerRadius">右下角圆角半径</param>
+        <param name = "includeLast">是否包含最后一条边</param>
+        </member>
+        <member name="M:GameUI.Graphics.PathF.AppendRoundedRectangle(System.Drawing.RectangleF,System.Single,System.Single)">
+        <summary>
+        添加圆角矩形到路径
+        </summary>
+        <param name = "rect">矩形区域</param>
+        <param name = "xCornerRadius">X方向圆角半径</param>
+        <param name = "yCornerRadius">Y方向圆角半径</param>
+        </member>
+        <member name="M:GameUI.Graphics.PathF.AppendRoundedRectangle(System.Single,System.Single,System.Single,System.Single,System.Single,System.Single,System.Single,System.Single,System.Boolean)">
+        <summary>
+        添加圆角矩形到路径
+        </summary>
+        <param name = "x">矩形左上角X坐标</param>
+        <param name = "y">矩形左上角Y坐标</param>
+        <param name = "w">矩形宽度</param>
+        <param name = "h">矩形高度</param>
+        <param name = "topLeftCornerRadius">左上角圆角半径</param>
+        <param name = "topRightCornerRadius">右上角圆角半径</param>
+        <param name = "bottomLeftCornerRadius">左下角圆角半径</param>
+        <param name = "bottomRightCornerRadius">右下角圆角半径</param>
+        <param name = "includeLast">是否包含最后一条边</param>
+        </member>
+        <member name="M:GameUI.Graphics.PathF.IsSubPathClosed(System.Int32)">
+        <summary>
+        检查指定子路径是否已闭合
+        </summary>
+        <param name = "subPathIndex">子路径的索引</param>
+        <returns>如果指定子路径已闭合则返回true，否则返回false</returns>
+        </member>
+        <member name="M:GameUI.Graphics.PathF.Invalidate">
+        <summary>
+        使路径无效
+        </summary>
+        </member>
+        <member name="M:GameUI.Graphics.PathF.Move(System.Single,System.Single)">
+        <summary>
+        移动路径
+        </summary>
+        <param name = "x">X方向移动量</param>
+        <param name = "y">Y方向移动量</param>
+        </member>
+        <member name="M:GameUI.Graphics.PathF.MovePoint(System.Int32,System.Single,System.Single)">
+        <summary>
+        移动路径中的点
+        </summary>
+        <param name = "index">点的索引</param>
+        <param name = "dx">X方向移动量</param>
+        <param name = "dy">Y方向移动量</param>
+        </member>
+        <member name="M:GameUI.Graphics.PathF.Equals(System.Object)">
+        <summary>
+        比较路径是否相等
+        </summary>
+        <param name = "obj">要比较的对象</param>
+        <returns>是否相等</returns>
+        </member>
+        <member name="M:GameUI.Graphics.PathF.GetHashCode">
+        <summary>
+        获取路径的哈希码
+        </summary>
+        <returns>哈希码</returns>
+        </member>
+        <member name="M:GameUI.Graphics.PathF.Equals(System.Object,System.Single)">
+        <summary>
+        比较路径是否相等
+        </summary>
+        <param name = "obj">要比较的对象</param>
+        <param name = "epsilon">比较精度</param>
+        <returns>是否相等</returns>
+        </member>
+        <member name="P:GameUI.Graphics.PathF.Bounds">
+        <summary>
+        获取路径的边界矩形
+        </summary>
+        </member>
+        <member name="M:GameUI.Graphics.PathF.GetBoundsByFlattening(System.Single)">
+        <summary>
+        获取路径的边界矩形
+        </summary>
+        <param name = "flatness">扁平化精度，值越小越精确</param>
+        <returns>边界矩形</returns>
+        </member>
+        <member name="M:GameUI.Graphics.PathF.GetFlattenedPath(System.Single,System.Boolean)">
+        <summary>
+        将路径扁平化为直线段序列
+        </summary>
+        <param name = "flatness">扁平化精度，值越小越精确</param>
+        <param name = "includeSubPaths">是否包含所有子路径</param>
+        <returns>扁平化后的路径</returns>
+        </member>
+        <member name="T:GameUI.Graphics.RadialGradientPaint">
+        <summary>
+        表示从中心点向外扩散进行颜色过渡的径向渐变画笔
+        </summary>
+        <param name = "centerPoint">径向渐变的中心点</param>
+        <param name = "startRadius">渐变的起始半径（内半径）</param>
+        <param name = "endRadius">渐变的结束半径（外半径）</param>
+        <param name = "startColor">渐变中心（起始半径）处的颜色</param>
+        <param name = "endColor">渐变边缘（结束半径）处的颜色</param>
+        </member>
+        <member name="M:GameUI.Graphics.RadialGradientPaint.#ctor(System.Drawing.PointF,System.Single,System.Single,System.Drawing.Color,System.Drawing.Color)">
+        <summary>
+        表示从中心点向外扩散进行颜色过渡的径向渐变画笔
+        </summary>
+        <param name = "centerPoint">径向渐变的中心点</param>
+        <param name = "startRadius">渐变的起始半径（内半径）</param>
+        <param name = "endRadius">渐变的结束半径（外半径）</param>
+        <param name = "startColor">渐变中心（起始半径）处的颜色</param>
+        <param name = "endColor">渐变边缘（结束半径）处的颜色</param>
+        </member>
+        <member name="P:GameUI.Graphics.RadialGradientPaint.CenterPoint">
+        <summary>
+        获取径向渐变的中心点
+        </summary>
+        </member>
+        <member name="P:GameUI.Graphics.RadialGradientPaint.StartRadius">
+        <summary>
+        获取渐变的起始半径（内半径）
+        </summary>
+        </member>
+        <member name="P:GameUI.Graphics.RadialGradientPaint.EndRadius">
+        <summary>
+        获取渐变的结束半径（外半径）
+        </summary>
+        </member>
+        <member name="P:GameUI.Graphics.RadialGradientPaint.StartColor">
+        <summary>
+        获取渐变中心（起始半径）处的颜色
+        </summary>
+        </member>
+        <member name="P:GameUI.Graphics.RadialGradientPaint.EndColor">
+        <summary>
+        获取渐变边缘（结束半径）处的颜色
+        </summary>
+        </member>
+        <member name="M:GameUI.Graphics.RadialGradientPaint.CreateUnmanagedGradient">
+        <summary>
+        
+        </summary>
+        <returns></returns>
+        </member>
+        <member name="T:GameUI.Graphics.SolidPaint">
+        <summary>
+        表示使用纯色填充形状的画笔
+        </summary>
+        <remarks>
+        使用指定颜色初始化<see cref = "T:GameUI.Graphics.SolidPaint"/>类的新实例。
+        </remarks>
+        <param name = "color">用于填充形状的颜色</param>
+        </member>
+        <member name="M:GameUI.Graphics.SolidPaint.#ctor(System.Drawing.Color)">
+        <summary>
+        表示使用纯色填充形状的画笔
+        </summary>
+        <remarks>
+        使用指定颜色初始化<see cref = "T:GameUI.Graphics.SolidPaint"/>类的新实例。
+        </remarks>
+        <param name = "color">用于填充形状的颜色</param>
+        </member>
+        <member name="P:GameUI.Graphics.SolidPaint.Color">
+        <summary>
+        获取或设置用于填充形状的颜色
+        </summary>
+        </member>
+        <member name="P:GameUI.Graphics.SolidPaint.IsTransparent">
+        <summary>
+        获取一个值，指示此画笔是否具有透明区域
+        </summary>
+        <remarks>
+        当纯色画笔颜色的alpha值小于255时，被认为是透明的。
+        </remarks>
+        </member>
+        <member name="M:GameUI.Graphics.SolidPaint.ToString">
+        <summary>
+        返回此纯色画笔的字符串表示形式
+        </summary>
+        <returns>包含类型名称和颜色信息的字符串</returns>
+        </member>
+        <member name="M:GameUI.Graphics.SolidPaint.op_Implicit(System.Drawing.Color)~GameUI.Graphics.SolidPaint">
+        <summary>
+        将<see cref = "T:System.Drawing.Color"/>隐式转换为<see cref = "T:GameUI.Graphics.SolidPaint"/>
+        </summary>
+        <param name = "color">要转换的颜色</param>
+        <returns>使用指定颜色的新<see cref = "T:GameUI.Graphics.SolidPaint"/>实例</returns>
+        </member>
+    </members>
+</doc>

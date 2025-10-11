@@ -1,0 +1,730 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Events</name>
+    </assembly>
+    <members>
+        <member name="T:Events.EventAggregator">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Events.EventAggregator.eventSubscribers">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Events.EventAggregator.disposedValue">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Events.EventAggregator.Subscribe``1(System.WeakReference{Events.ITrigger})">
+            <summary>
+            
+            </summary>
+            <typeparam name="TEvent"></typeparam>
+            <param name="wrTrigger"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Events.EventAggregator.Unsubscribe``1(System.WeakReference{Events.ITrigger})">
+            <summary>
+            
+            </summary>
+            <typeparam name="TEvent"></typeparam>
+            <param name="wrTrigger"></param>
+            <returns></returns>
+        </member>
+        <member name="E:Events.EventAggregator.TaskUnhandledException">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Events.EventAggregator.TaskUnhandledExceptionEventHandler">
+            <summary>
+            Represents the method that will handle an unhandled exception thrown during the execution of a task.
+            </summary>
+            <remarks>This delegate is typically used to subscribe to events or callbacks that notify about
+            unhandled exceptions in asynchronous task execution. Implementations of this delegate should handle the
+            exception appropriately, such as logging the error or performing cleanup operations.</remarks>
+            <param name = "task">The <see cref = "T:System.Threading.Tasks.Task"/> instance that encountered the unhandled exception.</param>
+            <param name = "e">The <see cref = "T:System.Exception"/> that was thrown by the task.</param>
+            <param name = "callerStackTrace">The optional <see cref = "T:System.Diagnostics.StackTrace"/> of the caller at the time the exception occurred, providing additional
+            context for debugging. Only work if <see cref = "P:Events.EventAggregator.CaptureCallerStackTrace"/> is <c>true</c>.</param>
+        </member>
+        <member name="P:Events.EventAggregator.CaptureCallerStackTrace">
+            <summary>
+            Determines whether the caller's stack trace should be captured when publishing events.
+            If enabled, a <see cref = "T:System.Diagnostics.StackTrace"/> will be created and passed to the event exception handlers.
+            This can be useful for debugging or logging purposes but may have a performance impact, as the stack trace will be captured for every event published even if no exceptions occur.
+            Default value is <see langword="false"/>.
+            </summary>
+        </member>
+        <member name="P:Events.EventAggregator.Logger">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Events.EventAggregator.ForgetRun(System.Threading.Tasks.Task,System.Diagnostics.StackTrace)">
+            <summary>
+            
+            </summary>
+            <param name="task"></param>
+            <param name="callerStackTrace"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Events.EventAggregator.Publish``1(System.Object,``0)">
+            <summary>
+            
+            </summary>
+            <typeparam name="TEvent"></typeparam>
+            <param name="sender"></param>
+            <param name="eventToPublish"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Events.EventAggregator.GetPublisher``1(System.Object)">
+            <summary>
+            Similar to the Publish method, but returns an Action delegate instead of executing it directly, it can be used to improve performance in some cases.
+            </summary>
+            <typeparam name = "TEvent"></typeparam>
+            <returns></returns>
+        </member>
+        <member name="M:Events.EventAggregator.Destroy">
+            <summary>
+            
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Events.EventAggregator.Dispose(System.Boolean)">
+            <summary>
+            
+            </summary>
+            <param name="disposing"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Events.EventAggregator.System#IDisposable#Dispose">
+            <summary>
+            
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:Events.IEventSender">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Events.IEventSender.Aggregator">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Events.IEventSender.AggregatorWeakReference">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Events.IEventSender.Publish``1(``0)">
+            <summary>
+            
+            </summary>
+            <typeparam name="TEvent"></typeparam>
+            <param name="eventToPublish"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Events.IEventSender.GetPublisher``1">
+            <summary>
+            
+            </summary>
+            <typeparam name="TEvent"></typeparam>
+            <returns></returns>
+        </member>
+        <member name="T:Events.IEventSenderExtensions">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Events.IEventSenderExtensions.Publish``1(Events.IEventSender,``0)">
+            <summary>
+            
+            </summary>
+            <typeparam name="TEvent"></typeparam>
+            <param name="sender"></param>
+            <param name="eventToPublish"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Events.IEventSenderExtensions.GetPublisher``1(Events.IEventSender)">
+            <summary>
+            
+            </summary>
+            <typeparam name="TEvent"></typeparam>
+            <param name="sender"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Events.ITriggerEvent`1">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Events.ITriggerEventToken`1">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Events.QuickDictionary`2">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Events.QuickDictionary`2.Item(`0)">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Events.ITrigger">
+            <summary>
+            定义事件触发器的基本接口，用于响应和处理事件系统中的特定事件。
+            触发器通过弱引用机制管理事件订阅，支持自动垃圾回收和生命周期管理。
+            </summary>
+            <remarks>
+            触发器是事件系统的核心组件，它们：
+            <list type="bullet">
+            <item><description>订阅来自 <see cref = "T:Events.IEventSender"/> 的特定事件</description></item>
+            <item><description>在事件发生时异步执行处理逻辑</description></item>
+            <item><description>使用弱引用避免内存泄漏</description></item>
+            <item><description>支持硬引用集合防止意外的垃圾回收</description></item>
+            </list>
+            </remarks>
+        </member>
+        <member name="M:Events.ITrigger.Execute``1(System.Object,``0)">
+            <summary>
+            异步执行触发器的事件处理逻辑。
+            </summary>
+            <typeparam name = "TEventCaller">事件参数的类型</typeparam>
+            <param name = "sender">触发事件的发送者对象</param>
+            <param name = "eventArgs">事件参数，包含事件的具体数据</param>
+            <returns>
+            返回一个 <see cref = "T:System.Threading.Tasks.Task`1"/>，其结果表示事件是否被成功处理：
+            <list type="bullet">
+            <item><description><c>true</c> - 事件处理成功</description></item>
+            <item><description><c>false</c> - 事件处理失败或事件类型不匹配</description></item>
+            </list>
+            </returns>
+        </member>
+        <member name="M:Events.ITrigger.AddEvent``1(Events.IEventSender)">
+            <summary>
+            向指定的事件发送者注册此触发器，开始监听特定类型的事件。
+            </summary>
+            <typeparam name = "TEventCaller">要监听的事件类型</typeparam>
+            <param name = "sender">事件发送者，触发器将订阅其 <see cref = "T:Events.EventAggregator"/></param>
+            <remarks>
+            此方法已过时，建议使用具体实现类中的 Register 方法。
+            注册后，当发送者发布指定类型的事件时，此触发器的 <see cref = "M:Events.ITrigger.Execute``1(System.Object,``0)"/> 方法将被调用。
+            </remarks>
+        </member>
+        <member name="M:Events.ITrigger.RemoveEvent``1(Events.IEventSender)">
+            <summary>
+            从指定的事件发送者注销此触发器，停止监听特定类型的事件。
+            </summary>
+            <typeparam name = "TEventCaller">要停止监听的事件类型</typeparam>
+            <param name = "sender">事件发送者，触发器将从其 <see cref = "T:Events.EventAggregator"/> 中注销</param>
+            <remarks>
+            此方法已过时，建议使用具体实现类中的 Unregister 方法。
+            注销后，此触发器将不再接收来自该发送者的指定类型事件。
+            </remarks>
+        </member>
+        <member name="M:Events.ITrigger.Destroy">
+            <summary>
+            销毁触发器，释放所有资源并从事件系统中完全移除。
+            </summary>
+            <remarks>
+            此方法将：
+            <list type="bullet">
+            <item><description>从所有已注册的事件发送者中注销触发器</description></item>
+            <item><description>从硬引用集合中移除触发器</description></item>
+            <item><description>清理内部资源和引用</description></item>
+            <item><description>将 <see cref = "P:Events.ITrigger.IsValid"/> 设置为 false</description></item>
+            </list>
+            </remarks>
+        </member>
+        <member name="M:Events.ITrigger.Events">
+            <summary>
+            获取当前触发器订阅的所有事件发送者和事件类型的集合。
+            </summary>
+            <returns>
+            返回一个包含元组的枚举，每个元组包含：
+            <list type="bullet">
+            <item><description>sender - 事件聚合器 <see cref = "T:Events.EventAggregator"/></description></item>
+            <item><description>eventType - 订阅的事件类型 <see cref = "T:System.Type"/></description></item>
+            </list>
+            </returns>
+            <remarks>
+            此方法主要用于调试和监控触发器的订阅状态。
+            返回的集合只包含仍然有效的（未被垃圾回收的）事件聚合器。
+            </remarks>
+        </member>
+        <member name="M:Events.ITrigger.EventsGC">
+            <summary>
+            执行垃圾回收，清理已失效的弱引用。
+            </summary>
+            <remarks>
+            此方法会遍历内部存储的弱引用集合，移除那些目标对象已被垃圾回收的弱引用。
+            定期调用此方法有助于保持触发器的内存效率，防止弱引用集合无限增长。
+            </remarks>
+        </member>
+        <member name="P:Events.ITrigger.IsValid">
+            <summary>
+            获取触发器是否处于有效状态。
+            </summary>
+            <value>
+            <c>true</c> 如果触发器未被销毁且可以正常工作；否则为 <c>false</c>。
+            </value>
+            <remarks>
+            当触发器被销毁（调用 <see cref = "M:Events.ITrigger.Destroy"/> 方法）后，此属性将返回 false。
+            无效的触发器不会处理任何事件。
+            </remarks>
+        </member>
+        <member name="P:Events.ITrigger.IsEnabled">
+            <summary>
+            获取或设置触发器是否启用。
+            </summary>
+            <value>
+            <c>true</c> 如果触发器启用并会处理事件；<c>false</c> 如果触发器被禁用。
+            默认值为 <c>true</c>。
+            </value>
+            <remarks>
+            禁用的触发器仍然保持与事件发送者的订阅关系，但不会执行事件处理逻辑。
+            这提供了一种临时暂停触发器而不需要完全注销的机制。
+            </remarks>
+        </member>
+        <member name="P:Events.ITrigger.HardReferences">
+            <summary>
+            硬引用集合，用于防止触发器被垃圾回收。
+            </summary>
+            <value>
+            包含所有需要保持硬引用的触发器的集合。集合中的触发器不会被垃圾回收。
+            </value>
+            <remarks>
+            当创建触发器时指定 keepReference 参数为 true，或者需要确保触发器不被意外回收时，
+            触发器会被添加到此集合中。使用完毕后应调用 <see cref = "M:Events.ITrigger.Destroy"/> 方法从集合中移除。
+            </remarks>
+        </member>
+        <member name="T:Events.Trigger`1">
+            <summary>
+            泛型触发器实现，专门处理单一类型的事件，提供高性能的事件处理能力。
+            </summary>
+            <typeparam name = "TEvent">
+            触发器处理的事件类型，必须实现 <see cref = "T:Events.ITriggerEvent`1"/> 接口。
+            </typeparam>
+            <remarks>
+            <para>
+            <see cref = "T:Events.Trigger`1"/> 是针对单一事件类型优化的触发器实现，具有以下特点：
+            </para>
+            <list type="bullet">
+            <item><description><strong>高性能</strong>：由于只处理一种事件类型，避免了类型检查和转换的开销</description></item>
+            <item><description><strong>类型安全</strong>：编译时确保事件类型的正确性</description></item>
+            <item><description><strong>弱引用管理</strong>：自动管理与事件聚合器的弱引用关系</description></item>
+            <item><description><strong>生命周期控制</strong>：支持显式的资源释放和垃圾回收</description></item>
+            </list>
+            <para>
+            与 <see cref = "T:Events.TriggerDynamic"/> 相比，此类在性能上更优，但灵活性较低，只能处理指定的单一事件类型。
+            </para>
+            </remarks>
+            <example>
+            <code>
+            // 创建处理特定事件的触发器
+            var trigger = new Trigger&lt;PlayerDeathEvent&gt;(async (sender, eventArgs) =&gt; {
+                Console.WriteLine($"玩家 {eventArgs.PlayerName} 死亡");
+                return true; // 表示事件处理成功
+            });
+            
+            // 注册到事件发送者
+            trigger.Register(gameEntity);
+            
+            // 使用完毕后销毁
+            trigger.Destroy();
+            </code>
+            </example>
+        </member>
+        <member name="M:Events.Trigger`1.#ctor(Events.TriggerEventHandle{`0},System.Boolean)">
+            <summary>
+            初始化 <see cref = "T:Events.Trigger`1"/> 类的新实例。
+            </summary>
+            <param name = "action">
+            事件处理器委托，当事件被触发时将调用此委托。
+            委托应返回 <c>true</c> 表示事件处理成功，<c>false</c> 表示处理失败。
+            </param>
+            <param name = "keepReference">
+            是否在 <see cref = "P:Events.ITrigger.HardReferences"/> 集合中保持对此触发器的硬引用，
+            防止其被垃圾回收。默认为 <c>false</c>。
+            </param>
+            <remarks>
+            <para>
+            创建触发器后，需要调用 <see cref = "M:Events.Trigger`1.Register(Events.IEventSender)"/> 方法将其注册到相应的事件发送者，
+            才能开始接收和处理事件。
+            </para>
+            <para>
+            如果 <paramref name = "keepReference"/> 为 <c>true</c>，触发器将不会被垃圾回收，
+            直到显式调用 <see cref = "M:Events.Trigger`1.Destroy"/> 方法。这在某些长生命周期的场景中很有用。
+            </para>
+            </remarks>
+        </member>
+        <member name="F:Events.Trigger`1.weakReference">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Events.Trigger`1.Execute(System.Object,`0)">
+            <summary>
+            执行事件处理逻辑的强类型版本。
+            </summary>
+            <param name = "sender">触发事件的发送者对象</param>
+            <param name = "eventArgs">类型为 <typeparamref name = "TEvent"/> 的事件参数</param>
+            <returns>
+            返回一个 <see cref = "T:System.Threading.Tasks.Task`1"/>，表示触发器处理的结果：
+            <list type="bullet">
+            <item><description><c>true</c> - 触发器处理成功（通过条件判定）</description></item>
+            <item><description><c>false</c> - 触发器条件判定失败或触发器被禁用</description></item>
+            </list>
+            </returns>
+            <remarks>
+            此方法是 <see cref = "M:Events.ITrigger.Execute``1(System.Object,``0)"/> 的强类型版本，
+            只有当触发器启用（<see cref = "P:Events.Trigger`1.IsEnabled"/> 为 <c>true</c>）时才会执行处理逻辑。
+            </remarks>
+        </member>
+        <member name="F:Events.Trigger`1.action">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Events.Trigger`1.disposedValue">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Events.Trigger`1.aggregators">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Events.Trigger`1.IsValid">
+            <summary>
+            获取触发器是否处于有效状态。
+            </summary>
+            <value>
+            <c>true</c> 如果触发器未被释放且可以正常工作；否则为 <c>false</c>。
+            </value>
+        </member>
+        <member name="P:Events.Trigger`1.IsEnabled">
+            <summary>
+            获取或设置触发器是否启用。
+            </summary>
+            <value>
+            <c>true</c> 如果触发器启用并会处理事件；<c>false</c> 如果触发器被禁用。
+            默认值为 <c>true</c>。
+            </value>
+        </member>
+        <member name="M:Events.Trigger`1.Events#ITrigger#Execute``1(System.Object,``0)">
+            <summary>
+            
+            </summary>
+            <typeparam name="TEventCaller"></typeparam>
+            <param name="sender"></param>
+            <param name="eventArgs"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Events.Trigger`1.Destroy">
+            <summary>
+            销毁触发器，释放所有资源。这是 <see cref = "M:System.IDisposable.Dispose"/> 的公共包装器。
+            </summary>
+        </member>
+        <member name="M:Events.Trigger`1.Events">
+            <summary>
+            获取当前触发器订阅的事件聚合器和事件类型信息。
+            </summary>
+            <returns>
+            返回包含有效事件聚合器和事件类型的元组集合。
+            每个元组包含 <see cref = "T:Events.EventAggregator"/> 实例和 <typeparamref name = "TEvent"/> 类型。
+            </returns>
+        </member>
+        <member name="M:Events.Trigger`1.EventsGC">
+            <summary>
+            清理失效的弱引用，释放不再有效的事件聚合器引用。
+            </summary>
+        </member>
+        <member name="M:Events.Trigger`1.Dispose(System.Boolean)">
+            <summary>
+            释放触发器使用的托管和非托管资源。
+            </summary>
+            <param name = "disposing">
+            <c>true</c> 表示从 <see cref = "M:System.IDisposable.Dispose"/> 调用；
+            <c>false</c> 表示从终结器调用。
+            </param>
+        </member>
+        <member name="M:Events.Trigger`1.System#IDisposable#Dispose">
+            <summary>
+            
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Events.Trigger`1.AddEvent(Events.IEventSender)">
+            <summary>
+            
+            </summary>
+            <param name="sender"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Events.Trigger`1.Register(Events.IEventSender)">
+            <summary>
+            将触发器注册到指定的事件发送者，开始监听事件。
+            </summary>
+            <param name = "sender">
+            事件发送者，触发器将订阅其 <see cref = "T:Events.EventAggregator"/> 来接收 <typeparamref name = "TEvent"/> 类型的事件。
+            </param>
+            <remarks>
+            <para>
+            注册后，当发送者发布 <typeparamref name = "TEvent"/> 类型的事件时，
+            此触发器的 <see cref = "M:Events.Trigger`1.Execute(System.Object,`0)"/> 方法将被异步调用。
+            </para>
+            <para>
+            可以多次调用此方法将触发器注册到多个事件发送者。
+            触发器使用弱引用来避免阻止事件发送者被垃圾回收。
+            </para>
+            </remarks>
+        </member>
+        <member name="M:Events.Trigger`1.Events#ITrigger#AddEvent``1(Events.IEventSender)">
+            <summary>
+            
+            </summary>
+            <typeparam name="TEventCaller"></typeparam>
+            <param name="sender"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Events.Trigger`1.RemoveEvent(Events.IEventSender)">
+            <summary>
+            
+            </summary>
+            <param name="sender"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Events.Trigger`1.Unregister(Events.IEventSender)">
+            <summary>
+            从指定的事件发送者注销触发器，停止监听事件。
+            </summary>
+            <param name = "sender">
+            要注销的事件发送者，触发器将从其 <see cref = "T:Events.EventAggregator"/> 中移除订阅。
+            </param>
+            <remarks>
+            注销后，此触发器将不再接收来自该发送者的 <typeparamref name = "TEvent"/> 类型事件。
+            如果触发器未注册到此发送者，调用此方法不会产生任何效果。
+            </remarks>
+        </member>
+        <member name="M:Events.Trigger`1.Events#ITrigger#RemoveEvent``1(Events.IEventSender)">
+            <summary>
+            
+            </summary>
+            <typeparam name="TEventCaller"></typeparam>
+            <param name="sender"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Events.Trigger`1.ToString">
+            <summary>
+            返回表示当前触发器状态的字符串表示形式。
+            </summary>
+            <returns>
+            包含触发器关键状态信息的字符串，包括事件类型、启用状态、有效性和订阅数量。
+            </returns>
+            <remarks>
+            此方法主要用于调试和日志记录，提供触发器的快速状态概览。
+            返回格式：Trigger&lt;EventType&gt;[Status, Subscriptions: count, InHardReferences: bool]
+            </remarks>
+        </member>
+        <member name="T:Events.TriggerDynamic">
+            <summary>
+            动态触发器实现，支持处理多种不同类型的事件，但相比单一事件触发器有一定的性能开销。
+            </summary>
+            <remarks>
+            <para>
+            <see cref = "T:Events.TriggerDynamic"/> 适用于需要处理多种事件类型的场景，具有以下特点：
+            </para>
+            <list type="bullet">
+            <item><description><strong>多事件支持</strong>：可以同时订阅和处理多种不同类型的事件</description></item>
+            <item><description><strong>运行时灵活性</strong>：可以在运行时动态添加或移除不同类型的事件订阅</description></item>
+            <item><description><strong>性能开销</strong>：由于需要支持动态类型，存在一定的性能损耗</description></item>
+            <item><description><strong>类型擦除</strong>：使用 dynamic 类型处理事件参数</description></item>
+            </list>
+            <para>
+            如果只需要处理单一类型的事件，建议使用 <see cref = "T:Events.Trigger`1"/> 以获得更好的性能。
+            </para>
+            </remarks>
+            <example>
+            <code>
+            // 创建可处理多种事件的动态触发器
+            var dynamicTrigger = new TriggerDynamic(async (sender, eventArgs) =&gt; {
+                // 使用 dynamic 类型处理不同的事件
+                Console.WriteLine($"接收到事件: {eventArgs.GetType().Name}");
+                return true;
+            });
+            
+            // 注册不同类型的事件
+            dynamicTrigger.AddEvent&lt;PlayerDeathEvent&gt;(gameEntity);
+            dynamicTrigger.AddEvent&lt;ItemPickupEvent&gt;(gameEntity);
+            
+            // 使用完毕后销毁
+            dynamicTrigger.Destroy();
+            </code>
+            </example>
+        </member>
+        <member name="P:Events.TriggerDynamic.IsEnabled">
+            <summary>
+            获取或设置触发器是否启用。
+            </summary>
+            <value>
+            <c>true</c> 如果触发器启用并会处理事件；<c>false</c> 如果触发器被禁用。
+            默认值为 <c>true</c>。
+            </value>
+        </member>
+        <member name="T:Events.TriggerDynamic.AggregatorsOfEvent">
+            <summary>
+            事件聚合器集合的抽象基类，用于管理特定事件类型的弱引用集合。
+            </summary>
+        </member>
+        <member name="M:Events.TriggerDynamic.AggregatorsOfEvent.Unsubscribe(System.WeakReference{Events.ITrigger})">
+            <summary>
+            从所有聚合器中注销指定的触发器。
+            </summary>
+            <param name = "wrTrigger">要注销的触发器的弱引用</param>
+        </member>
+        <member name="T:Events.TriggerDynamic.AggregatorsOfEvent`1">
+            <summary>
+            特定事件类型的聚合器集合实现。
+            </summary>
+            <typeparam name = "TEvent">聚合器管理的事件类型</typeparam>
+        </member>
+        <member name="M:Events.TriggerDynamic.AggregatorsOfEvent`1.Unsubscribe(System.WeakReference{Events.ITrigger})">
+            <summary>
+            从所有聚合器中注销指定触发器对特定事件类型的订阅。
+            </summary>
+            <param name = "wrTrigger">要注销的触发器的弱引用</param>
+        </member>
+        <member name="M:Events.TriggerDynamic.#ctor(Events.TriggerEventHandle{System.Object},System.Boolean)">
+            <summary>
+            初始化 <see cref = "T:Events.TriggerDynamic"/> 类的新实例。
+            </summary>
+            <param name = "action">
+            动态事件处理器委托，接受 dynamic 类型的事件参数。
+            委托应返回 <c>true</c> 表示事件处理成功，<c>false</c> 表示处理失败。
+            </param>
+            <param name = "keepReference">
+            是否在 <see cref = "P:Events.ITrigger.HardReferences"/> 集合中保持对此触发器的硬引用，
+            防止其被垃圾回收。默认为 <c>false</c>。
+            </param>
+            <remarks>
+            创建动态触发器后，需要使用 <see cref = "M:Events.TriggerDynamic.AddEvent``1(Events.IEventSender)"/> 方法
+            为每种要处理的事件类型进行注册。
+            </remarks>
+        </member>
+        <member name="F:Events.TriggerDynamic.weakReference">
+            <summary>
+            触发器的弱引用，用于在事件聚合器中进行订阅管理。
+            </summary>
+        </member>
+        <member name="F:Events.TriggerDynamic.action">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Events.TriggerDynamic.disposedValue">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Events.TriggerDynamic.IsValid">
+            <summary>
+            获取触发器是否处于有效状态。
+            </summary>
+            <value>
+            <c>true</c> 如果触发器未被释放且可以正常工作；否则为 <c>false</c>。
+            </value>
+        </member>
+        <member name="M:Events.TriggerDynamic.Execute``1(System.Object,``0)">
+            <summary>
+            执行事件处理逻辑，支持任意类型的事件参数。
+            </summary>
+            <typeparam name = "TEventCaller">事件参数的类型</typeparam>
+            <param name = "sender">触发事件的发送者对象</param>
+            <param name = "eventArgs">事件参数</param>
+            <returns>
+            返回一个 <see cref = "T:System.Threading.Tasks.Task`1"/>，表示事件处理的结果。
+            如果 <paramref name = "eventArgs"/> 为 null，则返回 false。
+            </returns>
+        </member>
+        <member name="M:Events.TriggerDynamic.Destroy">
+            <summary>
+            销毁触发器，释放所有资源。这是 <see cref = "M:System.IDisposable.Dispose"/> 的公共包装器。
+            </summary>
+        </member>
+        <member name="M:Events.TriggerDynamic.Dispose(System.Boolean)">
+            <summary>
+            释放触发器使用的托管和非托管资源。
+            </summary>
+            <param name = "disposing">
+            <c>true</c> 表示从 <see cref = "M:System.IDisposable.Dispose"/> 调用；
+            <c>false</c> 表示从终结器调用。
+            </param>
+        </member>
+        <member name="M:Events.TriggerDynamic.System#IDisposable#Dispose">
+            <summary>
+            
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="F:Events.TriggerDynamic.typedAggregators">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Events.TriggerDynamic.AddEvent``1(Events.IEventSender)">
+            <summary>
+            向指定的事件发送者注册此触发器，开始监听特定类型的事件。
+            </summary>
+            <typeparam name = "TEventCaller">要监听的事件类型</typeparam>
+            <param name = "sender">
+            事件发送者，触发器将订阅其 <see cref = "T:Events.EventAggregator"/> 来接收指定类型的事件。
+            </param>
+            <remarks>
+            可以多次调用此方法为不同的事件类型进行注册。
+            每种事件类型都会被单独管理，互不影响。
+            </remarks>
+        </member>
+        <member name="M:Events.TriggerDynamic.RemoveEvent``1(Events.IEventSender)">
+            <summary>
+            从指定的事件发送者注销此触发器，停止监听特定类型的事件。
+            </summary>
+            <typeparam name = "TEventCaller">要停止监听的事件类型</typeparam>
+            <param name = "sender">
+            事件发送者，触发器将从其 <see cref = "T:Events.EventAggregator"/> 中注销指定类型的事件订阅。
+            </param>
+            <remarks>
+            注销后，此触发器将不再接收来自该发送者的指定类型事件。
+            如果该事件类型的所有订阅都被移除，相关的内部数据结构也会被清理。
+            </remarks>
+        </member>
+        <member name="M:Events.TriggerDynamic.Events">
+            <summary>
+            获取当前触发器订阅的所有事件聚合器和事件类型信息。
+            </summary>
+            <returns>
+            返回包含有效事件聚合器和对应事件类型的元组集合。
+            </returns>
+        </member>
+        <member name="M:Events.TriggerDynamic.EventsGC">
+            <summary>
+            清理失效的弱引用，释放不再有效的事件聚合器引用。
+            </summary>
+            <remarks>
+            此方法会遍历所有事件类型的聚合器集合，移除失效的弱引用。
+            如果某个事件类型的聚合器集合变为空，该事件类型的记录也会被完全移除。
+            </remarks>
+        </member>
+    </members>
+</doc>

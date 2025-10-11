@@ -1,0 +1,394 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<doc>
+    <assembly>
+        <name>GameCore</name>
+    </assembly>
+    <members>
+        <member name="T:GameCore.Interface.IActor">
+            <summary />
+        </member>
+        <member name="M:GameCore.Interface.IActor.GetByViewActorId(System.Int32)">
+            <summary />
+            <param name="id" />
+            <returns />
+        </member>
+        <member name="P:GameCore.Interface.IActor.ShouldRemoveWithParent">
+            <summary />
+        </member>
+        <member name="P:GameCore.Interface.IActor.IsValid">
+            <summary />
+        </member>
+        <member name="P:GameCore.Interface.IActor.Scope">
+            <summary />
+        </member>
+        <member name="P:GameCore.Interface.IActor.Facing">
+            <summary />
+        </member>
+        <member name="P:GameCore.Interface.IActor.Position">
+            <summary />
+        </member>
+        <member name="P:GameCore.Interface.IActor.Player">
+            <summary />
+        </member>
+        <member name="M:GameCore.Interface.IActor.Kill">
+            <summary />
+            <returns />
+        </member>
+        <member name="M:GameCore.Interface.IActor.Destroy(System.Boolean)">
+            <summary />
+            <param name="forceNoFade" />
+            <returns />
+        </member>
+        <member name="P:GameCore.Interface.IActor.Parent">
+            <summary />
+        </member>
+        <member name="P:GameCore.Interface.IActor.ViewAsyncActor">
+            <summary />
+        </member>
+        <member name="M:GameCore.Interface.IActor.Attach(GameCore.Interface.IActor,System.Nullable{EngineCommon.UTF8String})">
+            <summary />
+            <param name="child" />
+            <param name="socket" />
+            <returns />
+        </member>
+        <member name="M:GameCore.Interface.IActor.AttachTo(GameCore.Interface.IActor,System.Nullable{EngineCommon.UTF8String})">
+            <summary />
+            <param name="parent" />
+            <param name="socket" />
+            <returns />
+        </member>
+        <member name="M:GameCore.Interface.IActor.Detach(System.Boolean)">
+            <summary />
+            <param name="resetBearings" />
+            <returns />
+        </member>
+        <member name="M:GameCore.Interface.IActor.OnAddedToScope(GameCore.ActorSystem.IActorScope)">
+            <summary />
+            <param name="actorScope" />
+            <returns />
+        </member>
+        <member name="T:GameCore.Interface.IActorSync">
+            <summary />
+        </member>
+        <member name="P:GameCore.Interface.IActorSync.Host">
+            <summary>
+            Synced actor's host. Have no socket.
+            </summary>
+        </member>
+        <member name="P:GameCore.Interface.IActorSync.ViewActor">
+            <summary />
+        </member>
+        <member name="P:GameCore.Interface.IActorSync.GameCore#Interface#IActor#ShouldRemoveWithParent">
+            <summary />
+        </member>
+        <member name="T:GameCore.Interface.IDebugDraw">
+            <summary>
+            Defines an interface for drawing debug shapes and text in the game scene.
+            Implementations provide methods to visualize geometric primitives such as lines, circles, points, sectors, parallelograms, rectangles, and text for debugging purposes.
+            </summary>
+        </member>
+        <member name="M:GameCore.Interface.IDebugDraw.Clear">
+            <summary>
+            Clears all debug drawings from the current debug graph.
+            </summary>
+        </member>
+        <member name="M:GameCore.Interface.IDebugDraw.Destroy(System.Boolean)">
+            <summary>
+            Destroys the debug drawing context and releases associated resources.
+            </summary>
+            <param name="isHostDispose">Indicates whether the destruction is triggered by the host's disposal process. 
+            this will skip some cleanup steps if true, as the host will handle them.
+            </param>
+        </member>
+        <member name="M:GameCore.Interface.IDebugDraw.DrawCircle(System.Numerics.Vector3,System.Numerics.Vector3,System.Single,System.Drawing.Color,System.Boolean)">
+            <summary>
+            Draws a circle in 3D space.
+            </summary>
+            <param name="center">The center of the circle.</param>
+            <param name="eulerRotation">The rotation of the circle in Euler angles (degrees).</param>
+            <param name="radius">The radius of the circle.</param>
+            <param name="color">The color of the circle.</param>
+            <param name="fill">Whether to fill the circle (true) or draw only the outline (false).</param>
+        </member>
+        <member name="M:GameCore.Interface.IDebugDraw.DrawLine(System.Numerics.Vector3,System.Numerics.Vector3,System.Drawing.Color)">
+            <summary>
+            Draws a line between two points in 3D space.
+            </summary>
+            <param name="origin">The starting point of the line.</param>
+            <param name="end">The ending point of the line.</param>
+            <param name="color">The color of the line.</param>
+        </member>
+        <member name="M:GameCore.Interface.IDebugDraw.DrawParallelogram(System.Numerics.Vector3,System.Numerics.Vector3,System.Numerics.Vector3,System.Drawing.Color,System.Boolean)">
+            <summary>
+            Draws a parallelogram in 3D space, defined by an origin and two side vectors.
+            </summary>
+            <param name="origin">The origin (one corner) of the parallelogram.</param>
+            <param name="sideVectorA">
+            The first side vector from the origin.
+            </param>
+            <param name="sideVectorB">
+            The second side vector from the origin.
+            </param>
+            <param name="color">The color of the parallelogram.</param>
+            <param name="fill">Whether to fill the parallelogram (true) or draw only the outline (false).</param>
+        </member>
+        <member name="M:GameCore.Interface.IDebugDraw.DrawPoint(System.Numerics.Vector3,System.Drawing.Color)">
+            <summary>
+            Draws a point in 3D space.
+            </summary>
+            <param name="point">The position of the point.</param>
+            <param name="color">The color of the point.</param>
+        </member>
+        <member name="M:GameCore.Interface.IDebugDraw.DrawRectangle(System.Numerics.Vector3,System.Single,System.Single,System.Numerics.Vector3,System.Drawing.Color,System.Boolean)">
+            <summary>
+            Draws a rectangle in 3D space, defined by its center, width, height, and rotation (XYZ order).
+            </summary>
+            <param name="center">The center of the rectangle.</param>
+            <param name="width">The width of the rectangle.</param>
+            <param name="height">The height of the rectangle.</param>
+            <param name="rotation">The rotation of the rectangle in Euler angles (degrees, XYZ order).</param>
+            <param name="color">The color of the rectangle.</param>
+            <param name="fill">Whether to fill the rectangle (true) or draw only the outline (false).</param>
+        </member>
+        <member name="M:GameCore.Interface.IDebugDraw.DrawSector(System.Numerics.Vector3,System.Numerics.Vector3,System.Single,System.Single,System.Drawing.Color,System.Boolean)">
+            <summary>
+            Draws a sector (pie slice) in 3D space.
+            </summary>
+            <param name="center">The center of the sector.</param>
+            <param name="eulerRotation">The rotation of the sector in Euler angles (degrees).</param>
+            <param name="radius">The radius of the sector.</param>
+            <param name="angle">The angle of the sector in degrees.</param>
+            <param name="color">The color of the sector.</param>
+            <param name="fill">Whether to fill the sector (true) or draw only the outline (false).</param>
+        </member>
+        <member name="M:GameCore.Interface.IDebugDraw.DrawText(System.Numerics.Vector3,System.String,System.Drawing.Color,System.Boolean)">
+            <summary>
+            Draws text at a specified position in 3D space.
+            </summary>
+            <param name="position">The position where the text will be drawn.</param>
+            <param name="text">The text to display.</param>
+            <param name="color">The color of the text.</param>
+            <param name="onTopOfEverything">Whether to render the text on top of all other elements.</param>
+        </member>
+        <member name="T:GameCore.Interface.IExecutableData">
+            <summary>
+            Represents game data that can be executed within a specific context, such as abilities, spells, or items.
+            </summary>
+            <remarks>
+            This interface extends <see cref="T:GameData.IGameData" /> to provide execution capabilities with validation.
+            Implementers define specific logic for how the data should be executed and what validation rules apply.
+            </remarks>
+        </member>
+        <member name="M:GameCore.Interface.IExecutableData.Execute(GameCore.Interface.IExecutableObject)">
+            <summary>
+            Executes the data's logic within the specified context.
+            </summary>
+            <param name="context">The execution context containing information about the caster, targets, and environment.</param>
+        </member>
+        <member name="M:GameCore.Interface.IExecutableData.Validate(GameCore.Interface.IExecutableObject)">
+            <summary>
+            Validates whether the data can be executed in the given context.
+            </summary>
+            <param name="context">The execution context to validate against.</param>
+            <returns>A <see cref="T:GameCore.BaseType.CmdResult" /> indicating whether execution is valid.</returns>
+        </member>
+        <member name="P:GameCore.Interface.IExecutableData.Validators">
+            <summary>
+            Gets the validator function used for additional validation checks, if any.
+            </summary>
+        </member>
+        <member name="T:GameCore.Interface.IExecutableObject">
+            <summary>
+            Represents an object that can execute game logic within a specific context, providing access to execution parameters and validation.
+            </summary>
+            <remarks>
+            This interface combines <see cref="T:GameCore.Interface.IExecutionContext" /> and <see cref="T:GameData.Interface.IGameObject" /> to create objects that can both
+            hold execution state and be executed. It provides access to casters, targets, abilities, items, and scene information
+            needed for complex game operations.
+            </remarks>
+        </member>
+        <member name="P:GameCore.Interface.IExecutableObject.Parent">
+            <summary>
+            Gets the parent executable object in the execution hierarchy, if any.
+            </summary>
+        </member>
+        <member name="P:GameCore.Interface.IExecutableObject.Shared">
+            <summary>
+            Gets the shared execution parameters containing common data like caster, targets, and level.
+            </summary>
+        </member>
+        <member name="P:GameCore.Interface.IExecutableObject.Source">
+            <summary>
+            Gets the source target of the execution, which is typically the caster.
+            </summary>
+        </member>
+        <member name="P:GameCore.Interface.IExecutableObject.GameCore#Interface#IExecutionContext#Level">
+            <summary>
+            Gets the level at which this execution is performed.
+            </summary>
+        </member>
+        <member name="P:GameCore.Interface.IExecutableObject.GameCore#Interface#IExecutionContext#Caster">
+            <summary>
+            Gets the entity that is casting or initiating this execution.
+            </summary>
+        </member>
+        <member name="P:GameCore.Interface.IExecutableObject.GameCore#Interface#IExecutionContext#Ability">
+            <summary>
+            Gets the ability associated with this execution, if any.
+            </summary>
+        </member>
+        <member name="P:GameCore.Interface.IExecutableObject.GameCore#Interface#IExecutionContext#Item">
+            <summary>
+            Gets the item associated with this execution, if any.
+            </summary>
+        </member>
+        <member name="P:GameCore.Interface.IExecutableObject.GameCore#Interface#IExecutionContext#Order">
+            <summary>
+            Gets the order associated with this execution, if any.
+            </summary>
+        </member>
+        <member name="P:GameCore.Interface.IExecutableObject.GameCore#Interface#IExecutionContext#MainTarget">
+            <summary>
+            Gets the main target of this execution.
+            </summary>
+        </member>
+        <member name="P:GameCore.Interface.IExecutableObject.GameCore#Interface#IExecutionContext#FactoryParent">
+            <summary>
+            Gets the factory parent for creating child executable objects.
+            </summary>
+        </member>
+        <member name="P:GameCore.Interface.IExecutableObject.LocVarUnit">
+            <summary>
+            Gets the local variable dictionary for unit references, if any.
+            </summary>
+        </member>
+        <member name="P:GameCore.Interface.IExecutableObject.LocVarPoint">
+            <summary>
+            Gets the local variable dictionary for scene point references, if any.
+            </summary>
+        </member>
+        <member name="P:GameCore.Interface.IExecutableObject.Missile">
+            <summary>
+            Gets the missile entity associated with this execution, if any.
+            </summary>
+        </member>
+        <member name="P:GameCore.Interface.IExecutableObject.PersistIndex">
+            <summary>
+            Gets the persistence index for this executable object, if any.
+            </summary>
+        </member>
+        <member name="P:GameCore.Interface.IExecutableObject.LaunchScene">
+            <summary>
+            Gets the scene where this execution was launched.
+            </summary>
+        </member>
+        <member name="P:GameCore.Interface.IExecutableObject.Cache">
+            <summary>
+            Gets the executable data cache for this object.
+            </summary>
+        </member>
+        <member name="M:GameCore.Interface.IExecutableObject.SearchAncestor(GameData.IGameLink)">
+            <summary>
+            Searches up the execution hierarchy to find an ancestor with the specified link.
+            </summary>
+            <param name="link">The game link to search for, or null to return this object.</param>
+            <returns>The ancestor executable object with the matching link, or null if not found.</returns>
+        </member>
+        <member name="M:GameCore.Interface.IExecutableObject.Execute">
+            <summary>
+            Executes this object after validating that execution is allowed.
+            </summary>
+            <returns>A <see cref="T:GameCore.BaseType.CmdResult" /> indicating the success or failure of the execution.</returns>
+        </member>
+        <member name="M:GameCore.Interface.IExecutableObject.ClassValidate(GameCore.BaseType.Validator)">
+            <summary />
+            <param name="validator" />
+            <returns />
+        </member>
+        <member name="M:GameCore.Interface.IExecutableObject.ValidateImplement">
+            <summary />
+            <returns />
+        </member>
+        <member name="M:GameCore.Interface.IExecutableObject.Validate">
+            <summary />
+            <returns />
+        </member>
+        <member name="T:GameCore.Interface.IExecutionContext">
+            <summary />
+        </member>
+        <member name="F:GameCore.Interface.IExecutionContext.Random">
+            <summary />
+        </member>
+        <member name="P:GameCore.Interface.IExecutionContext.Caster">
+            <summary />
+        </member>
+        <member name="P:GameCore.Interface.IExecutionContext.Ability">
+            <summary />
+        </member>
+        <member name="P:GameCore.Interface.IExecutionContext.Item">
+            <summary />
+        </member>
+        <member name="P:GameCore.Interface.IExecutionContext.Order">
+            <summary />
+        </member>
+        <member name="P:GameCore.Interface.IExecutionContext.Level">
+            <summary />
+        </member>
+        <member name="P:GameCore.Interface.IExecutionContext.FactoryParent">
+            <summary />
+        </member>
+        <member name="P:GameCore.Interface.IExecutionContext.Target">
+            <summary />
+        </member>
+        <member name="P:GameCore.Interface.IExecutionContext.MainTarget">
+            <summary />
+        </member>
+        <member name="P:GameCore.Interface.IExecutionContext.DefaultTarget">
+            <summary />
+        </member>
+        <member name="M:GameCore.Interface.IExecutionContext.FactoryCreateChild(GameData.IGameLink{GameCore.Execution.Data.GameDataEffect},GameCore.BaseInterface.ITarget,System.Boolean)">
+            <summary />
+            <param name="link" />
+            <param name="defaultTarget" />
+            <param name="preValidateOnly" />
+            <returns />
+        </member>
+        <member name="M:GameCore.Interface.IExecutionContext.ExecuteChild(GameData.IGameLink{GameCore.Execution.Data.GameDataEffect},GameCore.BaseInterface.ITarget)">
+            <summary />
+            <param name="link" />
+            <param name="target" />
+            <returns />
+        </member>
+        <member name="M:GameCore.Interface.IExecutionContext.ExecuteChildImplementation(GameCore.Interface.IExecutionContext,GameData.IGameLink{GameCore.Execution.Data.GameDataEffect},GameCore.BaseInterface.ITarget)">
+            <summary />
+            <param name="context" />
+            <param name="link" />
+            <param name="target" />
+            <returns />
+        </member>
+        <member name="T:GameCore.Interface.ExecutionContextExtensions">
+            <summary />
+        </member>
+        <member name="M:GameCore.Interface.ExecutionContextExtensions.ExecuteChild(GameCore.Interface.IExecutionContext,GameData.IGameLink{GameCore.Execution.Data.GameDataEffect},GameCore.BaseInterface.ITarget)">
+            <summary />
+            <param name="context" />
+            <param name="link" />
+            <param name="target" />
+            <returns />
+        </member>
+        <member name="M:GameCore.Interface.ExecutionContextExtensions.FactoryCreateChild(GameCore.Interface.IExecutionContext,GameData.IGameLink{GameCore.Execution.Data.GameDataEffect},GameCore.BaseInterface.ITarget,System.Boolean)">
+            <summary />
+            <param name="context" />
+            <param name="link" />
+            <param name="defaultTarget" />
+            <param name="preValidateOnly" />
+            <returns />
+        </member>
+        <member name="T:GameCore.Interface.IResponseOwnerData">
+            <summary />
+        </member>
+        <member name="P:GameCore.Interface.IResponseOwnerData.Responses">
+            <summary />
+        </member>
+    </members>
+</doc>

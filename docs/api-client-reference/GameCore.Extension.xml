@@ -1,0 +1,233 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<doc>
+    <assembly>
+        <name>GameCore</name>
+    </assembly>
+    <members>
+        <member name="T:GameCore.Extension.EnumExtensionAttribute">
+            <summary>
+            Attribute used to mark enums for extension capabilities within the GameCore framework.
+            </summary>
+            <remarks>
+            This attribute provides metadata for enums that can be extended at runtime or compile-time,
+            allowing for flexible and modular enum systems. It supports flag-based enums, extendable
+            enums that can be inherited, and enum extension hierarchies.
+            </remarks>
+        </member>
+        <member name="P:GameCore.Extension.EnumExtensionAttribute.UseAsFlags">
+            <summary>
+            Gets or sets a value indicating whether the enum should be treated as a flags enumeration.
+            </summary>
+            <remarks>
+            When set to true, the enum values can be combined using bitwise operations,
+            similar to the standard <see cref="T:System.FlagsAttribute" /> behavior.
+            </remarks>
+        </member>
+        <member name="P:GameCore.Extension.EnumExtensionAttribute.Extendable">
+            <summary>
+            Gets or sets a value indicating whether this enum can be extended by other enums.
+            </summary>
+            <remarks>
+            Extendable enums can have additional values added through the extension system,
+            allowing for modular and plugin-based enum definitions.
+            </remarks>
+        </member>
+        <member name="P:GameCore.Extension.EnumExtensionAttribute.Extends">
+            <summary>
+            Gets or sets the base enum type that this enum extends.
+            </summary>
+            <remarks>
+            When specified, this enum will inherit or extend the values from the base enum type,
+            creating a hierarchical enum extension system.
+            </remarks>
+        </member>
+        <member name="T:GameCore.Extension.EnumValueExtensionAttribute">
+            <summary>
+            Marks an enum field with extension configuration options, controlling its behavior in various game systems.
+            </summary>
+            <remarks>
+            This attribute provides metadata for enum values that can be used by the game engine and editor tools
+            to customize how specific enum values are handled, displayed, or processed. It allows fine-grained
+            control over enum value behavior without modifying the core enum definition.
+            </remarks>
+        </member>
+        <member name="F:GameCore.Extension.EnumValueExtensionAttribute.HiddenInEditor">
+            <summary>
+            Gets or sets a value indicating whether this enum value should be hidden in editor interfaces.
+            </summary>
+            <remarks>
+            When set to true, this enum value will not appear in editor dropdowns, property inspectors,
+            or other UI elements where enum values are displayed for selection. This is useful for
+            internal or deprecated enum values that should not be exposed to content creators.
+            TODO: Hide in Editor
+            </remarks>
+        </member>
+        <member name="T:GameCore.Extension.ExtensionMethods">
+            <summary />
+        </member>
+        <member name="M:GameCore.Extension.ExtensionMethods.GetNormalized(System.Numerics.Vector2)">
+            <summary />
+            <param name="vector" />
+            <returns />
+        </member>
+        <member name="M:GameCore.Extension.ExtensionMethods.CompareToEx(System.Nullable{System.Double},System.Nullable{System.Double})">
+            <summary />
+            <param name="x" />
+            <param name="y" />
+            <returns />
+        </member>
+        <member name="F:GameCore.Extension.ExtensionMethods.EnumExtensionMap">
+            <summary />
+        </member>
+        <member name="M:GameCore.Extension.ExtensionMethods.Extends(System.Enum,System.Type)">
+            <summary />
+            <param name="en" />
+            <param name="type" />
+            <returns />
+        </member>
+        <member name="M:GameCore.Extension.ExtensionMethods.Extends``1(System.Enum)">
+            <summary />
+            <typeparam name="TExtendableEnum" />
+            <param name="en" />
+            <returns />
+        </member>
+        <member name="M:GameCore.Extension.ExtensionMethods.As``1(System.Enum)">
+            <summary />
+            <typeparam name="TExtendableEnum" />
+            <param name="en" />
+            <returns />
+        </member>
+        <member name="M:GameCore.Extension.ExtensionMethods.Except``1(``0,``0)">
+            <summary>
+            Returns a new flag enum value with the specified flags removed.
+            </summary>
+            <typeparam name="TEnum">The flag enum type.</typeparam>
+            <param name="value">The original enum value.</param>
+            <param name="except">The flags to remove from the original value.</param>
+            <returns>A new enum value with the specified flags removed.</returns>
+            <remarks>
+            This method performs a bitwise AND operation with the bitwise NOT of the except parameter,
+            effectively removing the specified flags from the original value.
+            Example: <c>RoutedEvents.All.Except(RoutedEvents.PointerClicked)</c></remarks>
+        </member>
+        <member name="M:GameCore.Extension.ExtensionMethods.Forget(System.Threading.Tasks.Task,System.Action{System.Exception})">
+            <summary>
+            执行但不等待
+            </summary>
+            <remarks>
+            执行一个异步任务，但不等待。但依然可以捕获异常。
+            <br />
+            可以自定义异常处理，若没有设置，则异常会转到<see cref="E:GameCore.GameSystem.Game.TaskUnhandledException" />中。
+            </remarks>
+            <param name="task" />
+            <param name="innerExceptionHandler">
+            自定义异常处理，当任务中出现异常时会执行对应的处理逻辑。
+            <br />
+            若没有设置，则异常会转到<see cref="E:GameCore.GameSystem.Game.TaskUnhandledException" />中。
+            </param>
+        </member>
+        <member name="M:GameCore.Extension.ExtensionMethods.LogError(Microsoft.Extensions.Logging.ILogger,System.Exception,System.Diagnostics.StackTrace,System.String,System.Object[])">
+            <summary>
+            Formats and writes an error log message.
+            </summary>
+            <param name="logger">The <see cref="T:Microsoft.Extensions.Logging.ILogger" /> to write to.</param>
+            <param name="callerStackTrace">The stack trace of the caller.</param>
+            <param name="exception">The exception to log.</param>
+            <param name="message">Format string of the log message in message template format. Example: <c>"User {User} logged in from {Address}"</c>.</param>
+            <param name="args">An object array that contains zero or more objects to format.</param>
+            <example>
+                <code language="csharp">
+            logger.LogError(exception, new StackTrace(), "Error while processing request from {Address}", address)
+            </code>
+            </example>
+        </member>
+        <member name="M:GameCore.Extension.ExtensionMethods.LogException(Microsoft.Extensions.Logging.ILogger,System.Exception,System.Diagnostics.StackTrace)">
+            <summary />
+            <param name="logger" />
+            <param name="ex" />
+            <param name="callerStackTrace" />
+            <returns />
+        </member>
+        <member name="M:GameCore.Extension.ExtensionMethods.LogException(Microsoft.Extensions.Logging.ILogger,System.Exception,System.String)">
+            <summary />
+            <param name="logger" />
+            <param name="ex" />
+            <param name="message" />
+            <returns />
+        </member>
+        <member name="M:GameCore.Extension.ExtensionMethods.PrintLog(System.Object,Microsoft.Extensions.Logging.LogLevel,System.Object[])">
+            <summary />
+            <param name="obj" />
+            <param name="logLevel" />
+            <param name="span" />
+            <returns />
+        </member>
+        <member name="M:GameCore.Extension.ExtensionMethods.ResolveComponent(GameCore.BaseInterface.ICooldownHost,System.Int64)">
+            <summary>
+            Resolves a component based on a property hash and returns the associated owner and identifiers.
+            </summary>
+            <param name="host">The context in which the property is being resolved.</param>
+            <param name="propertyHashLong">A long value representing the property hash used for resolution.</param>
+            <returns>Returns a tuple containing the owner, a short property hash, and an attached synchronization ID.</returns>
+        </member>
+        <member name="M:GameCore.Extension.ExtensionMethods.ResolveToIntPair(System.Int64)">
+            <summary />
+            <param name="longValue" />
+            <returns />
+        </member>
+        <member name="M:GameCore.Extension.ExtensionMethods.CreateStackTrace(System.Int32)">
+            <summary>
+            创建一个跳过指定帧数的堆栈跟踪，避免包含不相关的调用帧
+            </summary>
+            <param name="skipFrames">要跳过的帧数，默认为1（跳过当前方法）</param>
+            <returns>新的堆栈跟踪实例</returns>
+        </member>
+        <member name="M:GameCore.Extension.ExtensionMethods.LogErrorLazy(Microsoft.Extensions.Logging.ILogger,System.Exception,System.Func{System.Diagnostics.StackTrace},System.String,System.Object[])">
+            <summary>
+            带性能考虑的LogError扩展方法
+            只有在Error级别启用时才会创建堆栈跟踪
+            </summary>
+            <param name="logger">日志记录器</param>
+            <param name="exception">异常</param>
+            <param name="createStackTrace">是否创建堆栈跟踪的函数</param>
+            <param name="message">日志消息</param>
+            <param name="args">消息参数</param>
+        </member>
+        <member name="M:GameCore.Extension.ExtensionMethods.LogExceptionWithContext(Microsoft.Extensions.Logging.ILogger,System.Exception,System.String,System.Int32)">
+            <summary>
+            简化的异常日志记录方法，自动跳过当前调用帧
+            </summary>
+            <param name="logger">日志记录器</param>
+            <param name="exception">异常</param>
+            <param name="message">自定义消息</param>
+            <param name="skipFrames">要跳过的帧数，默认为1</param>
+        </member>
+        <member name="M:GameCore.Extension.ExtensionMethods.HasStackTrace(System.Exception)">
+            <summary>
+            检查异常是否包含有用的堆栈跟踪信息
+            </summary>
+            <param name="exception">要检查的异常</param>
+            <returns>如果异常包含堆栈跟踪信息则返回true</returns>
+        </member>
+        <member name="T:GameCore.Extension.GameDataCategoryAttribute">
+            <summary>
+            Marks a class as a game data category, indicating that it represents a configuration data type used by the game engine.
+            </summary>
+            <remarks>
+            This attribute is used to identify classes that contain game configuration data, allowing the engine
+            to automatically discover, load, and manage these data types. Classes marked with this attribute are
+            typically used for defining game rules, unit properties, abilities, items, and other configurable
+            game elements that can be modified without recompiling the game code.
+            </remarks>
+        </member>
+        <member name="T:GameCore.Extension.GameDataNodeTypeAttribute`2">
+            <summary />
+        </member>
+        <member name="T:GameCore.Extension.GameObjectAttribute`1">
+            <summary />
+        </member>
+        <member name="T:GameCore.Extension.WaitForEventAttribute">
+            <summary />
+        </member>
+    </members>
+</doc>

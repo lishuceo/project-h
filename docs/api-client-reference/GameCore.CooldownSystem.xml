@@ -1,0 +1,208 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<doc>
+    <assembly>
+        <name>GameCore</name>
+    </assembly>
+    <members>
+        <member name="T:GameCore.CooldownSystem.Cooldown">
+            <summary />
+            <summary />
+            <summary />
+            <summary />
+            <summary />
+            <summary />
+        </member>
+        <member name="M:GameCore.CooldownSystem.Cooldown.#ctor(GameData.IGameLink{GameCore.CooldownSystem.Data.GameDataCooldown},GameCore.BaseInterface.ICooldownOwner)">
+            <summary />
+        </member>
+        <member name="P:GameCore.CooldownSystem.Cooldown.CooldownHash">
+            <summary />
+        </member>
+        <member name="E:GameCore.CooldownSystem.Cooldown.OnCooldown">
+            <summary />
+        </member>
+        <member name="P:GameCore.CooldownSystem.Cooldown.Owner">
+            <summary />
+        </member>
+        <member name="P:GameCore.CooldownSystem.Cooldown.MaxTime">
+            <summary />
+        </member>
+        <member name="P:GameCore.CooldownSystem.Cooldown.RemainingTime">
+            <summary />
+        </member>
+        <member name="P:GameCore.CooldownSystem.Cooldown.IsRunning">
+            <summary />
+        </member>
+        <member name="P:GameCore.CooldownSystem.Cooldown.Affordable">
+            <summary />
+        </member>
+        <member name="M:GameCore.CooldownSystem.Cooldown.CheckAffordable">
+            <summary />
+            <returns />
+        </member>
+        <member name="M:GameCore.CooldownSystem.Cooldown.ToString">
+            <summary />
+            <returns />
+        </member>
+        <member name="P:GameCore.CooldownSystem.Cooldown.Host">
+            <summary />
+        </member>
+        <member name="P:GameCore.CooldownSystem.Cooldown.GameCore#BaseInterface#IPropertyOwner#PropertyHost">
+            <summary />
+        </member>
+        <member name="P:GameCore.CooldownSystem.Cooldown.SyncId">
+            <summary />
+        </member>
+        <member name="M:GameCore.CooldownSystem.Cooldown.ReplicateFromKeyValue(System.Enum,System.ReadOnlySpan{System.Byte})">
+            <summary />
+            <param name="propertyEnum" />
+            <param name="value" />
+            <returns />
+        </member>
+        <member name="M:GameCore.CooldownSystem.Cooldown.DisposeManaged">
+            <summary />
+            <returns />
+        </member>
+        <member name="M:GameCore.CooldownSystem.Cooldown.DisposeUnmanaged(System.Boolean)">
+            <summary />
+            <param name="finalizing" />
+            <returns />
+        </member>
+        <member name="P:GameCore.CooldownSystem.Cooldown.Link">
+            <summary />
+        </member>
+        <member name="P:GameCore.CooldownSystem.Cooldown.Cache">
+            <summary />
+        </member>
+        <member name="P:GameCore.CooldownSystem.Cooldown.GameData#Interface#IGameObject#Link">
+            <summary />
+        </member>
+        <member name="P:GameCore.CooldownSystem.Cooldown.GameData#Interface#IGameObject#Cache">
+            <summary />
+        </member>
+        <member name="T:GameCore.CooldownSystem.CooldownActive">
+            <summary />
+        </member>
+        <member name="M:GameCore.CooldownSystem.CooldownActive.#ctor(GameData.IGameLink{GameCore.CooldownSystem.Data.GameDataCooldownActive},GameCore.BaseInterface.ICooldownOwner)">
+            <summary />
+        </member>
+        <member name="F:GameCore.CooldownSystem.CooldownActive.isRunning">
+            <summary />
+        </member>
+        <member name="P:GameCore.CooldownSystem.CooldownActive.Link">
+            <summary />
+        </member>
+        <member name="P:GameCore.CooldownSystem.CooldownActive.Cache">
+            <summary />
+        </member>
+        <member name="P:GameCore.CooldownSystem.CooldownActive.IsRunning">
+            <summary />
+        </member>
+        <member name="P:GameCore.CooldownSystem.CooldownActive.Affordable">
+            <summary />
+        </member>
+        <member name="M:GameCore.CooldownSystem.CooldownActive.CheckAffordable">
+            <summary />
+            <returns />
+        </member>
+        <member name="T:GameCore.CooldownSystem.CooldownCharge">
+            <summary />
+            <summary />
+        </member>
+        <member name="F:GameCore.CooldownSystem.CooldownCharge.context">
+            <summary />
+        </member>
+        <member name="M:GameCore.CooldownSystem.CooldownCharge.#ctor(GameData.IGameLink{GameCore.CooldownSystem.Data.GameDataCooldownCharge},GameCore.BaseInterface.ICooldownOwner,GameCore.Interface.IExecutionContext)">
+            <summary />
+        </member>
+        <member name="P:GameCore.CooldownSystem.CooldownCharge.Link">
+            <summary />
+        </member>
+        <member name="P:GameCore.CooldownSystem.CooldownCharge.Cache">
+            <summary />
+        </member>
+        <member name="P:GameCore.CooldownSystem.CooldownCharge.Context">
+            <summary />
+        </member>
+        <member name="P:GameCore.CooldownSystem.CooldownCharge.IsRunning">
+            <summary />
+        </member>
+        <member name="P:GameCore.CooldownSystem.CooldownCharge.Affordable">
+            <summary />
+        </member>
+        <member name="M:GameCore.CooldownSystem.CooldownCharge.CheckAffordable">
+            <summary />
+            <returns />
+        </member>
+        <member name="P:GameCore.CooldownSystem.CooldownCharge.ChargeMax">
+            <summary />
+        </member>
+        <member name="P:GameCore.CooldownSystem.CooldownCharge.ChargeRemain">
+            <summary />
+        </member>
+        <member name="T:GameCore.CooldownSystem.Data.GameDataCooldown">
+            <summary />
+            <summary />
+        </member>
+        <member name="M:GameCore.CooldownSystem.Data.GameDataCooldown.GameCore#BaseInterface#IAttachedData#Replicate(GameCore.BaseInterface.ICooldownHost,System.Nullable{System.Int32})">
+            <summary />
+            <param name="host" />
+            <param name="syncId" />
+            <returns />
+        </member>
+        <member name="P:GameCore.CooldownSystem.Data.GameDataCooldown.Time">
+            <summary />
+        </member>
+        <member name="P:GameCore.CooldownSystem.Data.GameDataCooldown.Location">
+            <summary />
+        </member>
+        <member name="P:GameCore.CooldownSystem.Data.GameDataCooldown.SyncType">
+            <summary />
+        </member>
+        <member name="P:GameCore.CooldownSystem.Data.GameDataCooldown.GameCore#BaseInterface#IAttachedData#Categories">
+            <summary />
+        </member>
+        <member name="T:GameCore.CooldownSystem.Data.GameDataCooldownActive">
+            <summary />
+        </member>
+        <member name="T:GameCore.CooldownSystem.Data.GameDataCooldownCharge">
+            <summary />
+        </member>
+        <member name="P:GameCore.CooldownSystem.Data.GameDataCooldownCharge.ChargeStart">
+            <summary />
+        </member>
+        <member name="P:GameCore.CooldownSystem.Data.GameDataCooldownCharge.ChargeMax">
+            <summary />
+        </member>
+        <member name="T:GameCore.CooldownSystem.Enum.EPropertyCooldownHost">
+            <summary>
+            定义冷却时间宿主的属性类型，用于标识和管理不同类型的冷却时间容器
+            </summary>
+            <remarks>
+            此枚举提供了扩展能力，允许在运行时动态添加新的冷却时间宿主属性类型。
+            冷却时间宿主属性用于识别和访问可以承载冷却时间的不同容器和组件，
+            为冷却时间系统提供了灵活的存储和管理机制。
+            </remarks>
+        </member>
+        <member name="F:GameCore.CooldownSystem.Enum.EPropertyCooldownHost.AttachedObjects">
+            <summary>
+            附加对象列表 - 用于管理附加到实体上的对象的冷却时间
+            </summary>
+            <remarks>
+            表示一个附加对象的列表，这些对象可以承载冷却时间。
+            通常在数据链接设置完成后插入到列表中进行管理。
+            这种类型的宿主适用于动态附加的组件、技能、物品等对象的冷却时间管理。
+            </remarks>
+        </member>
+        <member name="F:GameCore.CooldownSystem.Enum.PropertyCooldownHost.AttachedObjects">
+            <summary>
+            附加对象列表 - 用于管理附加到实体上的对象的冷却时间
+            </summary>
+            <remarks>
+            表示一个附加对象的列表，这些对象可以承载冷却时间。
+            通常在数据链接设置完成后插入到列表中进行管理。
+            这种类型的宿主适用于动态附加的组件、技能、物品等对象的冷却时间管理。
+            </remarks>
+        </member>
+    </members>
+</doc>

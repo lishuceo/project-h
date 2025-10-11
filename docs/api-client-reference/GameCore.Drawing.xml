@@ -1,0 +1,106 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<doc>
+    <assembly>
+        <name>GameCore</name>
+    </assembly>
+    <members>
+        <member name="T:GameCore.Drawing.HdrColor">
+            <summary>
+            Represents a high-dynamic-range (HDR) color with 16-bit (short) channels for red, green, and blue,
+            and an alpha channel. Supports construction from standard <see cref="T:System.Drawing.Color" /> and scaling for HDR scenarios.
+            </summary>
+            <summary />
+            <summary />
+        </member>
+        <member name="F:GameCore.Drawing.HdrColor.R">
+            <summary>
+            The red channel value. Can exceed the standard 0-255 range for HDR purposes.
+            </summary>
+        </member>
+        <member name="F:GameCore.Drawing.HdrColor.G">
+            <summary>
+            The green channel value. Can exceed the standard 0-255 range for HDR purposes.
+            </summary>
+        </member>
+        <member name="F:GameCore.Drawing.HdrColor.B">
+            <summary>
+            The blue channel value. Can exceed the standard 0-255 range for HDR purposes.
+            </summary>
+        </member>
+        <member name="F:GameCore.Drawing.HdrColor.A">
+            <summary>
+            The alpha (opacity) channel value. Typically in the range 0-255.
+            </summary>
+        </member>
+        <member name="M:GameCore.Drawing.HdrColor.#ctor(System.Drawing.Color)">
+            <summary>
+            Initializes a new <see cref="T:GameCore.Drawing.HdrColor" /> from a standard <see cref="T:System.Drawing.Color" />.
+            </summary>
+            <param name="color">The source color.</param>
+        </member>
+        <member name="M:GameCore.Drawing.HdrColor.#ctor(System.Drawing.Color,System.Single)">
+            <summary>
+            Initializes a new <see cref="T:GameCore.Drawing.HdrColor" /> from a standard <see cref="T:System.Drawing.Color" /> and applies an HDR scale to the RGB channels.
+            </summary>
+            <param name="color">The source color.</param>
+            <param name="hdrScale">The scale factor to apply to the RGB channels.</param>
+        </member>
+        <member name="M:GameCore.Drawing.HdrColor.#ctor(System.Int16,System.Int16,System.Int16,System.Int16)">
+            <summary>
+            Initializes a new <see cref="T:GameCore.Drawing.HdrColor" /> from explicit channel values.
+            </summary>
+            <param name="r">The red channel value.</param>
+            <param name="g">The green channel value.</param>
+            <param name="b">The blue channel value.</param>
+            <param name="a">The alpha channel value. Defaults to 255 (fully opaque).</param>
+        </member>
+        <member name="M:GameCore.Drawing.HdrColor.op_Implicit(System.Drawing.Color)~GameCore.Drawing.HdrColor">
+            <summary>
+            Implicitly converts a <see cref="T:System.Drawing.Color" /> to an <see cref="T:GameCore.Drawing.HdrColor" />.
+            </summary>
+            <param name="color">The color to convert.</param>
+        </member>
+        <member name="M:GameCore.Drawing.HdrColor.ToString">
+            <summary />
+            <returns />
+        </member>
+        <member name="P:GameCore.Drawing.HdrColor.PrefersRealtimeAnimation">
+            <summary />
+        </member>
+        <member name="M:GameCore.Drawing.HdrColor.GameCore#Animation#IArithmeticAnimatable{GameCore#Drawing#HdrColor}#op_Addition(GameCore.Drawing.HdrColor,GameCore.Drawing.HdrColor)">
+            <summary />
+        </member>
+        <member name="M:GameCore.Drawing.HdrColor.GameCore#Animation#IArithmeticAnimatable{GameCore#Drawing#HdrColor}#op_Subtraction(GameCore.Drawing.HdrColor,GameCore.Drawing.HdrColor)">
+            <summary />
+        </member>
+        <member name="M:GameCore.Drawing.HdrColor.GameCore#Animation#IArithmeticAnimatable{GameCore#Drawing#HdrColor}#op_Multiply(GameCore.Drawing.HdrColor,System.Double)">
+            <summary />
+        </member>
+        <member name="M:GameCore.Drawing.HdrColor.GameCore#Animation#IArithmeticAnimatable{GameCore#Drawing#HdrColor}#op_Multiply(System.Double,GameCore.Drawing.HdrColor)">
+            <summary />
+        </member>
+        <member name="M:GameCore.Drawing.HdrColor.GameCore#Animation#IArithmeticAnimatable{GameCore#Drawing#HdrColor}#op_Division(GameCore.Drawing.HdrColor,System.Double)">
+            <summary />
+        </member>
+        <member name="M:GameCore.Drawing.HdrColor.Equals(System.Object)">
+            <summary />
+            <param name="obj" />
+            <returns />
+        </member>
+        <member name="M:GameCore.Drawing.HdrColor.Equals(GameCore.Drawing.HdrColor)">
+            <summary />
+            <param name="other" />
+            <returns />
+        </member>
+        <member name="M:GameCore.Drawing.HdrColor.op_Equality(GameCore.Drawing.HdrColor,GameCore.Drawing.HdrColor)">
+            <summary />
+        </member>
+        <member name="M:GameCore.Drawing.HdrColor.op_Inequality(GameCore.Drawing.HdrColor,GameCore.Drawing.HdrColor)">
+            <summary />
+        </member>
+        <member name="M:GameCore.Drawing.HdrColor.GetHashCode">
+            <summary />
+            <returns />
+        </member>
+    </members>
+</doc>

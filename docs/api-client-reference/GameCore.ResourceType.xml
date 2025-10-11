@@ -1,0 +1,946 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<doc>
+    <assembly>
+        <name>GameCore</name>
+    </assembly>
+    <members>
+        <member name="T:GameCore.ResourceType.Data.GameDataAnimation">
+            <summary />
+        </member>
+        <member name="M:GameCore.ResourceType.Data.GameDataAnimation.CreateSwingController(GameCore.ActorSystem.IActorAnimationPlayable,System.Nullable{System.TimeSpan})">
+            <summary />
+            <param name="animationPlayable" />
+            <param name="totalTime" />
+            <returns />
+        </member>
+        <member name="T:GameCore.ResourceType.Data.Enum.ShadowType">
+            <summary>
+            定义阴影渲染的类型，控制游戏对象的阴影生成方式
+            </summary>
+            <remarks>
+            阴影类型决定了游戏对象如何产生和显示阴影效果。不同的阴影类型在性能和视觉质量之间提供了不同的平衡，
+            允许开发者根据游戏需求和设备性能选择合适的阴影实现方式。
+            </remarks>
+        </member>
+        <member name="F:GameCore.ResourceType.Data.Enum.ShadowType.FakeShadow">
+            <summary>
+            假阴影 - 使用预制的平面阴影贴图，性能开销最小
+            </summary>
+            <remarks>
+            使用简单的平面投影或预制阴影贴图来模拟阴影效果。
+            这种方式性能开销很小，但视觉效果相对简单，适用于低端设备或大量对象的场景。
+            </remarks>
+        </member>
+        <member name="F:GameCore.ResourceType.Data.Enum.ShadowType.DeviceDependentShadow">
+            <summary>
+            设备依赖阴影 - 根据设备性能自动选择阴影实现方式
+            </summary>
+            <remarks>
+            根据设备的渲染能力自动选择阴影类型。如果设备支持动态阴影，将使用动态阴影；
+            否则降级为平面阴影。这种方式提供了最佳的性能与质量平衡，适应不同设备的能力。
+            </remarks>
+        </member>
+        <member name="T:GameCore.ResourceType.Data.Enum.SliceMode">
+            <summary>
+            Defines the mode for specifying animation slice duration.
+            </summary>
+            <remarks>
+            SliceMode determines how the animation slice end point is calculated:
+            - Duration: Uses start offset and duration length for precise time-based slicing
+            - EndOffset: Uses start offset and absolute end offset for position-based slicing
+            - EndOffsetFromEnd: Uses start offset and offset from animation end for relative slicing
+            This provides flexibility in animation content selection and timing control.
+            </remarks>
+        </member>
+        <member name="F:GameCore.ResourceType.Data.Enum.SliceMode.Duration">
+            <summary>
+            Specify start offset and duration length.
+            </summary>
+            <remarks>
+            Uses StartOffset and SliceDuration to define the animation slice.
+            The slice runs from StartOffset for the specified SliceDuration.
+            This is the most straightforward way to specify a time-based slice.
+            </remarks>
+        </member>
+        <member name="F:GameCore.ResourceType.Data.Enum.SliceMode.EndOffset">
+            <summary>
+            Specify start offset and end offset.
+            </summary>
+            <remarks>
+            Uses StartOffset and EndOffset to define the animation slice.
+            The slice runs from StartOffset to EndOffset within the original animation.
+            This allows for absolute positioning within the animation timeline.
+            </remarks>
+        </member>
+        <member name="F:GameCore.ResourceType.Data.Enum.SliceMode.EndOffsetFromEnd">
+            <summary>
+            Specify start offset and end offset from the end of the original animation.
+            </summary>
+            <remarks>
+            Uses StartOffset and EndOffsetFromEnd to define the animation slice.
+            The slice runs from StartOffset to (animation_end - EndOffsetFromEnd).
+            This is useful when you want to exclude a specific amount of time from the animation end.
+            </remarks>
+        </member>
+        <member name="T:GameCore.ResourceType.Data.Enum.SoundCategory">
+            <summary>
+            Defines categories for organizing and managing different types of sounds in the game.
+            </summary>
+            <remarks>
+            This enum is used to classify sounds for purposes such as volume control, mixing,
+            and resource management. Each category represents a different type of audio content.
+            </remarks>
+        </member>
+        <member name="F:GameCore.ResourceType.Data.Enum.SoundCategory.UI">
+            <summary>
+            User interface sounds such as button clicks, menu navigation, and notifications.
+            </summary>
+        </member>
+        <member name="F:GameCore.ResourceType.Data.Enum.SoundCategory.Ambient">
+            <summary>
+            Background environmental sounds that create atmosphere.
+            </summary>
+        </member>
+        <member name="F:GameCore.ResourceType.Data.Enum.SoundCategory.Music">
+            <summary>
+            Background music and musical compositions.
+            </summary>
+        </member>
+        <member name="F:GameCore.ResourceType.Data.Enum.SoundCategory.Cutscene">
+            <summary>
+            Audio for cinematic sequences and story scenes.
+            </summary>
+        </member>
+        <member name="F:GameCore.ResourceType.Data.Enum.SoundCategory.Dialogue">
+            <summary>
+            Character speech and conversation audio.
+            </summary>
+        </member>
+        <member name="F:GameCore.ResourceType.Data.Enum.SoundCategory.Alert">
+            <summary>
+            Warning sounds and alert notifications.
+            </summary>
+        </member>
+        <member name="F:GameCore.ResourceType.Data.Enum.SoundCategory.Movement">
+            <summary>
+            Sounds related to character and object movement.
+            </summary>
+        </member>
+        <member name="F:GameCore.ResourceType.Data.Enum.SoundCategory.Foley">
+            <summary>
+            Sound effects for everyday actions and interactions.
+            </summary>
+        </member>
+        <member name="F:GameCore.ResourceType.Data.Enum.SoundCategory.Doodad">
+            <summary>
+            Environmental object and decoration sounds.
+            </summary>
+        </member>
+        <member name="F:GameCore.ResourceType.Data.Enum.SoundCategory.Combat">
+            <summary>
+            Battle, fighting, and combat-related audio effects.
+            </summary>
+        </member>
+        <member name="F:GameCore.ResourceType.Data.Enum.SoundCategory.Message">
+            <summary>
+            System messages and communication sounds.
+            </summary>
+        </member>
+        <member name="F:GameCore.ResourceType.Data.Enum.SoundCategory.Voice">
+            <summary>
+            Character voice acting and vocal expressions.
+            </summary>
+        </member>
+        <member name="T:GameCore.ResourceType.Data.GameDataModel">
+            <summary />
+        </member>
+        <member name="P:GameCore.ResourceType.Data.GameDataModel.Asset">
+            <summary />
+        </member>
+        <member name="P:GameCore.ResourceType.Data.GameDataModel.AssetLayerScale">
+            <summary>
+            Represents the scale of the asset layer, acting as an independent scaling factor separate from the script scale.
+            This ensures that assets imported from different tools are scaled consistently, so the users don't need to adjust script scales manually based on the tool used in writing the gameplay script.
+            </summary>
+        </member>
+        <member name="P:GameCore.ResourceType.Data.GameDataModel.ApplyAssetLayerScaleToChildren">
+            <summary>
+            Determines whether the asset layer scale should be applied to child elements, affecting the scaling behavior of nested components. By default, this should be set to false to adhere to the original design principle of the Asset Layer Scale, which is intended to apply only to the asset itself.
+            </summary>
+        </member>
+        <member name="P:GameCore.ResourceType.Data.GameDataModel.BirthStandDeathAnimation">
+            <summary />
+        </member>
+        <member name="P:GameCore.ResourceType.Data.GameDataModel.Events">
+            <summary />
+        </member>
+        <member name="P:GameCore.ResourceType.Data.GameDataModel.AnimationMappings">
+            <summary />
+        </member>
+        <member name="P:GameCore.ResourceType.Data.GameDataModel.ForceOffScreenUpdate">
+            <summary>
+            Indicates whether to force an update when the object is off-screen. Useful for ensuring updates occur even when
+            not visible.
+            </summary>
+        </member>
+        <member name="P:GameCore.ResourceType.Data.GameDataModel.CustomStatusBarPosition">
+            <summary />
+        </member>
+        <member name="P:GameCore.ResourceType.Data.GameDataModel.Volume">
+            <summary />
+        </member>
+        <member name="P:GameCore.ResourceType.Data.GameDataModel.UpperBodyRootBone">
+            <summary />
+        </member>
+        <member name="P:GameCore.ResourceType.Data.GameDataModel.DynamicPointLightShadingEnabled">
+            <summary />
+        </member>
+        <member name="P:GameCore.ResourceType.Data.GameDataModel.RoleSphericalHarmonicsEnabled">
+            <summary />
+        </member>
+        <member name="P:GameCore.ResourceType.Data.GameDataModel.OcclusionCullingEnabled">
+            <summary />
+        </member>
+        <member name="P:GameCore.ResourceType.Data.GameDataModel.RayCastingEnabled">
+            <summary />
+        </member>
+        <member name="P:GameCore.ResourceType.Data.GameDataModel.SimpleBoundingCylinder">
+            <summary>
+            Represents an optional simple bounding cylinder for simple ray-casting.
+            </summary>
+        </member>
+        <member name="P:GameCore.ResourceType.Data.GameDataModel.ShadowSetting">
+            <summary />
+        </member>
+        <member name="P:GameCore.ResourceType.Data.GameDataModel.Outline">
+            <summary />
+        </member>
+        <member name="P:GameCore.ResourceType.Data.GameDataModel.MovementAnimationSpeedRatio">
+            <summary />
+        </member>
+        <member name="T:GameCore.ResourceType.Data.GameDataParticle">
+            <summary />
+        </member>
+        <member name="P:GameCore.ResourceType.Data.GameDataParticle.Asset">
+            <summary />
+        </member>
+        <member name="P:GameCore.ResourceType.Data.GameDataParticle.AssetLayerScale">
+            <summary>
+            Represents the scale of the asset layer, acting as an independent scaling factor separate from the script scale.
+            This ensures that assets imported from different tools are scaled consistently, so the users don't need to adjust script scales manually based on the tool used in writing the gameplay script.
+            </summary>
+        </member>
+        <member name="P:GameCore.ResourceType.Data.GameDataParticle.ApplyAssetLayerScaleToChildren">
+            <summary>
+            Determines whether the asset layer scale should be applied to child elements, affecting the scaling behavior of nested components. By default, this should be set to false to adhere to the original design principle of the Asset Layer Scale, which is intended to apply only to the asset itself.
+            </summary>
+        </member>
+        <member name="P:GameCore.ResourceType.Data.GameDataParticle.Radius">
+            <summary />
+        </member>
+        <member name="P:GameCore.ResourceType.Data.GameDataParticle.Volume">
+            <summary />
+        </member>
+        <member name="T:GameCore.ResourceType.Data.GameDataSound">
+            <summary />
+        </member>
+        <member name="P:GameCore.ResourceType.Data.GameDataSound.Asset">
+            <summary />
+        </member>
+        <member name="P:GameCore.ResourceType.Data.GameDataSound.Events">
+            <summary />
+        </member>
+        <member name="P:GameCore.ResourceType.Data.GameDataSound.VolumeFactor">
+            <summary />
+        </member>
+        <member name="P:GameCore.ResourceType.Data.GameDataSound.FadeTime">
+            <summary>
+            Normal sound usually has a fade time of 0.5 seconds, while music has a fade time of 2 seconds.
+            </summary>
+        </member>
+        <member name="P:GameCore.ResourceType.Data.GameDataSound.Category">
+            <summary>
+            Represents the category of sound, which can be used to group or classify sounds for various purposes, such as muting or adjusting volume levels based on the category.
+            </summary>
+        </member>
+        <member name="T:GameCore.ResourceType.Data.Struct.AnimationMapping">
+            <summary>
+            Represents a mapping relationship between a logical animation alias and an actual animation resource,
+            enabling the use of meaningful names instead of direct file paths in animation systems.
+            </summary>
+            <remarks>
+            AnimationMapping provides an abstraction layer for animation resources by allowing developers to:
+            - Use logical names (aliases) like "walk", "attack", "idle" instead of file paths
+            - Easily swap animation files without changing code that references the animations
+            - Organize animations with consistent naming across different models and contexts
+            - Support multiple aliases pointing to the same animation resource for reusability
+            
+            This mapping system is particularly useful in game development where animation files may be
+            reorganized, renamed, or replaced during development, and where different models may use
+            different animation files for the same logical action.
+            </remarks>
+            <example>
+                <code>
+            var walkMapping = new AnimationMapping
+            {
+                AnimationAlias = "walk",
+                AnimationRaw = "character_walk_cycle_v2.fbx"
+            };
+            
+            // Later in code, reference by alias instead of file path
+            // PlayAnimation("walk") instead of PlayAnimation("character_walk_cycle_v2.fbx")
+            </code>
+            </example>
+        </member>
+        <member name="P:GameCore.ResourceType.Data.Struct.AnimationMapping.AnimationAlias">
+            <summary>
+            Gets or sets the logical alias name used to reference this animation in code.
+            </summary>
+            <value>A meaningful name that represents the animation's purpose or action, such as "walk", "attack", or "idle".</value>
+            <remarks>
+            This alias serves as the public interface for the animation, allowing developers to use
+            descriptive names instead of file paths. The alias should be consistent across different
+            models that perform the same logical action, enabling code reuse and maintainability.
+            
+            Common naming conventions include:
+            - Action-based: "walk", "run", "attack", "defend"
+            - State-based: "idle", "casting", "stunned", "dead"
+            - Context-specific: "intro", "victory", "defeat"
+            </remarks>
+        </member>
+        <member name="P:GameCore.ResourceType.Data.Struct.AnimationMapping.AnimationRaw">
+            <summary>
+            Gets or sets the actual animation resource that will be played when the alias is referenced.
+            </summary>
+            <value>The animation file or resource path that contains the actual animation data.</value>
+            <remarks>
+            This property points to the concrete animation resource (typically a file) that will be
+            loaded and played when the corresponding alias is requested. The raw animation can be:
+            - A file path to an animation file (e.g., "animations/character_walk.fbx")
+            - A reference to an animation resource in the game's asset system
+            - Any valid Animation resource identifier
+            
+            Multiple mappings can reference the same AnimationRaw, allowing for animation reuse
+            across different aliases or contexts.
+            </remarks>
+        </member>
+        <member name="T:GameCore.ResourceType.Data.Struct.AnimationPlayback">
+            <summary>
+            Represents a comprehensive animation playback configuration that controls how an animation is played back,
+            including timing, scaling, looping, and blending behavior.
+            </summary>
+            <remarks>
+            AnimationPlayback provides fine-grained control over animation playback by allowing you to:
+            - Reference a source animation and apply time scaling
+            - Define slice configuration using different modes (duration, end offset, or end offset from end)
+            - Control looping behavior when playback duration exceeds content duration
+            - Configure smooth blending transitions for seamless animation transitions
+            This class is particularly useful for creating complex animation sequences, dynamic timing adjustments,
+            and smooth animation blending in game scenarios.
+            </remarks>
+        </member>
+        <member name="P:GameCore.ResourceType.Data.Struct.AnimationPlayback.AnimationRaw">
+            <summary>
+            Gets or sets the source animation to be played back.
+            </summary>
+            <value>The animation resource that will be used as the source for playback.</value>
+            <remarks>
+            This property references the raw animation data that will be modified according to the
+            other playback configuration properties in this class.
+            </remarks>
+        </member>
+        <member name="P:GameCore.ResourceType.Data.Struct.AnimationPlayback.Scale">
+            <summary>
+            Gets or sets the time scale multiplier applied to the original animation speed.
+            </summary>
+            <value>The speed multiplier where 1.0 is normal speed, values greater than 1.0 speed up playback, 
+            and values less than 1.0 slow down playback. Default is 1.0.</value>
+            <remarks>
+            This scale factor affects the overall playback speed of the animation. For example:
+            - 0.5 will play the animation at half speed
+            - 2.0 will play the animation at double speed
+            The scale is applied to the original animation timing before other duration calculations.
+            </remarks>
+        </member>
+        <member name="P:GameCore.ResourceType.Data.Struct.AnimationPlayback.Mode">
+            <summary>
+            Gets or sets the mode for specifying the animation slice.
+            </summary>
+            <value>The slice mode that determines how the slice end point is specified. Default is Duration.</value>
+            <remarks>
+            This mode determines which properties are used to define the animation slice:
+            - Duration: Uses StartOffset and SliceDuration
+            - EndOffset: Uses StartOffset and EndOffset
+            - EndOffsetFromEnd: Uses StartOffset and EndOffsetFromEnd
+            </remarks>
+        </member>
+        <member name="P:GameCore.ResourceType.Data.Struct.AnimationPlayback.StartOffset">
+            <summary>
+            Gets or sets the start offset for the animation playback, based on the original animation speed.
+            </summary>
+            <value>The time offset from the beginning of the source animation where playback should start.</value>
+            <remarks>
+            This offset allows you to start playback from any point within the source animation,
+            effectively skipping the initial portion. The offset is calculated based on the original
+            animation timing before any scaling is applied.
+            </remarks>
+        </member>
+        <member name="P:GameCore.ResourceType.Data.Struct.AnimationPlayback.SliceDuration">
+            <summary>
+            Gets or sets the duration of the animation content to be played, based on the original animation speed.
+            Used when Mode is set to Duration.
+            </summary>
+            <value>The length of time from the source animation that should be included in this playback configuration.</value>
+            <remarks>
+            This duration defines how much of the source animation (starting from the StartOffset) will be
+            considered for playback. It represents the "slice" of animation content before any scaling
+            or playback duration modifications are applied.
+            Only used when Mode is SliceMode.Duration.
+            </remarks>
+        </member>
+        <member name="P:GameCore.ResourceType.Data.Struct.AnimationPlayback.EndOffset">
+            <summary>
+            Gets or sets the end offset for the animation slice, based on the original animation speed.
+            Used when Mode is set to EndOffset.
+            </summary>
+            <value>The time offset from the beginning of the source animation where the slice should end.</value>
+            <remarks>
+            This end offset defines the absolute end point of the animation slice within the source animation.
+            The effective slice duration will be (EndOffset - StartOffset).
+            Only used when Mode is SliceMode.EndOffset.
+            </remarks>
+        </member>
+        <member name="P:GameCore.ResourceType.Data.Struct.AnimationPlayback.EndOffsetFromEnd">
+            <summary>
+            Gets or sets the end offset from the end of the original animation, based on the original animation speed.
+            Used when Mode is set to EndOffsetFromEnd.
+            </summary>
+            <value>The time offset from the end of the source animation where the slice should end.</value>
+            <remarks>
+            This end offset defines how much time before the end of the original animation the slice should stop.
+            For example, if the original animation is 10 seconds and EndOffsetFromEnd is 2 seconds,
+            the slice will end at 8 seconds from the start.
+            Only used when Mode is SliceMode.EndOffsetFromEnd.
+            </remarks>
+        </member>
+        <member name="P:GameCore.ResourceType.Data.Struct.AnimationPlayback.IsLooping">
+            <summary>
+            Gets or sets a value indicating whether the animation should loop when the playback duration
+            exceeds the slice duration.
+            </summary>
+            <value>
+                <c>true</c> if the animation should loop; otherwise, <c>false</c>. Default is <c>false</c>.</value>
+            <remarks>
+            When the PlaybackDuration is longer than the effective slice duration, this property controls the behavior:
+            - If <c>true</c>, the animation will loop continuously until the PlaybackDuration is reached
+            - If <c>false</c>, the animation will pause at the last frame until the PlaybackDuration is reached
+            </remarks>
+        </member>
+        <member name="P:GameCore.ResourceType.Data.Struct.AnimationPlayback.PlaybackDuration">
+            <summary>
+            Gets or sets the actual playback duration of the animation at the scaled animation speed.
+            </summary>
+            <value>The total time that the animation playback should last, accounting for scaling and timing adjustments.</value>
+            <remarks>
+            This duration controls the total time the animation will play, independent of the source content duration.
+            The behavior depends on the relationship between PlaybackDuration and the effective slice duration:
+            - If PlaybackDuration is less than slice duration: animation stops early
+            - If PlaybackDuration is greater than slice duration: animation loops (if IsLooping is true) or pauses at the last frame
+            - If PlaybackDuration equals slice duration: animation plays exactly once through the slice content
+            </remarks>
+        </member>
+        <member name="P:GameCore.ResourceType.Data.Struct.AnimationPlayback.BlendIn">
+            <summary>
+            Gets or sets the blend-in duration for smooth transitions when starting this animation.
+            </summary>
+            <value>The time span over which the animation will blend in from the previous animation state. Default is 0.15 seconds.</value>
+            <remarks>
+            This property controls how smoothly the animation transitions in when it starts playing.
+            A longer blend-in duration creates a more gradual transition, while a shorter duration
+            creates a more abrupt change. This is particularly useful for character animations
+            where sudden transitions can look unnatural.
+            </remarks>
+        </member>
+        <member name="P:GameCore.ResourceType.Data.Struct.AnimationPlayback.BlendOut">
+            <summary>
+            Gets or sets the blend-out duration for smooth transitions when ending this animation.
+            </summary>
+            <value>The time span over which the animation will blend out to the next animation state. Default is 0.15 seconds.</value>
+            <remarks>
+            This property controls how smoothly the animation transitions out when it finishes playing.
+            A longer blend-out duration creates a more gradual transition to the next animation,
+            while a shorter duration creates a more abrupt change. This helps create seamless
+            animation sequences and prevents jarring transitions between different animations.
+            </remarks>
+        </member>
+        <member name="T:GameCore.ResourceType.Data.Struct.BirthStandDeathAnimation">
+            <summary />
+        </member>
+        <member name="P:GameCore.ResourceType.Data.Struct.BirthStandDeathAnimation.BirthAnimation">
+            <summary />
+        </member>
+        <member name="P:GameCore.ResourceType.Data.Struct.BirthStandDeathAnimation.StandAnimation">
+            <summary />
+        </member>
+        <member name="P:GameCore.ResourceType.Data.Struct.BirthStandDeathAnimation.DeathAnimation">
+            <summary />
+        </member>
+        <member name="T:GameCore.ResourceType.Data.Struct.StatusBarPosition">
+            <summary />
+        </member>
+        <member name="P:GameCore.ResourceType.Data.Struct.StatusBarPosition.RootZOffset">
+            <summary>
+            The StatusBar's position relative to the root bone.
+            </summary>
+        </member>
+        <member name="P:GameCore.ResourceType.Data.Struct.StatusBarPosition.ScreenOffset">
+            <summary>
+            This is device-dependent, a offset in screen space.
+            </summary>
+        </member>
+        <member name="T:GameCore.ResourceType.Data.Struct.Outline">
+            <summary />
+        </member>
+        <member name="P:GameCore.ResourceType.Data.Struct.Outline.InnerOutlineThickness">
+            <summary />
+        </member>
+        <member name="P:GameCore.ResourceType.Data.Struct.Outline.OuterOutlineThickness">
+            <summary />
+        </member>
+        <member name="P:GameCore.ResourceType.Data.Struct.Outline.RenderThroughOcclusion">
+            <summary />
+        </member>
+        <member name="T:GameCore.ResourceType.Data.Struct.ShadowSetting">
+            <summary />
+        </member>
+        <member name="P:GameCore.ResourceType.Data.Struct.ShadowSetting.ShadowScaleFactor">
+            <summary />
+        </member>
+        <member name="P:GameCore.ResourceType.Data.Struct.ShadowSetting.ShadowType">
+            <summary />
+        </member>
+        <member name="T:GameCore.ResourceType.Data.Struct.SimpleBoundingCylinder">
+            <summary />
+        </member>
+        <member name="P:GameCore.ResourceType.Data.Struct.SimpleBoundingCylinder.Radius">
+            <summary />
+        </member>
+        <member name="P:GameCore.ResourceType.Data.Struct.SimpleBoundingCylinder.Height">
+            <summary />
+        </member>
+        <member name="T:GameCore.ResourceType.Data.Struct.TimedAssetEvent">
+            <summary />
+        </member>
+        <member name="P:GameCore.ResourceType.Data.Struct.TimedAssetEvent.EventName">
+            <summary />
+        </member>
+        <member name="P:GameCore.ResourceType.Data.Struct.TimedAssetEvent.StartingTime">
+            <summary />
+        </member>
+        <member name="P:GameCore.ResourceType.Data.Struct.TimedAssetEvent.Duration">
+            <summary />
+        </member>
+        <member name="T:GameCore.ResourceType.Data.Struct.TimedAssetEventAnimation">
+            <summary />
+        </member>
+        <member name="P:GameCore.ResourceType.Data.Struct.TimedAssetEventAnimation.Animation">
+            <summary />
+        </member>
+        <member name="T:GameCore.ResourceType.Animation">
+            <summary />
+        </member>
+        <member name="M:GameCore.ResourceType.Animation.#ctor(EngineCommon.UTF8String)">
+            <summary />
+        </member>
+        <member name="P:GameCore.ResourceType.Animation.Path">
+            <summary />
+        </member>
+        <member name="M:GameCore.ResourceType.Animation.op_Implicit(EngineCommon.UTF8String)~GameCore.ResourceType.Animation">
+            <summary />
+        </member>
+        <member name="M:GameCore.ResourceType.Animation.op_Implicit(System.ReadOnlySpan{System.Byte})~GameCore.ResourceType.Animation">
+            <summary />
+        </member>
+        <member name="M:GameCore.ResourceType.Animation.op_Implicit(System.String)~GameCore.ResourceType.Animation">
+            <summary />
+        </member>
+        <member name="M:GameCore.ResourceType.Animation.op_Implicit(GameCore.ResourceType.Animation)~EngineCommon.UTF8String">
+            <summary />
+        </member>
+        <member name="M:GameCore.ResourceType.Animation.ToString">
+            <summary />
+            <returns />
+        </member>
+        <member name="T:GameCore.ResourceType.Font">
+            <summary />
+        </member>
+        <member name="M:GameCore.ResourceType.Font.#ctor(EngineCommon.UTF8String)">
+            <summary />
+        </member>
+        <member name="P:GameCore.ResourceType.Font.Path">
+            <summary />
+        </member>
+        <member name="M:GameCore.ResourceType.Font.op_Implicit(EngineCommon.UTF8String)~GameCore.ResourceType.Font">
+            <summary />
+        </member>
+        <member name="M:GameCore.ResourceType.Font.op_Implicit(System.ReadOnlySpan{System.Byte})~GameCore.ResourceType.Font">
+            <summary />
+        </member>
+        <member name="M:GameCore.ResourceType.Font.op_Implicit(System.String)~GameCore.ResourceType.Font">
+            <summary />
+        </member>
+        <member name="M:GameCore.ResourceType.Font.op_Implicit(GameCore.ResourceType.Font)~EngineCommon.UTF8String">
+            <summary />
+        </member>
+        <member name="T:GameCore.ResourceType.Icon">
+            <summary>
+            表示游戏中的图标资源，包装图标文件路径并提供类型转换功能
+            </summary>
+            <param name="path">图标文件的路径</param>
+            <remarks>
+            此结构体用于表示和管理游戏中的图标资源，通常用于 UI 元素、物品图标、技能图标等。
+            支持与字符串类型的隐式转换，便于在不同的上下文中使用图标路径。
+            图标通常是小尺寸的图像文件，用于在用户界面中提供视觉标识。
+            </remarks>
+        </member>
+        <member name="M:GameCore.ResourceType.Icon.#ctor(EngineCommon.UTF8String)">
+            <summary>
+            表示游戏中的图标资源，包装图标文件路径并提供类型转换功能
+            </summary>
+            <param name="path">图标文件的路径</param>
+            <remarks>
+            此结构体用于表示和管理游戏中的图标资源，通常用于 UI 元素、物品图标、技能图标等。
+            支持与字符串类型的隐式转换，便于在不同的上下文中使用图标路径。
+            图标通常是小尺寸的图像文件，用于在用户界面中提供视觉标识。
+            </remarks>
+        </member>
+        <member name="P:GameCore.ResourceType.Icon.Path">
+            <summary>
+            获取或设置图标文件的路径
+            </summary>
+            <remarks>
+            使用 UTF8String 类型存储路径，提供更好的性能和内存效率。
+            </remarks>
+        </member>
+        <member name="P:GameCore.ResourceType.Icon.FileName">
+            <summary>
+            获取或设置图标文件的名称
+            </summary>
+            <remarks>
+            实现 <see cref="T:GameCore.ResourceType.IFile" /> 接口，返回文件路径作为文件名。
+            </remarks>
+        </member>
+        <member name="M:GameCore.ResourceType.Icon.op_Implicit(EngineCommon.UTF8String)~GameCore.ResourceType.Icon">
+            <summary>
+            提供从 UTF8String 到 Icon 的隐式转换
+            </summary>
+            <param name="path">UTF8 格式的图标路径</param>
+            <returns>新的 Icon 实例</returns>
+        </member>
+        <member name="M:GameCore.ResourceType.Icon.op_Implicit(System.String)~GameCore.ResourceType.Icon">
+            <summary>
+            提供从字符串到 Icon 的隐式转换
+            </summary>
+            <param name="path">图标文件路径</param>
+            <returns>新的 Icon 实例</returns>
+        </member>
+        <member name="M:GameCore.ResourceType.Icon.op_Implicit(System.ReadOnlySpan{System.Byte})~GameCore.ResourceType.Icon">
+            <summary>
+            提供从字符串到 Icon 的隐式转换
+            </summary>
+            <param name="path">图标文件路径</param>
+            <returns>新的 Icon 实例</returns>
+        </member>
+        <member name="M:GameCore.ResourceType.Icon.op_Implicit(GameCore.ResourceType.Icon)~EngineCommon.UTF8String">
+            <summary>
+            提供从 Icon 到 UTF8String 的隐式转换
+            </summary>
+            <param name="icon">Icon 实例</param>
+            <returns>图标的路径</returns>
+        </member>
+        <member name="T:GameCore.ResourceType.IFile">
+            <summary />
+        </member>
+        <member name="P:GameCore.ResourceType.IFile.Path">
+            <summary />
+        </member>
+        <member name="T:GameCore.ResourceType.Image">
+            <summary />
+        </member>
+        <member name="M:GameCore.ResourceType.Image.#ctor(EngineCommon.UTF8String)">
+            <summary />
+        </member>
+        <member name="P:GameCore.ResourceType.Image.Path">
+            <summary />
+        </member>
+        <member name="M:GameCore.ResourceType.Image.op_Implicit(EngineCommon.UTF8String)~GameCore.ResourceType.Image">
+            <summary />
+        </member>
+        <member name="M:GameCore.ResourceType.Image.op_Implicit(System.ReadOnlySpan{System.Byte})~GameCore.ResourceType.Image">
+            <summary />
+        </member>
+        <member name="M:GameCore.ResourceType.Image.op_Implicit(System.String)~GameCore.ResourceType.Image">
+            <summary />
+        </member>
+        <member name="T:GameCore.ResourceType.Material">
+            <summary>
+            表示游戏中的材质资源，包装材质文件路径并提供类型转换功能
+            </summary>
+            <param name="path">材质文件的路径</param>
+            <remarks>
+            此结构体用于表示和管理游戏中的材质资源，支持与字符串类型的隐式转换，
+            便于在不同的上下文中使用材质路径。材质通常用于定义 3D 模型的外观和渲染属性。
+            </remarks>
+        </member>
+        <member name="M:GameCore.ResourceType.Material.#ctor(EngineCommon.UTF8String)">
+            <summary>
+            表示游戏中的材质资源，包装材质文件路径并提供类型转换功能
+            </summary>
+            <param name="path">材质文件的路径</param>
+            <remarks>
+            此结构体用于表示和管理游戏中的材质资源，支持与字符串类型的隐式转换，
+            便于在不同的上下文中使用材质路径。材质通常用于定义 3D 模型的外观和渲染属性。
+            </remarks>
+        </member>
+        <member name="P:GameCore.ResourceType.Material.Path">
+            <summary>
+            获取或设置材质文件的路径
+            </summary>
+            <remarks>
+            使用 UTF8String 类型存储路径，提供更好的性能和内存效率。
+            </remarks>
+        </member>
+        <member name="P:GameCore.ResourceType.Material.FileName">
+            <summary>
+            获取或设置材质文件的名称
+            </summary>
+            <remarks>
+            实现 <see cref="T:GameCore.ResourceType.IFile" /> 接口，返回文件路径作为文件名。
+            </remarks>
+        </member>
+        <member name="M:GameCore.ResourceType.Material.op_Implicit(EngineCommon.UTF8String)~GameCore.ResourceType.Material">
+            <summary>
+            提供从 UTF8String 到 Material 的隐式转换
+            </summary>
+            <param name="path">UTF8 格式的材质路径</param>
+            <returns>新的 Material 实例</returns>
+        </member>
+        <member name="M:GameCore.ResourceType.Material.op_Implicit(System.ReadOnlySpan{System.Byte})~GameCore.ResourceType.Material">
+            <summary>
+            提供从字节跨度到 Material 的隐式转换
+            </summary>
+            <param name="path">表示路径的只读字节跨度</param>
+            <returns>新的 Material 实例</returns>
+        </member>
+        <member name="M:GameCore.ResourceType.Material.op_Implicit(System.String)~GameCore.ResourceType.Material">
+            <summary>
+            提供从字符串到 Material 的隐式转换
+            </summary>
+            <param name="path">材质文件路径</param>
+            <returns>新的 Material 实例</returns>
+        </member>
+        <member name="M:GameCore.ResourceType.Material.op_Implicit(GameCore.ResourceType.Material)~EngineCommon.UTF8String">
+            <summary>
+            提供从 Material 到 UTF8String 的隐式转换
+            </summary>
+            <param name="Material">Material 实例</param>
+            <returns>材质的路径</returns>
+        </member>
+        <member name="T:GameCore.ResourceType.Model">
+            <summary>
+            表示游戏中的 3D 模型资源，包装模型文件路径并提供类型转换功能
+            </summary>
+            <param name="path">模型文件的路径</param>
+            <remarks>
+            此结构体用于表示和管理游戏中的 3D 模型资源，支持从多种字符串类型的隐式转换。
+            模型资源通常包含几何体、材质引用和动画数据，用于在游戏世界中渲染 3D 对象。
+            </remarks>
+        </member>
+        <member name="M:GameCore.ResourceType.Model.#ctor(EngineCommon.UTF8String)">
+            <summary>
+            表示游戏中的 3D 模型资源，包装模型文件路径并提供类型转换功能
+            </summary>
+            <param name="path">模型文件的路径</param>
+            <remarks>
+            此结构体用于表示和管理游戏中的 3D 模型资源，支持从多种字符串类型的隐式转换。
+            模型资源通常包含几何体、材质引用和动画数据，用于在游戏世界中渲染 3D 对象。
+            </remarks>
+        </member>
+        <member name="P:GameCore.ResourceType.Model.Path">
+            <summary>
+            获取或设置模型文件的路径
+            </summary>
+            <remarks>
+            使用 UTF8String 类型存储路径，提供更好的性能和内存效率。
+            </remarks>
+        </member>
+        <member name="P:GameCore.ResourceType.Model.FileName">
+            <summary>
+            获取或设置模型文件的名称
+            </summary>
+            <remarks>
+            实现 <see cref="T:GameCore.ResourceType.IFile" /> 接口，返回文件路径作为文件名。
+            </remarks>
+        </member>
+        <member name="M:GameCore.ResourceType.Model.op_Implicit(EngineCommon.UTF8String)~GameCore.ResourceType.Model">
+            <summary>
+            提供从 UTF8String 到 Model 的隐式转换
+            </summary>
+            <param name="path">UTF8 格式的模型路径</param>
+            <returns>新的 Model 实例</returns>
+        </member>
+        <member name="M:GameCore.ResourceType.Model.op_Implicit(System.ReadOnlySpan{System.Byte})~GameCore.ResourceType.Model">
+            <summary>
+            提供从字节跨度到 Model 的隐式转换
+            </summary>
+            <param name="path">表示路径的只读字节跨度</param>
+            <returns>新的 Model 实例</returns>
+        </member>
+        <member name="M:GameCore.ResourceType.Model.op_Implicit(System.String)~GameCore.ResourceType.Model">
+            <summary>
+            提供从字符串到 Model 的隐式转换
+            </summary>
+            <param name="path">模型文件路径</param>
+            <returns>新的 Model 实例</returns>
+        </member>
+        <member name="M:GameCore.ResourceType.Model.op_Implicit(GameCore.ResourceType.Model)~EngineCommon.UTF8String">
+            <summary>
+            提供从 Model 到 UTF8String 的隐式转换
+            </summary>
+            <param name="Model">Model 实例</param>
+            <returns>模型的路径</returns>
+        </member>
+        <member name="T:GameCore.ResourceType.Particle">
+            <summary />
+        </member>
+        <member name="M:GameCore.ResourceType.Particle.#ctor(EngineCommon.UTF8String)">
+            <summary />
+        </member>
+        <member name="P:GameCore.ResourceType.Particle.Path">
+            <summary />
+        </member>
+        <member name="M:GameCore.ResourceType.Particle.op_Implicit(EngineCommon.UTF8String)~GameCore.ResourceType.Particle">
+            <summary />
+        </member>
+        <member name="M:GameCore.ResourceType.Particle.op_Implicit(System.ReadOnlySpan{System.Byte})~GameCore.ResourceType.Particle">
+            <summary />
+        </member>
+        <member name="M:GameCore.ResourceType.Particle.op_Implicit(System.String)~GameCore.ResourceType.Particle">
+            <summary />
+        </member>
+        <member name="M:GameCore.ResourceType.Particle.op_Implicit(GameCore.ResourceType.Particle)~EngineCommon.UTF8String">
+            <summary />
+        </member>
+        <member name="T:GameCore.ResourceType.Sound">
+            <summary>
+            表示游戏中的音频资源，包装音频文件路径并提供类型转换功能
+            </summary>
+            <param name="path">音频文件的路径</param>
+            <remarks>
+            此结构体用于表示和管理游戏中的音频资源，包括音效、背景音乐和语音等。
+            支持与字符串类型的隐式转换，便于在不同的上下文中使用音频路径。
+            音频资源通常用于游戏的声音效果系统。
+            </remarks>
+        </member>
+        <member name="M:GameCore.ResourceType.Sound.#ctor(EngineCommon.UTF8String)">
+            <summary>
+            表示游戏中的音频资源，包装音频文件路径并提供类型转换功能
+            </summary>
+            <param name="path">音频文件的路径</param>
+            <remarks>
+            此结构体用于表示和管理游戏中的音频资源，包括音效、背景音乐和语音等。
+            支持与字符串类型的隐式转换，便于在不同的上下文中使用音频路径。
+            音频资源通常用于游戏的声音效果系统。
+            </remarks>
+        </member>
+        <member name="P:GameCore.ResourceType.Sound.Path">
+            <summary>
+            获取或设置音频文件的路径
+            </summary>
+            <remarks>
+            使用 UTF8String 类型存储路径，提供更好的性能和内存效率。
+            </remarks>
+        </member>
+        <member name="P:GameCore.ResourceType.Sound.FileName">
+            <summary>
+            获取或设置音频文件的名称
+            </summary>
+            <remarks>
+            实现 <see cref="T:GameCore.ResourceType.IFile" /> 接口，返回文件路径作为文件名。
+            </remarks>
+        </member>
+        <member name="M:GameCore.ResourceType.Sound.op_Implicit(EngineCommon.UTF8String)~GameCore.ResourceType.Sound">
+            <summary>
+            提供从 UTF8String 到 Sound 的隐式转换
+            </summary>
+            <param name="path">UTF8 格式的音频路径</param>
+            <returns>新的 Sound 实例</returns>
+        </member>
+        <member name="M:GameCore.ResourceType.Sound.op_Implicit(GameCore.ResourceType.Sound)~EngineCommon.UTF8String">
+            <summary>
+            提供从 Sound 到 UTF8String 的隐式转换
+            </summary>
+            <param name="sound">Sound 实例</param>
+            <returns>音频的路径</returns>
+        </member>
+        <member name="T:GameCore.ResourceType.Texture">
+            <summary>
+            表示游戏中的纹理资源，包装纹理文件路径并提供类型转换功能
+            </summary>
+            <param name="path">纹理文件的路径</param>
+            <remarks>
+            此结构体用于表示和管理游戏中的纹理资源，包括贴图、精灵图、UI 图片等。
+            支持与字符串类型的隐式转换，便于在不同的上下文中使用纹理路径。
+            纹理资源是游戏渲染系统的重要组成部分，用于为 3D 模型和 2D 精灵提供视觉外观。
+            </remarks>
+        </member>
+        <member name="M:GameCore.ResourceType.Texture.#ctor(EngineCommon.UTF8String)">
+            <summary>
+            表示游戏中的纹理资源，包装纹理文件路径并提供类型转换功能
+            </summary>
+            <param name="path">纹理文件的路径</param>
+            <remarks>
+            此结构体用于表示和管理游戏中的纹理资源，包括贴图、精灵图、UI 图片等。
+            支持与字符串类型的隐式转换，便于在不同的上下文中使用纹理路径。
+            纹理资源是游戏渲染系统的重要组成部分，用于为 3D 模型和 2D 精灵提供视觉外观。
+            </remarks>
+        </member>
+        <member name="P:GameCore.ResourceType.Texture.Path">
+            <summary>
+            获取或设置纹理文件的路径
+            </summary>
+            <remarks>
+            使用 UTF8String 类型存储路径，提供更好的性能和内存效率。
+            </remarks>
+        </member>
+        <member name="P:GameCore.ResourceType.Texture.FileName">
+            <summary>
+            获取或设置纹理文件的名称
+            </summary>
+            <remarks>
+            实现 <see cref="T:GameCore.ResourceType.IFile" /> 接口，返回文件路径作为文件名。
+            </remarks>
+        </member>
+        <member name="M:GameCore.ResourceType.Texture.op_Implicit(EngineCommon.UTF8String)~GameCore.ResourceType.Texture">
+            <summary>
+            提供从 UTF8String 到 Texture 的隐式转换
+            </summary>
+            <param name="path">UTF8 格式的纹理路径</param>
+            <returns>新的 Texture 实例</returns>
+        </member>
+        <member name="M:GameCore.ResourceType.Texture.op_Implicit(System.String)~GameCore.ResourceType.Texture">
+            <summary>
+            提供从字符串到 Texture 的隐式转换
+            </summary>
+            <param name="path">纹理文件路径</param>
+            <returns>新的 Texture 实例</returns>
+        </member>
+        <member name="M:GameCore.ResourceType.Texture.op_Implicit(GameCore.ResourceType.Texture)~EngineCommon.UTF8String">
+            <summary>
+            提供从 Texture 到 UTF8String 的隐式转换
+            </summary>
+            <param name="texture">Texture 实例</param>
+            <returns>纹理的路径</returns>
+        </member>
+    </members>
+</doc>

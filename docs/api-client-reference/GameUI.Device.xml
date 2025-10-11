@@ -1,0 +1,885 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>GameUI</name>
+    </assembly>
+    <members>
+        <member name="M:GameUI.Control.Struct.KeyboardAccelerator.Matches(GameUI.TriggerEvent.EventGameKeyDown)">
+        <summary>
+        
+        </summary>
+        <param name="down"></param>
+        <returns></returns>
+        </member>
+        <member name="T:GameUI.Device.DeviceInfo">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="P:GameUI.Device.DeviceInfo.Platform">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="P:GameUI.Device.DeviceInfo.PrimaryViewport">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="P:GameUI.Device.DeviceInfo.PrimaryInputManager">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="T:GameUI.Device.Enum.PointerType">
+        <summary>
+        表示指针输入设备的类型
+        </summary>
+        </member>
+        <member name="F:GameUI.Device.Enum.PointerType.Mouse">
+        <summary>
+        鼠标指针输入
+        </summary>
+        </member>
+        <member name="F:GameUI.Device.Enum.PointerType.Touch">
+        <summary>
+        触摸指针输入
+        </summary>
+        </member>
+        <member name="T:GameUI.Device.Enum.RayCastMode">
+        <summary>
+        定义射线检测的碰撞检测模式
+        </summary>
+        <remarks>
+        <para><strong>⚠️ 重要提示：</strong></para>
+        <para>不同的射线检测模式对游戏对象的模型数据有不同的要求。如果选择了需要特定包围盒数据的模式，
+        但游戏对象的模型没有配置相应的包围盒，射线检测将会失败。</para>
+        <para><strong>配置位置：</strong>模型的包围盒数据需要在相应的 GameDataModel 字段中配置，
+        例如 <see cref = "!:GameDataModel.SimpleBoundingCylinder"/> 字段用于配置简单包围圆柱体数据。</para>
+        <para><strong>建议：</strong>对于大多数游戏，使用 <see cref = "F:GameUI.Device.Enum.RayCastMode.AABB"/> 模式是最安全的选择，
+        因为它不需要特殊的模型配置。</para>
+        </remarks>
+        </member>
+        <member name="F:GameUI.Device.Enum.RayCastMode.AABB">
+        <summary>
+        轴对齐包围盒 (Axis-Aligned Bounding Box)
+        </summary>
+        <remarks>
+        <para><strong>推荐模式</strong> - 适用于大多数游戏对象，不需要特殊的模型配置。</para>
+        <para>使用游戏对象的轴对齐包围盒进行碰撞检测，兼容性最好。</para>
+        </remarks>
+        </member>
+        <member name="F:GameUI.Device.Enum.RayCastMode.OBB">
+        <summary>
+        有向包围盒 (Oriented Bounding Box)
+        </summary>
+        <remarks>
+        <para><strong>需要模型配置</strong> - 需要在模型数据中设置相应的有向包围盒数据。</para>
+        </remarks>
+        </member>
+        <member name="F:GameUI.Device.Enum.RayCastMode.Triangle">
+        <summary>
+        三角形精确检测
+        </summary>
+        <remarks>
+        <para>对模型的三角形网格进行精确的射线-三角形相交检测。</para>
+        <para>精度最高但性能开销较大。</para>
+        </remarks>
+        </member>
+        <member name="F:GameUI.Device.Enum.RayCastMode.TriangleUV">
+        <summary>
+        三角形精确检测（包含UV坐标）
+        </summary>
+        <remarks>
+        <para>与 <see cref = "F:GameUI.Device.Enum.RayCastMode.Triangle"/> 相似，但额外返回UV坐标信息。</para>
+        </remarks>
+        </member>
+        <member name="F:GameUI.Device.Enum.RayCastMode.SimpleBoundingCylinder">
+        <summary>
+        简单包围圆柱体
+        </summary>
+        <remarks>
+        <para><strong>需要模型配置</strong> - 需要在单位/表现的模型数据中预先设置 SimpleBoundingCylinder。</para>
+        <para><strong>配置位置：</strong>在 <see cref = "!:GameDataModel.SimpleBoundingCylinder"/> 字段中配置包围圆柱体数据。</para>
+        <para><strong>⚠️ 注意：</strong>如果模型没有配置 SimpleBoundingCylinder 数据，射线检测将会失败！</para>
+        </remarks>
+        </member>
+        <member name="T:GameUI.Device.InputManager">
+        <summary>
+        
+        </summary>
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="P:GameUI.Device.InputManager.Primary">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="E:GameUI.Device.InputManager.OnKeyDown">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="E:GameUI.Device.InputManager.OnKeyUp">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="E:GameUI.Device.InputManager.OnPointerButtonDown">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="E:GameUI.Device.InputManager.OnPointerButtonUp">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="E:GameUI.Device.InputManager.OnPointerButtonMove">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="E:GameUI.Device.InputManager.OnPointerWheelChanged">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="M:GameUI.Device.InputManager.#ctor">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="P:GameUI.Device.InputManager.PointerType">
+        <summary>
+        Gets the type of pointer input currently in use.
+        </summary>
+        </member>
+        <member name="M:GameUI.Device.InputManager.OnRegisterGameClass">
+        <summary>
+        
+        </summary>
+        <returns></returns>
+        </member>
+        <member name="T:GameUI.Device.ScreenViewport">
+        <summary>
+        
+        </summary>
+        <summary>
+        
+        </summary>
+        <summary>
+        
+        </summary>
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="P:GameUI.Device.ScreenViewport.Primary">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="P:GameUI.Device.ScreenViewport.Camera">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="P:GameUI.Device.ScreenViewport.WidthDP">
+        <summary>
+        In device pixels
+        </summary>
+        </member>
+        <member name="P:GameUI.Device.ScreenViewport.HeightDP">
+        <summary>
+        In device pixels
+        </summary>
+        </member>
+        <member name="E:GameUI.Device.ScreenViewport.OnSizeChanged">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="E:GameUI.Device.ScreenViewport.OnOrientationChanged">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="E:GameUI.Device.ScreenViewport.OnDevicePixelRatioChanged">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="F:GameUI.Device.ScreenViewport.DesignResolutionLandscape">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="F:GameUI.Device.ScreenViewport.DesignResolutionPortrait">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="P:GameUI.Device.ScreenViewport.Size">
+        <summary>
+        Gets the size of the viewport in device-independent pixels (DIPs).
+        </summary>
+        </member>
+        <member name="P:GameUI.Device.ScreenViewport.DesignResolution">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="P:GameUI.Device.ScreenViewport.DevicePixelRatio">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="P:GameUI.Device.ScreenViewport.DisplayOrientations">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="M:GameUI.Device.ScreenViewport.#ctor">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="P:GameUI.Device.ScreenViewport.SafeZonePadding">
+        <summary>
+        In device independent pixels
+        </summary>
+        </member>
+        <member name="F:GameUI.Device.ScreenViewport._SceneRendering">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="F:GameUI.Device.ScreenViewport.displayOrientations">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="P:GameUI.Device.ScreenViewport.SceneRendering">
+        <summary>
+        Gets or sets a value indicating whether scene rendering is enabled.
+        </summary>
+        <remarks>
+        Setting this property to false will lock the scene render in the view, make it static.
+        </remarks>
+        </member>
+        <member name="M:GameUI.Device.ScreenViewport.GetPointerInputPosition(GameCore.Platform.SDL.PointerButtons)">
+        <summary>
+        
+        </summary>
+        <param name="buttonIndex"></param>
+        <returns></returns>
+        </member>
+        <member name="M:GameUI.Device.ScreenViewport.GetPointerInputPositionDP(GameCore.Platform.SDL.PointerButtons)">
+        <summary>
+        In device pixels
+        </summary>
+        <param name = "button"></param>
+        <returns></returns>
+        </member>
+        <member name="F:GameUI.Device.ScreenViewport.gaussianBlurLevel">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="P:GameUI.Device.ScreenViewport.GaussianBlurLevel">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="F:GameUI.Device.ScreenViewport.saturation">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="P:GameUI.Device.ScreenViewport.SaturationInput">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="F:GameUI.Device.ScreenViewport.multiply">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="P:GameUI.Device.ScreenViewport.MultiplyInput">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="M:GameUI.Device.ScreenViewport.OnRegisterGameClass">
+        <summary>
+        
+        </summary>
+        <returns></returns>
+        </member>
+        <member name="M:GameUI.Device.ScreenViewport.CreateDebugDraw">
+        <summary>
+        
+        </summary>
+        <returns></returns>
+        </member>
+        <member name="M:GameUI.Device.ScreenViewport.RaycastWorldPanel(GameUI.Struct.UIPosition,GameUI.Device.Enum.WorldPanel,System.Single)">
+        <summary>
+        Performs a raycast on a specified world panel at a given UI position and fixed axis value.
+        </summary>
+        <remarks>
+        This method calculates the screen position in device-dependent pixels (DPI) based on the provided UI position
+        and performs a raycast on the specified world panel (XY, XZ, or YZ). The raycast determines whether the panel
+        is hit and, if so, returns the world position of the hit.
+        </remarks>
+        <param name = "position">The UI position, in logical pixels, where the raycast should be performed.</param>
+        <param name = "panel">The world panel to raycast against. This can be one of the following: XY, XZ, or YZ.</param>
+        <param name = "fixedAxisValue">
+        The fixed axis value to use for the raycast. For example, if the panel is XY, this value represents the Z-coordinate.
+        </param>
+        <returns>
+        A <see cref = "T:GameUI.Device.Struct.RaycastHitWorldPosition"/> object containing the result of the raycast. If the raycast hits the panel,
+        the <see cref = "P:GameUI.Device.Struct.RaycastHitWorldPosition.Position"/> property will contain the world position of the hit, and
+        <see cref = "P:GameUI.Device.Struct.RaycastHitWorldPosition.IsHit"/> will be <see langword="true"/>. Otherwise, <see cref = "P:GameUI.Device.Struct.RaycastHitWorldPosition.IsHit"/>
+        will be <see langword="false"/>.
+        </returns>
+        <example>
+        Example usage:
+        <code>
+        var viewport = new ScreenViewport();
+        var uiPosition = new UIPosition { Left = 100, Top = 200 };
+        var result = viewport.RaycastWorldPanel(uiPosition, WorldPanel.XY, 0);
+        if (result.IsHit)
+        {
+        Game.Logger.LogInformation("Hit at world position: {0}", result.Position);
+        }
+        else
+        {
+        Game.Logger.LogInformation("No hit detected.");
+        }
+        </code>
+        </example>
+        </member>
+        <member name="M:GameUI.Device.ScreenViewport.RaycastWorldPanelDP(System.Single,System.Single,GameUI.Device.Enum.WorldPanel,System.Single)">
+        <summary>
+        Performs a raycast on a specified world panel at given screen coordinates and a fixed axis value.
+        </summary>
+        <remarks>
+        This method directly operates on device-dependent coordinates to perform a raycast on the specified
+        world panel (XY, XZ, or YZ). The raycast determines whether the panel is hit and, if so, returns the world position
+        of the hit.
+        </remarks>
+        <param name = "x">The horizontal screen coordinate in device-dependent pixels.</param>
+        <param name = "y">The vertical screen coordinate in device-dependent pixels.</param>
+        <param name = "panel">The world panel to raycast against. This can be one of the following: XY, XZ, or YZ.</param>
+        <param name = "fixedAxisValue">
+        The fixed axis value to use for the raycast. For example, if the panel is XY, this value represents the Z-coordinate.
+        </param>
+        <returns>
+        A <see cref = "T:GameUI.Device.Struct.RaycastHitWorldPosition"/> object containing the result of the raycast. If the raycast hits the panel,
+        the <see cref = "P:GameUI.Device.Struct.RaycastHitWorldPosition.Position"/> property will contain the world position of the hit, and
+        <see cref = "P:GameUI.Device.Struct.RaycastHitWorldPosition.IsHit"/> will be <see langword="true"/>. Otherwise, <see cref = "P:GameUI.Device.Struct.RaycastHitWorldPosition.IsHit"/>
+        will be <see langword="false"/>.
+        </returns>
+        <example>
+        Example usage:
+        <code>
+        var viewport = new ScreenViewport();
+        var result = viewport.RaycastWorldPanelDP(150.0f, 300.0f, WorldPanel.XY, 0);
+        if (result.IsHit)
+        {
+        Game.Logger.LogInformation("Hit at world position: {0}", result.Position);
+        }
+        else
+        {
+        Game.Logger.LogInformation("No hit detected.");
+        }
+        </code>
+        </example>
+        </member>
+        <member name="M:GameUI.Device.ScreenViewport.RaycastWorldToUI(GameCore.SceneSystem.ScenePoint)">
+        <summary>
+        Converts a world position to a corresponding UI position and determines if the conversion is valid.
+        </summary>
+        <remarks>The method maps a 3D world position to a 2D screen position and then to a UI position.</remarks>
+        <param name = "scenePoint">The world position represented as a <see cref = "T:GameCore.SceneSystem.ScenePoint"/> to be converted to a UI
+        position.</param>
+        <returns>A <see cref = "T:GameUI.Device.Struct.RaycastHitUIPosition"/> object containing the converted UI position and a flag indicating whether
+        the conversion was successful. If the conversion is invalid, the returned <see cref = "T:GameUI.Device.Struct.RaycastHitUIPosition"/>
+        will have <see cref = "P:GameUI.Device.Struct.RaycastHitUIPosition.IsHit"/> set to <see langword="false"/>.</returns>
+        </member>
+        <member name="M:GameUI.Device.ScreenViewport.RaycastWorldToScreenDP(GameCore.SceneSystem.ScenePoint)">
+        <summary>
+        Converts a world position to a screen position in device dependent pixels.
+        </summary>
+        <remarks>The method returns <see langword="false"/> for <c>success</c> if the world position cannot be
+        mapped to a valid screen position.</remarks>
+        <param name = "scenePoint">The world position, represented as a <see cref = "T:GameCore.SceneSystem.ScenePoint"/>, to be converted to screen
+        coordinates.</param>
+        <returns>A tuple containing the result of the conversion: <list type="bullet"> <item> <term><c>success</c></term>
+        <description><see langword="true"/> if the conversion was successful; otherwise, <see
+        langword="false"/>.</description> </item> <item> <term><c>x</c></term> <description>The X-coordinate of the
+        screen position.</description> </item> <item>
+        <term><c>y</c></term> <description>The Y-coordinate of the screen position.</description> </item> </list></returns>
+        </member>
+        <member name="M:GameUI.Device.ScreenViewport.RaycastWorldSpace(GameCore.SceneSystem.ScenePoint,System.Numerics.Vector3,System.Single,GameUI.Device.Enum.RayCastMode)">
+        <summary>
+        Performs a raycast in world space from a specified origin point in a given direction and length.
+        </summary>
+        <remarks>
+        This method casts a ray in the world space starting from the specified origin point, extending in the given direction
+        for the specified length. It determines whether the ray intersects with any objects in the scene and, if so, provides
+        details about the hit, including the hit position and surface normal.
+        </remarks>
+        <param name = "origin">The starting point of the ray in world space, represented as a <see cref = "T:GameCore.SceneSystem.ScenePoint"/>.</param>
+        <param name = "direction">The direction of the ray, represented as a <see cref = "T:System.Numerics.Vector3"/>.</param>
+        <param name = "rayLength">The maximum length of the ray.</param>
+        <param name = "mode">
+        The mode of the raycast, determining the type of collision detection to use. The default is <see cref = "F:GameUI.Device.Enum.RayCastMode.AABB"/>.
+        </param>
+        <returns>
+        A <see cref = "T:GameUI.Device.Struct.RaycastHitWorld"/> object containing the result of the raycast. If the ray hits an object, the
+        <see cref = "P:GameUI.Device.Struct.RaycastHitWorld.IsHit"/> property will be <see langword="true"/>, and the <see cref = "P:GameUI.Device.Struct.RaycastHitWorld.Position"/>
+        and <see cref = "P:GameUI.Device.Struct.RaycastHitWorld.Normal"/> properties will contain the hit position and surface normal, respectively.
+        If no object is hit, <see cref = "P:GameUI.Device.Struct.RaycastHitWorld.IsHit"/> will be <see langword="false"/>.
+        </returns>
+        <example>
+        Example usage:
+        <code>
+        var viewport = new ScreenViewport();
+        var origin = new ScenePoint(0, 0, new Scene());
+        var direction = new System.Numerics.Vector3(1, 0, 0);
+        float rayLength = 100f;
+        var result = viewport.RaycastWorldSpace(origin, direction, rayLength);
+        if (result.IsHit)
+        {
+        Game.Logger.LogInformation("Hit at world position: {0}, Normal: {1}", result.Point, result.Normal);
+        }
+        else
+        {
+        Game.Logger.LogInformation("No hit detected.");
+        }
+        </code>
+        </example>
+        </member>
+        <member name="M:GameUI.Device.ScreenViewport.RaycastTerrain(GameUI.Struct.UIPosition)">
+        <summary>
+        Performs a raycast on the terrain at the specified UI position.
+        </summary>
+        <remarks>The input position is automatically adjusted for the device's pixel density using the device
+        pixel ratio.</remarks>
+        <param name = "position">The position on the UI, specified in logical pixels, where the raycast should be performed.</param>
+        <returns>A <see cref = "T:GameUI.Device.Struct.RaycastHitWorld"/> object containing the result of the raycast,  including information about the
+        hit location and any intersected terrain features.</returns>
+        </member>
+        <member name="M:GameUI.Device.ScreenViewport.RaycastTerrainOrWorldPanelXY(GameUI.Struct.UIPosition,System.Single)">
+        <summary>
+        Performs a raycast on the terrain or a world panel in the XY plane based on the specified UI position.
+        </summary>
+        <remarks>This method first attempts to perform a raycast against the terrain. If the terrain is hit,
+        the resulting position is returned. If the terrain is not hit, the method performs a raycast against the world
+        panel in the XY plane using the specified Z-axis value.</remarks>
+        <param name = "uiPosition">The UI position, in screen coordinates, used to determine the raycast origin.</param>
+        <param name = "zAxisValue">The Z-axis value to use when raycasting against the world panel. Defaults to <see langword="0f"/>.</param>
+        <returns>A <see cref = "T:GameUI.Device.Struct.RaycastHitWorldPosition"/> object containing the result of the raycast. If the raycast hits the
+        terrain, the result includes the hit position. Otherwise, the result of the world panel raycast is returned.
+        </returns>
+        </member>
+        <member name="M:GameUI.Device.ScreenViewport.RaycastTerrainDP(System.Single,System.Single)">
+        <summary>
+        Retrieves the screen point for raycasting to terrain.
+        </summary>
+        <param name = "x">The x coordinate for the raycast.</param>
+        <param name = "y">The y coordinate for the raycast.</param>
+        <returns>A RaycastHitTerrain object containing the hit information.</returns>
+        </member>
+        <member name="M:GameUI.Device.ScreenViewport.RaycastActor(GameUI.Struct.UIPosition,GameUI.Device.Enum.RayCastMode)">
+        <summary>
+        Retrieves actors at specified UIPosition using a raycast, optionally filtering results based on a
+        condition.
+        </summary>
+        <remarks>
+        <para>The <paramref name = "position"/> is automatically scaled by the device pixel ratio to ensure
+        accurate hit detection.</para>
+        <para><strong>⚠️ 射线检测模式选择重要提示：</strong></para>
+        <para>如果使用 <see cref = "F:GameUI.Device.Enum.RayCastMode.SimpleBoundingCylinder"/> 或其他需要特定包围盒数据的模式，
+        请确保目标游戏对象的模型数据中已配置相应的包围盒。如果没有配置，射线检测将会失败。</para>
+        <para><strong>配置位置：</strong>SimpleBoundingCylinder 数据需要在 <see cref = "!:GameDataModel.SimpleBoundingCylinder"/> 字段中配置。</para>
+        <para><strong>建议：</strong>对于大多数游戏项目，使用默认的 <see cref = "F:GameUI.Device.Enum.RayCastMode.AABB"/> 模式，
+        因为它具有最好的兼容性且不需要特殊的模型配置。</para>
+        </remarks>
+        <param name = "position">The UI position, in device-independent pixels (DIPs), to perform the raycast operation.</param>
+        <param name = "mode">The mode of the raycast operation, determining the type of bounding box used for hit detection.
+        The default is <see cref = "F:GameUI.Device.Enum.RayCastMode.AABB"/>, which provides the best compatibility for most game objects.</param>
+        <returns>An enumerable collection of <see cref = "T:GameCore.Interface.IActor"/> instances that are hit by the raycast at the specified position.
+        The collection will be empty if no actors are hit.</returns>
+        </member>
+        <member name="M:GameUI.Device.ScreenViewport.RaycastActorDP(System.Single,System.Single,GameUI.Device.Enum.RayCastMode)">
+        <summary>
+        Performs a raycast at specified screen coordinates and returns a collection of actors intersected by the ray, only works for model or particle actor that is not transient, and not destroyed or garbage collected. Entities and units are also included in the result.
+        </summary>
+        <remarks>
+        <para><strong>⚠️ 射线检测模式选择重要提示：</strong></para>
+        <para>某些射线检测模式（如 <see cref = "F:GameUI.Device.Enum.RayCastMode.SimpleBoundingCylinder"/>）需要游戏对象的模型数据中
+        预先配置相应的包围盒数据。如果模型没有配置这些数据，射线检测将会失败。</para>
+        <para><strong>配置位置：</strong>SimpleBoundingCylinder 数据需要在 <see cref = "!:GameDataModel.SimpleBoundingCylinder"/> 字段中配置。</para>
+        <para><strong>建议：</strong>对于大多数游戏项目，使用 <see cref = "F:GameUI.Device.Enum.RayCastMode.AABB"/> 模式
+        以获得最佳兼容性。</para>
+        </remarks>
+        <param name = "x">Specifies the horizontal device-dependent coordinate for the raycast.</param>
+        <param name = "y">Specifies the vertical device-dependent coordinate for the raycast.</param>
+        <param name = "mode">Determines the method used for collision detection during the raycast.
+        <see cref = "F:GameUI.Device.Enum.RayCastMode.AABB"/> is recommended for best compatibility.</param>
+        <returns>Yields a collection of actors that intersect with the raycast.</returns>
+        </member>
+        <member name="M:GameUI.Device.ScreenViewport.RaycastEntities(GameUI.Struct.UIPosition,System.Func{GameCore.EntitySystem.Entity,System.Boolean},GameUI.Device.Enum.RayCastMode)">
+        <summary>
+        Retrieves entities at specified UIPosition using a raycast, optionally filtering results based on a condition.
+        </summary>
+        <remarks>
+        <para><strong>⚠️ 重要注意事项：</strong></para>
+        <para>默认使用 <see cref = "F:GameUI.Device.Enum.RayCastMode.SimpleBoundingCylinder"/> 模式，但这需要实体/单位的模型数据中
+        预先配置 SimpleBoundingCylinder 数据。如果模型没有配置这些数据，射线检测将会失败！</para>
+        <para><strong>配置位置：</strong>SimpleBoundingCylinder 数据需要在 <see cref = "!:GameDataModel.SimpleBoundingCylinder"/> 字段中配置。</para>
+        <para><strong>建议：</strong>如果你的游戏项目中的单位模型没有配置 SimpleBoundingCylinder 数据，
+        请改用 <see cref = "F:GameUI.Device.Enum.RayCastMode.AABB"/> 模式以确保射线检测正常工作。</para>
+        </remarks>
+        <param name = "position">
+        Specifies the screen coordinates for the raycast, which are in device-independent pixels (DIPs).
+        </param>
+        <param name = "filter">
+        An optional function to determine which entities to include based on a condition.
+        </param>
+        <param name = "mode">Defines the method of raycasting to be used for detecting entities.
+        Note: The default <see cref = "F:GameUI.Device.Enum.RayCastMode.SimpleBoundingCylinder"/> requires model data configuration.
+        Consider using <see cref = "F:GameUI.Device.Enum.RayCastMode.AABB"/> for better compatibility.</param>
+        <returns>An enumerable collection of entities that meet the specified criteria.</returns>
+        </member>
+        <member name="M:GameUI.Device.ScreenViewport.RaycastEntitiesDP(System.Single,System.Single,System.Func{GameCore.EntitySystem.Entity,System.Boolean},GameUI.Device.Enum.RayCastMode)">
+        <summary>
+        Retrieves entities at specified screen coordinates using a raycast, optionally filtering results based on a
+        condition.
+        </summary>
+        <remarks>
+        <para><strong>⚠️ 重要注意事项：</strong></para>
+        <para>默认使用 <see cref = "F:GameUI.Device.Enum.RayCastMode.SimpleBoundingCylinder"/> 模式，但这需要实体/单位的模型数据中
+        预先配置 SimpleBoundingCylinder 数据。如果模型没有配置这些数据，射线检测将会失败！</para>
+        <para><strong>配置位置：</strong>SimpleBoundingCylinder 数据需要在 <see cref = "!:GameDataModel.SimpleBoundingCylinder"/> 字段中配置。</para>
+        <para><strong>建议：</strong>如果你的游戏项目中的单位模型没有配置 SimpleBoundingCylinder 数据，
+        请改用 <see cref = "F:GameUI.Device.Enum.RayCastMode.AABB"/> 模式以确保射线检测正常工作。</para>
+        </remarks>
+        <param name = "x">Specifies the horizontal device-dependent screen coordinate for the raycast.</param>
+        <param name = "y">Specifies the vertical device-dependent screen coordinate for the raycast.</param>
+        <param name = "filter">An optional function to determine which entities to include based on a condition.</param>
+        <param name = "mode">Defines the method of raycasting to be used for detecting entities.
+        Note: The default <see cref = "F:GameUI.Device.Enum.RayCastMode.SimpleBoundingCylinder"/> requires model data configuration.
+        Consider using <see cref = "F:GameUI.Device.Enum.RayCastMode.AABB"/> for better compatibility.</param>
+        <returns>An enumerable collection of entities that meet the specified criteria.</returns>
+        </member>
+        <member name="T:GameUI.Device.Struct.RaycastHitUIPosition">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="P:GameUI.Device.Struct.RaycastHitUIPosition.UIPosition">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="P:GameUI.Device.Struct.RaycastHitUIPosition.IsHit">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="T:GameUI.Device.Struct.RaycastHitWorld">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="P:GameUI.Device.Struct.RaycastHitWorld.Position">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="P:GameUI.Device.Struct.RaycastHitWorld.Normal">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="P:GameUI.Device.Struct.RaycastHitWorld.IsHit">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="T:GameUI.Device.Struct.RaycastHitWorldPosition">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="P:GameUI.Device.Struct.RaycastHitWorldPosition.Position">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="P:GameUI.Device.Struct.RaycastHitWorldPosition.IsHit">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="T:GameUI.TriggerEvent.EventGameInput">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="P:GameUI.TriggerEvent.EventGameInput.Modifiers">
+        <summary>
+        The virtual key modifiers, such as Shift, Ctrl, or Alt, that were pressed when the event occurred.
+        </summary>
+        </member>
+        <member name="P:GameUI.TriggerEvent.EventGameInput.PointerButtons">
+        <summary>
+        The pointer buttons that were pressed when the event occurred. For mouse events, this indicates which mouse buttons were pressed. For finger events, differentiate between fingers by using the touching ID.
+        </summary>
+        </member>
+        <member name="T:GameUI.TriggerEvent.EventGameKey">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="P:GameUI.TriggerEvent.EventGameKey.Key">
+        <summary>
+        The virtual key that triggered the event.
+        </summary>
+        </member>
+        <member name="T:GameUI.TriggerEvent.EventGameKeyDown">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="M:GameUI.TriggerEvent.EventGameKeyDown.#ctor">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="P:GameUI.TriggerEvent.EventGameKeyDown.IsRepeat">
+        <summary>
+        Indicates whether the event was triggered by a key long press.
+        </summary>
+        </member>
+        <member name="M:GameUI.TriggerEvent.EventGameKeyDown.#ctor(GameCore.Platform.SDL.VirtualKey,GameCore.Platform.Urho.VirtualKeyModifiers,GameCore.Platform.SDL.PointerButtons,System.Boolean)">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="T:GameUI.TriggerEvent.EventGameKeyUp">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="M:GameUI.TriggerEvent.EventGameKeyUp.#ctor">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="M:GameUI.TriggerEvent.EventGameKeyUp.#ctor(GameCore.Platform.SDL.VirtualKey,GameCore.Platform.Urho.VirtualKeyModifiers,GameCore.Platform.SDL.PointerButtons)">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="T:GameUI.TriggerEvent.EventGamePointerButton">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="P:GameUI.TriggerEvent.EventGamePointerButton.EventPointerButton">
+        <summary>
+        The pointer button that triggered the event.
+        </summary>
+        </member>
+        <member name="P:GameUI.TriggerEvent.EventGamePointerButton.PointerPosition">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="T:GameUI.TriggerEvent.EventGamePointerButtonDown">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="M:GameUI.TriggerEvent.EventGamePointerButtonDown.#ctor">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="M:GameUI.TriggerEvent.EventGamePointerButtonDown.#ctor(GameCore.Platform.SDL.PointerButtons,GameCore.Platform.Urho.VirtualKeyModifiers,GameCore.Platform.SDL.PointerButtons)">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="T:GameUI.TriggerEvent.EventGamePointerButtonUp">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="M:GameUI.TriggerEvent.EventGamePointerButtonUp.#ctor">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="M:GameUI.TriggerEvent.EventGamePointerButtonUp.#ctor(GameCore.Platform.SDL.PointerButtons,GameCore.Platform.Urho.VirtualKeyModifiers,GameCore.Platform.SDL.PointerButtons)">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="T:GameUI.TriggerEvent.EventGamePointerButtonMove">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="M:GameUI.TriggerEvent.EventGamePointerButtonMove.#ctor">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="M:GameUI.TriggerEvent.EventGamePointerButtonMove.#ctor(GameCore.Platform.SDL.PointerButtons,GameCore.Platform.Urho.VirtualKeyModifiers,GameCore.Platform.SDL.PointerButtons)">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="T:GameUI.TriggerEvent.EventGamePointerWheelChanged">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="M:GameUI.TriggerEvent.EventGamePointerWheelChanged.#ctor">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="P:GameUI.TriggerEvent.EventGamePointerWheelChanged.Amount">
+        <summary>
+        The changed amount of the wheel.
+        </summary>
+        </member>
+        <member name="M:GameUI.TriggerEvent.EventGamePointerWheelChanged.#ctor(System.Int32,GameCore.Platform.Urho.VirtualKeyModifiers,GameCore.Platform.SDL.PointerButtons)">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="T:GameUI.CameraSystem.Camera">
+        <summary>
+        表示游戏中的摄像机对象，支持跟随目标、切换视角、设置变换、震动等功能。
+        </summary>
+        </member>
+        <member name="M:GameUI.CameraSystem.Camera.#ctor">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="P:GameUI.CameraSystem.Camera.Link">
+        <summary>
+        获取摄像机的数据链接。
+        </summary>
+        </member>
+        <member name="P:GameUI.CameraSystem.Camera.Cache">
+        <summary>
+        获取摄像机的数据缓存。
+        </summary>
+        </member>
+        <member name="M:GameUI.CameraSystem.Camera.Switch(GameData.IGameLink{GameUI.CameraSystem.Data.GameDataCamera},System.TimeSpan)">
+        <summary>
+        切换摄像机到指定数据链接。
+        </summary>
+        <param name = "link">目标摄像机数据链接。</param>
+        <param name = "duration">切换动画时长。</param>
+        </member>
+        <member name="F:GameUI.CameraSystem.Camera.followTarget">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="P:GameUI.CameraSystem.Camera.FollowTarget">
+        <summary>
+        获取或设置摄像机的跟随目标。
+        </summary>
+        </member>
+        <member name="P:GameUI.CameraSystem.Camera.Transform">
+        <summary>
+        获取摄像机的变换信息（位置、旋转、焦距）。
+        </summary>
+        </member>
+        <member name="M:GameUI.CameraSystem.Camera.SetPosition(System.Numerics.Vector3,System.TimeSpan)">
+        <summary>
+        设置摄像机的位置。
+        </summary>
+        <param name = "position">目标位置。</param>
+        <param name = "transitionTime">过渡动画时长。</param>
+        </member>
+        <member name="M:GameUI.CameraSystem.Camera.SetRotation(GameCore.CameraSystem.Struct.CameraRotation,System.TimeSpan)">
+        <summary>
+        设置摄像机的旋转。
+        </summary>
+        <param name = "rotation">目标旋转。</param>
+        <param name = "transitionTime">过渡动画时长。</param>
+        </member>
+        <member name="M:GameUI.CameraSystem.Camera.SetFocalLength(System.Single,System.TimeSpan)">
+        <summary>
+        设置摄像机的焦距。
+        </summary>
+        <param name = "focalLength">目标焦距。</param>
+        <param name = "transitionTime">过渡动画时长。</param>
+        </member>
+        <member name="M:GameUI.CameraSystem.Camera.SetTransform(GameUI.CameraSystem.Struct.CameraTransform,System.TimeSpan)">
+        <summary>
+        设置摄像机的完整变换。
+        </summary>
+        <param name = "transform">目标变换。</param>
+        <param name = "transitionTime">过渡动画时长。</param>
+        </member>
+        <member name="P:GameUI.CameraSystem.Camera.Lock">
+        <summary>
+        获取或设置摄像机锁定状态。
+        </summary>
+        </member>
+        <member name="M:GameUI.CameraSystem.Camera.Shake(System.Single,System.TimeSpan,System.Single,GameUI.CameraSystem.Enum.CameraShakeDirection)">
+        <summary>
+        使摄像机产生震动效果。
+        </summary>
+        <param name = "intensity">震动强度。</param>
+        <param name = "duration">震动时长。</param>
+        <param name = "frequency">震动频率。</param>
+        <param name = "direction">震动方向。</param>
+        </member>
+        <member name="M:GameUI.CameraSystem.Camera.RotateAround(GameCore.SceneSystem.ScenePoint,GameCore.BaseType.Angle,System.TimeSpan)">
+        <summary>
+        使摄像机围绕指定点旋转。
+        </summary>
+        <param name = "point">旋转中心点。</param>
+        <param name = "rate">旋转速率。</param>
+        <param name = "duration">旋转时长。</param>
+        </member>
+        <member name="T:GameUI.CameraSystem.Struct.CameraTransform">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="P:GameUI.CameraSystem.Struct.CameraTransform.Position">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="P:GameUI.CameraSystem.Struct.CameraTransform.Rotation">
+        <summary>
+        Gets the rotation of the camera in 3D space. Euler angles in degrees.
+        </summary>
+        </member>
+        <member name="P:GameUI.CameraSystem.Struct.CameraTransform.FocalLength">
+        <summary>
+        
+        </summary>
+        </member>
+    </members>
+</doc>

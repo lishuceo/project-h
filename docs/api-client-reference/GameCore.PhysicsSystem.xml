@@ -1,0 +1,79 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<doc>
+    <assembly>
+        <name>GameCore</name>
+    </assembly>
+    <members>
+        <member name="T:GameCore.PhysicsSystem.Enum.CollisionType">
+            <summary>
+            物理碰撞类型
+            </summary>
+        </member>
+        <member name="T:GameCore.PhysicsSystem.Enum.CollisionEventMode">
+            <summary>
+            物理碰撞事件类型
+            </summary>
+        </member>
+        <member name="T:GameCore.PhysicsSystem.Struct.PhysicsAttributes">
+            <summary>
+            物理属性
+            </summary>
+        </member>
+        <member name="P:GameCore.PhysicsSystem.Struct.PhysicsAttributes.CollisionType">
+            <summary>
+            碰撞类型
+            </summary>
+        </member>
+        <member name="P:GameCore.PhysicsSystem.Struct.PhysicsAttributes.CollisionEventMode">
+            <summary>
+            碰撞事件类型
+            </summary>
+        </member>
+        <member name="P:GameCore.PhysicsSystem.Struct.PhysicsAttributes.CollisionLayer">
+            <summary>
+            碰撞层级
+            </summary>
+        </member>
+        <member name="P:GameCore.PhysicsSystem.Struct.PhysicsAttributes.Radius">
+            <summary>
+            碰撞半径
+            </summary>
+        </member>
+        <member name="P:GameCore.PhysicsSystem.Struct.PhysicsAttributes.Height">
+            <summary>
+            碰撞高度
+            </summary>
+        </member>
+        <member name="P:GameCore.PhysicsSystem.Struct.PhysicsAttributes.Position">
+            <summary>
+            碰撞基准位置
+            </summary>
+        </member>
+        <member name="P:GameCore.PhysicsSystem.Struct.PhysicsAttributes.InitVelocity">
+            <summary>
+            初始速度
+            </summary>
+        </member>
+        <member name="P:GameCore.PhysicsSystem.Struct.PhysicsAttributes.AngularFactor">
+            <summary>
+            角度旋转系数
+            如果不希望碰撞会影响物体自旋转，可以将这个值设置为Vector3.Zero
+            </summary>
+        </member>
+        <member name="P:GameCore.PhysicsSystem.Struct.PhysicsAttributes.Mass">
+            <summary>
+            惯性系数
+            </summary>
+        </member>
+        <member name="P:GameCore.PhysicsSystem.Struct.PhysicsAttributes.Damping">
+            <summary>
+            阻尼系数
+            </summary>
+        </member>
+        <member name="P:GameCore.PhysicsSystem.Struct.PhysicsAttributes.Friction">
+            <summary>
+            摩檫系数
+            </summary>
+        </member>
+    </members>
+</doc>

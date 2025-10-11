@@ -1,0 +1,511 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<doc>
+    <assembly>
+        <name>GameCore</name>
+    </assembly>
+    <members>
+        <member name="T:GameCore.Platform.SDL.PointerButtons">
+            <summary>
+            Defines pointer button flags for the SDL platform, supporting bitwise combinations for multi-button input.
+            </summary>
+            <remarks>
+            This enum represents mouse buttons and other pointer device buttons (such as touch screen) that can be pressed simultaneously.
+            Multiple buttons can be combined using bitwise operations to represent complex input states.
+            The buttons are numbered from 1 to 32, with additional special values for common operations.
+            </remarks>
+        </member>
+        <member name="F:GameCore.Platform.SDL.PointerButtons.None">
+            <summary>
+            No pointer buttons are pressed.
+            </summary>
+        </member>
+        <member name="F:GameCore.Platform.SDL.PointerButtons.Button1">
+            <summary>
+            Pointer button 1 (When using mouse, it's typically the left mouse button).
+            </summary>
+        </member>
+        <member name="F:GameCore.Platform.SDL.PointerButtons.Button2">
+            <summary>
+            Pointer button 2 (When using mouse, it's typically the middle mouse button or scroll wheel click).
+            </summary>
+        </member>
+        <member name="F:GameCore.Platform.SDL.PointerButtons.Button3">
+            <summary>
+            Pointer button 3 (When using mouse, it's typically the right mouse button).
+            </summary>
+        </member>
+        <member name="F:GameCore.Platform.SDL.PointerButtons.Button4">
+            <summary>
+            Pointer button 4.
+            </summary>
+        </member>
+        <member name="F:GameCore.Platform.SDL.PointerButtons.Button5">
+            <summary>
+            Pointer button 5.
+            </summary>
+        </member>
+        <member name="F:GameCore.Platform.SDL.PointerButtons.Button6">
+            <summary>
+            Pointer button 6.
+            </summary>
+        </member>
+        <member name="F:GameCore.Platform.SDL.PointerButtons.Button7">
+            <summary>
+            Pointer button 7.
+            </summary>
+        </member>
+        <member name="F:GameCore.Platform.SDL.PointerButtons.Button8">
+            <summary>
+            Pointer button 8.
+            </summary>
+        </member>
+        <member name="F:GameCore.Platform.SDL.PointerButtons.Button9">
+            <summary>
+            Pointer button 9.
+            </summary>
+        </member>
+        <member name="F:GameCore.Platform.SDL.PointerButtons.Button10">
+            <summary>
+            Pointer button 10.
+            </summary>
+        </member>
+        <member name="F:GameCore.Platform.SDL.PointerButtons.Button11">
+            <summary>
+            Pointer button 11.
+            </summary>
+        </member>
+        <member name="F:GameCore.Platform.SDL.PointerButtons.Button12">
+            <summary>
+            Pointer button 12.
+            </summary>
+        </member>
+        <member name="F:GameCore.Platform.SDL.PointerButtons.Button13">
+            <summary>
+            Pointer button 13.
+            </summary>
+        </member>
+        <member name="F:GameCore.Platform.SDL.PointerButtons.Button14">
+            <summary>
+            Pointer button 14.
+            </summary>
+        </member>
+        <member name="F:GameCore.Platform.SDL.PointerButtons.Button15">
+            <summary>
+            Pointer button 15.
+            </summary>
+        </member>
+        <member name="F:GameCore.Platform.SDL.PointerButtons.Button16">
+            <summary>
+            Pointer button 16.
+            </summary>
+        </member>
+        <member name="F:GameCore.Platform.SDL.PointerButtons.Button17">
+            <summary>
+            Pointer button 17.
+            </summary>
+        </member>
+        <member name="F:GameCore.Platform.SDL.PointerButtons.Button18">
+            <summary>
+            Pointer button 18.
+            </summary>
+        </member>
+        <member name="F:GameCore.Platform.SDL.PointerButtons.Button19">
+            <summary>
+            Pointer button 19.
+            </summary>
+        </member>
+        <member name="F:GameCore.Platform.SDL.PointerButtons.Button20">
+            <summary>
+            Pointer button 20.
+            </summary>
+        </member>
+        <member name="F:GameCore.Platform.SDL.PointerButtons.Button21">
+            <summary>
+            Pointer button 21.
+            </summary>
+        </member>
+        <member name="F:GameCore.Platform.SDL.PointerButtons.Button22">
+            <summary>
+            Pointer button 22.
+            </summary>
+        </member>
+        <member name="F:GameCore.Platform.SDL.PointerButtons.Button23">
+            <summary>
+            Pointer button 23.
+            </summary>
+        </member>
+        <member name="F:GameCore.Platform.SDL.PointerButtons.Button24">
+            <summary>
+            Pointer button 24.
+            </summary>
+        </member>
+        <member name="F:GameCore.Platform.SDL.PointerButtons.Button25">
+            <summary>
+            Pointer button 25.
+            </summary>
+        </member>
+        <member name="F:GameCore.Platform.SDL.PointerButtons.Button26">
+            <summary>
+            Pointer button 26.
+            </summary>
+        </member>
+        <member name="F:GameCore.Platform.SDL.PointerButtons.Button27">
+            <summary>
+            Pointer button 27.
+            </summary>
+        </member>
+        <member name="F:GameCore.Platform.SDL.PointerButtons.Button28">
+            <summary>
+            Pointer button 28.
+            </summary>
+        </member>
+        <member name="F:GameCore.Platform.SDL.PointerButtons.Button29">
+            <summary>
+            Pointer button 29.
+            </summary>
+        </member>
+        <member name="F:GameCore.Platform.SDL.PointerButtons.Button30">
+            <summary>
+            Pointer button 30.
+            </summary>
+        </member>
+        <member name="F:GameCore.Platform.SDL.PointerButtons.Button31">
+            <summary>
+            Pointer button 31.
+            </summary>
+        </member>
+        <member name="F:GameCore.Platform.SDL.PointerButtons.Button32">
+            <summary>
+            Pointer button 32.
+            </summary>
+        </member>
+        <member name="F:GameCore.Platform.SDL.PointerButtons.All">
+            <summary>
+            All pointer buttons are pressed (bitwise combination of all button flags).
+            </summary>
+        </member>
+        <member name="F:GameCore.Platform.SDL.VirtualKey.Exclaim">
+            <summary>
+            !
+            </summary>
+        </member>
+        <member name="F:GameCore.Platform.SDL.VirtualKey.QuoteDouble">
+            <summary>
+            "
+            </summary>
+        </member>
+        <member name="F:GameCore.Platform.SDL.VirtualKey.Hash">
+            <summary>
+            #
+            </summary>
+        </member>
+        <member name="F:GameCore.Platform.SDL.VirtualKey.Percent">
+            <summary>
+            %
+            </summary>
+        </member>
+        <member name="F:GameCore.Platform.SDL.VirtualKey.Dollar">
+            <summary>
+            $
+            </summary>
+        </member>
+        <member name="F:GameCore.Platform.SDL.VirtualKey.Quote">
+            <summary>
+            '
+            </summary>
+        </member>
+        <member name="F:GameCore.Platform.SDL.VirtualKey.LeftParenthesis">
+            <summary>
+            (
+            </summary>
+        </member>
+        <member name="F:GameCore.Platform.SDL.VirtualKey.RightParenthesis">
+            <summary>
+            )
+            </summary>
+        </member>
+        <member name="F:GameCore.Platform.SDL.VirtualKey.Asterisk">
+            <summary>
+            *
+            </summary>
+        </member>
+        <member name="F:GameCore.Platform.SDL.VirtualKey.Plus">
+            <summary>
+            +
+            </summary>
+        </member>
+        <member name="F:GameCore.Platform.SDL.VirtualKey.Comma">
+            <summary>
+            ,
+            </summary>
+        </member>
+        <member name="F:GameCore.Platform.SDL.VirtualKey.Minus">
+            <summary>
+            -
+            </summary>
+        </member>
+        <member name="F:GameCore.Platform.SDL.VirtualKey.Period">
+            <summary>
+            .
+            </summary>
+        </member>
+        <member name="F:GameCore.Platform.SDL.VirtualKey.Slash">
+            <summary>
+            /
+            </summary>
+        </member>
+        <member name="F:GameCore.Platform.SDL.VirtualKey.Colon">
+            <summary>
+            :
+            </summary>
+        </member>
+        <member name="F:GameCore.Platform.SDL.VirtualKey.Semicolon">
+            <summary>
+            ;
+            </summary>
+        </member>
+        <member name="F:GameCore.Platform.SDL.VirtualKey.Equals">
+            <summary>
+            =
+            </summary>
+        </member>
+        <member name="F:GameCore.Platform.SDL.VirtualKey.Greater">
+            <summary>
+            &gt;
+            </summary>
+        </member>
+        <member name="F:GameCore.Platform.SDL.VirtualKey.Question">
+            <summary>
+            ?
+            </summary>
+        </member>
+        <member name="F:GameCore.Platform.SDL.VirtualKey.At">
+            <summary>
+            @
+            </summary>
+        </member>
+        <member name="F:GameCore.Platform.SDL.VirtualKey.LeftBracket">
+            <summary>
+            [
+            </summary>
+        </member>
+        <member name="F:GameCore.Platform.SDL.VirtualKey.Backslash">
+            <summary>
+            \
+            </summary>
+        </member>
+        <member name="F:GameCore.Platform.SDL.VirtualKey.RightBracket">
+            <summary>
+            ]
+            </summary>
+        </member>
+        <member name="F:GameCore.Platform.SDL.VirtualKey.Caret">
+            <summary>
+            ^
+            </summary>
+        </member>
+        <member name="F:GameCore.Platform.SDL.VirtualKey.Underscore">
+            <summary>
+            _
+            </summary>
+        </member>
+        <member name="F:GameCore.Platform.SDL.VirtualKey.Backquote">
+            <summary>
+            `
+            </summary>
+        </member>
+        <member name="F:GameCore.Platform.SDL.VirtualKey.NumPadDivide">
+            <summary>
+            Num /
+            </summary>
+        </member>
+        <member name="F:GameCore.Platform.SDL.VirtualKey.NumPadMultiply">
+            <summary>
+            Num *
+            </summary>
+        </member>
+        <member name="F:GameCore.Platform.SDL.VirtualKey.NumPadMinus">
+            <summary>
+            Num -
+            </summary>
+        </member>
+        <member name="F:GameCore.Platform.SDL.VirtualKey.NumPadPlus">
+            <summary>
+            Num +
+            </summary>
+        </member>
+        <member name="F:GameCore.Platform.SDL.VirtualKey.NumPadEnter">
+            <summary>
+            Num Enter
+            </summary>
+        </member>
+        <member name="F:GameCore.Platform.SDL.VirtualKey.NumPadPeriod">
+            <summary>
+            Num .
+            </summary>
+        </member>
+        <member name="F:GameCore.Platform.SDL.VirtualKey.NumPadEquals">
+            <summary>
+            Num =
+            </summary>
+        </member>
+        <member name="F:GameCore.Platform.SDL.VirtualKey.NumPadComma">
+            <summary>
+            Num ,
+            </summary>
+        </member>
+        <member name="T:GameCore.Platform.SDL.VirtualKeyModifiers">
+            <summary>
+            Defines keyboard modifier key flags for the SDL platform, supporting bitwise combinations.
+            </summary>
+            <remarks>
+            This enum represents the various modifier keys that can be held down while pressing other keys,
+            such as Shift, Ctrl, Alt, and Windows keys. Multiple modifiers can be combined using bitwise operations.
+            The values correspond to SDL's native KMOD constants for cross-platform compatibility.
+            </remarks>
+        </member>
+        <member name="F:GameCore.Platform.SDL.VirtualKeyModifiers.None">
+            <summary>
+            No modifier keys are pressed.
+            </summary>
+        </member>
+        <member name="F:GameCore.Platform.SDL.VirtualKeyModifiers.LeftShift">
+            <summary>
+            The left Shift key is pressed.
+            </summary>
+        </member>
+        <member name="F:GameCore.Platform.SDL.VirtualKeyModifiers.RightShift">
+            <summary>
+            The right Shift key is pressed.
+            </summary>
+        </member>
+        <member name="F:GameCore.Platform.SDL.VirtualKeyModifiers.LeftCtrl">
+            <summary>
+            The left Ctrl key is pressed.
+            </summary>
+        </member>
+        <member name="F:GameCore.Platform.SDL.VirtualKeyModifiers.RightCtrl">
+            <summary>
+            The right Ctrl key is pressed.
+            </summary>
+        </member>
+        <member name="F:GameCore.Platform.SDL.VirtualKeyModifiers.LeftAlt">
+            <summary>
+            The left Alt key is pressed.
+            </summary>
+        </member>
+        <member name="F:GameCore.Platform.SDL.VirtualKeyModifiers.RightAlt">
+            <summary>
+            The right Alt key is pressed.
+            </summary>
+        </member>
+        <member name="F:GameCore.Platform.SDL.VirtualKeyModifiers.LeftWindows">
+            <summary>
+            The left Windows/GUI key is pressed.
+            </summary>
+        </member>
+        <member name="F:GameCore.Platform.SDL.VirtualKeyModifiers.RightWindows">
+            <summary>
+            The right Windows/GUI key is pressed.
+            </summary>
+        </member>
+        <member name="F:GameCore.Platform.SDL.VirtualKeyModifiers.NumberKeyLock">
+            <summary>
+            The Num Lock key is active.
+            </summary>
+        </member>
+        <member name="F:GameCore.Platform.SDL.VirtualKeyModifiers.CapitalLock">
+            <summary>
+            The Caps Lock key is active.
+            </summary>
+        </member>
+        <member name="F:GameCore.Platform.SDL.VirtualKeyModifiers.Mode">
+            <summary>
+            The AltGr/Mode key is pressed.
+            </summary>
+        </member>
+        <member name="F:GameCore.Platform.SDL.VirtualKeyModifiers.Scroll">
+            <summary>
+            The Scroll Lock key is active.
+            </summary>
+        </member>
+        <member name="F:GameCore.Platform.SDL.VirtualKeyModifiers.Ctrl">
+            <summary>
+            Either Ctrl key is pressed (combination of left and right Ctrl).
+            </summary>
+        </member>
+        <member name="F:GameCore.Platform.SDL.VirtualKeyModifiers.Shift">
+            <summary>
+            Either Shift key is pressed (combination of left and right Shift).
+            </summary>
+        </member>
+        <member name="F:GameCore.Platform.SDL.VirtualKeyModifiers.Alt">
+            <summary>
+            Either Alt key is pressed (combination of left and right Alt).
+            </summary>
+        </member>
+        <member name="F:GameCore.Platform.SDL.VirtualKeyModifiers.Windows">
+            <summary>
+            Either Windows/GUI key is pressed (combination of left and right Windows keys).
+            </summary>
+        </member>
+        <member name="T:GameCore.Platform.Urho.Variant">
+            <summary />
+        </member>
+        <member name="P:GameCore.Platform.Urho.Variant.Type">
+            <summary />
+        </member>
+        <member name="P:GameCore.Platform.Urho.Variant.Value">
+            <summary />
+        </member>
+        <member name="M:GameCore.Platform.Urho.Variant.ToString">
+            <summary />
+            <returns />
+        </member>
+        <member name="M:GameCore.Platform.Urho.Variant.#ctor(System.Int32)">
+            <summary />
+        </member>
+        <member name="M:GameCore.Platform.Urho.Variant.#ctor(System.Single)">
+            <summary />
+        </member>
+        <member name="M:GameCore.Platform.Urho.Variant.#ctor(System.String)">
+            <summary />
+        </member>
+        <member name="M:GameCore.Platform.Urho.Variant.#ctor(EngineCommon.UTF8String)">
+            <summary />
+        </member>
+        <member name="M:GameCore.Platform.Urho.Variant.#ctor(System.Boolean)">
+            <summary />
+        </member>
+        <member name="M:GameCore.Platform.Urho.Variant.#ctor(System.Int64)">
+            <summary />
+        </member>
+        <member name="M:GameCore.Platform.Urho.Variant.#ctor(System.Double)">
+            <summary />
+        </member>
+        <member name="M:GameCore.Platform.Urho.Variant.#ctor(System.Numerics.Vector2)">
+            <summary />
+        </member>
+        <member name="M:GameCore.Platform.Urho.Variant.#ctor(System.Numerics.Vector3)">
+            <summary />
+        </member>
+        <member name="M:GameCore.Platform.Urho.Variant.#ctor(System.Numerics.Vector4)">
+            <summary />
+        </member>
+        <member name="M:GameCore.Platform.Urho.Variant.#ctor(System.Numerics.Quaternion)">
+            <summary />
+        </member>
+        <member name="M:GameCore.Platform.Urho.Variant.#ctor(System.Drawing.Color)">
+            <summary />
+        </member>
+        <member name="M:GameCore.Platform.Urho.Variant.#ctor(System.Drawing.Rectangle)">
+            <summary />
+        </member>
+        <member name="M:GameCore.Platform.Urho.Variant.#ctor(System.Drawing.RectangleF)">
+            <summary />
+        </member>
+        <member name="M:GameCore.Platform.Urho.Variant.#ctor(System.Numerics.Matrix4x4)">
+            <summary />
+        </member>
+    </members>
+</doc>

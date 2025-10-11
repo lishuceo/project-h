@@ -1,0 +1,512 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<doc>
+    <assembly>
+        <name>GameCore</name>
+    </assembly>
+    <members>
+        <member name="T:GameCore.Container.Data.GameDataInventory">
+            <summary />
+        </member>
+        <member name="P:GameCore.Container.Data.GameDataInventory.Slots">
+            <summary />
+        </member>
+        <member name="P:GameCore.Container.Data.GameDataInventory.InventoryFlags">
+            <summary />
+        </member>
+        <member name="P:GameCore.Container.Data.GameDataInventory.SyncType">
+            <summary />
+        </member>
+        <member name="P:GameCore.Container.Data.GameDataInventory.GameCore#BaseInterface#IAttachedData#Categories">
+            <summary />
+        </member>
+        <member name="M:GameCore.Container.Data.GameDataInventory.CreateInventory(GameCore.EntitySystem.Unit)">
+            <summary />
+            <param name="unit" />
+            <returns />
+        </member>
+        <member name="M:GameCore.Container.Data.GameDataInventory.GameCore#BaseInterface#IAttachedData#Replicate(GameCore.BaseInterface.ICooldownHost,System.Nullable{System.Int32})">
+            <summary />
+            <param name="host" />
+            <param name="syncId" />
+            <returns />
+        </member>
+        <member name="T:GameCore.Container.Data.GameDataInventorySlot">
+            <summary />
+        </member>
+        <member name="P:GameCore.Container.Data.GameDataInventorySlot.Type">
+            <summary />
+        </member>
+        <member name="P:GameCore.Container.Data.GameDataInventorySlot.Required">
+            <summary />
+        </member>
+        <member name="P:GameCore.Container.Data.GameDataInventorySlot.Excluded">
+            <summary />
+        </member>
+        <member name="P:GameCore.Container.Data.GameDataInventorySlot.DisallowItemWithFailedRequirement">
+            <summary />
+        </member>
+        <member name="T:GameCore.Container.Data.Struct.IInventorySlotData">
+            <summary />
+        </member>
+        <member name="P:GameCore.Container.Data.Struct.IInventorySlotData.Type">
+            <summary />
+        </member>
+        <member name="P:GameCore.Container.Data.Struct.IInventorySlotData.Required">
+            <summary />
+        </member>
+        <member name="P:GameCore.Container.Data.Struct.IInventorySlotData.Excluded">
+            <summary />
+        </member>
+        <member name="P:GameCore.Container.Data.Struct.IInventorySlotData.DisallowItemWithFailedRequirement">
+            <summary />
+        </member>
+        <member name="T:GameCore.Container.Data.Struct.InventorySlotData">
+            <summary />
+        </member>
+        <member name="P:GameCore.Container.Data.Struct.InventorySlotData.Type">
+            <summary />
+        </member>
+        <member name="P:GameCore.Container.Data.Struct.InventorySlotData.Required">
+            <summary />
+        </member>
+        <member name="P:GameCore.Container.Data.Struct.InventorySlotData.Excluded">
+            <summary />
+        </member>
+        <member name="P:GameCore.Container.Data.Struct.InventorySlotData.DisallowItemWithFailedRequirement">
+            <summary />
+        </member>
+        <member name="T:GameCore.Container.Inventory">
+            <summary>
+            Represents an inventory container that manages a collection of item slots for storing and organizing items.
+            </summary>
+            <remarks>
+            The Inventory class provides a structured way to store, organize, and manipulate items within a game system.
+            It consists of a collection of slots, each capable of holding specific types of items based on configuration.
+            The inventory supports item absorption (stacking), assignment, and various operations for item management.
+            Each inventory is associated with a carrier unit and managed by an InventoryManager for lifecycle control.
+            The system handles item state management, ownership changes, and synchronization for multiplayer scenarios.
+            </remarks>
+            <summary />
+            <summary />
+            <summary />
+            <summary />
+        </member>
+        <member name="P:GameCore.Container.Inventory.Slots">
+            <summary>
+            Gets the collection of inventory slots that make up this inventory.
+            </summary>
+            <value>A list of inventory slots configured for this inventory.</value>
+            <remarks>
+            Each slot can hold one or more items (if stacking is supported) and has its own
+            configuration for item type restrictions and requirements.
+            </remarks>
+        </member>
+        <member name="P:GameCore.Container.Inventory.Manager">
+            <summary>
+            Gets the inventory manager that owns this inventory.
+            </summary>
+            <value>The manager responsible for this inventory's lifecycle and operations.</value>
+        </member>
+        <member name="P:GameCore.Container.Inventory.Carrier">
+            <summary>
+            Gets the unit that carries this inventory.
+            </summary>
+            <value>The unit that owns and carries this inventory.</value>
+            <remarks>
+            The carrier unit determines the context for item requirements, ownership changes,
+            and spatial operations like dropping items to the ground.
+            </remarks>
+        </member>
+        <member name="M:GameCore.Container.Inventory.Absorb(GameCore.ItemSystem.ItemPickable)">
+            <summary>
+            Attempts to absorb (stack) the specified item into existing items in this inventory.
+            </summary>
+            <param name="inItem">The item to absorb into existing stacks.</param>
+            <returns>The total amount of the item that was absorbed.</returns>
+            <remarks>
+            This method tries to merge the incoming item with existing items of the same type
+            in the inventory. It's particularly useful for stackable items like resources or consumables.
+            The method will distribute the item across multiple stacks if necessary and possible.
+            </remarks>
+        </member>
+        <member name="P:GameCore.Container.Inventory.Items">
+            <summary>
+            Gets all items currently stored in this inventory.
+            </summary>
+            <value>An enumerable collection of all non-null items in the inventory slots.</value>
+            <remarks>
+            This property provides a convenient way to iterate through all items without
+            having to check individual slots. Empty slots are automatically excluded.
+            </remarks>
+        </member>
+        <member name="M:GameCore.Container.Inventory.CanAssign(GameCore.ItemSystem.ItemPickable,GameCore.Container.ReasonItemAssign,GameCore.Container.InventorySlot)">
+            <summary>
+            Checks if the specified item can be assigned to any slot in this inventory.
+            </summary>
+            <param name="inItem">The item to test for assignment compatibility.</param>
+            <param name="reason">The reason for the assignment attempt.</param>
+            <param name="swapSource">The source slot for swap operations, if applicable.</param>
+            <returns>The first slot that can accept this item, or null if no suitable slot is found.</returns>
+            <remarks>
+            This method checks all slots in order to find the first one that can accept the item
+            based on the slot's restrictions, item requirements, and the assignment reason.
+            It's useful for previewing assignment operations before actually performing them.
+            </remarks>
+        </member>
+        <member name="M:GameCore.Container.Inventory.Assign(GameCore.ItemSystem.ItemPickable,GameCore.Container.ReasonItemAssign,GameCore.Container.InventorySlot)">
+            <summary>
+            Attempts to assign the specified item to the first available suitable slot in this inventory.
+            </summary>
+            <param name="inItem">The item to assign to this inventory.</param>
+            <param name="reason">The reason for the assignment.</param>
+            <param name="swapSource">The source slot for swap operations, if applicable.</param>
+            <returns>The slot where the item was assigned, or null if the assignment failed.</returns>
+            <remarks>
+            This method first checks if the item can be assigned using CanAssign, then performs
+            the actual assignment if a suitable slot is found. It provides a convenient way
+            to add items to the inventory without manually managing slot selection.
+            </remarks>
+        </member>
+        <member name="M:GameCore.Container.Inventory.Take(GameCore.ItemSystem.ItemPickable)">
+            <summary>
+            Attempts to take the specified item into this inventory, using absorption and assignment as needed.
+            </summary>
+            <param name="inItem">The item to take into this inventory.</param>
+            <returns>True if the item was successfully taken; otherwise, false.</returns>
+            <remarks>
+            This method first tries to absorb the item into existing stacks, then attempts to assign
+            it to an empty slot if absorption doesn't fully consume the item. It provides the most
+            convenient way to add items to an inventory with automatic handling of stacking behavior.
+            </remarks>
+        </member>
+        <member name="M:GameCore.Container.Inventory.ToString">
+            <summary>
+            Returns a string representation of this inventory including its type, name, ID, and slot/item counts.
+            </summary>
+            <returns>A formatted string describing this inventory.</returns>
+        </member>
+        <member name="P:GameCore.Container.Inventory.DebuggerDisplay">
+            <summary>
+            Gets the display string used by the debugger.
+            </summary>
+            <value>A string representation of this inventory for debugging purposes.</value>
+        </member>
+        <member name="P:GameCore.Container.Inventory.Host">
+            <summary />
+        </member>
+        <member name="P:GameCore.Container.Inventory.GameCore#BaseInterface#IAttachedObject#IsValid">
+            <summary />
+        </member>
+        <member name="P:GameCore.Container.Inventory.GameCore#BaseInterface#IAttachedObject#SyncId">
+            <summary />
+        </member>
+        <member name="M:GameCore.Container.Inventory.ReplicateFromKeyValue(System.Enum,System.ReadOnlySpan{System.Byte})">
+            <summary />
+            <param name="propertyEnum" />
+            <param name="value" />
+            <returns />
+        </member>
+        <member name="M:GameCore.Container.Inventory.DisposeManaged">
+            <summary />
+            <returns />
+        </member>
+        <member name="P:GameCore.Container.Inventory.Link">
+            <summary />
+        </member>
+        <member name="P:GameCore.Container.Inventory.Cache">
+            <summary />
+        </member>
+        <member name="P:GameCore.Container.Inventory.AllowDrop">
+            <summary />
+        </member>
+        <member name="P:GameCore.Container.Inventory.AllowUse">
+            <summary />
+        </member>
+        <member name="P:GameCore.Container.Inventory.HandlePickUpRequest">
+            <summary>
+            If true, the inventory will handle the pick up request.
+            Otherwise, only none-request pick up orders will be handled.
+            </summary>
+        </member>
+        <member name="M:GameCore.Container.Inventory.#ctor(GameCore.EntitySystem.Unit,GameData.IGameLink{GameCore.Container.Data.GameDataInventory})">
+            <summary />
+        </member>
+        <member name="P:GameCore.Container.Inventory.GameCore#BaseInterface#IPropertyOwner#PropertyHost">
+            <summary />
+        </member>
+        <member name="M:GameCore.Container.Inventory.GetProperty``1(GameCore.BaseType.PropertyAttachedObject)">
+            <summary />
+            <typeparam name="TValue" />
+            <param name="property" />
+            <returns />
+        </member>
+        <member name="T:GameCore.Container.InventoryManager">
+            <summary />
+            <summary />
+        </member>
+        <member name="M:GameCore.Container.InventoryManager.#ctor(GameCore.EntitySystem.Entity)">
+            <summary />
+        </member>
+        <member name="E:GameCore.Container.InventoryManager.InventoryAttached">
+            <summary>
+            当Inventory被添加到InventoryManager时触发
+            </summary>
+        </member>
+        <member name="E:GameCore.Container.InventoryManager.InventoryDetached">
+            <summary>
+            当单个Inventory从InventoryManager中移除时触发，但整个InventoryManager被销毁时不会触发
+            </summary>
+        </member>
+        <member name="M:GameCore.Container.InventoryManager.AddInventory(GameCore.Container.Inventory)">
+            <summary />
+            <param name="inventory" />
+            <returns />
+        </member>
+        <member name="P:GameCore.Container.InventoryManager.Inventories">
+            <summary />
+        </member>
+        <member name="M:GameCore.Container.InventoryManager.Absorb(GameCore.ItemSystem.ItemPickable)">
+            <summary />
+            <param name="inItem" />
+            <returns />
+        </member>
+        <member name="M:GameCore.Container.InventoryManager.CanAssign(GameCore.ItemSystem.ItemPickable,GameCore.Container.ReasonItemAssign,GameCore.Container.InventorySlot,System.Boolean)">
+            <summary />
+            <param name="inItem" />
+            <param name="reason" />
+            <param name="swapSource" />
+            <param name="isRequest" />
+            <returns />
+        </member>
+        <member name="M:GameCore.Container.InventoryManager.Assign(GameCore.ItemSystem.ItemPickable,GameCore.Container.ReasonItemAssign,GameCore.Container.InventorySlot,System.Boolean)">
+            <summary />
+            <param name="inItem" />
+            <param name="reason" />
+            <param name="swapSource" />
+            <param name="isRequest" />
+            <returns />
+        </member>
+        <member name="M:GameCore.Container.InventoryManager.Take(GameCore.ItemSystem.ItemPickable,System.Boolean)">
+            <summary />
+            <param name="inItem" />
+            <param name="isRequest" />
+            <returns />
+        </member>
+        <member name="F:GameCore.Container.InventoryManager.disposedValue">
+            <summary />
+        </member>
+        <member name="M:GameCore.Container.InventoryManager.Dispose(System.Boolean)">
+            <summary />
+            <param name="disposing" />
+            <returns />
+        </member>
+        <member name="M:GameCore.Container.InventoryManager.CreateInstance(GameCore.EntitySystem.Entity)">
+            <summary />
+            <param name="content" />
+            <returns />
+        </member>
+        <member name="M:GameCore.Container.InventoryManager.RemoveInventory(GameCore.Container.Inventory)">
+            <summary>
+            Cannot be called publicly, only used for internal destruction
+            </summary>
+            <param name="inventory" />
+        </member>
+        <member name="P:GameCore.Container.InventoryManager.PickUpRange">
+            <summary />
+        </member>
+        <member name="T:GameCore.Container.ComponentExtension">
+            <summary />
+        </member>
+        <member name="M:GameCore.Container.ComponentExtension.GetComponent``1(GameCore.EntitySystem.Unit)">
+            <summary />
+            <typeparam name="TComponent" />
+            <param name="entity" />
+            <returns />
+        </member>
+        <member name="M:GameCore.Container.ComponentExtension.GetOrCreateComponent``1(GameCore.EntitySystem.Unit)">
+            <summary />
+            <typeparam name="TComponent" />
+            <param name="entity" />
+            <returns />
+        </member>
+        <member name="T:GameCore.Container.InventorySlot">
+            <summary>
+            Represents a single slot within an inventory that can hold an item with specific restrictions and requirements.
+            </summary>
+            <remarks>
+            InventorySlot is the fundamental unit of item storage within an inventory system. Each slot can hold one item
+            (or a stack of identical items) and enforces specific rules about what types of items can be assigned to it.
+            Slots support item category filtering, requirement validation, and various assignment/drop operations.
+            The slot handles item state management, ownership changes, and synchronization when items are assigned or removed.
+            It integrates with the broader inventory system to provide flexible and controlled item management capabilities.
+            </remarks>
+            <summary />
+            <summary />
+        </member>
+        <member name="M:GameCore.Container.InventorySlot.#ctor(GameCore.Container.Inventory,GameCore.Container.Data.Struct.IInventorySlotData)">
+            <summary>
+            Represents a single slot within an inventory that can hold an item with specific restrictions and requirements.
+            </summary>
+            <remarks>
+            InventorySlot is the fundamental unit of item storage within an inventory system. Each slot can hold one item
+            (or a stack of identical items) and enforces specific rules about what types of items can be assigned to it.
+            Slots support item category filtering, requirement validation, and various assignment/drop operations.
+            The slot handles item state management, ownership changes, and synchronization when items are assigned or removed.
+            It integrates with the broader inventory system to provide flexible and controlled item management capabilities.
+            </remarks>
+        </member>
+        <member name="F:GameCore.Container.InventorySlot.InventoryItemStates">
+            <summary />
+        </member>
+        <member name="F:GameCore.Container.InventorySlot.slotId">
+            <summary />
+        </member>
+        <member name="P:GameCore.Container.InventorySlot.Inventory">
+            <summary>
+            Gets the inventory that contains this slot.
+            </summary>
+            <value>The parent inventory of this slot.</value>
+        </member>
+        <member name="P:GameCore.Container.InventorySlot.Item">
+            <summary>
+            Gets or sets the item currently stored in this slot.
+            </summary>
+            <value>The item in this slot, or null if the slot is empty.</value>
+            <remarks>
+            This property is managed internally by the slot assignment system and should not be
+            modified directly. Use the Assign and Drop methods to properly manage slot contents.
+            </remarks>
+        </member>
+        <member name="P:GameCore.Container.InventorySlot.Cache">
+            <summary>
+            Gets the configuration data that defines the restrictions and behavior of this slot.
+            </summary>
+            <value>The slot configuration data containing rules and requirements.</value>
+        </member>
+        <member name="M:GameCore.Container.InventorySlot.CanDrop(GameCore.Container.ReasonItemDrop,GameCore.Container.InventorySlot)">
+            <summary>
+            Determines whether an item can be dropped from this slot for the specified reason.
+            </summary>
+            <param name="reason">The reason for dropping the item.</param>
+            <param name="swapSource">The source slot for swap operations, if applicable.</param>
+            <returns>True if the item can be dropped; otherwise, false.</returns>
+            <remarks>
+            This method checks inventory drop permissions and swap compatibility to determine
+            if the drop operation is allowed. Different drop reasons have different requirements.
+            </remarks>
+        </member>
+        <member name="M:GameCore.Container.InventorySlot.Drop(GameCore.Container.ReasonItemDrop,GameCore.Container.InventorySlot)">
+            <summary>
+            Drops the item from this slot according to the specified reason and parameters.
+            </summary>
+            <param name="reason">The reason for dropping the item.</param>
+            <param name="swapSource">The source slot for swap operations, if applicable.</param>
+            <returns>True if the drop was successful; otherwise, false.</returns>
+            <remarks>
+            This method removes the item from the slot and handles the appropriate consequences
+            based on the drop reason, such as placing the item on the ground or preparing it for swapping.
+            </remarks>
+        </member>
+        <member name="P:GameCore.Container.InventorySlot.Carrier">
+            <summary>
+            Gets the unit that carries the inventory containing this slot.
+            </summary>
+            <value>The carrier unit of the parent inventory.</value>
+        </member>
+        <member name="M:GameCore.Container.InventorySlot.CanAssign(GameCore.ItemSystem.ItemPickable,GameCore.Container.ReasonItemAssign,GameCore.Container.InventorySlot)">
+            <summary>
+            Determines whether the specified item can be assigned to this slot.
+            </summary>
+            <param name="inItem">The item to test for assignment compatibility.</param>
+            <param name="reason">The reason for the assignment attempt.</param>
+            <param name="swapSource">The source slot for swap operations, if applicable.</param>
+            <returns>True if the item can be assigned to this slot; otherwise, false.</returns>
+            <remarks>
+            This method performs comprehensive validation including item validity, slot availability,
+            category restrictions, requirements checking, and swap compatibility. It's used to preview
+            assignment operations before actually performing them.
+            </remarks>
+        </member>
+        <member name="M:GameCore.Container.InventorySlot.Assign(GameCore.ItemSystem.ItemPickable,GameCore.Container.ReasonItemAssign,GameCore.Container.InventorySlot)">
+            <summary>
+            Assigns the specified item to this slot, handling swapping and state management as needed.
+            </summary>
+            <param name="inItem">The item to assign to this slot.</param>
+            <param name="reason">The reason for the assignment.</param>
+            <param name="swapSource">The source slot for swap operations, if applicable.</param>
+            <returns>True if the assignment was successful; otherwise, false.</returns>
+            <remarks>
+            This method performs the actual assignment operation after validation, handling item swapping,
+            inventory state application, and proper cleanup of source slots. It coordinates with the
+            broader inventory system to ensure consistent item management.
+            </remarks>
+        </member>
+        <member name="M:GameCore.Container.InventorySlot.Put(GameCore.ItemSystem.ItemPickable)">
+            <summary>
+            Attempts to put an item in this slot, using absorption or assignment as appropriate.
+            </summary>
+            <param name="inItem">The item to put in this slot.</param>
+            <returns>True if the item was successfully placed; otherwise, false.</returns>
+            <remarks>
+            This method first attempts to absorb the item into an existing stack if possible,
+            then falls back to assignment with swapping if absorption fails or is not applicable.
+            It provides a convenient high-level interface for item placement.
+            </remarks>
+        </member>
+        <member name="M:GameCore.Container.InventorySlot.Destroy">
+            <summary>
+            Destroys this inventory slot and releases its resources.
+            </summary>
+            <remarks>
+            This method is used internally for slot lifecycle management and should not be called directly.
+            </remarks>
+        </member>
+        <member name="P:GameCore.Container.InventorySlot.MeetRequirement">
+            <summary>
+            Gets a value indicating whether the item in this slot meets its requirements.
+            </summary>
+            <value>True if the slot contains an item that meets all requirements; otherwise, false.</value>
+            <remarks>
+            This property reflects whether the currently stored item satisfies all requirements
+            for proper functionality. Items that don't meet requirements may be disabled or restricted.
+            </remarks>
+        </member>
+        <member name="M:GameCore.Container.InventorySlot.ToString">
+            <summary>
+            Returns a string representation of this inventory slot including its configuration, index, and contained item.
+            </summary>
+            <returns>A formatted string describing this inventory slot.</returns>
+        </member>
+        <member name="P:GameCore.Container.InventorySlot.DebuggerDisplay">
+            <summary>
+            Gets the display string used by the debugger.
+            </summary>
+            <value>A string representation of this inventory slot for debugging purposes.</value>
+        </member>
+        <member name="P:GameCore.Container.InventorySlot.SlotIndex">
+            <summary>
+            Gets the index of this slot within its parent inventory.
+            </summary>
+            <value>The zero-based index of this slot in the inventory's slot collection.</value>
+            <remarks>
+            This property is calculated on first access and cached for efficiency. It's used for
+            slot identification and ordering within the inventory system.
+            </remarks>
+        </member>
+        <member name="F:GameCore.Container.InventorySlot.disposedValue">
+            <summary />
+        </member>
+        <member name="P:GameCore.Container.InventorySlot.IsValid">
+            <summary />
+        </member>
+        <member name="M:GameCore.Container.InventorySlot.Dispose(System.Boolean)">
+            <summary />
+            <param name="disposing" />
+            <returns />
+        </member>
+        <member name="M:GameCore.Container.InventorySlot.System#IDisposable#Dispose">
+            <summary />
+            <returns />
+        </member>
+    </members>
+</doc>

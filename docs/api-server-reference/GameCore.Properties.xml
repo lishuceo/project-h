@@ -1,0 +1,63 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<doc>
+    <assembly>
+        <name>GameCore</name>
+    </assembly>
+    <members>
+        <member name="T:GameCore.Properties.EditorRuntime">
+            <summary>
+              A strongly-typed resource class, for looking up localized strings, etc.
+            </summary>
+        </member>
+        <member name="F:GameCore.Properties.EditorRuntime.resourceMan">
+            <summary />
+        </member>
+        <member name="F:GameCore.Properties.EditorRuntime.resourceCulture">
+            <summary />
+        </member>
+        <member name="M:GameCore.Properties.EditorRuntime.#ctor">
+            <summary />
+        </member>
+        <member name="P:GameCore.Properties.EditorRuntime.ResourceManager">
+            <summary>
+              Returns the cached ResourceManager instance used by this class.
+            </summary>
+        </member>
+        <member name="P:GameCore.Properties.EditorRuntime.Culture">
+            <summary>
+              Overrides the current thread's CurrentUICulture property for all
+              resource lookups using this strongly typed resource class.
+            </summary>
+        </member>
+        <member name="P:GameCore.Properties.EditorRuntime.GameDataInvalidUnitType">
+            <summary>
+              Looks up a localized string similar to Unit type is not specified correctly.
+            </summary>
+        </member>
+        <member name="T:GameCore.Properties.Resources">
+            <summary>
+              A strongly-typed resource class, for looking up localized strings, etc.
+            </summary>
+        </member>
+        <member name="F:GameCore.Properties.Resources.resourceMan">
+            <summary />
+        </member>
+        <member name="F:GameCore.Properties.Resources.resourceCulture">
+            <summary />
+        </member>
+        <member name="M:GameCore.Properties.Resources.#ctor">
+            <summary />
+        </member>
+        <member name="P:GameCore.Properties.Resources.ResourceManager">
+            <summary>
+              Returns the cached ResourceManager instance used by this class.
+            </summary>
+        </member>
+        <member name="P:GameCore.Properties.Resources.Culture">
+            <summary>
+              Overrides the current thread's CurrentUICulture property for all
+              resource lookups using this strongly typed resource class.
+            </summary>
+        </member>
+    </members>
+</doc>

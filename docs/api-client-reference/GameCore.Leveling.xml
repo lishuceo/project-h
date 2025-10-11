@@ -1,0 +1,236 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<doc>
+    <assembly>
+        <name>GameCore</name>
+    </assembly>
+    <members>
+        <member name="T:GameCore.Leveling.Data.GameDataRuleExperienceGrant">
+            <summary>
+            Defines the rules and configuration for distributing experience points when a unit is killed.
+            This includes how experience is granted, the radius for distribution, filtering and validation of candidates,
+            and whether to fallback to global distribution if no valid candidates are found within the radius.
+            </summary>
+        </member>
+        <member name="P:GameCore.Leveling.Data.GameDataRuleExperienceGrant.ExperienceGrant">
+            <summary>
+            Delegate that calculates the experience points awarded when a unit is killed.
+            </summary>
+        </member>
+        <member name="P:GameCore.Leveling.Data.GameDataRuleExperienceGrant.ExperienceDistributionRadius">
+            <summary>
+            The radius within which experience is distributed to eligible units.
+            </summary>
+        </member>
+        <member name="P:GameCore.Leveling.Data.GameDataRuleExperienceGrant.ExperienceDistributionFilter">
+            <summary>
+            The filter used to determine which units within the radius are eligible to receive experience, the compare source is the killed unit. Combined with the validator.
+            </summary>
+            <remarks>
+            Only units that have leveling enabled will be considered for experience distribution.
+            </remarks>
+        </member>
+        <member name="P:GameCore.Leveling.Data.GameDataRuleExperienceGrant.ExperienceDistributionValidator">
+            <summary>
+            Delegate that validates whether a candidate unit is eligible to receive experience. Combined with the filter,
+            </summary>
+        </member>
+        <member name="P:GameCore.Leveling.Data.GameDataRuleExperienceGrant.AllowGlobalExperienceDistributionFallback">
+            <summary>
+            Indicates whether to fall back to global experience distribution if no valid candidates are found within the radius and the killer is not a valid candidate.
+            </summary>
+        </member>
+        <member name="M:GameCore.Leveling.Data.GameDataRuleExperienceGrant.IsValidDistributionCandidate(GameCore.EntitySystem.Unit,GameCore.EntitySystem.Unit,GameCore.Interface.IExecutionContext)">
+            <summary>
+             Determines whether the specified candidate unit is eligible to receive experience distribution  based on the
+             given killed unit and execution context.
+             </summary>
+            <remarks>A candidate unit is considered valid for experience distribution if it passes the experience 
+             distribution filter, has leveling capabilities, and satisfies any additional validation logic  provided by the
+             <c>ExperienceDistributionValidator</c>, if defined.</remarks>
+            <param name="killedUnit">The unit that was killed, which serves as the source of experience distribution.</param>
+            <param name="candidate">The unit being evaluated for eligibility to receive experience distribution.</param>
+            <param name="killingContext">The execution context in which the killing occurred, providing additional  information for validation.</param>
+            <returns>
+                <see langword="true" /> if the candidate unit is eligible to receive experience distribution;  otherwise, <see langword="false" />.</returns>
+        </member>
+        <member name="M:GameCore.Leveling.Data.GameDataRuleExperienceGrant.MorphValidDistributionCandidate(GameCore.EntitySystem.Unit,GameCore.EntitySystem.Entity,GameCore.Interface.IExecutionContext)">
+            <summary />
+            <param name="killedUnit" />
+            <param name="candidate" />
+            <param name="killingContext" />
+            <returns />
+        </member>
+        <member name="T:GameCore.Leveling.Data.GameDataUnitLeveling">
+            <summary />
+            <summary />
+        </member>
+        <member name="P:GameCore.Leveling.Data.GameDataUnitLeveling.ExperienceKillerFraction">
+            <summary>
+            Gets or sets the fraction of experience points awarded to the unit if the unit is the one that
+            dealt the killing blow.
+            </summary>
+        </member>
+        <member name="P:GameCore.Leveling.Data.GameDataUnitLeveling.ExperienceRequiredForEachLevel">
+            <summary>
+            Gets or sets the list of experience points required to reach each level n from level n-1.
+            </summary>
+        </member>
+        <member name="P:GameCore.Leveling.Data.GameDataUnitLeveling.ExtraLevelExperienceRequiredLevelFactor">
+            <summary>
+            If the targeting level is higher than the level specified in <see cref="P:GameCore.Leveling.Data.GameDataUnitLeveling.ExperienceRequiredForEachLevel" />, this value and <see cref="P:GameCore.Leveling.Data.GameDataUnitLeveling.ExtraLevelExperienceRequiredBonusPerLevel" /> will be used to calculate the experience required for level n from n-1. The formula is: RequiredExperience = ExtraLevelExperienceRequiredLevelFactor * level + ExtraLevelExperienceRequiredBonusPerLevel
+            </summary>
+        </member>
+        <member name="P:GameCore.Leveling.Data.GameDataUnitLeveling.ExtraLevelExperienceRequiredBonusPerLevel">
+            <summary>
+            If the targeting level is higher than the level specified in <see cref="P:GameCore.Leveling.Data.GameDataUnitLeveling.ExperienceRequiredForEachLevel" />, this value and <see cref="P:GameCore.Leveling.Data.GameDataUnitLeveling.ExtraLevelExperienceRequiredLevelFactor" /> will be used to calculate the experience required for level n from n-1. The formula is: RequiredExperience = ExtraLevelExperienceRequiredLevelFactor * level + ExtraLevelExperienceRequiredBonusPerLevel
+            </summary>
+        </member>
+        <member name="P:GameCore.Leveling.Data.GameDataUnitLeveling.MaxLevelLeech">
+            <summary>
+            Specifies if the entity can still be distributed experience even if it is at the maximum level. This is useful for entities that have a maximum level but can still gain experience for other purposes, such as item upgrades or other rewards. If this is set to false, the entity will not receive experience if it is at the maximum level, and other candidates will receive more experience as fewer candidates are available.
+            </summary>
+        </member>
+        <member name="M:GameCore.Leveling.Data.GameDataUnitLeveling.ExperienceRequiredForLevel(System.UInt32)">
+            <summary>
+            Returns the experience required to reach the specified level from the previous level.
+            For levels within ExperienceRequiredForEachLevel, returns the corresponding value.
+            For higher levels, uses the formula:
+              RequiredExperience = ExtraLevelExperienceRequiredLevelFactor * level + ExtraLevelExperienceRequiredBonusPerLevel
+            </summary>
+            <param name="level">The target level.</param>
+            <returns>Experience required to reach the specified level from the previous level.</returns>
+        </member>
+        <member name="M:GameCore.Leveling.Data.GameDataUnitLeveling.TotalExperienceRequiredForLevel(System.UInt32)">
+            <summary>
+            Returns the total cumulative experience required to reach the specified level from level 0.
+            Sums up the experience required for each level up to the specified level.
+            </summary>
+            <param name="level">The target level.</param>
+            <returns>Total experience required to reach the specified level from level 0.</returns>
+        </member>
+        <member name="M:GameCore.Leveling.Data.GameDataUnitLeveling.CreateUnitLeveling(GameCore.EntitySystem.Unit)">
+            <summary />
+            <param name="unit" />
+            <returns />
+        </member>
+        <member name="P:GameCore.Leveling.Data.GameDataUnitLeveling.Modifications">
+            <summary />
+        </member>
+        <member name="P:GameCore.Leveling.Data.GameDataUnitLeveling.AddStates">
+            <summary />
+        </member>
+        <member name="P:GameCore.Leveling.Data.GameDataUnitLeveling.RemoveStates">
+            <summary />
+        </member>
+        <member name="P:GameCore.Leveling.Data.GameDataUnitLeveling.ImmuneStates">
+            <summary />
+        </member>
+        <member name="T:GameCore.Leveling.Data.Struct.ExperienceDistributionValidator">
+            <summary>
+            Represents a method that validates whether a candidate unit is eligible to receive experience points.
+            </summary>
+            <param name="candidate">
+            The unit being considered for experience distribution. This is typically a unit that may receive experience.
+            </param>
+            <param name="killContext">
+            The execution context providing additional information relevant to the validation, such as the killer and victim.
+            </param>
+            <returns>
+            A <see cref="T:GameCore.BaseType.CmdResult" /> indicating whether the candidate is eligible to receive experience.
+            If returns <see cref="F:GameCore.BaseType.CmdResult.Ok" />, the candidate can receive experience; otherwise, the candidate is excluded.
+            </returns>
+        </member>
+        <member name="T:GameCore.Leveling.Data.Struct.UnitKilledExperience">
+            <summary>
+            Represents a method that calculates the experience points awarded when a unit is killed.
+            </summary>
+            <param name="deathType">
+            The type of death that occurred, which may influence the experience calculation.
+            Normally, only <see cref="F:GameCore.BaseType.DeathType.Normal" /> will grant experience points.
+            </param>
+            <param name="context">The execution context providing additional information or state relevant to the calculation, such as the killer and victim.
+            </param>
+            <returns>
+            The amount of experience points awarded as a <see langword="double" />. If the experience is not applicable or cannot be calculated, <see langword="null" /> is returned.
+            </returns>
+        </member>
+        <member name="T:GameCore.Leveling.UnitLeveling">
+            <summary>
+            Provides leveling logic for a unit, including experience tracking, level calculation, and property/state modifications.
+            Handles level up/down, experience to next level, and applies modifications as the unit's level changes.
+            </summary>
+            <summary />
+            <summary />
+            <summary />
+        </member>
+        <member name="P:GameCore.Leveling.UnitLeveling.UnitPropertyComplex">
+            <summary>
+            Gets the <see cref="P:GameCore.Leveling.UnitLeveling.UnitPropertyComplex" /> component used for property calculations.
+            </summary>
+        </member>
+        <member name="P:GameCore.Leveling.UnitLeveling.Unit">
+            <summary>
+            Gets the unit associated with this leveling logic.
+            </summary>
+        </member>
+        <member name="P:GameCore.Leveling.UnitLeveling.Level">
+            <summary>
+            Gets the current level of the unit.
+            </summary>
+        </member>
+        <member name="P:GameCore.Leveling.UnitLeveling.ExperienceToNextLevel">
+            <summary>
+            Gets the experience required to reach the next level, or <c>null</c> if at max level.
+            </summary>
+        </member>
+        <member name="P:GameCore.Leveling.UnitLeveling.Experience">
+            <summary>
+            Gets the current experience points of the unit.
+            Setting this property will recalculate the level and update the experience property accordingly.
+            </summary>
+        </member>
+        <member name="P:GameCore.Leveling.UnitLeveling.LevelMax">
+            <summary>
+            Gets the maximum level the unit can reach, or <c>null</c> if not set, this is determined by the <see cref="F:GameCore.ScopeData.UnitProperty.LevelMax" /> property in the <see cref="P:GameCore.Leveling.UnitLeveling.UnitPropertyComplex" /> component.
+            </summary>
+        </member>
+        <member name="P:GameCore.Leveling.UnitLeveling.IsMaxLevel">
+            <summary>
+            Gets a value indicating whether the unit is at the maximum level.
+            </summary>
+        </member>
+        <member name="P:GameCore.Leveling.UnitLeveling.ExperienceKillerFraction">
+            <summary>
+            Gets or sets the fraction of experience points awarded to the unit if the unit is the one that
+            dealt the killing blow.
+            </summary>
+        </member>
+        <member name="M:GameCore.Leveling.UnitLeveling.#ctor(GameCore.EntitySystem.Unit,GameData.IGameLink{GameCore.Leveling.Data.GameDataUnitLeveling})">
+            <summary />
+        </member>
+        <member name="M:GameCore.Leveling.UnitLeveling.DisposeManaged">
+            <summary />
+            <returns />
+        </member>
+        <member name="P:GameCore.Leveling.UnitLeveling.Link">
+            <summary />
+        </member>
+        <member name="P:GameCore.Leveling.UnitLeveling.Cache">
+            <summary />
+        </member>
+        <member name="T:GameCore.Leveling.UnitLevelingExtension">
+            <summary />
+        </member>
+        <member name="M:GameCore.Leveling.UnitLevelingExtension.GetComponent``1(GameCore.EntitySystem.Entity)">
+            <summary />
+            <typeparam name="TComponent" />
+            <param name="entity" />
+            <returns />
+        </member>
+        <member name="M:GameCore.Leveling.UnitLevelingExtension.HasLeveling(GameCore.EntitySystem.Entity)">
+            <summary />
+            <param name="unit" />
+            <returns />
+        </member>
+    </members>
+</doc>

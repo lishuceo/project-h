@@ -1,0 +1,1530 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>GameUI</name>
+    </assembly>
+    <members>
+        <member name="M:GameUI.Control.Struct.ApplyControlTemplateEventArgs.#ctor(GameUI.Control.Control,GameData.IGameData{GameUI.Control.Data.GameDataControl})">
+        <summary>
+        Provides data for events related to applying a control template.
+        </summary>
+        </member>
+        <member name="M:GameUI.Control.Struct.ApplyControlTemplatePhaseEventArgs.#ctor(GameUI.Control.Control,GameData.IGameData{GameUI.Control.Data.GameDataControl},System.Int32)">
+        <summary>
+        Provides data for events related to applying a control template at a specific phase.
+        </summary>
+        </member>
+        <member name="M:GameUI.Control.Control.#ctor(GameData.IGameLink{GameUI.Control.Data.GameDataControl},ClientCaller.SCEImportGUI.ControlType)">
+        <summary>
+        Initializes a new instance of the <see cref = "T:GameUI.Control.Control"/> class with the specified game data link and control type.
+        This constructor creates a control based on the provided game data link and control type, applying any template data associated with the link. It also handles the creation of child controls defined in the game data link.
+        </summary>
+        <remarks>
+        This constructor is typically used when creating controls that are defined in the game data, allowing for dynamic UI generation based on the game's configuration.
+        </remarks>
+        <param name = "link">The template data link for this control.</param>
+        <param name = "type">The type of control to create.</param>
+        </member>
+        <member name="M:GameUI.Control.Control.ApplyTemplate(GameData.IGameLink{GameUI.Control.Data.GameDataControl})">
+        <summary>
+        Applies a template to this control using a game data link. Unlike the constructor, this method
+        allows for applying templates after the control has been created, but it will not create child
+        controls.
+        </summary>
+        <param name = "template">The template to apply.</param>
+        </member>
+        <member name="M:GameUI.Control.Control.ApplyTemplate(GameUI.Control.Data.GameDataControl)">
+        <summary>
+        Applies a template to this control using a game data control instance. This method allows for
+        applying templates after the control has been created, but it will not create child controls.
+        This is useful for updating the control's properties without recreating it.
+        </summary>
+        <param name = "template">The template to apply.</param>
+        </member>
+        <member name="M:GameUI.Control.Control.GenerateChild(System.Object,GameUI.Control.Data.GameDataControl,System.Boolean)">
+        <summary>
+        根据数据项和模板生成子控件。
+        </summary>
+        <param name = "item">数据项。</param>
+        <param name = "template">模板。</param>
+        <param name = "addToParent">是否自动添加到父控件。</param>
+        <returns>生成的子控件。</returns>
+        </member>
+        <member name="M:GameUI.Control.Primitive.Button.#ctor(GameData.IGameLink{GameUI.Control.Data.GameDataControlButton})">
+        <summary>
+        使用指定模板链接初始化按钮实例。
+        </summary>
+        <param name = "link">按钮模板数据链接。</param>
+        </member>
+        <member name="M:GameUI.Control.Primitive.Canvas.#ctor(GameData.IGameLink{GameUI.Control.Data.GameDataControlCanvas})">
+        <summary>
+        使用指定的游戏链接初始化Canvas实例
+        </summary>
+        <param name = "link">指向GameDataControlCanvas数据的游戏链接</param>
+        <remarks>
+        此构造函数将创建一个与指定数据链接绑定的Canvas控件，
+        控件类型设置为SCEImportGUI.ControlType.Canvas
+        </remarks>
+        </member>
+        <member name="M:GameUI.Control.Primitive.Input.#ctor(GameData.IGameLink{GameUI.Control.Data.GameDataControlInput})">
+        <summary>
+        使用指定模板链接初始化输入框实例。
+        </summary>
+        <param name = "link">输入框模板数据链接。</param>
+        </member>
+        <member name="M:GameUI.Control.Primitive.Label.#ctor(GameData.IGameLink{GameUI.Control.Data.GameDataControlLabel})">
+        <summary>
+        使用指定模板链接初始化标签实例。
+        </summary>
+        <param name = "link">标签模板数据链接。</param>
+        </member>
+        <member name="M:GameUI.Control.Primitive.Panel.#ctor(GameData.IGameLink{GameUI.Control.Data.GameDataControlPanel})">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="M:GameUI.Control.Primitive.Panel.#ctor(GameData.IGameLink{GameUI.Control.Data.GameDataControlPanel},ClientCaller.SCEImportGUI.ControlType)">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="M:GameUI.Control.Primitive.PanelScrollable.#ctor(GameData.IGameLink{GameUI.Control.Data.GameDataControlPanel})">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="M:GameUI.Control.Primitive.Particle.#ctor(GameData.IGameLink{GameUI.Control.Data.GameDataControlParticle})">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="M:GameUI.Control.Primitive.Progress.#ctor(GameData.IGameLink{GameUI.Control.Data.GameDataControlProgress})">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="M:GameUI.Control.Primitive.Spine.#ctor(GameData.IGameLink{GameUI.Control.Data.GameDataControlSpine})">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="M:GameUI.Control.Primitive.Sprites.#ctor(GameData.IGameLink{GameUI.Control.Data.GameDataControlSprites})">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="M:GameUI.Control.Primitive.VirtualizingPanel.#ctor(GameData.IGameLink{GameUI.Control.Data.GameDataControlVirtualizingPanel})">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="T:GameUI.Control.Data.Enum.EasingType">
+        <summary>
+        缓动函数类型枚举
+        </summary>
+        </member>
+        <member name="F:GameUI.Control.Data.Enum.EasingType.None">
+        <summary>
+        无缓动函数，使用线性插值
+        </summary>
+        </member>
+        <member name="F:GameUI.Control.Data.Enum.EasingType.Quadratic">
+        <summary>
+        二次方缓动函数
+        </summary>
+        </member>
+        <member name="F:GameUI.Control.Data.Enum.EasingType.Cubic">
+        <summary>
+        三次方缓动函数
+        </summary>
+        </member>
+        <member name="F:GameUI.Control.Data.Enum.EasingType.Sine">
+        <summary>
+        正弦缓动函数
+        </summary>
+        </member>
+        <member name="F:GameUI.Control.Data.Enum.EasingType.Bounce">
+        <summary>
+        弹跳缓动函数
+        </summary>
+        </member>
+        <member name="T:GameUI.Control.Data.GameDataControl">
+        <summary>
+        UI 控件的数据模板基类，用于在游戏数据层定义控件的属性和行为。
+        该类是数据驱动 UI 系统的核心，允许通过配置数据动态生成和更新 UI 控件。
+        </summary>
+        <remarks>
+        GameDataControl 采用可空属性设计，只有非空值才会在 ApplyTo 时应用到控件上，
+        这样可以实现部分更新和模板继承。所有具体的控件数据类（如 GameDataControlButton、
+        GameDataControlLabel 等）都继承自此类。
+        </remarks>
+        </member>
+        <member name="P:GameUI.Control.Data.GameDataControl.Layout">
+        <summary>
+        控件的布局配置，包含位置、大小、对齐方式等布局相关属性。
+        当设置时，会批量应用所有非空的布局属性到目标控件。
+        </summary>
+        </member>
+        <member name="P:GameUI.Control.Data.GameDataControl.Event">
+        <summary>
+        控件的事件处理器配置，定义了控件响应的各种用户交互事件。
+        包括鼠标点击、双击、进入、离开、拖放等事件的处理函数。
+        </summary>
+        </member>
+        <member name="P:GameUI.Control.Data.GameDataControl.IsStatic">
+        <summary>
+        指定控件是否为静态控件。静态控件不接收交互事件，但不影响其子控件的事件处理。
+        通常用于纯展示的背景元素或布局容器。
+        </summary>
+        </member>
+        <member name="P:GameUI.Control.Data.GameDataControl.Disabled">
+        <summary>
+        控件的禁用状态。禁用的控件及其所有子控件都不能接收用户输入。
+        通常会配合视觉样式变化（如变灰）来提示用户。
+        </summary>
+        </member>
+        <member name="P:GameUI.Control.Data.GameDataControl.KeyboardAccelerators">
+        <summary>
+        Gets or sets the collection of keyboard accelerators associated with the control.
+        </summary>
+        </member>
+        <member name="P:GameUI.Control.Data.GameDataControl.Behaviors">
+        <summary>
+        控件的行为配置列表，用于动态添加交互行为
+        </summary>
+        <remarks>
+        行为包括触摸交互等效果。
+        每个行为都可以独立配置参数，如动画时长、缩放比例等。
+        </remarks>
+        </member>
+        <member name="P:GameUI.Control.Data.GameDataControl.RoutedEvents">
+        <summary>
+        控件的事件路由配置，决定哪些事件会被控件消费，哪些会继续向父控件冒泡。
+        用于实现复杂的事件传播逻辑，比如按钮的点击事件是否会冒泡到父控件。
+        这个属性也影响到全局鼠标事件。如果控件吞噬了鼠标事件，则全局鼠标事件不会触发。
+        </summary>
+        </member>
+        <member name="P:GameUI.Control.Data.GameDataControl.Visible">
+        <summary>
+        控件的可见性。不可见的控件及其子控件不会被渲染和参与布局计算。
+        与 Opacity 为 0 不同，不可见的控件完全不占用空间。
+        </summary>
+        </member>
+        <member name="P:GameUI.Control.Data.GameDataControl.AllowDrag">
+        <summary>
+        是否允许该控件被拖拽。启用后，用户可以通过鼠标或触摸拖动该控件。
+        需要配合拖拽事件处理来实现完整的拖拽功能。
+        </summary>
+        </member>
+        <member name="P:GameUI.Control.Data.GameDataControl.AllowDrop">
+        <summary>
+        是否允许其他控件拖放到该控件上。启用后，该控件可以作为拖放操作的目标。
+        通常用于实现物品栏、装备槽等功能。
+        </summary>
+        </member>
+        <member name="P:GameUI.Control.Data.GameDataControl.ZIndex">
+        <summary>
+        控件在同级兄弟控件中的 Z 轴排序顺序。数值越大，控件越靠前显示。
+        用于控制重叠控件的显示层级，如弹出菜单、提示框等。
+        </summary>
+        </member>
+        <member name="P:GameUI.Control.Data.GameDataControl.Background">
+        <summary>
+        控件的背景画刷，可以是纯色或渐变色。
+        支持 SolidColorBrush、LinearGradientBrush 等多种画刷类型。
+        </summary>
+        </member>
+        <member name="P:GameUI.Control.Data.GameDataControl.Desaturated">
+        <summary>
+        是否对控件进行去色（灰度）处理。通常用于表示禁用状态或特殊的视觉效果。
+        去色会将控件的所有颜色转换为灰度显示。
+        </summary>
+        </member>
+        <member name="P:GameUI.Control.Data.GameDataControl.CornerRadius">
+        <summary>
+        控件的圆角半径（像素）。设置后，控件的四个角会变为圆角。
+        常用于按钮、面板等控件的美化。值为 0 表示直角。
+        </summary>
+        </member>
+        <member name="P:GameUI.Control.Data.GameDataControl.Image">
+        <summary>
+        控件的主图像资源路径。支持各种图片格式，路径相对于游戏资源目录。
+        图像会根据控件大小和 SlicedEdges 设置进行缩放或九宫格拉伸。
+        </summary>
+        </member>
+        <member name="P:GameUI.Control.Data.GameDataControl.ImageMask">
+        <summary>
+        控件的遮罩图像资源路径。遮罩图像的 Alpha 通道将用于裁剪主图像。
+        常用于实现特殊形状的控件或图像效果。
+        </summary>
+        </member>
+        <member name="P:GameUI.Control.Data.GameDataControl.ImageBlurLevel">
+        <summary>
+        图像的模糊等级（0-10）。0 表示不模糊，数值越大模糊程度越高。
+        常用于背景虚化效果或创建毛玻璃效果。
+        </summary>
+        </member>
+        <member name="P:GameUI.Control.Data.GameDataControl.ImageFlipX">
+        <summary>
+        是否水平翻转图像。启用后，图像会沿垂直轴镜像翻转。
+        常用于创建对称的 UI 元素或调整图像方向。
+        </summary>
+        </member>
+        <member name="P:GameUI.Control.Data.GameDataControl.ImageFlipY">
+        <summary>
+        是否垂直翻转图像。启用后，图像会沿水平轴镜像翻转。
+        可与 ImageFlipX 组合使用实现 180 度旋转效果。
+        </summary>
+        </member>
+        <member name="P:GameUI.Control.Data.GameDataControl.SlicedEdges">
+        <summary>
+        九宫格切片的边距设置。定义图像哪些部分在缩放时保持原始大小（边角），
+        哪些部分可以拉伸（边缘和中心）。用于制作可缩放的 UI 元素如按钮、面板边框。
+        </summary>
+        </member>
+        <member name="P:GameUI.Control.Data.GameDataControl.Opacity">
+        <summary>
+        控件的不透明度（0.0-1.0）。0 表示完全透明，1 表示完全不透明。
+        会影响控件及其所有子控件的透明度，可用于淡入淡出效果。
+        </summary>
+        </member>
+        <member name="P:GameUI.Control.Data.GameDataControl.Rotation">
+        <summary>
+        控件的旋转角度（度）。正值表示顺时针旋转，负值表示逆时针旋转。
+        旋转中心为控件的中心点，会影响控件的布局边界。
+        </summary>
+        </member>
+        <member name="P:GameUI.Control.Data.GameDataControl.Scale">
+        <summary>
+        控件的缩放比例。X 和 Y 可以独立设置，实现非等比缩放。
+        值为 1.0 表示原始大小，大于 1.0 表示放大，小于 1.0 表示缩小。
+        </summary>
+        </member>
+        <member name="P:GameUI.Control.Data.GameDataControl.ClipContent">
+        <summary>
+        是否裁剪超出控件边界的内容。启用后，子控件超出父控件边界的部分将被裁剪。
+        常用于滚动面板、列表框等需要限制内容显示区域的控件。
+        </summary>
+        </member>
+        <member name="P:GameUI.Control.Data.GameDataControl.ItemTemplate">
+        <summary>
+        数据绑定的项模板。当控件设置了 ItemsSource 后，会使用此模板为每个数据项
+        生成对应的子控件。用于实现列表、网格等数据驱动的 UI。
+        </summary>
+        </member>
+        <member name="P:GameUI.Control.Data.GameDataControl.ItemTemplateSelector">
+        <summary>
+        项模板选择器函数。根据不同的数据项返回不同的模板，实现异构列表。
+        比如聊天列表中系统消息和玩家消息使用不同的显示模板。
+        </summary>
+        </member>
+        <member name="P:GameUI.Control.Data.GameDataControl.OnPostInitialization">
+        <summary>
+        控件初始化完成后的回调函数。在控件创建并应用模板后异步调用。
+        用于执行需要控件完全初始化后才能进行的操作，如动画播放、数据加载等。
+        </summary>
+        </member>
+        <member name="P:GameUI.Control.Data.GameDataControl.OnVirtualizationPhase">
+        <summary>
+        虚拟化回调函数列表。当控件在虚拟化面板中被重用时调用。
+        用于更新控件状态、重新绑定数据等，确保回收的控件正确显示新内容。
+        </summary>
+        </member>
+        <member name="M:GameUI.Control.Data.GameDataControl.ApplyTo(GameUI.Control.Control)">
+        <summary>
+        将模板的所有非空属性应用到指定的控件实例。
+        这是模板系统的核心方法，实现了数据到 UI 的映射。
+        </summary>
+        <param name = "control">要应用模板的目标控件。</param>
+        <remarks>
+        该方法只会应用非空属性，这样可以实现：
+        1. 部分更新 - 只修改需要改变的属性
+        2. 模板继承 - 子模板可以选择性覆盖父模板的属性
+        3. 增量配置 - 可以多次调用来逐步配置控件
+        </remarks>
+        </member>
+        <member name="M:GameUI.Control.Data.GameDataControl.OverrideByOrientationApply(GameUI.Control.Control)">
+        <summary>
+        根据当前设备的屏幕方向应用相应的覆盖模板。
+        支持响应式 UI 设计，为不同屏幕方向提供优化的布局。
+        </summary>
+        <param name = "control">要应用方向覆盖的控件。</param>
+        <remarks>
+        如果当前方向有对应的覆盖模板，会在基础模板之上再应用覆盖模板的属性。
+        同时会注册方向变化事件，以便在设备旋转时自动更新布局。
+        </remarks>
+        </member>
+        <member name="P:GameUI.Control.Data.GameDataControl.Children">
+        <summary>
+        子控件定义列表。仅在控件初始构造时使用，用于定义控件的静态子控件树。
+        后续对此属性的修改不会影响已创建的控件实例。
+        </summary>
+        <remarks>
+        与 ItemTemplate 不同，Children 定义的是静态的、预定义的子控件，
+        而 ItemTemplate 用于动态生成数据绑定的子控件。
+        </remarks>
+        </member>
+        <member name="P:GameUI.Control.Data.GameDataControl.OverrideByTheme">
+        <summary>
+        基于主题的模板覆盖字典。为不同的 UI 主题提供不同的视觉样式。
+        键为主题枚举，值为该主题下的覆盖模板。
+        </summary>
+        <remarks>
+        当前版本暂未启用，预留给未来的主题系统使用。
+        </remarks>
+        </member>
+        <member name="P:GameUI.Control.Data.GameDataControl.OverrideByOrientation">
+        <summary>
+        基于屏幕方向的模板覆盖字典。为横屏、竖屏等不同方向提供优化的布局。
+        实现响应式 UI，自动适配不同的设备方向。
+        </summary>
+        <remarks>
+        覆盖模板会在基础模板之上应用，只需定义需要改变的属性。
+        支持横屏(Landscape)、竖屏(Portrait)等多种方向。
+        </remarks>
+        </member>
+        <member name="M:GameUI.Control.Data.GameDataControl.CreateControl">
+        <summary>
+        创建该模板对应的控件实例。由具体的控件数据类实现。
+        这是工厂方法模式的应用，每种控件类型都知道如何创建自己。
+        </summary>
+        <returns>新创建的控件实例，其类型与数据模板类型对应。</returns>
+        <remarks>
+        例如：GameDataControlButton.CreateControl() 返回 Button 实例，
+        GameDataControlLabel.CreateControl() 返回 Label 实例。
+        </remarks>
+        </member>
+        <member name="T:GameUI.Control.Data.GameDataControlBehavior">
+        <summary>
+        控件行为配置基类，用于在GameDataControl中配置控件行为
+        </summary>
+        <remarks>
+        该基类定义了行为配置的通用属性，具体的行为配置类继承此类。
+        支持通过游戏数据配置来动态添加控件行为。
+        </remarks>
+        </member>
+        <member name="P:GameUI.Control.Data.GameDataControlBehavior.Enabled">
+        <summary>
+        是否启用该行为，默认为 true
+        </summary>
+        </member>
+        <member name="M:GameUI.Control.Data.GameDataControlBehavior.CreateBehavior">
+        <summary>
+        创建行为实例
+        </summary>
+        <returns>创建的行为实例</returns>
+        </member>
+        <member name="T:GameUI.Control.Data.GameDataControlBehaviorTouch">
+        <summary>
+        触摸行为配置，包含按下动画和长按检测功能
+        </summary>
+        <remarks>
+        配置触摸行为的参数，如缩放比例、透明度、动画时长、长按触发时长等
+        </remarks>
+        
+        </member>
+        <member name="P:GameUI.Control.Data.GameDataControlBehaviorTouch.PressedScale">
+        <summary>
+        按下时的缩放因子，默认为0.8
+        </summary>
+        </member>
+        <member name="P:GameUI.Control.Data.GameDataControlBehaviorTouch.PressedOpacity">
+        <summary>
+        按下时的透明度因子，默认为0.9
+        </summary>
+        </member>
+        <member name="P:GameUI.Control.Data.GameDataControlBehaviorTouch.PressAnimationDuration">
+        <summary>
+        按下动画时长，默认为250毫秒
+        </summary>
+        </member>
+        <member name="P:GameUI.Control.Data.GameDataControlBehaviorTouch.PressAnimationEasingType">
+        <summary>
+        按下动画的缓动函数类型，默认为None（线性插值）
+        </summary>
+        </member>
+        <member name="P:GameUI.Control.Data.GameDataControlBehaviorTouch.PressAnimationEasingMode">
+        <summary>
+        按下动画的缓动模式，默认为EaseOut
+        </summary>
+        </member>
+        <member name="P:GameUI.Control.Data.GameDataControlBehaviorTouch.LongPressDuration">
+        <summary>
+        长按触发时长，默认为500毫秒
+        </summary>
+        </member>
+        <member name="P:GameUI.Control.Data.GameDataControlBehaviorTouch.EnablePressAnimation">
+        <summary>
+        是否启用按下动画，默认为true
+        </summary>
+        </member>
+        <member name="P:GameUI.Control.Data.GameDataControlBehaviorTouch.EnableLongPress">
+        <summary>
+        是否启用长按检测，默认为true
+        </summary>
+        </member>
+        <member name="M:GameUI.Control.Data.GameDataControlBehaviorTouch.CreateBehavior">
+        <summary>
+        创建行为实例
+        </summary>
+        <returns>创建的行为实例</returns>
+        </member>
+        <member name="T:GameUI.Control.Data.GameDataControlButton">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="P:GameUI.Control.Data.GameDataControlButton.ImageHover">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="P:GameUI.Control.Data.GameDataControlButton.ImagePressed">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="M:GameUI.Control.Data.GameDataControlButton.ApplyTo(GameUI.Control.Control)">
+        <summary>
+        
+        </summary>
+        <param name="control"></param>
+        <returns></returns>
+        </member>
+        <member name="M:GameUI.Control.Data.GameDataControlButton.CreateControl">
+        <summary>
+        
+        </summary>
+        <returns></returns>
+        </member>
+        <member name="M:GameUI.Control.Data.GameDataControlButton.CreateButton">
+        <summary>
+        
+        </summary>
+        <returns></returns>
+        </member>
+        <member name="T:GameUI.Control.Data.GameDataControlCanvas">
+        <summary>
+        Canvas控件的游戏数据类
+        </summary>
+        <remarks>
+        <para>此类继承自GameDataControl，专门用于Canvas控件的数据管理和控件创建。</para>
+        <para>它作为Canvas控件与游戏数据系统之间的桥梁，负责：</para>
+        <list type="bullet">
+        <item><description>Canvas控件实例的创建和初始化</description></item>
+        <item><description>Canvas相关游戏数据的存储和管理</description></item>
+        <item><description>与游戏数据链接系统的集成</description></item>
+        </list>
+        </remarks>
+        </member>
+        <member name="P:GameUI.Control.Data.GameDataControlCanvas.DefaultPathWinding">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="P:GameUI.Control.Data.GameDataControlCanvas.FillPaint">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="P:GameUI.Control.Data.GameDataControlCanvas.StrokePaint">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="P:GameUI.Control.Data.GameDataControlCanvas.StrokeSize">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="M:GameUI.Control.Data.GameDataControlCanvas.ApplyTo(GameUI.Control.Control)">
+        <summary>
+        
+        </summary>
+        <param name="control"></param>
+        <returns></returns>
+        </member>
+        <member name="M:GameUI.Control.Data.GameDataControlCanvas.CreateControl">
+        <summary>
+        创建Canvas控件实例
+        </summary>
+        <returns>基于当前数据链接创建的Canvas控件实例</returns>
+        <remarks>
+        <para>此方法重写基类的CreateControl方法，返回Canvas类型的具体实例。</para>
+        <para>创建的控件会自动绑定到当前的数据链接(Link)。</para>
+        </remarks>
+        <example>
+        <code>
+        var canvasData = new GameDataControlCanvas();
+        var canvas = canvasData.CreateControl() as Canvas;
+        // 或者直接使用
+        var canvas = canvasData.CreateCanvas();
+        </code>
+        </example>
+        </member>
+        <member name="M:GameUI.Control.Data.GameDataControlCanvas.CreateCanvas">
+        <summary>
+        创建Canvas控件的强类型版本
+        </summary>
+        <returns>基于当前数据链接创建的Canvas控件实例</returns>
+        <remarks>
+        <para>此方法提供了创建Canvas控件的强类型接口，避免了类型转换的需要。</para>
+        <para>功能上等同于CreateControl()方法，但返回类型直接是Canvas而不是Control。</para>
+        </remarks>
+        <example>
+        <code>
+        var canvasData = new GameDataControlCanvas();
+        var canvas = canvasData.CreateCanvas();
+        
+        // 可以直接使用Canvas的特定方法
+        canvas.DrawCircle(50, 50, 25);
+        canvas.FillColor = Color.Red;
+        </code>
+        </example>
+        </member>
+        <member name="T:GameUI.Control.Data.GameDataControlInput">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="P:GameUI.Control.Data.GameDataControlInput.InputEvents">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="P:GameUI.Control.Data.GameDataControlInput.Text">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="P:GameUI.Control.Data.GameDataControlInput.Font">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="P:GameUI.Control.Data.GameDataControlInput.FontSize">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="P:GameUI.Control.Data.GameDataControlInput.TextColor">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="M:GameUI.Control.Data.GameDataControlInput.ApplyTo(GameUI.Control.Control)">
+        <summary>
+        
+        </summary>
+        <param name="control"></param>
+        <returns></returns>
+        </member>
+        <member name="M:GameUI.Control.Data.GameDataControlInput.CreateControl">
+        <summary>
+        
+        </summary>
+        <returns></returns>
+        </member>
+        <member name="M:GameUI.Control.Data.GameDataControlInput.CreateInput">
+        <summary>
+        
+        </summary>
+        <returns></returns>
+        </member>
+        <member name="T:GameUI.Control.Data.GameDataControlJoystickDynamic">
+        <summary>
+        动态游戏摇杆控件的数据模板类
+        </summary>
+        </member>
+        <member name="P:GameUI.Control.Data.GameDataControlJoystickDynamic.Radius">
+        <summary>
+        摇杆操作半径（像素）
+        </summary>
+        </member>
+        <member name="P:GameUI.Control.Data.GameDataControlJoystickDynamic.KnobSize">
+        <summary>
+        摇杆头的大小（像素）
+        </summary>
+        </member>
+        <member name="P:GameUI.Control.Data.GameDataControlJoystickDynamic.IsEnabled">
+        <summary>
+        是否启用摇杆功能
+        </summary>
+        </member>
+        <member name="P:GameUI.Control.Data.GameDataControlJoystickDynamic.FollowSensitivity">
+        <summary>
+        中心点跟随的敏感度（0-1），越大跟随越快
+        </summary>
+        </member>
+        <member name="P:GameUI.Control.Data.GameDataControlJoystickDynamic.JoystickBackground">
+        <summary>
+        摇杆背景颜色
+        </summary>
+        </member>
+        <member name="P:GameUI.Control.Data.GameDataControlJoystickDynamic.KnobBackground">
+        <summary>
+        摇杆头颜色
+        </summary>
+        </member>
+        <member name="P:GameUI.Control.Data.GameDataControlJoystickDynamic.JoystickBackgroundImage">
+        <summary>
+        摇杆背景图像
+        </summary>
+        </member>
+        <member name="P:GameUI.Control.Data.GameDataControlJoystickDynamic.KnobImage">
+        <summary>
+        摇杆头图像
+        </summary>
+        </member>
+        <member name="P:GameUI.Control.Data.GameDataControlJoystickDynamic.ActivationAreaBackground">
+        <summary>
+        激活区域背景颜色（用于调试）
+        </summary>
+        </member>
+        <member name="M:GameUI.Control.Data.GameDataControlJoystickDynamic.ApplyTo(GameUI.Control.Control)">
+        <summary>
+        
+        </summary>
+        <param name="control"></param>
+        <returns></returns>
+        </member>
+        <member name="M:GameUI.Control.Data.GameDataControlJoystickDynamic.CreateControl">
+        <summary>
+        
+        </summary>
+        <returns></returns>
+        </member>
+        <member name="M:GameUI.Control.Data.GameDataControlJoystickDynamic.CreateJoystickDynamic">
+        <summary>
+        
+        </summary>
+        <returns></returns>
+        </member>
+        <member name="T:GameUI.Control.Data.GameDataControlJoystickFloat">
+        <summary>
+        浮动游戏摇杆控件的数据模板类
+        </summary>
+        </member>
+        <member name="P:GameUI.Control.Data.GameDataControlJoystickFloat.Radius">
+        <summary>
+        摇杆操作半径（像素）
+        </summary>
+        </member>
+        <member name="P:GameUI.Control.Data.GameDataControlJoystickFloat.KnobSize">
+        <summary>
+        摇杆头的大小（像素）
+        </summary>
+        </member>
+        <member name="P:GameUI.Control.Data.GameDataControlJoystickFloat.IsEnabled">
+        <summary>
+        是否启用摇杆功能
+        </summary>
+        </member>
+        <member name="P:GameUI.Control.Data.GameDataControlJoystickFloat.JoystickBackground">
+        <summary>
+        摇杆背景颜色
+        </summary>
+        </member>
+        <member name="P:GameUI.Control.Data.GameDataControlJoystickFloat.KnobBackground">
+        <summary>
+        摇杆头颜色
+        </summary>
+        </member>
+        <member name="P:GameUI.Control.Data.GameDataControlJoystickFloat.JoystickBackgroundImage">
+        <summary>
+        摇杆背景图像
+        </summary>
+        </member>
+        <member name="P:GameUI.Control.Data.GameDataControlJoystickFloat.KnobImage">
+        <summary>
+        摇杆头图像
+        </summary>
+        </member>
+        <member name="P:GameUI.Control.Data.GameDataControlJoystickFloat.ActivationAreaBackground">
+        <summary>
+        激活区域背景颜色（用于调试）
+        </summary>
+        </member>
+        <member name="M:GameUI.Control.Data.GameDataControlJoystickFloat.ApplyTo(GameUI.Control.Control)">
+        <summary>
+        
+        </summary>
+        <param name="control"></param>
+        <returns></returns>
+        </member>
+        <member name="M:GameUI.Control.Data.GameDataControlJoystickFloat.CreateControl">
+        <summary>
+        
+        </summary>
+        <returns></returns>
+        </member>
+        <member name="M:GameUI.Control.Data.GameDataControlJoystickFloat.CreateJoystickFloat">
+        <summary>
+        
+        </summary>
+        <returns></returns>
+        </member>
+        <member name="T:GameUI.Control.Data.GameDataControlJoystickNormal">
+        <summary>
+        普通游戏摇杆控件的数据模板类
+        </summary>
+        </member>
+        <member name="P:GameUI.Control.Data.GameDataControlJoystickNormal.Radius">
+        <summary>
+        摇杆操作半径（像素）
+        </summary>
+        </member>
+        <member name="P:GameUI.Control.Data.GameDataControlJoystickNormal.KnobSize">
+        <summary>
+        摇杆头的大小（像素）
+        </summary>
+        </member>
+        <member name="P:GameUI.Control.Data.GameDataControlJoystickNormal.IsEnabled">
+        <summary>
+        是否启用摇杆功能
+        </summary>
+        </member>
+        <member name="P:GameUI.Control.Data.GameDataControlJoystickNormal.JoystickBackground">
+        <summary>
+        摇杆背景颜色
+        </summary>
+        </member>
+        <member name="P:GameUI.Control.Data.GameDataControlJoystickNormal.KnobBackground">
+        <summary>
+        摇杆头颜色
+        </summary>
+        </member>
+        <member name="P:GameUI.Control.Data.GameDataControlJoystickNormal.JoystickBackgroundImage">
+        <summary>
+        摇杆背景图像
+        </summary>
+        </member>
+        <member name="P:GameUI.Control.Data.GameDataControlJoystickNormal.KnobImage">
+        <summary>
+        摇杆头图像
+        </summary>
+        </member>
+        <member name="M:GameUI.Control.Data.GameDataControlJoystickNormal.ApplyTo(GameUI.Control.Control)">
+        <summary>
+        
+        </summary>
+        <param name="control"></param>
+        <returns></returns>
+        </member>
+        <member name="M:GameUI.Control.Data.GameDataControlJoystickNormal.CreateControl">
+        <summary>
+        
+        </summary>
+        <returns></returns>
+        </member>
+        <member name="M:GameUI.Control.Data.GameDataControlJoystickNormal.CreateJoystickNormal">
+        <summary>
+        
+        </summary>
+        <returns></returns>
+        </member>
+        <member name="T:GameUI.Control.Data.GameDataControlLabel">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="P:GameUI.Control.Data.GameDataControlLabel.Text">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="P:GameUI.Control.Data.GameDataControlLabel.Font">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="P:GameUI.Control.Data.GameDataControlLabel.FontSize">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="P:GameUI.Control.Data.GameDataControlLabel.TextColor">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="P:GameUI.Control.Data.GameDataControlLabel.LineSpacingRatio">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="P:GameUI.Control.Data.GameDataControlLabel.TextWrap">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="P:GameUI.Control.Data.GameDataControlLabel.Bold">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="P:GameUI.Control.Data.GameDataControlLabel.Italic">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="P:GameUI.Control.Data.GameDataControlLabel.StrokeSize">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="P:GameUI.Control.Data.GameDataControlLabel.StrokeColor">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="P:GameUI.Control.Data.GameDataControlLabel.ShadowOffset">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="P:GameUI.Control.Data.GameDataControlLabel.ShadowColor">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="P:GameUI.Control.Data.GameDataControlLabel.TextTrimming">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="M:GameUI.Control.Data.GameDataControlLabel.ApplyTo(GameUI.Control.Control)">
+        <summary>
+        
+        </summary>
+        <param name="control"></param>
+        <returns></returns>
+        </member>
+        <member name="M:GameUI.Control.Data.GameDataControlLabel.CreateControl">
+        <summary>
+        
+        </summary>
+        <returns></returns>
+        </member>
+        <member name="M:GameUI.Control.Data.GameDataControlLabel.CreateLabel">
+        <summary>
+        
+        </summary>
+        <returns></returns>
+        </member>
+        <member name="T:GameUI.Control.Data.GameDataControlPanel">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="M:GameUI.Control.Data.GameDataControlPanel.CreateControl">
+        <summary>
+        
+        </summary>
+        <returns></returns>
+        </member>
+        <member name="M:GameUI.Control.Data.GameDataControlPanel.CreatePanel">
+        <summary>
+        
+        </summary>
+        <returns></returns>
+        </member>
+        <member name="T:GameUI.Control.Data.GameDataControlPanelScrollable">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="P:GameUI.Control.Data.GameDataControlPanelScrollable.ScrollEvents">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="P:GameUI.Control.Data.GameDataControlPanelScrollable.ScrollEnabled">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="P:GameUI.Control.Data.GameDataControlPanelScrollable.ScrollOrientation">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="P:GameUI.Control.Data.GameDataControlPanelScrollable.ScrollBarSize">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="P:GameUI.Control.Data.GameDataControlPanelScrollable.ScrollBarColor">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="P:GameUI.Control.Data.GameDataControlPanelScrollable.ScrollBarValue">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="M:GameUI.Control.Data.GameDataControlPanelScrollable.ApplyTo(GameUI.Control.Control)">
+        <summary>
+        
+        </summary>
+        <param name="control"></param>
+        <returns></returns>
+        </member>
+        <member name="M:GameUI.Control.Data.GameDataControlPanelScrollable.CreateControl">
+        <summary>
+        
+        </summary>
+        <returns></returns>
+        </member>
+        <member name="M:GameUI.Control.Data.GameDataControlPanelScrollable.CreatePanelScrollable">
+        <summary>
+        
+        </summary>
+        <returns></returns>
+        </member>
+        <member name="T:GameUI.Control.Data.GameDataControlParticle">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="P:GameUI.Control.Data.GameDataControlParticle.Resource">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="P:GameUI.Control.Data.GameDataControlParticle.IsPlaying">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="P:GameUI.Control.Data.GameDataControlParticle.Speed">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="P:GameUI.Control.Data.GameDataControlParticle.ParticleScale">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="P:GameUI.Control.Data.GameDataControlParticle.ParticleView">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="M:GameUI.Control.Data.GameDataControlParticle.ApplyTo(GameUI.Control.Control)">
+        <summary>
+        
+        </summary>
+        <param name="control"></param>
+        <returns></returns>
+        </member>
+        <member name="M:GameUI.Control.Data.GameDataControlParticle.CreateControl">
+        <summary>
+        
+        </summary>
+        <returns></returns>
+        </member>
+        <member name="M:GameUI.Control.Data.GameDataControlParticle.CreateParticle">
+        <summary>
+        
+        </summary>
+        <returns></returns>
+        </member>
+        <member name="T:GameUI.Control.Data.GameDataControlProgress">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="P:GameUI.Control.Data.GameDataControlProgress.Value">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="P:GameUI.Control.Data.GameDataControlProgress.ProgressionMode">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="P:GameUI.Control.Data.GameDataControlProgress.ProgressRotation">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="M:GameUI.Control.Data.GameDataControlProgress.ApplyTo(GameUI.Control.Control)">
+        <summary>
+        
+        </summary>
+        <param name="control"></param>
+        <returns></returns>
+        </member>
+        <member name="M:GameUI.Control.Data.GameDataControlProgress.CreateControl">
+        <summary>
+        
+        </summary>
+        <returns></returns>
+        </member>
+        <member name="M:GameUI.Control.Data.GameDataControlProgress.CreateProgress">
+        <summary>
+        
+        </summary>
+        <returns></returns>
+        </member>
+        <member name="T:GameUI.Control.Data.GameDataControlSpine">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="P:GameUI.Control.Data.GameDataControlSpine.IsLooping">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="P:GameUI.Control.Data.GameDataControlSpine.Resource">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="P:GameUI.Control.Data.GameDataControlSpine.Animation">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="M:GameUI.Control.Data.GameDataControlSpine.ApplyTo(GameUI.Control.Control)">
+        <summary>
+        
+        </summary>
+        <param name="control"></param>
+        <returns></returns>
+        </member>
+        <member name="M:GameUI.Control.Data.GameDataControlSpine.CreateControl">
+        <summary>
+        
+        </summary>
+        <returns></returns>
+        </member>
+        <member name="M:GameUI.Control.Data.GameDataControlSpine.CreateSpine">
+        <summary>
+        
+        </summary>
+        <returns></returns>
+        </member>
+        <member name="T:GameUI.Control.Data.GameDataControlSprites">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="P:GameUI.Control.Data.GameDataControlSprites.IsLooping">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="P:GameUI.Control.Data.GameDataControlSprites.IsPlaying">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="P:GameUI.Control.Data.GameDataControlSprites.IntervalMillisecond">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="P:GameUI.Control.Data.GameDataControlSprites.FramePerSecond">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="M:GameUI.Control.Data.GameDataControlSprites.ApplyTo(GameUI.Control.Control)">
+        <summary>
+        
+        </summary>
+        <param name="control"></param>
+        <returns></returns>
+        </member>
+        <member name="M:GameUI.Control.Data.GameDataControlSprites.CreateControl">
+        <summary>
+        
+        </summary>
+        <returns></returns>
+        </member>
+        <member name="M:GameUI.Control.Data.GameDataControlSprites.CreateSprites">
+        <summary>
+        
+        </summary>
+        <returns></returns>
+        </member>
+        <member name="T:GameUI.Control.Data.GameDataControlTextButton">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="P:GameUI.Control.Data.GameDataControlTextButton.Text">
+        <summary>
+        按钮默认文本内容
+        </summary>
+        </member>
+        <member name="P:GameUI.Control.Data.GameDataControlTextButton.Font">
+        <summary>
+        文本字体
+        </summary>
+        </member>
+        <member name="P:GameUI.Control.Data.GameDataControlTextButton.FontSize">
+        <summary>
+        文本字体大小
+        </summary>
+        </member>
+        <member name="P:GameUI.Control.Data.GameDataControlTextButton.TextColor">
+        <summary>
+        文本颜色
+        </summary>
+        </member>
+        <member name="P:GameUI.Control.Data.GameDataControlTextButton.Bold">
+        <summary>
+        文本是否粗体
+        </summary>
+        </member>
+        <member name="P:GameUI.Control.Data.GameDataControlTextButton.Italic">
+        <summary>
+        文本是否斜体
+        </summary>
+        </member>
+        <member name="P:GameUI.Control.Data.GameDataControlTextButton.TextWrap">
+        <summary>
+        文本是否自动换行
+        </summary>
+        </member>
+        <member name="P:GameUI.Control.Data.GameDataControlTextButton.LineSpacingRatio">
+        <summary>
+        行间距比例
+        </summary>
+        </member>
+        <member name="P:GameUI.Control.Data.GameDataControlTextButton.TextHorizontalAlignment">
+        <summary>
+        文本水平对齐方式
+        </summary>
+        </member>
+        <member name="P:GameUI.Control.Data.GameDataControlTextButton.TextVerticalAlignment">
+        <summary>
+        文本垂直对齐方式
+        </summary>
+        </member>
+        <member name="P:GameUI.Control.Data.GameDataControlTextButton.StrokeSize">
+        <summary>
+        文本描边大小
+        </summary>
+        </member>
+        <member name="P:GameUI.Control.Data.GameDataControlTextButton.StrokeColor">
+        <summary>
+        文本描边颜色
+        </summary>
+        </member>
+        <member name="P:GameUI.Control.Data.GameDataControlTextButton.ShadowOffset">
+        <summary>
+        文本阴影偏移
+        </summary>
+        </member>
+        <member name="P:GameUI.Control.Data.GameDataControlTextButton.ShadowColor">
+        <summary>
+        文本阴影颜色
+        </summary>
+        </member>
+        <member name="M:GameUI.Control.Data.GameDataControlTextButton.ApplyTo(GameUI.Control.Control)">
+        <summary>
+        
+        </summary>
+        <param name="control"></param>
+        <returns></returns>
+        </member>
+        <member name="M:GameUI.Control.Data.GameDataControlTextButton.CreateControl">
+        <summary>
+        
+        </summary>
+        <returns></returns>
+        </member>
+        <member name="M:GameUI.Control.Data.GameDataControlTextButton.CreateTextButton">
+        <summary>
+        
+        </summary>
+        <returns></returns>
+        </member>
+        <member name="T:GameUI.Control.Data.GameDataControlVirtualizingPanel">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="P:GameUI.Control.Data.GameDataControlVirtualizingPanel.CacheLength">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="P:GameUI.Control.Data.GameDataControlVirtualizingPanel.CacheLengthUnit">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="P:GameUI.Control.Data.GameDataControlVirtualizingPanel.ItemSize">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="P:GameUI.Control.Data.GameDataControlVirtualizingPanel.ArrangeOnScroll">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="M:GameUI.Control.Data.GameDataControlVirtualizingPanel.ApplyTo(GameUI.Control.Control)">
+        <summary>
+        
+        </summary>
+        <param name="control"></param>
+        <returns></returns>
+        </member>
+        <member name="T:GameUI.Control.Data.Struct.Event">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="P:GameUI.Control.Data.Struct.Event.OnPointerClicked">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="P:GameUI.Control.Data.Struct.Event.OnPointerDoubleClicked">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="P:GameUI.Control.Data.Struct.Event.OnPointerEntered">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="P:GameUI.Control.Data.Struct.Event.OnPointerExited">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="P:GameUI.Control.Data.Struct.Event.OnPointerPressed">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="P:GameUI.Control.Data.Struct.Event.OnPointerReleased">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="P:GameUI.Control.Data.Struct.Event.OnPointerCapturedMove">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="P:GameUI.Control.Data.Struct.Event.OnDrag">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="P:GameUI.Control.Data.Struct.Event.OnDrop">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="P:GameUI.Control.Data.Struct.Event.OnSizeChanged">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="M:GameUI.Control.Data.Struct.Event.ApplyTo(GameUI.Control.Control)">
+        <summary>
+        
+        </summary>
+        <param name="control"></param>
+        <returns></returns>
+        </member>
+        <member name="T:GameUI.Control.Data.Struct.InputEvents">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="F:GameUI.Control.Data.Struct.InputEvents.OnInputTextChanged">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="F:GameUI.Control.Data.Struct.InputEvents.OnGotFocus">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="F:GameUI.Control.Data.Struct.InputEvents.OnLostFocus">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="F:GameUI.Control.Data.Struct.InputEvents.OnInputKeyDown">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="F:GameUI.Control.Data.Struct.InputEvents.OnInputKeyUp">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="M:GameUI.Control.Data.Struct.InputEvents.ApplyTo(GameUI.Control.Primitive.Input)">
+        <summary>
+        
+        </summary>
+        <param name="control"></param>
+        <returns></returns>
+        </member>
+        <member name="T:GameUI.Control.Data.Struct.Layout">
+        <summary>
+        表示控件的布局属性集合，可用于批量设置控件的布局相关属性。
+        </summary>
+        </member>
+        <member name="P:GameUI.Control.Data.Struct.Layout.Position">
+        <summary>
+        控件的布局位置。
+        </summary>
+        </member>
+        <member name="P:GameUI.Control.Data.Struct.Layout.PositionType">
+        <summary>
+        控件的布局定位类型，决定 <see cref = "P:GameUI.Control.Data.Struct.Layout.Position"/> 的含义。
+        </summary>
+        </member>
+        <member name="P:GameUI.Control.Data.Struct.Layout.Margin">
+        <summary>
+        控件的外边距。
+        </summary>
+        </member>
+        <member name="P:GameUI.Control.Data.Struct.Layout.Padding">
+        <summary>
+        控件的内边距。
+        </summary>
+        </member>
+        <member name="P:GameUI.Control.Data.Struct.Layout.Width">
+        <summary>
+        控件的宽度（支持 Auto）。
+        </summary>
+        </member>
+        <member name="P:GameUI.Control.Data.Struct.Layout.Height">
+        <summary>
+        控件的高度（支持 Auto）。
+        </summary>
+        </member>
+        <member name="P:GameUI.Control.Data.Struct.Layout.WidthStretchRatio">
+        <summary>
+        控件在父容器中的宽度拉伸比例。
+        </summary>
+        </member>
+        <member name="P:GameUI.Control.Data.Struct.Layout.HeightStretchRatio">
+        <summary>
+        控件在父容器中的高度拉伸比例。
+        </summary>
+        </member>
+        <member name="P:GameUI.Control.Data.Struct.Layout.WidthCompactRatio">
+        <summary>
+        控件在父容器中的宽度收缩比例。
+        </summary>
+        </member>
+        <member name="P:GameUI.Control.Data.Struct.Layout.HeightCompactRatio">
+        <summary>
+        控件在父容器中的高度收缩比例。
+        </summary>
+        </member>
+        <member name="P:GameUI.Control.Data.Struct.Layout.FlowOrientation">
+        <summary>
+        控件的流式布局方向。
+        </summary>
+        </member>
+        <member name="P:GameUI.Control.Data.Struct.Layout.HorizontalAlignment">
+        <summary>
+        控件的水平对齐方式。
+        </summary>
+        </member>
+        <member name="P:GameUI.Control.Data.Struct.Layout.VerticalAlignment">
+        <summary>
+        控件的垂直对齐方式。
+        </summary>
+        </member>
+        <member name="P:GameUI.Control.Data.Struct.Layout.HorizontalContentAlignment">
+        <summary>
+        子控件的水平对齐方式。
+        </summary>
+        </member>
+        <member name="P:GameUI.Control.Data.Struct.Layout.VerticalContentAlignment">
+        <summary>
+        子控件的垂直对齐方式。
+        </summary>
+        </member>
+        <member name="P:GameUI.Control.Data.Struct.Layout.AspectRatio">
+        <summary>
+        控件的宽高比设置，仅在宽或高为 Auto 时生效。
+        </summary>
+        </member>
+        <member name="M:GameUI.Control.Data.Struct.Layout.ApplyTo(GameUI.Control.Control)">
+        <summary>
+        批量应用布局属性到指定控件。
+        </summary>
+        <param name = "control">要应用布局的控件。</param>
+        </member>
+        <member name="T:GameUI.Control.Data.Struct.PanelScrollableEvents">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="F:GameUI.Control.Data.Struct.PanelScrollableEvents.OnScrollChangedHandler">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="M:GameUI.Control.Data.Struct.PanelScrollableEvents.ApplyTo(GameUI.Control.Primitive.PanelScrollable)">
+        <summary>
+        
+        </summary>
+        <param name="panelScrollable"></param>
+        <returns></returns>
+        </member>
+        <member name="T:GameUI.Control.Data.Struct.TemplateOverride">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="P:GameUI.Control.Data.Struct.TemplateOverride.ThemeOverride">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="P:GameUI.Control.Data.Struct.TemplateOverride.OrientationOverride">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="M:GameUI.Control.Advanced.JoystickDynamic.#ctor(GameData.IGameLink{GameUI.Control.Data.GameDataControlJoystickDynamic})">
+        <summary>
+        使用指定模板链接初始化摇杆实例。
+        </summary>
+        <param name = "link">摇杆模板数据链接。</param>
+        </member>
+        <member name="M:GameUI.Control.Advanced.JoystickFloat.#ctor(GameData.IGameLink{GameUI.Control.Data.GameDataControlJoystickFloat})">
+        <summary>
+        使用指定模板链接初始化摇杆实例。
+        </summary>
+        <param name = "link">摇杆模板数据链接。</param>
+        </member>
+        <member name="M:GameUI.Control.Advanced.JoystickNormal.#ctor(GameData.IGameLink{GameUI.Control.Data.GameDataControlJoystickNormal})">
+        <summary>
+        使用指定模板链接初始化摇杆实例。
+        </summary>
+        <param name = "link">摇杆模板数据链接。</param>
+        </member>
+        <member name="M:GameUI.Control.Advanced.TextButton.#ctor(GameData.IGameLink{GameUI.Control.Data.GameDataControlTextButton})">
+        <summary>
+        使用指定模板链接初始化TextButton实例
+        </summary>
+        <param name = "link">按钮模板数据链接</param>
+        </member>
+    </members>
+</doc>

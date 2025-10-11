@@ -1,0 +1,1804 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<doc>
+    <assembly>
+        <name>GameCore</name>
+    </assembly>
+    <members>
+        <member name="T:GameCore.BaseType.AbilityStage">
+            <summary>
+            Defines the execution stages of an ability lifecycle.
+            </summary>
+            <remarks>
+            This enum represents the different phases an ability goes through during its execution,
+            from initial approach to final completion. Each stage may have different behaviors,
+            animations, and effects associated with it.
+            </remarks>
+        </member>
+        <member name="F:GameCore.BaseType.AbilityStage.Approach">
+            <summary>
+            The approach stage where the caster moves into position or range to use the ability.
+            </summary>
+            <remarks>
+            During this stage, the entity may move closer to the target or adjust positioning
+            as required by the ability's range and targeting requirements.
+            </remarks>
+        </member>
+        <member name="F:GameCore.BaseType.AbilityStage.Start">
+            <summary>
+            The initial stage when the ability execution begins.
+            </summary>
+            <remarks>
+            This stage marks the beginning of the ability's execution sequence,
+            typically involving initial setup and preparation.
+            </remarks>
+        </member>
+        <member name="F:GameCore.BaseType.AbilityStage.Cast">
+            <summary>
+            The casting stage where the ability is being prepared or charged.
+            </summary>
+            <remarks>
+            During this stage, the ability is actively being cast, which may involve
+            cast time, mana consumption, and casting animations or effects.
+            </remarks>
+        </member>
+        <member name="F:GameCore.BaseType.AbilityStage.Channel">
+            <summary>
+            The channeling stage for abilities that require sustained casting.
+            </summary>
+            <remarks>
+            Some abilities require continuous channeling to maintain their effect.
+            During this stage, the caster must maintain focus and cannot perform other actions.
+            </remarks>
+        </member>
+        <member name="F:GameCore.BaseType.AbilityStage.Finish">
+            <summary>
+            The final stage when the ability execution is completed.
+            </summary>
+            <remarks>
+            This stage represents the conclusion of the ability's execution,
+            including any cleanup, final effects, or post-execution behaviors.
+            </remarks>
+        </member>
+        <member name="T:GameCore.BaseType.ActorScaleAggregator">
+            <summary />
+        </member>
+        <member name="M:GameCore.BaseType.ActorScaleAggregator.GetFinal">
+            <summary />
+            <returns />
+        </member>
+        <member name="T:GameCore.BaseType.Angle">
+            <summary>
+            Angle based on degree
+            </summary>
+            <param name="degree" />
+        </member>
+        <member name="M:GameCore.BaseType.Angle.#ctor(System.Single)">
+            <summary>
+            Angle based on degree
+            </summary>
+            <param name="degree" />
+        </member>
+        <member name="M:GameCore.BaseType.Angle.ScaledTargetPosition(GameCore.BaseInterface.ITarget,System.Single)">
+            <summary />
+            <param name="source" />
+            <param name="range" />
+            <returns />
+        </member>
+        <member name="M:GameCore.BaseType.Angle.ToVector2">
+            <summary />
+            <returns />
+        </member>
+        <member name="M:GameCore.BaseType.Angle.FromVector2(System.Numerics.Vector2)">
+            <summary />
+            <param name="vector" />
+            <returns />
+        </member>
+        <member name="F:GameCore.BaseType.Angle._degree">
+            <summary />
+        </member>
+        <member name="M:GameCore.BaseType.Angle.Normalize">
+            <summary />
+            <returns />
+        </member>
+        <member name="P:GameCore.BaseType.Angle.Normal">
+            <summary />
+        </member>
+        <member name="P:GameCore.BaseType.Angle.Minor">
+            <summary />
+        </member>
+        <member name="P:GameCore.BaseType.Angle.Radian">
+            <summary />
+        </member>
+        <member name="M:GameCore.BaseType.Angle.IsInArc(GameCore.BaseType.Angle,GameCore.BaseType.Angle)">
+            <summary />
+            <param name="targetAngle" />
+            <param name="arc" />
+            <returns />
+        </member>
+        <member name="M:GameCore.BaseType.Angle.DifferenceMinor(GameCore.BaseType.Angle)">
+            <summary />
+            <param name="targetAngle" />
+            <returns />
+        </member>
+        <member name="P:GameCore.BaseType.Angle.Zero">
+            <summary />
+        </member>
+        <member name="P:GameCore.BaseType.Angle.Half">
+            <summary />
+        </member>
+        <member name="P:GameCore.BaseType.Angle.Full">
+            <summary />
+        </member>
+        <member name="M:GameCore.BaseType.Angle.FromDegree(System.Single)">
+            <summary />
+            <param name="degree" />
+            <returns />
+        </member>
+        <member name="M:GameCore.BaseType.Angle.FromRadian(System.Double)">
+            <summary />
+            <param name="radian" />
+            <returns />
+        </member>
+        <member name="M:GameCore.BaseType.Angle.Equals(System.Object)">
+            <summary />
+            <param name="obj" />
+            <returns />
+        </member>
+        <member name="M:GameCore.BaseType.Angle.GetHashCode">
+            <summary />
+            <returns />
+        </member>
+        <member name="M:GameCore.BaseType.Angle.ToString">
+            <summary />
+            <returns />
+        </member>
+        <member name="M:GameCore.BaseType.Angle.RangeEndPointPosition(GameCore.BaseInterface.ITarget,System.Single)">
+            <summary />
+            <param name="source" />
+            <param name="range" />
+            <returns />
+        </member>
+        <member name="M:GameCore.BaseType.Angle.CompareTo(GameCore.BaseType.Angle)">
+            <summary />
+            <param name="other" />
+            <returns />
+        </member>
+        <member name="M:GameCore.BaseType.Angle.op_Addition(GameCore.BaseType.Angle,GameCore.BaseType.Angle)">
+            <summary />
+        </member>
+        <member name="M:GameCore.BaseType.Angle.op_Subtraction(GameCore.BaseType.Angle,GameCore.BaseType.Angle)">
+            <summary />
+        </member>
+        <member name="M:GameCore.BaseType.Angle.op_UnaryNegation(GameCore.BaseType.Angle)">
+            <summary />
+        </member>
+        <member name="M:GameCore.BaseType.Angle.op_Equality(GameCore.BaseType.Angle,GameCore.BaseType.Angle)">
+            <summary />
+        </member>
+        <member name="M:GameCore.BaseType.Angle.op_Inequality(GameCore.BaseType.Angle,GameCore.BaseType.Angle)">
+            <summary />
+        </member>
+        <member name="M:GameCore.BaseType.Angle.op_LessThan(GameCore.BaseType.Angle,GameCore.BaseType.Angle)">
+            <summary />
+        </member>
+        <member name="M:GameCore.BaseType.Angle.op_GreaterThan(GameCore.BaseType.Angle,GameCore.BaseType.Angle)">
+            <summary />
+        </member>
+        <member name="M:GameCore.BaseType.Angle.op_LessThanOrEqual(GameCore.BaseType.Angle,GameCore.BaseType.Angle)">
+            <summary />
+        </member>
+        <member name="M:GameCore.BaseType.Angle.op_GreaterThanOrEqual(GameCore.BaseType.Angle,GameCore.BaseType.Angle)">
+            <summary />
+        </member>
+        <member name="M:GameCore.BaseType.Angle.op_Implicit(System.Single)~GameCore.BaseType.Angle">
+            <summary />
+        </member>
+        <member name="M:GameCore.BaseType.Angle.op_Implicit(GameCore.BaseType.Angle)~System.Single">
+            <summary />
+        </member>
+        <member name="T:GameCore.BaseType.AttachedObject">
+            <summary>
+            Directly attached to the unit, such as abilities, buffs. Can be added and removed.
+            Can be in multiple states at the same time.
+            Can modify the unit's properties.
+            Usually has Link and Cache.
+            </summary>
+            <summary />
+            <summary />
+            <summary />
+            <summary />
+            <summary />
+        </member>
+        <member name="P:GameCore.BaseType.AttachedObject.Host">
+            <summary />
+        </member>
+        <member name="P:GameCore.BaseType.AttachedObject.ModSeed">
+            <summary />
+        </member>
+        <member name="P:GameCore.BaseType.AttachedObject.IsActivated">
+            <summary />
+        </member>
+        <member name="P:GameCore.BaseType.AttachedObject.IsEnabled">
+            <summary />
+        </member>
+        <member name="P:GameCore.BaseType.AttachedObject.IsInstanceEnabled">
+            <summary />
+        </member>
+        <member name="P:GameCore.BaseType.AttachedObject.IsLinkEnabled">
+            <summary />
+        </member>
+        <member name="P:GameCore.BaseType.AttachedObject.IsHidden">
+            <summary />
+        </member>
+        <member name="P:GameCore.BaseType.AttachedObject.ModificationManager">
+            <summary />
+        </member>
+        <member name="P:GameCore.BaseType.AttachedObject.StackInternal">
+            <summary />
+        </member>
+        <member name="E:GameCore.BaseType.AttachedObject.OnRemoved">
+            <summary />
+        </member>
+        <member name="F:GameCore.BaseType.AttachedObject.StateCounter">
+            <summary />
+        </member>
+        <member name="F:GameCore.BaseType.AttachedObject.modSeed">
+            <summary />
+        </member>
+        <member name="M:GameCore.BaseType.AttachedObject.#ctor(GameCore.EntitySystem.Unit)">
+            <summary />
+        </member>
+        <member name="M:GameCore.BaseType.AttachedObject.AddState(GameCore.BaseType.AttachedObjectState)">
+            <summary />
+            <param name="state" />
+            <returns />
+        </member>
+        <member name="M:GameCore.BaseType.AttachedObject.RemoveState(GameCore.BaseType.AttachedObjectState)">
+            <summary />
+            <param name="state" />
+            <returns />
+        </member>
+        <member name="M:GameCore.BaseType.AttachedObject.HasState(GameCore.BaseType.AttachedObjectState)">
+            <summary />
+            <param name="state" />
+            <returns />
+        </member>
+        <member name="M:GameCore.BaseType.AttachedObject.ToString">
+            <summary />
+            <returns />
+        </member>
+        <member name="M:GameCore.BaseType.AttachedObject.DisposeManaged">
+            <summary />
+            <returns />
+        </member>
+        <member name="P:GameCore.BaseType.AttachedObject.GameCore#ActorSystem#IActorScope#SourceSite">
+            <summary />
+        </member>
+        <member name="P:GameCore.BaseType.AttachedObject.GameCore#ActorSystem#IActorScope#EnsuredSourceSite">
+            <summary />
+        </member>
+        <member name="F:GameCore.BaseType.AttachedObject._clientActors">
+            <summary />
+        </member>
+        <member name="P:GameCore.BaseType.AttachedObject.ClientActors">
+            <summary />
+        </member>
+        <member name="P:GameCore.BaseType.AttachedObject.GameCore#ActorSystem#IActorScope#Id">
+            <summary />
+        </member>
+        <member name="P:GameCore.BaseType.AttachedObject.GameCore#ActorSystem#IActorScopeContext#Link">
+            <summary />
+        </member>
+        <member name="P:GameCore.BaseType.AttachedObject.GameCore#ActorSystem#IActorScope#Context">
+            <summary />
+        </member>
+        <member name="P:GameCore.BaseType.AttachedObject.GameCore#ActorSystem#IActorScopeOwner#ActorScope">
+            <summary />
+        </member>
+        <member name="P:GameCore.BaseType.AttachedObject.GameCore#ActorSystem#IActorScopeContext#Target">
+            <summary />
+        </member>
+        <member name="P:GameCore.BaseType.AttachedObject.GameCore#ActorSystem#IActorScopeContext#Player">
+            <summary />
+        </member>
+        <member name="P:GameCore.BaseType.AttachedObject.GameCore#ActorSystem#IActorScopeContext#Scale">
+            <summary />
+        </member>
+        <member name="P:GameCore.BaseType.AttachedObject.GameCore#ActorSystem#IActorScopeContext#Volume">
+            <summary />
+        </member>
+        <member name="P:GameCore.BaseType.AttachedObject.GameCore#ActorSystem#IActorScopeContext#Facing">
+            <summary />
+        </member>
+        <member name="M:GameCore.BaseType.AttachedObject.GameCore#ActorSystem#IActorScope#Destroy">
+            <summary />
+            <returns />
+        </member>
+        <member name="M:GameCore.BaseType.AttachedObject.GameCore#ActorSystem#IActorScope#Kill">
+            <summary />
+            <returns />
+        </member>
+        <member name="M:GameCore.BaseType.AttachedObject.CompareTo(System.Object)">
+            <summary />
+            <param name="obj" />
+            <returns />
+        </member>
+        <member name="P:GameCore.BaseType.AttachedObject.DisplayCache">
+            <summary />
+        </member>
+        <member name="P:GameCore.BaseType.AttachedObject.GameCore#DisplayInfo#IDisplayInfo#Cache">
+            <summary />
+        </member>
+        <member name="F:GameCore.BaseType.AttachedObject.aggregator">
+            <summary />
+        </member>
+        <member name="F:GameCore.BaseType.AttachedObject.aggregatorWeakReference">
+            <summary />
+        </member>
+        <member name="P:GameCore.BaseType.AttachedObject.Events#IEventSender#Aggregator">
+            <summary />
+        </member>
+        <member name="P:GameCore.BaseType.AttachedObject.AggregatorWeakReference">
+            <summary />
+        </member>
+        <member name="M:GameCore.BaseType.AttachedObject.Publish``1(``0)">
+            <summary />
+            <typeparam name="TEvent" />
+            <param name="eventToPublish" />
+            <returns />
+        </member>
+        <member name="M:GameCore.BaseType.AttachedObject.GetPublisher``1">
+            <summary />
+            <typeparam name="TEvent" />
+            <returns />
+        </member>
+        <member name="P:GameCore.BaseType.AttachedObject.GameCore#BaseInterface#IAttachedObject#SyncId">
+            <summary />
+        </member>
+        <member name="M:GameCore.BaseType.AttachedObject.ReplicateFromKeyValue(System.Enum,System.ReadOnlySpan{System.Byte})">
+            <summary />
+            <param name="propertyEnum" />
+            <param name="value" />
+            <returns />
+        </member>
+        <member name="P:GameCore.BaseType.AttachedObject.GameCore#BaseInterface#IAttachedObject#Host">
+            <summary />
+        </member>
+        <member name="P:GameCore.BaseType.AttachedObject.SyncIdType">
+            <summary />
+        </member>
+        <member name="P:GameCore.BaseType.AttachedObject.GameCore#BaseInterface#IPropertyOwner#PropertyHost">
+            <summary />
+        </member>
+        <member name="M:GameCore.BaseType.AttachedObject.GetProperty``1(GameCore.BaseType.PropertyAttachedObject)">
+            <summary />
+            <typeparam name="TValue" />
+            <param name="property" />
+            <returns />
+        </member>
+        <member name="T:GameCore.BaseType.BearingSnapshot">
+            <summary />
+        </member>
+        <member name="P:GameCore.BaseType.BearingSnapshot.Position">
+            <summary />
+        </member>
+        <member name="F:GameCore.BaseType.BearingSnapshot.facing">
+            <summary />
+        </member>
+        <member name="F:GameCore.BaseType.BearingSnapshot.position">
+            <summary />
+        </member>
+        <member name="P:GameCore.BaseType.BearingSnapshot.Z">
+            <summary />
+        </member>
+        <member name="P:GameCore.BaseType.BearingSnapshot.Facing">
+            <summary>
+            Will be normalized to 0-360
+            </summary>
+        </member>
+        <member name="P:GameCore.BaseType.BearingSnapshot.IgnoreTerrainHeight">
+            <summary />
+        </member>
+        <member name="M:GameCore.BaseType.BearingSnapshot.ZeroOut(System.Boolean)">
+            <summary />
+            <param name="includeZ" />
+            <returns />
+        </member>
+        <member name="M:GameCore.BaseType.BearingSnapshot.ToString">
+            <summary />
+            <returns />
+        </member>
+        <member name="F:GameCore.BaseType.ECmdError.FailedToAddBuff">
+            <summary>
+            Happened when the buff is not able to be added.
+            </summary>
+        </member>
+        <member name="F:GameCore.BaseType.ECmdError.UnableToAddBuff">
+            <summary>
+            Happened when the target is not able to add any buff, for example, the target cannot have BuffManager.
+            </summary>
+        </member>
+        <member name="T:GameCore.BaseType.CmdError">
+            <summary />
+        </member>
+        <member name="M:GameCore.BaseType.CmdError.op_True(GameCore.BaseType.CmdError)">
+            <summary />
+        </member>
+        <member name="M:GameCore.BaseType.CmdError.op_False(GameCore.BaseType.CmdError)">
+            <summary />
+        </member>
+        <member name="M:GameCore.BaseType.CmdError.op_LogicalNot(GameCore.BaseType.CmdError)">
+            <summary />
+        </member>
+        <member name="M:GameCore.BaseType.CmdError.op_BitwiseAnd(GameCore.BaseType.CmdError,GameCore.BaseType.CmdError)">
+            <summary />
+        </member>
+        <member name="F:GameCore.BaseType.CmdError.FailedToAddBuff">
+            <summary>
+            Happened when the buff is not able to be added.
+            </summary>
+        </member>
+        <member name="F:GameCore.BaseType.CmdError.UnableToAddBuff">
+            <summary>
+            Happened when the target is not able to add any buff, for example, the target cannot have BuffManager.
+            </summary>
+        </member>
+        <member name="T:GameCore.BaseType.ECmdResult">
+            <summary>
+            Internal enum defining the base command result values.
+            </summary>
+            <remarks>
+            This enum serves as the foundation for the command result system,
+            with <see cref="F:GameCore.BaseType.ECmdResult.Ok" /> representing successful command execution.
+            Additional error values are defined through the extendable enum system.
+            </remarks>
+        </member>
+        <member name="F:GameCore.BaseType.ECmdResult.Ok">
+            <summary>
+            Indicates that the command executed successfully without errors.
+            </summary>
+        </member>
+        <member name="T:GameCore.BaseType.CmdResult">
+            <summary>
+            Represents the result of a command execution, indicating success or failure.
+            </summary>
+            <remarks>
+            This struct provides a type-safe way to handle command results throughout the game systems.
+            It uses the extendable enum system to support both success and various error conditions.
+            The struct supports boolean operations and comparison operators for convenient result checking.
+            </remarks>
+        </member>
+        <member name="P:GameCore.BaseType.CmdResult.Error">
+            <summary>
+            Gets the error information if the command failed, or <c>null</c> if successful.
+            </summary>
+            <remarks>
+            This property provides access to detailed error information when the command result
+            indicates failure. When the result is <see cref="F:GameCore.BaseType.ECmdResult.Ok" />, this returns <c>null</c>.
+            </remarks>
+        </member>
+        <member name="P:GameCore.BaseType.CmdResult.IsSuccess">
+            <summary>
+            Gets a value indicating whether the command executed successfully.
+            </summary>
+            <remarks>
+            This property provides a convenient way to check if the command completed without errors.
+            It returns <c>true</c> only when the inner value is <see cref="F:GameCore.BaseType.ECmdResult.Ok" />.
+            </remarks>
+        </member>
+        <member name="M:GameCore.BaseType.CmdResult.op_True(GameCore.BaseType.CmdResult)">
+            <summary>
+            Enables the use of <see cref="T:GameCore.BaseType.CmdResult" /> in boolean contexts, returning <c>true</c> for success.
+            </summary>
+            <param name="x">The command result to evaluate.</param>
+            <returns>
+                <c>true</c> if the command was successful; otherwise, <c>false</c>.</returns>
+            <remarks>
+            This operator allows <see cref="T:GameCore.BaseType.CmdResult" /> to be used directly in if statements and other boolean contexts.
+            </remarks>
+        </member>
+        <member name="M:GameCore.BaseType.CmdResult.op_False(GameCore.BaseType.CmdResult)">
+            <summary>
+            Enables the use of <see cref="T:GameCore.BaseType.CmdResult" /> in boolean contexts, returning <c>false</c> for success.
+            </summary>
+            <param name="x">The command result to evaluate.</param>
+            <returns>
+                <c>false</c> if the command was successful; otherwise, <c>true</c>.</returns>
+            <remarks>
+            This operator is the complement of the <c>true</c> operator and is required for boolean logic operations.
+            </remarks>
+        </member>
+        <member name="M:GameCore.BaseType.CmdResult.op_LogicalNot(GameCore.BaseType.CmdResult)">
+            <summary>
+            Negates the success state of the command result.
+            </summary>
+            <param name="x">The command result to negate.</param>
+            <returns>
+                <c>true</c> if the command failed; <c>false</c> if it succeeded.</returns>
+            <remarks>
+            This operator allows for negation of the success state, useful for checking failure conditions.
+            </remarks>
+        </member>
+        <member name="M:GameCore.BaseType.CmdResult.op_BitwiseAnd(GameCore.BaseType.CmdResult,GameCore.BaseType.CmdResult)">
+            <summary>
+            Performs a logical AND operation on two command results, returning the more severe error.
+            </summary>
+            <param name="x">The first command result.</param>
+            <param name="y">The second command result.</param>
+            <returns>The command result with the higher error severity.</returns>
+            <remarks>
+            This operator is used to combine multiple command results, with higher integer values
+            representing more severe errors. If both results are successful, returns success.
+            </remarks>
+        </member>
+        <member name="M:GameCore.BaseType.CmdResult.op_BitwiseOr(GameCore.BaseType.CmdResult,GameCore.BaseType.CmdResult)">
+            <summary>
+            Performs a logical OR operation on two command results, preferring success over failure.
+            </summary>
+            <param name="x">The first command result.</param>
+            <param name="y">The second command result.</param>
+            <returns>A successful result if either input is successful; otherwise, the less severe error.</returns>
+            <remarks>
+            This operator returns success if either operand is successful. If both are errors,
+            it returns the error with lower severity (smaller integer value).
+            </remarks>
+        </member>
+        <member name="F:GameCore.BaseType.CmdResult.Ok">
+            <summary>
+            Indicates that the command executed successfully without errors.
+            </summary>
+        </member>
+        <member name="T:GameCore.BaseType.CmdResult`1">
+            <summary>
+            Represents the result of a command execution that returns a value, combining success/failure with the result data.
+            </summary>
+            <typeparam name="T">The type of value returned by the successful command execution.</typeparam>
+            <remarks>
+            This generic struct extends the command result system to include return values for successful operations.
+            It provides type-safe access to both the result value and error information, with compile-time guarantees
+            about when each property is available.
+            </remarks>
+        </member>
+        <member name="P:GameCore.BaseType.CmdResult`1.Value">
+            <summary>
+            Gets the value returned by the successful command execution, or <c>null</c> if the command failed.
+            </summary>
+            <remarks>
+            This property is only non-null when <see cref="P:GameCore.BaseType.CmdResult`1.IsSuccess" /> is <c>true</c>.
+            The compiler enforces this relationship through nullable reference type annotations.
+            </remarks>
+        </member>
+        <member name="P:GameCore.BaseType.CmdResult`1.Result">
+            <summary>
+            Gets the underlying command result indicating success or failure.
+            </summary>
+            <remarks>
+            This property provides access to the base command result information,
+            including error details when the command fails.
+            </remarks>
+        </member>
+        <member name="P:GameCore.BaseType.CmdResult`1.Error">
+            <summary>
+            Gets the error information if the command failed, or <c>null</c> if successful.
+            </summary>
+            <remarks>
+            This property delegates to the underlying <see cref="P:GameCore.BaseType.CmdResult`1.Result" /> to provide
+            consistent error access across both generic and non-generic result types.
+            </remarks>
+        </member>
+        <member name="P:GameCore.BaseType.CmdResult`1.IsSuccess">
+            <summary>
+            Gets a value indicating whether the command executed successfully and returned a value.
+            </summary>
+            <remarks>
+            When this property is <c>true</c>, the <see cref="P:GameCore.BaseType.CmdResult`1.Value" /> property is guaranteed to be non-null.
+            When <c>false</c>, the <see cref="P:GameCore.BaseType.CmdResult`1.Error" /> property will contain error information.
+            </remarks>
+        </member>
+        <member name="M:GameCore.BaseType.CmdResult`1.#ctor(`0)">
+            <summary>
+            Initializes a new instance of <see cref="T:GameCore.BaseType.CmdResult`1" /> with a successful result and value.
+            </summary>
+            <param name="value">The value returned by the successful command execution.</param>
+            <remarks>
+            This constructor creates a successful command result containing the specified value.
+            </remarks>
+        </member>
+        <member name="M:GameCore.BaseType.CmdResult`1.op_Implicit(`0)~GameCore.BaseType.CmdResult{`0}">
+            <summary>
+            Implicitly converts a value to a successful <see cref="T:GameCore.BaseType.CmdResult`1" />.
+            </summary>
+            <param name="value">The value to wrap in a successful result.</param>
+            <returns>A successful command result containing the specified value.</returns>
+            <remarks>
+            This operator provides convenient creation of successful results from values.
+            </remarks>
+        </member>
+        <member name="M:GameCore.BaseType.CmdResult`1.#ctor(GameCore.BaseType.CmdError)">
+            <summary>
+            Initializes a new instance of <see cref="T:GameCore.BaseType.CmdResult`1" /> with a failed result and error information.
+            </summary>
+            <param name="error">The error information for the failed command execution.</param>
+            <remarks>
+            This constructor creates a failed command result with no value and the specified error.
+            </remarks>
+        </member>
+        <member name="M:GameCore.BaseType.CmdResult`1.op_Implicit(GameCore.BaseType.CmdResult{`0})~GameCore.BaseType.CmdResult">
+            <summary>
+            Implicitly converts a <see cref="T:GameCore.BaseType.CmdResult`1" /> to a non-generic <see cref="T:GameCore.BaseType.CmdResult" />.
+            </summary>
+            <param name="cmdResult">The generic command result to convert.</param>
+            <returns>The underlying command result without the value information.</returns>
+            <remarks>
+            This operator allows generic command results to be used where non-generic results are expected.
+            </remarks>
+        </member>
+        <member name="M:GameCore.BaseType.CmdResult`1.op_Implicit(GameCore.BaseType.CmdError)~GameCore.BaseType.CmdResult{`0}">
+            <summary>
+            Implicitly converts a <see cref="T:GameCore.BaseType.CmdError" /> to a failed <see cref="T:GameCore.BaseType.CmdResult`1" />.
+            </summary>
+            <param name="error">The error to wrap in a failed result.</param>
+            <returns>A failed command result containing the specified error.</returns>
+            <remarks>
+            This operator provides convenient creation of failed results from error values.
+            </remarks>
+        </member>
+        <member name="M:GameCore.BaseType.CmdResult`1.op_True(GameCore.BaseType.CmdResult{`0})">
+            <summary>
+            Enables the use of <see cref="T:GameCore.BaseType.CmdResult`1" /> in boolean contexts, returning <c>true</c> for success.
+            </summary>
+            <param name="x">The command result to evaluate.</param>
+            <returns>
+                <c>true</c> if the command was successful; otherwise, <c>false</c>.</returns>
+            <remarks>
+            This operator allows <see cref="T:GameCore.BaseType.CmdResult`1" /> to be used directly in if statements and other boolean contexts.
+            </remarks>
+        </member>
+        <member name="M:GameCore.BaseType.CmdResult`1.op_False(GameCore.BaseType.CmdResult{`0})">
+            <summary>
+            Enables the use of <see cref="T:GameCore.BaseType.CmdResult`1" /> in boolean contexts, returning <c>false</c> for success.
+            </summary>
+            <param name="x">The command result to evaluate.</param>
+            <returns>
+                <c>false</c> if the command was successful; otherwise, <c>true</c>.</returns>
+            <remarks>
+            This operator is the complement of the <c>true</c> operator and is required for boolean logic operations.
+            </remarks>
+        </member>
+        <member name="M:GameCore.BaseType.CmdResult`1.op_LogicalNot(GameCore.BaseType.CmdResult{`0})">
+            <summary>
+            Negates the success state of the command result.
+            </summary>
+            <param name="x">The command result to negate.</param>
+            <returns>
+                <c>true</c> if the command failed; <c>false</c> if it succeeded.</returns>
+            <remarks>
+            This operator allows for negation of the success state, useful for checking failure conditions.
+            </remarks>
+        </member>
+        <member name="M:GameCore.BaseType.CmdResult`1.op_BitwiseAnd(GameCore.BaseType.CmdResult{`0},GameCore.BaseType.CmdResult{`0})">
+            <summary>
+            Performs a logical AND operation on two command results, returning the more severe error.
+            </summary>
+            <param name="x">The first command result.</param>
+            <param name="y">The second command result.</param>
+            <returns>The command result with the higher error severity, or the first successful result if both succeed.</returns>
+            <remarks>
+            This operator combines two generic command results, preserving values when possible
+            and selecting the more severe error when both fail.
+            </remarks>
+        </member>
+        <member name="M:GameCore.BaseType.CmdResult`1.ToString">
+            <summary>
+            Returns a string representation of the command result.
+            </summary>
+            <returns>A string containing either the value (for success) or the error information (for failure).</returns>
+            <remarks>
+            This method provides a human-readable representation of the command result,
+            showing either the contained value or the error details.
+            </remarks>
+        </member>
+        <member name="T:GameCore.BaseType.ComponentTag">
+            <summary />
+        </member>
+        <member name="P:GameCore.BaseType.ComponentTag.TagMap">
+            <summary />
+        </member>
+        <member name="P:GameCore.BaseType.ComponentTag.Services">
+            <summary />
+        </member>
+        <member name="M:GameCore.BaseType.ComponentTag.GameCore#BaseInterface#IGameClass#OnRegisterGameClass">
+            <summary />
+            <returns />
+        </member>
+        <member name="M:GameCore.BaseType.ComponentTag.CreateComponent``1(GameCore.EntitySystem.Entity)">
+            <summary />
+            <typeparam name="TComponent" />
+            <param name="host" />
+            <returns />
+        </member>
+        <member name="T:GameCore.BaseType.ComponentTagEx">
+            <summary />
+        </member>
+        <member name="M:GameCore.BaseType.ComponentTagEx.GameCore#BaseInterface#IGameClass#OnRegisterGameClass">
+            <summary />
+            <returns />
+        </member>
+        <member name="T:GameCore.BaseType.ContentTypeServices`1">
+            <summary />
+        </member>
+        <member name="F:GameCore.BaseType.ContentTypeServices`1._map">
+            <summary />
+        </member>
+        <member name="M:GameCore.BaseType.ContentTypeServices`1.Add``2">
+            <summary />
+            <typeparam name="TRequest" />
+            <typeparam name="TService" />
+            <returns />
+        </member>
+        <member name="M:GameCore.BaseType.ContentTypeServices`1.Set``2">
+            <summary />
+            <typeparam name="TRequest" />
+            <typeparam name="TService" />
+            <returns />
+        </member>
+        <member name="M:GameCore.BaseType.ContentTypeServices`1.Set``1">
+            <summary />
+            <typeparam name="TSelfService" />
+            <returns />
+        </member>
+        <member name="M:GameCore.BaseType.ContentTypeServices`1.CreateInstance``1(`0)">
+            <summary />
+            <typeparam name="TRequest" />
+            <param name="host" />
+            <returns />
+        </member>
+        <member name="T:GameCore.BaseType.DeathType">
+            <summary>
+            Defines the different types of death or destruction that can occur to game entities.
+            </summary>
+            <remarks>
+            This enum categorizes how entities die or are removed from the game, which can affect
+            visual effects, sound effects, revival possibilities, and other game mechanics.
+            Different death types may trigger different behaviors or restrictions.
+            </remarks>
+        </member>
+        <member name="F:GameCore.BaseType.DeathType.Normal">
+            <summary>
+            Standard death through normal game mechanics such as health reaching zero.
+            </summary>
+            <remarks>
+            This represents typical death scenarios where an entity dies through conventional
+            means like damage, poison, or other health-depleting effects. Normal deaths may
+            allow for revival or resurrection depending on game rules.
+            </remarks>
+        </member>
+        <member name="F:GameCore.BaseType.DeathType.Destroy">
+            <summary>
+            Complete destruction that removes the entity entirely from the game.
+            </summary>
+            <remarks>
+            This represents total annihilation where the entity is completely removed
+            and typically cannot be revived. Used for permanent removal scenarios.
+            </remarks>
+        </member>
+        <member name="F:GameCore.BaseType.DeathType.Impact">
+            <summary>
+            Death caused by high-impact forces or collision-based damage.
+            </summary>
+            <remarks>
+            This represents death from physical impacts, explosions, or collision damage.
+            May trigger specific visual or audio effects related to impact scenarios.
+            </remarks>
+        </member>
+        <member name="F:GameCore.BaseType.DeathType.Nullified">
+            <summary>
+            Death caused by nullification, dispelling, or reality-warping effects.
+            </summary>
+            <remarks>
+            This represents death from magical nullification, reality manipulation, or
+            other supernatural causes that erase or negate the entity's existence.
+            May bypass normal death protections or immunities.
+            </remarks>
+        </member>
+        <member name="T:GameCore.BaseType.DisposableObject">
+            <summary />
+        </member>
+        <member name="F:GameCore.BaseType.DisposableObject.disposedValue">
+            <summary />
+        </member>
+        <member name="F:GameCore.BaseType.DisposableObject.disposingLock">
+            <summary />
+        </member>
+        <member name="P:GameCore.BaseType.DisposableObject.IsValid">
+            <summary />
+        </member>
+        <member name="P:GameCore.BaseType.DisposableObject.IsDisposed">
+            <summary />
+        </member>
+        <member name="F:GameCore.BaseType.DisposableObject.hostDisposedValue">
+            <summary />
+        </member>
+        <member name="M:GameCore.BaseType.DisposableObject.Destroy(System.Boolean)">
+            <summary />
+            <param name="isHostDispose" />
+            <returns />
+        </member>
+        <member name="M:GameCore.BaseType.DisposableObject.Dispose(System.Boolean)">
+            <summary />
+            <param name="disposing" />
+            <returns />
+        </member>
+        <member name="M:GameCore.BaseType.DisposableObject.DisposeManaged">
+            <summary />
+            <returns />
+        </member>
+        <member name="M:GameCore.BaseType.DisposableObject.DisposeUnmanaged(System.Boolean)">
+            <summary>
+            Override this method to dispose unmanaged resources.
+            </summary>
+            <param name="finalizing">
+            If true, the method is called from the finalizer.
+            </param>
+        </member>
+        <member name="M:GameCore.BaseType.DisposableObject.System#IDisposable#Dispose">
+            <summary />
+            <returns />
+        </member>
+        <member name="M:GameCore.BaseType.DisposableObject.Finalize">
+            <summary />
+        </member>
+        <member name="T:GameCore.BaseType.Fraction">
+            <summary>
+            Represents a fractional value in the range [0.0, 1.0].
+            </summary>
+            <remarks>The <see cref="T:GameCore.BaseType.Fraction" /> struct is designed to encapsulate a fractional value that is always 
+            constrained to the range [0.0, 1.0]. Any attempt to create a <see cref="T:GameCore.BaseType.Fraction" /> with a value  outside this range
+            will result in a debug assertion failure in debug builds.</remarks>
+        </member>
+        <member name="F:GameCore.BaseType.Fraction.n">
+            <summary />
+        </member>
+        <member name="M:GameCore.BaseType.Fraction.#ctor(System.Double)">
+            <summary />
+        </member>
+        <member name="P:GameCore.BaseType.Fraction.Value">
+            <summary />
+        </member>
+        <member name="M:GameCore.BaseType.Fraction.op_Implicit(System.Double)~GameCore.BaseType.Fraction">
+            <summary />
+        </member>
+        <member name="M:GameCore.BaseType.Fraction.op_Multiply(GameCore.BaseType.Fraction,GameCore.BaseType.Fraction)">
+            <summary />
+        </member>
+        <member name="M:GameCore.BaseType.Fraction.op_Multiply(GameCore.BaseType.Fraction,System.Double)">
+            <summary />
+        </member>
+        <member name="M:GameCore.BaseType.Fraction.op_Multiply(System.Double,GameCore.BaseType.Fraction)">
+            <summary />
+        </member>
+        <member name="T:GameCore.BaseType.FuncNumberExtension">
+            <summary />
+        </member>
+        <member name="M:GameCore.BaseType.FuncNumberExtension.AsFuncNumber(GameCore.BaseType.FuncNumberEffect)">
+            <summary />
+            <param name="funcEffectNumber" />
+            <returns />
+        </member>
+        <member name="M:GameCore.BaseType.FuncNumberExtension.AsFuncNumber(GameCore.BaseType.FuncFloatEffect)">
+            <summary />
+            <param name="funcEffectNumber" />
+            <returns />
+        </member>
+        <member name="M:GameCore.BaseType.FuncNumberExtension.AsFuncNumber(GameCore.BaseType.FuncBoolEffect)">
+            <summary />
+            <param name="funcEffectNumber" />
+            <returns />
+        </member>
+        <member name="M:GameCore.BaseType.FuncNumberExtension.AsFuncNumber(GameCore.BaseType.FuncIntEffect)">
+            <summary />
+            <param name="funcEffectNumber" />
+            <returns />
+        </member>
+        <member name="M:GameCore.BaseType.FuncNumberExtension.AsFuncNumber(GameCore.BaseType.FuncUIntEffect)">
+            <summary />
+            <param name="funcEffectNumber" />
+            <returns />
+        </member>
+        <member name="M:GameCore.BaseType.FuncNumberExtension.AsFuncNumber(GameCore.BaseType.FuncProbabilityEffect)">
+            <summary />
+            <param name="funcEffectNumber" />
+            <returns />
+        </member>
+        <member name="M:GameCore.BaseType.FuncNumberExtension.AsFuncNumber(GameCore.BaseType.FuncTimeEffect)">
+            <summary />
+            <param name="funcEffectNumber" />
+            <returns />
+        </member>
+        <member name="M:GameCore.BaseType.FuncNumberExtension.AsFuncNumber(GameCore.BaseType.FuncRateEffect)">
+            <summary />
+            <param name="funcEffectNumber" />
+            <returns />
+        </member>
+        <member name="T:GameCore.BaseType.GameRate">
+            <summary />
+        </member>
+        <member name="F:GameCore.BaseType.GameRate.Zero">
+            <summary />
+        </member>
+        <member name="P:GameCore.BaseType.GameRate.RatePerTick">
+            <summary />
+        </member>
+        <member name="P:GameCore.BaseType.GameRate.RatePerSecond">
+            <summary />
+        </member>
+        <member name="M:GameCore.BaseType.GameRate.#ctor(System.Single)">
+            <summary />
+        </member>
+        <member name="M:GameCore.BaseType.GameRate.op_Implicit(System.Single)~GameCore.BaseType.GameRate">
+            <summary />
+        </member>
+        <member name="M:GameCore.BaseType.GameRate.op_Explicit(GameCore.BaseType.GameRate)~System.Single">
+            <summary />
+        </member>
+        <member name="M:GameCore.BaseType.GameRate.op_Addition(GameCore.BaseType.GameRate,GameCore.BaseType.GameRate)">
+            <summary />
+        </member>
+        <member name="M:GameCore.BaseType.GameRate.op_Subtraction(GameCore.BaseType.GameRate,GameCore.BaseType.GameRate)">
+            <summary />
+        </member>
+        <member name="M:GameCore.BaseType.GameRate.op_Multiply(GameCore.BaseType.GameRate,GameCore.BaseType.GameRate)">
+            <summary />
+        </member>
+        <member name="M:GameCore.BaseType.GameRate.op_Division(GameCore.BaseType.GameRate,GameCore.BaseType.GameRate)">
+            <summary />
+        </member>
+        <member name="M:GameCore.BaseType.GameRate.op_Addition(GameCore.BaseType.GameRate,System.Single)">
+            <summary />
+        </member>
+        <member name="M:GameCore.BaseType.GameRate.op_Subtraction(GameCore.BaseType.GameRate,System.Single)">
+            <summary />
+        </member>
+        <member name="M:GameCore.BaseType.GameRate.op_Multiply(GameCore.BaseType.GameRate,System.Single)">
+            <summary />
+        </member>
+        <member name="M:GameCore.BaseType.GameRate.op_Division(GameCore.BaseType.GameRate,System.Single)">
+            <summary />
+        </member>
+        <member name="M:GameCore.BaseType.GameRate.ToString">
+            <summary />
+            <returns />
+        </member>
+        <member name="M:GameCore.BaseType.GameRate.GetTime(System.Single)">
+            <summary />
+            <param name="delta" />
+            <returns />
+        </member>
+        <member name="M:GameCore.BaseType.GameRate.CompareTo(GameCore.BaseType.GameRate)">
+            <summary />
+            <param name="other" />
+            <returns />
+        </member>
+        <member name="M:GameCore.BaseType.GameRate.Equals(GameCore.BaseType.GameRate)">
+            <summary />
+            <param name="other" />
+            <returns />
+        </member>
+        <member name="M:GameCore.BaseType.GameRate.CompareTo(System.Single)">
+            <summary />
+            <param name="other" />
+            <returns />
+        </member>
+        <member name="M:GameCore.BaseType.GameRate.Equals(System.Single)">
+            <summary />
+            <param name="other" />
+            <returns />
+        </member>
+        <member name="M:GameCore.BaseType.GameRate.Equals(System.Object)">
+            <summary />
+            <param name="obj" />
+            <returns />
+        </member>
+        <member name="M:GameCore.BaseType.GameRate.GetHashCode">
+            <summary />
+            <returns />
+        </member>
+        <member name="M:GameCore.BaseType.GameRate.op_Equality(GameCore.BaseType.GameRate,GameCore.BaseType.GameRate)">
+            <summary />
+        </member>
+        <member name="M:GameCore.BaseType.GameRate.op_Inequality(GameCore.BaseType.GameRate,GameCore.BaseType.GameRate)">
+            <summary />
+        </member>
+        <member name="M:GameCore.BaseType.GameRate.op_LessThan(GameCore.BaseType.GameRate,GameCore.BaseType.GameRate)">
+            <summary />
+        </member>
+        <member name="M:GameCore.BaseType.GameRate.op_LessThanOrEqual(GameCore.BaseType.GameRate,GameCore.BaseType.GameRate)">
+            <summary />
+        </member>
+        <member name="M:GameCore.BaseType.GameRate.op_GreaterThan(GameCore.BaseType.GameRate,GameCore.BaseType.GameRate)">
+            <summary />
+        </member>
+        <member name="M:GameCore.BaseType.GameRate.op_GreaterThanOrEqual(GameCore.BaseType.GameRate,GameCore.BaseType.GameRate)">
+            <summary />
+        </member>
+        <member name="T:GameCore.BaseType.IResponseOwner">
+            <summary />
+        </member>
+        <member name="P:GameCore.BaseType.IResponseOwner.Host">
+            <summary />
+        </member>
+        <member name="P:GameCore.BaseType.IResponseOwner.Cache">
+            <summary />
+        </member>
+        <member name="P:GameCore.BaseType.IResponseOwner.Responses">
+            <summary />
+        </member>
+        <member name="M:GameCore.BaseType.IResponseOwner.InitResponses">
+            <summary />
+            <returns />
+        </member>
+        <member name="M:GameCore.BaseType.IResponseOwner.AddResponse(GameData.IGameLink{GameCore.Behavior.GameDataResponse})">
+            <summary />
+            <param name="responseLink" />
+            <returns />
+        </member>
+        <member name="M:GameCore.BaseType.IResponseOwner.RemoveResponse(GameCore.Behavior.Response,System.Boolean)">
+            <summary />
+            <param name="response" />
+            <param name="destroy" />
+            <returns />
+        </member>
+        <member name="M:GameCore.BaseType.IResponseOwner.DisposeResponses">
+            <summary />
+            <returns />
+        </member>
+        <member name="P:GameCore.BaseType.IResponseOwner.IsActivated">
+            <summary />
+        </member>
+        <member name="T:GameCore.BaseType.IResponseOwnerExtensions">
+            <summary />
+        </member>
+        <member name="M:GameCore.BaseType.IResponseOwnerExtensions.InitResponses(GameCore.BaseType.IResponseOwner)">
+            <summary />
+            <param name="owner" />
+            <returns />
+        </member>
+        <member name="M:GameCore.BaseType.IResponseOwnerExtensions.AddResponse(GameCore.BaseType.IResponseOwner,GameData.IGameLink{GameCore.Behavior.GameDataResponse})">
+            <summary />
+            <param name="owner" />
+            <param name="responseLink" />
+            <returns />
+        </member>
+        <member name="M:GameCore.BaseType.IResponseOwnerExtensions.RemoveResponse(GameCore.BaseType.IResponseOwner,GameCore.Behavior.Response,System.Boolean)">
+            <summary />
+            <param name="owner" />
+            <param name="response" />
+            <param name="destroy" />
+            <returns />
+        </member>
+        <member name="M:GameCore.BaseType.IResponseOwnerExtensions.DisposeResponses(GameCore.BaseType.IResponseOwner)">
+            <summary />
+            <param name="owner" />
+            <returns />
+        </member>
+        <member name="T:GameCore.BaseType.ISyncIdOwner">
+            <summary />
+        </member>
+        <member name="M:GameCore.BaseType.ISyncIdOwner.ResolvePropertyHash(System.Int64)">
+            <summary />
+            <param name="propertyHashLong" />
+            <returns />
+        </member>
+        <member name="P:GameCore.BaseType.ISyncIdOwner.SyncId">
+            <summary />
+        </member>
+        <member name="P:GameCore.BaseType.ISyncIdOwner.SyncIdShifted">
+            <summary />
+        </member>
+        <member name="T:GameCore.BaseType.LoggerTextWriter">
+            <summary />
+        </member>
+        <member name="M:GameCore.BaseType.LoggerTextWriter.#ctor(Microsoft.Extensions.Logging.ILogger,Microsoft.Extensions.Logging.LogLevel)">
+            <summary />
+        </member>
+        <member name="P:GameCore.BaseType.LoggerTextWriter.Encoding">
+            <summary />
+        </member>
+        <member name="M:GameCore.BaseType.LoggerTextWriter.WriteLine(System.String)">
+            <summary />
+            <param name="value" />
+            <returns />
+        </member>
+        <member name="M:GameCore.BaseType.LoggerTextWriter.WriteLine">
+            <summary />
+            <returns />
+        </member>
+        <member name="M:GameCore.BaseType.LoggerTextWriter.WriteLine(System.Boolean)">
+            <summary />
+            <param name="value" />
+            <returns />
+        </member>
+        <member name="M:GameCore.BaseType.LoggerTextWriter.WriteLine(System.Char)">
+            <summary />
+            <param name="value" />
+            <returns />
+        </member>
+        <member name="M:GameCore.BaseType.LoggerTextWriter.WriteLine(System.Char[])">
+            <summary />
+            <param name="buffer" />
+            <returns />
+        </member>
+        <member name="M:GameCore.BaseType.LoggerTextWriter.WriteLine(System.Char[],System.Int32,System.Int32)">
+            <summary />
+            <param name="buffer" />
+            <param name="index" />
+            <param name="count" />
+            <returns />
+        </member>
+        <member name="M:GameCore.BaseType.LoggerTextWriter.WriteLine(System.Decimal)">
+            <summary />
+            <param name="value" />
+            <returns />
+        </member>
+        <member name="M:GameCore.BaseType.LoggerTextWriter.WriteLine(System.Double)">
+            <summary />
+            <param name="value" />
+            <returns />
+        </member>
+        <member name="M:GameCore.BaseType.LoggerTextWriter.WriteLine(System.Int32)">
+            <summary />
+            <param name="value" />
+            <returns />
+        </member>
+        <member name="M:GameCore.BaseType.LoggerTextWriter.WriteLine(System.Int64)">
+            <summary />
+            <param name="value" />
+            <returns />
+        </member>
+        <member name="M:GameCore.BaseType.LoggerTextWriter.WriteLine(System.Object)">
+            <summary />
+            <param name="value" />
+            <returns />
+        </member>
+        <member name="M:GameCore.BaseType.LoggerTextWriter.WriteLine(System.ReadOnlySpan{System.Char})">
+            <summary />
+            <param name="buffer" />
+            <returns />
+        </member>
+        <member name="M:GameCore.BaseType.LoggerTextWriter.WriteLine(System.Single)">
+            <summary />
+            <param name="value" />
+            <returns />
+        </member>
+        <member name="M:GameCore.BaseType.LoggerTextWriter.WriteLine(System.String,System.Object)">
+            <summary />
+            <param name="format" />
+            <param name="arg0" />
+            <returns />
+        </member>
+        <member name="M:GameCore.BaseType.LoggerTextWriter.WriteLine(System.String,System.Object,System.Object)">
+            <summary />
+            <param name="format" />
+            <param name="arg0" />
+            <param name="arg1" />
+            <returns />
+        </member>
+        <member name="M:GameCore.BaseType.LoggerTextWriter.WriteLine(System.String,System.Object,System.Object,System.Object)">
+            <summary />
+            <param name="format" />
+            <param name="arg0" />
+            <param name="arg1" />
+            <param name="arg2" />
+            <returns />
+        </member>
+        <member name="M:GameCore.BaseType.LoggerTextWriter.WriteLine(System.String,System.Object[])">
+            <summary />
+            <param name="format" />
+            <param name="arg" />
+            <returns />
+        </member>
+        <member name="M:GameCore.BaseType.LoggerTextWriter.WriteLine(System.String,System.ReadOnlySpan{System.Object})">
+            <summary />
+            <param name="format" />
+            <param name="arg" />
+            <returns />
+        </member>
+        <member name="M:GameCore.BaseType.LoggerTextWriter.WriteLine(System.Text.StringBuilder)">
+            <summary />
+            <param name="value" />
+            <returns />
+        </member>
+        <member name="M:GameCore.BaseType.LoggerTextWriter.WriteLine(System.UInt32)">
+            <summary />
+            <param name="value" />
+            <returns />
+        </member>
+        <member name="M:GameCore.BaseType.LoggerTextWriter.WriteLine(System.UInt64)">
+            <summary />
+            <param name="value" />
+            <returns />
+        </member>
+        <member name="T:GameCore.BaseType.Probability">
+            <summary>
+            Represents a probability value in the range [0.0, 1.0].
+            </summary>
+            <remarks>The <see cref="T:GameCore.BaseType.Probability" /> struct is designed to encapsulate a probability value, ensuring it
+            remains within the valid range of 0.0 to 1.0. It provides methods and operators for arithmetic operations, random
+            generation, and conversions to and from other numeric types.  This type is immutable. It is suitable
+            for use in scenarios requiring high-precision probability calculations, such as simulations or statistical
+            modeling. 精确到小数点后28位。</remarks>
+        </member>
+        <member name="F:GameCore.BaseType.Probability.n">
+            <summary />
+        </member>
+        <member name="M:GameCore.BaseType.Probability.#ctor(System.Decimal)">
+            <summary />
+        </member>
+        <member name="M:GameCore.BaseType.Probability.#ctor(System.Double)">
+            <summary />
+        </member>
+        <member name="M:GameCore.BaseType.Probability.Pass">
+            <summary />
+            <returns />
+        </member>
+        <member name="F:GameCore.BaseType.Probability.unitTestMaxValue">
+            <summary />
+        </member>
+        <member name="F:GameCore.BaseType.Probability.randomBuffer">
+            <summary />
+        </member>
+        <member name="M:GameCore.BaseType.Probability.NextRandom">
+            <summary>
+            Generates a new random probability value.
+            </summary>
+            <remarks>The generated probability is created using a high-precision random number generator. This
+            method is suitable for scenarios requiring precise random values within the range of probabilities.</remarks>
+            <returns>A <see cref="T:GameCore.BaseType.Probability" /> instance representing a random value between 0 and 1, inclusive.</returns>
+        </member>
+        <member name="P:GameCore.BaseType.Probability.Value">
+            <summary />
+        </member>
+        <member name="M:GameCore.BaseType.Probability.ToDouble">
+            <summary />
+            <returns />
+        </member>
+        <member name="M:GameCore.BaseType.Probability.op_Implicit(System.Decimal)~GameCore.BaseType.Probability">
+            <summary />
+        </member>
+        <member name="M:GameCore.BaseType.Probability.op_Implicit(System.Double)~GameCore.BaseType.Probability">
+            <summary />
+        </member>
+        <member name="M:GameCore.BaseType.Probability.op_Implicit(System.Int32)~GameCore.BaseType.Probability">
+            <summary />
+        </member>
+        <member name="M:GameCore.BaseType.Probability.op_Explicit(GameCore.BaseType.Probability)~System.Decimal">
+            <summary />
+        </member>
+        <member name="M:GameCore.BaseType.Probability.op_Explicit(GameCore.BaseType.Probability)~System.Double">
+            <summary />
+        </member>
+        <member name="M:GameCore.BaseType.Probability.ToString">
+            <summary />
+            <returns />
+        </member>
+        <member name="M:GameCore.BaseType.Probability.ToString(System.String)">
+            <summary />
+            <param name="format" />
+            <returns />
+        </member>
+        <member name="M:GameCore.BaseType.Probability.Equals(System.Object)">
+            <summary />
+            <param name="obj" />
+            <returns />
+        </member>
+        <member name="M:GameCore.BaseType.Probability.GetHashCode">
+            <summary />
+            <returns />
+        </member>
+        <member name="M:GameCore.BaseType.Probability.op_Equality(GameCore.BaseType.Probability,GameCore.BaseType.Probability)">
+            <summary />
+        </member>
+        <member name="M:GameCore.BaseType.Probability.op_Inequality(GameCore.BaseType.Probability,GameCore.BaseType.Probability)">
+            <summary />
+        </member>
+        <member name="M:GameCore.BaseType.Probability.op_LessThan(GameCore.BaseType.Probability,GameCore.BaseType.Probability)">
+            <summary />
+        </member>
+        <member name="M:GameCore.BaseType.Probability.op_GreaterThan(GameCore.BaseType.Probability,GameCore.BaseType.Probability)">
+            <summary />
+        </member>
+        <member name="M:GameCore.BaseType.Probability.op_LessThanOrEqual(GameCore.BaseType.Probability,GameCore.BaseType.Probability)">
+            <summary />
+        </member>
+        <member name="M:GameCore.BaseType.Probability.op_GreaterThanOrEqual(GameCore.BaseType.Probability,GameCore.BaseType.Probability)">
+            <summary />
+        </member>
+        <member name="M:GameCore.BaseType.Probability.op_Addition(GameCore.BaseType.Probability,GameCore.BaseType.Probability)">
+            <summary />
+        </member>
+        <member name="M:GameCore.BaseType.Probability.op_Subtraction(GameCore.BaseType.Probability,GameCore.BaseType.Probability)">
+            <summary />
+        </member>
+        <member name="M:GameCore.BaseType.Probability.op_Multiply(GameCore.BaseType.Probability,GameCore.BaseType.Probability)">
+            <summary />
+        </member>
+        <member name="M:GameCore.BaseType.Probability.op_Multiply(GameCore.BaseType.Probability,System.Decimal)">
+            <summary />
+        </member>
+        <member name="M:GameCore.BaseType.Probability.op_Multiply(System.Decimal,GameCore.BaseType.Probability)">
+            <summary />
+        </member>
+        <member name="T:GameCore.BaseType.PropertyVital">
+            <summary />
+        </member>
+        <member name="M:GameCore.BaseType.PropertyVital.OnRegisterGameClass">
+            <summary />
+            <returns />
+        </member>
+        <member name="F:GameCore.BaseType.PropertyVital.InnerValue">
+            <summary />
+        </member>
+        <member name="P:GameCore.BaseType.PropertyVital.GameCore#BaseInterface#IExtendedEnum#InnerValue">
+            <summary />
+        </member>
+        <member name="M:GameCore.BaseType.PropertyVital.ToString">
+            <summary />
+            <returns />
+        </member>
+        <member name="M:GameCore.BaseType.PropertyVital.op_Equality(GameCore.BaseType.PropertyVital,GameCore.BaseType.PropertyVital)">
+            <summary />
+        </member>
+        <member name="M:GameCore.BaseType.PropertyVital.op_Inequality(GameCore.BaseType.PropertyVital,GameCore.BaseType.PropertyVital)">
+            <summary />
+        </member>
+        <member name="M:GameCore.BaseType.PropertyVital.Equals(System.Object)">
+            <summary />
+            <param name="obj" />
+            <returns />
+        </member>
+        <member name="M:GameCore.BaseType.PropertyVital.GetHashCode">
+            <summary />
+            <returns />
+        </member>
+        <member name="M:GameCore.BaseType.PropertyVital.#ctor(GameCore.BaseType.EPropertyVital)">
+            <summary />
+        </member>
+        <member name="M:GameCore.BaseType.PropertyVital.#ctor(System.Enum)">
+            <summary />
+        </member>
+        <member name="M:GameCore.BaseType.PropertyVital.GameCore#BaseInterface#IExtendableEnum{GameCore#BaseType#PropertyVital}#Make(System.Enum)">
+            <summary />
+            <param name="enumValue" />
+            <returns />
+        </member>
+        <member name="M:GameCore.BaseType.PropertyVital.op_Implicit(GameCore.BaseType.PropertyVital)~GameCore.BaseType.ComponentTag">
+            <summary />
+        </member>
+        <member name="F:GameCore.BaseType.PropertyVital.Health">
+            <summary />
+        </member>
+        <member name="F:GameCore.BaseType.PropertyVital.Mana">
+            <summary />
+        </member>
+        <member name="T:GameCore.BaseType.SnowflakeIdGenerator">
+            <summary />
+        </member>
+        <member name="F:GameCore.BaseType.SnowflakeIdGenerator.Twepoch">
+            <summary />
+        </member>
+        <member name="F:GameCore.BaseType.SnowflakeIdGenerator.MachineIdBits">
+            <summary />
+        </member>
+        <member name="F:GameCore.BaseType.SnowflakeIdGenerator.SequenceBits">
+            <summary />
+        </member>
+        <member name="F:GameCore.BaseType.SnowflakeIdGenerator.MaxMachineId">
+            <summary />
+        </member>
+        <member name="F:GameCore.BaseType.SnowflakeIdGenerator.MaxSequence">
+            <summary />
+        </member>
+        <member name="F:GameCore.BaseType.SnowflakeIdGenerator._machineId">
+            <summary />
+        </member>
+        <member name="F:GameCore.BaseType.SnowflakeIdGenerator._lastTimestamp">
+            <summary />
+        </member>
+        <member name="F:GameCore.BaseType.SnowflakeIdGenerator._sequence">
+            <summary />
+        </member>
+        <member name="F:GameCore.BaseType.SnowflakeIdGenerator._lock">
+            <summary />
+        </member>
+        <member name="M:GameCore.BaseType.SnowflakeIdGenerator.#ctor(System.Int32)">
+            <summary />
+        </member>
+        <member name="M:GameCore.BaseType.SnowflakeIdGenerator.#ctor(System.Int64)">
+            <summary />
+        </member>
+        <member name="M:GameCore.BaseType.SnowflakeIdGenerator.NextId">
+            <summary />
+            <returns />
+        </member>
+        <member name="T:GameCore.BaseType.StateCounter`1">
+            <summary />
+        </member>
+        <member name="F:GameCore.BaseType.StateCounter`1._counters">
+            <summary />
+        </member>
+        <member name="F:GameCore.BaseType.StateCounter`1._countersImmunity">
+            <summary />
+        </member>
+        <member name="E:GameCore.BaseType.StateCounter`1.OnStateChange">
+            <summary />
+        </member>
+        <member name="M:GameCore.BaseType.StateCounter`1.Add(`0,System.Int32)">
+            <summary />
+            <param name="state" />
+            <param name="count" />
+            <returns />
+        </member>
+        <member name="M:GameCore.BaseType.StateCounter`1.AddImmunity(`0,System.Int32)">
+            <summary />
+            <param name="state" />
+            <param name="countImmunity" />
+            <returns />
+        </member>
+        <member name="P:GameCore.BaseType.StateCounter`1.States">
+            <summary />
+        </member>
+        <member name="M:GameCore.BaseType.StateCounter`1.GetEnabledStates">
+            <summary />
+            <returns />
+        </member>
+        <member name="M:GameCore.BaseType.StateCounter`1.HasState(`0)">
+            <summary />
+            <param name="state" />
+            <returns />
+        </member>
+        <member name="M:GameCore.BaseType.StateCounter`1.Count(`0)">
+            <summary />
+            <param name="state" />
+            <returns />
+        </member>
+        <member name="M:GameCore.BaseType.StateCounter`1.CountImmunity(`0)">
+            <summary />
+            <param name="state" />
+            <returns />
+        </member>
+        <member name="M:GameCore.BaseType.StateCounter`1.ToString">
+            <summary />
+            <returns />
+        </member>
+        <member name="T:GameCore.BaseType.StructRange`1">
+            <summary />
+        </member>
+        <member name="M:GameCore.BaseType.StructRange`1.#ctor(`0,`0)">
+            <summary />
+        </member>
+        <member name="P:GameCore.BaseType.StructRange`1.Min">
+            <summary />
+        </member>
+        <member name="P:GameCore.BaseType.StructRange`1.Max">
+            <summary />
+        </member>
+        <member name="T:GameCore.BaseType.TargetType">
+            <summary>
+            Defines the types of targets that can be selected or referenced in game operations.
+            </summary>
+            <remarks>
+            This enum is used throughout the targeting system to specify what kinds of objects
+            can be targeted by abilities, commands, or other game actions. It helps validate
+            target compatibility and filter appropriate targets for different operations.
+            </remarks>
+        </member>
+        <member name="F:GameCore.BaseType.TargetType.Any">
+            <summary>
+            Accepts any valid target type, including units and points.
+            </summary>
+            <remarks>
+            This is the most permissive target type, allowing operations to work with
+            any targetable object or location in the game world.
+            </remarks>
+        </member>
+        <member name="F:GameCore.BaseType.TargetType.Unit">
+            <summary>
+            Targets must be unit entities (living or interactive objects).
+            </summary>
+            <remarks>
+            This restricts targeting to units only, such as players, NPCs, creatures,
+            or other entity-based objects that can participate in game interactions.
+            </remarks>
+        </member>
+        <member name="F:GameCore.BaseType.TargetType.Point">
+            <summary>
+            Targets must be specific points or locations in the game world.
+            </summary>
+            <remarks>
+            This restricts targeting to positional coordinates or locations,
+            typically used for area-of-effect abilities or movement commands.
+            </remarks>
+        </member>
+        <member name="F:GameCore.BaseType.EUnitState.Invulnerable">
+            <summary>
+            无敌
+            </summary>
+        </member>
+        <member name="F:GameCore.BaseType.EUnitState.SpellImmunity">
+            <summary>
+            魔免
+            </summary>
+        </member>
+        <member name="F:GameCore.BaseType.EUnitState.Ethereal">
+            <summary>
+            物免
+            </summary>
+        </member>
+        <member name="F:GameCore.BaseType.EUnitState.Unkillable">
+            <summary>
+            免死
+            </summary>
+        </member>
+        <member name="F:GameCore.BaseType.EUnitState.Summoned">
+            <summary>
+            召唤
+            </summary>
+        </member>
+        <member name="F:GameCore.BaseType.EUnitState.UnCommandable">
+            <summary>
+            无法被玩家或AI命令
+            </summary>
+        </member>
+        <member name="F:GameCore.BaseType.EUnitState.Dead">
+            <summary>
+            死亡
+            </summary>
+        </member>
+        <member name="F:GameCore.BaseType.EUnitState.Illusion">
+            <summary>
+            幻象
+            </summary>
+        </member>
+        <member name="F:GameCore.BaseType.EUnitState.Hidden">
+            <summary>
+            隐藏
+            </summary>
+        </member>
+        <member name="F:GameCore.BaseType.EUnitState.InvisibleToEnemy">
+            <summary>
+            Indicates whether the entity is invisible to enemies. This affects how enemies perceive and interact with the
+            entity.
+            </summary>
+        </member>
+        <member name="F:GameCore.BaseType.EUnitState.Detected">
+            <summary>
+            Revealed to enemy, suppress InvisibleToEnemy
+            </summary>
+        </member>
+        <member name="F:GameCore.BaseType.EUnitState.UnobstructedSight">
+            <summary>
+            可理解为空中视野，视野范围为圆形，不会被障碍物阻挡
+            </summary>
+        </member>
+        <member name="F:GameCore.BaseType.EUnitState.IgnoreSelector">
+            <summary>
+            无法被搜索
+            </summary>
+        </member>
+        <member name="F:GameCore.BaseType.EUnitState.IgnoreTerrainHeight">
+            <summary>
+            Indicates whether terrain height should be ignored in calculations. Useful for scenarios where elevation is not
+            a factor.
+            </summary>
+        </member>
+        <member name="F:GameCore.BaseType.EUnitState.SuppressActor">
+            <summary>
+            隐藏表现
+            </summary>
+        </member>
+        <member name="F:GameCore.BaseType.EUnitState.SuppressDynamicCollision">
+            <summary>
+            忽略动态碰撞
+            </summary>
+        </member>
+        <member name="F:GameCore.BaseType.EUnitState.SuppressStaticCollision">
+            <summary>
+            忽略静态碰撞
+            </summary>
+        </member>
+        <member name="F:GameCore.BaseType.EUnitState.SuppressMovement">
+            <summary>
+            Temporarily prevents the unit from walking or pathfinding, such as when stunned or frozen by a buff. 
+            Unlike <see cref="F:GameCore.BaseType.UnitState.DisableMovement" /> this state suggests that the unit's movement is temporarily suppressed; it 
+            still allows the unit to handle approach orders and resume movement. The unit will proceed to moving 
+            once the suppression is lifted.
+            </summary>
+        </member>
+        <member name="F:GameCore.BaseType.EUnitState.DisableMovement">
+            <summary>
+            Permanently disables the unit's ability to move, preventing walking, pathfinding, or handling approach orders. 
+            Unlike <see cref="F:GameCore.BaseType.UnitState.SuppressMovement" /> this state indicates indefinite movement restriction; instead of temporarily
+            suppressed, the unit will not be able to handle any approaching orders.
+            </summary>
+        </member>
+        <member name="F:GameCore.BaseType.EUnitState.SuppressTurning">
+            <summary>
+            Temporarily prevents the unit from turning or facing to an object, such as when stunned or frozen by a buff. 
+            </summary>
+            <remarks>Unlike <see cref="F:GameCore.BaseType.UnitState.DisableTurning" /> this state suggests that the unit's turning is temporarily suppressed; it still allows the unit to handle approach orders and resume turning. The unit will proceed to turning once the suppression is lifted.
+            </remarks>
+        </member>
+        <member name="F:GameCore.BaseType.EUnitState.DisableTurning">
+            <summary>
+            Disables the ability to turn or face to an object.
+            </summary>
+            <remarks>This method prevents any further turning or facing actions on the object.  It is typically
+            used to lock the object's orientation in scenarios where facing is not allowed.</remarks>
+        </member>
+        <member name="T:GameCore.BaseType.ValidatorExtension">
+            <summary />
+        </member>
+        <member name="M:GameCore.BaseType.ValidatorExtension.AsValidator(GameCore.BaseType.ValidatorEffect)">
+            <summary />
+            <param name="validatorEffect" />
+            <returns />
+        </member>
+        <member name="T:GameCore.BaseType.ValueRange`1">
+            <summary>
+            Represents a range of values with minimum and maximum bounds for any comparable type.
+            </summary>
+            <typeparam name="T">The type of values in the range, which must implement <see cref="T:System.IComparable`1" />.</typeparam>
+            <remarks>
+            This struct automatically handles invalid ranges where min &gt; max by swapping the values and logging a warning.
+            It provides methods to check if a value falls within the defined range.
+            </remarks>
+        </member>
+        <member name="P:GameCore.BaseType.ValueRange`1.Min">
+            <summary>
+            Gets or sets the minimum value of the range.
+            </summary>
+        </member>
+        <member name="P:GameCore.BaseType.ValueRange`1.Max">
+            <summary>  
+            Gets or sets the maximum value of the range.
+            </summary>
+        </member>
+        <member name="M:GameCore.BaseType.ValueRange`1.#ctor(`0,`0)">
+            <summary>
+            Initializes a new instance of the <see cref="T:GameCore.BaseType.ValueRange`1" /> struct with the specified minimum and maximum values.
+            </summary>
+            <param name="min">The minimum value of the range.</param>
+            <param name="max">The maximum value of the range.</param>
+            <remarks>
+            If <paramref name="min" /> is greater than <paramref name="max" />, the values will be swapped and a warning will be logged.
+            </remarks>
+        </member>
+        <member name="M:GameCore.BaseType.ValueRange`1.IsInRange(`0)">
+            <summary>
+            Determines whether the specified value falls within this range (inclusive of boundaries).
+            </summary>
+            <param name="value">The value to check.</param>
+            <returns>
+                <c>true</c> if the value is within the range; otherwise, <c>false</c>.</returns>
+        </member>
+        <member name="F:GameCore.BaseType.UnitState.Invulnerable">
+            <summary>
+            无敌
+            </summary>
+        </member>
+        <member name="F:GameCore.BaseType.UnitState.SpellImmunity">
+            <summary>
+            魔免
+            </summary>
+        </member>
+        <member name="F:GameCore.BaseType.UnitState.Ethereal">
+            <summary>
+            物免
+            </summary>
+        </member>
+        <member name="F:GameCore.BaseType.UnitState.Unkillable">
+            <summary>
+            免死
+            </summary>
+        </member>
+        <member name="F:GameCore.BaseType.UnitState.Summoned">
+            <summary>
+            召唤
+            </summary>
+        </member>
+        <member name="F:GameCore.BaseType.UnitState.UnCommandable">
+            <summary>
+            无法被玩家或AI命令
+            </summary>
+        </member>
+        <member name="F:GameCore.BaseType.UnitState.Dead">
+            <summary>
+            死亡
+            </summary>
+        </member>
+        <member name="F:GameCore.BaseType.UnitState.Illusion">
+            <summary>
+            幻象
+            </summary>
+        </member>
+        <member name="F:GameCore.BaseType.UnitState.Hidden">
+            <summary>
+            隐藏
+            </summary>
+        </member>
+        <member name="F:GameCore.BaseType.UnitState.InvisibleToEnemy">
+            <summary>
+            Indicates whether the entity is invisible to enemies. This affects how enemies perceive and interact with the
+            entity.
+            </summary>
+        </member>
+        <member name="F:GameCore.BaseType.UnitState.Detected">
+            <summary>
+            Revealed to enemy, suppress InvisibleToEnemy
+            </summary>
+        </member>
+        <member name="F:GameCore.BaseType.UnitState.UnobstructedSight">
+            <summary>
+            可理解为空中视野，视野范围为圆形，不会被障碍物阻挡
+            </summary>
+        </member>
+        <member name="F:GameCore.BaseType.UnitState.IgnoreSelector">
+            <summary>
+            无法被搜索
+            </summary>
+        </member>
+        <member name="F:GameCore.BaseType.UnitState.IgnoreTerrainHeight">
+            <summary>
+            Indicates whether terrain height should be ignored in calculations. Useful for scenarios where elevation is not
+            a factor.
+            </summary>
+        </member>
+        <member name="F:GameCore.BaseType.UnitState.SuppressActor">
+            <summary>
+            隐藏表现
+            </summary>
+        </member>
+        <member name="F:GameCore.BaseType.UnitState.SuppressDynamicCollision">
+            <summary>
+            忽略动态碰撞
+            </summary>
+        </member>
+        <member name="F:GameCore.BaseType.UnitState.SuppressStaticCollision">
+            <summary>
+            忽略静态碰撞
+            </summary>
+        </member>
+        <member name="F:GameCore.BaseType.UnitState.SuppressMovement">
+            <summary>
+            Temporarily prevents the unit from walking or pathfinding, such as when stunned or frozen by a buff.
+            Unlike  this state suggests that the unit's movement is temporarily suppressed; it
+            still allows the unit to handle approach orders and resume movement. The unit will proceed to moving
+            once the suppression is lifted.
+            </summary>
+        </member>
+        <member name="F:GameCore.BaseType.UnitState.DisableMovement">
+            <summary>
+            Permanently disables the unit's ability to move, preventing walking, pathfinding, or handling approach orders.
+            Unlike  this state indicates indefinite movement restriction; instead of temporarily
+            suppressed, the unit will not be able to handle any approaching orders.
+            </summary>
+        </member>
+        <member name="F:GameCore.BaseType.UnitState.SuppressTurning">
+            <summary>
+            Temporarily prevents the unit from turning or facing to an object, such as when stunned or frozen by a buff.
+            </summary>
+            <remarks>
+            Unlike  this state suggests that the unit's turning is temporarily suppressed; it still allows the unit to handle approach orders and resume turning. The unit will proceed to turning once the suppression is lifted.
+            </remarks>
+        </member>
+        <member name="F:GameCore.BaseType.UnitState.DisableTurning">
+            <summary>
+            Disables the ability to turn or face to an object.
+            </summary>
+            <remarks>
+            This method prevents any further turning or facing actions on the object.  It is typically
+            used to lock the object's orientation in scenarios where facing is not allowed.
+            </remarks>
+        </member>
+    </members>
+</doc>

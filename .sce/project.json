@@ -1,0 +1,38 @@
+{
+  "projectId": "p_9tqf",
+  "projectCopyPath": "C:\\Users\\jljia\\.sce\\openhands-kit\\projects\\p_9tqf",
+  "bindTime": "2025-10-11T05:32:16.025Z",
+  "version": "1.0.0",
+  "workspacePath": "C:\\Dev\\AIProject\\project-h-sce",
+  "workspaceStatus": {
+    "method": "copy",
+    "directories": {
+      "src": {
+        "success": true,
+        "method": "copy",
+        "needsSync": false
+      },
+      "AppBundle": {
+        "success": true,
+        "method": "copy",
+        "needsSync": false
+      },
+      "ui": {
+        "success": true,
+        "method": "copy",
+        "needsSync": false
+      },
+      "docs": {
+        "success": true,
+        "method": "copy",
+        "needsSync": false
+      }
+    }
+  },
+  "metadata": {
+    "lastInit": "2025-10-11T05:32:16.025Z",
+    "initMethod": "create",
+    "mcpVersion": "1.0.0",
+    "lastSync": "2025-10-11T05:32:16.025Z"
+  }
+}

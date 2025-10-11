@@ -1,0 +1,140 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<doc>
+    <assembly>
+        <name>GameCore</name>
+    </assembly>
+    <members>
+        <member name="T:GameCore.UserCloudData.UserData`1">
+            <summary>
+            用户数据集合，提供高效的数据查询和分组功能
+            </summary>
+            <typeparam name="T">用户数据记录类型，必须实现IUserKeyRecord接口</typeparam>
+            <remarks>
+            该类封装了用户数据记录集合，提供按用户ID和数据键进行分组查询的功能。
+            适用于云数据查询结果的后续处理和分析。
+            </remarks>
+            <example>
+                <code>
+            // 查询用户数据
+            var result = await CloudData.QueryCurrencyAsync(userIds, keys);
+            if (result.IsSuccess)
+            {
+                var userData = result.Data;
+                
+                // 获取特定用户的数据
+                var userRecords = userData.GetByUserId(123L);
+                
+                // 获取特定键的数据
+                var keyRecords = userData.GetByKey("gold");
+                
+                // 检查数据存在性
+                if (userData.HasUserId(123L))
+                {
+                    // 处理数据...
+                }
+            }
+            </code>
+            </example>
+        </member>
+        <member name="M:GameCore.UserCloudData.UserData`1.#ctor(System.Collections.Generic.IEnumerable{`0})">
+            <summary>
+            用户数据集合，提供高效的数据查询和分组功能
+            </summary>
+            <typeparam name="T">用户数据记录类型，必须实现IUserKeyRecord接口</typeparam>
+            <remarks>
+            该类封装了用户数据记录集合，提供按用户ID和数据键进行分组查询的功能。
+            适用于云数据查询结果的后续处理和分析。
+            </remarks>
+            <example>
+                <code>
+            // 查询用户数据
+            var result = await CloudData.QueryCurrencyAsync(userIds, keys);
+            if (result.IsSuccess)
+            {
+                var userData = result.Data;
+                
+                // 获取特定用户的数据
+                var userRecords = userData.GetByUserId(123L);
+                
+                // 获取特定键的数据
+                var keyRecords = userData.GetByKey("gold");
+                
+                // 检查数据存在性
+                if (userData.HasUserId(123L))
+                {
+                    // 处理数据...
+                }
+            }
+            </code>
+            </example>
+        </member>
+        <member name="P:GameCore.UserCloudData.UserData`1.Records">
+            <summary>
+            原始记录集合
+            </summary>
+        </member>
+        <member name="M:GameCore.UserCloudData.UserData`1.GetByKey(System.String)">
+            <summary>
+            根据数据键分组查询
+            </summary>
+            <param name="key">数据键，不能为null或空</param>
+            <returns>匹配的记录集合，如果键为空则返回null</returns>
+            <remarks>
+            此方法会过滤出所有Key属性等于指定键的记录。
+            </remarks>
+        </member>
+        <member name="M:GameCore.UserCloudData.UserData`1.GetByUserId(System.Int64)">
+            <summary>
+            根据用户ID分组查询
+            </summary>
+            <param name="userId">用户ID</param>
+            <returns>该用户的所有记录</returns>
+            <remarks>
+            此方法会过滤出所有UserId属性等于指定用户ID的记录。
+            </remarks>
+        </member>
+        <member name="M:GameCore.UserCloudData.UserData`1.GetByUserIds(System.Int64[])">
+            <summary>
+            根据多个用户ID查询
+            </summary>
+            <param name="userIds">用户ID数组</param>
+            <returns>指定用户的所有记录</returns>
+        </member>
+        <member name="M:GameCore.UserCloudData.UserData`1.GetByKeys(System.String[])">
+            <summary>
+            根据多个数据键查询
+            </summary>
+            <param name="keys">数据键数组</param>
+            <returns>指定键的所有记录</returns>
+        </member>
+        <member name="M:GameCore.UserCloudData.UserData`1.HasUserId(System.Int64)">
+            <summary>
+            检查是否包含指定用户ID的记录
+            </summary>
+            <param name="userId">用户ID</param>
+            <returns>如果包含该用户的记录则返回true</returns>
+        </member>
+        <member name="M:GameCore.UserCloudData.UserData`1.HasKey(System.String)">
+            <summary>
+            检查是否包含指定键的记录
+            </summary>
+            <param name="key">数据键</param>
+            <returns>如果包含该键的记录则返回true</returns>
+        </member>
+        <member name="P:GameCore.UserCloudData.UserData`1.Count">
+            <summary>
+            获取记录总数
+            </summary>
+        </member>
+        <member name="P:GameCore.UserCloudData.UserData`1.UserCount">
+            <summary>
+            获取唯一用户ID的数量
+            </summary>
+        </member>
+        <member name="P:GameCore.UserCloudData.UserData`1.KeyCount">
+            <summary>
+            获取唯一键的数量
+            </summary>
+        </member>
+    </members>
+</doc>

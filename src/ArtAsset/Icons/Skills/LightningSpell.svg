@@ -1,0 +1,52 @@
+<svg width="64" height="64" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
+  <!-- 背景圆环 -->
+  <circle cx="32" cy="32" r="30" fill="#191970" stroke="#000080" stroke-width="2"/>
+  
+  <!-- 掌心雷主图案 -->
+  <!-- 闪电主体 -->
+  <g opacity="0.9">
+    <path d="M 32 10 L 28 22 L 35 22 L 30 35 L 38 35 L 32 54 L 36 42 L 29 42 L 34 29 L 26 29 Z" 
+          fill="#ffff00" stroke="#ffd700" stroke-width="1"/>
+  </g>
+  
+  <!-- 闪电高光 -->
+  <g opacity="0.8">
+    <path d="M 32 10 L 29 20 L 34 20 L 31 32 L 36 32 L 32 54" 
+          fill="none" stroke="#ffffff" stroke-width="2" stroke-linecap="round"/>
+  </g>
+  
+  <!-- 电弧效果 -->
+  <g opacity="0.7">
+    <!-- 左侧电弧 -->
+    <path d="M 20 25 Q 25 20 22 30 Q 18 35 25 32" fill="none" stroke="#87ceeb" stroke-width="2"/>
+    <!-- 右侧电弧 -->
+    <path d="M 44 25 Q 39 20 42 30 Q 46 35 39 32" fill="none" stroke="#87ceeb" stroke-width="2"/>
+    <!-- 上方电弧 -->
+    <path d="M 25 15 Q 32 12 39 15 Q 32 18 25 15" fill="none" stroke="#87ceeb" stroke-width="1.5"/>
+    <!-- 下方电弧 -->
+    <path d="M 25 49 Q 32 46 39 49 Q 32 52 25 49" fill="none" stroke="#87ceeb" stroke-width="1.5"/>
+  </g>
+  
+  <!-- 雷电环绕 -->
+  <g opacity="0.6">
+    <circle cx="32" cy="32" r="20" fill="none" stroke="#ffff00" stroke-width="1" stroke-dasharray="2,4"/>
+    <circle cx="32" cy="32" r="24" fill="none" stroke="#ffd700" stroke-width="1" stroke-dasharray="1,5"/>
+  </g>
+  
+  <!-- 电光粒子 -->
+  <g opacity="0.8">
+    <circle cx="15" cy="20" r="1" fill="#ffff00"/>
+    <circle cx="49" cy="25" r="1.5" fill="#ffd700"/>
+    <circle cx="18" cy="44" r="1" fill="#ffff00"/>
+    <circle cx="46" cy="40" r="1.5" fill="#ffd700"/>
+    <circle cx="25" cy="12" r="1" fill="#ffffff"/>
+    <circle cx="39" cy="52" r="1" fill="#ffffff"/>
+  </g>
+  
+  <!-- 闪光效果 -->
+  <g opacity="1">
+    <line x1="30" y1="8" x2="34" y2="12" stroke="#ffffff" stroke-width="3" stroke-linecap="round"/>
+    <line x1="30" y1="52" x2="34" y2="56" stroke="#ffffff" stroke-width="3" stroke-linecap="round"/>
+  </g>
+</svg>
+

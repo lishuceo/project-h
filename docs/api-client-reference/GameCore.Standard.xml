@@ -1,0 +1,125 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<doc>
+    <assembly>
+        <name>GameCore</name>
+    </assembly>
+    <members>
+        <member name="T:GameCore.Standard.DoubleUtilities">
+            <summary>
+            DoubleUtil uses fixed eps to provide fuzzy comparison functionality for doubles.
+            Note that FP noise is a big problem and using any of these compare 
+            methods is not a complete solution, but rather the way to reduce 
+            the probability of repeating unnecessary work.
+            </summary>
+        </member>
+        <member name="F:GameCore.Standard.DoubleUtilities.DBL_EPSILON">
+            <summary />
+        </member>
+        <member name="F:GameCore.Standard.DoubleUtilities.FLT_MIN">
+            <summary />
+        </member>
+        <member name="M:GameCore.Standard.DoubleUtilities.IsOne(System.Double)">
+            <summary>
+            IsOne - Returns whether or not the double is "close" to 1.  Same as AreClose(double, 1),
+            but this is faster.
+            </summary>
+            <returns>
+            bool - the result of the AreClose comparison.
+            </returns>
+            <param name="value"> The double to compare to 1. </param>
+        </member>
+        <member name="M:GameCore.Standard.DoubleUtilities.IsZero(System.Double)">
+            <summary>
+            IsZero - Returns whether or not the double is "close" to 0.  Same as AreClose(double, 0),
+            but this is faster.
+            </summary>
+            <returns>
+            bool - the result of the AreClose comparison.
+            </returns>
+            <param name="value"> The double to compare to 0. </param>
+        </member>
+        <member name="F:GameCore.Standard.DoubleUtilities.Epsilon">
+            <summary>
+            Epsilon - more or less random, more or less small number.
+            </summary>
+        </member>
+        <member name="M:GameCore.Standard.DoubleUtilities.AreClose(System.Double,System.Double)">
+            <summary>
+            AreClose returns whether or not two doubles are "close".  That is, whether or 
+            not they are within epsilon of each other.
+            There are plenty of ways for this to return false even for numbers which
+            are theoretically identical, so no code calling this should fail to work if this 
+            returns false. 
+            </summary>
+            <param name="value1">The first double to compare.</param>
+            <param name="value2">The second double to compare.</param>
+            <returns>The result of the AreClose comparison.</returns>
+        </member>
+        <member name="M:GameCore.Standard.DoubleUtilities.LessThan(System.Double,System.Double)">
+            <summary>
+            LessThan returns whether or not the first double is less than the second double.
+            That is, whether or not the first is strictly less than *and* not within epsilon of
+            the other number.
+            There are plenty of ways for this to return false even for numbers which
+            are theoretically identical, so no code calling this should fail to work if this 
+            returns false.
+            </summary>
+            <param name="value1">The first double to compare.</param>
+            <param name="value2">The second double to compare.</param>
+            <returns>The result of the LessThan comparison.</returns>
+        </member>
+        <member name="M:GameCore.Standard.DoubleUtilities.GreaterThan(System.Double,System.Double)">
+            <summary>
+            GreaterThan returns whether or not the first double is greater than the second double.
+            That is, whether or not the first is strictly greater than *and* not within epsilon of
+            the other number.
+            There are plenty of ways for this to return false even for numbers which
+            are theoretically identical, so no code calling this should fail to work if this 
+            returns false.
+            </summary>
+            <param name="value1">The first double to compare.</param>
+            <param name="value2">The second double to compare.</param>
+            <returns>The result of the GreaterThan comparison.</returns>
+        </member>
+        <member name="M:GameCore.Standard.DoubleUtilities.LessThanOrClose(System.Double,System.Double)">
+            <summary>
+            LessThanOrClose returns whether or not the first double is less than or close to
+            the second double.  That is, whether or not the first is strictly less than or within
+            epsilon of the other number.
+            There are plenty of ways for this to return false even for numbers which
+            are theoretically identical, so no code calling this should fail to work if this 
+            returns false.
+            </summary>
+            <param name="value1">The first double to compare.</param>
+            <param name="value2">The second double to compare.</param>
+            <returns>The result of the LessThanOrClose comparison.</returns>
+        </member>
+        <member name="M:GameCore.Standard.DoubleUtilities.GreaterThanOrClose(System.Double,System.Double)">
+            <summary>
+            GreaterThanOrClose returns whether or not the first double is greater than or close to
+            the second double.  That is, whether or not the first is strictly greater than or within
+            epsilon of the other number.
+            There are plenty of ways for this to return false even for numbers which
+            are theoretically identical, so no code calling this should fail to work if this 
+            returns false.
+            </summary>
+            <param name="value1">The first double to compare.</param>
+            <param name="value2">The second double to compare.</param>
+            <returns>The result of the GreaterThanOrClose comparison.</returns>
+        </member>
+        <member name="M:GameCore.Standard.DoubleUtilities.IsFinite(System.Double)">
+            <summary>
+            Test to see if a double is a finite number (is not NaN or Infinity).
+            </summary>
+            <param name="value">The value to test.</param>
+            <returns>Whether or not the value is a finite number.</returns>
+        </member>
+        <member name="M:GameCore.Standard.DoubleUtilities.IsValidSize(System.Double)">
+            <summary>
+            Test to see if a double a valid size value (is finite and &gt; 0).
+            </summary>
+            <param name="value">The value to test.</param>
+            <returns>Whether or not the value is a valid size value.</returns>
+        </member>
+    </members>
+</doc>

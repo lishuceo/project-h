@@ -1,0 +1,640 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>EngineCommon</name>
+    </assembly>
+    <members>
+        <member name="T:EngineCommon.ArrayView`1">
+            <summary>
+            交互用数组视图
+            </summary>
+            <typeparam name = "T"></typeparam>
+        </member>
+        <member name="F:EngineCommon.ArrayView`1.ptr">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:EngineCommon.ArrayView`1.length">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:EngineCommon.ArrayView`1.Item(System.Int32)">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:EngineCommon.ArrayView`1.#ctor(`0[],EngineCommon.GCPinner)">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:EngineCommon.ArrayView`1.Create(System.Int32,EngineCommon.GCPinner)">
+            <summary>
+            
+            </summary>
+            <param name="length"></param>
+            <param name="pinner"></param>
+            <returns></returns>
+        </member>
+        <member name="T:EngineCommon.ArrayViewRef`1">
+            <summary>
+            交互用数组视图 （引用版本）
+            </summary>
+            <typeparam name = "T"></typeparam>
+        </member>
+        <member name="F:EngineCommon.ArrayViewRef`1.reference">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:EngineCommon.ArrayViewRef`1.length">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:EngineCommon.ArrayViewRef`1.#ctor(`0[])">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:EngineCommon.ArrayViewRef`1.#ctor(System.ReadOnlySpan{`0})">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:EngineCommon.ArrayViewRef`1.#ctor(System.Collections.Generic.List{`0})">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:EngineCommon.ArrayViewRef`1.Item(System.Int32)">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:EngineCommon.ArrayViewRef`1.op_Implicit(`0[])~EngineCommon.ArrayViewRef{`0}">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:EngineCommon.ArrayViewRef`1.op_Implicit(System.Collections.Generic.List{`0})~EngineCommon.ArrayViewRef{`0}">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:EngineCommon.GCPinner">
+            <summary>
+            用于防止GC的内存固定器
+            </summary>
+        </member>
+        <member name="F:EngineCommon.GCPinner.pool">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:EngineCommon.GCPinner.pinnedHandles">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:EngineCommon.GCPinner.#ctor(System.Collections.Generic.List{System.Runtime.InteropServices.GCHandle})">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:EngineCommon.GCPinner.Finalize">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:EngineCommon.GCPinner.Dispose">
+            <summary>
+            
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:EngineCommon.GCPinner.Create">
+            <summary>
+            
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:EngineCommon.GCPinner.Pin``1(``0@)">
+            <summary>
+            
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="data"></param>
+            <returns></returns>
+        </member>
+        <member name="M:EngineCommon.GCPinner.Pin(EngineCommon.UTF8String@)">
+            <summary>
+            
+            </summary>
+            <param name="str"></param>
+            <returns></returns>
+        </member>
+        <member name="M:EngineCommon.GCPinner.Pin``1(``0[])">
+            <summary>
+            
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="array"></param>
+            <returns></returns>
+        </member>
+        <member name="M:EngineCommon.GCPinner.Pin``1(``0)">
+            <summary>
+            
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="obj"></param>
+            <returns></returns>
+        </member>
+        <member name="M:EngineCommon.GCPinner.UnpinAll">
+            <summary>
+            
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:EngineCommon.NativePtr">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:EngineCommon.NativePtr.#ctor(System.IntPtr)">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:EngineCommon.NativePtr.op_Equality(EngineCommon.NativePtr,EngineCommon.NativePtr)">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:EngineCommon.NativePtr.op_Inequality(EngineCommon.NativePtr,EngineCommon.NativePtr)">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:EngineCommon.NativePtr.Equals(System.Object)">
+            <summary>
+            
+            </summary>
+            <param name="obj"></param>
+            <returns></returns>
+        </member>
+        <member name="M:EngineCommon.NativePtr.GetHashCode">
+            <summary>
+            
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="F:EngineCommon.NativePtr.value">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:EngineCommon.NativePtr.Zero">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:EngineCommon.SequentialPair`2">
+            <typeparam name="K"></typeparam>
+            <typeparam name="V"></typeparam>
+        </member>
+        <member name="M:EngineCommon.SequentialPair`2.#ctor(`0,`1)">
+            <typeparam name="K"></typeparam>
+            <typeparam name="V"></typeparam>
+        </member>
+        <member name="F:EngineCommon.SequentialPair`2.Key">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:EngineCommon.SequentialPair`2.Value">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:EngineCommon.SpanMarshal">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:EngineCommon.SpanMarshal.AsBytes``1(``0@)">
+            <summary>
+            
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="t"></param>
+            <returns></returns>
+        </member>
+        <member name="M:EngineCommon.SpanMarshal.AsBytes``1(System.ReadOnlySpan{``0})">
+            <summary>
+            
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="span"></param>
+            <returns></returns>
+        </member>
+        <member name="M:EngineCommon.SpanMarshal.As``1(System.Byte[])">
+            <summary>
+            
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="bytes"></param>
+            <returns></returns>
+        </member>
+        <member name="M:EngineCommon.SpanMarshal.As``1(System.Span{System.Byte})">
+            <summary>
+            
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="span"></param>
+            <returns></returns>
+        </member>
+        <member name="M:EngineCommon.SpanMarshal.AsNullable``1(System.Byte[])">
+            <summary>
+            
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="bytes"></param>
+            <returns></returns>
+        </member>
+        <member name="M:EngineCommon.SpanMarshal.AsNullable``1(System.Span{System.Byte})">
+            <summary>
+            
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="span"></param>
+            <returns></returns>
+        </member>
+        <member name="M:EngineCommon.SpanMarshal.AsNullable``1(System.ReadOnlySpan{System.Byte})">
+            <summary>
+            
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="span"></param>
+            <returns></returns>
+        </member>
+        <member name="M:EngineCommon.SpanMarshal.As``1(System.ReadOnlySpan{System.Byte})">
+            <summary>
+            
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="span"></param>
+            <returns></returns>
+        </member>
+        <member name="M:EngineCommon.SpanMarshal.As``1(System.Span{System.Byte},System.Int32)">
+            <summary>
+            
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="span"></param>
+            <param name="starting"></param>
+            <returns></returns>
+        </member>
+        <member name="M:EngineCommon.SpanMarshal.As``1(System.ReadOnlySpan{System.Byte},System.Int32)">
+            <summary>
+            
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="span"></param>
+            <param name="starting"></param>
+            <returns></returns>
+        </member>
+        <member name="M:EngineCommon.SpanMarshal.MarshalAs``1(System.Double)">
+            <summary>
+            
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="value"></param>
+            <returns></returns>
+        </member>
+        <member name="M:EngineCommon.SpanMarshal.AsSpan``1(System.ReadOnlySpan{System.Byte})">
+            <summary>
+            
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="span"></param>
+            <returns></returns>
+        </member>
+        <member name="M:EngineCommon.SpanMarshal.AsBytes``1(System.Span{``0})">
+            <summary>
+            
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="span"></param>
+            <returns></returns>
+        </member>
+        <member name="M:EngineCommon.SpanMarshal.AsSpan``1(System.Span{System.Byte})">
+            <summary>
+            
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="span"></param>
+            <returns></returns>
+        </member>
+        <member name="M:EngineCommon.SpanMarshal.Append``1(System.ReadOnlySpan{System.Byte},``0@)">
+            <summary>
+            
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="bytes"></param>
+            <param name="value"></param>
+            <returns></returns>
+        </member>
+        <member name="M:EngineCommon.SpanMarshal.Prepend``1(System.ReadOnlySpan{System.Byte},``0@)">
+            <summary>
+            
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="bytes"></param>
+            <param name="value"></param>
+            <returns></returns>
+        </member>
+        <member name="M:EngineCommon.SpanMarshal.Append``1(``0@,System.ReadOnlySpan{System.Byte})">
+            <summary>
+            
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="t"></param>
+            <param name="span"></param>
+            <returns></returns>
+        </member>
+        <member name="M:EngineCommon.SpanMarshal.Prepend``1(``0@,System.ReadOnlySpan{System.Byte})">
+            <summary>
+            
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="t"></param>
+            <param name="span"></param>
+            <returns></returns>
+        </member>
+        <member name="M:EngineCommon.SpanMarshal.Read``1(System.ReadOnlySpan{System.Byte}@)">
+            <summary>
+            
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="bytes"></param>
+            <returns></returns>
+        </member>
+        <member name="M:EngineCommon.SpanMarshal.Write``1(System.Span{System.Byte}@,``0)">
+            <summary>
+            
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="bytes"></param>
+            <param name="value"></param>
+            <returns></returns>
+        </member>
+        <member name="T:EngineCommon.StructView`1">
+            <summary>
+            交互用结构体视图
+            </summary>
+            <typeparam name = "T"></typeparam>
+        </member>
+        <member name="F:EngineCommon.StructView`1.ptr">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:EngineCommon.StructView`1.size">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:EngineCommon.StructView`1.Data">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:EngineCommon.StructView`1.#ctor(System.IntPtr)">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:EngineCommon.StructView`1.#ctor(`0@,EngineCommon.GCPinner)">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:EngineCommon.StructView`1.Create(EngineCommon.GCPinner)">
+            <summary>
+            
+            </summary>
+            <param name="pinner"></param>
+            <returns></returns>
+        </member>
+        <member name="M:EngineCommon.StructView`1.op_Implicit(EngineCommon.StructView{`0})~System.Boolean">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:EngineCommon.StructView`1.op_Implicit(EngineCommon.StructView{`0})~System.Nullable{`0}">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:EngineCommon.StructView`1.op_Implicit(EngineCommon.StructView{`0})~EngineCommon.AnyStructView">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:EngineCommon.AnyStructView">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:EngineCommon.AnyStructView.ptr">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:EngineCommon.AnyStructView.size">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:EngineCommon.AnyStructView.#ctor">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:EngineCommon.AnyStructView.Assign``1(EngineCommon.StructView{``0})">
+            <summary>
+            
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="other"></param>
+            <returns></returns>
+        </member>
+        <member name="T:EngineCommon.UTF8String">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:EngineCommon.UTF8String.IsNullOrEmpty">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:EngineCommon.UTF8String.Bytes">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:EngineCommon.UTF8String.Length">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:EngineCommon.UTF8String.#ctor(System.Byte[])">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:EngineCommon.UTF8String.#ctor(System.ReadOnlySpan{System.Byte})">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:EngineCommon.UTF8String.#ctor(System.String)">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:EngineCommon.UTF8String.#ctor(System.ReadOnlySpan{System.Char})">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:EngineCommon.UTF8String.#ctor(EngineCommon.UTF8String)">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:EngineCommon.UTF8String.ToString">
+            <summary>
+            
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:EngineCommon.UTF8String.ToRawString">
+            <summary>
+            转换为内存布局不变的原生字符串
+            </summary>
+        </member>
+        <member name="M:EngineCommon.UTF8String.FromRawString(System.String)">
+            <summary>
+            
+            </summary>
+            <param name="rawString"></param>
+            <returns></returns>
+        </member>
+        <member name="M:EngineCommon.UTF8String.AsSpan">
+            <summary>
+            
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:EngineCommon.UTF8String.op_Implicit(System.Byte[])~EngineCommon.UTF8String">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:EngineCommon.UTF8String.op_Implicit(System.ReadOnlySpan{System.Byte})~EngineCommon.UTF8String">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:EngineCommon.UTF8String.op_Implicit(System.String)~EngineCommon.UTF8String">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:EngineCommon.UTF8String.op_Implicit(System.ReadOnlySpan{System.Char})~EngineCommon.UTF8String">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:EngineCommon.UTF8String.op_Implicit(EngineCommon.UTF8String)~System.Byte[]">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:EngineCommon.UTF8String.op_Implicit(EngineCommon.UTF8String)~System.ReadOnlySpan{System.Byte}">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:EngineCommon.UTF8String.op_Implicit(EngineCommon.UTF8String)~System.String">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:EngineCommon.UTF8String.Empty">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:EngineCommon.UTF8StringView">
+            <summary>
+            交互用UTF8字符串视图
+            </summary>
+        </member>
+        <member name="F:EngineCommon.UTF8StringView.ptr">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:EngineCommon.UTF8StringView.length">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:EngineCommon.UTF8StringView.#ctor(EngineCommon.UTF8String,EngineCommon.GCPinner)">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:EngineCommon.UTF8StringView.#ctor(System.Byte[],EngineCommon.GCPinner)">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:EngineCommon.UTF8StringViewRef">
+            <summary>
+            交互用UTF8字符串视图（引用版）
+            </summary>
+        </member>
+        <member name="F:EngineCommon.UTF8StringViewRef.reference">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:EngineCommon.UTF8StringViewRef.length">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:EngineCommon.UTF8StringViewRef.#ctor(EngineCommon.UTF8String)">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:EngineCommon.UTF8StringViewRef.#ctor(System.Byte[])">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:EngineCommon.UTF8StringViewRef.op_Implicit(EngineCommon.UTF8String)~EngineCommon.UTF8StringViewRef">
+            <summary>
+            
+            </summary>
+        </member>
+    </members>
+</doc>

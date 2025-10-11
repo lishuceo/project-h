@@ -1,0 +1,44 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<doc>
+    <assembly>
+        <name>GameCore</name>
+    </assembly>
+    <members>
+        <member name="T:GameCore.CostSystem.ICostSpender">
+            <summary>
+            Everything that implements this interface should call InitializeCooldown in its constructor, and ClearUpCooldowns in its dispose method.
+            </summary>
+        </member>
+        <member name="P:GameCore.CostSystem.ICostSpender.Cooldown">
+            <summary />
+        </member>
+        <member name="P:GameCore.CostSystem.ICostSpender.Charge">
+            <summary />
+        </member>
+        <member name="P:GameCore.CostSystem.ICostSpender.Item">
+            <summary />
+        </member>
+        <member name="M:GameCore.CostSystem.ICostSpender.GetCooldown(GameCore.BaseType.CooldownType)">
+            <summary />
+            <param name="type" />
+            <returns />
+        </member>
+        <member name="M:GameCore.CostSystem.ICostSpender.GetCooldownOwner(GameCore.Struct.CooldownLocation,GameCore.Interface.IExecutionContext)">
+            <summary />
+            <param name="location" />
+            <param name="context" />
+            <returns />
+        </member>
+        <member name="M:GameCore.CostSystem.ICostSpender.CheckCooldownAndCharge">
+            <summary />
+            <returns />
+        </member>
+        <member name="T:GameCore.CostSystem.ISpendable">
+            <summary />
+        </member>
+        <member name="M:GameCore.CostSystem.ISpendable.CheckAffordable">
+            <summary />
+            <returns />
+        </member>
+    </members>
+</doc>

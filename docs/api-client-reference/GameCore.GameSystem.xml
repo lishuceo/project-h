@@ -1,0 +1,846 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<doc>
+    <assembly>
+        <name>GameCore</name>
+    </assembly>
+    <members>
+        <member name="T:GameCore.GameSystem.Data.GameDataGameMode">
+            <summary />
+        </member>
+        <member name="P:GameCore.GameSystem.Data.GameDataGameMode.Gameplay">
+            <summary />
+        </member>
+        <member name="P:GameCore.GameSystem.Data.GameDataGameMode.GameUI">
+            <summary />
+        </member>
+        <member name="P:GameCore.GameSystem.Data.GameDataGameMode.PlayerSettings">
+            <summary />
+        </member>
+        <member name="P:GameCore.GameSystem.Data.GameDataGameMode.ExperienceGrant">
+            <summary />
+        </member>
+        <member name="P:GameCore.GameSystem.Data.GameDataGameMode.DisplayInfo">
+            <summary />
+        </member>
+        <member name="P:GameCore.GameSystem.Data.GameDataGameMode.SceneList">
+            <summary />
+        </member>
+        <member name="P:GameCore.GameSystem.Data.GameDataGameMode.DefaultScene">
+            <summary>
+            The default scene for this game mode. The server will try to load this scene when the game starts, and all players will be set to this scene by default.
+            </summary>
+        </member>
+        <member name="T:GameCore.GameSystem.Data.GameDataGameplay">
+            <summary>
+            定义游戏核心玩法规则和全局配置，包含游戏运行时的关键参数和系统配置。
+            </summary>
+            <remarks>
+            此类作为游戏玩法的中央配置中心，包含影响整个游戏体验的全局设置。
+            通过此配置类可以统一管理各种游戏系统的默认行为和规则参数。
+            </remarks>
+        </member>
+        <member name="P:GameCore.GameSystem.Data.GameDataGameplay.DefaultWaveAI">
+            <summary>
+            获取或设置默认的波次AI配置，用于控制游戏中敌方单位的自动行为模式。
+            </summary>
+            <remarks>
+            此配置定义了游戏中AI单位的默认决策逻辑，包括移动模式、攻击策略、编队行为等。
+            所有未明确指定AI配置的敌方单位将使用此默认配置。
+            </remarks>
+        </member>
+        <member name="P:GameCore.GameSystem.Data.GameDataGameplay.ItemQualityList">
+            <summary>
+            获取或设置全局物品品质配置列表，定义游戏中所有品质等级的视觉表现和特效规则。
+            </summary>
+            <remarks>
+                <para>此列表按品质等级顺序排列，物品的<see cref="P:GameCore.ItemSystem.Item.Quality" />值用作索引来查找对应的品质配置：</para>
+                <list type="bullet">
+                    <item>
+                        <description>
+                            <see cref="P:GameCore.ItemSystem.Item.Quality" /> = 0：使用列表中第一个品质配置（索引0）</description>
+                    </item>
+                    <item>
+                        <description>
+                            <see cref="P:GameCore.ItemSystem.Item.Quality" /> = 1：使用列表中第二个品质配置（索引1），以此类推</description>
+                    </item>
+                    <item>
+                        <description>如果<see cref="P:GameCore.ItemSystem.Item.Quality" />超出列表范围，则使用最后一个品质配置</description>
+                    </item>
+                    <item>
+                        <description>如果列表为空或null，物品将不应用任何品质相关的视觉效果</description>
+                    </item>
+                </list>
+                <para>品质配置影响物品在UI中的显示效果、地面掉落时的特效表现等视觉元素，
+            是实现物品稀有度系统的核心配置。建议按从低到高的品质顺序排列配置项。</para>
+            </remarks>
+        </member>
+        <member name="T:GameCore.GameSystem.Data.GameDataGlobalConfig">
+            <summary>
+            Represents the global configuration for game data, including available game modes and testing settings.
+            </summary>
+            <remarks>This class provides a centralized configuration for managing game modes and testing parameters.  It
+            includes a dictionary of available game modes, a default game mode for testing, and settings for single-player
+            testing.</remarks>
+        </member>
+        <member name="P:GameCore.GameSystem.Data.GameDataGlobalConfig.AvailableGameModes">
+            <summary>
+            Register the game mod for the game system.
+            in non-testing (online) mode, the server will send game mode strings to the engine,
+            and the engine will use this to determine which game mode to use.
+            </summary>
+        </member>
+        <member name="P:GameCore.GameSystem.Data.GameDataGlobalConfig.TestGameMode">
+            <summary>
+            The game mode to use when testing the game remotely or locally.
+            </summary>
+        </member>
+        <member name="P:GameCore.GameSystem.Data.GameDataGlobalConfig.SinglePlayerTestSlotId">
+            <summary>
+            The player slot ID the local player will use in single-player testing mode.
+            </summary>
+        </member>
+        <member name="T:GameCore.GameSystem.Data.GameDataRule">
+            <summary>
+            Represents the abstract base class for all game rule configurations, defining how game systems behave and interact.
+            </summary>
+            <remarks>
+            This class serves as the foundation for all rule-based game logic, including victory conditions, gameplay mechanics,
+            resource management rules, and behavioral constraints. Derived classes implement specific rule types that govern
+            different aspects of gameplay, allowing for flexible and configurable game systems that can be modified without
+            code changes.
+            </remarks>
+        </member>
+        <member name="T:GameCore.GameSystem.Data.IGameDataGameUI">
+            <summary />
+        </member>
+        <member name="M:GameCore.GameSystem.Data.IGameDataGameUI.GetStandardUIZIndex(GameCore.GameSystem.Enum.StandardUIType)">
+            <summary />
+            <param name="uiType" />
+            <returns />
+        </member>
+        <member name="M:GameCore.GameSystem.Data.IGameDataGameUI.CreateDefaultUI">
+            <summary />
+            <returns />
+        </member>
+        <member name="T:GameCore.GameSystem.Enum.EStandardUIType">
+            <summary>
+            标准UI类型枚举，按照传统游戏UI渲染优先级排序
+            数值越小的元素渲染层级越低（越靠后），数值越大的元素渲染层级越高（越靠前）
+            </summary>
+            <remarks>
+            渲染优先级从低到高的分层逻辑：
+            1. 基础游戏控制层：摇杆、地图等基础交互元素
+            2. 信息面板层：背包、角色面板、任务等游戏信息界面
+            3. 系统功能层：设置、排行榜等系统级功能
+            4. 交互反馈层：聊天、对话等即时交互
+            5. 顶层通知层：通知、主菜单等最高优先级UI
+            </remarks>
+        </member>
+        <member name="F:GameCore.GameSystem.Enum.EStandardUIType.Joystick">
+            <summary>
+            虚拟摇杆控制 - 基础移动控制，应在最底层
+            </summary>
+        </member>
+        <member name="F:GameCore.GameSystem.Enum.EStandardUIType.Map">
+            <summary>
+            游戏地图界面 - 基础导航信息
+            </summary>
+        </member>
+        <member name="F:GameCore.GameSystem.Enum.EStandardUIType.CharacterSheet">
+            <summary>
+            角色属性面板 - 角色基础信息
+            </summary>
+        </member>
+        <member name="F:GameCore.GameSystem.Enum.EStandardUIType.Inventory">
+            <summary>
+            物品背包界面 - 物品管理
+            </summary>
+        </member>
+        <member name="F:GameCore.GameSystem.Enum.EStandardUIType.Quest">
+            <summary>
+            任务追踪显示 - 当前活跃任务
+            </summary>
+        </member>
+        <member name="F:GameCore.GameSystem.Enum.EStandardUIType.QuestLog">
+            <summary>
+            任务日志面板 - 完整任务列表
+            </summary>
+        </member>
+        <member name="F:GameCore.GameSystem.Enum.EStandardUIType.Crafting">
+            <summary>
+            制作合成界面 - 物品制作
+            </summary>
+        </member>
+        <member name="F:GameCore.GameSystem.Enum.EStandardUIType.TalentTree">
+            <summary>
+            技能天赋树 - 角色成长
+            </summary>
+        </member>
+        <member name="F:GameCore.GameSystem.Enum.EStandardUIType.Leaderboards">
+            <summary>
+            排行榜界面 - 竞技信息
+            </summary>
+        </member>
+        <member name="F:GameCore.GameSystem.Enum.EStandardUIType.Settings">
+            <summary>
+            游戏设置面板 - 系统配置
+            </summary>
+        </member>
+        <member name="F:GameCore.GameSystem.Enum.EStandardUIType.Chat">
+            <summary>
+            聊天系统界面 - 玩家交流
+            </summary>
+        </member>
+        <member name="F:GameCore.GameSystem.Enum.EStandardUIType.Dialogue">
+            <summary>
+            NPC对话界面 - 剧情交互，需要较高优先级
+            </summary>
+        </member>
+        <member name="F:GameCore.GameSystem.Enum.EStandardUIType.Notifications">
+            <summary>
+            系统通知提示 - 重要信息通知
+            </summary>
+        </member>
+        <member name="F:GameCore.GameSystem.Enum.EStandardUIType.MainMenu">
+            <summary>
+            主菜单界面 - 最高优先级的模态界面
+            </summary>
+        </member>
+        <member name="F:GameCore.GameSystem.Enum.EStandardUIType.Minimap">
+            <summary>
+            小地图/雷达 - 局部区域导航，通常固定显示
+            </summary>
+        </member>
+        <member name="F:GameCore.GameSystem.Enum.EStandardUIType.Hotbar">
+            <summary>
+            快捷栏/技能栏 - 快速访问技能和物品
+            </summary>
+        </member>
+        <member name="F:GameCore.GameSystem.Enum.EStandardUIType.StatusBar">
+            <summary>
+            血条/状态栏 - 角色生命值、法力值等关键状态。
+            注意这是指 UI 中的血条/状态栏，而非实体组件中的血条（位于场景中）。
+            </summary>
+        </member>
+        <member name="F:GameCore.GameSystem.Enum.EStandardUIType.Shop">
+            <summary>
+            商店/交易界面 - 商品购买和交易
+            </summary>
+        </member>
+        <member name="F:GameCore.GameSystem.Enum.EStandardUIType.Party">
+            <summary>
+            团队/组队界面 - 多人游戏团队管理
+            </summary>
+        </member>
+        <member name="F:GameCore.GameSystem.Enum.EStandardUIType.Social">
+            <summary>
+            好友/社交面板 - 社交功能管理
+            </summary>
+        </member>
+        <member name="F:GameCore.GameSystem.Enum.EStandardUIType.Achievement">
+            <summary>
+            成就系统界面 - 成就展示和追踪
+            </summary>
+        </member>
+        <member name="F:GameCore.GameSystem.Enum.EStandardUIType.Tutorial">
+            <summary>
+            教程/引导界面 - 新手引导和帮助
+            </summary>
+        </member>
+        <member name="F:GameCore.GameSystem.Enum.EStandardUIType.Reward">
+            <summary>
+            奖励选择面板 - 游戏中的升级/奖励选择界面，需要暂停游戏并强制选择
+            </summary>
+            <remarks>
+            类似《吸血鬼幸存者》等游戏中的升级选择面板，具有以下特点：
+            - 模态交互，暂停游戏进行
+            - 阻止其他UI操作
+            - 要求玩家必须做出选择才能继续
+            - 优先级应高于一般UI但低于系统确认对话框
+            </remarks>
+        </member>
+        <member name="F:GameCore.GameSystem.Enum.EStandardUIType.ConfirmDialog">
+            <summary>
+            确认对话框 - 重要操作确认，需要最高优先级
+            </summary>
+        </member>
+        <member name="F:GameCore.GameSystem.Enum.EStandardUIType.ErrorDialog">
+            <summary>
+            系统错误提示 - 错误信息显示，最高优先级
+            </summary>
+        </member>
+        <member name="F:GameCore.GameSystem.Enum.EStandardUIType.Loading">
+            <summary>
+            加载界面 - 场景切换时的加载提示
+            </summary>
+        </member>
+        <member name="T:GameCore.GameSystem.Enum.StandardUIType">
+            <summary />
+        </member>
+        <member name="P:GameCore.GameSystem.Enum.StandardUIType.ExpectedZIndex">
+            <summary>
+            获取当前标准UI类型的期望ZIndex值
+            </summary>
+            <returns>
+            根据当前游戏模式的UI配置计算得出的ZIndex值，如果无法获取配置则返回null
+            </returns>
+            <remarks>
+                <para>此属性会自动从当前游戏模式的 <see cref="!:GameDataGameUI" /> 配置中获取ZIndex值。</para>
+                <para>计算公式：ZIndex = BaseZIndex + (在渲染顺序数组中的索引 × ZIndexStep)</para>
+                <para>如果满足以下任一条件，将返回null：</para>
+                <list type="bullet">
+                    <item>游戏模式未初始化</item>
+                    <item>游戏模式数据为空</item>
+                    <item>UI配置未设置</item>
+                    <item>当前UI类型不在渲染顺序配置中</item>
+                </list>
+                <para>建议在使用前检查返回值是否为null，并提供合适的默认值。</para>
+            </remarks>
+            <example>
+                <code>
+            var zIndex = StandardUIType.Chat.ExpectedZIndex;
+            if (zIndex.HasValue)
+            {
+                control.ZIndex = zIndex.Value;
+            }
+            else
+            {
+                // 使用默认值或记录警告
+                control.ZIndex = 1000; // 默认值
+                Game.Logger.LogWarning("Unable to get ZIndex for {UIType}, using default", StandardUIType.Chat);
+            }
+            </code>
+            </example>
+        </member>
+        <member name="F:GameCore.GameSystem.Enum.StandardUIType.Joystick">
+            <summary>
+            虚拟摇杆控制 - 基础移动控制，应在最底层
+            </summary>
+        </member>
+        <member name="F:GameCore.GameSystem.Enum.StandardUIType.Map">
+            <summary>
+            游戏地图界面 - 基础导航信息
+            </summary>
+        </member>
+        <member name="F:GameCore.GameSystem.Enum.StandardUIType.CharacterSheet">
+            <summary>
+            角色属性面板 - 角色基础信息
+            </summary>
+        </member>
+        <member name="F:GameCore.GameSystem.Enum.StandardUIType.Inventory">
+            <summary>
+            物品背包界面 - 物品管理
+            </summary>
+        </member>
+        <member name="F:GameCore.GameSystem.Enum.StandardUIType.Quest">
+            <summary>
+            任务追踪显示 - 当前活跃任务
+            </summary>
+        </member>
+        <member name="F:GameCore.GameSystem.Enum.StandardUIType.QuestLog">
+            <summary>
+            任务日志面板 - 完整任务列表
+            </summary>
+        </member>
+        <member name="F:GameCore.GameSystem.Enum.StandardUIType.Crafting">
+            <summary>
+            制作合成界面 - 物品制作
+            </summary>
+        </member>
+        <member name="F:GameCore.GameSystem.Enum.StandardUIType.TalentTree">
+            <summary>
+            技能天赋树 - 角色成长
+            </summary>
+        </member>
+        <member name="F:GameCore.GameSystem.Enum.StandardUIType.Leaderboards">
+            <summary>
+            排行榜界面 - 竞技信息
+            </summary>
+        </member>
+        <member name="F:GameCore.GameSystem.Enum.StandardUIType.Settings">
+            <summary>
+            游戏设置面板 - 系统配置
+            </summary>
+        </member>
+        <member name="F:GameCore.GameSystem.Enum.StandardUIType.Chat">
+            <summary>
+            聊天系统界面 - 玩家交流
+            </summary>
+        </member>
+        <member name="F:GameCore.GameSystem.Enum.StandardUIType.Dialogue">
+            <summary>
+            NPC对话界面 - 剧情交互，需要较高优先级
+            </summary>
+        </member>
+        <member name="F:GameCore.GameSystem.Enum.StandardUIType.Notifications">
+            <summary>
+            系统通知提示 - 重要信息通知
+            </summary>
+        </member>
+        <member name="F:GameCore.GameSystem.Enum.StandardUIType.MainMenu">
+            <summary>
+            主菜单界面 - 最高优先级的模态界面
+            </summary>
+        </member>
+        <member name="F:GameCore.GameSystem.Enum.StandardUIType.Minimap">
+            <summary>
+            小地图/雷达 - 局部区域导航，通常固定显示
+            </summary>
+        </member>
+        <member name="F:GameCore.GameSystem.Enum.StandardUIType.Hotbar">
+            <summary>
+            快捷栏/技能栏 - 快速访问技能和物品
+            </summary>
+        </member>
+        <member name="F:GameCore.GameSystem.Enum.StandardUIType.StatusBar">
+            <summary>
+            血条/状态栏 - 角色生命值、法力值等关键状态。
+            注意这是指 UI 中的血条/状态栏，而非实体组件中的血条（位于场景中）。
+            </summary>
+        </member>
+        <member name="F:GameCore.GameSystem.Enum.StandardUIType.Shop">
+            <summary>
+            商店/交易界面 - 商品购买和交易
+            </summary>
+        </member>
+        <member name="F:GameCore.GameSystem.Enum.StandardUIType.Party">
+            <summary>
+            团队/组队界面 - 多人游戏团队管理
+            </summary>
+        </member>
+        <member name="F:GameCore.GameSystem.Enum.StandardUIType.Social">
+            <summary>
+            好友/社交面板 - 社交功能管理
+            </summary>
+        </member>
+        <member name="F:GameCore.GameSystem.Enum.StandardUIType.Achievement">
+            <summary>
+            成就系统界面 - 成就展示和追踪
+            </summary>
+        </member>
+        <member name="F:GameCore.GameSystem.Enum.StandardUIType.Tutorial">
+            <summary>
+            教程/引导界面 - 新手引导和帮助
+            </summary>
+        </member>
+        <member name="F:GameCore.GameSystem.Enum.StandardUIType.Reward">
+            <summary>
+            奖励选择面板 - 游戏中的升级/奖励选择界面，需要暂停游戏并强制选择
+            </summary>
+            <remarks>
+            类似《吸血鬼幸存者》等游戏中的升级选择面板，具有以下特点：
+            - 模态交互，暂停游戏进行
+            - 阻止其他UI操作
+            - 要求玩家必须做出选择才能继续
+            - 优先级应高于一般UI但低于系统确认对话框
+            </remarks>
+        </member>
+        <member name="F:GameCore.GameSystem.Enum.StandardUIType.ConfirmDialog">
+            <summary>
+            确认对话框 - 重要操作确认，需要最高优先级
+            </summary>
+        </member>
+        <member name="F:GameCore.GameSystem.Enum.StandardUIType.ErrorDialog">
+            <summary>
+            系统错误提示 - 错误信息显示，最高优先级
+            </summary>
+        </member>
+        <member name="F:GameCore.GameSystem.Enum.StandardUIType.Loading">
+            <summary>
+            加载界面 - 场景切换时的加载提示
+            </summary>
+        </member>
+        <member name="T:GameCore.GameSystem.Game">
+            <summary />
+            <summary />
+            <summary />
+            <summary />
+            <summary />
+            <summary />
+        </member>
+        <member name="M:GameCore.GameSystem.Game.TestInvokeHostOnce">
+            <summary />
+            <returns />
+        </member>
+        <member name="M:GameCore.GameSystem.Game.TestInvokedByHost(System.Int32)">
+            <summary />
+            <param name="count" />
+            <returns />
+        </member>
+        <member name="P:GameCore.GameSystem.Game.IsDebugTestMode">
+            <summary />
+        </member>
+        <member name="F:GameCore.GameSystem.Game.FramePerSecond">
+            <summary>
+            This is not the real frame rate, but the target frame rate for the game loop on client side.
+            </summary>
+        </member>
+        <member name="F:GameCore.GameSystem.Game.MillisecondsPerFrame">
+            <summary />
+        </member>
+        <member name="P:GameCore.GameSystem.Game.Instance">
+            <summary />
+        </member>
+        <member name="M:GameCore.GameSystem.Game.GetService``1">
+            <summary />
+            <typeparam name="T" />
+            <returns />
+        </member>
+        <member name="F:GameCore.GameSystem.Game._localPlayerId">
+            <summary />
+        </member>
+        <member name="P:GameCore.GameSystem.Game.LocalPlayerId">
+            <summary />
+        </member>
+        <member name="M:GameCore.GameSystem.Game.GetViewPlayer(System.Int32)">
+            <summary />
+            <param name="playerId" />
+            <returns />
+        </member>
+        <member name="M:GameCore.GameSystem.Game.GetViewTeam(System.Int32)">
+            <summary />
+            <param name="teamId" />
+            <returns />
+        </member>
+        <member name="F:GameCore.GameSystem.Game._viewGame">
+            <summary />
+        </member>
+        <member name="M:GameCore.GameSystem.Game.SetUpServices(Microsoft.Extensions.DependencyInjection.ServiceProvider)">
+            <summary />
+            <param name="services" />
+            <returns />
+        </member>
+        <member name="M:GameCore.GameSystem.Game.SendServerMessage``1(``0@)">
+            <summary />
+            <typeparam name="T" />
+            <param name="obj" />
+            <returns />
+        </member>
+        <member name="M:GameCore.GameSystem.Game.SendServerMessage(System.Int32,System.ReadOnlySpan{System.Byte})">
+            <summary />
+            <param name="typeHash" />
+            <param name="bytes" />
+            <returns />
+        </member>
+        <member name="P:GameCore.GameSystem.Game.Logger">
+            <summary />
+        </member>
+        <member name="M:GameCore.GameSystem.Game.RaiseTaskUnhandledException(System.Threading.Tasks.Task,System.Exception,System.Diagnostics.StackTrace)">
+            <summary />
+            <param name="task" />
+            <param name="e" />
+            <param name="callerStackTrace" />
+            <returns />
+        </member>
+        <member name="E:GameCore.GameSystem.Game.TaskUnhandledException">
+            <summary />
+        </member>
+        <member name="P:GameCore.GameSystem.Game.ForgetRunCaptureCallerStackTrace">
+            <summary>
+            Gets or sets a value indicating whether the caller's <see cref="T:System.Diagnostics.StackTrace" /> should be captured when a task is run and
+            subsequently forgotten.
+            Default value is <see langword="false" />.
+            </summary>
+            <remarks>This property can be used to control whether stack trace information is retained for
+            diagnostic purposes when a task is executed and not awaited. Setting this to <see langword="false" /> may improve
+            performance by avoiding the overhead of capturing the stack trace, but will lose the information of the task's caller stack.</remarks>
+        </member>
+        <member name="T:GameCore.GameSystem.Game.TaskUnhandledExceptionEventHandler">
+            <summary>
+            Represents the method that will handle an unhandled exception thrown during the execution of a task.
+            </summary>
+            <remarks>This delegate is typically used to subscribe to events or callbacks that notify about
+            unhandled exceptions in asynchronous task execution. Implementations of this delegate should handle the
+            exception appropriately, such as logging the error or performing cleanup operations.</remarks>
+            <param name="task">The <see cref="T:System.Threading.Tasks.Task" /> instance that encountered the unhandled exception.</param>
+            <param name="e">The <see cref="T:System.Exception" /> that was thrown by the task.</param>
+            <param name="callerStackTrace">The optional <see cref="T:System.Diagnostics.StackTrace" /> of the caller at the time the exception occurred, providing additional
+            context for debugging. Only work if <see cref="P:GameCore.GameSystem.Game.ForgetRunCaptureCallerStackTrace" /> is <c>true</c>.</param>
+        </member>
+        <member name="P:GameCore.GameSystem.Game.Initialized">
+            <summary />
+        </member>
+        <member name="P:GameCore.GameSystem.Game.ScriptStarted">
+            <summary />
+        </member>
+        <member name="P:GameCore.GameSystem.Game.Started">
+            <summary />
+        </member>
+        <member name="P:GameCore.GameSystem.Game.Scenes">
+            <summary />
+        </member>
+        <member name="P:GameCore.GameSystem.Game.Ended">
+            <summary />
+        </member>
+        <member name="M:GameCore.GameSystem.Game.Delay(System.TimeSpan,System.Nullable{System.Threading.CancellationToken},System.Int32)">
+            <summary>
+            Creates a new <see cref="M:GameCore.GameSystem.Game.Delay(System.TimeSpan,System.Nullable{System.Threading.CancellationToken},System.Int32)" /> instance with the specified delay duration, optional cancellation token, and
+            adjustment value.
+            </summary>
+            <param name="delay">The duration of the delay.</param>
+            <param name="token">An optional <see cref="T:System.Threading.CancellationToken" /> that can be used to cancel the delay.  If <see langword="null" />,
+            the delay cannot be canceled.</param>
+            <param name="adjustment">An optional adjustment value, in milliseconds, to modify the delay duration.  The final delay duration is
+            calculated as <paramref name="delay" /> plus <paramref name="adjustment" />.</param>
+            <returns>A new <see cref="M:GameCore.GameSystem.Game.Delay(System.TimeSpan,System.Nullable{System.Threading.CancellationToken},System.Int32)" /> instance configured with the specified parameters.</returns>
+        </member>
+        <member name="M:GameCore.GameSystem.Game.Delay(System.Int32,System.Nullable{System.Threading.CancellationToken},System.Int32)">
+            <summary>
+            Creates a new <see cref="M:GameCore.GameSystem.Game.Delay(System.TimeSpan,System.Nullable{System.Threading.CancellationToken},System.Int32)" /> instance with the specified delay duration in milliseconds, optional cancellation token, and
+            adjustment value.
+            </summary>
+            <param name="delayInMilliseconds">The duration of the delay in milliseconds.</param>
+            <param name="token">An optional <see cref="T:System.Threading.CancellationToken" /> that can be used to cancel the delay.  If <see langword="null" />,
+            the delay cannot be canceled.</param>
+            <param name="adjustment">An optional adjustment value, in milliseconds, to modify the delay duration.  The final delay duration is
+            calculated as <paramref name="delayInMilliseconds" /> plus <paramref name="adjustment" />.</param>
+            <returns>A new <see cref="M:GameCore.GameSystem.Game.Delay(System.TimeSpan,System.Nullable{System.Threading.CancellationToken},System.Int32)" /> instance configured with the specified parameters.</returns>
+        </member>
+        <member name="M:GameCore.GameSystem.Game.DelaySimulateRealTime(System.TimeSpan,System.Nullable{System.Threading.CancellationToken},System.Int32)">
+            <summary>
+            Creates a delay that simulates real-time progression, with optional cancellation and adjustment.
+            </summary>
+            <param name="delay">The duration of the delay to simulate.</param>
+            <param name="token">An optional <see cref="T:System.Threading.CancellationToken" /> to cancel the delay.</param>
+            <param name="adjustment">An optional adjustment value, in milliseconds, to modify the delay duration.</param>
+            <returns>A <see cref="M:GameCore.GameSystem.Game.Delay(System.TimeSpan,System.Nullable{System.Threading.CancellationToken},System.Int32)" /> instance configured to simulate real-time progression.</returns>
+        </member>
+        <member name="M:GameCore.GameSystem.Game.DelaySimulateRealTime(System.Int32,System.Nullable{System.Threading.CancellationToken},System.Int32)">
+            <summary>
+            Creates a delay that simulates real-time progression with the specified duration in milliseconds, with optional cancellation and adjustment.
+            </summary>
+            <param name="delayInMilliseconds">The duration of the delay to simulate in milliseconds.</param>
+            <param name="token">An optional <see cref="T:System.Threading.CancellationToken" /> to cancel the delay.</param>
+            <param name="adjustment">An optional adjustment value, in milliseconds, to modify the delay duration.</param>
+            <returns>A <see cref="M:GameCore.GameSystem.Game.Delay(System.TimeSpan,System.Nullable{System.Threading.CancellationToken},System.Int32)" /> instance configured to simulate real-time progression.</returns>
+        </member>
+        <member name="M:GameCore.GameSystem.Game.NextTick(System.Nullable{System.Threading.CancellationToken})">
+            <summary />
+            <param name="token" />
+            <returns />
+        </member>
+        <member name="T:GameCore.GameSystem.Game.GameTickState">
+            <summary />
+        </member>
+        <member name="P:GameCore.GameSystem.Game.TickState">
+            <summary />
+        </member>
+        <member name="P:GameCore.GameSystem.Game.TickCurrentFrame">
+            <summary />
+        </member>
+        <member name="P:GameCore.GameSystem.Game.ElapsedTime">
+            <summary />
+        </member>
+        <member name="M:GameCore.GameSystem.Game.Tick(System.Int32)">
+            <summary />
+            <param name="delta" />
+            <returns />
+        </member>
+        <member name="F:GameCore.GameSystem.Game.dirtyThinkers">
+            <summary />
+        </member>
+        <member name="F:GameCore.GameSystem.Game.thinkers">
+            <summary />
+        </member>
+        <member name="F:GameCore.GameSystem.Game.tickFinalizers">
+            <summary />
+        </member>
+        <member name="F:GameCore.GameSystem.Game.tickFinalizersQueued">
+            <summary />
+        </member>
+        <member name="M:GameCore.GameSystem.Game.RegisterScene(System.ReadOnlySpan{System.Byte})">
+            <summary />
+            <param name="sceneNameSpan" />
+            <returns />
+        </member>
+        <member name="M:GameCore.GameSystem.Game.RegisterScene(System.Int32,System.String)">
+            <summary />
+            <param name="sceneHash" />
+            <param name="name" />
+            <returns />
+        </member>
+        <member name="M:GameCore.GameSystem.Game.RegisterScene(System.Int32,GameData.IGameLink{GameCore.SceneSystem.Data.GameDataScene})">
+            <summary />
+            <param name="sceneHash" />
+            <param name="link" />
+            <returns />
+        </member>
+        <member name="M:GameCore.GameSystem.Game.RegisterThinker(GameCore.BaseInterface.IThinker)">
+            <summary />
+            <param name="thinker" />
+            <returns />
+        </member>
+        <member name="M:GameCore.GameSystem.Game.UnregisterThinker(GameCore.BaseInterface.IThinker)">
+            <summary />
+            <param name="thinker" />
+            <returns />
+        </member>
+        <member name="M:GameCore.GameSystem.Game.RegisterTickFinalizer(GameCore.BaseInterface.ITickFinalizer)">
+            <summary />
+            <param name="finalizer" />
+            <returns />
+        </member>
+        <member name="P:GameCore.GameSystem.Game.LocalScene">
+            <summary>
+            Gets the local player's current scene.
+            </summary>
+            <returns>The scene that the local player is currently in.</returns>
+            <remarks>
+            This is a convenience method that provides easy access to the local player's scene.
+            It's equivalent to calling <c>Player.LocalPlayer.Scene</c> but provides a more direct
+            and semantic way to access the local scene.
+            </remarks>
+        </member>
+        <member name="M:GameCore.GameSystem.Game.GameCore#BaseInterface#IPropertyHost#GetPropertiesWithHash(System.Boolean)">
+            <summary />
+            <param name="modifiedOnly" />
+            <returns />
+        </member>
+        <member name="M:GameCore.GameSystem.Game.GameCore#BaseInterface#IPropertyHost#GetBytesPropertiesWithHash(System.Boolean)">
+            <summary />
+            <param name="modifiedOnly" />
+            <returns />
+        </member>
+        <member name="M:GameCore.GameSystem.Game.GameCore#BaseInterface#IPropertyHost#GetPropertyWithHash``1(System.Int64)">
+            <summary />
+            <typeparam name="T" />
+            <param name="propertyHash" />
+            <returns />
+        </member>
+        <member name="P:GameCore.GameSystem.Game.GameCore#BaseInterface#ICooldownOwner#CooldownHost">
+            <summary />
+        </member>
+        <member name="P:GameCore.GameSystem.Game.SyncId">
+            <summary />
+        </member>
+        <member name="P:GameCore.GameSystem.Game.SyncIdType">
+            <summary />
+        </member>
+        <member name="P:GameCore.GameSystem.Game.GameCore#BaseInterface#ICooldownHost#ViewActor">
+            <summary />
+        </member>
+        <member name="P:GameCore.GameSystem.Game.GameCore#BaseInterface#ICooldownHost#LazyAttachedChildren">
+            <summary />
+        </member>
+        <member name="P:GameCore.GameSystem.Game.GameCore#BaseInterface#ICooldownHost#SyncIds">
+            <summary />
+        </member>
+        <member name="P:GameCore.GameSystem.Game.GameCore#BaseInterface#ICooldownOwner#LazyCooldownPool">
+            <summary />
+        </member>
+        <member name="F:GameCore.GameSystem.Game.aggregator">
+            <summary />
+        </member>
+        <member name="P:GameCore.GameSystem.Game.Events#IEventSender#Aggregator">
+            <summary />
+        </member>
+        <member name="P:GameCore.GameSystem.Game.AggregatorWeakReference">
+            <summary />
+        </member>
+        <member name="M:GameCore.GameSystem.Game.Initialization">
+            <summary />
+            <returns />
+        </member>
+        <member name="M:GameCore.GameSystem.Game.TryStartGame">
+            <summary />
+            <returns />
+        </member>
+        <member name="P:GameCore.GameSystem.Game.GameMode">
+            <summary />
+        </member>
+        <member name="P:GameCore.GameSystem.Game.GameModeLink">
+            <summary />
+        </member>
+        <member name="M:GameCore.GameSystem.Game.GetCoreActor(System.Int32)">
+            <summary />
+            <param name="coreActorId" />
+            <returns />
+        </member>
+        <member name="F:GameCore.GameSystem.Game.gamePropertyActor">
+            <summary />
+        </member>
+        <member name="M:GameCore.GameSystem.Game.#ctor(EngineInterface.GoInterface.IViewGame)">
+            <summary />
+        </member>
+        <member name="M:GameCore.GameSystem.Game.RegisterGameClass``1">
+            <summary />
+            <typeparam name="TClass" />
+            <returns />
+        </member>
+        <member name="E:GameCore.GameSystem.Game.OnRegisterGameClasses">
+            <summary>
+            Requires manually unregistering the event. When the game starts, the events happens in the following order:
+            <list type="number"><item>
+            OnRegisterAssemblySetup
+            </item><item>
+            OnGameDataInitialization
+            </item><item>
+            OnGameplaySettingsInitialization
+            </item><item>
+            OnGameInstanceInitialization
+            </item><item>
+            EventGameStart
+            </item></list></summary>
+        </member>
+        <member name="E:GameCore.GameSystem.Game.OnGameDataInitialization">
+            <summary>
+            Requires manually unregistering the event. When the game starts, the events happens in the following order:
+            <list type="number"><item>
+            OnRegisterAssemblySetup
+            </item><item>
+            OnGameDataInitialization
+            </item><item>
+            OnGameplaySettingsInitialization
+            </item><item>
+            OnGameInstanceInitialization
+            </item><item>
+            EventGameStart
+            </item></list></summary>
+        </member>
+        <member name="E:GameCore.GameSystem.Game.OnGameplaySettingsInitialization">
+            <summary>
+            Requires manually unregistering the event. When the game starts, the events happens in the following order:
+            <list type="number"><item>
+            OnRegisterAssemblySetup
+            </item><item>
+            OnGameDataInitialization
+            </item><item>
+            OnGameplaySettingsInitialization
+            </item><item>
+            OnGameInstanceInitialization
+            </item><item>
+            EventGameStart
+            </item></list></summary>
+        </member>
+        <member name="E:GameCore.GameSystem.Game.OnGameSceneListInitialization">
+            <summary />
+        </member>
+        <member name="E:GameCore.GameSystem.Game.OnGameTriggerInitialization">
+            <summary />
+        </member>
+        <member name="E:GameCore.GameSystem.Game.OnGameInstanceInitialization">
+            <summary>
+            Requires manually unregistering the event. When the game starts, the events happens in the following order:
+            <list type="number"><item>
+            OnRegisterAssemblySetup
+            </item><item>
+            OnGameDataInitialization
+            </item><item>
+            OnGameplaySettingsInitialization
+            </item><item>
+            OnGameInstanceInitialization
+            </item><item>
+            EventGameStart
+            </item></list></summary>
+        </member>
+        <member name="E:GameCore.GameSystem.Game.OnGameUIInitialization">
+            <summary>
+            The game won't be able to create GameUI before this event is triggered.
+            Only make sense in client.
+            </summary>
+        </member>
+        <member name="E:GameCore.GameSystem.Game.OnGameStart">
+            <summary />
+        </member>
+    </members>
+</doc>

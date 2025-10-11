@@ -1,0 +1,532 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<doc>
+    <assembly>
+        <name>GameCore</name>
+    </assembly>
+    <members>
+        <member name="T:GameCore.PlayerAndUsers.AIController">
+            <summary />
+        </member>
+        <member name="M:GameCore.PlayerAndUsers.AIController.#ctor(GameCore.PlayerAndUsers.Player)">
+            <summary />
+        </member>
+        <member name="P:GameCore.PlayerAndUsers.AIController.Status">
+            <summary />
+        </member>
+        <member name="T:GameCore.PlayerAndUsers.Data.GameDataPlayerSettings">
+            <summary />
+        </member>
+        <member name="P:GameCore.PlayerAndUsers.Data.GameDataPlayerSettings.PlayerTeamData">
+            <summary />
+        </member>
+        <member name="T:GameCore.PlayerAndUsers.Enum.PlayerRelationShip">
+            <summary>
+            Defines the relationship types between players in the game.
+            </summary>
+            <remarks>
+            This enum is used to determine how players interact with each other,
+            affecting gameplay mechanics such as combat, visibility, and cooperation.
+            </remarks>
+        </member>
+        <member name="F:GameCore.PlayerAndUsers.Enum.PlayerRelationShip.Enemy">
+            <summary>
+            Players are hostile to each other and can attack one another.
+            </summary>
+        </member>
+        <member name="F:GameCore.PlayerAndUsers.Enum.PlayerRelationShip.Neutral">
+            <summary>
+            Players have no special relationship - neither hostile nor friendly.
+            </summary>
+        </member>
+        <member name="F:GameCore.PlayerAndUsers.Enum.PlayerRelationShip.Ally">
+            <summary>
+            Players are allied and typically cannot harm each other directly.
+            </summary>
+        </member>
+        <member name="F:GameCore.PlayerAndUsers.Enum.PlayerRelationShip.Player">
+            <summary>
+            Represents the relationship a player has with themselves.
+            </summary>
+        </member>
+        <member name="T:GameCore.PlayerAndUsers.Enum.PlayerStatus">
+            <summary>
+            Defines the connection and activity status of a player in the game.
+            </summary>
+            <remarks>
+            This enum tracks the current state of a player's connection and participation in the game session.
+            It helps manage player lifecycle and determine appropriate game behavior based on player availability.
+            </remarks>
+        </member>
+        <member name="F:GameCore.PlayerAndUsers.Enum.PlayerStatus.Open">
+            <summary>
+            The player slot is available but no player has connected yet.
+            </summary>
+        </member>
+        <member name="F:GameCore.PlayerAndUsers.Enum.PlayerStatus.Connected">
+            <summary>
+            The player is actively connected and participating in the game.
+            </summary>
+        </member>
+        <member name="F:GameCore.PlayerAndUsers.Enum.PlayerStatus.Afk">
+            <summary>
+            The player is connected but currently away from keyboard (inactive).
+            </summary>
+        </member>
+        <member name="F:GameCore.PlayerAndUsers.Enum.PlayerStatus.Disconnected">
+            <summary>
+            The player has lost connection but may reconnect.
+            </summary>
+        </member>
+        <member name="F:GameCore.PlayerAndUsers.Enum.PlayerStatus.Left">
+            <summary>
+            The player has permanently left the game session.
+            </summary>
+        </member>
+        <member name="T:GameCore.PlayerAndUsers.Enum.PlayerUnitRelationShip">
+            <summary>
+            Relationship between a player and a unit
+            </summary>
+        </member>
+        <member name="F:GameCore.PlayerAndUsers.Enum.PlayerUnitRelationShip.MainUnit">
+            <summary>
+            If the unit is the main unit of the player.
+            </summary>
+        </member>
+        <member name="F:GameCore.PlayerAndUsers.Enum.PlayerUnitRelationShip.Player">
+            <summary>
+            If the unit owned by the player.
+            </summary>
+        </member>
+        <member name="T:GameCore.PlayerAndUsers.Player">
+            <summary />
+            <summary>
+            Represents a player in the game, managing team affiliation, main unit control, scene presence, and multiplayer functionality.
+            </summary>
+            <remarks>
+            Player is a core entity in the game system that represents human players, AI controllers, and system players.
+            It manages the relationship between the player and their controlled units, team membership, scene presence,
+            and network communication. Each player has a unique identifier and is associated with a controller type
+            (human user or AI). Players can own units, switch between scenes, and participate in team-based gameplay.
+            The Player class integrates with the networking system for multiplayer scenarios and provides event-driven
+            updates for client-side state synchronization. It also handles visibility and relationship calculations
+            between different players based on team affiliations and neutral status.
+            </remarks>
+            <summary />
+            <summary />
+            <summary />
+            <summary />
+            <summary />
+            <summary>
+            Player类对UI属性的IPropertyOwner实现
+            核心属性操作功能在GameCore中，客户端设置功能在TriggerEncapsulation中作为扩展方法
+            </summary>
+        </member>
+        <member name="F:GameCore.PlayerAndUsers.Player._unSyncedPlayers">
+            <summary />
+        </member>
+        <member name="M:GameCore.PlayerAndUsers.Player.Replicate(EngineInterface.GoInterface.ICoreActor)">
+            <summary />
+            <param name="coreActor" />
+            <returns />
+        </member>
+        <member name="E:GameCore.PlayerAndUsers.Player.OnNeutralChanged">
+            <summary>
+            Occurs when the player's neutral status changes.
+            </summary>
+            <remarks>
+            This event is fired on the client side when the player's neutral status is updated
+            from server synchronization. Neutral players have different relationship rules.
+            </remarks>
+        </member>
+        <member name="E:GameCore.PlayerAndUsers.Player.OnTeamChanged">
+            <summary>
+            Occurs when the player's team assignment changes.
+            </summary>
+            <remarks>
+            This event is fired on the client side when the player is assigned to a different team.
+            Team changes affect player relationships and targeting rules.
+            </remarks>
+        </member>
+        <member name="E:GameCore.PlayerAndUsers.Player.OnMainUnitChanged">
+            <summary>
+            Occurs when the player's main unit changes.
+            </summary>
+            <remarks>
+            This event is fired when the player's primary controlled unit is changed or removed.
+            The main unit is typically the player's avatar or primary character.
+            </remarks>
+        </member>
+        <member name="M:GameCore.PlayerAndUsers.Player.ToString">
+            <summary>
+            Returns a string representation of this player including ID and team information.
+            </summary>
+            <returns>A formatted string describing this player.</returns>
+        </member>
+        <member name="P:GameCore.PlayerAndUsers.Player.Scene">
+            <summary>
+            Gets the scene where this player is currently located.
+            </summary>
+            <value>The scene containing this player.</value>
+            <remarks>
+            The player's scene is determined by their underlying view player's scene assignment.
+            This affects what entities the player can see and interact with.
+            On the client side, this value is unreliable unless you are fetch the scene of the local player. 
+            It may always return the default scene for other players, as you don't have this information of other players
+            </remarks>
+        </member>
+        <member name="P:GameCore.PlayerAndUsers.Player.MainUnit">
+            <summary>
+            Gets or sets the main unit controlled by this player.
+            </summary>
+            <value>The primary unit under this player's control, or null if no main unit is assigned.</value>
+            <remarks>
+            The main unit is typically the player's avatar or primary character. On the server,
+            setting this property updates the underlying view player's main actor reference.
+            On the client, this property is read-only and updated through network synchronization.
+            </remarks>
+        </member>
+        <member name="M:GameCore.PlayerAndUsers.Player.GetRelationShip(GameCore.PlayerAndUsers.Player)">
+            <summary>
+            Determines the relationship between this player and another player.
+            </summary>
+            <param name="other">The other player to determine relationship with.</param>
+            <returns>The relationship type between the two players.</returns>
+            <remarks>
+            Relationships are determined based on team membership and neutral status.
+            The hierarchy is: Self &gt; Team Member (Ally) &gt; Enemy &gt; Neutral.
+            Neutral players are considered neutral to everyone except themselves.
+            </remarks>
+        </member>
+        <member name="P:GameCore.PlayerAndUsers.Player.IsNeutral">
+            <summary>
+            Gets or sets a value indicating whether this player is neutral.
+            </summary>
+            <value>True if the player is neutral; otherwise, false.</value>
+            <remarks>
+            Neutral players are not considered enemies by other players and have special
+            relationship rules. On the server, setting this property updates the underlying
+            view player. On the client, this is synchronized from the server.
+            </remarks>
+        </member>
+        <member name="P:GameCore.PlayerAndUsers.Player.ControllerSetting">
+            <summary>
+            Gets the controller type setting from the player configuration.
+            </summary>
+            <value>The configured controller type for this player.</value>
+            <remarks>
+            This represents the controller setting from the player's configuration, which may differ
+            from the actual controller type if overridden by game conditions.
+            </remarks>
+        </member>
+        <member name="P:GameCore.PlayerAndUsers.Player.Controller">
+            <summary>
+            Gets the actual controller type for this player.
+            </summary>
+            <value>The active controller type (human user or AI).</value>
+            <remarks>
+            This represents the actual controller managing this player, which determines
+            how input and decisions are processed for the player's units and actions.
+            </remarks>
+        </member>
+        <member name="P:GameCore.PlayerAndUsers.Player.DefaultPlayer">
+            <summary>
+            Gets the default system player (Player 0).
+            </summary>
+            <value>The default player instance used for system operations.</value>
+            <remarks>
+            The default player is used for entities and operations that don't belong to
+            a specific human player, such as neutral creatures or system-generated content.
+            </remarks>
+        </member>
+        <member name="F:GameCore.PlayerAndUsers.Player._viewPlayer">
+            <summary>
+            Gets the underlying engine view player interface.
+            </summary>
+            <value>The view player that manages engine-level player operations.</value>
+        </member>
+        <member name="F:GameCore.PlayerAndUsers.Player._players">
+            <summary />
+        </member>
+        <member name="P:GameCore.PlayerAndUsers.Player.AllPlayers">
+            <summary />
+        </member>
+        <member name="F:GameCore.PlayerAndUsers.Player.team">
+            <summary />
+        </member>
+        <member name="F:GameCore.PlayerAndUsers.Player.isNeutral">
+            <summary />
+        </member>
+        <member name="F:GameCore.PlayerAndUsers.Player._mainUnit">
+            <summary />
+        </member>
+        <member name="M:GameCore.PlayerAndUsers.Player.#ctor(System.Int32)">
+            <summary>
+            Initializes a new player instance with the specified ID.
+            </summary>
+            <param name="id">The unique identifier for this player.</param>
+            <remarks>
+            This constructor sets up the player with engine integration, event handling,
+            and appropriate initialization for server or client scenarios.
+            </remarks>
+        </member>
+        <member name="P:GameCore.PlayerAndUsers.Player.Team">
+            <summary>
+            Gets or sets the team that this player belongs to.
+            </summary>
+            <value>The team this player is a member of.</value>
+            <remarks>
+            Team membership affects player relationships, targeting rules, and shared objectives.
+            On the server, setting this property updates the underlying view player and adds
+            the player to the team. On the client, this is synchronized from the server.
+            </remarks>
+            <exception cref="T:System.ArgumentNullException">Thrown when attempting to set the team to null on the server.</exception>
+        </member>
+        <member name="P:GameCore.PlayerAndUsers.Player.Id">
+            <summary>
+            Gets the unique identifier for this player.
+            </summary>
+            <value>The player's unique ID used throughout the game system.</value>
+        </member>
+        <member name="M:GameCore.PlayerAndUsers.Player.GetById(System.Int32)">
+            <summary>
+            Retrieves a player by their unique identifier.
+            </summary>
+            <param name="id">The unique identifier of the player to retrieve.</param>
+            <returns>The player with the specified ID, or null if not found.</returns>
+        </member>
+        <member name="M:GameCore.PlayerAndUsers.Player.GetOrCreateById(System.Int32)">
+            <summary>
+            Retrieves an existing player or creates a new one with the specified ID.
+            </summary>
+            <param name="id">The unique identifier of the player to retrieve or create.</param>
+            <returns>The existing player or a newly created player with the specified ID.</returns>
+            <remarks>
+            This method is used internally for player management and should not be called directly
+            by game code. Player creation is typically handled by the game's player management systems.
+            </remarks>
+        </member>
+        <member name="P:GameCore.PlayerAndUsers.Player.LocalPlayer">
+            <summary>
+            Gets the local player instance for the current client.
+            </summary>
+            <value>The player representing the local client.</value>
+            <exception cref="T:System.InvalidOperationException">Thrown when the local player ID is invalid.</exception>
+            <remarks>
+            This property provides access to the player instance representing the local client
+            in multiplayer scenarios. It's only available on the client side.
+            </remarks>
+        </member>
+        <member name="M:GameCore.PlayerAndUsers.Player.CanControlTo(GameCore.EntitySystem.Entity,System.Boolean)">
+            <summary>
+            Determines whether this player can control the specified entity.
+            </summary>
+            <param name="entity">The entity to check control permissions for.</param>
+            <param name="isRequest">Whether this is a control request that requires additional validation.</param>
+            <returns>True if the player can control the entity; otherwise, false.</returns>
+            <remarks>
+            Control permissions are based on entity ownership and the entity's ability to receive commands.
+            Control requests have additional validation requirements compared to simple ownership checks.
+            </remarks>
+        </member>
+        <member name="M:GameCore.PlayerAndUsers.Player.ActorsSynced">
+            <summary>
+            Determines whether all player actors are properly synchronized.
+            </summary>
+            <returns>True if synchronization is complete; otherwise, false.</returns>
+            <remarks>
+            This method checks if all players have completed their synchronization process.
+            On the server, it checks if any players exist. On the client, it ensures all
+            players have finished replication.
+            </remarks>
+        </member>
+        <member name="M:GameCore.PlayerAndUsers.Player.IsShareControlTo(GameCore.PlayerAndUsers.Player)">
+            <summary />
+            <param name="player" />
+            <returns />
+        </member>
+        <member name="F:GameCore.PlayerAndUsers.Player.playerPropertyActor">
+            <summary />
+        </member>
+        <member name="P:GameCore.PlayerAndUsers.Player.GameCore#BaseInterface#ICooldownOwner#CooldownHost">
+            <summary />
+        </member>
+        <member name="P:GameCore.PlayerAndUsers.Player.SyncId">
+            <summary />
+        </member>
+        <member name="P:GameCore.PlayerAndUsers.Player.SyncIdType">
+            <summary />
+        </member>
+        <member name="P:GameCore.PlayerAndUsers.Player.GameCore#BaseInterface#ICooldownHost#ViewActor">
+            <summary />
+        </member>
+        <member name="P:GameCore.PlayerAndUsers.Player.GameCore#BaseInterface#ICooldownHost#LazyAttachedChildren">
+            <summary />
+        </member>
+        <member name="P:GameCore.PlayerAndUsers.Player.GameCore#BaseInterface#ICooldownHost#SyncIds">
+            <summary />
+        </member>
+        <member name="P:GameCore.PlayerAndUsers.Player.GameCore#BaseInterface#ICooldownOwner#LazyCooldownPool">
+            <summary />
+        </member>
+        <member name="M:GameCore.PlayerAndUsers.Player.GameCore#BaseInterface#IPropertyHost#GetPropertiesWithHash(System.Boolean)">
+            <summary />
+            <param name="modifiedOnly" />
+            <returns />
+        </member>
+        <member name="M:GameCore.PlayerAndUsers.Player.GameCore#BaseInterface#IPropertyHost#GetBytesPropertiesWithHash(System.Boolean)">
+            <summary />
+            <param name="modifiedOnly" />
+            <returns />
+        </member>
+        <member name="M:GameCore.PlayerAndUsers.Player.GameCore#BaseInterface#IPropertyHost#GetPropertyWithHash``1(System.Int64)">
+            <summary />
+            <typeparam name="T" />
+            <param name="propertyHash" />
+            <returns />
+        </member>
+        <member name="P:GameCore.PlayerAndUsers.Player.Aggregator">
+            <summary />
+        </member>
+        <member name="P:GameCore.PlayerAndUsers.Player.AggregatorWeakReference">
+            <summary />
+        </member>
+        <member name="M:GameCore.PlayerAndUsers.Player.Publish``1(``0)">
+            <summary />
+            <typeparam name="TEvent" />
+            <param name="eventToPublish" />
+            <returns />
+        </member>
+        <member name="M:GameCore.PlayerAndUsers.Player.GetPublisher``1">
+            <summary />
+            <typeparam name="TEvent" />
+            <returns />
+        </member>
+        <member name="M:GameCore.PlayerAndUsers.Player.OnRegisterGameClass">
+            <summary />
+            <returns />
+        </member>
+        <member name="P:GameCore.PlayerAndUsers.Player.GameCore#BaseInterface#IPropertyOwner#PropertyHost">
+            <summary />
+        </member>
+        <member name="M:GameCore.PlayerAndUsers.Player.GetProperty``1(GameCore.EntitySystem.PropertyPlayer)">
+            <summary />
+            <typeparam name="TValue" />
+            <param name="property" />
+            <returns />
+        </member>
+        <member name="M:GameCore.PlayerAndUsers.Player.GetUIProperty``1(GameCore.PlayerAndUsers.PropertyPlayerUI)">
+            <summary>
+            获取UI属性值
+            </summary>
+        </member>
+        <member name="T:GameCore.PlayerAndUsers.EPropertyPlayerUI">
+            <summary>
+            客户端可设置的玩家UI属性枚举
+            警告：这些属性可能被客户端修改，不应用于游戏逻辑判断
+            仅用于UI状态、偏好设置等非安全关键数据
+            </summary>
+        </member>
+        <member name="F:GameCore.PlayerAndUsers.EPropertyPlayerUI.UIPanelCollapsed">
+            <summary>
+            UI面板折叠状态 - 示例属性
+            </summary>
+        </member>
+        <member name="F:GameCore.PlayerAndUsers.EPropertyPlayerUI.ChatChannelPreference">
+            <summary>
+            聊天频道设置
+            </summary>
+        </member>
+        <member name="F:GameCore.PlayerAndUsers.EPropertyPlayerUI.KeyBindingSettings">
+            <summary>
+            快捷键绑定设置
+            </summary>
+        </member>
+        <member name="F:GameCore.PlayerAndUsers.EPropertyPlayerUI.UILayoutConfig">
+            <summary>
+            界面布局配置
+            </summary>
+        </member>
+        <member name="T:GameCore.PlayerAndUsers.SlotController">
+            <summary />
+        </member>
+        <member name="M:GameCore.PlayerAndUsers.SlotController.#ctor(GameCore.PlayerAndUsers.Player)">
+            <summary />
+        </member>
+        <member name="P:GameCore.PlayerAndUsers.SlotController.Player">
+            <summary />
+        </member>
+        <member name="P:GameCore.PlayerAndUsers.SlotController.Status">
+            <summary />
+        </member>
+        <member name="M:GameCore.PlayerAndUsers.SlotController.SendMessage``1(``0@,System.Func{GameCore.PlayerAndUsers.Player,System.Boolean})">
+            <summary />
+            <typeparam name="T" />
+            <param name="protocol" />
+            <param name="filter" />
+            <returns />
+        </member>
+        <member name="M:GameCore.PlayerAndUsers.SlotController.SendMessage(System.Int32,System.ReadOnlySpan{System.Byte},System.Func{GameCore.PlayerAndUsers.Player,System.Boolean})">
+            <summary />
+            <param name="typeHash" />
+            <param name="data" />
+            <param name="filter" />
+            <returns />
+        </member>
+        <member name="T:GameCore.PlayerAndUsers.User">
+            <summary>
+            Represents a user in the game system with identification and display information.
+            </summary>
+            <param name="userId">The unique identifier for this user.</param>
+            <remarks>
+            This class encapsulates user information including their unique ID and optional display name.
+            It provides string representation functionality for debugging and display purposes.
+            </remarks>
+        </member>
+        <member name="M:GameCore.PlayerAndUsers.User.#ctor(System.Int64)">
+            <summary>
+            Represents a user in the game system with identification and display information.
+            </summary>
+            <param name="userId">The unique identifier for this user.</param>
+            <remarks>
+            This class encapsulates user information including their unique ID and optional display name.
+            It provides string representation functionality for debugging and display purposes.
+            </remarks>
+        </member>
+        <member name="P:GameCore.PlayerAndUsers.User.Name">
+            <summary>
+            Gets or sets the display name for this user. Can be null if no name is set.
+            </summary>
+        </member>
+        <member name="P:GameCore.PlayerAndUsers.User.UserId">
+            <summary>
+            Gets the unique identifier for this user.
+            </summary>
+        </member>
+        <member name="M:GameCore.PlayerAndUsers.User.ToString">
+            <summary>
+            Returns a string representation of this user, including the name (if available) and user ID.
+            </summary>
+            <returns>A formatted string in the format "[Name] [User ID]" or just "[User ID]" if no name is set.</returns>
+        </member>
+        <member name="F:GameCore.PlayerAndUsers.PropertyPlayerUI.UIPanelCollapsed">
+            <summary>
+            UI面板折叠状态 - 示例属性
+            </summary>
+        </member>
+        <member name="F:GameCore.PlayerAndUsers.PropertyPlayerUI.ChatChannelPreference">
+            <summary>
+            聊天频道设置
+            </summary>
+        </member>
+        <member name="F:GameCore.PlayerAndUsers.PropertyPlayerUI.KeyBindingSettings">
+            <summary>
+            快捷键绑定设置
+            </summary>
+        </member>
+        <member name="F:GameCore.PlayerAndUsers.PropertyPlayerUI.UILayoutConfig">
+            <summary>
+            界面布局配置
+            </summary>
+        </member>
+    </members>
+</doc>

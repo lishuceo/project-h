@@ -1,0 +1,1211 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<doc>
+    <assembly>
+        <name>GameCore</name>
+    </assembly>
+    <members>
+        <member name="T:GameCore.Struct.AcquireSettings">
+            <summary>
+            Represents configuration settings for automatic ability acquisition and casting behavior.
+            </summary>
+            <remarks>
+            AcquireSettings defines how abilities should behave when it comes to automatic casting,
+            target acquisition, and recasting logic. This is commonly used for AI-controlled units
+            or abilities that have automatic behavior patterns. The settings control when and how
+            abilities are automatically triggered based on various conditions and filters.
+            Note: This class is currently under development and some features may not be fully implemented.
+            </remarks>
+            <example>
+                <code>
+            var settings = new AcquireSettings
+            {
+                AutoCast = true,
+                AutoCastOn = true,
+                Recast = false,
+                Enabled = true,
+                TargetingFilters = new TargetFilterComplex { /* filter configuration */ }
+            };
+            </code>
+            </example>
+        </member>
+        <member name="P:GameCore.Struct.AcquireSettings.AutoCast">
+            <summary>
+            Gets or sets a value indicating whether the ability can be automatically cast.
+            </summary>
+            <value>True if the ability supports automatic casting; otherwise, false.</value>
+            <remarks>
+            When enabled, this allows the ability to be cast automatically by AI systems or
+            automatic behavior logic without direct player input. This is typically used for
+            passive abilities or AI-controlled unit behaviors.
+            </remarks>
+        </member>
+        <member name="P:GameCore.Struct.AcquireSettings.AutoCastOn">
+            <summary>
+            Gets or sets a value indicating whether automatic casting is currently active.
+            </summary>
+            <value>True if automatic casting is currently enabled; otherwise, false.</value>
+            <remarks>
+            This setting controls whether the automatic casting feature is currently active.
+            It can be toggled independently of the AutoCast capability, allowing players or
+            systems to temporarily disable automatic behavior while preserving the configuration.
+            </remarks>
+        </member>
+        <member name="P:GameCore.Struct.AcquireSettings.Recast">
+            <summary>
+            Gets or sets a value indicating whether the ability should automatically recast when conditions are met.
+            </summary>
+            <value>True if the ability should recast automatically; otherwise, false.</value>
+            <remarks>
+            When enabled, the ability will automatically cast again after its previous casting completes,
+            provided that valid targets and conditions are still available. This is useful for channeled
+            abilities or abilities that should maintain continuous effect.
+            Note: This feature is planned for implementation and may be used by client or AI systems.
+            </remarks>
+        </member>
+        <member name="P:GameCore.Struct.AcquireSettings.RecastUseAutoCast">
+            <summary>
+            Gets or sets a value indicating whether recasting should use the same logic as automatic casting.
+            </summary>
+            <value>True if recasting should follow AutoCast rules; otherwise, false.</value>
+            <remarks>
+            This setting determines whether the recasting behavior should follow the same targeting
+            and condition logic as the initial automatic cast, or use different criteria.
+            Note: This feature is not yet implemented.
+            </remarks>
+        </member>
+        <member name="P:GameCore.Struct.AcquireSettings.Enabled">
+            <summary>
+            Gets or sets a value indicating whether these acquire settings are enabled.
+            </summary>
+            <value>True if the acquire settings are active; otherwise, false.</value>
+            <remarks>
+            This serves as a master enable/disable switch for all automatic behavior defined
+            in these settings. When disabled, none of the automatic casting or acquisition
+            behaviors will function regardless of their individual settings.
+            </remarks>
+        </member>
+        <member name="P:GameCore.Struct.AcquireSettings.TargetingFilters">
+            <summary>
+            Gets or sets the complex targeting filters used to determine valid targets for automatic casting.
+            </summary>
+            <value>A collection of targeting filters that define which entities can be targeted.</value>
+            <remarks>
+            These filters are used by the automatic casting system to determine which entities
+            are valid targets for the ability. The filters can include criteria such as enemy/ally
+            status, unit types, health conditions, and other game-specific requirements.
+            </remarks>
+        </member>
+        <member name="T:GameCore.Struct.CooldownLocation">
+            <summary>
+            定义冷却时间的存储位置，决定冷却时间在哪个层级进行管理和共享
+            </summary>
+            <remarks>
+            冷却位置决定了冷却时间的作用域和共享规则。不同的位置允许冷却时间在不同的层级上进行管理，
+            从而实现各种复杂的冷却机制，如全局冷却、角色冷却、技能冷却等。
+            </remarks>
+        </member>
+        <member name="F:GameCore.Struct.CooldownLocation.Self">
+            <summary>
+            自身冷却 - 仅影响当前对象
+            </summary>
+            <remarks>
+            冷却时间仅对当前的技能、物品或能力实例有效，不会影响其他实例。
+            </remarks>
+        </member>
+        <member name="F:GameCore.Struct.CooldownLocation.Item">
+            <summary>
+            物品冷却 - 技能的默认值，当没有物品时会回退到技能冷却
+            </summary>
+            <remarks>
+            冷却时间与特定物品关联。这是技能的默认冷却位置，
+            因为没有物品时会回退到技能冷却机制。
+            </remarks>
+        </member>
+        <member name="F:GameCore.Struct.CooldownLocation.Ability">
+            <summary>
+            技能冷却 - 冷却时间与特定技能关联
+            </summary>
+            <remarks>
+            同一技能上相同冷却数据链接的冷却实例共享同一个冷却时间。
+            </remarks>
+        </member>
+        <member name="F:GameCore.Struct.CooldownLocation.Unit">
+            <summary>
+            单位冷却 - 冷却时间与特定单位关联
+            </summary>
+            <remarks>
+            冷却时间在单位级别进行管理，同一单位上相同冷却数据链接的冷却实例共享同一个冷却时间。
+            </remarks>
+        </member>
+        <member name="F:GameCore.Struct.CooldownLocation.Player">
+            <summary>
+            玩家冷却 - 冷却时间与特定玩家关联
+            </summary>
+            <remarks>
+            冷却时间在玩家级别进行管理，同一玩家上相同冷却数据链接的冷却实例共享同一个冷却时间。
+            </remarks>
+        </member>
+        <member name="F:GameCore.Struct.CooldownLocation.Game">
+            <summary>
+            游戏冷却 - 全局冷却时间
+            </summary>
+            <remarks>
+            冷却时间在整个游戏范围内生效，整个游戏中相同冷却数据链接的冷却实例共享同一个冷却时间。
+            </remarks>
+        </member>
+        <member name="T:GameCore.Struct.Cost">
+            <summary>
+            Represents the cost requirements for performing an action, including cooldowns, charges, vitals, and player resources.
+            </summary>
+            <remarks>
+            The Cost class provides a comprehensive system for defining and managing resource requirements for game actions
+            such as casting spells, using abilities, or performing other operations. It supports multiple types of costs
+            including cooldown timers, charge systems, vital properties (like health and mana), and player-specific resources.
+            The class includes validation methods to check if costs can be afforded and execution methods to actually
+            spend the resources when an action is performed.
+            </remarks>
+        </member>
+        <member name="P:GameCore.Struct.Cost.Cooldown">
+            <summary>
+            Gets or sets the active cooldown requirement for this cost.
+            </summary>
+            <value>A game data link to a cooldown configuration, or <c>null</c> if no cooldown is required.</value>
+            <remarks>
+            Active cooldowns prevent actions from being performed until a specified time has elapsed.
+            This is commonly used for abilities that have a recharge time between uses.
+            </remarks>
+        </member>
+        <member name="P:GameCore.Struct.Cost.Charge">
+            <summary>
+            Gets or sets the charge system requirement for this cost.
+            </summary>
+            <value>A game data link to a charge configuration, or <c>null</c> if no charges are required.</value>
+            <remarks>
+            Charge systems allow actions to be performed a limited number of times before requiring
+            a recharge period. This is useful for abilities with multiple uses but limited availability.
+            </remarks>
+        </member>
+        <member name="P:GameCore.Struct.Cost.Vital">
+            <summary>
+            Gets or sets the vital property costs (such as health, mana, or energy) required for this action.
+            </summary>
+            <value>A dictionary mapping vital properties to their cost functions.</value>
+            <remarks>
+            Vital costs are typically used for abilities that consume health, mana, or other character resources.
+            The cost functions allow for dynamic calculation based on the execution context, such as scaling
+            with level or other modifiers.
+            </remarks>
+        </member>
+        <member name="P:GameCore.Struct.Cost.PlayerCost">
+            <summary>
+            Gets or sets the player-specific numeric costs required for this action.
+            </summary>
+            <value>A dictionary mapping player numeric properties to their cost functions.</value>
+            <remarks>
+            Player costs represent resources that belong to the player rather than individual units,
+            such as gold, experience, or other shared resources. This feature is currently under development.
+            </remarks>
+        </member>
+        <member name="F:GameCore.Struct.Cost.vitalCache">
+            <summary />
+        </member>
+        <member name="F:GameCore.Struct.Cost.playerCostCache">
+            <summary />
+        </member>
+        <member name="F:GameCore.Struct.Cost.cached">
+            <summary />
+        </member>
+        <member name="M:GameCore.Struct.Cost.CooldownCheck(GameCore.CostSystem.ICostSpender)">
+            <summary>
+            Performs a cooldown and charge check for the specified cost spender.
+            </summary>
+            <param name="requester">The object requesting to spend costs, which manages cooldowns and charges.</param>
+            <returns>A command result indicating whether the cooldown and charge requirements are satisfied.</returns>
+            <remarks>
+            This method validates that the requester can proceed based on cooldown timers and available charges.
+            It does not check other cost types like vital or player resources.
+            </remarks>
+        </member>
+        <member name="M:GameCore.Struct.Cost.CanAfford(GameCore.EntitySystem.Entity,GameCore.Interface.IExecutionContext,GameCore.CostSystem.ICostSpender,System.Boolean,System.Boolean)">
+            <summary>
+            Determines whether the specified caster can afford this cost.
+            </summary>
+            <param name="caster">The entity attempting to pay the cost.</param>
+            <param name="context">The execution context providing additional parameters for cost calculation.</param>
+            <param name="requester">The object requesting to spend costs.</param>
+            <param name="testOnly">If <c>true</c>, only tests affordability without caching results for spending; if <c>false</c>, caches results for efficient spending.</param>
+            <param name="skipCooldownCheckInTest">If <c>true</c> and <paramref name="testOnly" /> is <c>true</c>, skips cooldown validation for performance.</param>
+            <returns>A command result indicating whether the cost can be afforded.</returns>
+            <remarks>
+            This method performs comprehensive validation of all cost requirements including cooldowns, charges,
+            vital properties, and player resources. When <paramref name="testOnly" /> is <c>false</c>, it caches
+            the calculated costs for efficient spending later. The method validates that the caster has sufficient
+            resources and that adding negative costs (healing effects) wouldn't exceed maximum values.
+            </remarks>
+        </member>
+        <member name="T:GameCore.Struct.EffectAngleExpression">
+            <summary>
+            表示效果角度表达式，用于计算和确定效果的方向角度
+            </summary>
+            <remarks>
+            EffectAngleExpression 类提供了灵活的角度计算机制，支持多种角度确定方法，
+            包括使用实体朝向、两点间角度计算和显式角度设置。这对于需要方向性的效果
+            （如投射物、区域效果、视觉特效等）提供了完整的角度计算解决方案。
+            </remarks>
+        </member>
+        <member name="P:GameCore.Struct.EffectAngleExpression.Method">
+            <summary>
+            获取或设置角度计算的方法
+            </summary>
+            <remarks>
+            默认使用朝向方法（Facing），即使用目标实体的朝向作为角度。
+            </remarks>
+        </member>
+        <member name="P:GameCore.Struct.EffectAngleExpression.Location">
+            <summary>
+            获取或设置主要目标位置表达式
+            </summary>
+            <remarks>
+            根据角度计算方法的不同，此位置可能作为起始点、朝向来源或角度计算的基础。
+            </remarks>
+        </member>
+        <member name="P:GameCore.Struct.EffectAngleExpression.OtherLocation">
+            <summary>
+            获取或设置其他目标位置表达式
+            </summary>
+            <remarks>
+            在两点间角度计算方法中，此位置作为终点，与主要位置配合计算方向角度。
+            </remarks>
+        </member>
+        <member name="P:GameCore.Struct.EffectAngleExpression.LocalOffset">
+            <summary>
+            获取或设置本地偏移角度函数
+            </summary>
+            <remarks>
+            此函数提供额外的角度偏移，会添加到计算出的基础角度上。
+            默认返回 0，表示无偏移。可用于微调或动态调整效果方向。
+            </remarks>
+        </member>
+        <member name="M:GameCore.Struct.EffectAngleExpression.Parse(GameCore.Execution.Effect)">
+            <summary>
+            解析并计算效果的最终角度
+            </summary>
+            <param name="effect">效果实例，提供计算所需的上下文信息</param>
+            <returns>计算出的角度值，如果计算失败则返回 <c>null</c></returns>
+            <remarks>
+            根据配置的角度方法执行相应的计算逻辑：
+            <list type="bullet"><item><description><see cref="F:GameCore.Struct.EffectAngleMethod.ExplicitAngle" />：直接返回本地偏移角度</description></item><item><description><see cref="F:GameCore.Struct.EffectAngleMethod.AngleBetweenTwoPoints" />：计算两个位置间的角度并加上偏移</description></item><item><description><see cref="F:GameCore.Struct.EffectAngleMethod.Facing" />：使用目标的朝向角度并加上偏移</description></item></list>
+            如果所需的目标位置无法解析，方法会返回 <c>null</c>。
+            </remarks>
+        </member>
+        <member name="T:GameCore.Struct.EffectAngleMethod">
+            <summary>
+            Defines the methods used to determine the angle for effect calculations.
+            </summary>
+            <remarks>
+            This enum specifies how the angle should be calculated when applying effects
+            that require directional information, such as projectiles, area effects, or
+            visual effects that need orientation.
+            </remarks>
+        </member>
+        <member name="F:GameCore.Struct.EffectAngleMethod.Facing">
+            <summary>
+            Uses the facing direction of the source entity.
+            </summary>
+            <remarks>
+            The angle is determined by the current facing direction of the entity
+            that is applying the effect.
+            </remarks>
+        </member>
+        <member name="F:GameCore.Struct.EffectAngleMethod.AngleBetweenTwoPoints">
+            <summary>
+            Calculates the angle based on the direction between two points.
+            </summary>
+            <remarks>
+            The angle is computed using the vector from a source point to a target point,
+            typically used for targeted effects or projectiles.
+            </remarks>
+        </member>
+        <member name="F:GameCore.Struct.EffectAngleMethod.ExplicitAngle">
+            <summary>
+            Uses a specific angle value that is explicitly provided.
+            </summary>
+            <remarks>
+            The angle is set directly through configuration or parameters,
+            allowing for precise control over the effect's direction.
+            </remarks>
+        </member>
+        <member name="T:GameCore.Struct.EffectLaunchMissileMethod">
+            <summary>
+            Defines the methods for launching missiles in effect systems.
+            </summary>
+            <remarks>
+            This enum specifies how missiles should be created and launched when applying
+            missile-based effects. It determines whether to create new missile instances
+            or reuse existing ones for performance optimization.
+            </remarks>
+        </member>
+        <member name="F:GameCore.Struct.EffectLaunchMissileMethod.CreateMissile">
+            <summary>
+            Creates a new missile instance for the effect.
+            </summary>
+            <remarks>
+            A new missile entity is instantiated and configured specifically for this effect.
+            This provides full control over the missile's properties but has higher overhead.
+            </remarks>
+        </member>
+        <member name="F:GameCore.Struct.EffectLaunchMissileMethod.UseExistingMissile">
+            <summary>
+            Uses an existing missile instance for the effect.
+            </summary>
+            <remarks>
+            Reuses a pre-existing missile entity, which can improve performance by avoiding
+            instantiation costs. The existing missile's properties may be modified as needed.
+            </remarks>
+        </member>
+        <member name="T:GameCore.Struct.EffectOffsetExpression">
+            <summary>
+            表示效果偏移表达式，用于计算基于角度和距离的位置偏移
+            </summary>
+            <remarks>
+            EffectOffsetExpression 类提供了基于极坐标系统的位置偏移计算功能。
+            它使用角度表达式和距离函数来计算从原点开始的偏移位置，
+            常用于技能效果、投射物发射位置、AOE效果中心等需要精确位置控制的场景。
+            </remarks>
+        </member>
+        <member name="P:GameCore.Struct.EffectOffsetExpression.Angle">
+            <summary>
+            获取或设置角度表达式，用于确定偏移的方向
+            </summary>
+            <remarks>
+            此角度表达式定义了从原点向外偏移的方向。
+            角度可以基于实体朝向、两点间夹角或显式角度值来计算。
+            </remarks>
+        </member>
+        <member name="P:GameCore.Struct.EffectOffsetExpression.Distance">
+            <summary>
+            获取或设置距离函数，用于确定偏移的距离
+            </summary>
+            <remarks>
+            此函数计算从原点沿指定角度方向偏移的距离。
+            默认返回 0，表示无偏移。可以基于效果的各种参数动态计算距离。
+            </remarks>
+        </member>
+        <member name="M:GameCore.Struct.EffectOffsetExpression.Parse(GameCore.Execution.Effect,GameCore.BaseInterface.ITarget)">
+            <summary>
+            解析并计算最终的偏移位置
+            </summary>
+            <param name="effect">效果实例，提供计算所需的上下文信息</param>
+            <param name="origin">原点位置，作为偏移计算的基础</param>
+            <returns>计算出的最终位置点</returns>
+            <remarks>
+            方法首先计算偏移距离，如果距离为 0 则直接返回原点位置。
+            否则使用角度表达式计算偏移方向，然后基于极坐标系统计算最终位置。
+            如果角度无法确定，则返回原点位置。
+            计算公式：最终位置 = 原点 + (角度方向 × 距离)
+            </remarks>
+        </member>
+        <member name="T:GameCore.Struct.EffectOwner">
+            <summary>
+            Defines who owns or controls an effect in the game.
+            </summary>
+            <remarks>
+            This enum determines the ownership context for effects, which can influence their behavior,
+            interactions, and lifecycle management within the game systems.
+            </remarks>
+        </member>
+        <member name="F:GameCore.Struct.EffectOwner.TargetLocation">
+            <summary>
+            The effect is owned by or associated with the target location where it was created.
+            </summary>
+        </member>
+        <member name="F:GameCore.Struct.EffectOwner.Neutral">
+            <summary>
+            The effect has no specific owner and is considered neutral.
+            </summary>
+        </member>
+        <member name="T:GameCore.Struct.EffectOwnerExpression">
+            <summary />
+        </member>
+        <member name="P:GameCore.Struct.EffectOwnerExpression.Value">
+            <summary />
+        </member>
+        <member name="P:GameCore.Struct.EffectOwnerExpression.TargetLocation">
+            <summary />
+        </member>
+        <member name="M:GameCore.Struct.EffectOwnerExpression.Parse(GameCore.Interface.IExecutableObject)">
+            <summary />
+            <param name="context" />
+            <returns />
+        </member>
+        <member name="T:GameCore.Struct.EffectPropertyModification`1">
+            <summary>
+            Represents a property modification configuration for effects that alter entity properties.
+            </summary>
+            <typeparam name="T">The type of property being modified, which must implement <see cref="T:GameCore.BaseInterface.IExtendableEnum`1" />.</typeparam>
+            <remarks>
+            This class defines how an effect should modify a specific property of an entity,
+            including the property to modify, the calculation method for the new value,
+            and optional randomization parameters.
+            </remarks>
+        </member>
+        <member name="P:GameCore.Struct.EffectPropertyModification`1.Property">
+            <summary>
+            Gets or sets the property to be modified by this effect.
+            </summary>
+            <remarks>
+            This property specifies which entity property will be affected by the modification.
+            The property type must be part of the extendable enum system for type safety.
+            </remarks>
+        </member>
+        <member name="P:GameCore.Struct.EffectPropertyModification`1.Value">
+            <summary>
+            Gets or sets the function used to calculate the modification value.
+            </summary>
+            <remarks>
+            This function determines how the property value should be calculated or modified.
+            The default implementation returns a constant value of 100.
+            The function receives effect context parameters and returns the computed value.
+            </remarks>
+        </member>
+        <member name="P:GameCore.Struct.EffectPropertyModification`1.Random">
+            <summary>
+            Gets or sets the optional random variation applied to the modification value.
+            </summary>
+            <remarks>
+            When specified, this value introduces randomness to the property modification,
+            allowing for variable effects rather than deterministic ones.
+            If <c>null</c>, no randomization is applied.
+            </remarks>
+        </member>
+        <member name="T:GameCore.Struct.HashSetFilter`1">
+            <summary>
+            Represents a generic filter for determining whether collections of items meet specific criteria based on required and excluded elements.
+            </summary>
+            <typeparam name="T">The type of elements to filter.</typeparam>
+            <remarks>
+            HashSetFilter provides a flexible way to define filtering conditions for any type of collection.
+            It uses inclusion (required) and exclusion criteria to determine if a collection is valid.
+            A collection passes the filter if it contains all required elements and none of the excluded elements.
+            This is a generic version of TargetFilter that can work with any type, not just unit filter tags.
+            </remarks>
+            <example>
+                <code>
+            var stringFilter = new HashSetFilter&lt;string&gt;
+            {
+                Required = { "important", "necessary" },
+                Excluded = { "forbidden", "blocked" }
+            };
+            
+            var testSet = new HashSet&lt;string&gt; { "important", "necessary", "optional" };
+            bool passes = stringFilter.Pass(testSet); // Returns true
+            
+            var badSet = new HashSet&lt;string&gt; { "important", "forbidden" };
+            bool fails = stringFilter.Pass(badSet); // Returns false (contains excluded item)
+            </code>
+            </example>
+        </member>
+        <member name="P:GameCore.Struct.HashSetFilter`1.Required">
+            <summary>
+            Gets or sets the collection of elements that must be present for the filter to pass.
+            </summary>
+            <value>A set of elements that are required for the collection to be valid.</value>
+            <remarks>
+            All elements in this collection must be present in the tested collection for the filter to pass.
+            If this collection is empty, no specific elements are required (only exclusions apply).
+            </remarks>
+        </member>
+        <member name="P:GameCore.Struct.HashSetFilter`1.Excluded">
+            <summary>
+            Gets or sets the collection of elements that disqualify a collection from passing the filter.
+            </summary>
+            <value>A set of elements that, if present, will cause the filter to fail.</value>
+            <remarks>
+            If any element in this collection is present in the tested collection, the filter will fail
+            regardless of which required elements are met. This provides a way to exclude specific elements.
+            </remarks>
+        </member>
+        <member name="M:GameCore.Struct.HashSetFilter`1.Pass(System.Collections.Generic.HashSet{`0})">
+            <summary>
+            Determines whether the specified set of elements passes this filter.
+            </summary>
+            <param name="tags">The collection of elements to test against this filter.</param>
+            <returns>True if the elements pass the filter criteria; otherwise, false.</returns>
+            <remarks>
+            The filter passes if:
+            <list type="bullet"><item><description>The collection has none of the excluded elements (no overlap with Excluded)</description></item><item><description>The collection has all of the required elements (Required is a subset of tags)</description></item></list>
+            Both conditions must be met for the filter to pass.
+            </remarks>
+        </member>
+        <member name="M:GameCore.Struct.HashSetFilter`1.Pass(System.Collections.Generic.IEnumerable{`0})">
+            <summary>
+            Determines whether the specified enumerable collection of elements passes this filter.
+            </summary>
+            <param name="tags">The enumerable collection of elements to test against this filter.</param>
+            <returns>True if the elements pass the filter criteria; otherwise, false.</returns>
+            <remarks>
+            This overload accepts any enumerable collection, not just HashSet. The same filtering logic applies:
+            the collection must contain all required elements and none of the excluded elements.
+            For better performance with large collections, consider using the HashSet overload.
+            </remarks>
+        </member>
+        <member name="T:GameCore.Struct.InventoryFlags">
+            <summary>
+            定义物品栏系统的行为标志，控制物品的拾取、丢弃和使用权限
+            </summary>
+            <remarks>
+            InventoryFlags 类用于配置物品栏系统中物品和容器的各种行为权限。
+            这些标志决定了玩家或系统是否可以对物品栏中的物品执行特定操作，
+            为不同类型的容器和物品提供了灵活的权限控制机制。
+            </remarks>
+        </member>
+        <member name="P:GameCore.Struct.InventoryFlags.HandlePickUpRequest">
+            <summary>
+            获取或设置是否处理物品拾取请求
+            </summary>
+            <remarks>
+            当设置为 <c>true</c> 时，物品栏系统会处理来自玩家的物品拾取请求。
+            当设置为 <c>false</c> 时，拾取请求会被忽略，物品无法被添加到此物品栏中。
+            默认值为 <c>true</c>。
+            即使设置为 <c>false</c>，物品也可以通过其他方式添加到物品栏中，如通过代码添加。
+            </remarks>
+        </member>
+        <member name="P:GameCore.Struct.InventoryFlags.AllowDrop">
+            <summary>
+            获取或设置是否允许丢弃物品
+            </summary>
+            <remarks>
+            当设置为 <c>true</c> 时，玩家可以从物品栏中丢弃物品到游戏世界中。
+            当设置为 <c>false</c> 时，丢弃操作被禁止，物品只能通过其他方式移除。
+            默认值为 <c>true</c>。这通常用于限制特殊容器或任务物品的丢弃。
+            </remarks>
+        </member>
+        <member name="P:GameCore.Struct.InventoryFlags.AllowUse">
+            <summary>
+            获取或设置是否允许使用物品
+            </summary>
+            <remarks>
+            当设置为 <c>true</c> 时，玩家可以直接使用物品栏中的物品（如消耗品、工具等）。
+            当设置为 <c>false</c> 时，使用操作被禁止，物品可能需要先移动到其他位置才能使用。
+            默认值为 <c>true</c>。这用于控制特定容器中物品的可用性。
+            </remarks>
+        </member>
+        <member name="T:GameCore.Struct.EItemCategory">
+            <summary>
+            定义物品的分类类型，用于组织和管理游戏中的各种物品
+            </summary>
+            <remarks>
+            此枚举提供了扩展能力，允许在运行时动态添加新的物品分类。
+            物品分类用于物品栏管理、UI 显示、过滤器和其他需要按类型组织物品的系统中。
+            可以通过枚举扩展系统添加自定义的物品分类，如武器、防具、消耗品等。
+            </remarks>
+        </member>
+        <member name="T:GameCore.Struct.ItemUnitModificationData">
+            <summary />
+        </member>
+        <member name="P:GameCore.Struct.ItemUnitModificationData.Ability">
+            <summary />
+        </member>
+        <member name="P:GameCore.Struct.ItemUnitModificationData.Modifications">
+            <summary />
+        </member>
+        <member name="P:GameCore.Struct.ItemUnitModificationData.AddStates">
+            <summary />
+        </member>
+        <member name="P:GameCore.Struct.ItemUnitModificationData.RemoveStates">
+            <summary />
+        </member>
+        <member name="P:GameCore.Struct.ItemUnitModificationData.ImmuneStates">
+            <summary />
+        </member>
+        <member name="P:GameCore.Struct.ItemUnitModificationData.ActorArray">
+            <summary />
+        </member>
+        <member name="T:GameCore.Struct.LeveledData`1">
+            <summary>
+            Represents a collection of data that varies by level, providing level-based data retrieval with automatic clamping.
+            </summary>
+            <typeparam name="T">The type of data stored at each level.</typeparam>
+            <remarks>
+            LeveledData is commonly used for game mechanics where values change as a character or ability levels up,
+            such as spell damage, ability cooldowns, or unit statistics. The class automatically handles level bounds
+            by clamping the requested level to the available data range.
+            </remarks>
+            <example>
+                <code>
+            var damage = new LeveledData&lt;int&gt; { 10, 20, 30, 40, 50 };
+            
+            int level1Damage = damage.GetLeveledData(0); // Returns 10 (level 0)
+            int level3Damage = damage.GetLeveledData(2); // Returns 30 (level 2)
+            int maxDamage = damage.GetLeveledData(999);   // Returns 50 (clamped to max level)
+            </code>
+            </example>
+        </member>
+        <member name="M:GameCore.Struct.LeveledData`1.GetLeveledData(System.Int32)">
+            <summary>
+            Retrieves the data for the specified level, automatically clamping the level to valid bounds.
+            </summary>
+            <param name="level">The zero-based level index to retrieve data for.</param>
+            <returns>The data for the specified level, or the closest valid level if the input is out of bounds.</returns>
+            <exception cref="T:System.IO.InvalidDataException">Thrown when the LeveledData collection is empty.</exception>
+            <remarks>
+            This method provides safe access to leveled data by automatically clamping the level parameter:
+            <list type="bullet"><item><description>Negative levels are clamped to 0 (minimum level)</description></item><item><description>Levels exceeding the data count are clamped to the maximum available level</description></item></list>
+            This ensures that valid data is always returned as long as the collection is not empty.
+            </remarks>
+        </member>
+        <member name="T:GameCore.Struct.MorphFlags">
+            <summary>
+            定义变身系统的行为标志，控制变身时哪些属性和特征会发生改变
+            </summary>
+            <remarks>
+            MorphFlags 类用于配置单位变身时的各种变化选项。变身是游戏中常见的机制，
+            可以用于技能效果、形态转换、临时强化等场景。这些标志提供了细粒度的控制，
+            允许开发者精确定义变身过程中哪些方面会被修改。
+            </remarks>
+        </member>
+        <member name="P:GameCore.Struct.MorphFlags.ChangeModel">
+            <summary>
+            获取或设置是否改变模型外观
+            </summary>
+            <remarks>
+            当设置为 <c>true</c> 时，变身会改变单位的 3D 模型、材质和视觉外观。
+            这是最常见的变身效果，让单位看起来完全不同。
+            默认值为 <c>true</c>。
+            </remarks>
+        </member>
+        <member name="P:GameCore.Struct.MorphFlags.ChangeAbilities">
+            <summary>
+            获取或设置是否改变技能能力
+            </summary>
+            <remarks>
+            当设置为 <c>true</c> 时，变身会改变单位可用的技能和能力。
+            这允许变身形态拥有完全不同的技能组合。
+            默认值为 <c>false</c>。
+            </remarks>
+        </member>
+        <member name="P:GameCore.Struct.MorphFlags.ChangeResponses">
+            <summary>
+            获取或设置是否改变响应行为
+            </summary>
+            <remarks>
+            当设置为 <c>true</c> 时，变身会改变单位对各种事件和刺激的响应方式。
+            这包括 AI 行为、交互方式、触发条件等。
+            默认值为 <c>false</c>。
+            </remarks>
+        </member>
+        <member name="P:GameCore.Struct.MorphFlags.ChangeUnitProperties">
+            <summary>
+            获取或设置是否改变单位属性
+            </summary>
+            <remarks>
+            当设置为 <c>true</c> 时，变身会改变单位的基础属性，如生命值、攻击力、移动速度等。
+            这允许变身形态具有不同的战斗能力和特征。
+            默认值为 <c>false</c>。
+            </remarks>
+        </member>
+        <member name="P:GameCore.Struct.MorphFlags.ChangeUnitStates">
+            <summary>
+            获取或设置是否改变单位状态
+            </summary>
+            <remarks>
+            当设置为 <c>true</c> 时，变身会改变单位的各种状态标记和分类。
+            这可能影响单位如何被其他系统识别和处理。
+            默认值为 <c>false</c>。
+            </remarks>
+        </member>
+        <member name="P:GameCore.Struct.MorphFlags.ChangeHeight">
+            <summary>
+            获取或设置是否改变单位高度
+            </summary>
+            <remarks>
+            当设置为 <c>true</c> 时，变身会改变单位的物理高度。
+            这影响碰撞检测、视线计算和其他基于高度的游戏机制。
+            默认值为 <c>false</c>。
+            TODO: 高度系统待实现
+            </remarks>
+        </member>
+        <member name="P:GameCore.Struct.MorphFlags.ChangeLoot">
+            <summary>
+            获取或设置是否改变掉落物品
+            </summary>
+            <remarks>
+            当设置为 <c>true</c> 时，变身会改变单位死亡时掉落的物品。
+            这允许不同形态的单位掉落不同的战利品。
+            默认值为 <c>false</c>。
+            TODO: 掉落系统待实现
+            </remarks>
+        </member>
+        <member name="T:GameCore.Struct.PlayerData">
+            <summary>
+            Represents configuration data for a player in the game, including their identity, controller type, and team status.
+            </summary>
+            <remarks>
+            This class is used to define player properties during game setup and initialization.
+            It contains information about how the player is controlled and their relationship to other players.
+            </remarks>
+        </member>
+        <member name="P:GameCore.Struct.PlayerData.Id">
+            <summary>
+            Gets or sets the unique identifier for this player.
+            </summary>
+        </member>
+        <member name="P:GameCore.Struct.PlayerData.Controller">
+            <summary>
+            Gets or sets the type of controller that manages this player (e.g., human, AI).
+            </summary>
+        </member>
+        <member name="P:GameCore.Struct.PlayerData.IsNeutral">
+            <summary>
+            Gets or sets a value indicating whether this player is neutral (not aligned with any team).
+            </summary>
+        </member>
+        <member name="T:GameCore.Struct.PropertyModificationOperation">
+            <summary>
+            Defines the types of operations that can be performed when modifying properties.
+            </summary>
+            <remarks>
+            This enum is used to specify how a property value should be changed during modification operations.
+            </remarks>
+        </member>
+        <member name="F:GameCore.Struct.PropertyModificationOperation.Set">
+            <summary>
+            Sets the property to a specific value, replacing the current value.
+            </summary>
+        </member>
+        <member name="F:GameCore.Struct.PropertyModificationOperation.Add">
+            <summary>
+            Adds a value to the current property value.
+            </summary>
+        </member>
+        <member name="T:GameCore.Struct.ResponseDamageFlags">
+            <summary>
+            定义伤害响应系统的行为标志，控制特定伤害事件的处理方式
+            </summary>
+            <remarks>
+            ResponseDamageFlags 类用于配置伤害响应系统如何处理不同类型的伤害事件。
+            这些标志决定了响应器是否会对特定的伤害情况（如致命伤害、暴击、零伤害等）做出反应，
+            为创建复杂的伤害响应机制提供了灵活的控制选项。
+            </remarks>
+        </member>
+        <member name="P:GameCore.Struct.ResponseDamageFlags.Fatal">
+            <summary>
+            获取或设置是否响应致命伤害
+            </summary>
+            <remarks>
+            当设置为 <c>true</c> 时，响应器会对导致单位死亡的伤害事件做出反应。
+            这通常用于死亡时触发的特殊效果，如死亡爆炸、复活机制或遗言技能。
+            默认值为 <c>false</c>。
+            </remarks>
+        </member>
+        <member name="P:GameCore.Struct.ResponseDamageFlags.SetAsCrit">
+            <summary>
+            获取或设置是否将伤害设置为暴击
+            </summary>
+            <remarks>
+            当设置为 <c>true</c> 时，响应器可以强制将触发的伤害标记为暴击。
+            这允许某些技能或效果确保产生暴击伤害，无视正常的暴击计算。
+            默认值为 <c>false</c>。
+            </remarks>
+        </member>
+        <member name="P:GameCore.Struct.ResponseDamageFlags.HandleZeroDamage">
+            <summary>
+            获取或设置是否处理零伤害事件
+            </summary>
+            <remarks>
+            当设置为 <c>true</c> 时，响应器会对造成 0 点伤害的攻击做出反应。
+            这包括被完全抵挡、免疫或其他原因导致的无效伤害。
+            用于在即使没有造成实际伤害时也需要触发某些效果的场景。
+            默认值为 <c>false</c>。
+            </remarks>
+        </member>
+        <member name="P:GameCore.Struct.ResponseDamageFlags.HandleNullifiedDamage">
+            <summary>
+            获取或设置是否处理被无效化的伤害
+            </summary>
+            <remarks>
+            当设置为 <c>true</c> 时，响应器会对被护盾、无敌或其他保护机制完全抵消的伤害做出反应。
+            这与零伤害不同，无效化伤害是指原本会造成伤害但被特殊机制阻止的情况。
+            用于在伤害被阻挡时仍需要触发响应的场景。
+            默认值为 <c>false</c>。
+            </remarks>
+        </member>
+        <member name="T:GameCore.Struct.SpellCastTime">
+            <summary>
+            Represents the timing configuration for spell or ability casting phases.
+            </summary>
+            <remarks>
+            SpellCastTime defines the various time durations involved in casting a spell or using an ability.
+            It breaks down the casting process into distinct phases: preswing (preparation), cast (actual casting),
+            channel (sustained effect), and backswing (recovery). Each phase can have different timing requirements
+            and may be affected by various modifiers such as cast speed, interruption, or other game mechanics.
+            This granular timing control allows for sophisticated spell mechanics and balanced gameplay.
+            </remarks>
+            <example>
+                <code>
+            var castTime = new SpellCastTime
+            {
+                Preswing = (_) =&gt; TimeSpan.FromMilliseconds(300),  // 0.3s preparation
+                Cast = (_) =&gt; TimeSpan.FromSeconds(2),             // 2s casting time
+                Channel = (_) =&gt; TimeSpan.FromSeconds(5),          // 5s channeling
+                Backswing = (_) =&gt; TimeSpan.FromMilliseconds(200)  // 0.2s recovery
+            };
+            </code>
+            </example>
+        </member>
+        <member name="P:GameCore.Struct.SpellCastTime.Preswing">
+            <summary>
+            Gets or sets the preswing time function for the spell casting.
+            </summary>
+            <value>A function that calculates the preswing duration based on execution context.</value>
+            <remarks>
+            Preswing represents the preparation phase before the actual spell casting begins.
+            During this time, the caster may play preparation animations, gather energy, or perform
+            other preliminary actions. The preswing phase can typically be interrupted without
+            triggering cooldowns or consuming resources.
+            </remarks>
+        </member>
+        <member name="P:GameCore.Struct.SpellCastTime.Cast">
+            <summary>
+            Gets or sets the cast time function for the main spell casting phase.
+            </summary>
+            <value>A function that calculates the casting duration based on execution context.</value>
+            <remarks>
+            The cast time represents the core casting phase where the spell effect is being prepared
+            and channeled. During this phase, the caster is typically vulnerable to interruption,
+            and interrupting the cast may trigger partial cooldowns or resource consumption.
+            This is often the longest phase of spell casting.
+            </remarks>
+        </member>
+        <member name="P:GameCore.Struct.SpellCastTime.Channel">
+            <summary>
+            Gets or sets the channel time function for sustained spell effects.
+            </summary>
+            <value>A function that calculates the channeling duration based on execution context.</value>
+            <remarks>
+            Channel time represents the duration for which a spell effect is actively maintained
+            after the initial cast completes. During channeling, the caster typically cannot perform
+            other actions and must maintain focus to continue the effect. Channeled spells can often
+            be canceled early or interrupted by external effects.
+            Spell costs will typically be consumed at the start of the channel phase.
+            </remarks>
+        </member>
+        <member name="P:GameCore.Struct.SpellCastTime.Backswing">
+            <summary>
+            Gets or sets the backswing time function for the spell recovery phase.
+            </summary>
+            <value>A function that calculates the recovery duration based on execution context.</value>
+            <remarks>
+            Backswing represents the recovery time after a spell has been cast.
+            Backswing is typically can be interrupted by subsequent actions.
+            </remarks>
+        </member>
+        <member name="P:GameCore.Struct.SpellCastTime.NormalizedDuration">
+            <summary>
+            Gets or sets the normalized duration for the core casting phases (Preswing + Cast + Channel).
+            When set, enforces that the combined time of these three phases equals exactly this value,
+            while preserving their relative proportions.
+            </summary>
+            <value>A function that calculates the normalized duration based on execution context.</value>
+            <remarks>
+                <para>
+                    <strong>Primary Use Case:</strong> This property is primarily designed for basic attack abilities
+            where precise attack interval control is required. For such abilities, designers typically:
+            <list type="bullet"><item><description>Set <c>NormalizedDuration</c> to the desired attack interval</description></item><item><description>Do not configure cooldown (cooldown = 0)</description></item><item><description>Configure backswing as interruptible</description></item></list></para>
+                <para>
+                    <strong>Scaling Behavior:</strong> When <c>NormalizedDuration</c> is set, all casting phases
+            are scaled by the same factor to maintain animation coherence:
+            <list type="bullet"><item><description><strong>Preswing, Cast, Channel:</strong> Scaled to fit exactly within <c>NormalizedDuration</c></description></item><item><description><strong>Backswing:</strong> Scaled by the same factor but not included in <c>NormalizedDuration</c></description></item></list></para>
+                <para>
+                    <strong>Attack Interval Control:</strong> For abilities with interruptible backswing,
+            the effective attack interval equals <c>NormalizedDuration</c> because subsequent attacks
+            will interrupt the backswing phase. This provides precise attack rhythm control.
+            </para>
+                <para>
+                    <strong>Example:</strong> Setting <c>NormalizedDuration = 2s</c> for a basic attack with
+            original timings Preswing=0.3s, Cast=1.2s, Channel=0.5s, Backswing=0.6s:
+            <list type="bullet"><item><description>Scale factor = 2s / (0.3s + 1.2s + 0.5s) = 1.0</description></item><item><description>Adjusted: Preswing=0.3s, Cast=1.2s, Channel=0.5s, Backswing=0.6s</description></item><item><description>Complete casting time = 2.6s (for animation/UI purposes)</description></item><item><description>Effective attack interval = 2s (due to backswing interruption)</description></item></list></para>
+                <para>
+                    <strong>Edge Cases:</strong> If the sum of original core phase durations is zero or very small,
+            the phases will be distributed equally within the normalized duration. Backswing scaling
+            follows the same factor to maintain visual consistency.
+            </para>
+            </remarks>
+        </member>
+        <member name="T:GameCore.Struct.SpellInterruptConfig">
+            <summary />
+        </member>
+        <member name="P:GameCore.Struct.SpellInterruptConfig.InterruptedRequiredPriority">
+            <summary />
+        </member>
+        <member name="P:GameCore.Struct.SpellInterruptConfig.InterruptingPriority">
+            <summary />
+        </member>
+        <member name="P:GameCore.Struct.SpellInterruptConfig.InterruptiblePreswing">
+            <summary />
+        </member>
+        <member name="P:GameCore.Struct.SpellInterruptConfig.InterruptibleApproach">
+            <summary />
+        </member>
+        <member name="P:GameCore.Struct.SpellInterruptConfig.InterruptibleWaitForCooldown">
+            <summary />
+        </member>
+        <member name="P:GameCore.Struct.SpellInterruptConfig.InterruptibleCast">
+            <summary />
+        </member>
+        <member name="P:GameCore.Struct.SpellInterruptConfig.InterruptibleChannel">
+            <summary />
+        </member>
+        <member name="P:GameCore.Struct.SpellInterruptConfig.InterruptibleBackswing">
+            <summary />
+        </member>
+        <member name="T:GameCore.Struct.TargetFilter">
+            <summary>
+            Represents a filter for determining whether targets meet specific criteria based on unit filter tags.
+            </summary>
+            <remarks>
+            The TargetFilter class provides a flexible way to define targeting conditions for abilities, spells,
+            and other game systems. It uses inclusion (required) and exclusion criteria to determine if a target
+            is valid. A target passes the filter if it has all required tags and none of the excluded tags.
+            </remarks>
+            <example>
+                <code>
+            var filter = new TargetFilter
+            {
+                Required = { UnitFilterTag.Enemy, UnitFilterTag.Alive },
+                Excluded = { UnitFilterTag.Structure }
+            };
+            
+            // This would target living enemy units but not structures
+            bool canTarget = filter.Pass(targetTags);
+            </code>
+            </example>
+        </member>
+        <member name="P:GameCore.Struct.TargetFilter.Required">
+            <summary>
+            Gets or sets the collection of tags that a target must have to pass the filter.
+            </summary>
+            <value>A set of unit filter tags that are required for the target to be valid.</value>
+            <remarks>
+            All tags in this collection must be present on the target for the filter to pass.
+            If this collection is empty, no specific tags are required (only exclusions apply).
+            </remarks>
+        </member>
+        <member name="P:GameCore.Struct.TargetFilter.Excluded">
+            <summary>
+            Gets or sets the collection of tags that disqualify a target from passing the filter.
+            </summary>
+            <value>A set of unit filter tags that, if present, will cause the filter to fail.</value>
+            <remarks>
+            If any tag in this collection is present on the target, the filter will fail regardless
+            of which required tags are met. This provides a way to exclude specific types of targets.
+            </remarks>
+        </member>
+        <member name="M:GameCore.Struct.TargetFilter.Pass(System.Collections.Generic.HashSet{GameCore.BaseType.UnitFilterTag})">
+            <summary>
+            Determines whether the specified set of tags passes this filter.
+            </summary>
+            <param name="tags">The collection of tags to test against this filter.</param>
+            <returns>True if the tags pass the filter criteria; otherwise, false.</returns>
+            <remarks>
+            The filter passes if:
+            <list type="bullet"><item><description>The target has none of the excluded tags (no overlap with Excluded)</description></item><item><description>The target has all of the required tags (Required is a subset of tags)</description></item></list>
+            Both conditions must be met for the filter to pass.
+            </remarks>
+        </member>
+        <member name="T:GameCore.Struct.TargetFilterComplex">
+            <summary>
+            Represents a complex target filter that combines multiple individual target filters using OR logic.
+            </summary>
+            <remarks>
+            TargetFilterComplex extends the List&lt;TargetFilter&gt; to provide a collection of filters where
+            a target passes if it satisfies ANY of the individual filters in the collection. This allows
+            for flexible targeting conditions where multiple different criteria can make a target valid.
+            For example, you could target either "living enemies" OR "undead allies" by combining two
+            separate filters. If the collection is empty, all targets pass by default.
+            </remarks>
+            <example>
+                <code>
+            var complexFilter = new TargetFilterComplex
+            {
+                new TargetFilter { Required = { UnitFilterTag.Enemy, UnitFilterTag.Alive } },
+                new TargetFilter { Required = { UnitFilterTag.Ally, UnitFilterTag.Undead } }
+            };
+            
+            // This will pass for either living enemies OR undead allies
+            bool passes = complexFilter.Pass(targetTags);
+            </code>
+            </example>
+        </member>
+        <member name="F:GameCore.Struct.TargetFilterComplex.tagsCache">
+            <summary />
+        </member>
+        <member name="M:GameCore.Struct.TargetFilterComplex.Pass(System.Collections.Generic.HashSet{GameCore.BaseType.UnitFilterTag})">
+            <summary>
+            Determines whether the specified set of tags passes this complex filter.
+            </summary>
+            <param name="tags">The collection of unit filter tags to test against this filter.</param>
+            <returns>True if the tags pass any of the individual filters, or if no filters are defined; otherwise, false.</returns>
+            <remarks>
+            This method uses OR logic - the target passes if it satisfies ANY of the individual filters
+            in the collection. If the collection is empty (no filters defined), the method returns true,
+            effectively allowing all targets to pass. This provides a safe default for unfiltered targeting.
+            </remarks>
+        </member>
+        <member name="M:GameCore.Struct.TargetFilterComplex.Pass(GameCore.EntitySystem.Entity,GameCore.EntitySystem.Entity)">
+            <summary>
+            Determines whether the specified target entity passes this complex filter from the perspective of the caster.
+            </summary>
+            <param name="caster">The entity that is performing the targeting (used to determine relationships).</param>
+            <param name="target">The entity being evaluated as a potential target.</param>
+            <returns>True if the target passes any of the individual filters, or if no filters are defined; otherwise, false.</returns>
+            <remarks>
+            This method automatically extracts the target's filter tags relative to the caster and then
+            evaluates them against all filters in the collection. It uses OR logic like the other Pass method,
+            but provides a more convenient interface when working with entities directly. The method caches
+            the extracted tags for efficiency during the evaluation process.
+            </remarks>
+        </member>
+        <member name="T:GameCore.Struct.TargetLocationExpression">
+            <summary />
+        </member>
+        <member name="P:GameCore.Struct.TargetLocationExpression.Effect">
+            <summary />
+        </member>
+        <member name="P:GameCore.Struct.TargetLocationExpression.LocalVar">
+            <summary />
+        </member>
+        <member name="P:GameCore.Struct.TargetLocationExpression.Value">
+            <summary />
+        </member>
+        <member name="M:GameCore.Struct.TargetLocationExpression.Parse(GameCore.Interface.IExecutableObject,GameCore.BaseType.TargetType)">
+            <summary />
+            <param name="executable" />
+            <param name="targetType" />
+            <returns />
+        </member>
+        <member name="T:GameCore.Struct.UnitPropertyFormula">
+            <summary>
+            Represents a formula for calculating unit property values based on dependencies and custom calculation logic.
+            </summary>
+            <remarks>
+            UnitPropertyFormula provides a way to define complex property calculations that depend on other unit properties.
+            This is commonly used for derived statistics where one property's value is calculated based on multiple other
+            properties, such as calculating total damage from base damage plus bonuses, or determining movement speed
+            based on agility and equipment modifiers. The formula system ensures that dependent properties are recalculated
+            when their dependencies change.
+            </remarks>
+            <example>
+                <code>
+            var healthFormula = new UnitPropertyFormula
+            {
+                DependedProperties = { strengthProperty, constitutionProperty },
+                Formula = (complex) =&gt; complex.GetFinal(strengthProperty) * 10 + complex.GetFinal(constitutionProperty) * 5
+            };
+            </code>
+            </example>
+        </member>
+        <member name="P:GameCore.Struct.UnitPropertyFormula.DependedProperties">
+            <summary>
+            Gets or sets the collection of unit properties that this formula depends on.
+            </summary>
+            <value>A set of property links that this formula uses as input for its calculations.</value>
+            <remarks>
+            When any of the properties in this collection change, the formula will be recalculated automatically.
+            This dependency tracking ensures that derived properties stay up-to-date when their inputs change.
+            The property system uses this information to determine the order of calculations and avoid circular dependencies.
+            </remarks>
+        </member>
+        <member name="P:GameCore.Struct.UnitPropertyFormula.Formula">
+            <summary>
+            Gets or sets the calculation function that computes the property value based on the unit's property complex.
+            </summary>
+            <value>A function that takes a UnitPropertyComplex and returns the calculated property value, or null if no formula is defined.</value>
+            <remarks>
+            This function is called whenever the property value needs to be recalculated. It receives a UnitPropertyComplex
+            object that provides access to all of the unit's current property values. The function should use the
+            GetFinal method to retrieve the final calculated values of dependent properties, ensuring that all
+            modifiers and other formulas have been applied.
+            </remarks>
+        </member>
+        <member name="T:GameCore.Struct.UnitPropertyInitialData">
+            <summary />
+        </member>
+        <member name="T:GameCore.Struct.UnitPropertyModification">
+            <summary />
+        </member>
+        <member name="P:GameCore.Struct.UnitPropertyModification.Property">
+            <summary />
+        </member>
+        <member name="P:GameCore.Struct.UnitPropertyModification.Value">
+            <summary />
+        </member>
+        <member name="P:GameCore.Struct.UnitPropertyModification.Random">
+            <summary />
+        </member>
+        <member name="P:GameCore.Struct.UnitPropertyModification.SubType">
+            <summary />
+        </member>
+        <member name="T:GameCore.Struct.UnitPropertyRequirementData">
+            <summary />
+        </member>
+        <member name="P:GameCore.Struct.UnitPropertyRequirementData.Property">
+            <summary />
+        </member>
+        <member name="P:GameCore.Struct.UnitPropertyRequirementData.Value">
+            <summary />
+        </member>
+        <member name="T:GameCore.Struct.UnitPropertyRequirements">
+            <summary />
+        </member>
+        <member name="M:GameCore.Struct.UnitPropertyRequirements.MeetRequirement(GameCore.EntitySystem.Unit)">
+            <summary />
+            <param name="unit" />
+            <returns />
+        </member>
+        <member name="T:GameCore.Struct.WeightedLink`1">
+            <summary>
+            表示带权重的游戏数据链接，用于随机选择和概率计算
+            </summary>
+            <typeparam name="T">游戏数据链接的类型</typeparam>
+            <remarks>
+            WeightedLink 类将游戏数据链接与权重值关联，用于实现基于权重的随机选择算法。
+            这通常用于掉落系统、随机事件、AI 决策等需要概率性选择的场景。
+            权重越高，被选中的概率越大。
+            </remarks>
+        </member>
+        <member name="P:GameCore.Struct.WeightedLink`1.Link">
+            <summary>
+            获取或设置游戏数据链接
+            </summary>
+            <remarks>
+            指向具体游戏数据的链接，可以为 <c>null</c>。
+            在随机选择过程中，只有非 null 的链接才会被考虑。
+            </remarks>
+        </member>
+        <member name="P:GameCore.Struct.WeightedLink`1.Weight">
+            <summary>
+            获取或设置链接的权重值
+            </summary>
+            <remarks>
+            权重决定了此链接在随机选择中被选中的相对概率。
+            默认权重为 1。权重为 0 的链接不会被选中，负权重通常被视为无效。
+            在多个加权链接的集合中，单个链接的选中概率 = 该链接权重 / 所有链接权重之和。
+            </remarks>
+        </member>
+        <member name="T:GameCore.Struct.WeightedLinkComplex`1">
+            <summary />
+        </member>
+        <member name="M:GameCore.Struct.WeightedLinkComplex`1.GetLink">
+            <summary />
+            <returns />
+        </member>
+        <member name="M:GameCore.Struct.WeightedLinkComplex`1.GetLinks(System.Int32,System.Boolean,System.Func{`0,System.Boolean})">
+            <summary />
+            <param name="count" />
+            <param name="allowRecycle" />
+            <param name="filter" />
+            <returns />
+        </member>
+    </members>
+</doc>

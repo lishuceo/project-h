@@ -1,0 +1,395 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<doc>
+    <assembly>
+        <name>GameCore</name>
+    </assembly>
+    <members>
+        <member name="T:GameCore.Event.EventEntity">
+            <summary />
+        </member>
+        <member name="M:GameCore.Event.EventEntity.#ctor(GameCore.EntitySystem.Entity)">
+            <summary />
+        </member>
+        <member name="P:GameCore.Event.EventEntity.Entity">
+            <summary />
+        </member>
+        <member name="P:GameCore.Event.EventEntity.Unit">
+            <summary />
+        </member>
+        <member name="P:GameCore.Event.EventEntity.HasTriggerUnit">
+            <summary />
+        </member>
+        <member name="T:GameCore.Event.EventEntityDamageTaken">
+            <summary />
+        </member>
+        <member name="M:GameCore.Event.EventEntityDamageTaken.#ctor(GameCore.EntitySystem.Entity,GameCore.Execution.EffectDamage)">
+            <summary />
+        </member>
+        <member name="P:GameCore.Event.EventEntityDamageTaken.EffectDamage">
+            <summary />
+        </member>
+        <member name="P:GameCore.Event.EventEntityDamageTaken.DamageInstance">
+            <summary />
+        </member>
+        <member name="P:GameCore.Event.EventEntityDamageTaken.DamageCurrent">
+            <summary />
+        </member>
+        <member name="P:GameCore.Event.EventEntityDamageTaken.DamageOriginal">
+            <summary />
+        </member>
+        <member name="T:GameCore.Event.EventEntityDeath">
+            <summary />
+        </member>
+        <member name="M:GameCore.Event.EventEntityDeath.#ctor(GameCore.EntitySystem.Entity,GameCore.BaseType.DeathType,GameCore.Interface.IExecutionContext)">
+            <summary />
+        </member>
+        <member name="P:GameCore.Event.EventEntityDeath.DeathType">
+            <summary />
+        </member>
+        <member name="P:GameCore.Event.EventEntityDeath.Killer">
+            <summary />
+        </member>
+        <member name="P:GameCore.Event.EventEntityDeath.KillerUnit">
+            <summary />
+        </member>
+        <member name="T:GameCore.Event.EventEntityRemove">
+            <summary />
+        </member>
+        <member name="M:GameCore.Event.EventEntityRemove.#ctor(GameCore.EntitySystem.Entity)">
+            <summary />
+        </member>
+        <member name="T:GameCore.Event.EventGameStart">
+            <summary>
+            Represents an event that is triggered when the game starts.
+            </summary>
+            <remarks>
+            This event is fired once during game initialization after all systems have been set up
+            and the game is ready to begin. It can be used to perform startup actions or initialize
+            game-specific logic.
+            </remarks>
+        </member>
+        <member name="T:GameCore.Event.EventGameTick">
+            <summary>
+             Represents an event that occurs on each game tick, providing the elapsed time since the last tick.
+             </summary>
+            <remarks>This event is typically used to track or respond to time-based updates in a game loop.  The <see cref="P:GameCore.Event.EventGameTick.RealTimeDeltaInMilliseconds" /> property indicates the duration of the tick in milliseconds.</remarks>
+            <param name="realTimeDeltaInMs" />
+        </member>
+        <member name="M:GameCore.Event.EventGameTick.#ctor(System.Int32)">
+            <summary>
+             Represents an event that occurs on each game tick, providing the elapsed time since the last tick.
+             </summary>
+            <remarks>This event is typically used to track or respond to time-based updates in a game loop.  The <see cref="P:GameCore.Event.EventGameTick.RealTimeDeltaInMilliseconds" /> property indicates the duration of the tick in milliseconds.</remarks>
+            <param name="realTimeDeltaInMs" />
+        </member>
+        <member name="P:GameCore.Event.EventGameTick.RealTimeDeltaInMilliseconds">
+            <summary />
+        </member>
+        <member name="T:GameCore.Event.EventGameCmdResultNotify">
+            <summary>
+            Represents an event that notifies about the result of a game command execution.
+            </summary>
+            <param name="cmdResult">The result of the command execution.</param>
+            <remarks>
+            This event is triggered whenever a command is executed in the game, providing information
+            about whether the command succeeded or failed. It can be used for logging, debugging,
+            or responding to command outcomes.
+            </remarks>
+        </member>
+        <member name="M:GameCore.Event.EventGameCmdResultNotify.#ctor(GameCore.BaseType.CmdResult)">
+            <summary>
+            Represents an event that notifies about the result of a game command execution.
+            </summary>
+            <param name="cmdResult">The result of the command execution.</param>
+            <remarks>
+            This event is triggered whenever a command is executed in the game, providing information
+            about whether the command succeeded or failed. It can be used for logging, debugging,
+            or responding to command outcomes.
+            </remarks>
+        </member>
+        <member name="P:GameCore.Event.EventGameCmdResultNotify.CmdResult">
+            <summary>
+            Gets the result of the command execution.
+            </summary>
+        </member>
+        <member name="T:GameCore.Event.EventGamePropertyChange">
+            <summary>
+            Represents an event that is triggered when a game property changes.
+            </summary>
+            <param name="property">The game property that changed.</param>
+            <remarks>
+            This event allows systems to react to changes in global game properties,
+            enabling dynamic behavior based on game state modifications.
+            </remarks>
+        </member>
+        <member name="M:GameCore.Event.EventGamePropertyChange.#ctor(GameCore.GameSystem.Enum.PropertyGame)">
+            <summary>
+            Represents an event that is triggered when a game property changes.
+            </summary>
+            <param name="property">The game property that changed.</param>
+            <remarks>
+            This event allows systems to react to changes in global game properties,
+            enabling dynamic behavior based on game state modifications.
+            </remarks>
+        </member>
+        <member name="P:GameCore.Event.EventGamePropertyChange.Property">
+            <summary>
+            Gets the game property that was changed.
+            </summary>
+        </member>
+        <member name="T:GameCore.Event.EventItemSlotChange">
+            <summary />
+        </member>
+        <member name="M:GameCore.Event.EventItemSlotChange.#ctor(GameCore.ItemSystem.ItemPickable,GameCore.Container.InventorySlot,GameCore.Container.InventorySlot)">
+            <summary />
+        </member>
+        <member name="P:GameCore.Event.EventItemSlotChange.Item">
+            <summary />
+        </member>
+        <member name="P:GameCore.Event.EventItemSlotChange.Slot">
+            <summary />
+        </member>
+        <member name="P:GameCore.Event.EventItemSlotChange.SlotPrevious">
+            <summary />
+        </member>
+        <member name="T:GameCore.Event.EventItemStackChange">
+            <summary />
+        </member>
+        <member name="M:GameCore.Event.EventItemStackChange.#ctor(GameCore.ItemSystem.ItemPickable,System.UInt32,System.UInt32)">
+            <summary />
+        </member>
+        <member name="P:GameCore.Event.EventItemStackChange.Item">
+            <summary />
+        </member>
+        <member name="P:GameCore.Event.EventItemStackChange.Stack">
+            <summary />
+        </member>
+        <member name="P:GameCore.Event.EventItemStackChange.StackPrevious">
+            <summary />
+        </member>
+        <member name="T:GameCore.Event.EventItemLevelChange">
+            <summary />
+        </member>
+        <member name="M:GameCore.Event.EventItemLevelChange.#ctor(GameCore.ItemSystem.Item,System.UInt32,System.UInt32)">
+            <summary />
+        </member>
+        <member name="P:GameCore.Event.EventItemLevelChange.Item">
+            <summary />
+        </member>
+        <member name="P:GameCore.Event.EventItemLevelChange.Level">
+            <summary />
+        </member>
+        <member name="P:GameCore.Event.EventItemLevelChange.LevelPrevious">
+            <summary />
+        </member>
+        <member name="T:GameCore.Event.EventItemQualityChange">
+            <summary />
+        </member>
+        <member name="M:GameCore.Event.EventItemQualityChange.#ctor(GameCore.ItemSystem.Item,System.UInt32,System.UInt32)">
+            <summary />
+        </member>
+        <member name="P:GameCore.Event.EventItemQualityChange.Item">
+            <summary />
+        </member>
+        <member name="P:GameCore.Event.EventItemQualityChange.Quality">
+            <summary />
+        </member>
+        <member name="P:GameCore.Event.EventItemQualityChange.QualityPrevious">
+            <summary />
+        </member>
+        <member name="T:GameCore.Event.EventPlayer">
+            <summary />
+        </member>
+        <member name="M:GameCore.Event.EventPlayer.#ctor(GameCore.PlayerAndUsers.Player)">
+            <summary />
+        </member>
+        <member name="P:GameCore.Event.EventPlayer.Player">
+            <summary />
+        </member>
+        <member name="T:GameCore.Event.EventPlayerPropertyChange">
+            <summary />
+        </member>
+        <member name="M:GameCore.Event.EventPlayerPropertyChange.#ctor(GameCore.PlayerAndUsers.Player,GameCore.EntitySystem.PropertyPlayer)">
+            <summary />
+        </member>
+        <member name="P:GameCore.Event.EventPlayerPropertyChange.Property">
+            <summary />
+        </member>
+        <member name="T:GameCore.Event.EventPlayerMainUnitChanged">
+            <summary />
+        </member>
+        <member name="M:GameCore.Event.EventPlayerMainUnitChanged.#ctor(GameCore.PlayerAndUsers.Player,GameCore.EntitySystem.Unit)">
+            <summary />
+        </member>
+        <member name="P:GameCore.Event.EventPlayerMainUnitChanged.Player">
+            <summary />
+        </member>
+        <member name="P:GameCore.Event.EventPlayerMainUnitChanged.Unit">
+            <summary />
+        </member>
+        <member name="T:GameCore.Event.EventPlayerUIPropertyChange">
+            <summary>
+            玩家UI属性变更事件
+            </summary>
+            <param name="player">发生属性变更的玩家</param>
+            <param name="property">变更的UI属性</param>
+        </member>
+        <member name="M:GameCore.Event.EventPlayerUIPropertyChange.#ctor(GameCore.PlayerAndUsers.Player,GameCore.PlayerAndUsers.PropertyPlayerUI)">
+            <summary>
+            玩家UI属性变更事件
+            </summary>
+            <param name="player">发生属性变更的玩家</param>
+            <param name="property">变更的UI属性</param>
+        </member>
+        <member name="P:GameCore.Event.EventPlayerUIPropertyChange.Player">
+            <summary>
+            发生属性变更的玩家
+            </summary>
+        </member>
+        <member name="P:GameCore.Event.EventPlayerUIPropertyChange.Property">
+            <summary>
+            变更的UI属性
+            </summary>
+        </member>
+        <member name="T:GameCore.Event.EventRegion">
+            <summary />
+        </member>
+        <member name="M:GameCore.Event.EventRegion.#ctor(GameCore.Shape.Region,GameCore.EntitySystem.Entity)">
+            <summary />
+        </member>
+        <member name="P:GameCore.Event.EventRegion.Region">
+            <summary />
+        </member>
+        <member name="P:GameCore.Event.EventRegion.Entity">
+            <summary />
+        </member>
+        <member name="P:GameCore.Event.EventRegion.Unit">
+            <summary />
+        </member>
+        <member name="T:GameCore.Event.EventScene">
+            <summary />
+        </member>
+        <member name="M:GameCore.Event.EventScene.#ctor(GameCore.SceneSystem.Scene)">
+            <summary />
+        </member>
+        <member name="P:GameCore.Event.EventScene.Scene">
+            <summary />
+        </member>
+        <member name="T:GameCore.Event.EventSceneLoadStart">
+            <summary />
+        </member>
+        <member name="M:GameCore.Event.EventSceneLoadStart.#ctor(GameCore.SceneSystem.Scene)">
+            <summary />
+        </member>
+        <member name="T:GameCore.Event.EventSceneLoadEnd">
+            <summary />
+        </member>
+        <member name="M:GameCore.Event.EventSceneLoadEnd.#ctor(GameCore.SceneSystem.Scene)">
+            <summary />
+        </member>
+        <member name="T:GameCore.Event.EventUnit">
+            <summary />
+        </member>
+        <member name="M:GameCore.Event.EventUnit.#ctor(GameCore.EntitySystem.Unit)">
+            <summary />
+        </member>
+        <member name="F:GameCore.Event.EventUnit.Unit">
+            <summary />
+        </member>
+        <member name="T:GameCore.Event.EventUnitRevive">
+            <summary />
+        </member>
+        <member name="M:GameCore.Event.EventUnitRevive.#ctor(GameCore.EntitySystem.Unit)">
+            <summary />
+        </member>
+        <member name="T:GameCore.Event.EventUnitPropertyComplexFinalChange">
+            <summary />
+        </member>
+        <member name="M:GameCore.Event.EventUnitPropertyComplexFinalChange.#ctor(GameCore.EntitySystem.Unit,GameData.IGameLink{GameCore.Data.GameDataUnitProperty},System.Double)">
+            <summary />
+        </member>
+        <member name="P:GameCore.Event.EventUnitPropertyComplexFinalChange.Property">
+            <summary />
+        </member>
+        <member name="P:GameCore.Event.EventUnitPropertyComplexFinalChange.NewValue">
+            <summary />
+        </member>
+        <member name="T:GameCore.Event.EventUnitPropertyChange">
+            <summary />
+        </member>
+        <member name="M:GameCore.Event.EventUnitPropertyChange.#ctor(GameCore.EntitySystem.Unit,GameCore.EntitySystem.PropertyUnit)">
+            <summary />
+        </member>
+        <member name="P:GameCore.Event.EventUnitPropertyChange.Property">
+            <summary />
+        </member>
+        <member name="T:GameCore.Event.EventAbilityAttached">
+            <summary>
+            技能附加事件，当技能被附加到单位时触发
+            </summary>
+            <param name="ability">被附加的技能</param>
+        </member>
+        <member name="M:GameCore.Event.EventAbilityAttached.#ctor(GameCore.AbilitySystem.Ability)">
+            <summary>
+            技能附加事件，当技能被附加到单位时触发
+            </summary>
+            <param name="ability">被附加的技能</param>
+        </member>
+        <member name="P:GameCore.Event.EventAbilityAttached.Ability">
+            <summary>
+            被附加的技能
+            </summary>
+        </member>
+        <member name="T:GameCore.Event.EventAbilityRemoved">
+            <summary>
+            技能移除事件，当技能从单位移除时触发
+            </summary>
+            <param name="ability">被移除的技能</param>
+        </member>
+        <member name="M:GameCore.Event.EventAbilityRemoved.#ctor(GameCore.AbilitySystem.Ability)">
+            <summary>
+            技能移除事件，当技能从单位移除时触发
+            </summary>
+            <param name="ability">被移除的技能</param>
+        </member>
+        <member name="P:GameCore.Event.EventAbilityRemoved.Ability">
+            <summary>
+            被移除的技能
+            </summary>
+        </member>
+        <member name="T:GameCore.Event.EventBuffAttached">
+            <summary>
+            Buff附加事件，当Buff被附加到单位时触发
+            </summary>
+            <param name="buff">被附加的Buff</param>
+        </member>
+        <member name="M:GameCore.Event.EventBuffAttached.#ctor(GameCore.BuffSystem.Buff)">
+            <summary>
+            Buff附加事件，当Buff被附加到单位时触发
+            </summary>
+            <param name="buff">被附加的Buff</param>
+        </member>
+        <member name="P:GameCore.Event.EventBuffAttached.Buff">
+            <summary>
+            被附加的Buff
+            </summary>
+        </member>
+        <member name="T:GameCore.Event.EventBuffRemoved">
+            <summary>
+            Buff移除事件，当Buff从单位移除时触发
+            </summary>
+            <param name="buff">被移除的Buff</param>
+        </member>
+        <member name="M:GameCore.Event.EventBuffRemoved.#ctor(GameCore.BuffSystem.Buff)">
+            <summary>
+            Buff移除事件，当Buff从单位移除时触发
+            </summary>
+            <param name="buff">被移除的Buff</param>
+        </member>
+        <member name="P:GameCore.Event.EventBuffRemoved.Buff">
+            <summary>
+            被移除的Buff
+            </summary>
+        </member>
+    </members>
+</doc>

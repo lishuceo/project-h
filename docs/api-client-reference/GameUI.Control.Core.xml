@@ -1,0 +1,1028 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>GameUI</name>
+    </assembly>
+    <members>
+        <member name="T:GameUI.Control.Behavior.BehaviorExtensions">
+        <summary>
+        控件行为的扩展方法，提供便捷的行为添加接口
+        </summary>
+        </member>
+        <member name="M:GameUI.Control.Behavior.BehaviorExtensions.AddTouchBehavior(GameUI.Control.Control,System.Single,System.Boolean,System.Boolean)">
+        <summary>
+        为控件添加触摸行为（包含按下动画和长按检测）
+        </summary>
+        <param name = "control">目标控件</param>
+        <param name = "scaleFactor">按下时的缩放因子，默认为0.95</param>
+        <param name = "enablePressAnimation">是否启用按下动画，默认为true</param>
+        <param name = "enableLongPress">是否启用长按检测，默认为true</param>
+        <returns>添加的行为实例</returns>
+        </member>
+        <member name="M:GameUI.Control.Behavior.BehaviorExtensions.AddTouchBehaviorWithDuration(GameUI.Control.Control,System.Single,System.Int32,System.Int32,System.Boolean,System.Boolean)">
+        <summary>
+        为控件添加触摸行为（包含按下动画和长按检测），并自定义时长参数
+        </summary>
+        <param name = "control">目标控件</param>
+        <param name = "scaleFactor">按下时的缩放因子</param>
+        <param name = "pressAnimationDurationMs">按下动画时长（毫秒）</param>
+        <param name = "longPressDurationMs">长按触发时长（毫秒）</param>
+        <param name = "enablePressAnimation">是否启用按下动画</param>
+        <param name = "enableLongPress">是否启用长按检测</param>
+        <returns>添加的行为实例</returns>
+        </member>
+        <member name="T:GameUI.Control.Behavior.ControlBehavior">
+        <summary>
+        控件行为基类，提供通用的行为管理功能
+        </summary>
+        <remarks>
+        继承此类可以简化行为实现，提供通用的附加/分离逻辑和状态管理。
+        </remarks>
+        </member>
+        <member name="F:GameUI.Control.Behavior.ControlBehavior.attachedControl">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="P:GameUI.Control.Behavior.ControlBehavior.IsAttached">
+        <summary>
+        获取行为是否已附加到控件上
+        </summary>
+        </member>
+        <member name="P:GameUI.Control.Behavior.ControlBehavior.AttachedControl">
+        <summary>
+        获取行为附加的控件
+        </summary>
+        </member>
+        <member name="M:GameUI.Control.Behavior.ControlBehavior.Attach(GameUI.Control.Control)">
+        <summary>
+        将行为附加到指定控件上
+        </summary>
+        <param name = "control">要附加行为的控件</param>
+        </member>
+        <member name="M:GameUI.Control.Behavior.ControlBehavior.Detach(GameUI.Control.Control)">
+        <summary>
+        从指定控件上分离行为
+        </summary>
+        <param name = "control">要分离行为的控件</param>
+        </member>
+        <member name="M:GameUI.Control.Behavior.ControlBehavior.OnAttached(GameUI.Control.Control)">
+        <summary>
+        当行为被附加到控件时调用
+        </summary>
+        <param name = "control">被附加的控件</param>
+        </member>
+        <member name="M:GameUI.Control.Behavior.ControlBehavior.OnDetached(GameUI.Control.Control)">
+        <summary>
+        当行为从控件分离时调用
+        </summary>
+        <param name = "control">被分离的控件</param>
+        </member>
+        <member name="T:GameUI.Control.Behavior.IControlBehavior">
+        <summary>
+        控件行为接口，定义控件行为的标准契约
+        </summary>
+        <remarks>
+        行为模式允许为控件动态添加功能，而不需要修改控件基类。
+        每个行为负责特定的交互逻辑，如动画、手势识别等。
+        </remarks>
+        </member>
+        <member name="P:GameUI.Control.Behavior.IControlBehavior.ClickLockedPointerButtons">
+        <summary>
+        点击锁定指针按钮。指定的指针按钮被锁定后，点击控件不会触发<see cref = "E:GameUI.Control.Control.OnPointerClicked"/>事件。
+        </summary>
+        </member>
+        <member name="M:GameUI.Control.Behavior.IControlBehavior.Attach(GameUI.Control.Control)">
+        <summary>
+        将行为附加到指定控件上
+        </summary>
+        <param name = "control">要附加行为的控件</param>
+        </member>
+        <member name="M:GameUI.Control.Behavior.IControlBehavior.Detach(GameUI.Control.Control)">
+        <summary>
+        从指定控件上分离行为
+        </summary>
+        <param name = "control">要分离行为的控件</param>
+        </member>
+        <member name="P:GameUI.Control.Behavior.IControlBehavior.IsAttached">
+        <summary>
+        获取行为是否已附加到控件上
+        </summary>
+        </member>
+        <member name="P:GameUI.Control.Behavior.IControlBehavior.AttachedControl">
+        <summary>
+        获取行为附加的控件
+        </summary>
+        </member>
+        <member name="T:GameUI.Control.Behavior.TouchBehavior">
+        <summary>
+        触摸行为，提供按下动画和长按检测功能
+        </summary>
+        <remarks>
+        该行为支持平滑按下缩放和透明度动画，还支持长按事件检测。
+        使用内部ScaleAndOpacity类型实现统一的缩放和透明度动画。
+        </remarks>
+        </member>
+        <member name="T:GameUI.Control.Behavior.TouchBehavior.ScaleAndOpacity">
+        <summary>
+        表示缩放和透明度的组合值，支持算术运算
+        </summary>
+        </member>
+        <member name="M:GameUI.Control.Behavior.TouchBehavior.ScaleAndOpacity.#ctor(System.Numerics.Vector2,System.Single)">
+        <summary>
+        表示缩放和透明度的组合值，支持算术运算
+        </summary>
+        </member>
+        <member name="P:GameUI.Control.Behavior.TouchBehavior.ScaleAndOpacity.PrefersRealtimeAnimation">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="M:GameUI.Control.Behavior.TouchBehavior.ScaleAndOpacity.op_Addition(GameUI.Control.Behavior.TouchBehavior.ScaleAndOpacity,GameUI.Control.Behavior.TouchBehavior.ScaleAndOpacity)">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="M:GameUI.Control.Behavior.TouchBehavior.ScaleAndOpacity.op_Subtraction(GameUI.Control.Behavior.TouchBehavior.ScaleAndOpacity,GameUI.Control.Behavior.TouchBehavior.ScaleAndOpacity)">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="M:GameUI.Control.Behavior.TouchBehavior.ScaleAndOpacity.op_Multiply(GameUI.Control.Behavior.TouchBehavior.ScaleAndOpacity,System.Double)">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="M:GameUI.Control.Behavior.TouchBehavior.ScaleAndOpacity.op_Multiply(System.Double,GameUI.Control.Behavior.TouchBehavior.ScaleAndOpacity)">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="M:GameUI.Control.Behavior.TouchBehavior.ScaleAndOpacity.op_Division(GameUI.Control.Behavior.TouchBehavior.ScaleAndOpacity,System.Double)">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="M:GameUI.Control.Behavior.TouchBehavior.ScaleAndOpacity.FromControl(GameUI.Control.Control)">
+        <summary>
+        从控件创建ScaleAndOpacity值
+        </summary>
+        </member>
+        <member name="M:GameUI.Control.Behavior.TouchBehavior.ScaleAndOpacity.ApplyTo(GameUI.Control.Control)">
+        <summary>
+        将值应用到控件
+        </summary>
+        </member>
+        <member name="F:GameUI.Control.Behavior.TouchBehavior.isPressed">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="F:GameUI.Control.Behavior.TouchBehavior.isLongPressed">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="F:GameUI.Control.Behavior.TouchBehavior.longPressDelayTask">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="F:GameUI.Control.Behavior.TouchBehavior.lastLongPressedEventArgs">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="F:GameUI.Control.Behavior.TouchBehavior.pressAnimation">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="F:GameUI.Control.Behavior.TouchBehavior.originalValues">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="F:GameUI.Control.Behavior.TouchBehavior.targetValues">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="P:GameUI.Control.Behavior.TouchBehavior.PressedScale">
+        <summary>
+        按下时的缩放因子，默认为0.95
+        </summary>
+        </member>
+        <member name="P:GameUI.Control.Behavior.TouchBehavior.PressedOpacity">
+        <summary>
+        按下时的透明度因子，默认为0.9
+        </summary>
+        </member>
+        <member name="P:GameUI.Control.Behavior.TouchBehavior.PressAnimationDuration">
+        <summary>
+        按下动画时长，默认为150毫秒
+        </summary>
+        </member>
+        <member name="P:GameUI.Control.Behavior.TouchBehavior.PressAnimationEasing">
+        <summary>
+        按下动画的缓动函数，默认为null（线性插值）
+        </summary>
+        </member>
+        <member name="P:GameUI.Control.Behavior.TouchBehavior.LongPressDuration">
+        <summary>
+        长按触发时长，默认为500毫秒
+        </summary>
+        </member>
+        <member name="P:GameUI.Control.Behavior.TouchBehavior.EnablePressAnimation">
+        <summary>
+        是否启用按下动画，默认为true
+        </summary>
+        </member>
+        <member name="P:GameUI.Control.Behavior.TouchBehavior.EnableLongPress">
+        <summary>
+        是否启用长按检测，默认为true
+        </summary>
+        </member>
+        <member name="E:GameUI.Control.Behavior.TouchBehavior.LongPressTriggered">
+        <summary>
+        长按触发事件
+        </summary>
+        </member>
+        <member name="E:GameUI.Control.Behavior.TouchBehavior.LongPressStarted">
+        <summary>
+        长按开始事件
+        </summary>
+        </member>
+        <member name="E:GameUI.Control.Behavior.TouchBehavior.LongPressEnded">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="P:GameUI.Control.Behavior.TouchBehavior.IsLongPressed">
+        <summary>
+        获取当前是否处于长按状态
+        </summary>
+        </member>
+        <member name="P:GameUI.Control.Behavior.TouchBehavior.IsPressed">
+        <summary>
+        获取当前是否处于按下状态
+        </summary>
+        </member>
+        <member name="P:GameUI.Control.Behavior.TouchBehavior.ClickLockedPointerButtons">
+        <summary>
+        获取当前点击锁定指针按钮。
+        如果当前处于长按状态，并且有长按事件订阅，则返回长按事件的指针按钮。
+        否则返回<see cref = "F:GameCore.Platform.SDL.PointerButtons.None"/>。
+        该逻辑的目的是为了防止长按事件触发时，点击控件会触发<see cref = "E:GameUI.Control.Control.OnPointerClicked"/>事件。
+        </summary>
+        </member>
+        <member name="M:GameUI.Control.Behavior.TouchBehavior.OnAttached(GameUI.Control.Control)">
+        <summary>
+        
+        </summary>
+        <param name="control"></param>
+        <returns></returns>
+        </member>
+        <member name="M:GameUI.Control.Behavior.TouchBehavior.OnDetached(GameUI.Control.Control)">
+        <summary>
+        
+        </summary>
+        <param name="control"></param>
+        <returns></returns>
+        </member>
+        <member name="T:GameUI.Control.Struct.PointerEventArgs">
+        <summary>
+        Provides data for pointer-related events, such as mouse or touch input.
+        </summary>
+        <remarks>
+        This event argument is used for pointer events, including mouse clicks, presses, releases, and finger touches.
+        </remarks>
+        </member>
+        <member name="M:GameUI.Control.Struct.PointerEventArgs.#ctor(GameCore.Platform.SDL.PointerButtons)">
+        <summary>
+        Provides data for pointer-related events, such as mouse or touch input.
+        </summary>
+        <remarks>
+        This event argument is used for pointer events, including mouse clicks, presses, releases, and finger touches.
+        </remarks>
+        </member>
+        <member name="P:GameUI.Control.Struct.PointerEventArgs.PointerButtons">
+        <summary>
+        Gets the pointer buttons that triggered the event.
+        For mouse events, this indicates which mouse buttons were pressed.
+        For finger events, differentiate between fingers by using the touching ID.
+        </summary>
+        </member>
+        <member name="T:GameUI.Control.Struct.PointerCapturedMoveEventArgs">
+        <summary>
+        Provides data for pointer move events when the pointer is captured by a control.
+        This event argument is used to indicate which pointer buttons are involved in the move,
+        and which buttons are currently pressed on the control during the event.
+        </summary>
+        </member>
+        <member name="M:GameUI.Control.Struct.PointerCapturedMoveEventArgs.#ctor(GameCore.Platform.SDL.PointerButtons,GameCore.Platform.SDL.PointerButtons)">
+        <summary>
+        Provides data for pointer move events when the pointer is captured by a control.
+        This event argument is used to indicate which pointer buttons are involved in the move,
+        and which buttons are currently pressed on the control during the event.
+        </summary>
+        </member>
+        <member name="P:GameUI.Control.Struct.PointerCapturedMoveEventArgs.ButtonsOnControl">
+        <summary>
+        Gets the set of pointer buttons that are currently pressed on the control at the time of the move event.
+        This property is especially useful for handling multi-button or multi-finger interactions, such as resizing or complex gestures.
+        If multiple pointer buttons are captured and moving on the control, each will trigger its own move event with the corresponding set of pressed buttons.
+        </summary>
+        </member>
+        <member name="T:GameUI.Control.Struct.DropEventArgs">
+        <summary>
+        Provides data for drag-and-drop events, indicating the target control of a drop operation.
+        </summary>
+        </member>
+        <member name="M:GameUI.Control.Struct.DropEventArgs.#ctor(GameUI.Control.Control)">
+        <summary>
+        Provides data for drag-and-drop events, indicating the target control of a drop operation.
+        </summary>
+        </member>
+        <member name="P:GameUI.Control.Struct.DropEventArgs.TargetControl">
+        <summary>
+        Gets the control that is the target of the drop operation.
+        If null, the drop occurred on a blank area or on a control that does not support drop.
+        </summary>
+        </member>
+        <member name="T:GameUI.Control.Struct.ApplyControlTemplateEventArgs">
+        <summary>
+        Provides data for events related to applying a control template.
+        </summary>
+        </member>
+        <member name="M:GameUI.Control.Struct.ApplyControlTemplateEventArgs.#ctor(GameUI.Control.Control,GameData.IGameData{GameUI.Control.Data.GameDataControl})">
+        <summary>
+        Provides data for events related to applying a control template.
+        </summary>
+        </member>
+        <member name="P:GameUI.Control.Struct.ApplyControlTemplateEventArgs.Control">
+        <summary>
+        Gets the control to which the template is being applied.
+        </summary>
+        </member>
+        <member name="P:GameUI.Control.Struct.ApplyControlTemplateEventArgs.Template">
+        <summary>
+        Gets the template data being applied to the control.
+        </summary>
+        </member>
+        <member name="T:GameUI.Control.Struct.ApplyControlTemplatePhaseEventArgs">
+        <summary>
+        Provides data for events related to applying a control template at a specific phase.
+        </summary>
+        </member>
+        <member name="M:GameUI.Control.Struct.ApplyControlTemplatePhaseEventArgs.#ctor(GameUI.Control.Control,GameData.IGameData{GameUI.Control.Data.GameDataControl},System.Int32)">
+        <summary>
+        Provides data for events related to applying a control template at a specific phase.
+        </summary>
+        </member>
+        <member name="P:GameUI.Control.Struct.ApplyControlTemplatePhaseEventArgs.Phase">
+        <summary>
+        Gets the phase of the template application process.
+        </summary>
+        </member>
+        <member name="T:GameUI.Control.Struct.KeyboardAcceleratorEventArgs">
+        <summary>
+        Provides base data for keyboard accelerator events.
+        </summary>
+        </member>
+        <member name="M:GameUI.Control.Struct.KeyboardAcceleratorEventArgs.#ctor(GameUI.Control.Struct.KeyboardAccelerator)">
+        <summary>
+        Provides base data for keyboard accelerator events.
+        </summary>
+        </member>
+        <member name="P:GameUI.Control.Struct.KeyboardAcceleratorEventArgs.Accelerator">
+        <summary>
+        Gets the keyboard accelerator that triggered the event.
+        </summary>
+        </member>
+        <member name="T:GameUI.Control.Struct.KeyboardAcceleratorInvokedEventArgs">
+        <summary>
+        Provides data for events when a keyboard accelerator is invoked on a control.
+        Only one control can invoke a keyboard accelerator at a time.
+        </summary>
+        </member>
+        <member name="M:GameUI.Control.Struct.KeyboardAcceleratorInvokedEventArgs.#ctor(GameUI.Control.Control,GameUI.Control.Struct.KeyboardAccelerator)">
+        <summary>
+        Provides data for events when a keyboard accelerator is invoked on a control.
+        Only one control can invoke a keyboard accelerator at a time.
+        </summary>
+        </member>
+        <member name="P:GameUI.Control.Struct.KeyboardAcceleratorInvokedEventArgs.Control">
+        <summary>
+        Gets the control that invoked the keyboard accelerator.
+        </summary>
+        </member>
+        <member name="P:GameUI.Control.Struct.KeyboardAcceleratorInvokedEventArgs.Handled">
+        <summary>
+        Gets or sets a value indicating whether the event has been handled.
+        When set to true, it indicates that the event has been processed and no further action is required.
+        The default invoked action of the control will not be executed. For example, if the control is a button,
+        the click action will not be triggered.
+        </summary>
+        </member>
+        <member name="T:GameUI.Control.Struct.KeyboardAccelerator">
+        <summary>
+        Represents a keyboard accelerator that defines a key and optional modifiers to trigger an action.
+        </summary>
+        <remarks>A keyboard accelerator is typically used to associate a specific key combination with a command or
+        action within an application. The accelerator is considered active when <see cref = "P:GameUI.Control.Struct.KeyboardAccelerator.IsEnabled"/> is <see
+        langword="true"/>.</remarks>
+        </member>
+        <member name="P:GameUI.Control.Struct.KeyboardAccelerator.IsEnabled">
+        <summary>
+        Gets or sets a value indicating whether this key combination is enabled.
+        </summary>
+        </member>
+        <member name="P:GameUI.Control.Struct.KeyboardAccelerator.Key">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="P:GameUI.Control.Struct.KeyboardAccelerator.Modifiers">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="M:GameUI.Control.Struct.KeyboardAccelerator.Matches(GameUI.TriggerEvent.EventGameKeyDown)">
+        <summary>
+        
+        </summary>
+        <param name="down"></param>
+        <returns></returns>
+        </member>
+        <member name="T:GameUI.Control.Struct.VirtualizationCacheLengthUnit">
+        <summary>
+        VirtualizationCacheLengthUnit enum is used to indicate what kind of value the
+        VirtualizationCacheLength is holding.
+        </summary>
+        </member>
+        <member name="F:GameUI.Control.Struct.VirtualizationCacheLengthUnit.Item">
+        <summary>
+        The value is expressed as an item.
+        </summary>
+        </member>
+        <member name="F:GameUI.Control.Struct.VirtualizationCacheLengthUnit.Page">
+        <summary>
+        The value is expressed as a page full of item.
+        </summary>
+        </member>
+        <member name="T:GameUI.Control.Struct.VirtualizationCacheLength">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="M:GameUI.Control.Struct.VirtualizationCacheLength.#ctor(System.Double)">
+        <summary>
+        Constructor, initializes the CacheBeforeViewport and the CacheAfterViewport to their sizes. Units are specified as a seperate VisualizationCacheLengthUnit property.
+        </summary>
+        <param name = "cacheBeforeAndAfterViewport">Value to be stored by this VirtualizationCacheLength
+        instance as the cacheBeforeViewport and cacheAfterViewport.</param>
+        <exception cref = "T:System.ArgumentException">
+        If <c>cacheBeforeAndAfterViewport</c> parameter is <c>double.NaN</c>
+        or <c>cacheBeforeAndAfterViewport</c> parameter is <c>double.NegativeInfinity</c>
+        or <c>cacheBeforeAndAfterViewport</c> parameter is <c>double.PositiveInfinity</c>.
+        </exception>
+        </member>
+        <member name="M:GameUI.Control.Struct.VirtualizationCacheLength.#ctor(System.Double,System.Double)">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="M:GameUI.Control.Struct.VirtualizationCacheLength.op_Equality(GameUI.Control.Struct.VirtualizationCacheLength,GameUI.Control.Struct.VirtualizationCacheLength)">
+        <summary>
+        Overloaded operator, compares 2 VirtualizationCacheLength's.
+        </summary>
+        <param name = "cl1">first VirtualizationCacheLength to compare.</param>
+        <param name = "cl2">second VirtualizationCacheLength to compare.</param>
+        <returns>true if specified VirtualizationCacheLengths have same value
+        and unit type.</returns>
+        </member>
+        <member name="M:GameUI.Control.Struct.VirtualizationCacheLength.op_Inequality(GameUI.Control.Struct.VirtualizationCacheLength,GameUI.Control.Struct.VirtualizationCacheLength)">
+        <summary>
+        Overloaded operator, compares 2 VirtualizationCacheLength's.
+        </summary>
+        <param name = "cl1">first VirtualizationCacheLength to compare.</param>
+        <param name = "cl2">second VirtualizationCacheLength to compare.</param>
+        <returns>true if specified VirtualizationCacheLengths have either different value or
+        unit type.</returns>
+        </member>
+        <member name="M:GameUI.Control.Struct.VirtualizationCacheLength.Equals(System.Object)">
+        <summary>
+        Compares this instance of VirtualizationCacheLength with another object.
+        </summary>
+        <param name = "obj">Reference to an object for comparison.</param>
+        <returns><c>true</c>if this VirtualizationCacheLength instance has the same value
+        and unit type as oCompare.</returns>
+        </member>
+        <member name="M:GameUI.Control.Struct.VirtualizationCacheLength.Equals(GameUI.Control.Struct.VirtualizationCacheLength)">
+        <summary>
+        Compares this instance of VirtualizationCacheLength with another instance.
+        </summary>
+        <param name = "cacheLength">Cache length instance to compare.</param>
+        <returns><c>true</c>if this VirtualizationCacheLength instance has the same value
+        and unit type as cacheLength.</returns>
+        </member>
+        <member name="M:GameUI.Control.Struct.VirtualizationCacheLength.GetHashCode">
+        <summary>
+        <see cref = "M:System.Object.GetHashCode"/>
+        </summary>
+        <returns><see cref = "M:System.Object.GetHashCode"/></returns>
+        </member>
+        <member name="P:GameUI.Control.Struct.VirtualizationCacheLength.CacheBeforeViewport">
+        <summary>
+        Returns cacheBeforeViewport part of this VirtualizationCacheLength instance.
+        </summary>
+        </member>
+        <member name="P:GameUI.Control.Struct.VirtualizationCacheLength.CacheAfterViewport">
+        <summary>
+        Returns cacheAfterViewport part of this VirtualizationCacheLength instance.
+        </summary>
+        </member>
+        <member name="F:GameUI.Control.Struct.VirtualizationCacheLength._cacheBeforeViewport">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="F:GameUI.Control.Struct.VirtualizationCacheLength._cacheAfterViewport">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="M:GameUI.Control.Control.AddBehavior(GameUI.Control.Behavior.IControlBehavior)">
+        <summary>
+        为控件添加行为
+        </summary>
+        <param name = "behavior">要添加的行为</param>
+        <returns>是否成功添加</returns>
+        </member>
+        <member name="M:GameUI.Control.Control.RemoveBehavior(GameUI.Control.Behavior.IControlBehavior)">
+        <summary>
+        从控件移除指定行为
+        </summary>
+        <param name = "behavior">要移除的行为</param>
+        <returns>是否成功移除</returns>
+        </member>
+        <member name="M:GameUI.Control.Control.GenerateChild(System.Object,GameUI.Control.Struct.ItemTemplateSelector,System.Boolean)">
+        <summary>
+        根据数据项和模板选择器生成子控件。
+        </summary>
+        <param name = "item">数据项。</param>
+        <param name = "templateSelector">模板选择器。</param>
+        <param name = "addToParent">是否自动添加到父控件。</param>
+        <returns>生成的子控件。</returns>
+        </member>
+        <member name="M:GameUI.Control.Control.OnKeyboardAcceleratorInvokedInternal(GameUI.Control.Struct.KeyboardAccelerator)">
+        <summary>
+        
+        </summary>
+        <param name="accelerator"></param>
+        <returns></returns>
+        </member>
+        <member name="M:GameUI.Control.Primitive.Button.OnKeyboardAcceleratorInvokedInternal(GameUI.Control.Struct.KeyboardAccelerator)">
+        <summary>
+        
+        </summary>
+        <param name="accelerator"></param>
+        <returns></returns>
+        </member>
+        <member name="M:GameUI.Control.Primitive.Canvas.FillPath(GameUI.Graphics.PathF,System.Nullable{GameUI.Control.Enum.WindingMode})">
+        <summary>
+        填充路径
+        </summary>
+        <param name = "path">要填充的路径对象</param>
+        <param name = "windingMode">可选的路径缠绕模式，为null时使用DefaultPathWinding</param>
+        <remarks>
+        <para>根据PathF对象中定义的路径操作序列填充封闭区域。</para>
+        <para>支持的路径操作包括：移动、直线、二次贝塞尔曲线、三次贝塞尔曲线、圆弧和路径闭合。</para>
+        <para>如果路径为空或包含0个操作，则不执行任何填充。</para>
+        <para>填充使用当前的FillPaint设置。</para>
+        <para>缠绕模式决定了复杂路径的填充规则：</para>
+        <list type="bullet">
+        <item><description>NonZero: 非零缠绕规则，适用于大多数普通形状</description></item>
+        <item><description>EvenOdd: 奇偶规则，常用于创建镂空效果</description></item>
+        </list>
+        <para>如果提供了windingMode参数，会临时使用该模式进行填充，之后恢复到DefaultPathWinding。</para>
+        </remarks>
+        <example>
+        <code>
+        var path = new PathF();
+        path.MoveTo(10, 10);
+        path.LineTo(100, 10);
+        path.LineTo(100, 100);
+        path.LineTo(10, 100);
+        path.Close();
+        
+        canvas.FillPaint = new SolidPaint(Color.Blue);
+        canvas.FillPath(path); // 使用默认缠绕模式填充
+        
+        // 或者指定特定的缠绕模式
+        canvas.FillPath(path, WindingMode.EvenOdd); // 使用奇偶规则填充
+        </code>
+        </example>
+        </member>
+        <member name="M:GameUI.Control.Primitive.Struct.InputEventArgs.#ctor(System.String,GameUI.Control.Enum.UpdateSourceTrigger)">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="T:GameUI.Control.Enum.Auto`1">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="M:GameUI.Control.Enum.Auto`1.#ctor(GameUI.Control.Enum.AutoMode,`0)">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="P:GameUI.Control.Enum.Auto`1.IsAuto">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="P:GameUI.Control.Enum.Auto`1.Mode">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="P:GameUI.Control.Enum.Auto`1.Value">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="M:GameUI.Control.Enum.Auto`1.Equals(System.Object)">
+        <summary>
+        
+        </summary>
+        <param name="obj"></param>
+        <returns></returns>
+        </member>
+        <member name="M:GameUI.Control.Enum.Auto`1.Equals(GameUI.Control.Enum.Auto{`0})">
+        <summary>
+        
+        </summary>
+        <param name="other"></param>
+        <returns></returns>
+        </member>
+        <member name="M:GameUI.Control.Enum.Auto`1.op_Equality(GameUI.Control.Enum.Auto{`0},GameUI.Control.Enum.Auto{`0})">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="M:GameUI.Control.Enum.Auto`1.op_Inequality(GameUI.Control.Enum.Auto{`0},GameUI.Control.Enum.Auto{`0})">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="M:GameUI.Control.Enum.Auto`1.op_Equality(GameUI.Control.Enum.Auto{`0},`0)">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="M:GameUI.Control.Enum.Auto`1.op_Inequality(GameUI.Control.Enum.Auto{`0},`0)">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="M:GameUI.Control.Enum.Auto`1.op_Equality(`0,GameUI.Control.Enum.Auto{`0})">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="M:GameUI.Control.Enum.Auto`1.op_Inequality(`0,GameUI.Control.Enum.Auto{`0})">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="M:GameUI.Control.Enum.Auto`1.op_Equality(GameUI.Control.Enum.Auto{`0},GameUI.Control.Enum.AutoMode)">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="M:GameUI.Control.Enum.Auto`1.op_Inequality(GameUI.Control.Enum.Auto{`0},GameUI.Control.Enum.AutoMode)">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="M:GameUI.Control.Enum.Auto`1.op_Equality(GameUI.Control.Enum.AutoMode,GameUI.Control.Enum.Auto{`0})">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="M:GameUI.Control.Enum.Auto`1.op_Inequality(GameUI.Control.Enum.AutoMode,GameUI.Control.Enum.Auto{`0})">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="M:GameUI.Control.Enum.Auto`1.op_Implicit(GameUI.Control.Enum.AutoMode)~GameUI.Control.Enum.Auto{`0}">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="M:GameUI.Control.Enum.Auto`1.op_Implicit(`0)~GameUI.Control.Enum.Auto{`0}">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="M:GameUI.Control.Enum.Auto`1.op_Implicit(GameUI.Control.Enum.Auto{`0})~`0">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="M:GameUI.Control.Enum.Auto`1.GetHashCode">
+        <summary>
+        
+        </summary>
+        <returns></returns>
+        </member>
+        <member name="T:GameUI.Control.Enum.BlendMode">
+        <summary>
+        定义绘制内容与已有内容的混合模式
+        </summary>
+        <remarks>
+        <para>混合模式决定了新绘制的内容如何与画布上已有的内容进行混合。</para>
+        <para>不同的混合模式可以创建各种视觉效果，从简单的覆盖到复杂的颜色混合。</para>
+        <para>混合模式基于Porter-Duff合成操作和传统的图形混合算法。</para>
+        </remarks>
+        <example>
+        <code>
+        // 标准覆盖模式
+        canvas.BlendMode = BlendMode.SourceOver;
+        
+        // 相乘模式，产生更暗的颜色
+        canvas.BlendMode = BlendMode.Multiply;
+        
+        // 异或模式，创建特殊效果
+        canvas.BlendMode = BlendMode.Xor;
+        </code>
+        </example>
+        </member>
+        <member name="F:GameUI.Control.Enum.BlendMode.SourceOver">
+        <summary>
+        源覆盖模式（默认）
+        </summary>
+        <remarks>
+        新绘制的内容覆盖在已有内容之上。这是最常用的标准混合模式，新内容会根据其透明度与背景混合。
+        </remarks>
+        </member>
+        <member name="F:GameUI.Control.Enum.BlendMode.SourceIn">
+        <summary>
+        源内部模式
+        </summary>
+        <remarks>
+        新内容仅在已有内容的不透明区域内显示。透明区域不会显示新内容。
+        </remarks>
+        </member>
+        <member name="F:GameUI.Control.Enum.BlendMode.SourceOut">
+        <summary>
+        源外部模式
+        </summary>
+        <remarks>
+        新内容仅在已有内容的透明区域内显示。不透明区域不会显示新内容。
+        </remarks>
+        </member>
+        <member name="F:GameUI.Control.Enum.BlendMode.SourceAtop">
+        <summary>
+        源顶部模式
+        </summary>
+        <remarks>
+        新内容替换已有内容的不透明部分，透明部分保持不变。
+        </remarks>
+        </member>
+        <member name="F:GameUI.Control.Enum.BlendMode.DestinationOver">
+        <summary>
+        目标覆盖模式
+        </summary>
+        <remarks>
+        已有内容覆盖在新内容之上。与SourceOver相反，背景内容优先显示。
+        </remarks>
+        </member>
+        <member name="F:GameUI.Control.Enum.BlendMode.DestinationIn">
+        <summary>
+        目标内部模式
+        </summary>
+        <remarks>
+        已有内容仅在新内容的不透明区域内显示。
+        </remarks>
+        </member>
+        <member name="F:GameUI.Control.Enum.BlendMode.DestinationOut">
+        <summary>
+        目标外部模式
+        </summary>
+        <remarks>
+        已有内容仅在新内容的透明区域内显示。
+        </remarks>
+        </member>
+        <member name="F:GameUI.Control.Enum.BlendMode.DestinationAtop">
+        <summary>
+        目标顶部模式
+        </summary>
+        <remarks>
+        已有内容替换新内容的不透明部分。
+        </remarks>
+        </member>
+        <member name="F:GameUI.Control.Enum.BlendMode.Lighten">
+        <summary>
+        变亮模式
+        </summary>
+        <remarks>
+        选择新内容和已有内容中较亮的颜色。每个颜色通道独立比较，结果是两者中较大的值。
+        </remarks>
+        </member>
+        <member name="F:GameUI.Control.Enum.BlendMode.Copy">
+        <summary>
+        复制模式
+        </summary>
+        <remarks>
+        新内容完全替换已有内容，忽略透明度混合。这是最直接的替换操作。
+        </remarks>
+        </member>
+        <member name="F:GameUI.Control.Enum.BlendMode.Xor">
+        <summary>
+        异或模式
+        </summary>
+        <remarks>
+        对新内容和已有内容执行异或操作。重叠的不透明区域变为透明，其他区域正常显示。常用于创建特殊的视觉效果。
+        </remarks>
+        </member>
+        <member name="T:GameUI.Control.Enum.CanvasCoordinateMode">
+        <summary>
+        Canvas坐标系统模式
+        </summary>
+        <remarks>
+        <para>坐标系统模式决定了Canvas如何处理绘制坐标和设备像素的映射关系。</para>
+        <para>不同的坐标模式适用于不同的使用场景：</para>
+        <list type="bullet">
+        <item><description>DesignResolution: 适用于一般UI开发，与其他控件保持一致</description></item>
+        <item><description>CanvasResolution: 适用于像素级精确绘制，如图像处理或精密图形</description></item>
+        </list>
+        <para>选择合适的坐标模式对于确保在不同设备上的正确显示效果至关重要。</para>
+        </remarks>
+        <example>
+        <code>
+        // 使用设计分辨率模式（推荐用于一般UI）
+        canvas.CoordinateMode = CanvasCoordinateMode.DesignResolution;
+        canvas.DrawRectangle(10, 10, 100, 50); // 坐标会自动适配不同DPI
+        
+        // 使用Canvas分辨率模式（用于像素级精确控制）
+        canvas.CoordinateMode = CanvasCoordinateMode.CanvasResolution;
+        canvas.DrawPixel(100, 100); // 直接映射到画布像素
+        </code>
+        </example>
+        </member>
+        <member name="F:GameUI.Control.Enum.CanvasCoordinateMode.DesignResolution">
+        <summary>
+        使用设计分辨率坐标系统（与框架其他控件一致，AI友好）
+        </summary>
+        <remarks>
+        <para>在此模式下，Canvas使用与框架其他控件相同的坐标系统。</para>
+        <para>坐标会自动根据设备像素比例进行缩放，确保在不同DPI设备上的一致显示效果。</para>
+        <para>这是推荐的默认模式，特别适合UI开发和与其他控件混合使用的场景。</para>
+        <para>此模式对AI辅助开发更友好，因为坐标系统更直观。</para>
+        </remarks>
+        </member>
+        <member name="F:GameUI.Control.Enum.CanvasCoordinateMode.CanvasResolution">
+        <summary>
+        使用Canvas原始分辨率坐标系统，当用户期望实现像素级精确绘制时使用
+        </summary>
+        <remarks>
+        <para>在此模式下，Canvas坐标直接映射到画布像素，提供1:1的像素精确控制。</para>
+        <para>不进行DPI缩放，适合需要精确像素控制的场景，如图像处理、像素艺术或技术绘图。</para>
+        <para>在高DPI设备上，相同的坐标值会显得更小，需要开发者手动处理缩放。</para>
+        <para>适合高精度绘制需求和需要直接操作像素的专业应用。</para>
+        </remarks>
+        </member>
+        <member name="T:GameUI.Control.Enum.RoutedEventsExtensions">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="M:GameUI.Control.Enum.RoutedEventsExtensions.HasAll(GameUI.Control.Enum.RoutedEvents,GameUI.Control.Enum.RoutedEvents)">
+        <summary>
+        
+        </summary>
+        <param name="value"></param>
+        <param name="flag"></param>
+        <returns></returns>
+        </member>
+        <member name="M:GameUI.Control.Enum.RoutedEventsExtensions.HasAny(GameUI.Control.Enum.RoutedEvents,GameUI.Control.Enum.RoutedEvents)">
+        <summary>
+        
+        </summary>
+        <param name="value"></param>
+        <param name="flag"></param>
+        <returns></returns>
+        </member>
+        <member name="M:GameUI.Control.Enum.RoutedEventsExtensions.HasNone(GameUI.Control.Enum.RoutedEvents,GameUI.Control.Enum.RoutedEvents)">
+        <summary>
+        
+        </summary>
+        <param name="value"></param>
+        <param name="flag"></param>
+        <returns></returns>
+        </member>
+        <member name="M:GameUI.Control.Enum.RoutedEventsExtensions.Except(GameUI.Control.Enum.RoutedEvents,GameUI.Control.Enum.RoutedEvents)">
+        <summary>
+        Returns a new RoutedEvents value with the specified events removed.
+        </summary>
+        <param name = "value">The original RoutedEvents value.</param>
+        <param name = "except">The events to remove from the original value.</param>
+        <returns>A new RoutedEvents value with the specified events removed.</returns>
+        <example>
+        <code>
+        var events = RoutedEvents.All.Except(RoutedEvents.PointerClicked);
+        </code>
+        </example>
+        </member>
+        <member name="T:GameUI.Control.Enum.ScrollUnit">
+        <summary>
+        Enumeration that specifies the scrollUnit of the VirtualizingStackPanel.
+        Used by <see cref = "!:VirtualizingPanel.ScrollUnit"/>.
+        </summary>
+        </member>
+        <member name="F:GameUI.Control.Enum.TouchStatus.Started">
+        <summary>
+        The touch interaction has started.
+        </summary>
+        </member>
+        <member name="F:GameUI.Control.Enum.TouchStatus.Completed">
+        <summary>
+        The touch interaction has completed.
+        </summary>
+        </member>
+        <member name="F:GameUI.Control.Enum.TouchStatus.Canceled">
+        <summary>
+        The touch interaction has been canceled.
+        </summary>
+        </member>
+        <member name="T:GameUI.Control.Enum.VirtualizationMode">
+        <summary>
+        Enumeration that specifies the virtualization mode of the VirtualizingPanel.
+        Used by <see cref = "!:VirtualizingPanel.VirtualizationMode"/>.
+        </summary>
+        </member>
+        <member name="F:GameUI.Control.Enum.VirtualizationMode.Standard">
+        <summary>
+        Standard virtualization mode -- containers are thrown away when offscreen.
+        </summary>
+        </member>
+        <member name="F:GameUI.Control.Enum.VirtualizationMode.Recycling">
+        <summary>
+        Recycling virtualization mode -- containers are re-used when offscreen.
+        </summary>
+        </member>
+        <member name="T:GameUI.Control.Enum.WindingMode">
+        <summary>
+        定义路径填充时使用的缠绕模式
+        </summary>
+        <remarks>
+        <para>缠绕模式决定了在填充复杂路径（如自相交路径）时，哪些区域应该被填充。</para>
+        <para>不同的缠绕模式适用于不同的绘制需求：</para>
+        <list type="bullet">
+        <item><description>NonZero: 适用于大多数普通形状的填充</description></item>
+        <item><description>EvenOdd: 常用于创建镂空效果或复杂的几何图案</description></item>
+        </list>
+        </remarks>
+        <example>
+        <code>
+        // 使用非零缠绕规则填充普通形状
+        canvas.DefaultPathWinding = WindingMode.NonZero;
+        
+        // 使用奇偶规则创建镂空效果
+        canvas.DefaultPathWinding = WindingMode.EvenOdd;
+        canvas.FillPath(complexPath); // 自相交区域会显示镂空效果
+        </code>
+        </example>
+        </member>
+        <member name="F:GameUI.Control.Enum.WindingMode.NonZero">
+        <summary>
+        非零缠绕规则
+        </summary>
+        <remarks>
+        <para>使用非零缠绕规则来确定填充区域。此规则通过计算路径围绕某点的净缠绕数来决定是否填充。</para>
+        <para>如果净缠绕数不为零，则填充该区域；如果为零，则不填充。</para>
+        <para>这是最常用的填充规则，适用于大多数普通几何形状。</para>
+        </remarks>
+        </member>
+        <member name="F:GameUI.Control.Enum.WindingMode.EvenOdd">
+        <summary>
+        奇偶缠绕规则
+        </summary>
+        <remarks>
+        <para>使用奇偶规则来确定填充区域。此规则通过计算从某点向任意方向发射的射线与路径边界的交点数量来决定是否填充。</para>
+        <para>如果交点数量为奇数，则填充该区域；如果为偶数，则不填充。</para>
+        <para>这种规则常用于创建镂空效果，特别适合复杂的自相交路径。</para>
+        </remarks>
+        </member>
+        <member name="M:GameUI.Control.Extensions.BuilderExtensions.Click``1(``0,System.EventHandler{GameUI.Control.Struct.PointerEventArgs})">
+        <summary>
+        设置详细点击事件
+        </summary>
+        </member>
+    </members>
+</doc>

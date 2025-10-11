@@ -1,0 +1,100 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<doc>
+    <assembly>
+        <name>GameCore</name>
+    </assembly>
+    <members>
+        <member name="T:GameCore.Localization.LocalizationManager">
+            <summary />
+        </member>
+        <member name="P:GameCore.Localization.LocalizationManager.Primary">
+            <summary />
+        </member>
+        <member name="F:GameCore.Localization.LocalizationManager.resourceManagers">
+            <summary />
+        </member>
+        <member name="M:GameCore.Localization.LocalizationManager.AddResourceManager(System.Resources.ResourceManager)">
+            <summary />
+            <param name="resourceManager" />
+            <returns />
+        </member>
+        <member name="P:GameCore.Localization.LocalizationManager.PrimaryResourceManager">
+            <summary />
+        </member>
+        <member name="M:GameCore.Localization.LocalizationManager.GetString(System.String,System.Globalization.CultureInfo)">
+            <summary />
+            <param name="name" />
+            <param name="culture" />
+            <returns />
+        </member>
+        <member name="M:GameCore.Localization.LocalizationManager.GetStringOrDefault(System.String,System.String,System.Globalization.CultureInfo)">
+            <summary />
+            <param name="name" />
+            <param name="defaultValue" />
+            <param name="culture" />
+            <returns />
+        </member>
+        <member name="T:GameCore.Localization.LocalizedString">
+            <summary>
+            Represents a localized string that automatically resolves its value from the localization system using a key.
+            </summary>
+            <param name="key">The localization key used to lookup the string value.</param>
+            <remarks>
+            This class provides lazy loading of localized strings and automatic fallback to the key if the resource is not found.
+            It supports implicit conversion from and to string for convenience.
+            </remarks>
+        </member>
+        <member name="M:GameCore.Localization.LocalizedString.#ctor(System.String)">
+            <summary>
+            Represents a localized string that automatically resolves its value from the localization system using a key.
+            </summary>
+            <param name="key">The localization key used to lookup the string value.</param>
+            <remarks>
+            This class provides lazy loading of localized strings and automatic fallback to the key if the resource is not found.
+            It supports implicit conversion from and to string for convenience.
+            </remarks>
+        </member>
+        <member name="F:GameCore.Localization.LocalizedString.value">
+            <summary />
+        </member>
+        <member name="P:GameCore.Localization.LocalizedString.Key">
+            <summary>
+            Gets or sets the localization key used to lookup the string value.
+            </summary>
+        </member>
+        <member name="P:GameCore.Localization.LocalizedString.Value">
+            <summary>
+            Gets the localized string value for the current key, or null if the resource is not found.
+            </summary>
+            <remarks>
+            The value is lazily loaded from the <see cref="T:GameCore.Localization.LocalizationManager" /> when first accessed.
+            If the resource cannot be found, <see cref="P:GameCore.Localization.LocalizedString.ResourceNotFound" /> will be set to true.
+            </remarks>
+        </member>
+        <member name="P:GameCore.Localization.LocalizedString.ResourceNotFound">
+            <summary>
+            Gets a value indicating whether the localization resource for this key was not found.
+            </summary>
+        </member>
+        <member name="M:GameCore.Localization.LocalizedString.ToString">
+            <summary>
+            Returns the localized string value, or the key if the value is not available.
+            </summary>
+            <returns>The localized value or the fallback key.</returns>
+        </member>
+        <member name="M:GameCore.Localization.LocalizedString.op_Implicit(GameCore.Localization.LocalizedString)~System.String">
+            <summary>
+            Implicitly converts a <see cref="T:GameCore.Localization.LocalizedString" /> to a <see cref="T:System.String" />.
+            </summary>
+            <param name="localizedString">The localized string to convert.</param>
+            <returns>The string representation of the localized string.</returns>
+        </member>
+        <member name="M:GameCore.Localization.LocalizedString.op_Implicit(System.String)~GameCore.Localization.LocalizedString">
+            <summary>
+            Implicitly converts a <see cref="T:System.String" /> key to a <see cref="T:GameCore.Localization.LocalizedString" />.
+            </summary>
+            <param name="key">The localization key.</param>
+            <returns>A new <see cref="T:GameCore.Localization.LocalizedString" /> instance with the specified key.</returns>
+        </member>
+    </members>
+</doc>

@@ -1,0 +1,194 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<doc>
+    <assembly>
+        <name>GameCore</name>
+    </assembly>
+    <members>
+        <member name="T:GameCore.OrderSystem.Command">
+            <summary />
+        </member>
+        <member name="M:GameCore.OrderSystem.Command.#ctor">
+            <summary />
+        </member>
+        <member name="P:GameCore.OrderSystem.Command.AbilityLink">
+            <summary />
+        </member>
+        <member name="P:GameCore.OrderSystem.Command.Index">
+            <summary />
+        </member>
+        <member name="P:GameCore.OrderSystem.Command.Type">
+            <summary />
+        </member>
+        <member name="P:GameCore.OrderSystem.Command.Flag">
+            <summary />
+        </member>
+        <member name="P:GameCore.OrderSystem.Command.Target">
+            <summary />
+        </member>
+        <member name="P:GameCore.OrderSystem.Command.Item">
+            <summary />
+        </member>
+        <member name="P:GameCore.OrderSystem.Command.Player">
+            <summary />
+        </member>
+        <member name="P:GameCore.OrderSystem.Command.IsRequest">
+            <summary>
+            Request commands must have a player, and the player must be able to control the entity.
+            The player also must be able to see the target if the target is an entity.
+            The ability cannot be a hidden ability.
+            </summary>
+        </member>
+        <member name="P:GameCore.OrderSystem.Command.IsAcquired">
+            <summary>
+            Acquired commands are auto-acquired commands like auto-casting and recasting.
+            When orders queued after an acquired command, the acquired command will be removed, unless it is in uninterruptible state.
+            Interrupting of acquired commands only consider the uninterruptible state, not the order stage or interrupting priority.
+            </summary>
+        </member>
+        <member name="M:GameCore.OrderSystem.Command.IssueOrder(GameCore.EntitySystem.Entity,System.Boolean)">
+            <summary />
+            <param name="entity" />
+            <param name="testOnly" />
+            <returns />
+        </member>
+        <member name="F:GameCore.OrderSystem.CommandFlag.Queued">
+            <summary>
+            Queued command.
+            </summary>
+        </member>
+        <member name="F:GameCore.OrderSystem.CommandFlag.Preempt">
+            <summary>
+            Preempt the current command queue.
+            </summary>
+        </member>
+        <member name="F:GameCore.OrderSystem.CommandFlag.IsAcquired">
+            <summary>
+            Auto-acquired commands that are auto-casting or recasting commands.
+            </summary>
+        </member>
+        <member name="F:GameCore.OrderSystem.CommandFlag.IsRequest">
+            <summary>
+            Is request command from player client or AI.
+            </summary>
+        </member>
+        <member name="F:GameCore.OrderSystem.CommandFlag.IsUser">
+            <summary>
+            Is user request command from player client.
+            </summary>
+        </member>
+        <member name="F:GameCore.OrderSystem.CommandFlag.IsAI">
+            <summary>
+            Is AI request command from AI.
+            </summary>
+        </member>
+        <member name="T:GameCore.OrderSystem.IApproachOrder">
+            <summary />
+        </member>
+        <member name="M:GameCore.OrderSystem.IApproachOrder.OnApproachBreak">
+            <summary />
+            <returns />
+        </member>
+        <member name="M:GameCore.OrderSystem.IApproachOrder.OnApproachFinish">
+            <summary />
+            <returns />
+        </member>
+        <member name="M:GameCore.OrderSystem.IApproachOrder.GetHashCode">
+            <summary />
+            <returns />
+        </member>
+        <member name="P:GameCore.OrderSystem.IApproachOrder.Arc">
+            <summary />
+        </member>
+        <member name="P:GameCore.OrderSystem.IApproachOrder.ArcSlop">
+            <summary />
+        </member>
+        <member name="P:GameCore.OrderSystem.IApproachOrder.DoCheckAngle">
+            <summary />
+        </member>
+        <member name="P:GameCore.OrderSystem.IApproachOrder.DoReapproach">
+            <summary />
+        </member>
+        <member name="P:GameCore.OrderSystem.IApproachOrder.Target">
+            <summary />
+        </member>
+        <member name="P:GameCore.OrderSystem.IApproachOrder.TurnToTarget">
+            <summary />
+        </member>
+        <member name="P:GameCore.OrderSystem.IApproachOrder.IsValid">
+            <summary />
+        </member>
+        <member name="T:GameCore.OrderSystem.IWalkableOrder">
+            <summary />
+        </member>
+        <member name="T:GameCore.OrderSystem.Order">
+            <summary />
+        </member>
+        <member name="P:GameCore.OrderSystem.Order.GameCore#Interface#IExecutionContext#Caster">
+            <summary />
+        </member>
+        <member name="P:GameCore.OrderSystem.Order.GameCore#Interface#IExecutionContext#Order">
+            <summary />
+        </member>
+        <member name="P:GameCore.OrderSystem.Order.ChanneledEffect">
+            <summary />
+        </member>
+        <member name="P:GameCore.OrderSystem.Order.AbilityPhase">
+            <summary />
+        </member>
+        <member name="M:GameCore.OrderSystem.Order.ExecuteChild(GameData.IGameLink{GameCore.Execution.Data.GameDataEffect},GameCore.BaseInterface.ITarget)">
+            <summary />
+            <param name="link" />
+            <param name="target" />
+            <returns />
+        </member>
+        <member name="T:GameCore.OrderSystem.OrderQueue">
+            <summary />
+        </member>
+        <member name="M:GameCore.OrderSystem.OrderQueue.#ctor(GameCore.EntitySystem.Entity)">
+            <summary />
+        </member>
+        <member name="F:GameCore.OrderSystem.OrderQueue.orders">
+            <summary />
+        </member>
+        <member name="M:GameCore.OrderSystem.OrderQueue.GetEnumerator">
+            <summary />
+            <returns />
+        </member>
+        <member name="M:GameCore.OrderSystem.OrderQueue.System#Collections#IEnumerable#GetEnumerator">
+            <summary />
+            <returns />
+        </member>
+        <member name="M:GameCore.OrderSystem.OrderQueue.CreateInstance(GameCore.EntitySystem.Entity)">
+            <summary />
+            <param name="content" />
+            <returns />
+        </member>
+        <member name="T:GameCore.OrderSystem.OrderQueueExtension">
+            <summary />
+        </member>
+        <member name="M:GameCore.OrderSystem.OrderQueueExtension.GetComponent``1(GameCore.EntitySystem.Entity)">
+            <summary />
+            <typeparam name="TComponent" />
+            <param name="entity" />
+            <returns />
+        </member>
+        <member name="M:GameCore.OrderSystem.OrderQueueExtension.GetOrCreateComponent``1(GameCore.EntitySystem.Entity)">
+            <summary />
+            <typeparam name="TComponent" />
+            <param name="entity" />
+            <returns />
+        </member>
+        <member name="T:GameCore.OrderSystem.Struct.GetOrderFlags">
+            <summary />
+        </member>
+        <member name="P:GameCore.OrderSystem.Struct.GetOrderFlags.IncludeHead">
+            <summary />
+        </member>
+        <member name="P:GameCore.OrderSystem.Struct.GetOrderFlags.IncludeQueued">
+            <summary />
+        </member>
+        <member name="P:GameCore.OrderSystem.Struct.GetOrderFlags.IncludeUninterruptible">
+            <summary />
+        </member>
+    </members>
+</doc>

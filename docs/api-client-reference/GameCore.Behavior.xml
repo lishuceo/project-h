@@ -1,0 +1,398 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<doc>
+    <assembly>
+        <name>GameCore</name>
+    </assembly>
+    <members>
+        <member name="T:GameCore.Behavior.GameDataModifier">
+            <summary>
+            Represents the base class for behavior modifier configurations that alter or enhance entity behaviors and properties.
+            </summary>
+            <remarks>
+            This class serves as the foundation for all behavior modification systems, including buffs, debuffs, passive abilities,
+            auras, and other effects that dynamically alter how entities behave or perform. Modifiers can affect properties like
+            damage, speed, health, abilities, and other gameplay characteristics, providing a flexible system for temporary or
+            permanent changes to entity behavior.
+            </remarks>
+        </member>
+        <member name="T:GameCore.Behavior.GameDataOrderModifier">
+            <summary />
+        </member>
+        <member name="P:GameCore.Behavior.GameDataOrderModifier.RequireAttack">
+            <summary />
+        </member>
+        <member name="P:GameCore.Behavior.GameDataOrderModifier.MissileModelOverride">
+            <summary />
+        </member>
+        <member name="P:GameCore.Behavior.GameDataOrderModifier.ImpactActorsOverride">
+            <summary />
+        </member>
+        <member name="P:GameCore.Behavior.GameDataOrderModifier.AnimationOverride">
+            <summary />
+        </member>
+        <member name="P:GameCore.Behavior.GameDataOrderModifier.ImpactResponseDamage">
+            <summary />
+        </member>
+        <member name="P:GameCore.Behavior.GameDataOrderModifier.StackId">
+            <summary />
+        </member>
+        <member name="T:GameCore.Behavior.GameDataResponse">
+            <summary />
+        </member>
+        <member name="P:GameCore.Behavior.GameDataResponse.SyncType">
+            <summary />
+        </member>
+        <member name="M:GameCore.Behavior.GameDataResponse.CreateResponse(GameCore.EntitySystem.Unit,GameCore.BaseType.IResponseOwner)">
+            <summary />
+            <param name="host" />
+            <param name="owner" />
+            <returns />
+        </member>
+        <member name="M:GameCore.Behavior.GameDataResponse.GameCore#BaseInterface#IAttachedData#Replicate(GameCore.BaseInterface.ICooldownHost,System.Nullable{System.Int32})">
+            <summary />
+            <param name="host" />
+            <param name="syncId" />
+            <returns />
+        </member>
+        <member name="P:GameCore.Behavior.GameDataResponse.ResponseEffect">
+            <summary />
+        </member>
+        <member name="P:GameCore.Behavior.GameDataResponse.Cost">
+            <summary />
+        </member>
+        <member name="P:GameCore.Behavior.GameDataResponse.Priority">
+            <summary />
+        </member>
+        <member name="P:GameCore.Behavior.GameDataResponse.Location">
+            <summary />
+        </member>
+        <member name="P:GameCore.Behavior.GameDataResponse.GameCore#BaseInterface#IAttachedData#Categories">
+            <summary />
+        </member>
+        <member name="T:GameCore.Behavior.GameDataResponse`2">
+            <summary />
+        </member>
+        <member name="M:GameCore.Behavior.GameDataResponse`2.#ctor(GameData.IGameLink{GameCore.Behavior.GameDataResponse})">
+            <summary />
+        </member>
+        <member name="P:GameCore.Behavior.GameDataResponse`2.Chance">
+            <summary />
+        </member>
+        <member name="P:GameCore.Behavior.GameDataResponse`2.Validators">
+            <summary />
+        </member>
+        <member name="P:GameCore.Behavior.GameDataResponse`2.GameData#IGameData{TResponseData}#Link">
+            <summary />
+        </member>
+        <member name="M:GameCore.Behavior.GameDataResponse`2.Execute(GameCore.Interface.IExecutionContext,`1)">
+            <summary />
+            <param name="context" />
+            <param name="incomingContext" />
+            <returns />
+        </member>
+        <member name="M:GameCore.Behavior.GameDataResponse`2.Post(`1,GameCore.BaseInterface.ITarget)">
+            <summary />
+            <param name="incomingContext" />
+            <param name="defenderOverride" />
+            <returns />
+        </member>
+        <member name="M:GameCore.Behavior.GameDataResponse`2.CreateResponse(GameCore.EntitySystem.Unit,GameCore.BaseType.IResponseOwner)">
+            <summary />
+            <param name="host" />
+            <param name="owner" />
+            <returns />
+        </member>
+        <member name="T:GameCore.Behavior.GameDataResponseDamage">
+            <summary />
+            <summary />
+        </member>
+        <member name="M:GameCore.Behavior.GameDataResponseDamage.#ctor(GameData.GameLink{GameCore.Behavior.GameDataResponse,GameCore.Behavior.GameDataResponseDamage})">
+            <summary />
+        </member>
+        <member name="P:GameCore.Behavior.GameDataResponseDamage.Link">
+            <summary />
+        </member>
+        <member name="F:GameCore.Behavior.GameDataResponseDamage.ResponseDamageFlags">
+            <summary />
+        </member>
+        <member name="F:GameCore.Behavior.GameDataResponseDamage.DamageType">
+            <summary />
+        </member>
+        <member name="P:GameCore.Behavior.GameDataResponseDamage.Modification">
+            <summary />
+        </member>
+        <member name="P:GameCore.Behavior.GameDataResponseDamage.Multiplier">
+            <summary />
+        </member>
+        <member name="M:GameCore.Behavior.GameDataResponseDamage.Execute(GameCore.Interface.IExecutionContext,GameCore.Execution.EffectDamage)">
+            <summary />
+            <param name="context" />
+            <param name="incomingContext" />
+            <returns />
+        </member>
+        <member name="T:GameCore.Behavior.ModificationManager">
+            <summary />
+        </member>
+        <member name="M:GameCore.Behavior.ModificationManager.#ctor(GameCore.EntitySystem.Unit,GameCore.Interface.IExecutionContext,GameCore.BaseInterface.IUnitModificationData,System.Int32)">
+            <summary />
+        </member>
+        <member name="P:GameCore.Behavior.ModificationManager.RandomSeed">
+            <summary />
+        </member>
+        <member name="F:GameCore.Behavior.ModificationManager.modifyTarget">
+            <summary />
+        </member>
+        <member name="P:GameCore.Behavior.ModificationManager.ModifyTarget">
+            <summary />
+        </member>
+        <member name="P:GameCore.Behavior.ModificationManager.ExecutionContext">
+            <summary />
+        </member>
+        <member name="P:GameCore.Behavior.ModificationManager.AppliedPropertyStack">
+            <summary />
+        </member>
+        <member name="P:GameCore.Behavior.ModificationManager.IsStateApplied">
+            <summary />
+        </member>
+        <member name="P:GameCore.Behavior.ModificationManager.Cache">
+            <summary />
+        </member>
+        <member name="P:GameCore.Behavior.ModificationManager.Modifications">
+            <summary />
+        </member>
+        <member name="T:GameCore.Behavior.ModificationManager.Modification">
+            <summary />
+            <summary />
+        </member>
+        <member name="P:GameCore.Behavior.ModificationManager.Modification.Property">
+            <summary />
+        </member>
+        <member name="P:GameCore.Behavior.ModificationManager.Modification.Value">
+            <summary />
+        </member>
+        <member name="P:GameCore.Behavior.ModificationManager.Modification.SubType">
+            <summary />
+        </member>
+        <member name="M:GameCore.Behavior.ModificationManager.Modification.ToString">
+            <summary />
+            <returns />
+        </member>
+        <member name="M:GameCore.Behavior.ModificationManager.Initialize">
+            <summary />
+            <returns />
+        </member>
+        <member name="M:GameCore.Behavior.ModificationManager.Reset">
+            <summary />
+            <returns />
+        </member>
+        <member name="T:GameCore.Behavior.OrderModifier">
+            <summary />
+        </member>
+        <member name="M:GameCore.Behavior.OrderModifier.#ctor(GameData.IGameLink{GameCore.Behavior.GameDataOrderModifier})">
+            <summary />
+        </member>
+        <member name="P:GameCore.Behavior.OrderModifier.Link">
+            <summary />
+        </member>
+        <member name="P:GameCore.Behavior.OrderModifier.Cache">
+            <summary />
+        </member>
+        <member name="T:GameCore.Behavior.Response">
+            <summary />
+            <summary />
+            <summary />
+        </member>
+        <member name="P:GameCore.Behavior.Response.SyncId">
+            <summary />
+        </member>
+        <member name="P:GameCore.Behavior.Response.Link">
+            <summary />
+        </member>
+        <member name="P:GameCore.Behavior.Response.Cache">
+            <summary />
+        </member>
+        <member name="P:GameCore.Behavior.Response.Location">
+            <summary />
+        </member>
+        <member name="P:GameCore.Behavior.Response.Host">
+            <summary />
+        </member>
+        <member name="P:GameCore.Behavior.Response.GameData#Interface#IGameObject{GameCore#Behavior#GameDataResponse}#Link">
+            <summary />
+        </member>
+        <member name="P:GameCore.Behavior.Response.Owner">
+            <summary />
+        </member>
+        <member name="P:GameCore.Behavior.Response.Manager">
+            <summary />
+        </member>
+        <member name="P:GameCore.Behavior.Response.IsPersistDuringMorph">
+            <summary>
+            If the response is persisting during morph.
+            Currently responses directly attached to the unit are not persisted during morph.
+            </summary>
+        </member>
+        <member name="P:GameCore.Behavior.Response.GameCore#BaseInterface#IAttachedObject#Host">
+            <summary />
+        </member>
+        <member name="M:GameCore.Behavior.Response.#ctor(GameCore.EntitySystem.Unit,GameData.IGameLink{GameCore.Behavior.GameDataResponse},GameCore.BaseType.IResponseOwner)">
+            <summary />
+        </member>
+        <member name="M:GameCore.Behavior.Response.FactoryCreate(GameCore.EntitySystem.Unit,GameData.IGameLink{GameCore.Behavior.GameDataResponse},GameCore.BaseType.IResponseOwner)">
+            <summary />
+            <param name="host" />
+            <param name="link" />
+            <param name="owner" />
+            <returns />
+        </member>
+        <member name="M:GameCore.Behavior.Response.ResolveTarget(GameCore.Interface.IExecutionContext,GameCore.BaseInterface.ITarget)">
+            <summary />
+            <param name="incomingContext" />
+            <param name="defenderOverride" />
+            <returns />
+        </member>
+        <member name="M:GameCore.Behavior.Response.ReplicateFromKeyValue(System.Enum,System.ReadOnlySpan{System.Byte})">
+            <summary />
+            <param name="propertyEnum" />
+            <param name="value" />
+            <returns />
+        </member>
+        <member name="T:GameCore.Behavior.Response`2">
+            <summary />
+        </member>
+        <member name="M:GameCore.Behavior.Response`2.#ctor(GameCore.EntitySystem.Unit,GameData.IGameLink{GameCore.Behavior.GameDataResponse},GameCore.Behavior.Response@,GameCore.BaseType.IResponseOwner)">
+            <summary />
+        </member>
+        <member name="M:GameCore.Behavior.Response`2.ExecuteChild(GameData.IGameLink{GameCore.Execution.Data.GameDataEffect},GameCore.BaseInterface.ITarget,`1)">
+            <summary />
+            <param name="link" />
+            <param name="target" />
+            <param name="incomingContext" />
+            <returns />
+        </member>
+        <member name="P:GameCore.Behavior.Response`2.IsActivated">
+            <summary />
+        </member>
+        <member name="M:GameCore.Behavior.Response`2.Execute(`1,GameCore.BaseInterface.ITarget)">
+            <summary />
+            <param name="incomingContext" />
+            <param name="defenderOverride" />
+            <returns />
+        </member>
+        <member name="M:GameCore.Behavior.Response`2.Validate(GameCore.Interface.IExecutionContext,`1)">
+            <summary />
+            <param name="context" />
+            <param name="incomingContext" />
+            <returns />
+        </member>
+        <member name="M:GameCore.Behavior.Response`2.DisposeManaged">
+            <summary />
+            <returns />
+        </member>
+        <member name="T:GameCore.Behavior.ResponseManager">
+            <summary />
+        </member>
+        <member name="M:GameCore.Behavior.ResponseManager.#ctor(GameCore.EntitySystem.Entity)">
+            <summary />
+        </member>
+        <member name="P:GameCore.Behavior.ResponseManager.ObjectType">
+            <summary />
+        </member>
+        <member name="M:GameCore.Behavior.ResponseManager.GetAll">
+            <summary />
+            <returns />
+        </member>
+        <member name="T:GameCore.Behavior.ResponseManager.SortedManager">
+            <summary />
+            <summary />
+        </member>
+        <member name="T:GameCore.Behavior.ResponseManager.SortedManager.DefaultComparer">
+            <summary />
+            <summary />
+        </member>
+        <member name="F:GameCore.Behavior.ResponseManager.SortedManager.DefaultComparer.Default">
+            <summary />
+        </member>
+        <member name="M:GameCore.Behavior.ResponseManager.SortedManager.DefaultComparer.Compare(GameCore.Behavior.Response,GameCore.Behavior.Response)">
+            <summary />
+            <param name="x" />
+            <param name="y" />
+            <returns />
+        </member>
+        <member name="M:GameCore.Behavior.ResponseManager.SortedManager.GetAll">
+            <summary />
+            <returns />
+        </member>
+        <member name="T:GameCore.Behavior.ResponseManager.SortedManager`2">
+            <summary />
+            <summary />
+        </member>
+        <member name="F:GameCore.Behavior.ResponseManager.SortedManager`2.LinkedObjects">
+            <summary />
+        </member>
+        <member name="M:GameCore.Behavior.ResponseManager.SortedManager`2.Add(GameCore.Behavior.Response{`0,`1})">
+            <summary />
+            <param name="response" />
+            <returns />
+        </member>
+        <member name="M:GameCore.Behavior.ResponseManager.SortedManager`2.Remove(GameCore.Behavior.Response{`0,`1})">
+            <summary />
+            <param name="response" />
+            <returns />
+        </member>
+        <member name="M:GameCore.Behavior.ResponseManager.SortedManager`2.Execute(GameCore.Behavior.ResponseLocation,`1,GameCore.BaseInterface.ITarget)">
+            <summary />
+            <param name="location" />
+            <param name="incomingContext" />
+            <param name="defenderOverride" />
+            <returns />
+        </member>
+        <member name="M:GameCore.Behavior.ResponseManager.SortedManager`2.GetAll">
+            <summary />
+            <returns />
+        </member>
+        <member name="M:GameCore.Behavior.ResponseManager.Add``2(GameCore.Behavior.Response{``0,``1})">
+            <summary />
+            <typeparam name="TResponseData" />
+            <typeparam name="TIncomingContext" />
+            <param name="response" />
+            <returns />
+        </member>
+        <member name="M:GameCore.Behavior.ResponseManager.Remove``2(GameCore.Behavior.Response{``0,``1})">
+            <summary />
+            <typeparam name="TResponseData" />
+            <typeparam name="TIncomingContext" />
+            <param name="response" />
+            <returns />
+        </member>
+        <member name="M:GameCore.Behavior.ResponseManager.Execute``2(GameCore.Behavior.ResponseLocation,``1,GameCore.BaseInterface.ITarget)">
+            <summary />
+            <typeparam name="TResponseData" />
+            <typeparam name="TIncomingContext" />
+            <param name="location" />
+            <param name="incomingContext" />
+            <param name="defenderOverride" />
+            <returns />
+        </member>
+        <member name="M:GameCore.Behavior.ResponseManager.CreateInstance(GameCore.EntitySystem.Entity)">
+            <summary />
+            <param name="content" />
+            <returns />
+        </member>
+        <member name="T:GameCore.Behavior.ResponseManagerExtension">
+            <summary />
+        </member>
+        <member name="M:GameCore.Behavior.ResponseManagerExtension.GetComponent``1(GameCore.EntitySystem.Entity)">
+            <summary />
+            <typeparam name="TComponent" />
+            <param name="entity" />
+            <returns />
+        </member>
+        <member name="M:GameCore.Behavior.ResponseManagerExtension.GetOrCreateComponent``1(GameCore.EntitySystem.Entity)">
+            <summary />
+            <typeparam name="TComponent" />
+            <param name="entity" />
+            <returns />
+        </member>
+    </members>
+</doc>

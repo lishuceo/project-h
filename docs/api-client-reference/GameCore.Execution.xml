@@ -1,0 +1,2414 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<doc>
+    <assembly>
+        <name>GameCore</name>
+    </assembly>
+    <members>
+        <member name="T:GameCore.Execution.Damage">
+            <summary />
+        </member>
+        <member name="M:GameCore.Execution.Damage.#ctor(System.Double,GameCore.Execution.EffectDamage,GameData.IGameLink{GameCore.Data.GameDataDamageType})">
+            <summary />
+        </member>
+        <member name="P:GameCore.Execution.Damage.Current">
+            <summary />
+        </member>
+        <member name="P:GameCore.Execution.Damage.Origin">
+            <summary />
+        </member>
+        <member name="P:GameCore.Execution.Damage.Effect">
+            <summary />
+        </member>
+        <member name="P:GameCore.Execution.Damage.IsFatal">
+            <summary />
+        </member>
+        <member name="P:GameCore.Execution.Damage.IsCritical">
+            <summary />
+        </member>
+        <member name="P:GameCore.Execution.Damage.Type">
+            <summary />
+        </member>
+        <member name="P:GameCore.Execution.Damage.Caster">
+            <summary />
+        </member>
+        <member name="P:GameCore.Execution.Damage.Target">
+            <summary />
+        </member>
+        <member name="M:GameCore.Execution.Damage.ToString">
+            <summary />
+            <returns />
+        </member>
+        <member name="T:GameCore.Execution.Data.GameDataEffect">
+            <summary />
+            <summary />
+        </member>
+        <member name="P:GameCore.Execution.Data.GameDataEffect.GameData#IGameData{GameCore#ActorSystem#Data#IGameDataActorScopeOwner}#Link">
+            <summary />
+        </member>
+        <member name="F:GameCore.Execution.Data.GameDataEffect.rnd">
+            <summary />
+        </member>
+        <member name="P:GameCore.Execution.Data.GameDataEffect.Chance">
+            <summary />
+        </member>
+        <member name="P:GameCore.Execution.Data.GameDataEffect.Validators">
+            <summary />
+        </member>
+        <member name="P:GameCore.Execution.Data.GameDataEffect.TargetLocation">
+            <summary />
+        </member>
+        <member name="P:GameCore.Execution.Data.GameDataEffect.Facing">
+            <summary />
+        </member>
+        <member name="P:GameCore.Execution.Data.GameDataEffect.Scale">
+            <summary />
+        </member>
+        <member name="P:GameCore.Execution.Data.GameDataEffect.ActorScope">
+            <summary />
+        </member>
+        <member name="P:GameCore.Execution.Data.GameDataEffect.ActorArray">
+            <summary />
+        </member>
+        <member name="P:GameCore.Execution.Data.GameDataEffect.TargetType">
+            <summary />
+        </member>
+        <member name="P:GameCore.Execution.Data.GameDataEffect.LogExecutionFailure">
+            <summary />
+        </member>
+        <member name="P:GameCore.Execution.Data.GameDataEffect.GameCore#Interface#IExecutableData#Validators">
+            <summary />
+        </member>
+        <member name="P:GameCore.Execution.Data.GameDataEffect.GameCore#ActorSystem#Data#IGameDataActorScopeOwner#ImpactActors">
+            <summary />
+        </member>
+        <member name="M:GameCore.Execution.Data.GameDataEffect.Execute(GameCore.Execution.Effect)">
+            <summary />
+            <param name="context" />
+            <returns />
+        </member>
+        <member name="M:GameCore.Execution.Data.GameDataEffect.GameCore#Interface#IExecutableData#Execute(GameCore.Interface.IExecutableObject)">
+            <summary />
+            <param name="context" />
+            <returns />
+        </member>
+        <member name="M:GameCore.Execution.Data.GameDataEffect.Validate(GameCore.Execution.Effect)">
+            <summary />
+            <param name="context" />
+            <returns />
+        </member>
+        <member name="M:GameCore.Execution.Data.GameDataEffect.GameCore#Interface#IExecutableData#Validate(GameCore.Interface.IExecutableObject)">
+            <summary />
+            <param name="context" />
+            <returns />
+        </member>
+        <member name="M:GameCore.Execution.Data.GameDataEffect.CreateEffect(GameCore.BaseInterface.ITarget,GameCore.Interface.IExecutionContext,System.Boolean)">
+            <summary />
+            <param name="defaultTarget" />
+            <param name="context" />
+            <param name="preValidateOnly" />
+            <returns />
+        </member>
+        <member name="M:GameCore.Execution.Data.GameDataEffect.LocVarUnitAction(System.Nullable{GameCore.BaseType.LocVarType},GameCore.BaseInterface.ITarget)">
+            <summary />
+            <param name="nullableType" />
+            <param name="target" />
+            <returns />
+        </member>
+        <member name="M:GameCore.Execution.Data.GameDataEffect.LocVarPointAction(System.Nullable{GameCore.BaseType.LocVarType},GameCore.BaseInterface.ITarget)">
+            <summary />
+            <param name="nullableType" />
+            <param name="target" />
+            <returns />
+        </member>
+        <member name="F:GameCore.Execution.Data.GameDataEffect.aggregator">
+            <summary />
+        </member>
+        <member name="F:GameCore.Execution.Data.GameDataEffect.aggregatorWeakReference">
+            <summary />
+        </member>
+        <member name="P:GameCore.Execution.Data.GameDataEffect.Events#IEventSender#Aggregator">
+            <summary />
+        </member>
+        <member name="P:GameCore.Execution.Data.GameDataEffect.AggregatorWeakReference">
+            <summary />
+        </member>
+        <member name="T:GameCore.Execution.Data.GameDataEffectAbility">
+            <summary />
+        </member>
+        <member name="P:GameCore.Execution.Data.GameDataEffectAbility.AbilityLink">
+            <summary>
+            If null, use the ability that triggered the effect.
+            </summary>
+        </member>
+        <member name="M:GameCore.Execution.Data.GameDataEffectAbility.GetAbility(GameCore.Execution.Effect)">
+            <summary />
+            <param name="context" />
+            <returns />
+        </member>
+        <member name="M:GameCore.Execution.Data.GameDataEffectAbility.Validate(GameCore.Execution.Effect)">
+            <summary />
+            <param name="context" />
+            <returns />
+        </member>
+        <member name="T:GameCore.Execution.Data.GameDataEffectAbilityModify">
+            <summary />
+        </member>
+        <member name="P:GameCore.Execution.Data.GameDataEffectAbilityModify.Operation">
+            <summary />
+        </member>
+        <member name="T:GameCore.Execution.Data.GameDataEffectAbilityModifyCooldown">
+            <summary />
+        </member>
+        <member name="P:GameCore.Execution.Data.GameDataEffectAbilityModifyCooldown.Value">
+            <summary />
+        </member>
+        <member name="P:GameCore.Execution.Data.GameDataEffectAbilityModifyCooldown.CooldownType">
+            <summary />
+        </member>
+        <member name="T:GameCore.Execution.Data.GameDataEffectAbilityModifyPhase">
+            <summary />
+        </member>
+        <member name="P:GameCore.Execution.Data.GameDataEffectAbilityModifyPhase.Value">
+            <summary />
+        </member>
+        <member name="T:GameCore.Execution.Data.GameDataEffectAbilityModifyProperty">
+            <summary />
+        </member>
+        <member name="P:GameCore.Execution.Data.GameDataEffectAbilityModifyProperty.Modification">
+            <summary />
+        </member>
+        <member name="T:GameCore.Execution.Data.GameDataEffectAbilityReplace">
+            <summary />
+        </member>
+        <member name="P:GameCore.Execution.Data.GameDataEffectAbilityReplace.NewAbilityLink">
+            <summary />
+        </member>
+        <member name="M:GameCore.Execution.Data.GameDataEffectAbilityReplace.Execute(GameCore.Execution.Effect)">
+            <summary />
+            <param name="context" />
+            <returns />
+        </member>
+        <member name="T:GameCore.Execution.Data.GameDataEffectBuffAdd">
+            <summary />
+        </member>
+        <member name="P:GameCore.Execution.Data.GameDataEffectBuffAdd.Stack">
+            <summary />
+        </member>
+        <member name="P:GameCore.Execution.Data.GameDataEffectBuffAdd.BuffLink">
+            <summary />
+        </member>
+        <member name="P:GameCore.Execution.Data.GameDataEffectBuffAdd.Duration">
+            <summary />
+        </member>
+        <member name="M:GameCore.Execution.Data.GameDataEffectBuffAdd.CreateEffect(GameCore.BaseInterface.ITarget,GameCore.Interface.IExecutionContext,System.Boolean)">
+            <summary />
+            <param name="defaultTarget" />
+            <param name="creationContext" />
+            <param name="preValidateOnly" />
+            <returns />
+        </member>
+        <member name="T:GameCore.Execution.Data.GameDataEffectBuffRemove">
+            <summary />
+        </member>
+        <member name="P:GameCore.Execution.Data.GameDataEffectBuffRemove.Stack">
+            <summary />
+        </member>
+        <member name="P:GameCore.Execution.Data.GameDataEffectBuffRemove.BuffLink">
+            <summary />
+        </member>
+        <member name="P:GameCore.Execution.Data.GameDataEffectBuffRemove.CategoryFilter">
+            <summary />
+        </member>
+        <member name="P:GameCore.Execution.Data.GameDataEffectBuffRemove.BuffValidator">
+            <summary />
+        </member>
+        <member name="P:GameCore.Execution.Data.GameDataEffectBuffRemove.Sorts">
+            <summary />
+        </member>
+        <member name="T:GameCore.Execution.Data.GameDataEffectCancelOrder">
+            <summary />
+        </member>
+        <member name="P:GameCore.Execution.Data.GameDataEffectCancelOrder.CancelOrderMethod">
+            <summary />
+        </member>
+        <member name="P:GameCore.Execution.Data.GameDataEffectCancelOrder.CancelOrderFlags">
+            <summary />
+        </member>
+        <member name="P:GameCore.Execution.Data.GameDataEffectCancelOrder.AbilityLink">
+            <summary />
+        </member>
+        <member name="P:GameCore.Execution.Data.GameDataEffectCancelOrder.CategoryFilter">
+            <summary />
+        </member>
+        <member name="T:GameCore.Execution.Data.GameDataEffectCreateUnit">
+            <summary>
+            创建单位效果的游戏数据配置，用于在指定位置生成新的游戏单位
+            </summary>
+            <remarks>
+                <para>
+            GameDataEffectCreateUnit 是效果系统中用于创建单位的核心组件。它支持多种单位选择方式、
+            灵活的生成位置配置、所有权管理以及生成后的效果处理。
+            </para>
+                <para>
+                    <strong>单位选择方式：</strong>
+                </para>
+                <list type="bullet">
+                    <item>
+                        <description>
+                            <strong>UnitLink</strong> - 通过 <see cref="P:GameCore.Execution.Data.GameDataEffectCreateUnit.SpawnUnitTypePerLevel" /> 根据等级选择单位类型</description>
+                    </item>
+                    <item>
+                        <description>
+                            <strong>Location</strong> - 通过 <see cref="P:GameCore.Execution.Data.GameDataEffectCreateUnit.SpawnTypeUnit" /> 从目标位置获取单位类型</description>
+                    </item>
+                </list>
+                <para>
+                    <strong>生成配置：</strong>
+                </para>
+                <list type="bullet">
+                    <item>
+                        <description>支持批量生成多个单位（<see cref="P:GameCore.Execution.Data.GameDataEffectCreateUnit.SpawnCount" />）</description>
+                    </item>
+                    <item>
+                        <description>可自定义生成位置偏移（<see cref="P:GameCore.Execution.Data.GameDataEffectCreateUnit.SpawnOffset" />）</description>
+                    </item>
+                    <item>
+                        <description>灵活的单位所有权配置（<see cref="P:GameCore.Execution.Data.GameDataEffectCreateUnit.SpawnOwner" />）</description>
+                    </item>
+                    <item>
+                        <description>可选的生成后效果处理（<see cref="P:GameCore.Execution.Data.GameDataEffectCreateUnit.SpawnEffect" />）</description>
+                    </item>
+                    <item>
+                        <description>可选的默认AI配置（<see cref="P:GameCore.Execution.Data.GameDataEffectCreateUnit.Flags" />）</description>
+                    </item>
+                </list>
+                <para>
+                    <strong>验证机制：</strong>
+                </para>
+                <para>
+            系统会在执行前验证单位类型的有效性、玩家所有权的合法性等，确保创建过程的安全性和正确性。
+            </para>
+            </remarks>
+            <example>
+                <code>
+            // 基础单位创建配置
+            var createUnitEffect = new GameDataEffectCreateUnit
+            {
+                UnitPicker = UnitPicker.UnitLink,
+                SpawnUnitTypePerLevel = 
+                [
+                    soldierUnitLink,        // 等级0-1使用普通士兵
+                    soldierUnitLink,        
+                    eliteSoldierUnitLink,   // 等级2-3使用精英士兵
+                    eliteSoldierUnitLink,   
+                    championUnitLink        // 等级4+使用冠军单位
+                ],
+                SpawnCount = static (effect) =&gt; 3,  // 生成3个单位
+                SpawnOwner = new EffectOwnerExpression
+                {
+                    Value = EffectOwner.TargetLocation,
+                    TargetLocation = new() { Value = BaseType.TargetLocation.Caster }
+                },
+                Flags = new CreateUnitFlags { UseDefaultAI = true }
+            };
+            
+            // 带偏移和后续效果的配置
+            var advancedCreateEffect = new GameDataEffectCreateUnit
+            {
+                UnitPicker = UnitPicker.Location,
+                SpawnTypeUnit = targetLocationExpression,
+                SpawnOffset = new EffectOffsetExpression { /* 偏移配置 */ },
+                SpawnEffect = buffApplicationEffect,  // 生成后应用Buff
+                ImpactUnitLocVar = LocVarType.CreatedUnit
+            };
+            </code>
+            </example>
+        </member>
+        <member name="P:GameCore.Execution.Data.GameDataEffectCreateUnit.UnitPicker">
+            <summary>
+            获取或设置单位选择方式，决定如何确定要创建的单位类型
+            </summary>
+            <remarks>
+                <para>单位选择方式决定了系统如何确定要创建的单位类型：</para>
+                <list type="bullet">
+                    <item>
+                        <description>
+                            <strong>UnitLink</strong> - 使用 <see cref="P:GameCore.Execution.Data.GameDataEffectCreateUnit.SpawnUnitTypePerLevel" /> 根据效果等级选择单位</description>
+                    </item>
+                    <item>
+                        <description>
+                            <strong>Location</strong> - 使用 <see cref="P:GameCore.Execution.Data.GameDataEffectCreateUnit.SpawnTypeUnit" /> 从目标位置动态获取单位类型</description>
+                    </item>
+                </list>
+                <para>
+            UnitLink 方式适用于固定的单位类型配置，支持等级分层；Location 方式适用于需要根据
+            目标位置动态决定单位类型的场景，如复制目标位置的单位。
+            </para>
+            </remarks>
+            <seealso cref="P:GameCore.Execution.Data.GameDataEffectCreateUnit.SpawnUnitTypePerLevel" />
+            <seealso cref="P:GameCore.Execution.Data.GameDataEffectCreateUnit.SpawnTypeUnit" />
+        </member>
+        <member name="P:GameCore.Execution.Data.GameDataEffectCreateUnit.SpawnUnitTypePerLevel">
+            <summary>
+            获取或设置按等级分层的单位类型配置，当 <see cref="P:GameCore.Execution.Data.GameDataEffectCreateUnit.UnitPicker" /> 为 UnitLink 时使用
+            </summary>
+            <value>默认为空集合</value>
+            <remarks>
+                <para>
+            该属性允许根据效果的等级选择不同的单位类型，实现单位的升级机制。
+            系统会根据效果的当前等级查找对应的单位类型，使用 <see cref="M:GameCore.Struct.LeveledData`1.GetLeveledData(System.Int32)" /> 方法
+            进行自动等级范围限制，确保总是返回有效的单位类型。
+            </para>
+                <para>
+                    <strong>配置规则：</strong>
+                </para>
+                <list type="bullet">
+                    <item>
+                        <description>等级索引从0开始（等级0、1、2...）</description>
+                    </item>
+                    <item>
+                        <description>建议从等级0开始配置，确保低等级效果有对应的单位类型</description>
+                    </item>
+                    <item>
+                        <description>使用集合初始化语法按顺序添加单位类型</description>
+                    </item>
+                    <item>
+                        <description>如果请求的等级超出范围，会自动返回最高等级的配置</description>
+                    </item>
+                    <item>
+                        <description>如果集合为空，验证阶段会返回 InvalidUnitType 错误</description>
+                    </item>
+                </list>
+            </remarks>
+            <example>
+                <code>
+            SpawnUnitTypePerLevel = 
+            [
+                basicSoldierLink,      // 等级0使用基础士兵
+                basicSoldierLink,      // 等级1使用基础士兵  
+                eliteSoldierLink,      // 等级2使用精英士兵
+                eliteSoldierLink,      // 等级3使用精英士兵
+                championSoldierLink    // 等级4+使用冠军士兵（实际等级超出配置范围会返回配置中最高等级的单位类型）
+            ];
+            </code>
+            </example>
+        </member>
+        <member name="P:GameCore.Execution.Data.GameDataEffectCreateUnit.SpawnTypeUnit">
+            <summary>
+            获取或设置目标位置表达式，当 <see cref="P:GameCore.Execution.Data.GameDataEffectCreateUnit.UnitPicker" /> 为 Location 时用于动态获取单位类型
+            </summary>
+            <remarks>
+                <para>
+            该属性用于从指定的目标位置动态获取单位类型，常用于复制或转换现有单位的场景。
+            表达式会在运行时解析，从目标位置的实体中提取单位类型信息。
+            </para>
+                <para>
+                    <strong>使用场景：</strong>
+                </para>
+                <list type="bullet">
+                    <item>
+                        <description>复制目标单位：创建与目标相同类型的单位</description>
+                    </item>
+                    <item>
+                        <description>单位转换：基于目标单位类型创建相关的其他单位</description>
+                    </item>
+                    <item>
+                        <description>动态召唤：根据战场情况动态选择单位类型</description>
+                    </item>
+                </list>
+                <para>
+            如果目标位置没有有效的单位或实体，验证阶段会返回 InvalidUnitType 错误。
+            </para>
+            </remarks>
+            <seealso cref="T:GameCore.Struct.TargetLocationExpression" />
+        </member>
+        <member name="P:GameCore.Execution.Data.GameDataEffectCreateUnit.SpawnOffset">
+            <summary>
+            获取或设置生成位置的偏移表达式，用于调整单位的实际生成位置
+            </summary>
+            <value>默认为 <see langword="null" />，表示不应用偏移</value>
+            <remarks>
+                <para>
+            该属性允许对基础生成位置应用偏移，实现更精确的位置控制。偏移会在效果的目标位置基础上计算，
+            支持固定偏移、随机偏移、以及基于效果上下文的动态偏移。
+            </para>
+                <para>
+                    <strong>偏移类型：</strong>
+                </para>
+                <list type="bullet">
+                    <item>
+                        <description>
+                            <strong>固定偏移</strong> - 相对于目标位置的固定距离和方向</description>
+                    </item>
+                    <item>
+                        <description>
+                            <strong>随机偏移</strong> - 在指定范围内随机选择偏移位置</description>
+                    </item>
+                    <item>
+                        <description>
+                            <strong>动态偏移</strong> - 基于效果上下文计算的偏移</description>
+                    </item>
+                </list>
+                <para>
+            当值为 <see langword="null" /> 时，单位将直接在效果的目标位置生成。
+            偏移计算会考虑地形限制和碰撞检测，确保生成位置的有效性。
+            </para>
+            </remarks>
+            <example>
+                <code>
+            // 固定偏移示例
+            SpawnOffset = new EffectOffsetExpression
+            {
+                Offset = new Vector3(2.0f, 0.0f, 0.0f)  // 向X轴正方向偏移2个单位
+            };
+            
+            // 随机偏移示例
+            SpawnOffset = new EffectOffsetExpression
+            {
+                RandomRadius = 3.0f  // 在半径3个单位的圆形区域内随机生成
+            };
+            </code>
+            </example>
+            <seealso cref="T:GameCore.Struct.EffectOffsetExpression" />
+        </member>
+        <member name="P:GameCore.Execution.Data.GameDataEffectCreateUnit.SpawnCount">
+            <summary>
+            获取或设置生成单位数量的计算函数
+            </summary>
+            <value>默认为返回1的静态函数</value>
+            <remarks>
+                <para>
+            该函数用于动态计算要生成的单位数量，支持基于效果上下文的复杂逻辑。
+            函数接收当前效果实例作为参数，返回要生成的单位数量。
+            </para>
+                <para>
+                    <strong>计算方式：</strong>
+                </para>
+                <list type="bullet">
+                    <item>
+                        <description>
+                            <strong>固定数量</strong> - 返回固定值的静态函数</description>
+                    </item>
+                    <item>
+                        <description>
+                            <strong>等级相关</strong> - 基于效果等级计算数量</description>
+                    </item>
+                    <item>
+                        <description>
+                            <strong>属性相关</strong> - 基于施法者属性计算数量</description>
+                    </item>
+                    <item>
+                        <description>
+                            <strong>随机数量</strong> - 在指定范围内随机选择数量</description>
+                    </item>
+                </list>
+                <para>
+            返回值必须大于0，否则不会生成任何单位。建议对返回值进行合理的上限限制，
+            避免一次性生成过多单位影响游戏性能。
+            </para>
+            </remarks>
+            <example>
+                <code>
+            // 固定数量
+            SpawnCount = static (_) =&gt; 3;
+            
+            // 基于等级的数量
+            SpawnCount = (effect) =&gt; (uint)Math.Min(effect.Level / 5 + 1, 5);
+            
+            // 基于施法者属性的数量
+            SpawnCount = (effect) =&gt; (uint)Math.Min(effect.Caster.GetAttribute("Intelligence") / 10, 8);
+            
+            // 随机数量
+            SpawnCount = (effect) =&gt; (uint)Random.Range(2, 5);
+            </code>
+            </example>
+            <seealso cref="T:GameCore.BaseType.FuncUIntEffect" />
+        </member>
+        <member name="P:GameCore.Execution.Data.GameDataEffectCreateUnit.SpawnOwner">
+            <summary>
+            获取或设置生成单位的所有者表达式，决定新创建单位的归属
+            </summary>
+            <value>默认为目标位置的施法者</value>
+            <remarks>
+                <para>
+            该表达式用于确定新创建单位的所有者（玩家），这直接影响单位的控制权、
+            敌友关系判定、以及相关的游戏逻辑。所有者的正确设置对于游戏平衡和逻辑正确性至关重要。
+            </para>
+                <para>
+                    <strong>常用所有者类型：</strong>
+                </para>
+                <list type="bullet">
+                    <item>
+                        <description>
+                            <strong>Caster</strong> - 效果施法者，最常见的配置</description>
+                    </item>
+                    <item>
+                        <description>
+                            <strong>Target</strong> - 效果目标，用于"策反"类技能</description>
+                    </item>
+                    <item>
+                        <description>
+                            <strong>Neutral</strong> - 中立单位，不属于任何玩家</description>
+                    </item>
+                    <item>
+                        <description>
+                            <strong>Custom</strong> - 基于复杂逻辑确定的自定义所有者</description>
+                    </item>
+                </list>
+                <para>
+            默认配置将单位所有者设置为效果施法者，这适用于大多数召唤类技能。
+            如果表达式解析失败或返回无效玩家，验证阶段会返回 InvalidPlayer 错误。
+            </para>
+            </remarks>
+            <example>
+                <code>
+            // 施法者拥有（默认配置）
+            SpawnOwner = new EffectOwnerExpression
+            {
+                Value = EffectOwner.TargetLocation,
+                TargetLocation = new() { Value = BaseType.TargetLocation.Caster }
+            };
+            
+            // 目标玩家拥有（策反效果）
+            SpawnOwner = new EffectOwnerExpression
+            {
+                Value = EffectOwner.TargetLocation,
+                TargetLocation = new() { Value = BaseType.TargetLocation.Target }
+            };
+            
+            // 中立单位
+            SpawnOwner = new EffectOwnerExpression
+            {
+                Value = EffectOwner.Neutral
+            };
+            </code>
+            </example>
+            <seealso cref="T:GameCore.Struct.EffectOwnerExpression" />
+        </member>
+        <member name="P:GameCore.Execution.Data.GameDataEffectCreateUnit.SpawnEffect">
+            <summary>
+            获取或设置在单位创建后立即执行的效果
+            </summary>
+            <value>默认为 <see langword="null" />，表示不执行额外效果</value>
+            <remarks>
+                <para>
+            该属性允许在单位成功创建后立即对其执行额外的效果，常用于初始化新单位的状态、
+            应用特殊属性、或触发相关的游戏事件。
+            </para>
+                <para>
+                    <strong>常见用途：</strong>
+                </para>
+                <list type="bullet">
+                    <item>
+                        <description>
+                            <strong>状态初始化</strong> - 为新单位添加Buff或特殊状态</description>
+                    </item>
+                    <item>
+                        <description>
+                            <strong>属性调整</strong> - 修改新单位的基础属性</description>
+                    </item>
+                    <item>
+                        <description>
+                            <strong>视觉效果</strong> - 播放生成动画或特效</description>
+                    </item>
+                    <item>
+                        <description>
+                            <strong>事件触发</strong> - 触发与单位创建相关的游戏事件</description>
+                    </item>
+                </list>
+                <para>
+            该效果会以新创建的单位作为目标执行，可以通过 <see cref="P:GameCore.Execution.Data.GameDataEffectCreateUnit.ImpactUnitLocVar" /> 
+            将新单位存储到局部变量中供后续效果使用。如果生成效果执行失败，不会影响单位的创建。
+            </para>
+                <para>
+            当值为 <see langword="null" /> 时，跳过生成后效果的执行。
+            </para>
+            </remarks>
+            <example>
+                <code>
+            // 为新单位添加强化Buff
+            SpawnEffect = strengthenBuffEffect;
+            
+            // 执行复合效果：添加Buff + 播放特效
+            SpawnEffect = new GameDataEffectSet
+            {
+                Effects = new[] { buffEffect, visualEffect }
+            };
+            
+            // 配合局部变量使用
+            SpawnEffect = someEffect;
+            ImpactUnitLocVar = LocVarType.CreatedUnit;  // 将新单位存储到变量
+            </code>
+            </example>
+            <seealso cref="P:GameCore.Execution.Data.GameDataEffectCreateUnit.ImpactUnitLocVar" />
+        </member>
+        <member name="P:GameCore.Execution.Data.GameDataEffectCreateUnit.ImpactUnitLocVar">
+            <summary>
+            获取或设置用于存储新创建单位的局部变量类型
+            </summary>
+            <value>默认为 <see langword="null" />，表示不存储到局部变量</value>
+            <remarks>
+                <para>
+            该属性用于将新创建的单位存储到指定的局部变量中，使得后续的效果或逻辑
+            可以引用这些新创建的单位。这对于需要对创建的单位进行进一步操作的复杂效果非常有用。
+            </para>
+                <para>
+                    <strong>使用场景：</strong>
+                </para>
+                <list type="bullet">
+                    <item>
+                        <description>
+                            <strong>链式效果</strong> - 后续效果需要引用新创建的单位</description>
+                    </item>
+                    <item>
+                        <description>
+                            <strong>条件判断</strong> - 基于创建的单位数量或类型执行不同逻辑</description>
+                    </item>
+                    <item>
+                        <description>
+                            <strong>状态跟踪</strong> - 在效果持续期间跟踪创建的单位</description>
+                    </item>
+                    <item>
+                        <description>
+                            <strong>清理机制</strong> - 在特定条件下清理或移除创建的单位</description>
+                    </item>
+                </list>
+                <para>
+            当创建多个单位时，所有创建的单位都会存储到同一个局部变量中。
+            局部变量的生命周期与效果的执行上下文相关。
+            </para>
+                <para>
+            当值为 <see langword="null" /> 时，不会将单位存储到任何局部变量中。
+            </para>
+            </remarks>
+            <example>
+                <code>
+            // 将创建的单位存储到局部变量
+            ImpactUnitLocVar = LocVarType.CreatedUnit;
+            
+            // 在后续效果中引用这些单位
+            var followupEffect = new GameDataEffectSomeOperation
+            {
+                TargetUnits = LocVarType.CreatedUnit  // 操作之前创建的单位
+            };
+            </code>
+            </example>
+            <seealso cref="T:GameCore.BaseType.LocVarType" />
+            <seealso cref="P:GameCore.Execution.Data.GameDataEffectCreateUnit.SpawnEffect" />
+        </member>
+        <member name="P:GameCore.Execution.Data.GameDataEffectCreateUnit.Flags">
+            <summary>
+            获取或设置单位创建的标志配置，控制创建过程的特殊行为
+            </summary>
+            <value>默认为新的 CreateUnitFlags 实例</value>
+            <remarks>
+                <para>
+            该属性包含控制单位创建过程特殊行为的标志配置。通过这些标志，
+            可以精确控制新创建单位的初始状态和行为模式。
+            </para>
+                <para>
+                    <strong>可用标志：</strong>
+                </para>
+                <list type="bullet">
+                    <item>
+                        <description>
+                            <strong>UseDefaultAI</strong> - 是否为新创建的单位自动添加默认AI</description>
+                    </item>
+                </list>
+                <para>
+            UseDefaultAI 标志决定新创建的单位是否会自动获得默认的AI行为。
+            启用此标志适用于需要单位立即开始自主行动的场景，如召唤的盟友单位。
+            禁用此标志适用于需要玩家手动控制或有特殊AI配置的单位。
+            </para>
+            </remarks>
+            <example>
+                <code>
+            // 创建具有默认AI的单位（如召唤的盟友）
+            Flags = new CreateUnitFlags 
+            { 
+                UseDefaultAI = true 
+            };
+            
+            // 创建需要手动控制的单位
+            Flags = new CreateUnitFlags 
+            { 
+                UseDefaultAI = false 
+            };
+            </code>
+            </example>
+            <seealso cref="T:GameCore.Execution.Data.Struct.CreateUnitFlags" />
+        </member>
+        <member name="M:GameCore.Execution.Data.GameDataEffectCreateUnit.CreateEffect(GameCore.BaseInterface.ITarget,GameCore.Interface.IExecutionContext,System.Boolean)">
+            <summary />
+            <param name="defaultTarget" />
+            <param name="creationContext" />
+            <param name="preValidateOnly" />
+            <returns />
+        </member>
+        <member name="M:GameCore.Execution.Data.GameDataEffectCreateUnit.Validate(GameCore.Execution.Effect)">
+            <summary />
+            <param name="context" />
+            <returns />
+        </member>
+        <member name="T:GameCore.Execution.Data.GameDataEffectCustomAction">
+            <summary />
+        </member>
+        <member name="P:GameCore.Execution.Data.GameDataEffectCustomAction.Func">
+            <summary />
+        </member>
+        <member name="P:GameCore.Execution.Data.GameDataEffectCustomAction.Effect">
+            <summary />
+        </member>
+        <member name="M:GameCore.Execution.Data.GameDataEffectCustomAction.Execute(GameCore.Execution.Effect)">
+            <summary />
+            <param name="context" />
+            <returns />
+        </member>
+        <member name="M:GameCore.Execution.Data.GameDataEffectCustomAction.Validate(GameCore.Execution.Effect)">
+            <summary />
+            <param name="context" />
+            <returns />
+        </member>
+        <member name="T:GameCore.Execution.Data.GameDataEffectDamage">
+            <summary />
+        </member>
+        <member name="M:GameCore.Execution.Data.GameDataEffectDamage.CreateEffect(GameCore.BaseInterface.ITarget,GameCore.Interface.IExecutionContext,System.Boolean)">
+            <summary />
+            <param name="defaultTarget" />
+            <param name="creationContext" />
+            <param name="preValidateOnly" />
+            <returns />
+        </member>
+        <member name="P:GameCore.Execution.Data.GameDataEffectDamage.Amount">
+            <summary />
+        </member>
+        <member name="P:GameCore.Execution.Data.GameDataEffectDamage.Random">
+            <summary />
+        </member>
+        <member name="P:GameCore.Execution.Data.GameDataEffectDamage.Type">
+            <summary />
+        </member>
+        <member name="P:GameCore.Execution.Data.GameDataEffectDamage.DeathType">
+            <summary />
+        </member>
+        <member name="T:GameCore.Execution.Data.GameDataEffectForEachUnit">
+            <summary />
+        </member>
+        <member name="P:GameCore.Execution.Data.GameDataEffectForEachUnit.Units">
+            <summary />
+        </member>
+        <member name="P:GameCore.Execution.Data.GameDataEffectForEachUnit.Effect">
+            <summary />
+        </member>
+        <member name="M:GameCore.Execution.Data.GameDataEffectForEachUnit.Execute(GameCore.Execution.Effect)">
+            <summary />
+            <param name="context" />
+            <returns />
+        </member>
+        <member name="M:GameCore.Execution.Data.GameDataEffectForEachUnit.Validate(GameCore.Execution.Effect)">
+            <summary />
+            <param name="context" />
+            <returns />
+        </member>
+        <member name="T:GameCore.Execution.Data.GameDataEffectIssueOrder">
+            <summary />
+        </member>
+        <member name="P:GameCore.Execution.Data.GameDataEffectIssueOrder.AbilityLink">
+            <summary />
+        </member>
+        <member name="P:GameCore.Execution.Data.GameDataEffectIssueOrder.Index">
+            <summary />
+        </member>
+        <member name="P:GameCore.Execution.Data.GameDataEffectIssueOrder.Type">
+            <summary />
+        </member>
+        <member name="P:GameCore.Execution.Data.GameDataEffectIssueOrder.Flag">
+            <summary />
+        </member>
+        <member name="P:GameCore.Execution.Data.GameDataEffectIssueOrder.Target">
+            <summary />
+        </member>
+        <member name="P:GameCore.Execution.Data.GameDataEffectIssueOrder.WhichItem">
+            <summary />
+        </member>
+        <member name="M:GameCore.Execution.Data.GameDataEffectIssueOrder.CreateEffect(GameCore.BaseInterface.ITarget,GameCore.Interface.IExecutionContext,System.Boolean)">
+            <summary />
+            <param name="defaultTarget" />
+            <param name="creationContext" />
+            <param name="preValidateOnly" />
+            <returns />
+        </member>
+        <member name="T:GameCore.Execution.Data.GameDataEffectLaunchMissile">
+            <summary />
+            <summary />
+        </member>
+        <member name="P:GameCore.Execution.Data.GameDataEffectLaunchMissile.LaunchLocation">
+            <summary />
+        </member>
+        <member name="P:GameCore.Execution.Data.GameDataEffectLaunchMissile.LaunchTargetType">
+            <summary />
+        </member>
+        <member name="P:GameCore.Execution.Data.GameDataEffectLaunchMissile.LaunchOffset">
+            <summary />
+        </member>
+        <member name="P:GameCore.Execution.Data.GameDataEffectLaunchMissile.Method">
+            <summary />
+        </member>
+        <member name="P:GameCore.Execution.Data.GameDataEffectLaunchMissile.WhichUnit">
+            <summary />
+        </member>
+        <member name="P:GameCore.Execution.Data.GameDataEffectLaunchMissile.Missile">
+            <summary />
+        </member>
+        <member name="P:GameCore.Execution.Data.GameDataEffectLaunchMissile.DoStaticCollision">
+            <summary />
+        </member>
+        <member name="P:GameCore.Execution.Data.GameDataEffectLaunchMissile.StaticMask">
+            <summary />
+        </member>
+        <member name="P:GameCore.Execution.Data.GameDataEffectLaunchMissile.DoImpactEntity">
+            <summary />
+        </member>
+        <member name="P:GameCore.Execution.Data.GameDataEffectLaunchMissile.ImpactSearchFilter">
+            <summary />
+        </member>
+        <member name="P:GameCore.Execution.Data.GameDataEffectLaunchMissile.ImpactSearchRadius">
+            <summary />
+        </member>
+        <member name="P:GameCore.Execution.Data.GameDataEffectLaunchMissile.FinishArriveRadius">
+            <summary />
+        </member>
+        <member name="P:GameCore.Execution.Data.GameDataEffectLaunchMissile.ImpactMaxCount">
+            <summary />
+        </member>
+        <member name="P:GameCore.Execution.Data.GameDataEffectLaunchMissile.ImpactEffect">
+            <summary />
+        </member>
+        <member name="P:GameCore.Execution.Data.GameDataEffectLaunchMissile.ImpactActors">
+            <summary />
+        </member>
+        <member name="P:GameCore.Execution.Data.GameDataEffectLaunchMissile.Speed">
+            <summary />
+        </member>
+        <member name="P:GameCore.Execution.Data.GameDataEffectLaunchMissile.AllowSpellModification">
+            <summary />
+        </member>
+        <member name="P:GameCore.Execution.Data.GameDataEffectLaunchMissile.ImpactUnitLocVar">
+            <summary />
+        </member>
+        <member name="P:GameCore.Execution.Data.GameDataEffectLaunchMissile.MissileScaling">
+            <summary />
+        </member>
+        <member name="P:GameCore.Execution.Data.GameDataEffectLaunchMissile.ParabolaApex">
+            <summary />
+        </member>
+        <member name="P:GameCore.Execution.Data.GameDataEffectLaunchMissile.ParabolaLandingHeight">
+            <summary />
+        </member>
+        <member name="P:GameCore.Execution.Data.GameDataEffectLaunchMissile.LaunchHeight">
+            <summary />
+        </member>
+        <member name="P:GameCore.Execution.Data.GameDataEffectLaunchMissile.TargetHeight">
+            <summary />
+        </member>
+        <member name="P:GameCore.Execution.Data.GameDataEffectLaunchMissile.TargetHeightIsAbsolute">
+            <summary />
+        </member>
+        <member name="P:GameCore.Execution.Data.GameDataEffectLaunchMissile.TurnToDirection">
+            <summary />
+        </member>
+        <member name="P:GameCore.Execution.Data.GameDataEffectLaunchMissile.TurnToVelocity">
+            <summary />
+        </member>
+        <member name="P:GameCore.Execution.Data.GameDataEffectLaunchMissile.StickToGround">
+            <summary />
+        </member>
+        <member name="P:GameCore.Execution.Data.GameDataEffectLaunchMissile.GameCore#Components#Data#IGameDataMover#CompleteEffect">
+            <summary />
+        </member>
+        <member name="P:GameCore.Execution.Data.GameDataEffectLaunchMissile.GameCore#Components#Data#IGameDataMover#FinalEffect">
+            <summary />
+        </member>
+        <member name="P:GameCore.Execution.Data.GameDataEffectLaunchMissile.GameCore#Components#Data#IGameDataMover#ImpactSameTargetInterval">
+            <summary />
+        </member>
+        <member name="P:GameCore.Execution.Data.GameDataEffectLaunchMissile.GameCore#Components#Data#IGameDataMoverTarget#Acceleration">
+            <summary />
+        </member>
+        <member name="P:GameCore.Execution.Data.GameDataEffectLaunchMissile.GameCore#Components#Data#IGameDataMoverTarget#MinSpeed">
+            <summary />
+        </member>
+        <member name="P:GameCore.Execution.Data.GameDataEffectLaunchMissile.GameCore#Components#Data#IGameDataMoverTarget#MaxSpeed">
+            <summary />
+        </member>
+        <member name="P:GameCore.Execution.Data.GameDataEffectLaunchMissile.GameCore#Components#Data#IGameDataMover#KillOnRemoval">
+            <summary />
+        </member>
+        <member name="P:GameCore.Execution.Data.GameDataEffectLaunchMissile.GameCore#Components#Data#IGameDataMover#ActorArray">
+            <summary />
+        </member>
+        <member name="T:GameCore.Execution.Data.GameDataEffectLog">
+            <summary />
+        </member>
+        <member name="P:GameCore.Execution.Data.GameDataEffectLog.Message">
+            <summary />
+        </member>
+        <member name="P:GameCore.Execution.Data.GameDataEffectLog.On">
+            <summary />
+        </member>
+        <member name="P:GameCore.Execution.Data.GameDataEffectLog.Level">
+            <summary />
+        </member>
+        <member name="M:GameCore.Execution.Data.GameDataEffectLog.Execute(GameCore.Execution.Effect)">
+            <summary />
+            <param name="context" />
+            <returns />
+        </member>
+        <member name="M:GameCore.Execution.Data.GameDataEffectLog.Validate(GameCore.Execution.Effect)">
+            <summary />
+            <param name="context" />
+            <returns />
+        </member>
+        <member name="T:GameCore.Execution.Data.GameDataEffectPersist">
+            <summary />
+        </member>
+        <member name="P:GameCore.Execution.Data.GameDataEffectPersist.StartEffect">
+            <summary />
+        </member>
+        <member name="P:GameCore.Execution.Data.GameDataEffectPersist.CompleteEffect">
+            <summary />
+        </member>
+        <member name="P:GameCore.Execution.Data.GameDataEffectPersist.FinalEffect">
+            <summary />
+        </member>
+        <member name="P:GameCore.Execution.Data.GameDataEffectPersist.Radius">
+            <summary />
+        </member>
+        <member name="P:GameCore.Execution.Data.GameDataEffectPersist.TimeScaleProperty">
+            <summary />
+        </member>
+        <member name="P:GameCore.Execution.Data.GameDataEffectPersist.PersistValidator">
+            <summary />
+        </member>
+        <member name="P:GameCore.Execution.Data.GameDataEffectPersist.ChannelFlags">
+            <summary />
+        </member>
+        <member name="T:GameCore.Execution.Data.GameDataEffectPersistDelay">
+            <summary />
+        </member>
+        <member name="P:GameCore.Execution.Data.GameDataEffectPersistDelay.Amount">
+            <summary />
+        </member>
+        <member name="P:GameCore.Execution.Data.GameDataEffectPersistDelay.RandomAmount">
+            <summary />
+        </member>
+        <member name="M:GameCore.Execution.Data.GameDataEffectPersistDelay.CreateEffect(GameCore.BaseInterface.ITarget,GameCore.Interface.IExecutionContext,System.Boolean)">
+            <summary />
+            <param name="defaultTarget" />
+            <param name="creationContext" />
+            <param name="preValidateOnly" />
+            <returns />
+        </member>
+        <member name="M:GameCore.Execution.Data.GameDataEffectPersistDelay.Execute(GameCore.Execution.Effect)">
+            <summary />
+            <param name="context" />
+            <returns />
+        </member>
+        <member name="M:GameCore.Execution.Data.GameDataEffectPersistDelay.Validate(GameCore.Execution.Effect)">
+            <summary />
+            <param name="context" />
+            <returns />
+        </member>
+        <member name="T:GameCore.Execution.Data.GameDataEffectPersistLoop">
+            <summary />
+        </member>
+        <member name="P:GameCore.Execution.Data.GameDataEffectPersistLoop.PeriodicEffects">
+            <summary />
+        </member>
+        <member name="P:GameCore.Execution.Data.GameDataEffectPersistLoop.Period">
+            <summary />
+        </member>
+        <member name="P:GameCore.Execution.Data.GameDataEffectPersistLoop.Count">
+            <summary />
+        </member>
+        <member name="P:GameCore.Execution.Data.GameDataEffectPersistLoop.Duration">
+            <summary />
+        </member>
+        <member name="P:GameCore.Execution.Data.GameDataEffectPersistLoop.LoopFlags">
+            <summary />
+        </member>
+        <member name="M:GameCore.Execution.Data.GameDataEffectPersistLoop.CreateEffect(GameCore.BaseInterface.ITarget,GameCore.Interface.IExecutionContext,System.Boolean)">
+            <summary />
+            <param name="defaultTarget" />
+            <param name="context" />
+            <param name="preValidateOnly" />
+            <returns />
+        </member>
+        <member name="M:GameCore.Execution.Data.GameDataEffectPersistLoop.Execute(GameCore.Execution.Effect)">
+            <summary />
+            <param name="context" />
+            <returns />
+        </member>
+        <member name="M:GameCore.Execution.Data.GameDataEffectPersistLoop.Validate(GameCore.Execution.Effect)">
+            <summary />
+            <param name="context" />
+            <returns />
+        </member>
+        <member name="T:GameCore.Execution.Data.GameDataEffectPlayerModifyProperty">
+            <summary />
+        </member>
+        <member name="P:GameCore.Execution.Data.GameDataEffectPlayerModifyProperty.Modification">
+            <summary />
+        </member>
+        <member name="P:GameCore.Execution.Data.GameDataEffectPlayerModifyProperty.Operation">
+            <summary />
+        </member>
+        <member name="T:GameCore.Execution.Data.GameDataEffectPolarOffset">
+            <summary />
+        </member>
+        <member name="P:GameCore.Execution.Data.GameDataEffectPolarOffset.TargetEffect">
+            <summary />
+        </member>
+        <member name="P:GameCore.Execution.Data.GameDataEffectPolarOffset.Distance">
+            <summary />
+        </member>
+        <member name="P:GameCore.Execution.Data.GameDataEffectPolarOffset.PeriodicDistanceOffset">
+            <summary />
+        </member>
+        <member name="P:GameCore.Execution.Data.GameDataEffectPolarOffset.Angle">
+            <summary />
+        </member>
+        <member name="P:GameCore.Execution.Data.GameDataEffectPolarOffset.PeriodicAngleOffset">
+            <summary />
+        </member>
+        <member name="P:GameCore.Execution.Data.GameDataEffectPolarOffset.PeriodicOffsetBaselineIndex">
+            <summary />
+        </member>
+        <member name="P:GameCore.Execution.Data.GameDataEffectPolarOffset.OffsetByUnitRadius">
+            <summary />
+        </member>
+        <member name="P:GameCore.Execution.Data.GameDataEffectPolarOffset.PointLocalVar">
+            <summary />
+        </member>
+        <member name="M:GameCore.Execution.Data.GameDataEffectPolarOffset.Execute(GameCore.Execution.Effect)">
+            <summary />
+            <param name="context" />
+            <returns />
+        </member>
+        <member name="M:GameCore.Execution.Data.GameDataEffectPolarOffset.Validate(GameCore.Execution.Effect)">
+            <summary />
+            <param name="context" />
+            <returns />
+        </member>
+        <member name="T:GameCore.Execution.Data.GameDataEffectRandomPointInCircle">
+            <summary />
+        </member>
+        <member name="P:GameCore.Execution.Data.GameDataEffectRandomPointInCircle.Radius">
+            <summary />
+        </member>
+        <member name="P:GameCore.Execution.Data.GameDataEffectRandomPointInCircle.Count">
+            <summary />
+        </member>
+        <member name="P:GameCore.Execution.Data.GameDataEffectRandomPointInCircle.Effect">
+            <summary />
+        </member>
+        <member name="P:GameCore.Execution.Data.GameDataEffectRandomPointInCircle.Flags">
+            <summary />
+        </member>
+        <member name="P:GameCore.Execution.Data.GameDataEffectRandomPointInCircle.PointLocVar">
+            <summary />
+        </member>
+        <member name="M:GameCore.Execution.Data.GameDataEffectRandomPointInCircle.CreateEffect(GameCore.BaseInterface.ITarget,GameCore.Interface.IExecutionContext,System.Boolean)">
+            <summary />
+            <param name="defaultTarget" />
+            <param name="context" />
+            <param name="preValidateOnly" />
+            <returns />
+        </member>
+        <member name="M:GameCore.Execution.Data.GameDataEffectRandomPointInCircle.Execute(GameCore.Execution.Effect)">
+            <summary />
+            <param name="context" />
+            <returns />
+        </member>
+        <member name="M:GameCore.Execution.Data.GameDataEffectRandomPointInCircle.Validate(GameCore.Execution.Effect)">
+            <summary />
+            <param name="context" />
+            <returns />
+        </member>
+        <member name="T:GameCore.Execution.Data.GameDataEffectSearch">
+            <summary />
+        </member>
+        <member name="P:GameCore.Execution.Data.GameDataEffectSearch.MinCount">
+            <summary />
+        </member>
+        <member name="P:GameCore.Execution.Data.GameDataEffectSearch.MaxCount">
+            <summary />
+        </member>
+        <member name="P:GameCore.Execution.Data.GameDataEffectSearch.MinCountError">
+            <summary />
+        </member>
+        <member name="P:GameCore.Execution.Data.GameDataEffectSearch.MinCountEffect">
+            <summary />
+        </member>
+        <member name="P:GameCore.Execution.Data.GameDataEffectSearch.Radius">
+            <summary />
+        </member>
+        <member name="P:GameCore.Execution.Data.GameDataEffectSearch.CentralAngle">
+            <summary />
+        </member>
+        <member name="P:GameCore.Execution.Data.GameDataEffectSearch.Height">
+            <summary />
+        </member>
+        <member name="P:GameCore.Execution.Data.GameDataEffectSearch.Width">
+            <summary />
+        </member>
+        <member name="P:GameCore.Execution.Data.GameDataEffectSearch.Method">
+            <summary />
+        </member>
+        <member name="P:GameCore.Execution.Data.GameDataEffectSearch.Effect">
+            <summary />
+        </member>
+        <member name="P:GameCore.Execution.Data.GameDataEffectSearch.ImpactUnitLocVar">
+            <summary />
+        </member>
+        <member name="P:GameCore.Execution.Data.GameDataEffectSearch.SearchOffset">
+            <summary />
+        </member>
+        <member name="P:GameCore.Execution.Data.GameDataEffectSearch.SearchFilters">
+            <summary />
+        </member>
+        <member name="P:GameCore.Execution.Data.GameDataEffectSearch.SearchValidator">
+            <summary />
+        </member>
+        <member name="P:GameCore.Execution.Data.GameDataEffectSearch.TargetSorts">
+            <summary />
+        </member>
+        <member name="P:GameCore.Execution.Data.GameDataEffectSearch.SearchFlags">
+            <summary />
+        </member>
+        <member name="M:GameCore.Execution.Data.GameDataEffectSearch.CreateEffect(GameCore.BaseInterface.ITarget,GameCore.Interface.IExecutionContext,System.Boolean)">
+            <summary />
+            <param name="defaultTarget" />
+            <param name="context" />
+            <param name="preValidateOnly" />
+            <returns />
+        </member>
+        <member name="M:GameCore.Execution.Data.GameDataEffectSearch.Execute(GameCore.Execution.Effect)">
+            <summary />
+            <param name="context" />
+            <returns />
+        </member>
+        <member name="M:GameCore.Execution.Data.GameDataEffectSearch.Validate(GameCore.Execution.Effect)">
+            <summary />
+            <param name="context" />
+            <returns />
+        </member>
+        <member name="T:GameCore.Execution.Data.GameDataEffectSet">
+            <summary>
+            效果集合数据配置，用于将多个子效果组合成一个复合效果
+            </summary>
+            <remarks>
+            GameDataEffectSet 是效果系统中的核心组件，允许将多个子效果组合在一起执行。
+            它提供了灵活的执行控制，包括执行数量限制、随机选择、唯一性控制等功能。
+            
+            效果集合支持两种主要的执行模式：
+            - <strong>顺序执行</strong>：按配置顺序依次执行子效果
+            - <strong>随机执行</strong>：使用加权随机算法选择子效果执行
+            
+            通过 <see cref="P:GameCore.Execution.Data.GameDataEffectSet.SetFlags" /> 可以精确控制执行行为，实现复杂的游戏机制，
+            如多重攻击、随机技能选择、连锁效果等。
+            </remarks>
+            <example>
+                <code>
+            // 创建一个多重攻击效果集合
+            var multiAttackSet = new GameDataEffectSet
+            {
+                Effects = new WeightedLinkComplex&lt;IGameLink&lt;GameDataEffect&gt;?&gt;
+                {
+                    Links = new[]
+                    {
+                        new WeightedLink&lt;IGameLink&lt;GameDataEffect&gt;?&gt; { Link = slashEffect, Weight = 60 },
+                        new WeightedLink&lt;IGameLink&lt;GameDataEffect&gt;?&gt; { Link = thrustEffect, Weight = 30 },
+                        new WeightedLink&lt;IGameLink&lt;GameDataEffect&gt;?&gt; { Link = kickEffect, Weight = 10 }
+                    }
+                },
+                SetFlags = new SetFlags
+                {
+                    WeightedRandom = true,      // 启用加权随机
+                    PreferUnique = true,        // 优先选择不重复的效果
+                    MinCount = 2,               // 至少执行2个效果
+                    MaxCount = 3                // 最多执行3个效果
+                }
+            };
+            </code>
+            </example>
+            <seealso cref="P:GameCore.Execution.Data.GameDataEffectSet.SetFlags" />
+            <seealso cref="T:GameCore.Execution.EffectSet" />
+            <seealso cref="T:GameCore.Execution.Data.GameDataEffect" />
+        </member>
+        <member name="P:GameCore.Execution.Data.GameDataEffectSet.Effects">
+            <summary>
+            获取或设置子效果列表，支持加权随机选择
+            </summary>
+            <remarks>
+            此属性定义了效果集合可以执行的子效果列表。每个子效果都有一个权重值，
+            当 <see cref="P:GameCore.Execution.Data.Struct.SetFlags.WeightedRandom" /> 为 <see langword="true" /> 时，
+            系统会根据权重进行随机选择。
+            
+            权重值越高，被选中的概率越大。权重为0的效果永远不会被选中。
+            </remarks>
+            <example>
+                <code>
+            // 配置带权重的效果列表
+            Effects = new WeightedLinkComplex&lt;IGameLink&lt;GameDataEffect&gt;?&gt;
+            {
+                Links = new[]
+                {
+                    new WeightedLink&lt;IGameLink&lt;GameDataEffect&gt;?&gt; 
+                    { 
+                        Link = fireballEffect, 
+                        Weight = 70  // 70% 概率选择火球
+                    },
+                    new WeightedLink&lt;IGameLink&lt;GameDataEffect&gt;?&gt; 
+                    { 
+                        Link = iceSpikeEffect, 
+                        Weight = 30  // 30% 概率选择冰刺
+                    }
+                }
+            };
+            </code>
+            </example>
+        </member>
+        <member name="P:GameCore.Execution.Data.GameDataEffectSet.SetFlags">
+            <summary>
+            获取或设置效果集合的执行标志，控制执行行为
+            </summary>
+            <remarks>
+            SetFlags 控制效果集合的执行方式，包括随机性、唯一性、源覆盖和验证等行为。
+            这些标志的组合可以实现各种复杂的执行模式。
+            </remarks>
+            <seealso cref="P:GameCore.Execution.Data.GameDataEffectSet.SetFlags" />
+        </member>
+        <member name="P:GameCore.Execution.Data.GameDataEffectSet.MinCount">
+            <summary>
+            获取或设置最小执行效果数量
+            </summary>
+            <remarks>
+            此属性定义了效果集合必须执行的最少子效果数量。
+            如果设置为 <see langword="null" />，则默认为0。
+            
+            当 <see cref="P:GameCore.Execution.Data.Struct.SetFlags.Unique" /> 为 <see langword="true" /> 时，
+            如果可用的不重复子效果数量少于 MinCount，效果集合会执行失败。
+            
+            此属性支持动态计算，可以通过表达式或函数返回不同的值。
+            </remarks>
+            <example>
+                <code>
+            // 静态配置
+            MinCount = 3;  // 必须执行至少3个效果
+            
+            // 动态配置（基于施法者等级）
+            MinCount = (context) =&gt; (uint)Math.Min(context.Level / 10 + 1, 5);
+            </code>
+            </example>
+        </member>
+        <member name="P:GameCore.Execution.Data.GameDataEffectSet.MaxCount">
+            <summary>
+            获取或设置最大执行效果数量
+            </summary>
+            <remarks>
+            此属性定义了效果集合最多可以执行的子效果数量。
+            如果设置为 <see langword="null" />，则根据 <see cref="P:GameCore.Execution.Data.Struct.SetFlags.Unique" /> 和
+            <see cref="P:GameCore.Execution.Data.Struct.SetFlags.PreferUnique" /> 的值决定行为：
+            - 当 Unique 或 PreferUnique 为 <see langword="true" /> 时，最大数量为可用效果数量
+            - 当两者都为 <see langword="false" /> 时，必须设置此属性，此时的语义为可以重复执行相同的子效果，
+            因此MaxCount的值必须有意义，否则就会陷入死循环。
+            
+            此属性支持动态计算，可以通过表达式或函数返回不同的值。
+            </remarks>
+            <example>
+                <code>
+            // 静态配置
+            MaxCount = 5;  // 最多执行5个效果
+            
+            // 动态配置（基于目标数量）
+            MaxCount = (context) =&gt; (uint)Math.Min(GetTargetCount(context), 8);
+            </code>
+            </example>
+        </member>
+        <member name="M:GameCore.Execution.Data.GameDataEffectSet.CreateEffect(GameCore.BaseInterface.ITarget,GameCore.Interface.IExecutionContext,System.Boolean)">
+            <summary>
+            创建效果集合的执行实例
+            </summary>
+            <param name="defaultTarget">默认目标</param>
+            <param name="creationContext">创建上下文</param>
+            <param name="preValidateOnly">是否仅用于预验证</param>
+            <returns>新创建的 EffectSet 实例</returns>
+            <remarks>
+            此方法创建效果集合的执行实例，用于实际执行效果。
+            当 preValidateOnly 为 <see langword="true" /> 时，创建的实例仅用于验证，
+            不会执行实际的效果逻辑。
+            </remarks>
+            <seealso cref="T:GameCore.Execution.EffectSet" />
+        </member>
+        <member name="M:GameCore.Execution.Data.GameDataEffectSet.Execute(GameCore.Execution.Effect)">
+            <summary>
+            执行效果集合
+            </summary>
+            <param name="context">效果执行上下文</param>
+            <remarks>
+            此方法实现了效果集合的核心执行逻辑，根据配置的标志和参数执行子效果。
+            
+            执行流程：
+            1. 如果启用了 <see cref="P:GameCore.Execution.Data.Struct.SetFlags.OverrideSource" />，将目标设置为源
+            2. 根据 <see cref="P:GameCore.Execution.Data.Struct.SetFlags.WeightedRandom" /> 决定执行模式
+            3. 根据 <see cref="P:GameCore.Execution.Data.Struct.SetFlags.Unique" /> 和 <see cref="P:GameCore.Execution.Data.Struct.SetFlags.PreferUnique" /> 控制重复性
+            4. 执行选定数量的子效果
+            
+            执行模式：
+            - <strong>顺序执行</strong>：按配置顺序依次执行，直到达到执行数量限制
+            - <strong>随机执行</strong>：使用加权随机选择，支持唯一性控制
+            </remarks>
+        </member>
+        <member name="M:GameCore.Execution.Data.GameDataEffectSet.Validate(GameCore.Execution.Effect)">
+            <summary>
+            验证效果集合的配置有效性
+            </summary>
+            <param name="context">效果验证上下文</param>
+            <returns>验证结果</returns>
+            <remarks>
+            此方法验证效果集合的配置是否有效，包括：
+            - 最小和最大执行数量的合理性
+            - 子效果数量的充足性
+            - 子效果的有效性（当启用验证时）
+            
+            验证规则：
+            1. MinCount 不能大于 MaxCount
+            2. 当 Unique 和 PreferUnique 都为 false 时，MaxCount 不能为 null
+            3. 当 Unique 为 true 时，可用效果数量不能少于 MinCount
+            4. 当启用子效果验证时，有效子效果数量必须满足要求
+            </remarks>
+        </member>
+        <member name="T:GameCore.Execution.Data.GameDataEffectSwitch">
+            <summary />
+        </member>
+        <member name="P:GameCore.Execution.Data.GameDataEffectSwitch.CaseArray">
+            <summary />
+        </member>
+        <member name="P:GameCore.Execution.Data.GameDataEffectSwitch.CaseDefault">
+            <summary />
+        </member>
+        <member name="P:GameCore.Execution.Data.GameDataEffectSwitch.Flags">
+            <summary />
+        </member>
+        <member name="M:GameCore.Execution.Data.GameDataEffectSwitch.Execute(GameCore.Execution.Effect)">
+            <summary />
+            <param name="context" />
+            <returns />
+        </member>
+        <member name="M:GameCore.Execution.Data.GameDataEffectSwitch.Validate(GameCore.Execution.Effect)">
+            <summary />
+            <param name="context" />
+            <returns />
+        </member>
+        <member name="T:GameCore.Execution.Data.GameDataEffectTeleport">
+            <summary />
+        </member>
+        <member name="P:GameCore.Execution.Data.GameDataEffectTeleport.TeleportFlags">
+            <summary />
+        </member>
+        <member name="P:GameCore.Execution.Data.GameDataEffectTeleport.MinDistance">
+            <summary />
+        </member>
+        <member name="P:GameCore.Execution.Data.GameDataEffectTeleport.DistanceClamp">
+            <summary />
+        </member>
+        <member name="P:GameCore.Execution.Data.GameDataEffectTeleport.TeleportedEffect">
+            <summary />
+        </member>
+        <member name="P:GameCore.Execution.Data.GameDataEffectTeleport.CentralLocation">
+            <summary />
+        </member>
+        <member name="M:GameCore.Execution.Data.GameDataEffectTeleport.CreateEffect(GameCore.BaseInterface.ITarget,GameCore.Interface.IExecutionContext,System.Boolean)">
+            <summary />
+            <param name="defaultTarget" />
+            <param name="context" />
+            <param name="preValidateOnly" />
+            <returns />
+        </member>
+        <member name="M:GameCore.Execution.Data.GameDataEffectTeleport.Validate(GameCore.Execution.Effect)">
+            <summary />
+            <param name="context" />
+            <returns />
+        </member>
+        <member name="T:GameCore.Execution.Data.GameDataEffectUnit">
+            <summary />
+        </member>
+        <member name="M:GameCore.Execution.Data.GameDataEffectUnit.Validate(GameCore.Execution.Effect)">
+            <summary />
+            <param name="context" />
+            <returns />
+        </member>
+        <member name="T:GameCore.Execution.Data.GameDataEffectUnitKill">
+            <summary />
+        </member>
+        <member name="P:GameCore.Execution.Data.GameDataEffectUnitKill.DeathType">
+            <summary />
+        </member>
+        <member name="M:GameCore.Execution.Data.GameDataEffectUnitKill.Execute(GameCore.Execution.Effect)">
+            <summary />
+            <param name="context" />
+            <returns />
+        </member>
+        <member name="T:GameCore.Execution.Data.GameDataEffectUnitModifyFacing">
+            <summary />
+        </member>
+        <member name="P:GameCore.Execution.Data.GameDataEffectUnitModifyFacing.NewFacingAngle">
+            <summary />
+        </member>
+        <member name="P:GameCore.Execution.Data.GameDataEffectUnitModifyFacing.Duration">
+            <summary />
+        </member>
+        <member name="M:GameCore.Execution.Data.GameDataEffectUnitModifyFacing.Validate(GameCore.Execution.Effect)">
+            <summary />
+            <param name="context" />
+            <returns />
+        </member>
+        <member name="T:GameCore.Execution.Data.GameDataEffectUnitModifyOwner">
+            <summary />
+        </member>
+        <member name="P:GameCore.Execution.Data.GameDataEffectUnitModifyOwner.Owner">
+            <summary />
+        </member>
+        <member name="M:GameCore.Execution.Data.GameDataEffectUnitModifyOwner.Validate(GameCore.Execution.Effect)">
+            <summary />
+            <param name="context" />
+            <returns />
+        </member>
+        <member name="T:GameCore.Execution.Data.GameDataEffectUnitModifyVital">
+            <summary />
+        </member>
+        <member name="P:GameCore.Execution.Data.GameDataEffectUnitModifyVital.Modification">
+            <summary />
+        </member>
+        <member name="P:GameCore.Execution.Data.GameDataEffectUnitModifyVital.Operation">
+            <summary />
+        </member>
+        <member name="T:GameCore.Execution.Data.GameDataEffectUnitMoverApply">
+            <summary />
+        </member>
+        <member name="P:GameCore.Execution.Data.GameDataEffectUnitMoverApply.Mover">
+            <summary />
+        </member>
+        <member name="P:GameCore.Execution.Data.GameDataEffectUnitMoverApply.LaunchEntity">
+            <summary />
+        </member>
+        <member name="P:GameCore.Execution.Data.GameDataEffectUnitMoverApply.MoverTarget">
+            <summary />
+        </member>
+        <member name="M:GameCore.Execution.Data.GameDataEffectUnitMoverApply.Validate(GameCore.Execution.Effect)">
+            <summary />
+            <param name="context" />
+            <returns />
+        </member>
+        <member name="T:GameCore.Execution.Data.GameDataEffectUnitMoverRemove">
+            <summary />
+        </member>
+        <member name="P:GameCore.Execution.Data.GameDataEffectUnitMoverRemove.Mover">
+            <summary />
+        </member>
+        <member name="M:GameCore.Execution.Data.GameDataEffectUnitMoverRemove.Execute(GameCore.Execution.Effect)">
+            <summary />
+            <param name="context" />
+            <returns />
+        </member>
+        <member name="T:GameCore.Execution.Data.GameDataEffectUnitRemove">
+            <summary />
+        </member>
+        <member name="M:GameCore.Execution.Data.GameDataEffectUnitRemove.Execute(GameCore.Execution.Effect)">
+            <summary />
+            <param name="context" />
+            <returns />
+        </member>
+        <member name="T:GameCore.Execution.Data.GameDataEffectUnitRevive">
+            <summary />
+        </member>
+        <member name="T:GameCore.Execution.Data.GameDataEffectWhichUnit">
+            <summary />
+        </member>
+        <member name="P:GameCore.Execution.Data.GameDataEffectWhichUnit.WhichUnit">
+            <summary />
+        </member>
+        <member name="M:GameCore.Execution.Data.GameDataEffectWhichUnit.ProcessWhichUnit(GameCore.Execution.Effect)">
+            <summary />
+            <param name="context" />
+            <returns />
+        </member>
+        <member name="M:GameCore.Execution.Data.GameDataEffectWhichUnit.CreateEffect(GameCore.BaseInterface.ITarget,GameCore.Interface.IExecutionContext,System.Boolean)">
+            <summary />
+            <param name="defaultTarget" />
+            <param name="creationContext" />
+            <param name="preValidateOnly" />
+            <returns />
+        </member>
+        <member name="M:GameCore.Execution.Data.GameDataEffectWhichUnit.Validate(GameCore.Execution.Effect)">
+            <summary />
+            <param name="context" />
+            <returns />
+        </member>
+        <member name="T:GameCore.Execution.Data.Struct.CreateUnitFlags">
+            <summary />
+        </member>
+        <member name="P:GameCore.Execution.Data.Struct.CreateUnitFlags.UseDefaultAI">
+            <summary />
+        </member>
+        <member name="T:GameCore.Execution.Data.Struct.EffectCase">
+            <summary />
+        </member>
+        <member name="P:GameCore.Execution.Data.Struct.EffectCase.Validator">
+            <summary />
+        </member>
+        <member name="P:GameCore.Execution.Data.Struct.EffectCase.Effect">
+            <summary />
+        </member>
+        <member name="T:GameCore.Execution.Data.Struct.PersistChannelFlags">
+            <summary />
+        </member>
+        <member name="P:GameCore.Execution.Data.Struct.PersistChannelFlags.Channeling">
+            <summary />
+        </member>
+        <member name="P:GameCore.Execution.Data.Struct.PersistChannelFlags.Channeled">
+            <summary />
+        </member>
+        <member name="T:GameCore.Execution.Data.Struct.PersistLoopFlags">
+            <summary />
+        </member>
+        <member name="P:GameCore.Execution.Data.Struct.PersistLoopFlags.SkipInitialDelay">
+            <summary />
+        </member>
+        <member name="T:GameCore.Execution.Data.Struct.RandomPointInCircleFlags">
+            <summary />
+        </member>
+        <member name="P:GameCore.Execution.Data.Struct.RandomPointInCircleFlags.RestrictToCircumference">
+            <summary />
+        </member>
+        <member name="T:GameCore.Execution.Data.Struct.SearchFlags">
+            <summary />
+        </member>
+        <member name="P:GameCore.Execution.Data.Struct.SearchFlags.FailIfNotEnoughTarget">
+            <summary />
+        </member>
+        <member name="P:GameCore.Execution.Data.Struct.SearchFlags.ExtendByUnitRadius">
+            <summary />
+        </member>
+        <member name="P:GameCore.Execution.Data.Struct.SearchFlags.ValidateChildren">
+            <summary />
+        </member>
+        <member name="P:GameCore.Execution.Data.Struct.SearchFlags.OffsetByUnitRadiusAndAngle">
+            <summary />
+        </member>
+        <member name="T:GameCore.Execution.Data.Struct.SetFlags">
+            <summary>
+            定义效果集合的执行标志，控制效果集合的执行行为和特性
+            </summary>
+            <remarks>
+            SetFlags 类用于配置效果集合（<see cref="T:GameCore.Execution.Data.GameDataEffectSet" />）的执行方式，包括随机性、唯一性、
+            源覆盖和子效果验证等行为。这些标志决定了效果集合如何从子效果列表中选择和执行效果，
+            为创建复杂的效果组合提供了灵活的控制选项。
+            </remarks>
+        </member>
+        <member name="P:GameCore.Execution.Data.Struct.SetFlags.WeightedRandom">
+            <summary>
+            获取或设置是否使用加权随机选择子效果
+            </summary>
+            <remarks>
+            当设置为 <see langword="true" /> 时，效果集合会使用加权随机算法从子效果列表中选择效果执行。
+            当设置为 <see langword="false" /> 时，效果集合会按顺序执行子效果。
+            默认值为 <see langword="false" />。
+            
+            此标志与 <see cref="P:GameCore.Execution.Data.Struct.SetFlags.Unique" /> 和 <see cref="P:GameCore.Execution.Data.Struct.SetFlags.PreferUnique" /> 配合使用，
+            可以实现复杂的随机选择逻辑。
+            </remarks>
+            <example>
+                <code>
+            // 配置随机选择效果
+            var setFlags = new SetFlags
+            {
+                WeightedRandom = true,  // 启用加权随机
+                PreferUnique = true     // 优先选择不重复的效果
+            };
+            </code>
+            </example>
+        </member>
+        <member name="P:GameCore.Execution.Data.Struct.SetFlags.PreferUnique">
+            <summary>
+            获取或设置是否优先选择不重复的子效果
+            </summary>
+            <remarks>
+            当设置为 <see langword="true" /> 时，效果集合会优先选择尚未执行过的子效果。
+            当设置为 <see langword="false" /> 时，效果集合不会考虑重复性。
+            默认值为 <see langword="true" />。
+            
+            此标志与 <see cref="P:GameCore.Execution.Data.Struct.SetFlags.WeightedRandom" /> 配合使用时，可以实现"尽量不重复"的随机选择。
+            当所有子效果都已执行过时，系统会重新开始选择。
+            </remarks>
+            <example>
+                <code>
+            // 配置优先不重复的效果选择
+            var setFlags = new SetFlags
+            {
+                WeightedRandom = true,  // 启用加权随机
+                PreferUnique = true     // 优先选择不重复的效果
+            };
+            </code>
+            </example>
+        </member>
+        <member name="P:GameCore.Execution.Data.Struct.SetFlags.Unique">
+            <summary>
+            获取或设置是否严格禁止重复执行子效果
+            </summary>
+            <remarks>
+            当设置为 <see langword="true" /> 时，效果集合严格禁止重复执行同一个子效果。
+            当设置为 <see langword="false" /> 时，允许重复执行子效果。
+            默认值为 <see langword="false" />。
+            
+            此标志比 <see cref="P:GameCore.Execution.Data.Struct.SetFlags.PreferUnique" /> 更严格，当设置为 <see langword="true" /> 时，
+            如果可用的不重复子效果数量少于 <see cref="P:GameCore.Execution.Data.GameDataEffectSet.MinCount" />，
+            效果集合会执行失败。
+            </remarks>
+            <example>
+                <code>
+            // 配置严格不重复的效果执行
+            var setFlags = new SetFlags
+            {
+                Unique = true,          // 严格禁止重复
+                MinCount = 3,           // 需要至少3个不同的效果
+                MaxCount = 5            // 最多执行5个效果
+            };
+            </code>
+            </example>
+        </member>
+        <member name="P:GameCore.Execution.Data.Struct.SetFlags.OverrideSource">
+            <summary>
+            获取或设置是否将目标作为源传递给子效果
+            </summary>
+            <remarks>
+            当设置为 <see langword="true" /> 时，效果集合会将当前目标设置为子效果的源。
+            当设置为 <see langword="false" /> 时，子效果会继承父效果的源。
+            默认值为 <see langword="false" />。
+            
+            此标志用于创建"连锁反应"类型的效果，其中每个子效果的目标成为下一个效果的源。
+            常用于闪电链、弹射效果等场景。
+            </remarks>
+            <example>
+                <code>
+            // 配置连锁效果
+            var setFlags = new SetFlags
+            {
+                OverrideSource = true   // 目标成为子效果的源
+            };
+            
+            // 这样配置后，每个被攻击的目标都会成为下一个攻击的源
+            // 实现类似"闪电链"的效果
+            </code>
+            </example>
+        </member>
+        <member name="P:GameCore.Execution.Data.Struct.SetFlags.ValidateChildren">
+            <summary>
+            获取或设置是否在执行前验证子效果
+            </summary>
+            <remarks>
+            当设置为 <see langword="true" /> 时，效果集合会在执行前验证每个子效果的有效性。
+            当设置为 <see langword="false" /> 时，跳过子效果验证。
+            默认值为 <see langword="false" />。
+            
+            启用此标志后，只有通过验证的子效果才会计入执行次数，但会增加性能开销。
+            当 <see cref="P:GameCore.Execution.Data.Struct.SetFlags.Unique" /> 为 <see langword="true" /> 时，此标志特别重要，
+            因为系统需要确保有足够的有效子效果来满足最小执行数量要求。
+            </remarks>
+            <example>
+                <code>
+            // 配置子效果验证
+            var setFlags = new SetFlags
+            {
+                ValidateChildren = true,  // 启用子效果验证
+                Unique = true,            // 严格不重复
+                MinCount = 2              // 需要至少2个有效效果
+            };
+            </code>
+            </example>
+        </member>
+        <member name="T:GameCore.Execution.Data.Struct.SwitchFlags">
+            <summary />
+        </member>
+        <member name="P:GameCore.Execution.Data.Struct.SwitchFlags.ValidateChildren">
+            <summary />
+        </member>
+        <member name="T:GameCore.Execution.Data.Struct.TeleportFlags">
+            <summary />
+        </member>
+        <member name="P:GameCore.Execution.Data.Struct.TeleportFlags.ClearOrderQueue">
+            <summary />
+        </member>
+        <member name="P:GameCore.Execution.Data.Struct.TeleportFlags.SyncOffset">
+            <summary />
+        </member>
+        <member name="T:GameCore.Execution.Effect">
+            <summary />
+            <summary />
+            <summary />
+        </member>
+        <member name="F:GameCore.Execution.Effect.Random">
+            <summary />
+        </member>
+        <member name="F:GameCore.Execution.Effect.source">
+            <summary />
+        </member>
+        <member name="P:GameCore.Execution.Effect.Link">
+            <summary />
+        </member>
+        <member name="P:GameCore.Execution.Effect.Level">
+            <summary />
+        </member>
+        <member name="P:GameCore.Execution.Effect.Cache">
+            <summary />
+        </member>
+        <member name="P:GameCore.Execution.Effect.GameCore#Interface#IExecutableObject#Cache">
+            <summary />
+        </member>
+        <member name="P:GameCore.Execution.Effect.GameData#Interface#IGameObject#Cache">
+            <summary />
+        </member>
+        <member name="P:GameCore.Execution.Effect.Caster">
+            <summary />
+        </member>
+        <member name="P:GameCore.Execution.Effect.Source">
+            <summary />
+        </member>
+        <member name="P:GameCore.Execution.Effect.DefaultTarget">
+            <summary />
+        </member>
+        <member name="P:GameCore.Execution.Effect.Target">
+            <summary />
+        </member>
+        <member name="P:GameCore.Execution.Effect.Shared">
+            <summary />
+        </member>
+        <member name="P:GameCore.Execution.Effect.Parent">
+            <summary />
+        </member>
+        <member name="P:GameCore.Execution.Effect.GameCore#Interface#IExecutableObject#Missile">
+            <summary />
+        </member>
+        <member name="P:GameCore.Execution.Effect.LocVarUnit">
+            <summary />
+        </member>
+        <member name="P:GameCore.Execution.Effect.LocVarPoint">
+            <summary />
+        </member>
+        <member name="P:GameCore.Execution.Effect.Result">
+            <summary />
+        </member>
+        <member name="P:GameCore.Execution.Effect.State">
+            <summary />
+        </member>
+        <member name="P:GameCore.Execution.Effect.IsPreValidatorOnly">
+            <summary />
+        </member>
+        <member name="P:GameCore.Execution.Effect.IsTransient">
+            <summary />
+        </member>
+        <member name="P:GameCore.Execution.Effect.LaunchScene">
+            <summary />
+        </member>
+        <member name="P:GameCore.Execution.Effect.PersistIndex">
+            <summary />
+        </member>
+        <member name="M:GameCore.Execution.Effect.#ctor(GameData.IGameLink{GameCore.Execution.Data.GameDataEffect},GameCore.BaseInterface.ITarget,GameCore.Interface.IExecutionContext)">
+            <summary />
+        </member>
+        <member name="M:GameCore.Execution.Effect.LocVarUnitAction(System.Nullable{GameCore.BaseType.LocVarType},GameCore.BaseInterface.ITarget)">
+            <summary />
+            <param name="nullableType" />
+            <param name="target" />
+            <returns />
+        </member>
+        <member name="M:GameCore.Execution.Effect.LocVarPointAction(System.Nullable{GameCore.BaseType.LocVarType},GameCore.BaseInterface.ITarget)">
+            <summary />
+            <param name="nullableType" />
+            <param name="target" />
+            <returns />
+        </member>
+        <member name="M:GameCore.Execution.Effect.SetLocVar(GameCore.BaseType.LocVarType,GameCore.EntitySystem.Unit)">
+            <summary />
+            <param name="type" />
+            <param name="newTarget" />
+            <returns />
+        </member>
+        <member name="M:GameCore.Execution.Effect.SetLocVar(GameCore.BaseType.LocVarType,GameCore.SceneSystem.ScenePoint)">
+            <summary />
+            <param name="type" />
+            <param name="newTarget" />
+            <returns />
+        </member>
+        <member name="M:GameCore.Execution.Effect.FactoryCreateChild(GameData.IGameLink{GameCore.Execution.Data.GameDataEffect},GameCore.BaseInterface.ITarget,System.Boolean)">
+            <summary />
+            <param name="link" />
+            <param name="defaultTarget" />
+            <param name="preValidateOnly" />
+            <returns />
+        </member>
+        <member name="M:GameCore.Execution.Effect.FactoryCreateTree(GameData.IGameLink{GameCore.Execution.Data.GameDataEffect},GameCore.BaseInterface.ITarget,GameCore.EntitySystem.Entity,System.Boolean)">
+            <summary />
+            <param name="link" />
+            <param name="defaultTarget" />
+            <param name="caster" />
+            <param name="preValidateOnly" />
+            <returns />
+        </member>
+        <member name="M:GameCore.Execution.Effect.ExecuteChild(GameData.IGameLink{GameCore.Execution.Data.GameDataEffect},GameCore.BaseInterface.ITarget,System.Action{GameCore.Execution.Effect})">
+            <summary />
+            <param name="link" />
+            <param name="target" />
+            <param name="initialAction" />
+            <returns />
+        </member>
+        <member name="M:GameCore.Execution.Effect.Execute">
+            <summary />
+            <returns />
+        </member>
+        <member name="M:GameCore.Execution.Effect.ClassValidate(GameCore.BaseType.ValidatorEffect)">
+            <summary />
+            <param name="validator" />
+            <returns />
+        </member>
+        <member name="M:GameCore.Execution.Effect.Validate">
+            <summary />
+            <returns />
+        </member>
+        <member name="M:GameCore.Execution.Effect.PreValidate(GameCore.BaseInterface.ITarget)">
+            <summary />
+            <param name="target" />
+            <returns />
+        </member>
+        <member name="M:GameCore.Execution.Effect.ResolveTarget">
+            <summary />
+            <returns />
+        </member>
+        <member name="M:GameCore.Execution.Effect.GetMissile">
+            <summary />
+            <returns />
+        </member>
+        <member name="M:GameCore.Execution.Effect.ToString">
+            <summary />
+            <returns />
+        </member>
+        <member name="M:GameCore.Execution.Effect.SetCreator(GameCore.PlayerAndUsers.Player)">
+            <summary />
+            <param name="player" />
+            <returns />
+        </member>
+        <member name="M:GameCore.Execution.Effect.GetUnitProperty(GameData.IGameLink{GameCore.Data.GameDataUnitProperty},GameCore.Execution.Data.Enum.PropertyFetchMethod)">
+            <summary />
+            <param name="property" />
+            <param name="method" />
+            <returns />
+        </member>
+        <member name="P:GameCore.Execution.Effect.Facing">
+            <summary />
+        </member>
+        <member name="P:GameCore.Execution.Effect.Scale">
+            <summary />
+        </member>
+        <member name="P:GameCore.Execution.Effect.IsRoot">
+            <summary />
+        </member>
+        <member name="P:GameCore.Execution.Effect.GameCore#ActorSystem#IActorScopeOwner#StandaloneScopeLink">
+            <summary />
+        </member>
+        <member name="P:GameCore.Execution.Effect.GameCore#ActorSystem#IActorScopeContext#Link">
+            <summary />
+        </member>
+        <member name="P:GameCore.Execution.Effect.GameCore#ActorSystem#IActorScopeContext#Position">
+            <summary />
+        </member>
+        <member name="P:GameCore.Execution.Effect.GameCore#ActorSystem#IActorScopeContext#Host">
+            <summary />
+        </member>
+        <member name="P:GameCore.Execution.Effect.GameCore#ActorSystem#IActorScopeContext#Player">
+            <summary />
+        </member>
+        <member name="P:GameCore.Execution.Effect.GameCore#ActorSystem#IActorScopeOwner#ActorScope">
+            <summary />
+        </member>
+        <member name="P:GameCore.Execution.Effect.GameCore#ActorSystem#IActorScopeContext#Volume">
+            <summary />
+        </member>
+        <member name="F:GameCore.Execution.Effect.aggregator">
+            <summary />
+        </member>
+        <member name="F:GameCore.Execution.Effect.aggregatorWeakReference">
+            <summary />
+        </member>
+        <member name="P:GameCore.Execution.Effect.Events#IEventSender#Aggregator">
+            <summary />
+        </member>
+        <member name="P:GameCore.Execution.Effect.AggregatorWeakReference">
+            <summary />
+        </member>
+        <member name="M:GameCore.Execution.Effect.Publish``1(``0)">
+            <summary />
+            <typeparam name="TEvent" />
+            <param name="eventToPublish" />
+            <returns />
+        </member>
+        <member name="M:GameCore.Execution.Effect.GetPublisher``1">
+            <summary />
+            <typeparam name="TEvent" />
+            <returns />
+        </member>
+        <member name="T:GameCore.Execution.EffectBuffAdd">
+            <summary />
+        </member>
+        <member name="M:GameCore.Execution.EffectBuffAdd.#ctor(GameData.IGameLink{GameCore.Execution.Data.GameDataEffectBuffAdd},GameCore.BaseInterface.ITarget,GameCore.Interface.IExecutionContext)">
+            <summary />
+        </member>
+        <member name="P:GameCore.Execution.EffectBuffAdd.Buff">
+            <summary />
+        </member>
+        <member name="T:GameCore.Execution.EffectCreateUnit">
+            <summary />
+        </member>
+        <member name="M:GameCore.Execution.EffectCreateUnit.#ctor(GameData.IGameLink{GameCore.Execution.Data.GameDataEffectCreateUnit},GameCore.BaseInterface.ITarget,GameCore.Interface.IExecutionContext)">
+            <summary />
+        </member>
+        <member name="P:GameCore.Execution.EffectCreateUnit.CreatedUnits">
+            <summary />
+        </member>
+        <member name="T:GameCore.Execution.EffectDamage">
+            <summary />
+        </member>
+        <member name="M:GameCore.Execution.EffectDamage.#ctor(GameData.IGameLink{GameCore.Execution.Data.GameDataEffectDamage},GameCore.BaseInterface.ITarget,GameCore.Interface.IExecutionContext)">
+            <summary />
+        </member>
+        <member name="P:GameCore.Execution.EffectDamage.Damage">
+            <summary />
+        </member>
+        <member name="T:GameCore.Execution.EffectIssueOrder">
+            <summary />
+        </member>
+        <member name="M:GameCore.Execution.EffectIssueOrder.#ctor(GameData.IGameLink{GameCore.Execution.Data.GameDataEffectIssueOrder},GameCore.BaseInterface.ITarget,GameCore.Interface.IExecutionContext)">
+            <summary />
+        </member>
+        <member name="P:GameCore.Execution.EffectIssueOrder.Order">
+            <summary />
+        </member>
+        <member name="T:GameCore.Execution.EffectPersist">
+            <summary>
+            Should be used for effects that are meant to persist in the game world.
+            Always make sure that the effect will be stopped properly when exceptions are thrown.
+            </summary>
+            <summary />
+            <summary />
+        </member>
+        <member name="P:GameCore.Execution.EffectPersist.ActorScope">
+            <summary />
+        </member>
+        <member name="F:GameCore.Execution.EffectPersist._scene">
+            <summary />
+        </member>
+        <member name="M:GameCore.Execution.EffectPersist.#ctor(GameData.IGameLink{GameCore.Execution.Data.GameDataEffectPersist},GameCore.BaseInterface.ITarget,GameCore.Interface.IExecutionContext)">
+            <summary />
+        </member>
+        <member name="P:GameCore.Execution.EffectPersist.IsTransient">
+            <summary />
+        </member>
+        <member name="M:GameCore.Execution.EffectPersist.Stop(System.Boolean,System.Boolean)">
+            <summary />
+            <param name="complete" />
+            <param name="isHostDisposed" />
+            <returns />
+        </member>
+        <member name="P:GameCore.Execution.EffectPersist.GameCore#Execution#Interface#IChannelUser#ChannelingEffect">
+            <summary />
+        </member>
+        <member name="M:GameCore.Execution.EffectPersist.GameCore#Execution#Interface#IChannelUser#OnChannelStopped">
+            <summary />
+            <returns />
+        </member>
+        <member name="F:GameCore.Execution.EffectPersist.persistTokenSource">
+            <summary />
+        </member>
+        <member name="F:GameCore.Execution.EffectPersist.persistCancellationToken">
+            <summary />
+        </member>
+        <member name="F:GameCore.Execution.EffectPersist.persistTokenRegistration">
+            <summary />
+        </member>
+        <member name="M:GameCore.Execution.EffectPersist.PersistValidate">
+            <summary />
+            <returns />
+        </member>
+        <member name="T:GameCore.Execution.EffectPersistDelay">
+            <summary />
+        </member>
+        <member name="M:GameCore.Execution.EffectPersistDelay.#ctor(GameData.IGameLink{GameCore.Execution.Data.GameDataEffectPersistDelay},GameCore.BaseInterface.ITarget,GameCore.Interface.IExecutionContext)">
+            <summary />
+        </member>
+        <member name="P:GameCore.Execution.EffectPersistDelay.Delay">
+            <summary />
+        </member>
+        <member name="M:GameCore.Execution.EffectPersistDelay.LifeSpan">
+            <summary />
+            <returns />
+        </member>
+        <member name="T:GameCore.Execution.EffectPersistLoop">
+            <summary />
+        </member>
+        <member name="T:GameCore.Execution.EffectPersistLoop.PeriodicInfo">
+            <summary />
+            <summary />
+        </member>
+        <member name="P:GameCore.Execution.EffectPersistLoop.PeriodicInfo.ExecutedCount">
+            <summary />
+        </member>
+        <member name="P:GameCore.Execution.EffectPersistLoop.PeriodicInfo.CountMax">
+            <summary />
+        </member>
+        <member name="P:GameCore.Execution.EffectPersistLoop.PeriodicInfo.Period">
+            <summary />
+        </member>
+        <member name="P:GameCore.Execution.EffectPersistLoop.PeriodicInfo.Duration">
+            <summary />
+        </member>
+        <member name="P:GameCore.Execution.EffectPersistLoop.Info">
+            <summary />
+        </member>
+        <member name="M:GameCore.Execution.EffectPersistLoop.#ctor(GameData.IGameLink{GameCore.Execution.Data.GameDataEffectPersistLoop},GameCore.BaseInterface.ITarget,GameCore.Interface.IExecutionContext)">
+            <summary />
+        </member>
+        <member name="M:GameCore.Execution.EffectPersistLoop.Stop(System.Boolean,System.Boolean)">
+            <summary />
+            <param name="complete" />
+            <param name="isHostDisposed" />
+            <returns />
+        </member>
+        <member name="M:GameCore.Execution.EffectPersistLoop.SetPersistIndex(GameCore.Execution.Effect)">
+            <summary />
+            <param name="effect" />
+            <returns />
+        </member>
+        <member name="M:GameCore.Execution.EffectPersistLoop.ExecutePeriodicEffect">
+            <summary />
+            <returns />
+        </member>
+        <member name="M:GameCore.Execution.EffectPersistLoop.LifeSpan">
+            <summary />
+            <returns />
+        </member>
+        <member name="M:GameCore.Execution.EffectPersistLoop.StartLoop">
+            <summary />
+            <returns />
+        </member>
+        <member name="M:GameCore.Execution.EffectPersistLoop.Loop(System.Int32)">
+            <summary />
+            <param name="adjustment" />
+            <returns />
+        </member>
+        <member name="T:GameCore.Execution.EffectRandomPointInCircle">
+            <summary />
+        </member>
+        <member name="M:GameCore.Execution.EffectRandomPointInCircle.#ctor(GameData.IGameLink{GameCore.Execution.Data.GameDataEffectRandomPointInCircle},GameCore.BaseInterface.ITarget,GameCore.Interface.IExecutionContext)">
+            <summary />
+        </member>
+        <member name="P:GameCore.Execution.EffectRandomPointInCircle.Count">
+            <summary />
+        </member>
+        <member name="P:GameCore.Execution.EffectRandomPointInCircle.Radius">
+            <summary />
+        </member>
+        <member name="P:GameCore.Execution.EffectRandomPointInCircle.GeneratedPoints">
+            <summary />
+        </member>
+        <member name="T:GameCore.Execution.EffectSearch">
+            <summary />
+        </member>
+        <member name="P:GameCore.Execution.EffectSearch.GameCore#ActorSystem#IActorScopeContext#Volume">
+            <summary />
+        </member>
+        <member name="P:GameCore.Execution.EffectSearch.GameCore#ActorSystem#IActorScopeContext#Radius">
+            <summary />
+        </member>
+        <member name="P:GameCore.Execution.EffectSearch.StartingPoint">
+            <summary />
+        </member>
+        <member name="P:GameCore.Execution.EffectSearch.ExtraRadius">
+            <summary />
+        </member>
+        <member name="P:GameCore.Execution.EffectSearch.Info">
+            <summary />
+        </member>
+        <member name="P:GameCore.Execution.EffectSearch.MinCountCache">
+            <summary />
+        </member>
+        <member name="P:GameCore.Execution.EffectSearch.MaxCountCache">
+            <summary />
+        </member>
+        <member name="M:GameCore.Execution.EffectSearch.#ctor(GameData.IGameLink{GameCore.Execution.Data.GameDataEffectSearch},GameCore.BaseInterface.ITarget,GameCore.Interface.IExecutionContext)">
+            <summary />
+        </member>
+        <member name="T:GameCore.Execution.EffectSearch.SearchInfo">
+            <summary />
+            <summary />
+        </member>
+        <member name="P:GameCore.Execution.EffectSearch.SearchInfo.Founded">
+            <summary />
+        </member>
+        <member name="M:GameCore.Execution.EffectSearch.Filter(GameCore.EntitySystem.Entity)">
+            <summary />
+            <param name="entity" />
+            <returns />
+        </member>
+        <member name="T:GameCore.Execution.EffectSearch.SearchInfoCircle">
+            <summary />
+            <summary />
+        </member>
+        <member name="P:GameCore.Execution.EffectSearch.SearchInfoCircle.Radius">
+            <summary />
+        </member>
+        <member name="T:GameCore.Execution.EffectSearch.SearchInfoCone">
+            <summary />
+            <summary />
+        </member>
+        <member name="P:GameCore.Execution.EffectSearch.SearchInfoCone.Radius">
+            <summary />
+        </member>
+        <member name="P:GameCore.Execution.EffectSearch.SearchInfoCone.CentralAngle">
+            <summary />
+        </member>
+        <member name="T:GameCore.Execution.EffectSearch.SearchInfoRectangle">
+            <summary />
+            <summary />
+        </member>
+        <member name="P:GameCore.Execution.EffectSearch.SearchInfoRectangle.Width">
+            <summary />
+        </member>
+        <member name="P:GameCore.Execution.EffectSearch.SearchInfoRectangle.Height">
+            <summary />
+        </member>
+        <member name="T:GameCore.Execution.EffectSet">
+            <summary />
+        </member>
+        <member name="M:GameCore.Execution.EffectSet.#ctor(GameData.IGameLink{GameCore.Execution.Data.GameDataEffect},GameCore.BaseInterface.ITarget,GameCore.Interface.IExecutionContext)">
+            <summary />
+        </member>
+        <member name="P:GameCore.Execution.EffectSet.MaxCount">
+            <summary />
+        </member>
+        <member name="P:GameCore.Execution.EffectSet.MinCount">
+            <summary />
+        </member>
+        <member name="T:GameCore.Execution.EffectTeleport">
+            <summary />
+        </member>
+        <member name="M:GameCore.Execution.EffectTeleport.#ctor(GameData.IGameLink{GameCore.Execution.Data.GameDataEffectTeleport},GameCore.BaseInterface.ITarget,GameCore.Interface.IExecutionContext)">
+            <summary />
+        </member>
+        <member name="P:GameCore.Execution.EffectTeleport.Center">
+            <summary />
+        </member>
+        <member name="P:GameCore.Execution.EffectTeleport.DistanceClamp">
+            <summary />
+        </member>
+        <member name="P:GameCore.Execution.EffectTeleport.OriginalDistance">
+            <summary />
+        </member>
+        <member name="T:GameCore.Execution.EffectWhichUnit">
+            <summary />
+        </member>
+        <member name="M:GameCore.Execution.EffectWhichUnit.#ctor(GameData.IGameLink{GameCore.Execution.Data.GameDataEffectWhichUnit},GameCore.BaseInterface.ITarget,GameCore.Interface.IExecutionContext)">
+            <summary />
+        </member>
+        <member name="P:GameCore.Execution.EffectWhichUnit.Unit">
+            <summary />
+        </member>
+        <member name="T:GameCore.Execution.ExecutionParamShared">
+            <summary>
+            I can just use IExecutionContext as shared parameter for all effects, but most IExecutionContext are disposable and I don't want to dispose them.
+            I also want to snapshot context data, like unit properties, Level, etc.
+            </summary>
+        </member>
+        <member name="M:GameCore.Execution.ExecutionParamShared.#ctor(GameCore.Interface.IExecutionContext)">
+            <summary>
+            I can just use IExecutionContext as shared parameter for all effects, but most IExecutionContext are disposable and I don't want to dispose them.
+            I also want to snapshot context data, like unit properties, Level, etc.
+            </summary>
+        </member>
+        <member name="P:GameCore.Execution.ExecutionParamShared.CreationContext">
+            <summary />
+        </member>
+        <member name="P:GameCore.Execution.ExecutionParamShared.CreatorPlayer">
+            <summary>
+            Snapshot of the player who created this effect tree.
+            As Caster may swap player during the execution.
+            </summary>
+        </member>
+        <member name="P:GameCore.Execution.ExecutionParamShared.Level">
+            <summary>
+            Snapped level of the execution
+            </summary>
+        </member>
+        <member name="P:GameCore.Execution.ExecutionParamShared.MainTarget">
+            <summary />
+        </member>
+        <member name="P:GameCore.Execution.ExecutionParamShared.Caster">
+            <summary />
+        </member>
+        <member name="P:GameCore.Execution.ExecutionParamShared.Ability">
+            <summary />
+        </member>
+        <member name="P:GameCore.Execution.ExecutionParamShared.Item">
+            <summary />
+        </member>
+        <member name="P:GameCore.Execution.ExecutionParamShared.Order">
+            <summary />
+        </member>
+        <member name="P:GameCore.Execution.ExecutionParamShared.AbilityPhase">
+            <summary />
+        </member>
+        <member name="P:GameCore.Execution.ExecutionParamShared.UnitPropertySnapshot">
+            <summary />
+        </member>
+        <member name="P:GameCore.Execution.ExecutionParamShared.IsOrderChanneling">
+            <summary />
+        </member>
+        <member name="P:GameCore.Execution.ExecutionParamShared.UseOrderChanneling">
+            <summary />
+        </member>
+        <member name="P:GameCore.Execution.ExecutionParamShared.ResponseContext">
+            <summary />
+        </member>
+        <member name="M:GameCore.Execution.ExecutionParamShared.GetUnitProperty(GameData.IGameLink{GameCore.Data.GameDataUnitProperty},GameCore.Execution.Data.Enum.PropertyFetchMethod)">
+            <summary />
+            <param name="property" />
+            <param name="method" />
+            <returns />
+        </member>
+        <member name="M:GameCore.Execution.ExecutionParamShared.UpdateUnitPropertySnapshot(System.Collections.Generic.IEnumerable{GameData.IGameLink{GameCore.Data.GameDataUnitProperty}})">
+            <summary />
+            <param name="properties" />
+            <returns />
+        </member>
+        <member name="P:GameCore.Execution.ExecutionParamShared.IsSupportChanneling">
+            <summary />
+        </member>
+        <member name="P:GameCore.Execution.ExecutionParamShared.IsChanneling">
+            <summary />
+        </member>
+        <member name="M:GameCore.Execution.ExecutionParamShared.StopAllChannel">
+            <summary />
+            <returns />
+        </member>
+        <member name="M:GameCore.Execution.ExecutionParamShared.AddChanneled(GameCore.Execution.Interface.IChannelUser)">
+            <summary />
+            <param name="user" />
+            <returns />
+        </member>
+        <member name="M:GameCore.Execution.ExecutionParamShared.RemoveChanneled(GameCore.Execution.Interface.IChannelUser)">
+            <summary />
+            <param name="user" />
+            <returns />
+        </member>
+        <member name="M:GameCore.Execution.ExecutionParamShared.AddChanneling(GameCore.Execution.Interface.IChannelUser)">
+            <summary />
+            <param name="user" />
+            <returns />
+        </member>
+        <member name="M:GameCore.Execution.ExecutionParamShared.RemoveChanneling(GameCore.Execution.Interface.IChannelUser)">
+            <summary />
+            <param name="user" />
+            <returns />
+        </member>
+        <member name="T:GameCore.Execution.ExecutionState">
+            <summary>
+            Defines the possible states of execution for game operations, abilities, commands, or other executable actions.
+            </summary>
+            <remarks>
+            This enum tracks the lifecycle of executable operations from initial queuing through completion or failure.
+            It provides a standardized way to monitor and respond to the progress of various game systems that perform
+            time-based or conditional operations.
+            </remarks>
+        </member>
+        <member name="F:GameCore.Execution.ExecutionState.Pending">
+            <summary>
+            The execution is queued and waiting to begin.
+            </summary>
+            <remarks>
+            This is the initial state when an operation has been requested but not yet started.
+            The operation may be waiting for conditions to be met or for its turn in a queue.
+            </remarks>
+        </member>
+        <member name="F:GameCore.Execution.ExecutionState.Failed">
+            <summary>
+            The execution has failed and cannot be completed.
+            </summary>
+            <remarks>
+            This state indicates that the operation encountered an error, failed validation,
+            or was unable to complete due to invalid conditions or constraints.
+            </remarks>
+        </member>
+        <member name="F:GameCore.Execution.ExecutionState.Executing">
+            <summary>
+            The execution is currently in progress.
+            </summary>
+            <remarks>
+            This state indicates that the operation has started and is actively being processed.
+            The operation may still be running, animating, or performing its intended actions.
+            </remarks>
+        </member>
+        <member name="F:GameCore.Execution.ExecutionState.Aborted">
+            <summary>
+            The execution was cancelled or interrupted before completion.
+            </summary>
+            <remarks>
+            This state indicates that the operation was stopped by external intervention,
+            such as user cancellation, conflicting operations, or changing game conditions.
+            </remarks>
+        </member>
+        <member name="F:GameCore.Execution.ExecutionState.Completed">
+            <summary>
+            The execution has finished successfully.
+            </summary>
+            <remarks>
+            This state indicates that the operation has run to completion and achieved
+            its intended result without errors or interruptions.
+            </remarks>
+        </member>
+        <member name="T:GameCore.Execution.Interface.IChannelUser">
+            <summary />
+        </member>
+        <member name="P:GameCore.Execution.Interface.IChannelUser.ChannelingEffect">
+            <summary />
+        </member>
+        <member name="M:GameCore.Execution.Interface.IChannelUser.StartChanneling">
+            <summary />
+            <returns />
+        </member>
+        <member name="M:GameCore.Execution.Interface.IChannelUser.StopChanneling">
+            <summary />
+            <returns />
+        </member>
+        <member name="M:GameCore.Execution.Interface.IChannelUser.StartChanneled">
+            <summary />
+            <returns />
+        </member>
+        <member name="M:GameCore.Execution.Interface.IChannelUser.StopChanneled">
+            <summary />
+            <returns />
+        </member>
+        <member name="M:GameCore.Execution.Interface.IChannelUser.OnChannelStopped">
+            <summary />
+            <returns />
+        </member>
+    </members>
+</doc>

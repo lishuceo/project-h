@@ -1,0 +1,160 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<doc>
+    <assembly>
+        <name>GameCore</name>
+    </assembly>
+    <members>
+        <member name="T:GameCore.Collection.IterationSafeHashSet`1">
+            <summary>
+            A custom hash set that allows safe removal of elements during iteration.
+            </summary>
+            <typeparam name="T">The type of elements in the set.</typeparam>
+        </member>
+        <member name="F:GameCore.Collection.IterationSafeHashSet`1._set">
+            <summary />
+        </member>
+        <member name="F:GameCore.Collection.IterationSafeHashSet`1._pendingRemovals">
+            <summary />
+        </member>
+        <member name="F:GameCore.Collection.IterationSafeHashSet`1._isIterating">
+            <summary />
+        </member>
+        <member name="M:GameCore.Collection.IterationSafeHashSet`1.Add(`0)">
+            <summary>
+            Adds an element to the set.
+            </summary>
+            <param name="item">The element to add.</param>
+            <returns>True if the element was added; false if it already exists.</returns>
+        </member>
+        <member name="M:GameCore.Collection.IterationSafeHashSet`1.Remove(`0)">
+            <summary>
+            Removes an element from the set.
+            If called during iteration, the removal is deferred until the iteration completes.
+            </summary>
+            <param name="item">The element to remove.</param>
+            <returns>True if the element was removed; false if it was not found.</returns>
+        </member>
+        <member name="M:GameCore.Collection.IterationSafeHashSet`1.Clear">
+            <summary>
+            Clears all elements from the set.
+            </summary>
+        </member>
+        <member name="M:GameCore.Collection.IterationSafeHashSet`1.Contains(`0)">
+            <summary>
+            Checks if the set contains a specific element.
+            </summary>
+            <param name="item">The element to check.</param>
+            <returns>True if the element exists; otherwise, false.</returns>
+        </member>
+        <member name="P:GameCore.Collection.IterationSafeHashSet`1.Count">
+            <summary>
+            Gets the number of elements in the set.
+            </summary>
+        </member>
+        <member name="M:GameCore.Collection.IterationSafeHashSet`1.GetEnumerator">
+            <summary>
+            Returns an enumerator that iterates through the set.
+            </summary>
+            <returns>An enumerator for the set.</returns>
+        </member>
+        <member name="M:GameCore.Collection.IterationSafeHashSet`1.YieldCondition(`0)">
+            <summary />
+            <param name="item" />
+            <returns />
+        </member>
+        <member name="M:GameCore.Collection.IterationSafeHashSet`1.System#Collections#IEnumerable#GetEnumerator">
+            <summary />
+            <returns />
+        </member>
+        <member name="T:GameCore.Collection.ObservableQuickDictionary`2">
+            <summary />
+        </member>
+        <member name="M:GameCore.Collection.ObservableQuickDictionary`2.Add(`0,`1)">
+            <summary />
+            <param name="key" />
+            <param name="value" />
+            <returns />
+        </member>
+        <member name="M:GameCore.Collection.ObservableQuickDictionary`2.TryAdd(`0,`1)">
+            <summary />
+            <param name="key" />
+            <param name="value" />
+            <returns />
+        </member>
+        <member name="M:GameCore.Collection.ObservableQuickDictionary`2.Remove(`0)">
+            <summary />
+            <param name="key" />
+            <returns />
+        </member>
+        <member name="M:GameCore.Collection.ObservableQuickDictionary`2.Remove(`0,`1@)">
+            <summary />
+            <param name="key" />
+            <param name="value" />
+            <returns />
+        </member>
+        <member name="P:GameCore.Collection.ObservableQuickDictionary`2.Item(`0)">
+            <summary />
+        </member>
+        <member name="M:GameCore.Collection.ObservableQuickDictionary`2.ClearValueChangedEvent">
+            <summary />
+            <returns />
+        </member>
+        <member name="E:GameCore.Collection.ObservableQuickDictionary`2.OnValueChanged">
+            <summary />
+        </member>
+        <member name="T:GameCore.Collection.OrderedSet`1">
+            <summary />
+        </member>
+        <member name="M:GameCore.Collection.OrderedSet`1.Add(`0)">
+            <summary />
+            <param name="value" />
+            <returns />
+        </member>
+        <member name="M:GameCore.Collection.OrderedSet`1.GetEnumerator">
+            <summary />
+            <returns />
+        </member>
+        <member name="M:GameCore.Collection.OrderedSet`1.ToArray">
+            <summary />
+            <returns />
+        </member>
+        <member name="P:GameCore.Collection.OrderedSet`1.Item(System.Int32)">
+            <summary />
+        </member>
+        <member name="T:GameCore.Collection.OrderedSet`1.SetEnumerator">
+            <summary />
+            <summary />
+        </member>
+        <member name="M:GameCore.Collection.OrderedSet`1.SetEnumerator.#ctor(System.Collections.Generic.OrderedDictionary{`0,`0}.Enumerator)">
+            <summary />
+            <summary />
+        </member>
+        <member name="F:GameCore.Collection.OrderedSet`1.SetEnumerator.DicEnumerator">
+            <summary />
+        </member>
+        <member name="P:GameCore.Collection.OrderedSet`1.SetEnumerator.Current">
+            <summary />
+        </member>
+        <member name="P:GameCore.Collection.OrderedSet`1.SetEnumerator.System#Collections#IEnumerator#Current">
+            <summary />
+        </member>
+        <member name="M:GameCore.Collection.OrderedSet`1.SetEnumerator.System#IDisposable#Dispose">
+            <summary />
+            <returns />
+        </member>
+        <member name="M:GameCore.Collection.OrderedSet`1.SetEnumerator.MoveNext">
+            <summary />
+            <returns />
+        </member>
+        <member name="M:GameCore.Collection.OrderedSet`1.SetEnumerator.System#Collections#IEnumerator#Reset">
+            <summary />
+            <returns />
+        </member>
+        <member name="T:GameCore.Collection.QuickDictionary`2">
+            <summary />
+        </member>
+        <member name="P:GameCore.Collection.QuickDictionary`2.Item(`0)">
+            <summary />
+        </member>
+    </members>
+</doc>

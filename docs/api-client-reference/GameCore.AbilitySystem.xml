@@ -1,0 +1,1164 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<doc>
+    <assembly>
+        <name>GameCore</name>
+    </assembly>
+    <members>
+        <member name="T:GameCore.AbilitySystem.Ability">
+            <summary />
+            <summary />
+            <summary />
+            <summary />
+            <summary>
+            Represents an ability (skill/spell) object in the game, attached to units and responsible for managing ability lifecycle, state, and cooldowns.
+            </summary>
+            <remarks>
+            Abilities are the core system for unit capabilities in the game, including spells, skills, attacks, and special powers.
+            Each ability manages its own state, cooldowns, resource costs, and execution logic. Abilities can be granted by the unit's
+            base configuration or by items, and they support various modes including active, toggle, and passive behaviors.
+            The ability system integrates with other game systems like targeting, effects, and animations to provide
+            comprehensive gameplay mechanics. Abilities can persist through unit transformations based on their configuration.
+            </remarks>
+            <summary />
+            <summary />
+            <summary />
+            <summary />
+            <summary />
+            <summary />
+        </member>
+        <member name="F:GameCore.AbilitySystem.Ability.stage">
+            <summary />
+        </member>
+        <member name="P:GameCore.AbilitySystem.Ability.Stage">
+            <summary>
+            Only used for client-side ability animation replication.
+            </summary>
+        </member>
+        <member name="M:GameCore.AbilitySystem.Ability.OnAnimationState(GameCore.OrderSystem.OrderStage)">
+            <summary />
+            <param name="stage" />
+            <returns />
+        </member>
+        <member name="P:GameCore.AbilitySystem.Ability.GameCore#BaseInterface#IPropertyOwner#PropertyHost">
+            <summary />
+        </member>
+        <member name="M:GameCore.AbilitySystem.Ability.GetProperty``1(GameCore.AbilitySystem.Enum.PropertyAbility)">
+            <summary />
+            <typeparam name="TValue" />
+            <param name="property" />
+            <returns />
+        </member>
+        <member name="P:GameCore.AbilitySystem.Ability.GameCore#BaseType#IResponseOwner#Host">
+            <summary />
+        </member>
+        <member name="P:GameCore.AbilitySystem.Ability.GameCore#BaseType#IResponseOwner#Cache">
+            <summary />
+        </member>
+        <member name="P:GameCore.AbilitySystem.Ability.GameCore#BaseType#IResponseOwner#Responses">
+            <summary />
+        </member>
+        <member name="P:GameCore.AbilitySystem.Ability.GameCore#BaseType#IResponseOwner#IsActivated">
+            <summary />
+        </member>
+        <member name="M:GameCore.AbilitySystem.Ability.ReplicateFromKeyValue(System.Enum,System.ReadOnlySpan{System.Byte})">
+            <summary />
+            <param name="propertyEnum" />
+            <param name="value" />
+            <returns />
+        </member>
+        <member name="M:GameCore.AbilitySystem.Ability.SetDeactivatedFromReplication(System.Boolean)">
+            <summary>
+            Sets the deactivated state from server replication.
+            </summary>
+        </member>
+        <member name="M:GameCore.AbilitySystem.Ability.SetDisabledFromReplication(System.Boolean)">
+            <summary>
+            Sets the disabled state from server replication.
+            </summary>
+        </member>
+        <member name="P:GameCore.AbilitySystem.Ability.Manager">
+            <summary>
+            Gets the ability manager that owns this ability.
+            </summary>
+            <value>The manager responsible for this ability's lifecycle and state.</value>
+        </member>
+        <member name="P:GameCore.AbilitySystem.Ability.LevelMax">
+            <summary>
+            Gets the maximum level this ability can reach.
+            </summary>
+            <value>The maximum level allowed for this ability, or null if there is no level limit.</value>
+            <remarks>
+            The maximum level determines how many times an ability can be upgraded or improved.
+            Some abilities may not have level restrictions and can be upgraded indefinitely.
+            </remarks>
+        </member>
+        <member name="P:GameCore.AbilitySystem.Ability.IsGrantedByItem">
+            <summary>
+            Gets a value indicating whether this ability is granted by an item.
+            </summary>
+            <value>True if the ability comes from an equipped or possessed item; otherwise, false.</value>
+            <remarks>
+            Item-granted abilities typically have special behaviors such as persisting through
+            unit transformations and being removed when the item is unequipped or destroyed.
+            </remarks>
+        </member>
+        <member name="P:GameCore.AbilitySystem.Ability.IsPersistDuringMorph">
+            <summary>
+            Gets a value indicating whether this ability persists when the unit undergoes morphing or transformation.
+            </summary>
+            <value>True if the ability should remain active during morph effects; otherwise, false.</value>
+            <remarks>
+            Abilities can be configured to persist through unit transformations either through explicit
+            configuration or by being granted by items. This is important for maintaining unit capabilities
+            during temporary transformation effects.
+            </remarks>
+        </member>
+        <member name="P:GameCore.AbilitySystem.Ability.ShouldPersistDuringMorph">
+            <summary>
+            Gets or sets a value indicating whether this ability should persist during morphing operations.
+            </summary>
+            <value>True if the ability should remain available during transformations; otherwise, false.</value>
+            <remarks>
+            This property controls whether the ability remains accessible when the unit is transformed.
+            It can be set either from the ability's configuration data or modified dynamically.
+            </remarks>
+        </member>
+        <member name="P:GameCore.AbilitySystem.Ability.Paused">
+            <summary>
+            Gets a value indicating whether the ability is currently paused.
+            </summary>
+            <value>True if the ability is paused and not actively processing; otherwise, false.</value>
+            <remarks>
+            Paused abilities do not execute their periodic effects or update their states.
+            This is used for temporarily suspending ability functionality without removing the ability.
+            </remarks>
+        </member>
+        <member name="M:GameCore.AbilitySystem.Ability.Replace(GameData.IGameLink{GameCore.AbilitySystem.Data.GameDataAbility})">
+            <summary>
+            Replaces the current ability's data configuration with a new data link.
+            </summary>
+            <param name="link">The new ability data link to apply to this ability.</param>
+            <returns>True if the replacement was successful; otherwise, false.</returns>
+            <remarks>
+            This method allows dynamic modification of ability behavior by changing its underlying
+            data configuration. The replacement will fail if the provided link contains invalid data.
+            This is useful for ability evolution, morphing effects, or item-based ability modifications.
+            </remarks>
+        </member>
+        <member name="M:GameCore.AbilitySystem.Ability.ToString">
+            <summary>
+            Returns a string representation of this ability.
+            </summary>
+            <returns>A formatted string containing the ability's type, friendly name, and sync ID.</returns>
+        </member>
+        <member name="P:GameCore.AbilitySystem.Ability.SyncIdType">
+            <summary>
+            Gets the synchronization ID type for this ability.
+            </summary>
+            <value>The sync ID type indicating this is an ability object.</value>
+        </member>
+        <member name="M:GameCore.AbilitySystem.Ability.#ctor(GameCore.EntitySystem.Unit,GameData.IGameLink{GameCore.AbilitySystem.Data.GameDataAbility},GameCore.ItemSystem.Item,GameCore.AbilitySystem.Ability@)">
+            <summary>
+            Initializes a new ability instance attached to the specified unit.
+            </summary>
+            <param name="host">The unit that will own this ability.</param>
+            <param name="link">The game data link defining the ability's configuration.</param>
+            <param name="item">The item that grants this ability, or null if it's a native ability.</param>
+            <param name="ability">Returns the final ability instance after manager processing.</param>
+            <exception cref="T:System.ArgumentException">Thrown when the provided link has invalid data.</exception>
+            <remarks>
+            This constructor sets up the ability with all necessary components including modification management,
+            state tracking, cooldown integration, and manager registration. The ability may be processed or
+            modified by the manager before being returned as the final instance.
+            </remarks>
+        </member>
+        <member name="M:GameCore.AbilitySystem.Ability.GameCore#BaseInterface#IAttachedObject{GameCore#AbilitySystem#Ability,GameCore#AbilitySystem#Data#GameDataAbility}#OnAttached">
+            <summary>
+            Handles the ability attachment process and initializes active functionality.
+            </summary>
+            <remarks>
+            This method is called when the ability is successfully attached to its host unit.
+            It initializes response handlers, refreshes states and modifications on the server,
+            and sets up passive periodic effects if configured.
+            </remarks>
+        </member>
+        <member name="M:GameCore.AbilitySystem.Ability.DisposeManaged">
+            <summary>
+            Releases managed resources used by this ability.
+            </summary>
+            <remarks>
+            This method cleans up all ability resources including timers, event handlers, cooldowns,
+            and manager registrations. It ensures proper cleanup when the ability is removed from its host.
+            </remarks>
+        </member>
+        <member name="P:GameCore.AbilitySystem.Ability.GameCore#ActorSystem#IActorScope#Id">
+            <summary />
+        </member>
+        <member name="P:GameCore.AbilitySystem.Ability.GameCore#ActorSystem#IActorScopeContext#Link">
+            <summary />
+        </member>
+        <member name="P:GameCore.AbilitySystem.Ability.GameCore#ActorSystem#IActorScope#MainActor">
+            <summary />
+        </member>
+        <member name="P:GameCore.AbilitySystem.Ability.DisableOnDeath">
+            <summary />
+        </member>
+        <member name="P:GameCore.AbilitySystem.Ability.Link">
+            <summary />
+        </member>
+        <member name="P:GameCore.AbilitySystem.Ability.Cache">
+            <summary />
+        </member>
+        <member name="P:GameCore.AbilitySystem.Ability.GameCore#BaseInterface#IAttachedObject{GameCore#AbilitySystem#Ability,GameCore#AbilitySystem#Data#GameDataAbility}#Manager">
+            <summary />
+        </member>
+        <member name="P:GameCore.AbilitySystem.Ability.IsLinkEnabled">
+            <summary />
+        </member>
+        <member name="P:GameCore.AbilitySystem.Ability.GameCore#BaseInterface#ICooldownOwner#CooldownHost">
+            <summary />
+        </member>
+        <member name="P:GameCore.AbilitySystem.Ability.GameCore#BaseInterface#ICooldownOwner#LazyCooldownPool">
+            <summary />
+        </member>
+        <member name="P:GameCore.AbilitySystem.Ability.DisplayCache">
+            <summary />
+        </member>
+        <member name="P:GameCore.AbilitySystem.Ability.GameCore#DisplayInfo#IDisplayInfo#Level">
+            <summary>
+            Gets the current level value for display purposes, or <see langword="null" /> if the level is not set.
+            </summary>
+        </member>
+        <member name="P:GameCore.AbilitySystem.Ability.GameCore#Interface#IExecutionContext#Caster">
+            <summary />
+        </member>
+        <member name="P:GameCore.AbilitySystem.Ability.GameCore#Interface#IExecutionContext#Ability">
+            <summary />
+        </member>
+        <member name="P:GameCore.AbilitySystem.Ability.GameCore#Interface#IExecutionContext#Order">
+            <summary />
+        </member>
+        <member name="P:GameCore.AbilitySystem.Ability.GameCore#Interface#IExecutionContext#FactoryParent">
+            <summary />
+        </member>
+        <member name="P:GameCore.AbilitySystem.Ability.Item">
+            <summary />
+        </member>
+        <member name="F:GameCore.AbilitySystem.Ability.level">
+            <summary />
+        </member>
+        <member name="P:GameCore.AbilitySystem.Ability.Level">
+            <summary />
+        </member>
+        <member name="M:GameCore.AbilitySystem.Ability.SetLevelFromReplication(System.UInt32)">
+            <summary />
+            <param name="newLevel" />
+            <returns />
+        </member>
+        <member name="P:GameCore.AbilitySystem.Ability.GameData#Interface#IGameObject#Link">
+            <summary />
+        </member>
+        <member name="P:GameCore.AbilitySystem.Ability.GameData#Interface#IGameObject#Cache">
+            <summary />
+        </member>
+        <member name="T:GameCore.AbilitySystem.AbilityActive">
+            <summary />
+            <summary>
+            表示具有主动行为的技能（Ability），支持多段、冷却等机制。
+            </summary>
+            <summary />
+            <summary />
+            <summary />
+        </member>
+        <member name="P:GameCore.AbilitySystem.AbilityActive.SwingController">
+            <summary />
+        </member>
+        <member name="M:GameCore.AbilitySystem.AbilityActive.EnsureSwingController">
+            <summary />
+            <returns />
+        </member>
+        <member name="M:GameCore.AbilitySystem.AbilityActive.OnAnimationState(GameCore.OrderSystem.OrderStage)">
+            <summary />
+            <param name="stage" />
+            <returns />
+        </member>
+        <member name="P:GameCore.AbilitySystem.AbilityActive.Cooldown">
+            <summary>
+            获取主动技能的冷却对象。
+            </summary>
+        </member>
+        <member name="P:GameCore.AbilitySystem.AbilityActive.Charge">
+            <summary>
+            获取主动技能的充能对象。
+            </summary>
+        </member>
+        <member name="M:GameCore.AbilitySystem.AbilityActive.GetCooldown(GameCore.BaseType.CooldownType)">
+            <summary>
+            根据类型获取对应的冷却对象。
+            </summary>
+            <param name="type">冷却类型。</param>
+            <returns>对应的冷却对象或 null。</returns>
+        </member>
+        <member name="M:GameCore.AbilitySystem.AbilityActive.DisposeManaged">
+            <summary />
+            <returns />
+        </member>
+        <member name="M:GameCore.AbilitySystem.AbilityActive.NotifyPhaseChange(System.Int32)">
+            <summary />
+            <param name="phaseValue" />
+            <returns />
+        </member>
+        <member name="T:GameCore.AbilitySystem.AbilityActive.PhaseInfoStruct">
+            <summary>
+            阶段信息结构体。
+            </summary>
+        </member>
+        <member name="M:GameCore.AbilitySystem.AbilityActive.PhaseInfoStruct.#ctor(GameCore.AbilitySystem.Ability)">
+            <summary>
+            阶段信息结构体。
+            </summary>
+        </member>
+        <member name="F:GameCore.AbilitySystem.AbilityActive.PhaseInfoStruct.ability">
+            <summary />
+        </member>
+        <member name="P:GameCore.AbilitySystem.AbilityActive.PhaseInfoStruct.PhaseSettings">
+            <summary>
+            阶段设置列表。
+            </summary>
+        </member>
+        <member name="P:GameCore.AbilitySystem.AbilityActive.PhaseInfoStruct.Duration">
+            <summary>
+            当前阶段的持续时间。
+            </summary>
+        </member>
+        <member name="P:GameCore.AbilitySystem.AbilityActive.PhaseInfoStruct.CurrentPhase">
+            <summary>
+            当前阶段索引。
+            </summary>
+        </member>
+        <member name="E:GameCore.AbilitySystem.AbilityActive.PhaseInfoStruct.OnPhaseChanged">
+            <summary>
+            阶段变化事件。
+            </summary>
+        </member>
+        <member name="M:GameCore.AbilitySystem.AbilityActive.PhaseInfoStruct.NotifyPhaseChange(System.Int32)">
+            <summary />
+            <param name="_" />
+            <returns />
+        </member>
+        <member name="P:GameCore.AbilitySystem.AbilityActive.PhaseInfo">
+            <summary>
+            获取或设置阶段信息。
+            </summary>
+        </member>
+        <member name="P:GameCore.AbilitySystem.AbilityActive.IsMultiPhase">
+            <summary>
+            指示该技能是否为多阶段技能。
+            </summary>
+        </member>
+        <member name="P:GameCore.AbilitySystem.AbilityActive.GameCore#CostSystem#ICostSpender#Cooldown">
+            <summary />
+        </member>
+        <member name="P:GameCore.AbilitySystem.AbilityActive.GameCore#CostSystem#ICostSpender#Charge">
+            <summary />
+        </member>
+        <member name="P:GameCore.AbilitySystem.AbilityActive.GameCore#DisplayInfo#IDisplayInfo#Stack">
+            <summary />
+        </member>
+        <member name="P:GameCore.AbilitySystem.AbilityActive.GameCore#DisplayInfo#IDisplayInfo#Cooldown">
+            <summary />
+        </member>
+        <member name="P:GameCore.AbilitySystem.AbilityActive.GameCore#DisplayInfo#IDisplayInfo#CoolDownMax">
+            <summary />
+        </member>
+        <member name="P:GameCore.AbilitySystem.AbilityActive.GameCore#DisplayInfo#IDisplayInfo#ChargeCooldown">
+            <summary />
+        </member>
+        <member name="P:GameCore.AbilitySystem.AbilityActive.GameCore#DisplayInfo#IDisplayInfo#ChargeCooldownMax">
+            <summary />
+        </member>
+        <member name="P:GameCore.AbilitySystem.AbilityActive.Link">
+            <summary />
+        </member>
+        <member name="P:GameCore.AbilitySystem.AbilityActive.Cache">
+            <summary />
+        </member>
+        <member name="M:GameCore.AbilitySystem.AbilityActive.#ctor(GameCore.EntitySystem.Unit,GameData.IGameLink{GameCore.AbilitySystem.Data.GameDataAbilityActive},GameCore.ItemSystem.Item,GameCore.AbilitySystem.Ability@)">
+            <summary />
+        </member>
+        <member name="T:GameCore.AbilitySystem.AbilityExecute">
+            <summary>
+            表示可执行的技能，如主动技能、攻击技能等。
+            继承自 <see cref="T:GameCore.AbilitySystem.AbilityActive" />，提供即时执行的技能功能。
+            </summary>
+            <remarks>
+            该类是技能系统中最常用的技能类型，用于实现各种主动释放的技能。
+            攻击技能也是通过此类实现，通过设置 <see cref="P:GameCore.AbilitySystem.AbilityExecute.IsAttack" /> 标志来区分。
+            </remarks>
+            <summary />
+            <summary />
+        </member>
+        <member name="P:GameCore.AbilitySystem.AbilityExecute.IsAttack">
+            <summary>
+            获取技能是否为攻击技能。
+            <para><strong>重要</strong>：只有当数编表中的 <see cref="P:GameCore.AbilitySystem.Data.Struct.AbilityExecuteFlags.IsAttack" /> 设置为 <see langword="true" /> 时，该技能才能被 <see cref="F:GameCore.OrderSystem.CommandIndex.Attack" /> 指令使用。</para></summary>
+            <value>
+                <see langword="true" /> 表示该技能是攻击技能，可以被攻击指令调用；
+            <see langword="false" /> 表示该技能不是攻击技能，只能通过技能指令直接调用。
+            </value>
+            <example>
+                <code>
+            // 检查单位是否有攻击技能
+            var abilityManager = unit.GetComponent&lt;AbilityManager&gt;();
+            var attackAbility = abilityManager?.GetValidAttack();
+            
+            if (attackAbility?.IsAttack == true)
+            {
+                // 可以使用攻击指令
+                var attackCommand = new Command
+                {
+                    Index = CommandIndex.Attack,
+                    Target = enemy
+                };
+                attackCommand.IssueOrder(unit);
+            }
+            </code>
+            </example>
+            <seealso cref="P:GameCore.AbilitySystem.Data.Struct.AbilityExecuteFlags.IsAttack" />
+            <seealso cref="F:GameCore.OrderSystem.CommandIndex.Attack" />
+        </member>
+        <member name="P:GameCore.AbilitySystem.AbilityExecute.Range">
+            <summary>
+            获取技能的有效范围。
+            该值由数编表中的 <see cref="P:GameCore.AbilitySystem.Data.GameDataAbilityExecute.Range" /> 函数计算得出。
+            </summary>
+            <value>技能的有效作用距离，单位为游戏世界单位。</value>
+        </member>
+        <member name="P:GameCore.AbilitySystem.AbilityExecute.AlwaysAcquireTarget">
+            <summary>
+            获取无目标和向量目标技能是否总是获取目标。
+            <para>该属性仅对 <see cref="F:GameCore.AbilitySystem.Data.Enum.AbilityTargetType.None" /> 和 <see cref="F:GameCore.AbilitySystem.Data.Enum.AbilityTargetType.Vector" /> 目标类型的技能生效。</para><para>对于其他目标类型的技能，此属性始终返回 <see langword="true" />。</para></summary>
+            <value>
+            对于无目标和向量目标技能，返回 <see cref="P:GameCore.AbilitySystem.Data.Struct.AbilityExecuteFlags.AlwaysAcquireTarget" /> 的值；
+            对于其他目标类型的技能，始终返回 <see langword="true" />。
+            </value>
+        </member>
+        <member name="M:GameCore.AbilitySystem.AbilityExecute.Replace(GameData.IGameLink{GameCore.AbilitySystem.Data.GameDataAbility})">
+            <summary>
+            替换当前技能的数据链接。
+            只有当新链接指向的是 <see cref="T:GameCore.AbilitySystem.Data.GameDataAbilityExecute" /> 类型的数据时才能成功替换。
+            </summary>
+            <param name="link">新的技能数据链接。</param>
+            <returns>如果替换成功返回 <see langword="true" />；否则返回 <see langword="false" />。</returns>
+        </member>
+        <member name="P:GameCore.AbilitySystem.AbilityExecute.Link">
+            <summary />
+        </member>
+        <member name="P:GameCore.AbilitySystem.AbilityExecute.Cache">
+            <summary />
+        </member>
+        <member name="M:GameCore.AbilitySystem.AbilityExecute.#ctor(GameCore.EntitySystem.Unit,GameData.IGameLink{GameCore.AbilitySystem.Data.GameDataAbilityExecute},GameCore.ItemSystem.Item,GameCore.AbilitySystem.Ability@)">
+            <summary />
+        </member>
+        <member name="P:GameCore.AbilitySystem.AbilityExecute.ActorScope">
+            <summary />
+        </member>
+        <member name="P:GameCore.AbilitySystem.AbilityExecute.Source">
+            <summary />
+        </member>
+        <member name="P:GameCore.AbilitySystem.AbilityExecute.VectorConeAngle">
+            <summary />
+        </member>
+        <member name="P:GameCore.AbilitySystem.AbilityExecute.CursorRadius">
+            <summary />
+        </member>
+        <member name="P:GameCore.AbilitySystem.AbilityExecute.VectorLineWidth">
+            <summary />
+        </member>
+        <member name="P:GameCore.AbilitySystem.AbilityExecute.GameCore#TargetingSystem#ITargetingInfo#Range">
+            <summary />
+        </member>
+        <member name="P:GameCore.AbilitySystem.AbilityExecute.AllowApproachBeyondRange">
+            <summary />
+        </member>
+        <member name="P:GameCore.AbilitySystem.AbilityExecute.TargetingHighlightFilter">
+            <summary />
+        </member>
+        <member name="P:GameCore.AbilitySystem.AbilityExecute.VectorHighlightLimit">
+            <summary />
+        </member>
+        <member name="T:GameCore.AbilitySystem.AbilityMorph">
+            <summary />
+            <summary />
+        </member>
+        <member name="P:GameCore.AbilitySystem.AbilityMorph.IsPersistDuringMorph">
+            <summary>
+            Don't remove the morphing ability itself when morphed
+            </summary>
+        </member>
+        <member name="P:GameCore.AbilitySystem.AbilityMorph.Link">
+            <summary />
+        </member>
+        <member name="P:GameCore.AbilitySystem.AbilityMorph.Cache">
+            <summary />
+        </member>
+        <member name="M:GameCore.AbilitySystem.AbilityMorph.#ctor(GameCore.EntitySystem.Unit,GameData.IGameLink{GameCore.AbilitySystem.Data.GameDataAbilityMorph},GameCore.ItemSystem.Item,GameCore.AbilitySystem.Ability@)">
+            <summary />
+        </member>
+        <member name="T:GameCore.AbilitySystem.AbilityToggle">
+            <summary />
+            <summary />
+        </member>
+        <member name="P:GameCore.AbilitySystem.AbilityToggle.ToggledOn">
+            <summary />
+        </member>
+        <member name="M:GameCore.AbilitySystem.AbilityToggle.DisposeManaged">
+            <summary />
+            <returns />
+        </member>
+        <member name="P:GameCore.AbilitySystem.AbilityToggle.Link">
+            <summary />
+        </member>
+        <member name="P:GameCore.AbilitySystem.AbilityToggle.Cache">
+            <summary />
+        </member>
+        <member name="M:GameCore.AbilitySystem.AbilityToggle.#ctor(GameCore.EntitySystem.Unit,GameData.IGameLink{GameCore.AbilitySystem.Data.GameDataAbilityToggle},GameCore.ItemSystem.Item,GameCore.AbilitySystem.Ability@)">
+            <summary />
+        </member>
+        <member name="T:GameCore.AbilitySystem.Data.GameDataAbility">
+            <summary>
+            表示游戏中技能（Ability）的数据定义，包括技能的显示信息、属性修改、状态变更、响应、图标等。
+            用于驱动技能的创建、同步、被动效果、目标类型等核心逻辑。
+            </summary>
+            <summary />
+            <summary />
+        </member>
+        <member name="P:GameCore.AbilitySystem.Data.GameDataAbility.DisplayName">
+            <summary>
+            技能的本地化显示名称。
+            </summary>
+        </member>
+        <member name="P:GameCore.AbilitySystem.Data.GameDataAbility.Description">
+            <summary>
+            技能的本地化描述。
+            </summary>
+        </member>
+        <member name="P:GameCore.AbilitySystem.Data.GameDataAbility.SyncType">
+            <summary>
+            技能的同步类型，决定同步范围（如自身或视野内）。
+            </summary>
+        </member>
+        <member name="P:GameCore.AbilitySystem.Data.GameDataAbility.Flags">
+            <summary>
+            技能的标志位，控制技能的特殊行为（如被动、可切换等）。
+            </summary>
+        </member>
+        <member name="P:GameCore.AbilitySystem.Data.GameDataAbility.PassivePeriod">
+            <summary>
+            被动技能的周期（如定时触发）。
+            </summary>
+        </member>
+        <member name="P:GameCore.AbilitySystem.Data.GameDataAbility.PassivePeriodicEffect">
+            <summary>
+            被动周期性触发的效果。
+            </summary>
+        </member>
+        <member name="P:GameCore.AbilitySystem.Data.GameDataAbility.LevelMax">
+            <summary>
+            技能的最大等级。
+            </summary>
+        </member>
+        <member name="P:GameCore.AbilitySystem.Data.GameDataAbility.TargetType">
+            <summary>
+            技能的目标类型（如单体、范围、自身等）。
+            </summary>
+        </member>
+        <member name="P:GameCore.AbilitySystem.Data.GameDataAbility.Categories">
+            <summary>
+            技能所属的分类列表。
+            </summary>
+        </member>
+        <member name="P:GameCore.AbilitySystem.Data.GameDataAbility.Modifications">
+            <summary>
+            技能对单位属性的修改列表。
+            </summary>
+        </member>
+        <member name="P:GameCore.AbilitySystem.Data.GameDataAbility.AddStates">
+            <summary>
+            技能添加的单位状态列表。
+            </summary>
+        </member>
+        <member name="P:GameCore.AbilitySystem.Data.GameDataAbility.RemoveStates">
+            <summary>
+            技能移除的单位状态列表。
+            </summary>
+        </member>
+        <member name="P:GameCore.AbilitySystem.Data.GameDataAbility.ImmuneStates">
+            <summary>
+            技能赋予免疫的单位状态列表。
+            </summary>
+        </member>
+        <member name="P:GameCore.AbilitySystem.Data.GameDataAbility.Responses">
+            <summary>
+            技能触发的响应（如被动触发、命中触发等）。
+            </summary>
+        </member>
+        <member name="P:GameCore.AbilitySystem.Data.GameDataAbility.Icon">
+            <summary>
+            技能的图标信息。
+            </summary>
+        </member>
+        <member name="P:GameCore.AbilitySystem.Data.GameDataAbility.ActorArray">
+            <summary>
+            技能相关的特效/表现Actor数组。
+            </summary>
+        </member>
+        <member name="P:GameCore.AbilitySystem.Data.GameDataAbility.GameCore#ActorSystem#Data#IGameDataActorScopeOwner#ImpactActors">
+            <summary />
+        </member>
+        <member name="P:GameCore.AbilitySystem.Data.GameDataAbility.GameCore#BaseInterface#IAttachedData#Categories">
+            <summary />
+        </member>
+        <member name="P:GameCore.AbilitySystem.Data.GameDataAbility.GameData#IGameData{GameCore#ActorSystem#Data#IGameDataActorScopeOwner}#Link">
+            <summary />
+        </member>
+        <member name="M:GameCore.AbilitySystem.Data.GameDataAbility.CreateAbility(GameCore.EntitySystem.Unit,GameCore.ItemSystem.Item)">
+            <summary>
+            创建技能实例。
+            </summary>
+            <param name="owner">技能所属单位。</param>
+            <param name="item">（可选）技能关联的物品。</param>
+            <returns>新建的Ability实例。</returns>
+        </member>
+        <member name="M:GameCore.AbilitySystem.Data.GameDataAbility.Replicate(GameCore.BaseInterface.ICooldownHost,System.Nullable{System.Int32})">
+            <summary>
+            客户端复制技能对象，用于同步。
+            </summary>
+            <param name="host">冷却宿主。</param>
+            <param name="syncId">同步ID。</param>
+            <returns>复制的技能对象。</returns>
+        </member>
+        <member name="F:GameCore.AbilitySystem.Data.GameDataAbility.aggregator">
+            <summary />
+        </member>
+        <member name="F:GameCore.AbilitySystem.Data.GameDataAbility.aggregatorWeakReference">
+            <summary />
+        </member>
+        <member name="P:GameCore.AbilitySystem.Data.GameDataAbility.Events#IEventSender#Aggregator">
+            <summary />
+        </member>
+        <member name="P:GameCore.AbilitySystem.Data.GameDataAbility.AggregatorWeakReference">
+            <summary />
+        </member>
+        <member name="P:GameCore.AbilitySystem.Data.GameDataAbility.DebugDrawSettings">
+            <summary />
+        </member>
+        <member name="T:GameCore.AbilitySystem.Data.GameDataAbilityActive">
+            <summary />
+        </member>
+        <member name="P:GameCore.AbilitySystem.Data.GameDataAbilityActive.Effect">
+            <summary />
+        </member>
+        <member name="P:GameCore.AbilitySystem.Data.GameDataAbilityActive.AbilityActiveFlags">
+            <summary />
+        </member>
+        <member name="P:GameCore.AbilitySystem.Data.GameDataAbilityActive.SpellInterruptConfig">
+            <summary />
+        </member>
+        <member name="P:GameCore.AbilitySystem.Data.GameDataAbilityActive.Time">
+            <summary />
+        </member>
+        <member name="P:GameCore.AbilitySystem.Data.GameDataAbilityActive.LogExecutionFailure">
+            <summary />
+        </member>
+        <member name="P:GameCore.AbilitySystem.Data.GameDataAbilityActive.Cost">
+            <summary />
+        </member>
+        <member name="P:GameCore.AbilitySystem.Data.GameDataAbilityActive.AbilityPhaseSettings">
+            <summary />
+        </member>
+        <member name="P:GameCore.AbilitySystem.Data.GameDataAbilityActive.Animation">
+            <summary>
+            If set, the animation will be played when the ability is casting. When multiple animations are provided, a random one will be selected for each cast.
+            </summary>
+        </member>
+        <member name="T:GameCore.AbilitySystem.Data.GameDataAbilityExecute">
+            <summary>
+            可执行技能的数编表数据，用于配置主动技能和攻击技能的各种属性和行为。
+            该类定义了技能的执行参数、目标获取设置、范围计算等核心配置。
+            </summary>
+            <remarks>
+                <para>该数编表是技能系统中最重要的配置类之一，通过 <see cref="M:GameCore.AbilitySystem.Data.GameDataAbilityExecute.CreateAbility(GameCore.EntitySystem.Unit,GameCore.ItemSystem.Item)" /> 方法创建 <see cref="T:GameCore.AbilitySystem.AbilityExecute" /> 实例。</para>
+                <para>
+                    <strong>攻击技能配置</strong>：要使技能能够被攻击指令使用，必须设置 <see cref="P:GameCore.AbilitySystem.Data.GameDataAbilityExecute.AbilityExecuteFlags" />.<see cref="P:GameCore.AbilitySystem.Data.Struct.AbilityExecuteFlags.IsAttack" /> = <see langword="true" />。</para>
+            </remarks>
+            <example>
+                <code>
+            // 配置攻击技能
+            var swordAttackData = new GameDataAbilityExecute
+            {
+                AbilityExecuteFlags = new AbilityExecuteFlags 
+                { 
+                    IsAttack = true  // 关键：标记为攻击技能
+                },
+                Range = static (_) =&gt; 150f,  // 攻击范围
+                Arc = Angle.FromDegree(90),  // 攻击弧度
+                // 其他配置...
+            };
+            
+            // 配置普通技能
+            var fireballData = new GameDataAbilityExecute
+            {
+                AbilityExecuteFlags = new AbilityExecuteFlags 
+                { 
+                    IsAttack = false  // 不是攻击技能，只能通过技能指令使用
+                },
+                Range = static (_) =&gt; 300f,
+                // 其他配置...
+            };
+            </code>
+            </example>
+        </member>
+        <member name="P:GameCore.AbilitySystem.Data.GameDataAbilityExecute.AbilityExecuteFlags">
+            <summary>
+            获取或设置技能的执行标志配置。
+            <para><strong>重要</strong>：<see cref="P:GameCore.AbilitySystem.Data.Struct.AbilityExecuteFlags.IsAttack" /> 标志决定了技能是否能被攻击指令使用。</para></summary>
+            <value>技能执行标志的配置对象，包含 <see cref="P:GameCore.AbilitySystem.Data.Struct.AbilityExecuteFlags.IsAttack" /> 等重要属性。</value>
+            <remarks>
+            这是攻击技能配置的关键属性。如果要创建攻击技能，必须设置：
+            <code>AbilityExecuteFlags = new AbilityExecuteFlags { IsAttack = true }</code></remarks>
+            <seealso cref="T:GameCore.AbilitySystem.Data.Struct.AbilityExecuteFlags" />
+            <seealso cref="P:GameCore.AbilitySystem.Data.Struct.AbilityExecuteFlags.IsAttack" />
+        </member>
+        <member name="P:GameCore.AbilitySystem.Data.GameDataAbilityExecute.Arc">
+            <summary>
+            获取或设置技能的作用弧度。
+            定义技能影响的角度范围，通常用于扇形攻击或锥形技能。
+            </summary>
+            <value>技能作用的弧度角度。</value>
+        </member>
+        <member name="P:GameCore.AbilitySystem.Data.GameDataAbilityExecute.ArcSlop">
+            <summary>
+            获取或设置技能弧度的容差角度。
+            用于在目标获取时提供一定的角度容差，提升游戏体验。
+            </summary>
+            <value>弧度容差角度，默认为 12 度。</value>
+        </member>
+        <member name="P:GameCore.AbilitySystem.Data.GameDataAbilityExecute.Range">
+            <summary>
+            获取或设置技能的有效范围计算函数。
+            该函数接收技能实例作为参数，返回技能的有效作用距离。
+            </summary>
+            <value>范围计算函数，默认返回 0（无范围限制或接触范围）。</value>
+            <remarks>
+            该函数在运行时被调用以动态计算技能范围，可以根据技能等级、装备等因素进行调整。
+            </remarks>
+            <example>
+                <code>
+            // 固定范围
+            Range = static (_) =&gt; 150f;
+            
+            // 根据技能等级调整范围
+            Range = ability =&gt; 100f + ability.Level * 10f;
+            </code>
+            </example>
+        </member>
+        <member name="P:GameCore.AbilitySystem.Data.GameDataAbilityExecute.TargetingIndicatorInfo">
+            <summary>
+            获取或设置技能的目标指示器信息。
+            用于配置技能在选择目标时的视觉提示和交互行为。
+            </summary>
+            <value>目标指示器配置信息，如果为 <see langword="null" /> 则使用默认配置。</value>
+        </member>
+        <member name="P:GameCore.AbilitySystem.Data.GameDataAbilityExecute.AcquireSettings">
+            <summary>
+            获取或设置技能的目标获取设置。
+            配置技能如何选择和过滤目标，包括目标类型过滤器等。
+            </summary>
+            <value>目标获取设置配置。</value>
+        </member>
+        <member name="M:GameCore.AbilitySystem.Data.GameDataAbilityExecute.CreateAbility(GameCore.EntitySystem.Unit,GameCore.ItemSystem.Item)">
+            <summary>
+            创建技能实例。
+            根据当前数编表配置创建一个 <see cref="T:GameCore.AbilitySystem.AbilityExecute" /> 技能实例。
+            </summary>
+            <param name="owner">技能的拥有者单位。</param>
+            <param name="item">关联的物品（可选），通常用于装备技能。</param>
+            <returns>创建的技能实例。</returns>
+            <remarks>
+            该方法是技能系统的工厂方法，由框架在添加技能时自动调用。
+            </remarks>
+        </member>
+        <member name="T:GameCore.AbilitySystem.Data.GameDataAbilityMorph">
+            <summary />
+        </member>
+        <member name="P:GameCore.AbilitySystem.Data.GameDataAbilityMorph.MorphUnit">
+            <summary />
+        </member>
+        <member name="P:GameCore.AbilitySystem.Data.GameDataAbilityMorph.MorphFlags">
+            <summary />
+        </member>
+        <member name="M:GameCore.AbilitySystem.Data.GameDataAbilityMorph.CreateAbility(GameCore.EntitySystem.Unit,GameCore.ItemSystem.Item)">
+            <summary />
+            <param name="owner" />
+            <param name="item" />
+            <returns />
+        </member>
+        <member name="T:GameCore.AbilitySystem.Data.GameDataAbilityToggle">
+            <summary />
+        </member>
+        <member name="P:GameCore.AbilitySystem.Data.GameDataAbilityToggle.EffectOff">
+            <summary />
+        </member>
+        <member name="P:GameCore.AbilitySystem.Data.GameDataAbilityToggle.IconOff">
+            <summary />
+        </member>
+        <member name="P:GameCore.AbilitySystem.Data.GameDataAbilityToggle.ToggleFlags">
+            <summary />
+        </member>
+        <member name="M:GameCore.AbilitySystem.Data.GameDataAbilityToggle.CreateAbility(GameCore.EntitySystem.Unit,GameCore.ItemSystem.Item)">
+            <summary />
+            <param name="owner" />
+            <param name="item" />
+            <returns />
+        </member>
+        <member name="T:GameCore.AbilitySystem.Data.Struct.AbilityActiveFlags">
+            <summary />
+        </member>
+        <member name="P:GameCore.AbilitySystem.Data.Struct.AbilityActiveFlags.Transient">
+            <summary />
+        </member>
+        <member name="P:GameCore.AbilitySystem.Data.Struct.AbilityActiveFlags.CanBeUsedOnDead">
+            <summary />
+        </member>
+        <member name="P:GameCore.AbilitySystem.Data.Struct.AbilityActiveFlags.CanAutoCast">
+            <summary />
+        </member>
+        <member name="P:GameCore.AbilitySystem.Data.Struct.AbilityActiveFlags.AutoCastInitOn">
+            <summary />
+        </member>
+        <member name="P:GameCore.AbilitySystem.Data.Struct.AbilityActiveFlags.AllowEnqueueInCooldown">
+            <summary>
+            是否可以在冷却中下达指令，用于技能的连续释放，技能依然需要等待冷却完成才能进入前摇
+            </summary>
+        </member>
+        <member name="T:GameCore.AbilitySystem.Data.Struct.AbilityExecuteFlags">
+            <summary>
+            技能执行标志配置，用于控制技能的执行行为和特性。
+            这些标志决定了技能如何与指令系统交互，特别是攻击指令的处理方式。
+            </summary>
+        </member>
+        <member name="P:GameCore.AbilitySystem.Data.Struct.AbilityExecuteFlags.InfiniteCasting">
+            <summary>
+            获取或设置技能是否可以无限施法。
+            当设置为 true 时，技能可以持续施法而不会自动停止。
+            </summary>
+            <remarks>
+            TODO: SCE-19755 InfiniteCasting
+            https://xindong.atlassian.net/browse/SCE-19755 
+            </remarks>
+        </member>
+        <member name="P:GameCore.AbilitySystem.Data.Struct.AbilityExecuteFlags.IsAttack">
+            <summary>
+            获取或设置技能是否为攻击技能。
+            <para><strong>重要</strong>：只有设置为 <see langword="true" /> 的技能才能被 <see cref="F:GameCore.OrderSystem.CommandIndex.Attack" /> 指令使用。</para><para>攻击指令会自动查找单位的第一个有效攻击技能（<see cref="P:GameCore.AbilitySystem.Data.Struct.AbilityExecuteFlags.IsAttack" /> = true）来执行攻击。</para></summary>
+            <value>
+                <see langword="true" /> 表示该技能是攻击技能，可以被攻击指令调用；
+            <see langword="false" /> 表示该技能不是攻击技能，只能通过技能指令直接调用。
+            </value>
+            <example>
+                <code>
+            // 配置攻击技能
+            var weaponSkillData = new GameDataAbilityExecute
+            {
+                AbilityExecuteFlags = new AbilityExecuteFlags 
+                { 
+                    IsAttack = true  // 标记为攻击技能
+                }
+            };
+            
+            // 现在可以使用攻击指令
+            var attackCommand = new Command
+            {
+                Index = CommandIndex.Attack,  // 系统会自动找到上面的技能
+                Target = enemy
+            };
+            </code>
+            </example>
+            <seealso cref="F:GameCore.OrderSystem.CommandIndex.Attack" />
+            <seealso cref="P:GameCore.AbilitySystem.AbilityExecute.IsAttack" />
+        </member>
+        <member name="P:GameCore.AbilitySystem.Data.Struct.AbilityExecuteFlags.AlwaysAcquireTarget">
+            <summary>
+            获取或设置无目标和向量目标技能是否总是获取目标。
+            <para>仅对 <see cref="F:GameCore.AbilitySystem.Data.Enum.AbilityTargetType.None" /> 和 <see cref="F:GameCore.AbilitySystem.Data.Enum.AbilityTargetType.Vector" /> 目标类型的技能生效。</para></summary>
+            <value>
+                <see langword="true" /> 表示技能总是尝试获取目标；
+            <see langword="false" /> 表示技能按默认规则处理目标获取。
+            </value>
+        </member>
+        <member name="P:GameCore.AbilitySystem.Data.Struct.AbilityExecuteFlags.Reapproachable">
+            <summary>
+            获取或设置技能是否可以重新接近目标。
+            当技能执行过程中目标移动超出范围时，是否允许重新接近。
+            </summary>
+            <remarks>
+            TODO: SCE-19756 Implement this
+            https://xindong.atlassian.net/browse/SCE-19756
+            </remarks>
+        </member>
+        <member name="T:GameCore.AbilitySystem.Data.Struct.AbilityFlags">
+            <summary />
+        </member>
+        <member name="P:GameCore.AbilitySystem.Data.Struct.AbilityFlags.Hidden">
+            <summary />
+        </member>
+        <member name="P:GameCore.AbilitySystem.Data.Struct.AbilityFlags.PersistDuringMorph">
+            <summary>
+            Decides if the ability will be removed from the unit when the unit morphs.
+            Morphing will remove all abilities that are not persistent, except for the morph ability itself, and any other morph abilities that are toggled on at that point.
+            </summary>
+        </member>
+        <member name="P:GameCore.AbilitySystem.Data.Struct.AbilityFlags.DisplayDescriptionOnLongClick">
+            <summary />
+        </member>
+        <member name="P:GameCore.AbilitySystem.Data.Struct.AbilityFlags.DisableWhenDead">
+            <summary>
+            If true, the ability will be disabled when the unit dies.
+            </summary>
+        </member>
+        <member name="T:GameCore.AbilitySystem.Data.Struct.AbilityPhaseSetting">
+            <summary />
+        </member>
+        <member name="P:GameCore.AbilitySystem.Data.Struct.AbilityPhaseSetting.ResetDuration">
+            <summary />
+        </member>
+        <member name="P:GameCore.AbilitySystem.Data.Struct.AbilityPhaseSetting.AutoIncreasePhase">
+            <summary />
+        </member>
+        <member name="P:GameCore.AbilitySystem.Data.Struct.AbilityPhaseSetting.Link">
+            <summary />
+        </member>
+        <member name="T:GameCore.AbilitySystem.Data.Struct.AbilityToggleFlags">
+            <summary />
+        </member>
+        <member name="P:GameCore.AbilitySystem.Data.Struct.AbilityToggleFlags.ToggledOn">
+            <summary />
+        </member>
+        <member name="T:GameCore.AbilitySystem.Data.Struct.TargetingIndicatorInfo">
+            <summary />
+        </member>
+        <member name="P:GameCore.AbilitySystem.Data.Struct.TargetingIndicatorInfo.TargetingIndicator">
+            <summary />
+        </member>
+        <member name="P:GameCore.AbilitySystem.Data.Struct.TargetingIndicatorInfo.VectorConeAngle">
+            <summary />
+        </member>
+        <member name="P:GameCore.AbilitySystem.Data.Struct.TargetingIndicatorInfo.CursorRadius">
+            <summary />
+        </member>
+        <member name="P:GameCore.AbilitySystem.Data.Struct.TargetingIndicatorInfo.VectorLineWidth">
+            <summary />
+        </member>
+        <member name="P:GameCore.AbilitySystem.Data.Struct.TargetingIndicatorInfo.VectorHighlightLimit">
+            <summary>
+            Gets or sets the function that determines the maximum number of vector line highlights to display.
+            Only works when the targeting indicator have highlight actors set;
+            </summary>
+            <remarks>Use this property to define a custom logic for limiting the number of vector highlights.
+            Setting this property to <see langword="null" />  indicates
+            that all vector highlights will be displayed without restriction.</remarks>
+        </member>
+        <member name="T:GameCore.AbilitySystem.Manager.AbilityManager">
+            <summary />
+            <summary />
+        </member>
+        <member name="M:GameCore.AbilitySystem.Manager.AbilityManager.#ctor(GameCore.EntitySystem.Entity)">
+            <summary />
+        </member>
+        <member name="P:GameCore.AbilitySystem.Manager.AbilityManager.ObjectType">
+            <summary />
+        </member>
+        <member name="M:GameCore.AbilitySystem.Manager.AbilityManager.CreateInstance(GameCore.EntitySystem.Entity)">
+            <summary />
+            <param name="content" />
+            <returns />
+        </member>
+        <member name="M:GameCore.AbilitySystem.Manager.AbilityManager.Add(GameCore.AbilitySystem.Ability)">
+            <summary />
+            <param name="ability" />
+            <returns />
+        </member>
+        <member name="M:GameCore.AbilitySystem.Manager.AbilityManager.Remove(GameCore.AbilitySystem.Ability)">
+            <summary />
+            <param name="ability" />
+            <returns />
+        </member>
+        <member name="M:GameCore.AbilitySystem.Manager.AbilityManager.HasAbility(GameData.IGameLink{GameCore.AbilitySystem.Data.GameDataAbility})">
+            <summary>
+            检查是否有指定的技能
+            </summary>
+            <param name="abilityLink">技能数编Link</param>
+            <returns>如果存在指定技能则返回true</returns>
+        </member>
+        <member name="M:GameCore.AbilitySystem.Manager.AbilityManager.HasAnyAbility(GameData.IGameLink{GameCore.AbilitySystem.Data.GameDataAbility}[])">
+            <summary>
+            检查是否有任意一个指定的技能
+            </summary>
+            <param name="abilityLinks">技能数编Link数组</param>
+            <returns>如果存在任意一个指定技能则返回true</returns>
+        </member>
+        <member name="M:GameCore.AbilitySystem.Manager.AbilityManager.HasAllAbilities(GameData.IGameLink{GameCore.AbilitySystem.Data.GameDataAbility}[])">
+            <summary>
+            检查是否有所有指定的技能
+            </summary>
+            <param name="abilityLinks">技能数编Link数组</param>
+            <returns>如果存在所有指定技能则返回true</returns>
+        </member>
+        <member name="M:GameCore.AbilitySystem.Manager.AbilityManager.GetActivatedAbilities">
+            <summary>
+            获取所有激活的技能
+            </summary>
+            <returns>激活的技能集合</returns>
+        </member>
+        <member name="M:GameCore.AbilitySystem.Manager.AbilityManager.GetEnabledAbilities">
+            <summary>
+            获取所有启用的技能
+            </summary>
+            <returns>启用的技能集合</returns>
+        </member>
+        <member name="M:GameCore.AbilitySystem.Manager.AbilityManager.GetAbilitiesByTargetType(GameCore.AbilitySystem.Data.Enum.AbilityTargetType)">
+            <summary>
+            获取指定目标类型的技能
+            </summary>
+            <param name="targetType">技能目标类型</param>
+            <returns>指定目标类型的技能集合</returns>
+        </member>
+        <member name="M:GameCore.AbilitySystem.Manager.AbilityManager.GetPassiveAbilities">
+            <summary>
+            获取所有被动技能（非AbilityActive的技能）
+            </summary>
+            <returns>被动技能集合</returns>
+        </member>
+        <member name="M:GameCore.AbilitySystem.Manager.AbilityManager.GetActiveAbilities">
+            <summary>
+            获取所有主动技能（AbilityActive类型的技能）
+            </summary>
+            <returns>主动技能集合</returns>
+        </member>
+        <member name="M:GameCore.AbilitySystem.Manager.AbilityManager.RemoveByPredicate(System.Func{GameCore.AbilitySystem.Ability,System.Boolean})">
+            <summary>
+            按条件移除技能
+            </summary>
+            <param name="predicate">移除条件</param>
+            <returns>移除的技能数量</returns>
+        </member>
+        <member name="M:GameCore.AbilitySystem.Manager.AbilityManager.CountAbilities(System.Func{GameCore.AbilitySystem.Ability,System.Boolean})">
+            <summary>
+            统计指定类型的技能数量
+            </summary>
+            <param name="predicate">统计条件</param>
+            <returns>满足条件的技能数量</returns>
+        </member>
+        <member name="M:GameCore.AbilitySystem.Manager.AbilityManager.CountAbilitiesByTargetType(GameCore.AbilitySystem.Data.Enum.AbilityTargetType)">
+            <summary>
+            统计指定目标类型的技能数量
+            </summary>
+            <param name="targetType">技能目标类型</param>
+            <returns>指定目标类型的技能数量</returns>
+        </member>
+        <member name="M:GameCore.AbilitySystem.Manager.AbilityManager.CountPassiveAbilities">
+            <summary>
+            统计被动技能数量
+            </summary>
+            <returns>被动技能数量</returns>
+        </member>
+        <member name="M:GameCore.AbilitySystem.Manager.AbilityManager.CountActiveAbilities">
+            <summary>
+            统计主动技能数量
+            </summary>
+            <returns>主动技能数量</returns>
+        </member>
+        <member name="M:GameCore.AbilitySystem.Manager.AbilityManager.CountActivatedAbilities">
+            <summary>
+            统计激活技能数量
+            </summary>
+            <returns>激活技能数量</returns>
+        </member>
+        <member name="M:GameCore.AbilitySystem.Manager.AbilityManager.IsAbilityActivated(GameData.IGameLink{GameCore.AbilitySystem.Data.GameDataAbility})">
+            <summary>
+            检查指定技能是否激活
+            </summary>
+            <param name="abilityLink">技能数编Link</param>
+            <returns>如果技能激活则返回true</returns>
+        </member>
+        <member name="M:GameCore.AbilitySystem.Manager.AbilityManager.IsAbilityEnabled(GameData.IGameLink{GameCore.AbilitySystem.Data.GameDataAbility})">
+            <summary>
+            检查指定技能是否启用
+            </summary>
+            <param name="abilityLink">技能数编Link</param>
+            <returns>如果技能启用则返回true</returns>
+        </member>
+        <member name="M:GameCore.AbilitySystem.Manager.AbilityManager.GetValidAttacks">
+            <summary>
+            获取单位的所有有效攻击技能。
+            <para>有效攻击技能必须同时满足以下条件：</para><list type="bullet"><item><description><see cref="P:GameCore.AbilitySystem.AbilityExecute.IsAttack" /> = <see langword="true" /> （在数编表中设置 <see cref="P:GameCore.AbilitySystem.Data.Struct.AbilityExecuteFlags.IsAttack" /> = true）</description></item><item><description><see cref="!:Ability.IsValid" /> = <see langword="true" /> （技能有效）</description></item><item><description><see cref="!:Ability.IsEnabled" /> = <see langword="true" /> （技能启用）</description></item></list></summary>
+            <returns>所有满足条件的攻击技能的枚举。如果没有有效的攻击技能，返回空枚举。</returns>
+            <remarks>
+            该方法用于攻击指令系统查找可用的攻击技能。攻击指令会按顺序尝试这些技能。
+            </remarks>
+            <seealso cref="M:GameCore.AbilitySystem.Manager.AbilityManager.GetValidAttack" />
+            <seealso cref="P:GameCore.AbilitySystem.Data.Struct.AbilityExecuteFlags.IsAttack" />
+        </member>
+        <member name="M:GameCore.AbilitySystem.Manager.AbilityManager.GetValidAttack">
+            <summary>
+            获取单位的第一个有效攻击技能。
+            <para>有效攻击技能必须同时满足以下条件：</para><list type="bullet"><item><description><see cref="P:GameCore.AbilitySystem.AbilityExecute.IsAttack" /> = <see langword="true" /> （在数编表中设置 <see cref="P:GameCore.AbilitySystem.Data.Struct.AbilityExecuteFlags.IsAttack" /> = true）</description></item><item><description><see cref="!:Ability.IsValid" /> = <see langword="true" /> （技能有效）</description></item><item><description><see cref="!:Ability.IsEnabled" /> = <see langword="true" /> （技能启用）</description></item></list></summary>
+            <returns>第一个满足条件的攻击技能，如果没有有效的攻击技能则返回 <see langword="null" />。</returns>
+            <remarks>
+            这是攻击指令系统最常用的方法，用于快速获取默认的攻击技能。
+            攻击指令 (<see cref="F:GameCore.OrderSystem.CommandIndex.Attack" />) 会自动调用此方法来查找攻击技能。
+            </remarks>
+            <example>
+                <code>
+            var abilityManager = unit.GetComponent&lt;AbilityManager&gt;();
+            var attackAbility = abilityManager?.GetValidAttack();
+            
+            if (attackAbility != null)
+            {
+                // 单位有可用的攻击技能，可以使用攻击指令
+                var attackCommand = new Command
+                {
+                    Index = CommandIndex.Attack,
+                    Target = enemy
+                };
+                attackCommand.IssueOrder(unit);
+            }
+            else
+            {
+                // 单位没有攻击技能，需要添加攻击技能或使用技能指令
+                Game.Logger.LogWarning("单位没有有效的攻击技能");
+            }
+            </code>
+            </example>
+            <seealso cref="M:GameCore.AbilitySystem.Manager.AbilityManager.GetValidAttacks" />
+            <seealso cref="P:GameCore.AbilitySystem.Data.Struct.AbilityExecuteFlags.IsAttack" />
+            <seealso cref="F:GameCore.OrderSystem.CommandIndex.Attack" />
+        </member>
+        <member name="T:GameCore.AbilitySystem.Manager.AbilityManagerExtension">
+            <summary />
+        </member>
+        <member name="M:GameCore.AbilitySystem.Manager.AbilityManagerExtension.GetComponent``1(GameCore.EntitySystem.Entity)">
+            <summary />
+            <typeparam name="TComponent" />
+            <param name="entity" />
+            <returns />
+        </member>
+        <member name="M:GameCore.AbilitySystem.Manager.AbilityManagerExtension.GetOrCreateComponent``1(GameCore.EntitySystem.Entity)">
+            <summary />
+            <typeparam name="TComponent" />
+            <param name="entity" />
+            <returns />
+        </member>
+    </members>
+</doc>

@@ -1,0 +1,702 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>GameUI</name>
+    </assembly>
+    <members>
+        <member name="M:GameUI.Control.Control.AddToParent(GameUI.Interface.INode)">
+        <summary>
+        Adds this control to the specified parent node.
+        </summary>
+        <param name = "parent">The parent node.</param>
+        <returns>True if added successfully; otherwise, false.</returns>
+        </member>
+        <member name="M:GameUI.Control.Control.AddToParent(GameUI.Interface.INode,System.Int32)">
+        <summary>
+        Adds this control to the specified parent node at the given index.
+        </summary>
+        <param name = "parent">The parent node.</param>
+        <param name = "index">The index at which to insert the control.</param>
+        <returns>True if added successfully; otherwise, false.</returns>
+        </member>
+        <member name="M:GameUI.Control.Control.RemoveChild(GameUI.Interface.INodeChild)">
+        <summary>
+        Removes the specified child from this control.
+        </summary>
+        <param name = "child">The child to remove.</param>
+        <returns>True if removed successfully; otherwise, false.</returns>
+        </member>
+        <member name="M:GameUI.Control.Extensions.LayoutExtensions.Margin``1(``0,GameUI.Struct.Thickness)">
+        <summary>
+        设置控件的外边距
+        </summary>
+        <param name = "control">目标控件</param>
+        <param name = "margin">外边距</param>
+        <returns>控件本身，支持链式调用</returns>
+        </member>
+        <member name="M:GameUI.Control.Extensions.LayoutExtensions.Padding``1(``0,GameUI.Struct.Thickness)">
+        <summary>
+        设置控件的内边距
+        </summary>
+        <param name = "control">目标控件</param>
+        <param name = "padding">内边距</param>
+        <returns>控件本身，支持链式调用</returns>
+        </member>
+        <member name="T:GameUI.Data.GameDataGameUI">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="P:GameUI.Data.GameDataGameUI.DefaultUI">
+        <summary>
+        Default UI that will be created when the current game mode is initiated.
+        </summary>
+        </member>
+        <member name="P:GameUI.Data.GameDataGameUI.StandardUIRenderingOrder">
+        <summary>
+        标准UI类型的渲染层级顺序配置
+        按照从底层到顶层的顺序排列，数组中靠前的元素渲染层级越低（越靠后），靠后的元素渲染层级越高（越靠前）
+        </summary>
+        <remarks>
+        此配置定义了各种标准UI类型的相对渲染顺序。配合 <see cref = "P:GameUI.Data.GameDataGameUI.StandardUIBaseZIndex"/> 和
+        <see cref = "P:GameUI.Data.GameDataGameUI.StandardUIZIndexStep"/> 可以计算出每个UI类型的具体ZIndex值。
+        计算公式：ZIndex = BaseZIndex + (在数组中的索引 * ZIndexStep)
+        </remarks>
+        </member>
+        <member name="P:GameUI.Data.GameDataGameUI.StandardUIBaseZIndex">
+        <summary>
+        标准UI类型的起始ZIndex值（基础优先级）
+        </summary>
+        <remarks>
+        这是 <see cref = "P:GameUI.Data.GameDataGameUI.StandardUIRenderingOrder"/> 中第一个UI类型的ZIndex值。
+        其他UI类型的ZIndex将基于此值和步长进行递增计算。
+        建议设置为较大的值（如1000），为非标准UI预留足够的层级空间。
+        </remarks>
+        </member>
+        <member name="P:GameUI.Data.GameDataGameUI.StandardUIZIndexStep">
+        <summary>
+        标准UI类型之间的ZIndex步长（优先级间隔）
+        </summary>
+        <remarks>
+        定义了 <see cref = "P:GameUI.Data.GameDataGameUI.StandardUIRenderingOrder"/> 中相邻两个UI类型之间的ZIndex差值。
+        较大的步长值可以为同类型UI的细分层级预留更多空间。
+        例如：步长为100时，同一UI类型内的不同面板可以使用1-99的相对偏移。
+        </remarks>
+        </member>
+        <member name="M:GameUI.Data.GameDataGameUI.GetStandardUIZIndex(GameCore.GameSystem.Enum.StandardUIType)">
+        <summary>
+        根据标准UI类型计算其ZIndex值
+        </summary>
+        <param name = "uiType">标准UI类型</param>
+        <returns>计算得出的ZIndex值，如果UI类型不在渲染顺序中则返回null</returns>
+        <remarks>
+        计算公式：ZIndex = <see cref = "P:GameUI.Data.GameDataGameUI.StandardUIBaseZIndex"/> + (在 <see cref = "P:GameUI.Data.GameDataGameUI.StandardUIRenderingOrder"/> 中的索引 * <see cref = "P:GameUI.Data.GameDataGameUI.StandardUIZIndexStep"/>)
+        </remarks>
+        </member>
+        <member name="M:GameUI.Data.GameDataGameUI.CreateDefaultUI">
+        <summary>
+        
+        </summary>
+        <returns></returns>
+        </member>
+        <member name="M:GameUI.Data.GameDataGameUI.GameCore#GameSystem#Data#IGameDataGameUI#CreateDefaultUI">
+        <summary>
+        
+        </summary>
+        <returns></returns>
+        </member>
+        <member name="P:GameUI.Data.GameDataGameUI.GameData#IGameData{GameCore#GameSystem#Data#IGameDataGameUI}#Link">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="P:GameUI.Data.GameDataGameUI.GameData#IGameData{GameCore#GameSystem#Data#IGameDataGameUI}#Name">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="T:GameUI.Debug.DebugDraw">
+        <summary>
+        Provides utility methods for drawing debug shapes and text in the game scene.
+        This class allows developers to visualize geometric primitives such as lines, circles, points, sectors, parallelograms, and text for debugging purposes.
+        </summary>
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="F:GameUI.Debug.DebugDraw.viewActorId">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="M:GameUI.Debug.DebugDraw.#ctor(System.Int32)">
+        <summary>
+        Initializes a new instance of the <see cref = "T:GameUI.Debug.DebugDraw"/> class with the specified view actor ID.
+        </summary>
+        <param name = "viewActorId">The identifier for the debug view actor.</param>
+        </member>
+        <member name="M:GameUI.Debug.DebugDraw.#ctor">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="M:GameUI.Debug.DebugDraw.Create">
+        <summary>
+        Creates a new <see cref = "T:GameUI.Debug.DebugDraw"/> instance if the debug graph can be created successfully.
+        </summary>
+        <returns>A <see cref = "T:GameUI.Debug.DebugDraw"/> instance if successful; otherwise, <c>null</c>.</returns>
+        </member>
+        <member name="M:GameUI.Debug.DebugDraw.Clear">
+        <summary>
+        Clears all debug drawings from the current debug graph.
+        </summary>
+        </member>
+        <member name="M:GameUI.Debug.DebugDraw.DrawLine(System.Numerics.Vector3,System.Numerics.Vector3,System.Drawing.Color)">
+        <summary>
+        Draws a line between two points in 3D space.
+        </summary>
+        <param name = "origin">The starting point of the line.</param>
+        <param name = "end">The ending point of the line.</param>
+        <param name = "color">The color of the line.</param>
+        </member>
+        <member name="M:GameUI.Debug.DebugDraw.DrawCircle(System.Numerics.Vector3,System.Numerics.Vector3,System.Single,System.Drawing.Color,System.Boolean)">
+        <summary>
+        Draws a circle in 3D space.
+        </summary>
+        <param name = "center">The center of the circle.</param>
+        <param name = "eulerRotation">The rotation of the circle in Euler angles (degrees).</param>
+        <param name = "radius">The radius of the circle.</param>
+        <param name = "color">The color of the circle.</param>
+        <param name = "fill">Whether to fill the circle (true) or draw only the outline (false).</param>
+        </member>
+        <member name="M:GameUI.Debug.DebugDraw.DrawPoint(System.Numerics.Vector3,System.Drawing.Color)">
+        <summary>
+        Draws a point in 3D space.
+        </summary>
+        <param name = "point">The position of the point.</param>
+        <param name = "color">The color of the point.</param>
+        </member>
+        <member name="M:GameUI.Debug.DebugDraw.DrawText(System.Numerics.Vector3,System.String,System.Drawing.Color,System.Boolean)">
+        <summary>
+        Draws text at a specified position in 3D space.
+        </summary>
+        <param name = "position">The position where the text will be drawn.</param>
+        <param name = "text">The text to display.</param>
+        <param name = "color">The color of the text.</param>
+        <param name = "onTopOfEverything">Whether to render the text on top of all other elements.</param>
+        </member>
+        <member name="M:GameUI.Debug.DebugDraw.DrawSector(System.Numerics.Vector3,System.Numerics.Vector3,System.Single,System.Single,System.Drawing.Color,System.Boolean)">
+        <summary>
+        Draws a sector (pie slice) in 3D space.
+        </summary>
+        <param name = "center">The center of the sector.</param>
+        <param name = "eulerRotation">The rotation of the sector in Euler angles (degrees).</param>
+        <param name = "radius">The radius of the sector.</param>
+        <param name = "angle">The angle of the sector in degrees.</param>
+        <param name = "color">The color of the sector.</param>
+        <param name = "fill">Whether to fill the sector (true) or draw only the outline (false).</param>
+        </member>
+        <member name="M:GameUI.Debug.DebugDraw.DrawParallelogram(System.Numerics.Vector3,System.Numerics.Vector3,System.Numerics.Vector3,System.Drawing.Color,System.Boolean)">
+        <summary>
+        Draws a parallelogram in 3D space, defined by an origin and two side vectors.
+        </summary>
+        <param name = "origin">The origin (one corner) of the parallelogram.</param>
+        <param name = "sideVectorA">The first side vector from the origin.</param>
+        <param name = "sideVectorB">The second side vector from the origin.</param>
+        <param name = "color">The color of the parallelogram.</param>
+        <param name = "fill">Whether to fill the parallelogram (true) or draw only the outline (false).</param>
+        </member>
+        <member name="M:GameUI.Debug.DebugDraw.DrawRectangle(System.Numerics.Vector3,System.Single,System.Single,System.Numerics.Vector3,System.Drawing.Color,System.Boolean)">
+        <summary>
+        Draws a rectangle in 3D space, defined by its center, width, height, and rotation (XYZ order).
+        </summary>
+        <param name = "center">The center of the rectangle.</param>
+        <param name = "width">The width of the rectangle.</param>
+        <param name = "height">The height of the rectangle.</param>
+        <param name = "rotation">The rotation of the rectangle in Euler angles (degrees, XYZ order).</param>
+        <param name = "color">The color of the rectangle.</param>
+        <param name = "fill">Whether to fill the rectangle (true) or draw only the outline (false).</param>
+        </member>
+        <member name="M:GameUI.Debug.DebugDraw.DisposeManaged">
+        <summary>
+        
+        </summary>
+        <returns></returns>
+        </member>
+        <member name="M:GameUI.Debug.DebugDraw.DisposeUnmanaged(System.Boolean)">
+        <summary>
+        
+        </summary>
+        <param name="finalizing"></param>
+        <returns></returns>
+        </member>
+        <member name="M:GameUI.Device.ScreenViewport.RaycastWorldPanel(GameUI.Struct.UIPosition,GameUI.Device.Enum.WorldPanel,System.Single)">
+        <summary>
+        Performs a raycast on a specified world panel at a given UI position and fixed axis value.
+        </summary>
+        <remarks>
+        This method calculates the screen position in device-dependent pixels (DPI) based on the provided UI position
+        and performs a raycast on the specified world panel (XY, XZ, or YZ). The raycast determines whether the panel
+        is hit and, if so, returns the world position of the hit.
+        </remarks>
+        <param name = "position">The UI position, in logical pixels, where the raycast should be performed.</param>
+        <param name = "panel">The world panel to raycast against. This can be one of the following: XY, XZ, or YZ.</param>
+        <param name = "fixedAxisValue">
+        The fixed axis value to use for the raycast. For example, if the panel is XY, this value represents the Z-coordinate.
+        </param>
+        <returns>
+        A <see cref = "T:GameUI.Device.Struct.RaycastHitWorldPosition"/> object containing the result of the raycast. If the raycast hits the panel,
+        the <see cref = "P:GameUI.Device.Struct.RaycastHitWorldPosition.Position"/> property will contain the world position of the hit, and
+        <see cref = "P:GameUI.Device.Struct.RaycastHitWorldPosition.IsHit"/> will be <see langword="true"/>. Otherwise, <see cref = "P:GameUI.Device.Struct.RaycastHitWorldPosition.IsHit"/>
+        will be <see langword="false"/>.
+        </returns>
+        <example>
+        Example usage:
+        <code>
+        var viewport = new ScreenViewport();
+        var uiPosition = new UIPosition { Left = 100, Top = 200 };
+        var result = viewport.RaycastWorldPanel(uiPosition, WorldPanel.XY, 0);
+        if (result.IsHit)
+        {
+        Game.Logger.LogInformation("Hit at world position: {0}", result.Position);
+        }
+        else
+        {
+        Game.Logger.LogInformation("No hit detected.");
+        }
+        </code>
+        </example>
+        </member>
+        <member name="M:GameUI.Device.ScreenViewport.RaycastTerrain(GameUI.Struct.UIPosition)">
+        <summary>
+        Performs a raycast on the terrain at the specified UI position.
+        </summary>
+        <remarks>The input position is automatically adjusted for the device's pixel density using the device
+        pixel ratio.</remarks>
+        <param name = "position">The position on the UI, specified in logical pixels, where the raycast should be performed.</param>
+        <returns>A <see cref = "T:GameUI.Device.Struct.RaycastHitWorld"/> object containing the result of the raycast,  including information about the
+        hit location and any intersected terrain features.</returns>
+        </member>
+        <member name="M:GameUI.Device.ScreenViewport.RaycastTerrainOrWorldPanelXY(GameUI.Struct.UIPosition,System.Single)">
+        <summary>
+        Performs a raycast on the terrain or a world panel in the XY plane based on the specified UI position.
+        </summary>
+        <remarks>This method first attempts to perform a raycast against the terrain. If the terrain is hit,
+        the resulting position is returned. If the terrain is not hit, the method performs a raycast against the world
+        panel in the XY plane using the specified Z-axis value.</remarks>
+        <param name = "uiPosition">The UI position, in screen coordinates, used to determine the raycast origin.</param>
+        <param name = "zAxisValue">The Z-axis value to use when raycasting against the world panel. Defaults to <see langword="0f"/>.</param>
+        <returns>A <see cref = "T:GameUI.Device.Struct.RaycastHitWorldPosition"/> object containing the result of the raycast. If the raycast hits the
+        terrain, the result includes the hit position. Otherwise, the result of the world panel raycast is returned.
+        </returns>
+        </member>
+        <member name="M:GameUI.Device.ScreenViewport.RaycastActor(GameUI.Struct.UIPosition,GameUI.Device.Enum.RayCastMode)">
+        <summary>
+        Retrieves actors at specified UIPosition using a raycast, optionally filtering results based on a
+        condition.
+        </summary>
+        <remarks>
+        <para>The <paramref name = "position"/> is automatically scaled by the device pixel ratio to ensure
+        accurate hit detection.</para>
+        <para><strong>⚠️ 射线检测模式选择重要提示：</strong></para>
+        <para>如果使用 <see cref = "F:GameUI.Device.Enum.RayCastMode.SimpleBoundingCylinder"/> 或其他需要特定包围盒数据的模式，
+        请确保目标游戏对象的模型数据中已配置相应的包围盒。如果没有配置，射线检测将会失败。</para>
+        <para><strong>配置位置：</strong>SimpleBoundingCylinder 数据需要在 <see cref = "!:GameDataModel.SimpleBoundingCylinder"/> 字段中配置。</para>
+        <para><strong>建议：</strong>对于大多数游戏项目，使用默认的 <see cref = "F:GameUI.Device.Enum.RayCastMode.AABB"/> 模式，
+        因为它具有最好的兼容性且不需要特殊的模型配置。</para>
+        </remarks>
+        <param name = "position">The UI position, in device-independent pixels (DIPs), to perform the raycast operation.</param>
+        <param name = "mode">The mode of the raycast operation, determining the type of bounding box used for hit detection.
+        The default is <see cref = "F:GameUI.Device.Enum.RayCastMode.AABB"/>, which provides the best compatibility for most game objects.</param>
+        <returns>An enumerable collection of <see cref = "T:GameCore.Interface.IActor"/> instances that are hit by the raycast at the specified position.
+        The collection will be empty if no actors are hit.</returns>
+        </member>
+        <member name="M:GameUI.Device.ScreenViewport.RaycastEntities(GameUI.Struct.UIPosition,System.Func{GameCore.EntitySystem.Entity,System.Boolean},GameUI.Device.Enum.RayCastMode)">
+        <summary>
+        Retrieves entities at specified UIPosition using a raycast, optionally filtering results based on a condition.
+        </summary>
+        <remarks>
+        <para><strong>⚠️ 重要注意事项：</strong></para>
+        <para>默认使用 <see cref = "F:GameUI.Device.Enum.RayCastMode.SimpleBoundingCylinder"/> 模式，但这需要实体/单位的模型数据中
+        预先配置 SimpleBoundingCylinder 数据。如果模型没有配置这些数据，射线检测将会失败！</para>
+        <para><strong>配置位置：</strong>SimpleBoundingCylinder 数据需要在 <see cref = "!:GameDataModel.SimpleBoundingCylinder"/> 字段中配置。</para>
+        <para><strong>建议：</strong>如果你的游戏项目中的单位模型没有配置 SimpleBoundingCylinder 数据，
+        请改用 <see cref = "F:GameUI.Device.Enum.RayCastMode.AABB"/> 模式以确保射线检测正常工作。</para>
+        </remarks>
+        <param name = "position">
+        Specifies the screen coordinates for the raycast, which are in device-independent pixels (DIPs).
+        </param>
+        <param name = "filter">
+        An optional function to determine which entities to include based on a condition.
+        </param>
+        <param name = "mode">Defines the method of raycasting to be used for detecting entities.
+        Note: The default <see cref = "F:GameUI.Device.Enum.RayCastMode.SimpleBoundingCylinder"/> requires model data configuration.
+        Consider using <see cref = "F:GameUI.Device.Enum.RayCastMode.AABB"/> for better compatibility.</param>
+        <returns>An enumerable collection of entities that meet the specified criteria.</returns>
+        </member>
+        <member name="T:GameUI.Examples.DrawPathExample">
+        <summary>
+        DrawPath 方法使用示例
+        </summary>
+        </member>
+        <member name="M:GameUI.Examples.DrawPathExample.#ctor(GameUI.Control.Primitive.Canvas)">
+        <summary>
+        DrawPath 方法使用示例
+        </summary>
+        </member>
+        <member name="F:GameUI.Examples.DrawPathExample.canvas">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="M:GameUI.Examples.DrawPathExample.DrawBasicShapes">
+        <summary>
+        绘制基本形状示例
+        </summary>
+        </member>
+        <member name="M:GameUI.Examples.DrawPathExample.DrawComplexPath">
+        <summary>
+        绘制复杂路径示例
+        </summary>
+        </member>
+        <member name="M:GameUI.Examples.DrawPathExample.DrawBezierCurves">
+        <summary>
+        绘制贝塞尔曲线示例
+        </summary>
+        </member>
+        <member name="M:GameUI.Examples.DrawPathExample.DrawCompositePath">
+        <summary>
+        绘制组合路径示例（多个子路径）
+        </summary>
+        </member>
+        <member name="M:GameUI.Examples.DrawPathExample.DrawPathWithArcs">
+        <summary>
+        绘制带圆弧的路径示例
+        </summary>
+        </member>
+        <member name="M:GameUI.Examples.DrawPathExample.DrawTransformedPath">
+        <summary>
+        使用路径变换示例
+        </summary>
+        </member>
+        <member name="T:GameUI.Examples.JoystickExamples">
+        <summary>
+        摇杆控件使用示例
+        </summary>
+        </member>
+        <member name="M:GameUI.Examples.JoystickExamples.CreateNormalJoystick">
+        <summary>
+        创建普通摇杆示例
+        </summary>
+        </member>
+        <member name="M:GameUI.Examples.JoystickExamples.CreateFloatJoystick">
+        <summary>
+        创建浮动摇杆示例
+        </summary>
+        </member>
+        <member name="M:GameUI.Examples.JoystickExamples.CreateDynamicJoystick">
+        <summary>
+        创建动态摇杆示例
+        </summary>
+        </member>
+        <member name="M:GameUI.Examples.JoystickExamples.CreateCustomImageJoystick">
+        <summary>
+        创建带有自定义图像的摇杆
+        </summary>
+        </member>
+        <member name="M:GameUI.Examples.JoystickExamples.DemonstrateRuntimeConfiguration">
+        <summary>
+        演示如何在运行时调整摇杆属性
+        </summary>
+        </member>
+        <member name="T:GameUI.Extensions.ColorExtensions">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="M:GameUI.Extensions.ColorExtensions.ToHex(System.Drawing.Color)">
+        <summary>
+        
+        </summary>
+        <param name="color"></param>
+        <returns></returns>
+        </member>
+        <member name="M:GameUI.Extensions.ColorExtensions.ToHex(System.Drawing.Color,System.Byte)">
+        <summary>
+        
+        </summary>
+        <param name="color"></param>
+        <param name="alpha"></param>
+        <returns></returns>
+        </member>
+        <member name="M:GameUI.Extensions.ColorExtensions.ToRgbaHex(System.Drawing.Color)">
+        <summary>
+        
+        </summary>
+        <param name="color"></param>
+        <returns></returns>
+        </member>
+        <member name="M:GameUI.Extensions.ColorExtensions.FromHex(System.String)">
+        <summary>
+        
+        </summary>
+        <param name="hex"></param>
+        <returns></returns>
+        </member>
+        <member name="M:GameUI.Extensions.ColorExtensions.FromRgbaHex(System.String)">
+        <summary>
+        
+        </summary>
+        <param name="hex"></param>
+        <returns></returns>
+        </member>
+        <member name="M:GameUI.Extensions.ColorExtensions.FromHex(System.String,System.Byte)">
+        <summary>
+        
+        </summary>
+        <param name="hex"></param>
+        <param name="alpha"></param>
+        <returns></returns>
+        </member>
+        <member name="T:GameUI.Extensions.PointFExtension">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="M:GameUI.Extensions.PointFExtension.Equals(System.Drawing.PointF,System.Object,System.Single)">
+        <summary>
+        
+        </summary>
+        <param name="pointF"></param>
+        <param name="o"></param>
+        <param name="epsilon"></param>
+        <returns></returns>
+        </member>
+        <member name="M:GameUI.Extensions.PointFExtension.Offset(System.Drawing.PointF,System.Single,System.Single)">
+        <summary>
+        
+        </summary>
+        <param name="pointF"></param>
+        <param name="dx"></param>
+        <param name="dy"></param>
+        <returns></returns>
+        </member>
+        <member name="M:GameUI.Extensions.PointFExtension.Scale(System.Drawing.PointF,System.Single)">
+        <summary>
+        
+        </summary>
+        <param name="pointF"></param>
+        <param name="scale"></param>
+        <returns></returns>
+        </member>
+        <member name="M:GameUI.Extensions.PointFExtension.Scale(System.Drawing.PointF,System.Single,System.Single)">
+        <summary>
+        
+        </summary>
+        <param name="pointF"></param>
+        <param name="scaleX"></param>
+        <param name="scaleY"></param>
+        <returns></returns>
+        </member>
+        <member name="T:GameUI.Interface.INode">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="P:GameUI.Interface.INode.DataContext">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="P:GameUI.Interface.INode.Children">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="M:GameUI.Interface.INode.AddChild(GameUI.Interface.INodeChild)">
+        <summary>
+        
+        </summary>
+        <param name="child"></param>
+        <returns></returns>
+        </member>
+        <member name="M:GameUI.Interface.INode.RemoveChild(GameUI.Interface.INodeChild)">
+        <summary>
+        
+        </summary>
+        <param name="child"></param>
+        <returns></returns>
+        </member>
+        <member name="M:GameUI.Interface.INode.RemoveChild(System.Int32)">
+        <summary>
+        
+        </summary>
+        <param name="index"></param>
+        <returns></returns>
+        </member>
+        <member name="M:GameUI.Interface.INode.IsAncestorOf(GameUI.Interface.INodeChild)">
+        <summary>
+        
+        </summary>
+        <param name="child"></param>
+        <returns></returns>
+        </member>
+        <member name="M:GameUI.Interface.INode.FindChild(System.Func{GameUI.Interface.INodeChild,System.Boolean})">
+        <summary>
+        
+        </summary>
+        <param name="condition"></param>
+        <returns></returns>
+        </member>
+        <member name="T:GameUI.Interface.INodeChild">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="P:GameUI.Interface.INodeChild.Parent">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="M:GameUI.Interface.INodeChild.AddToParent(GameUI.Interface.INode)">
+        <summary>
+        
+        </summary>
+        <param name="parent"></param>
+        <returns></returns>
+        </member>
+        <member name="M:GameUI.Interface.INodeChild.AddToParent(GameUI.Interface.INode,System.Int32)">
+        <summary>
+        
+        </summary>
+        <param name="parent"></param>
+        <param name="index"></param>
+        <returns></returns>
+        </member>
+        <member name="M:GameUI.Interface.INodeChild.RemoveFromParent">
+        <summary>
+        Only remove from parent, not from collection
+        </summary>
+        <returns></returns>
+        </member>
+        <member name="T:GameUI.ScopeData.GameUI">
+        <summary>
+        
+        </summary>
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="F:GameUI.ScopeData.GameUI.Default">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="M:GameUI.ScopeData.OnRegisterGameClass">
+        <summary>
+        Called during game class registration phase to initialize scope data.
+        </summary>
+        </member>
+        <member name="T:GameUI.Standard.DoubleUtilities">
+        <summary>
+        DoubleUtil uses fixed eps to provide fuzzy comparison functionality for doubles.
+        Note that FP noise is a big problem and using any of these compare
+        methods is not a complete solution, but rather the way to reduce
+        the probability of repeating unnecessary work.
+        </summary>
+        </member>
+        <member name="F:GameUI.Standard.DoubleUtilities.Epsilon">
+        <summary>
+        Epsilon - more or less random, more or less small number.
+        </summary>
+        </member>
+        <member name="M:GameUI.Standard.DoubleUtilities.AreClose(System.Double,System.Double)">
+        <summary>
+        AreClose returns whether or not two doubles are "close".  That is, whether or
+        not they are within epsilon of each other.
+        There are plenty of ways for this to return false even for numbers which
+        are theoretically identical, so no code calling this should fail to work if this
+        returns false.
+        </summary>
+        <param name = "value1">The first double to compare.</param>
+        <param name = "value2">The second double to compare.</param>
+        <returns>The result of the AreClose comparision.</returns>
+        </member>
+        <member name="M:GameUI.Standard.DoubleUtilities.LessThan(System.Double,System.Double)">
+        <summary>
+        LessThan returns whether or not the first double is less than the second double.
+        That is, whether or not the first is strictly less than *and* not within epsilon of
+        the other number.
+        There are plenty of ways for this to return false even for numbers which
+        are theoretically identical, so no code calling this should fail to work if this
+        returns false.
+        </summary>
+        <param name = "value1">The first double to compare.</param>
+        <param name = "value2">The second double to compare.</param>
+        <returns>The result of the LessThan comparision.</returns>
+        </member>
+        <member name="M:GameUI.Standard.DoubleUtilities.GreaterThan(System.Double,System.Double)">
+        <summary>
+        GreaterThan returns whether or not the first double is greater than the second double.
+        That is, whether or not the first is strictly greater than *and* not within epsilon of
+        the other number.
+        There are plenty of ways for this to return false even for numbers which
+        are theoretically identical, so no code calling this should fail to work if this
+        returns false.
+        </summary>
+        <param name = "value1">The first double to compare.</param>
+        <param name = "value2">The second double to compare.</param>
+        <returns>The result of the GreaterThan comparision.</returns>
+        </member>
+        <member name="M:GameUI.Standard.DoubleUtilities.LessThanOrClose(System.Double,System.Double)">
+        <summary>
+        LessThanOrClose returns whether or not the first double is less than or close to
+        the second double.  That is, whether or not the first is strictly less than or within
+        epsilon of the other number.
+        There are plenty of ways for this to return false even for numbers which
+        are theoretically identical, so no code calling this should fail to work if this
+        returns false.
+        </summary>
+        <param name = "value1">The first double to compare.</param>
+        <param name = "value2">The second double to compare.</param>
+        <returns>The result of the LessThanOrClose comparision.</returns>
+        </member>
+        <member name="M:GameUI.Standard.DoubleUtilities.GreaterThanOrClose(System.Double,System.Double)">
+        <summary>
+        GreaterThanOrClose returns whether or not the first double is greater than or close to
+        the second double.  That is, whether or not the first is strictly greater than or within
+        epsilon of the other number.
+        There are plenty of ways for this to return false even for numbers which
+        are theoretically identical, so no code calling this should fail to work if this
+        returns false.
+        </summary>
+        <param name = "value1">The first double to compare.</param>
+        <param name = "value2">The second double to compare.</param>
+        <returns>The result of the GreaterThanOrClose comparision.</returns>
+        </member>
+        <member name="M:GameUI.Standard.DoubleUtilities.IsFinite(System.Double)">
+        <summary>
+        Test to see if a double is a finite number (is not NaN or Infinity).
+        </summary>
+        <param name = 'value'>The value to test.</param>
+        <returns>Whether or not the value is a finite number.</returns>
+        </member>
+        <member name="M:GameUI.Standard.DoubleUtilities.IsValidSize(System.Double)">
+        <summary>
+        Test to see if a double a valid size value (is finite and > 0).
+        </summary>
+        <param name = 'value'>The value to test.</param>
+        <returns>Whether or not the value is a valid size value.</returns>
+        </member>
+        <member name="T:GameUI.Struct.UIPosition">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="M:GameUI.Struct.UIPosition.#ctor(System.Single,System.Single)">
+        <summary>
+        
+        </summary>
+        </member>
+    </members>
+</doc>

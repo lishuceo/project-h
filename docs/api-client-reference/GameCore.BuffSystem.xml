@@ -1,0 +1,545 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<doc>
+    <assembly>
+        <name>GameCore</name>
+    </assembly>
+    <members>
+        <member name="T:GameCore.BuffSystem.Buff">
+            <summary />
+            <summary />
+            <summary />
+            <summary />
+            <summary />
+            <summary />
+            <summary />
+            <summary />
+            <summary />
+        </member>
+        <member name="F:GameCore.BuffSystem.Buff.replicatedDuration">
+            <summary />
+        </member>
+        <member name="M:GameCore.BuffSystem.Buff.ReplicateFromKeyValue(System.Enum,System.ReadOnlySpan{System.Byte})">
+            <summary />
+            <param name="propertyEnum" />
+            <param name="value" />
+            <returns />
+        </member>
+        <member name="P:GameCore.BuffSystem.Buff.GameCore#BaseInterface#IAttachedObject{GameCore#BuffSystem#Buff,GameCore#BuffSystem#Data#GameDataBuff}#Manager">
+            <summary />
+        </member>
+        <member name="P:GameCore.BuffSystem.Buff.Link">
+            <summary />
+        </member>
+        <member name="P:GameCore.BuffSystem.Buff.Cache">
+            <summary />
+        </member>
+        <member name="F:GameCore.BuffSystem.Buff._stack">
+            <summary />
+        </member>
+        <member name="P:GameCore.BuffSystem.Buff.Stack">
+            <summary />
+        </member>
+        <member name="P:GameCore.BuffSystem.Buff.StackInternal">
+            <summary />
+        </member>
+        <member name="M:GameCore.BuffSystem.Buff.SetStackFromReplication(System.UInt32)">
+            <summary />
+            <param name="stack" />
+            <returns />
+        </member>
+        <member name="P:GameCore.BuffSystem.Buff.GameData#Interface#IGameObject{GameCore#BuffSystem#Data#GameDataBuff}#Link">
+            <summary />
+        </member>
+        <member name="P:GameCore.BuffSystem.Buff.Manager">
+            <summary />
+        </member>
+        <member name="F:GameCore.BuffSystem.Buff.durationOverride">
+            <summary />
+        </member>
+        <member name="P:GameCore.BuffSystem.Buff.Duration">
+            <summary />
+        </member>
+        <member name="P:GameCore.BuffSystem.Buff.RemainingTime">
+            <summary />
+        </member>
+        <member name="P:GameCore.BuffSystem.Buff.InstanceComparison">
+            <summary />
+        </member>
+        <member name="P:GameCore.BuffSystem.Buff.SyncIdType">
+            <summary />
+        </member>
+        <member name="P:GameCore.BuffSystem.Buff.IsLinkEnabled">
+            <summary />
+        </member>
+        <member name="P:GameCore.BuffSystem.Buff.MergeAction">
+            <summary />
+        </member>
+        <member name="M:GameCore.BuffSystem.Buff.#ctor(GameCore.EntitySystem.Unit,GameData.IGameLink{GameCore.BuffSystem.Data.GameDataBuff},System.Nullable{System.UInt32},System.Nullable{System.TimeSpan})">
+            <summary>
+            Client-side constructor for replicating Buff objects from server.
+            </summary>
+            <param name="owner">The unit that owns this buff</param>
+            <param name="link">The GameDataBuff link</param>
+            <param name="stack">The stack count</param>
+            <param name="durationOverride">Override duration if any</param>
+        </member>
+        <member name="M:GameCore.BuffSystem.Buff.GameCore#BaseInterface#IAttachedObject{GameCore#BuffSystem#Buff,GameCore#BuffSystem#Data#GameDataBuff}#OnAttached">
+            <summary />
+            <returns />
+        </member>
+        <member name="F:GameCore.BuffSystem.Buff.lifeSpan">
+            <summary />
+        </member>
+        <member name="F:GameCore.BuffSystem.Buff._stateCounter">
+            <summary />
+        </member>
+        <member name="T:GameCore.BuffSystem.Buff.PausedTimer">
+            <summary />
+        </member>
+        <member name="M:GameCore.BuffSystem.Buff.OnLinkAttached">
+            <summary />
+            <returns />
+        </member>
+        <member name="M:GameCore.BuffSystem.Buff.OnLinkDetached">
+            <summary />
+            <returns />
+        </member>
+        <member name="M:GameCore.BuffSystem.Buff.DisposeManaged">
+            <summary />
+            <returns />
+        </member>
+        <member name="M:GameCore.BuffSystem.Buff.ToString">
+            <summary />
+            <returns />
+        </member>
+        <member name="P:GameCore.BuffSystem.Buff.GameCore#ActorSystem#IActorScope#Id">
+            <summary />
+        </member>
+        <member name="P:GameCore.BuffSystem.Buff.GameCore#ActorSystem#IActorScopeContext#Link">
+            <summary />
+        </member>
+        <member name="P:GameCore.BuffSystem.Buff.GameCore#ActorSystem#IActorScope#MainActor">
+            <summary />
+        </member>
+        <member name="P:GameCore.BuffSystem.Buff.DisableOnDeath">
+            <summary />
+        </member>
+        <member name="P:GameCore.BuffSystem.Buff.RemoveOnDeath">
+            <summary />
+        </member>
+        <member name="M:GameCore.BuffSystem.Buff.GameCore#BaseInterface#IAttachedObject{GameCore#BuffSystem#Buff,GameCore#BuffSystem#Data#GameDataBuff}#ProcessHostDeath">
+            <summary />
+            <returns />
+        </member>
+        <member name="M:GameCore.BuffSystem.Buff.GameCore#BaseInterface#IAttachedObject{GameCore#BuffSystem#Buff,GameCore#BuffSystem#Data#GameDataBuff}#ProcessHostRevive">
+            <summary />
+            <returns />
+        </member>
+        <member name="P:GameCore.BuffSystem.Buff.GameCore#Execution#Interface#IChannelUser#ChannelingEffect">
+            <summary />
+        </member>
+        <member name="M:GameCore.BuffSystem.Buff.GameCore#Execution#Interface#IChannelUser#OnChannelStopped">
+            <summary />
+            <returns />
+        </member>
+        <member name="P:GameCore.BuffSystem.Buff.DisplayCache">
+            <summary />
+        </member>
+        <member name="P:GameCore.BuffSystem.Buff.GameCore#DisplayInfo#IDisplayInfo#Stack">
+            <summary />
+        </member>
+        <member name="P:GameCore.BuffSystem.Buff.GameCore#DisplayInfo#IDisplayInfo#Cooldown">
+            <summary />
+        </member>
+        <member name="P:GameCore.BuffSystem.Buff.GameCore#DisplayInfo#IDisplayInfo#CoolDownMax">
+            <summary />
+        </member>
+        <member name="P:GameCore.BuffSystem.Buff.GameCore#Interface#IExecutionContext#Ability">
+            <summary />
+        </member>
+        <member name="P:GameCore.BuffSystem.Buff.GameCore#Interface#IExecutionContext#Item">
+            <summary />
+        </member>
+        <member name="P:GameCore.BuffSystem.Buff.GameCore#Interface#IExecutionContext#Caster">
+            <summary />
+        </member>
+        <member name="P:GameCore.BuffSystem.Buff.GameCore#Interface#IExecutionContext#Target">
+            <summary />
+        </member>
+        <member name="P:GameCore.BuffSystem.Buff.GameCore#Interface#IExecutionContext#MainTarget">
+            <summary />
+        </member>
+        <member name="P:GameCore.BuffSystem.Buff.GameCore#Interface#IExecutionContext#DefaultTarget">
+            <summary />
+        </member>
+        <member name="P:GameCore.BuffSystem.Buff.GameCore#Interface#IExecutionContext#Level">
+            <summary />
+        </member>
+        <member name="P:GameCore.BuffSystem.Buff.GameCore#Interface#IExecutionContext#Order">
+            <summary />
+        </member>
+        <member name="P:GameCore.BuffSystem.Buff.GameCore#Interface#IExecutionContext#FactoryParent">
+            <summary />
+        </member>
+        <member name="P:GameCore.BuffSystem.Buff.GameCore#BaseType#IResponseOwner#Host">
+            <summary />
+        </member>
+        <member name="P:GameCore.BuffSystem.Buff.GameCore#BaseType#IResponseOwner#Cache">
+            <summary />
+        </member>
+        <member name="P:GameCore.BuffSystem.Buff.GameCore#BaseType#IResponseOwner#Responses">
+            <summary />
+        </member>
+        <member name="P:GameCore.BuffSystem.Buff.GameCore#BaseType#IResponseOwner#IsActivated">
+            <summary />
+        </member>
+        <member name="M:GameCore.BuffSystem.Buff.Think(System.Int32)">
+            <summary />
+            <param name="delta" />
+            <returns />
+        </member>
+        <member name="M:GameCore.BuffSystem.Buff.Disable">
+            <summary />
+            <returns />
+        </member>
+        <member name="T:GameCore.BuffSystem.Data.GameDataBuff">
+            <summary />
+            <summary />
+            <summary />
+        </member>
+        <member name="P:GameCore.BuffSystem.Data.GameDataBuff.DisplayName">
+            <summary />
+        </member>
+        <member name="P:GameCore.BuffSystem.Data.GameDataBuff.Description">
+            <summary />
+        </member>
+        <member name="P:GameCore.BuffSystem.Data.GameDataBuff.Icon">
+            <summary />
+        </member>
+        <member name="P:GameCore.BuffSystem.Data.GameDataBuff.SyncType">
+            <summary />
+        </member>
+        <member name="P:GameCore.BuffSystem.Data.GameDataBuff.Polarity">
+            <summary />
+        </member>
+        <member name="P:GameCore.BuffSystem.Data.GameDataBuff.StackStart">
+            <summary />
+        </member>
+        <member name="P:GameCore.BuffSystem.Data.GameDataBuff.InstanceMax">
+            <summary />
+        </member>
+        <member name="P:GameCore.BuffSystem.Data.GameDataBuff.StackMax">
+            <summary />
+        </member>
+        <member name="P:GameCore.BuffSystem.Data.GameDataBuff.InitialEffect">
+            <summary />
+        </member>
+        <member name="P:GameCore.BuffSystem.Data.GameDataBuff.PeriodicEffect">
+            <summary />
+        </member>
+        <member name="P:GameCore.BuffSystem.Data.GameDataBuff.ExpireEffect">
+            <summary />
+        </member>
+        <member name="P:GameCore.BuffSystem.Data.GameDataBuff.RefreshEffect">
+            <summary />
+        </member>
+        <member name="P:GameCore.BuffSystem.Data.GameDataBuff.FinalEffect">
+            <summary />
+        </member>
+        <member name="P:GameCore.BuffSystem.Data.GameDataBuff.Period">
+            <summary />
+        </member>
+        <member name="P:GameCore.BuffSystem.Data.GameDataBuff.Duration">
+            <summary />
+        </member>
+        <member name="P:GameCore.BuffSystem.Data.GameDataBuff.Categories">
+            <summary />
+        </member>
+        <member name="P:GameCore.BuffSystem.Data.GameDataBuff.BuffFlags">
+            <summary />
+        </member>
+        <member name="P:GameCore.BuffSystem.Data.GameDataBuff.Modifications">
+            <summary />
+        </member>
+        <member name="P:GameCore.BuffSystem.Data.GameDataBuff.AddStates">
+            <summary />
+        </member>
+        <member name="P:GameCore.BuffSystem.Data.GameDataBuff.RemoveStates">
+            <summary />
+        </member>
+        <member name="P:GameCore.BuffSystem.Data.GameDataBuff.ImmuneStates">
+            <summary />
+        </member>
+        <member name="P:GameCore.BuffSystem.Data.GameDataBuff.Responses">
+            <summary />
+        </member>
+        <member name="P:GameCore.BuffSystem.Data.GameDataBuff.GameCore#BaseInterface#IAttachedData#Categories">
+            <summary />
+        </member>
+        <member name="P:GameCore.BuffSystem.Data.GameDataBuff.EnableValidator">
+            <summary />
+        </member>
+        <member name="P:GameCore.BuffSystem.Data.GameDataBuff.PersistValidator">
+            <summary />
+        </member>
+        <member name="P:GameCore.BuffSystem.Data.GameDataBuff.BuffsEnable">
+            <summary>
+            Is dropdown only if the list does not allow null values
+            </summary>
+        </member>
+        <member name="P:GameCore.BuffSystem.Data.GameDataBuff.BuffsDisable">
+            <summary />
+        </member>
+        <member name="P:GameCore.BuffSystem.Data.GameDataBuff.BuffCategoriesEnable">
+            <summary />
+        </member>
+        <member name="P:GameCore.BuffSystem.Data.GameDataBuff.BuffCategoriesDisable">
+            <summary />
+        </member>
+        <member name="P:GameCore.BuffSystem.Data.GameDataBuff.AbilitiesEnable">
+            <summary />
+        </member>
+        <member name="P:GameCore.BuffSystem.Data.GameDataBuff.AbilitiesDisable">
+            <summary />
+        </member>
+        <member name="P:GameCore.BuffSystem.Data.GameDataBuff.AbilityCategoriesEnable">
+            <summary />
+        </member>
+        <member name="P:GameCore.BuffSystem.Data.GameDataBuff.AbilityCategoriesDisable">
+            <summary />
+        </member>
+        <member name="P:GameCore.BuffSystem.Data.GameDataBuff.ActorArray">
+            <summary />
+        </member>
+        <member name="P:GameCore.BuffSystem.Data.GameDataBuff.GameCore#ActorSystem#Data#IGameDataActorScopeOwner#ImpactActors">
+            <summary />
+        </member>
+        <member name="P:GameCore.BuffSystem.Data.GameDataBuff.GameData#IGameData{GameCore#ActorSystem#Data#IGameDataActorScopeOwner}#Link">
+            <summary />
+        </member>
+        <member name="M:GameCore.BuffSystem.Data.GameDataBuff.GameCore#BaseInterface#IAttachedData#Replicate(GameCore.BaseInterface.ICooldownHost,System.Nullable{System.Int32})">
+            <summary />
+            <param name="host" />
+            <param name="syncId" />
+            <returns />
+        </member>
+        <member name="F:GameCore.BuffSystem.Data.GameDataBuff.aggregator">
+            <summary />
+        </member>
+        <member name="F:GameCore.BuffSystem.Data.GameDataBuff.aggregatorWeakReference">
+            <summary />
+        </member>
+        <member name="P:GameCore.BuffSystem.Data.GameDataBuff.Events#IEventSender#Aggregator">
+            <summary />
+        </member>
+        <member name="P:GameCore.BuffSystem.Data.GameDataBuff.AggregatorWeakReference">
+            <summary />
+        </member>
+        <member name="P:GameCore.BuffSystem.Data.GameDataBuff.DebugDrawSettings">
+            <summary />
+        </member>
+        <member name="T:GameCore.BuffSystem.Data.Struct.BuffFlags">
+            <summary>
+            定义 Buff 效果的行为标志，控制 Buff 的各种特性和生命周期管理
+            </summary>
+            <remarks>
+            BuffFlags 类用于配置 Buff 效果的特殊行为，包括叠加规则、持续性设置、
+            死亡时的处理和引导效果等。这些标志影响 Buff 在游戏中的应用和管理方式。
+            </remarks>
+        </member>
+        <member name="P:GameCore.BuffSystem.Data.Struct.BuffFlags.SingleInstancePerCaster">
+            <summary>
+            获取或设置是否每个施法者只能对同一目标施加一个相同类型的 Buff 实例
+            </summary>
+            <remarks>
+            当设置为 <c>true</c> 时，如果同一个施法者尝试对已有相同 Buff 的目标再次施加该 Buff，
+            新的 Buff 会替换旧的实例，并重置 Buff 的持续时间。如果 Buff 未达到最大叠加次数，则会将新旧实例的叠加次数相加。
+            </remarks>
+        </member>
+        <member name="P:GameCore.BuffSystem.Data.Struct.BuffFlags.Permanent">
+            <summary>
+            获取或设置 Buff 是否为永久效果
+            </summary>
+            <remarks>
+            当设置为 <c>true</c> 时，Buff 不会因为变身、死亡等条件而消失。
+            </remarks>
+        </member>
+        <member name="P:GameCore.BuffSystem.Data.Struct.BuffFlags.DisableWhenDead">
+            <summary>
+            获取或设置当单位死亡时是否禁用此 Buff
+            </summary>
+            <remarks>
+            默认值为 <c>true</c>，意味着大多数 Buff 在单位死亡时会被禁用或移除。
+            设置为 <c>false</c> 可以让某些特殊效果在死亡后继续存在，例如灵魂形态或复活效果。
+            </remarks>
+        </member>
+        <member name="P:GameCore.BuffSystem.Data.Struct.BuffFlags.Channeling">
+            <summary>
+            获取或设置 Buff 是否为引导效果
+            </summary>
+            <remarks>
+            当设置为 <c>true</c> 时，表示此 Buff 需要施法者持续引导，如果施法者的引导被打断，
+            该 Buff 也会被移除。这通常用于需要集中精神维持的法术效果。
+            </remarks>
+        </member>
+        <member name="T:GameCore.BuffSystem.Manager.BuffManager">
+            <summary />
+        </member>
+        <member name="P:GameCore.BuffSystem.Manager.BuffManager.ObjectType">
+            <summary />
+        </member>
+        <member name="M:GameCore.BuffSystem.Manager.BuffManager.#ctor(GameCore.EntitySystem.Entity)">
+            <summary />
+        </member>
+        <member name="M:GameCore.BuffSystem.Manager.BuffManager.Add(GameCore.BuffSystem.Buff)">
+            <summary />
+            <param name="Buff" />
+            <returns />
+        </member>
+        <member name="M:GameCore.BuffSystem.Manager.BuffManager.Remove(GameCore.BuffSystem.Buff)">
+            <summary />
+            <param name="Buff" />
+            <returns />
+        </member>
+        <member name="M:GameCore.BuffSystem.Manager.BuffManager.CreateInstance(GameCore.EntitySystem.Entity)">
+            <summary />
+            <param name="content" />
+            <returns />
+        </member>
+        <member name="M:GameCore.BuffSystem.Manager.BuffManager.HasBuff(GameData.IGameLink{GameCore.BuffSystem.Data.GameDataBuff})">
+            <summary>
+            检查是否有指定的Buff
+            </summary>
+            <param name="buffLink">Buff数编Link</param>
+            <returns>如果存在指定Buff则返回true</returns>
+        </member>
+        <member name="M:GameCore.BuffSystem.Manager.BuffManager.HasAnyBuff(GameData.IGameLink{GameCore.BuffSystem.Data.GameDataBuff}[])">
+            <summary>
+            检查是否有任意一个指定的Buff
+            </summary>
+            <param name="buffLinks">Buff数编Link数组</param>
+            <returns>如果存在任意一个指定Buff则返回true</returns>
+        </member>
+        <member name="M:GameCore.BuffSystem.Manager.BuffManager.HasAllBuffs(GameData.IGameLink{GameCore.BuffSystem.Data.GameDataBuff}[])">
+            <summary>
+            检查是否有所有指定的Buff
+            </summary>
+            <param name="buffLinks">Buff数编Link数组</param>
+            <returns>如果存在所有指定Buff则返回true</returns>
+        </member>
+        <member name="M:GameCore.BuffSystem.Manager.BuffManager.RemoveByPredicate(System.Func{GameCore.BuffSystem.Buff,System.Boolean})">
+            <summary>
+            按条件移除Buff
+            </summary>
+            <param name="predicate">移除条件</param>
+            <returns>移除的Buff数量</returns>
+        </member>
+        <member name="M:GameCore.BuffSystem.Manager.BuffManager.DispelBuffs(GameCore.BuffSystem.Data.Enum.BuffPolarity,System.Boolean)">
+            <summary>
+            驱散指定极性的Buff
+            </summary>
+            <param name="polarity">要驱散的Buff极性</param>
+            <param name="onlyDispellable">是否只驱散可驱散的Buff</param>
+            <returns>驱散的Buff数量</returns>
+        </member>
+        <member name="M:GameCore.BuffSystem.Manager.BuffManager.DispelPositiveBuffs(System.Boolean)">
+            <summary>
+            驱散有益Buff
+            </summary>
+            <param name="onlyDispellable">是否只驱散可驱散的Buff</param>
+            <returns>驱散的Buff数量</returns>
+        </member>
+        <member name="M:GameCore.BuffSystem.Manager.BuffManager.DispelNegativeBuffs(System.Boolean)">
+            <summary>
+            驱散有害Buff
+            </summary>
+            <param name="onlyDispellable">是否只驱散可驱散的Buff</param>
+            <returns>驱散的Buff数量</returns>
+        </member>
+        <member name="M:GameCore.BuffSystem.Manager.BuffManager.ClearAllDispellableBuffs">
+            <summary>
+            清除所有可驱散的Buff
+            </summary>
+            <returns>清除的Buff数量</returns>
+        </member>
+        <member name="M:GameCore.BuffSystem.Manager.BuffManager.HasState(GameCore.BaseType.UnitState)">
+            <summary>
+            检查单位是否有指定状态（通过Buff添加的）
+            </summary>
+            <param name="state">要检查的状态</param>
+            <returns>如果单位具有该状态则返回true</returns>
+        </member>
+        <member name="M:GameCore.BuffSystem.Manager.BuffManager.GetCurrentStates">
+            <summary>
+            获取单位当前所有状态（通过Buff添加的）
+            </summary>
+            <returns>当前所有状态的集合</returns>
+        </member>
+        <member name="M:GameCore.BuffSystem.Manager.BuffManager.GetBuffsByPolarity(GameCore.BuffSystem.Data.Enum.BuffPolarity)">
+            <summary>
+            获取指定极性的所有Buff
+            </summary>
+            <param name="polarity">Buff极性</param>
+            <returns>指定极性的Buff集合</returns>
+        </member>
+        <member name="M:GameCore.BuffSystem.Manager.BuffManager.GetPositiveBuffs">
+            <summary>
+            获取所有有益Buff
+            </summary>
+            <returns>有益Buff集合</returns>
+        </member>
+        <member name="M:GameCore.BuffSystem.Manager.BuffManager.GetNegativeBuffs">
+            <summary>
+            获取所有有害Buff
+            </summary>
+            <returns>有害Buff集合</returns>
+        </member>
+        <member name="M:GameCore.BuffSystem.Manager.BuffManager.GetDispellableBuffs">
+            <summary>
+            获取所有可驱散的Buff
+            </summary>
+            <returns>可驱散的Buff集合</returns>
+        </member>
+        <member name="M:GameCore.BuffSystem.Manager.BuffManager.CountBuffs(System.Func{GameCore.BuffSystem.Buff,System.Boolean})">
+            <summary>
+            统计指定类型的Buff数量
+            </summary>
+            <param name="predicate">统计条件</param>
+            <returns>满足条件的Buff数量</returns>
+        </member>
+        <member name="M:GameCore.BuffSystem.Manager.BuffManager.CountBuffsByPolarity(GameCore.BuffSystem.Data.Enum.BuffPolarity)">
+            <summary>
+            统计指定极性的Buff数量
+            </summary>
+            <param name="polarity">Buff极性</param>
+            <returns>指定极性的Buff数量</returns>
+        </member>
+        <member name="M:GameCore.BuffSystem.Manager.BuffManager.CountPositiveBuffs">
+            <summary>
+            统计有益Buff数量
+            </summary>
+            <returns>有益Buff数量</returns>
+        </member>
+        <member name="M:GameCore.BuffSystem.Manager.BuffManager.CountNegativeBuffs">
+            <summary>
+            统计有害Buff数量
+            </summary>
+            <returns>有害Buff数量</returns>
+        </member>
+        <member name="T:GameCore.BuffSystem.Manager.BuffManagerExtension">
+            <summary />
+        </member>
+        <member name="M:GameCore.BuffSystem.Manager.BuffManagerExtension.GetComponent``1(GameCore.EntitySystem.Entity)">
+            <summary />
+            <typeparam name="TComponent" />
+            <param name="entity" />
+            <returns />
+        </member>
+        <member name="M:GameCore.BuffSystem.Manager.BuffManagerExtension.GetOrCreateComponent``1(GameCore.EntitySystem.Entity)">
+            <summary />
+            <typeparam name="TComponent" />
+            <param name="entity" />
+            <returns />
+        </member>
+    </members>
+</doc>

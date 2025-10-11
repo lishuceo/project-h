@@ -1,0 +1,1021 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<doc>
+    <assembly>
+        <name>GameCore</name>
+    </assembly>
+    <members>
+        <member name="T:GameCore.Shape.AIShapeComposer">
+            <summary>
+            AI助手专用的形状组合工具，提供预定义的复杂对象组合模板
+            </summary>
+            <remarks>
+            这个组合器为AI助手提供了快速创建复杂对象的能力，通过组合多个基本形状
+            来构建角色、建筑、载具等复杂物体。每个组合都有清晰的语义含义，
+            便于AI理解和使用。
+            </remarks>
+        </member>
+        <member name="M:GameCore.Shape.AIShapeComposer.CreateSimpleCharacter(GameCore.SceneSystem.ScenePoint,GameCore.ActorSystem.IActorScope,System.Single)">
+            <summary>
+            创建简单的人形角色（头+身体）
+            </summary>
+            <param name="position">角色位置</param>
+            <param name="scope">作用域</param>
+            <param name="scale">整体缩放</param>
+            <returns>角色部件列表（[0]=身体, [1]=头部）</returns>
+            <example>
+                <code>
+            // AI示例：创建玩家角色
+            var player = AIShapeComposer.CreateSimpleCharacter(spawnPoint, playerScope);
+            var body = player[0];  // 身体
+            var head = player[1];  // 头部
+            </code>
+            </example>
+        </member>
+        <member name="M:GameCore.Shape.AIShapeComposer.CreateRobotCharacter(GameCore.SceneSystem.ScenePoint,GameCore.ActorSystem.IActorScope,System.Single)">
+            <summary>
+            创建机器人角色（更加几何化）
+            </summary>
+            <param name="position">机器人位置</param>
+            <param name="scope">作用域</param>
+            <param name="scale">整体缩放</param>
+            <returns>机器人部件列表（[0]=身体, [1]=头部, [2]=左臂, [3]=右臂）</returns>
+        </member>
+        <member name="M:GameCore.Shape.AIShapeComposer.CreateSimpleHouse(GameCore.SceneSystem.ScenePoint,GameCore.ActorSystem.IActorScope,System.Single)">
+            <summary>
+            创建简单房屋（墙+屋顶）
+            </summary>
+            <param name="position">房屋位置</param>
+            <param name="scope">作用域</param>
+            <param name="scale">整体缩放</param>
+            <returns>建筑部件列表（[0]=墙壁, [1]=屋顶）</returns>
+        </member>
+        <member name="M:GameCore.Shape.AIShapeComposer.CreateCastleTower(GameCore.SceneSystem.ScenePoint,GameCore.ActorSystem.IActorScope,System.Single)">
+            <summary>
+            创建城堡塔楼
+            </summary>
+            <param name="position">塔楼位置</param>
+            <param name="scope">作用域</param>
+            <param name="scale">整体缩放</param>
+            <returns>塔楼部件列表（[0]=基座, [1]=塔身, [2]=塔顶）</returns>
+        </member>
+        <member name="M:GameCore.Shape.AIShapeComposer.CreateSimpleCar(GameCore.SceneSystem.ScenePoint,GameCore.ActorSystem.IActorScope,System.Single)">
+            <summary>
+            创建简单汽车
+            </summary>
+            <param name="position">汽车位置</param>
+            <param name="scope">作用域</param>
+            <param name="scale">整体缩放</param>
+            <returns>汽车部件列表（[0]=车身, [1-4]=轮子）</returns>
+        </member>
+        <member name="M:GameCore.Shape.AIShapeComposer.CreateSimpleSpaceship(GameCore.SceneSystem.ScenePoint,GameCore.ActorSystem.IActorScope,System.Single)">
+            <summary>
+            创建简单飞船
+            </summary>
+            <param name="position">飞船位置</param>
+            <param name="scope">作用域</param>
+            <param name="scale">整体缩放</param>
+            <returns>飞船部件列表（[0]=船身, [1]=尾翼, [2]=引擎）</returns>
+        </member>
+        <member name="M:GameCore.Shape.AIShapeComposer.CreateSimpleTree(GameCore.SceneSystem.ScenePoint,GameCore.ActorSystem.IActorScope,System.Single)">
+            <summary>
+            创建简单树木
+            </summary>
+            <param name="position">树木位置</param>
+            <param name="scope">作用域</param>
+            <param name="scale">整体缩放</param>
+            <returns>树木部件列表（[0]=树干, [1]=树冠）</returns>
+        </member>
+        <member name="M:GameCore.Shape.AIShapeComposer.CreateStreetLight(GameCore.SceneSystem.ScenePoint,GameCore.ActorSystem.IActorScope,System.Single)">
+            <summary>
+            创建路灯
+            </summary>
+            <param name="position">路灯位置</param>
+            <param name="scope">作用域</param>
+            <param name="scale">整体缩放</param>
+            <returns>路灯部件列表（[0]=灯柱, [1]=灯泡）</returns>
+        </member>
+        <member name="M:GameCore.Shape.AIShapeComposer.CreateSimpleTurret(GameCore.SceneSystem.ScenePoint,GameCore.ActorSystem.IActorScope,System.Single)">
+            <summary>
+            创建简单炮塔
+            </summary>
+            <param name="position">炮塔位置</param>
+            <param name="scope">作用域</param>
+            <param name="scale">整体缩放</param>
+            <returns>炮塔部件列表（[0]=基座, [1]=炮管）</returns>
+        </member>
+        <member name="M:GameCore.Shape.AIShapeComposer.CreateCollectibleAltar(GameCore.SceneSystem.ScenePoint,GameCore.ActorSystem.IActorScope,System.Single)">
+            <summary>
+            创建收集品祭坛
+            </summary>
+            <param name="position">祭坛位置</param>
+            <param name="scope">作用域</param>
+            <param name="scale">整体缩放</param>
+            <returns>祭坛部件列表（[0]=基座, [1]=收集品）</returns>
+        </member>
+        <member name="M:GameCore.Shape.AIShapeComposer.CreateForest(GameCore.SceneSystem.ScenePoint,System.Single,System.Int32,GameCore.ActorSystem.IActorScope)">
+            <summary>
+            创建对象森林（随机分布的树木）
+            </summary>
+            <param name="centerPosition">森林中心位置</param>
+            <param name="radius">森林半径</param>
+            <param name="treeCount">树木数量</param>
+            <param name="scope">作用域</param>
+            <returns>所有树木的部件列表</returns>
+        </member>
+        <member name="M:GameCore.Shape.AIShapeComposer.CreateCityBlock(GameCore.SceneSystem.ScenePoint,System.ValueTuple{System.Int32,System.Int32},System.Single,GameCore.ActorSystem.IActorScope)">
+            <summary>
+            创建城市街区（房屋+路灯）
+            </summary>
+            <param name="centerPosition">街区中心位置</param>
+            <param name="gridSize">街区网格大小</param>
+            <param name="spacing">建筑间距</param>
+            <param name="scope">作用域</param>
+            <returns>所有建筑的部件列表</returns>
+        </member>
+        <member name="T:GameCore.Shape.AIShapeFactory">
+            <summary>
+            AI助手专用的3D形状创建工厂，提供简单易用的API来快速创建基本形状
+            </summary>
+            <remarks>
+            这个工厂类是为AI助手设计的，提供了语义化、直观的API来创建3D形状。
+            AI可以通过简单的方法调用快速搭建游戏原型，而无需深入了解复杂的底层系统。
+            支持智能默认颜色、自动尺寸调整和灵活的自定义选项。
+            </remarks>
+        </member>
+        <member name="P:GameCore.Shape.AIShapeFactory.DefaultColorMode">
+            <summary>
+            默认的形状颜色模式
+            </summary>
+        </member>
+        <member name="P:GameCore.Shape.AIShapeFactory.DefaultColorTheme">
+            <summary>
+            默认的颜色主题
+            </summary>
+        </member>
+        <member name="P:GameCore.Shape.AIShapeFactory.EnableAutoTint">
+            <summary>
+            是否启用自动染色设置（推荐用于AI快速原型）
+            </summary>
+        </member>
+        <member name="M:GameCore.Shape.AIShapeFactory.CreateShape(GameCore.Shape.Data.PrimitiveShape,GameCore.SceneSystem.ScenePoint,GameCore.ActorSystem.IActorScope)">
+            <summary>
+            创建基本形状Actor（最简单的API）
+            </summary>
+            <param name="shape">要创建的形状类型</param>
+            <param name="position">世界位置，使用Vector3(x, y, z)格式，其中XY为地面坐标，Z为高度</param>
+            <param name="scope">Actor作用域，null表示无作用域</param>
+            <returns>创建的形状Actor</returns>
+            <remarks>
+            ⚠️ 坐标系统重要提醒：
+            - X轴：水平方向（左右）
+            - Y轴：水平方向（前后）
+            - Z轴：高度方向（上下，跳跃轴）
+            - XY平面：地面
+            </remarks>
+            <example>
+                <code>
+            // AI示例：在地面创建球体
+            var groundBall = AIShapeFactory.CreateShape(PrimitiveShape.Sphere, 
+                new ScenePoint(new Vector3(100, 200, 0), scene));
+            
+            // AI示例：在空中创建跳跃角色
+            var jumpingCharacter = AIShapeFactory.CreateShape(PrimitiveShape.Capsule, 
+                new ScenePoint(new Vector3(100, 200, 50), scene), playerScope);
+            </code>
+            </example>
+        </member>
+        <member name="M:GameCore.Shape.AIShapeFactory.CreateShape(GameCore.Shape.Data.PrimitiveShape,GameCore.SceneSystem.ScenePoint,GameCore.Shape.Data.ShapeColorMode,GameCore.ActorSystem.IActorScope)">
+            <summary>
+            创建指定颜色模式的形状
+            </summary>
+            <param name="shape">要创建的形状类型</param>
+            <param name="position">世界位置</param>
+            <param name="colorMode">颜色模式</param>
+            <param name="scope">Actor作用域</param>
+            <returns>创建的形状Actor</returns>
+        </member>
+        <member name="M:GameCore.Shape.AIShapeFactory.CreateShape(GameCore.Shape.Data.PrimitiveShape,GameCore.SceneSystem.ScenePoint,System.Numerics.Vector3,GameCore.ActorSystem.IActorScope)">
+            <summary>
+            创建带缩放的形状
+            </summary>
+            <param name="shape">要创建的形状类型</param>
+            <param name="position">世界位置</param>
+            <param name="scale">缩放系数</param>
+            <param name="scope">Actor作用域</param>
+            <returns>创建的形状Actor</returns>
+            <example>
+                <code>
+            // AI示例：创建一个巨大的立方体建筑
+            var building = AIShapeFactory.CreateShape(
+                PrimitiveShape.Cube, 
+                buildingPosition, 
+                new Vector3(3f, 3f, 2f)); // 3倍宽高，2倍高度
+            </code>
+            </example>
+        </member>
+        <member name="M:GameCore.Shape.AIShapeFactory.CreateColoredShape(GameCore.Shape.Data.PrimitiveShape,GameCore.SceneSystem.ScenePoint,GameCore.Drawing.HdrColor,GameCore.ActorSystem.IActorScope)">
+            <summary>
+            创建自定义颜色的形状
+            </summary>
+            <param name="shape">要创建的形状类型</param>
+            <param name="position">世界位置</param>
+            <param name="color">自定义颜色</param>
+            <param name="scope">Actor作用域</param>
+            <returns>创建的形状Actor</returns>
+            <example>
+                <code>
+            // AI示例：创建一个金色的收集品
+            var collectible = AIShapeFactory.CreateColoredShape(
+                PrimitiveShape.Sphere, 
+                itemPosition, 
+                new HdrColor(Color.Gold));
+            </code>
+            </example>
+        </member>
+        <member name="M:GameCore.Shape.AIShapeFactory.CreateThemedShape(GameCore.Shape.Data.PrimitiveShape,GameCore.SceneSystem.ScenePoint,GameCore.Shape.Data.ShapeColorTheme,GameCore.ActorSystem.IActorScope)">
+            <summary>
+            创建指定主题的形状
+            </summary>
+            <param name="shape">要创建的形状类型</param>
+            <param name="position">世界位置</param>
+            <param name="theme">颜色主题</param>
+            <param name="scope">Actor作用域</param>
+            <returns>创建的形状Actor</returns>
+        </member>
+        <member name="M:GameCore.Shape.AIShapeFactory.CreatePlayer(GameCore.SceneSystem.ScenePoint,GameCore.ActorSystem.IActorScope)">
+            <summary>
+            快速创建玩家角色（蓝色胶囊）
+            </summary>
+            <param name="position">出生位置。注意：使用Vector3(x, y, z)，其中XY为地面位置，Z为高度</param>
+            <param name="scope">角色作用域</param>
+            <returns>角色Actor</returns>
+            <remarks>
+            坐标系统提醒：WasiCore使用Z轴作为高度轴，XY平面为地面。
+            示例：new ScenePoint(new Vector3(100, 200, 0), scene) 表示在地面位置(100,200)创建角色。
+            </remarks>
+        </member>
+        <member name="M:GameCore.Shape.AIShapeFactory.CreateEnemy(GameCore.SceneSystem.ScenePoint,GameCore.ActorSystem.IActorScope)">
+            <summary>
+            快速创建敌人（红色球体）
+            </summary>
+            <param name="position">敌人位置</param>
+            <param name="scope">敌人作用域</param>
+            <returns>敌人Actor</returns>
+        </member>
+        <member name="M:GameCore.Shape.AIShapeFactory.CreateObstacle(GameCore.SceneSystem.ScenePoint,System.Nullable{System.Numerics.Vector3},GameCore.ActorSystem.IActorScope)">
+            <summary>
+            快速创建障碍物（灰色立方体）
+            </summary>
+            <param name="position">障碍物位置</param>
+            <param name="scale">障碍物大小</param>
+            <param name="scope">作用域</param>
+            <returns>障碍物Actor</returns>
+        </member>
+        <member name="M:GameCore.Shape.AIShapeFactory.CreateCollectible(GameCore.SceneSystem.ScenePoint,GameCore.ActorSystem.IActorScope)">
+            <summary>
+            快速创建收集品（黄色圆锥）
+            </summary>
+            <param name="position">收集品位置</param>
+            <param name="scope">作用域</param>
+            <returns>收集品Actor</returns>
+        </member>
+        <member name="M:GameCore.Shape.AIShapeFactory.CreatePlatform(GameCore.SceneSystem.ScenePoint,System.Nullable{System.Numerics.Vector3},GameCore.ActorSystem.IActorScope)">
+            <summary>
+            快速创建平台（棕色平面）
+            </summary>
+            <param name="position">平台位置。Z坐标决定平台高度</param>
+            <param name="scale">平台大小。格式：Vector3(宽度, 深度, 厚度)，注意Z为厚度</param>
+            <param name="scope">作用域</param>
+            <returns>平台Actor</returns>
+            <remarks>
+            坐标提醒：平台位置的Z值决定其在空间中的高度。
+            缩放提醒：scale.X和scale.Y控制平台在地面的大小，scale.Z控制厚度。
+            </remarks>
+        </member>
+        <member name="M:GameCore.Shape.AIShapeFactory.CreateShapes(GameCore.Shape.Data.PrimitiveShape,System.Collections.Generic.IEnumerable{GameCore.SceneSystem.ScenePoint},GameCore.ActorSystem.IActorScope)">
+            <summary>
+            批量创建相同形状的Actor
+            </summary>
+            <param name="shape">形状类型</param>
+            <param name="positions">位置列表</param>
+            <param name="scope">作用域</param>
+            <returns>创建的Actor列表</returns>
+            <example>
+                <code>
+            // AI示例：创建一排障碍物
+            var obstaclePositions = GenerateLinePositions(start, end, count: 5);
+            var obstacles = AIShapeFactory.CreateShapes(
+                PrimitiveShape.Cube, 
+                obstaclePositions);
+            </code>
+            </example>
+        </member>
+        <member name="M:GameCore.Shape.AIShapeFactory.CreateShapeGrid(GameCore.Shape.Data.PrimitiveShape,GameCore.SceneSystem.ScenePoint,System.ValueTuple{System.Int32,System.Int32},System.Single,GameCore.ActorSystem.IActorScope)">
+            <summary>
+            在网格位置创建形状阵列
+            </summary>
+            <param name="shape">形状类型</param>
+            <param name="centerPosition">网格中心位置</param>
+            <param name="gridSize">网格大小（宽x高）</param>
+            <param name="spacing">网格间距</param>
+            <param name="scope">作用域</param>
+            <returns>创建的Actor列表</returns>
+        </member>
+        <member name="M:GameCore.Shape.AIShapeFactory.GetShapeUsageHint(GameCore.Shape.Data.PrimitiveShape)">
+            <summary>
+            获取形状的推荐用途描述
+            </summary>
+            <param name="shape">形状类型</param>
+            <returns>用途描述字符串</returns>
+        </member>
+        <member name="M:GameCore.Shape.AIShapeFactory.GetAllShapeHints">
+            <summary>
+            列出所有可用的形状和其用途
+            </summary>
+            <returns>形状用途映射</returns>
+        </member>
+        <member name="T:GameCore.Shape.AIUnitShapeFactory">
+            <summary>
+            AI友好的单位形状工厂，用于为游戏单位附着基本几何形状
+            </summary>
+            <remarks>
+            这个工厂专门处理单位（Unit）与基本形状的结合，提供简单的API让AI助手
+            能够快速为单位添加临时的视觉表现。支持形状切换、组合和动态调整。
+            </remarks>
+        </member>
+        <member name="M:GameCore.Shape.AIUnitShapeFactory.AttachShapeToUnit(GameCore.EntitySystem.Unit,GameCore.Shape.Data.PrimitiveShape,System.Nullable{System.Numerics.Vector3},System.Nullable{System.Numerics.Vector3},System.Nullable{GameCore.Shape.Data.ShapeColorMode},System.Nullable{GameCore.Shape.Data.ShapeColorTheme},System.Object)">
+            <summary>
+            为单位附着单个基本形状
+            </summary>
+            <param name="unit">目标单位</param>
+            <param name="shape">要附着的形状</param>
+            <param name="offset">相对于单位原点的偏移</param>
+            <param name="scale">形状缩放（null使用默认值）</param>
+            <param name="colorMode">颜色模式（null使用默认值）</param>
+            <param name="theme">颜色主题（null使用默认值）</param>
+            <param name="tag">标识符，用于后续管理（null使用默认值）</param>
+            <returns>创建的形状Actor</returns>
+        </member>
+        <member name="M:GameCore.Shape.AIUnitShapeFactory.AttachCompositeShapeToUnit(GameCore.EntitySystem.Unit,GameCore.Shape.ShapeConfig[])">
+            <summary>
+            为单位附着复合形状（多个形状组合）
+            </summary>
+            <param name="unit">目标单位</param>
+            <param name="shapeConfig">形状配置列表</param>
+            <returns>创建的所有形状Actor列表</returns>
+        </member>
+        <member name="M:GameCore.Shape.AIUnitShapeFactory.AttachUnitTemplate(GameCore.EntitySystem.Unit,GameCore.Shape.UnitShapeTemplate,System.Single)">
+            <summary>
+            使用预定义的单位形状模板
+            </summary>
+            <param name="unit">目标单位</param>
+            <param name="template">形状模板</param>
+            <param name="scale">整体缩放</param>
+            <returns>创建的形状Actor列表</returns>
+        </member>
+        <member name="M:GameCore.Shape.AIUnitShapeFactory.ClearUnitShapes(GameCore.EntitySystem.Unit)">
+            <summary>
+            移除单位上的所有附着形状
+            </summary>
+            <param name="unit">目标单位</param>
+        </member>
+        <member name="M:GameCore.Shape.AIUnitShapeFactory.ApplyShapeColor(GameCore.ActorSystem.ActorModel,GameCore.Shape.Data.PrimitiveShape,GameCore.Shape.Data.ShapeColorMode,GameCore.Shape.Data.ShapeColorTheme)">
+            <summary>
+            为形状Actor应用颜色（使用TintColor机制）
+            </summary>
+            <param name="actor">目标形状Actor</param>
+            <param name="shape">形状类型</param>
+            <param name="colorMode">颜色模式</param>
+            <param name="theme">颜色主题</param>
+        </member>
+        <member name="M:GameCore.Shape.AIUnitShapeFactory.SetShapeColor(GameCore.ActorSystem.ActorModel,GameCore.Drawing.HdrColor,System.String)">
+            <summary>
+            为形状Actor设置自定义颜色（使用TintColor机制）
+            </summary>
+            <param name="actor">目标形状Actor</param>
+            <param name="color">自定义颜色</param>
+            <param name="tag">标识符</param>
+        </member>
+        <member name="M:GameCore.Shape.AIUnitShapeFactory.ClearShapeColor(GameCore.ActorSystem.ActorModel,System.String)">
+            <summary>
+            清除形状Actor的颜色染色
+            </summary>
+            <param name="actor">目标形状Actor</param>
+            <param name="tag">要清除的标识符，null表示清除所有</param>
+        </member>
+        <member name="T:GameCore.Shape.ShapeConfig">
+            <summary>
+            形状配置结构，用于复合形状创建
+            </summary>
+        </member>
+        <member name="P:GameCore.Shape.ShapeConfig.Shape">
+            <summary />
+        </member>
+        <member name="P:GameCore.Shape.ShapeConfig.Scale">
+            <summary />
+        </member>
+        <member name="P:GameCore.Shape.ShapeConfig.Offset">
+            <summary />
+        </member>
+        <member name="P:GameCore.Shape.ShapeConfig.Rotation">
+            <summary />
+        </member>
+        <member name="P:GameCore.Shape.ShapeConfig.ColorMode">
+            <summary />
+        </member>
+        <member name="P:GameCore.Shape.ShapeConfig.Theme">
+            <summary />
+        </member>
+        <member name="P:GameCore.Shape.ShapeConfig.AttachToRoot">
+            <summary />
+        </member>
+        <member name="T:GameCore.Shape.UnitShapeTemplate">
+            <summary>
+            预定义的单位形状模板
+            </summary>
+        </member>
+        <member name="F:GameCore.Shape.UnitShapeTemplate.SimpleCharacter">
+            <summary>简单角色（胶囊身体+球体头部）</summary>
+        </member>
+        <member name="F:GameCore.Shape.UnitShapeTemplate.FlyingOrb">
+            <summary>飞行球体（单个球体）</summary>
+        </member>
+        <member name="F:GameCore.Shape.UnitShapeTemplate.Vehicle">
+            <summary>载具（立方体）</summary>
+        </member>
+        <member name="F:GameCore.Shape.UnitShapeTemplate.Tower">
+            <summary>塔楼（圆柱体）</summary>
+        </member>
+        <member name="T:GameCore.Shape.Data.PrimitiveColorScheme">
+            <summary>
+            基本形状的智能颜色方案管理器，为AI助手提供语义化的默认颜色
+            </summary>
+            <remarks>
+            该类基于认知心理学和游戏设计惯例，为不同形状分配直观的默认颜色。
+            支持多种主题，可以根据项目需求切换不同的配色方案。
+            </remarks>
+        </member>
+        <member name="P:GameCore.Shape.Data.PrimitiveColorScheme.CurrentTheme">
+            <summary>
+            当前使用的颜色主题
+            </summary>
+        </member>
+        <member name="F:GameCore.Shape.Data.PrimitiveColorScheme.StandardColors">
+            <summary>
+            标准主题 - 基于通用认知和文化习惯
+            </summary>
+        </member>
+        <member name="F:GameCore.Shape.Data.PrimitiveColorScheme.GamingColors">
+            <summary>
+            游戏主题 - 基于游戏设计惯例
+            </summary>
+        </member>
+        <member name="F:GameCore.Shape.Data.PrimitiveColorScheme.EducationalColors">
+            <summary>
+            教育主题 - 明亮且易于区分的颜色
+            </summary>
+        </member>
+        <member name="F:GameCore.Shape.Data.PrimitiveColorScheme.NaturalColors">
+            <summary>
+            自然主题 - 基于自然元素的颜色
+            </summary>
+        </member>
+        <member name="M:GameCore.Shape.Data.PrimitiveColorScheme.GetDefaultColor(GameCore.Shape.Data.PrimitiveShape)">
+            <summary>
+            获取指定形状在当前主题下的默认颜色
+            </summary>
+            <param name="shape">要获取颜色的形状</param>
+            <returns>该形状的默认HDR颜色</returns>
+        </member>
+        <member name="M:GameCore.Shape.Data.PrimitiveColorScheme.GetColor(GameCore.Shape.Data.PrimitiveShape,GameCore.Shape.Data.ShapeColorTheme)">
+            <summary>
+            获取指定主题下的形状颜色
+            </summary>
+            <param name="shape">要获取颜色的形状</param>
+            <param name="theme">指定的颜色主题</param>
+            <returns>该形状在指定主题下的HDR颜色</returns>
+        </member>
+        <member name="M:GameCore.Shape.Data.PrimitiveColorScheme.GenerateRandomColor">
+            <summary>
+            生成随机颜色（用于调试模式）
+            </summary>
+            <returns>随机的HDR颜色</returns>
+        </member>
+        <member name="M:GameCore.Shape.Data.PrimitiveColorScheme.GetAllShapeColors">
+            <summary>
+            获取所有可用的形状及其当前主题下的颜色
+            </summary>
+            <returns>形状到颜色的映射字典</returns>
+        </member>
+        <member name="M:GameCore.Shape.Data.PrimitiveColorScheme.GetShapeDescription(GameCore.Shape.Data.PrimitiveShape)">
+            <summary>
+            获取形状的语义化描述（包含颜色信息）
+            </summary>
+            <param name="shape">要描述的形状</param>
+            <returns>包含颜色和用途的描述字符串</returns>
+        </member>
+        <member name="T:GameCore.Shape.Data.PrimitiveShape">
+            <summary>
+            定义可用的基本3D形状类型，适用于AI助手快速游戏原型开发
+            </summary>
+            <remarks>
+            所有形状都基于标准尺寸：圆形底面直径100（半径50），方形底面边长100。
+            这个枚举为AI助手提供语义化的形状选择，便于快速识别和使用。
+            </remarks>
+        </member>
+        <member name="F:GameCore.Shape.Data.PrimitiveShape.Sphere">
+            <summary>
+            球体 - 直径100（半径50），原点在球心
+            <para>适用场景：球类、星球、泡泡、弹珠、敌人</para><para>默认颜色：红色</para></summary>
+        </member>
+        <member name="F:GameCore.Shape.Data.PrimitiveShape.Cube">
+            <summary>
+            立方体 - 边长100，原点在底面中心
+            <para>适用场景：箱子、建筑块、方形障碍物、容器</para><para>默认颜色：橙色</para></summary>
+        </member>
+        <member name="F:GameCore.Shape.Data.PrimitiveShape.Cylinder">
+            <summary>
+            圆柱体 - 底面直径100（半径50），高度100，原点在底面圆心
+            <para>适用场景：柱子、管道、炮筒、圆形建筑</para><para>默认颜色：灰色</para></summary>
+        </member>
+        <member name="F:GameCore.Shape.Data.PrimitiveShape.Plane">
+            <summary>
+            平面 - 边长100的正方形，原点在几何中心
+            <para>适用场景：地面、墙壁、平台、水面</para><para>默认颜色：棕色</para></summary>
+        </member>
+        <member name="F:GameCore.Shape.Data.PrimitiveShape.Cone">
+            <summary>
+            圆锥 - 底面直径100（半径50），高度100，原点在底面圆心
+            <para>适用场景：箭头指示、山峰、帽子、警示标志</para><para>默认颜色：黄色</para></summary>
+        </member>
+        <member name="F:GameCore.Shape.Data.PrimitiveShape.Capsule">
+            <summary>
+            胶囊 - 直径100（半径50），总高度200，原点在底端圆心
+            <para>适用场景：角色身体、子弹、药丸、玩家</para><para>默认颜色：蓝色</para></summary>
+        </member>
+        <member name="F:GameCore.Shape.Data.PrimitiveShape.Pyramid">
+            <summary>
+            方形金字塔 - 底面边长100，高度100，原点在底面中心
+            <para>适用场景：古代建筑、堆积物、尖顶建筑</para><para>默认颜色：沙黄色</para></summary>
+        </member>
+        <member name="F:GameCore.Shape.Data.PrimitiveShape.Torus">
+            <summary>
+            环形（甜甜圈） - 外径100，高度40，原点在几何中心
+            <para>适用场景：甜甜圈、轮胎、环状装饰</para><para>默认颜色：紫色</para></summary>
+        </member>
+        <member name="F:GameCore.Shape.Data.PrimitiveShape.Wedge">
+            <summary>
+            楔形 - 底面边长100，高度100，原点在底面后端中心
+            <para>适用场景：坡道、楔子、斜面</para><para>默认颜色：绿色</para></summary>
+        </member>
+        <member name="T:GameCore.Shape.Data.ShapeColorMode">
+            <summary>
+            形状颜色模式，决定基本形状的默认着色方案
+            </summary>
+        </member>
+        <member name="F:GameCore.Shape.Data.ShapeColorMode.SmartDefaults">
+            <summary>
+            智能默认颜色 - AI友好，每种形状有不同的语义化默认色
+            </summary>
+        </member>
+        <member name="F:GameCore.Shape.Data.ShapeColorMode.PureWhite">
+            <summary>
+            纯白色 - 适合需要自定义材质的场景
+            </summary>
+        </member>
+        <member name="F:GameCore.Shape.Data.ShapeColorMode.RandomColors">
+            <summary>
+            随机颜色 - 便于调试时区分不同实例
+            </summary>
+        </member>
+        <member name="T:GameCore.Shape.Data.ShapeColorTheme">
+            <summary>
+            预定义的形状颜色主题
+            </summary>
+        </member>
+        <member name="F:GameCore.Shape.Data.ShapeColorTheme.Standard">
+            <summary>
+            标准主题 - 基于通用认知的颜色
+            </summary>
+        </member>
+        <member name="F:GameCore.Shape.Data.ShapeColorTheme.Gaming">
+            <summary>
+            游戏主题 - 基于游戏惯例的颜色
+            </summary>
+        </member>
+        <member name="F:GameCore.Shape.Data.ShapeColorTheme.Educational">
+            <summary>
+            教育主题 - 明亮且易于区分的颜色
+            </summary>
+        </member>
+        <member name="F:GameCore.Shape.Data.ShapeColorTheme.Natural">
+            <summary>
+            自然主题 - 基于自然元素的颜色
+            </summary>
+        </member>
+        <member name="T:GameCore.Shape.Data.PrimitiveShapeConfig">
+            <summary>
+            基本几何形状配置数据（用于GameData序列化）
+            </summary>
+            <remarks>
+            这个配置类用于在GameDataUnit中定义单位的基本几何形状。
+            当单位在客户端创建时，会根据这些配置自动生成相应的形状表现。
+            </remarks>
+        </member>
+        <member name="P:GameCore.Shape.Data.PrimitiveShapeConfig.Shape">
+            <summary>
+            形状类型
+            </summary>
+        </member>
+        <member name="P:GameCore.Shape.Data.PrimitiveShapeConfig.Offset">
+            <summary>
+            相对于单位原点的偏移位置
+            </summary>
+        </member>
+        <member name="P:GameCore.Shape.Data.PrimitiveShapeConfig.Scale">
+            <summary>
+            形状的缩放比例
+            </summary>
+        </member>
+        <member name="P:GameCore.Shape.Data.PrimitiveShapeConfig.Rotation">
+            <summary>
+            形状的旋转角度（欧拉角，度数）
+            </summary>
+        </member>
+        <member name="P:GameCore.Shape.Data.PrimitiveShapeConfig.ColorMode">
+            <summary>
+            颜色模式
+            </summary>
+        </member>
+        <member name="P:GameCore.Shape.Data.PrimitiveShapeConfig.ColorTheme">
+            <summary>
+            颜色主题
+            </summary>
+        </member>
+        <member name="P:GameCore.Shape.Data.PrimitiveShapeConfig.CustomColor">
+            <summary>
+            自定义颜色（如果设置，将覆盖颜色模式）
+            </summary>
+            <remarks>
+            当此字段不为null时，将忽略ColorMode和ColorTheme设置，
+            直接使用指定的自定义颜色。
+            </remarks>
+        </member>
+        <member name="P:GameCore.Shape.Data.PrimitiveShapeConfig.AttachToRoot">
+            <summary>
+            是否附着到根单位
+            </summary>
+            <remarks>
+            true：附着到单位本身的原点
+            false：附着到前一个创建的形状（用于复合形状）
+            </remarks>
+        </member>
+        <member name="P:GameCore.Shape.Data.PrimitiveShapeConfig.Tag">
+            <summary>
+            形状标识符，用于后续管理和引用
+            </summary>
+            <remarks>
+            可以用于后续通过代码动态修改或移除特定的形状。
+            如果为空，将自动生成一个基于形状类型的标识符。
+            </remarks>
+        </member>
+        <member name="P:GameCore.Shape.Data.PrimitiveShapeConfig.Priority">
+            <summary>
+            形状优先级（数值越大越后创建，影响附着顺序）
+            </summary>
+        </member>
+        <member name="P:GameCore.Shape.Data.PrimitiveShapeConfig.EnableCollision">
+            <summary>
+            是否启用碰撞检测
+            </summary>
+            <remarks>
+            注意：基本形状通常只用于视觉表现，不建议启用碰撞。
+            单位的碰撞应该由其他系统管理。
+            </remarks>
+        </member>
+        <member name="M:GameCore.Shape.Data.PrimitiveShapeConfig.ToRuntimeConfig">
+            <summary>
+            创建运行时ShapeConfig（仅客户端可用）
+            </summary>
+            <returns>用于AIUnitShapeFactory的运行时配置</returns>
+        </member>
+        <member name="M:GameCore.Shape.Data.PrimitiveShapeConfig.IsValid">
+            <summary>
+            验证配置的有效性
+            </summary>
+            <returns>配置是否有效</returns>
+        </member>
+        <member name="M:GameCore.Shape.Data.PrimitiveShapeConfig.GetEffectiveTag(System.Int32)">
+            <summary>
+            获取有效的标识符
+            </summary>
+            <param name="index">形状索引，用于生成默认标识符</param>
+            <returns>形状标识符</returns>
+        </member>
+        <member name="T:GameCore.Shape.Data.PrimitiveShapeRegistry">
+            <summary>
+            基本形状的数据注册系统，负责在游戏初始化时创建所有基本形状的GameData
+            </summary>
+            <remarks>
+            该系统使用框架的IGameClass自动注册机制，在游戏启动时自动创建所有基本形状的
+            GameDataModel和GameDataActorModel数据。支持多种颜色主题和尺寸配置。
+            </remarks>
+        </member>
+        <member name="F:GameCore.Shape.Data.PrimitiveShapeRegistry.STANDARD_RADIUS">
+            <summary>
+            基本形状的标准半径（对应直径100的圆形）
+            </summary>
+        </member>
+        <member name="F:GameCore.Shape.Data.PrimitiveShapeRegistry.STANDARD_SIZE">
+            <summary>
+            基本形状的标准边长（方形底面）
+            </summary>
+        </member>
+        <member name="F:GameCore.Shape.Data.PrimitiveShapeRegistry.STANDARD_HEIGHT">
+            <summary>
+            基本形状的标准高度
+            </summary>
+        </member>
+        <member name="P:GameCore.Shape.Data.PrimitiveShapeRegistry.ModelLinks">
+            <summary>
+            形状模型数据的链接映射
+            </summary>
+        </member>
+        <member name="P:GameCore.Shape.Data.PrimitiveShapeRegistry.ActorLinks">
+            <summary>
+            形状Actor数据的链接映射（按颜色主题分组）
+            </summary>
+        </member>
+        <member name="M:GameCore.Shape.Data.PrimitiveShapeRegistry.GameCore#BaseInterface#IGameClass#OnRegisterGameClass">
+            <summary />
+            <returns />
+        </member>
+        <member name="T:GameCore.Shape.Data.ShapeGeometryInfo">
+            <summary>
+            形状几何信息结构
+            </summary>
+        </member>
+        <member name="P:GameCore.Shape.Data.ShapeGeometryInfo.Radius">
+            <summary />
+        </member>
+        <member name="P:GameCore.Shape.Data.ShapeGeometryInfo.Volume">
+            <summary />
+        </member>
+        <member name="P:GameCore.Shape.Data.ShapeGeometryInfo.BoundingCylinder">
+            <summary />
+        </member>
+        <member name="T:GameCore.Shape.Region">
+            <summary>
+            Abstract base class representing a geometric region within a scene.
+            Provides a common interface for region types (such as circles and rectangles) to define spatial properties,
+            containment logic, and entity queries within the region.
+            </summary>
+        </member>
+        <member name="M:GameCore.Shape.Region.#ctor">
+            <summary />
+        </member>
+        <member name="P:GameCore.Shape.Region.Position">
+            <summary>
+            Gets the position of the region, typically representing its origin or anchor point.
+            </summary>
+        </member>
+        <member name="P:GameCore.Shape.Region.Center">
+            <summary>
+            Gets the center point of the region.
+            </summary>
+        </member>
+        <member name="M:GameCore.Shape.Region.Contains(GameCore.SceneSystem.ScenePoint)">
+            <summary>
+            Determines whether the specified point is contained within the region.
+            </summary>
+            <param name="point">The point to check for containment.</param>
+            <returns>
+                <c>true</c> if the point is within the region; otherwise, <c>false</c>.</returns>
+        </member>
+        <member name="M:GameCore.Shape.Region.Contains(GameCore.EntitySystem.Entity)">
+            <summary>
+            Determines whether the specified entity is contained within the region.
+            </summary>
+            <param name="entity">The entity to check for containment.</param>
+            <returns>
+                <c>true</c> if the entity is within the region; otherwise, <c>false</c>.</returns>
+        </member>
+        <member name="M:GameCore.Shape.Region.FilterEntities(System.Func{GameCore.EntitySystem.Entity,System.Boolean})">
+            <summary>
+            Returns all entities within the region that satisfy the specified condition.
+            </summary>
+            <param name="condition">A predicate to filter entities; if <c>null</c>, all entities within the region are returned.</param>
+            <returns>An enumerable of entities within the region that match the condition, or <c>null</c> if none found.</returns>
+        </member>
+        <member name="M:GameCore.Shape.Region.FilterEntities``1(System.Func{GameCore.EntitySystem.Entity,``0})">
+            <summary>
+            Returns all entities within the region that can be transformed to the specified type and satisfy the given condition.
+            </summary>
+            <typeparam name="TMorph">
+            The target type to which entities are transformed. Only entities for which the <paramref name="condition" /> returns a non-null value are included.
+            </typeparam>
+            <param name="condition">
+            A transformation function that takes an <see cref="T:GameCore.EntitySystem.Entity" /> and returns a <typeparamref name="TMorph" /> instance or <c>null</c>.
+            If <c>null</c> is returned, the entity is excluded from the result.
+            </param>
+            <returns>
+            An enumerable of <typeparamref name="TMorph" /> instances representing entities within the region that match the transformation condition,
+            or <c>null</c> if none are found.
+            </returns>
+        </member>
+        <member name="T:GameCore.Shape.RegionCircle">
+            <summary>
+            Represents a circular region in a scene, defined by a center point and a radius.
+            Provides geometric properties and methods for containment checks and entity queries within the region.
+            </summary>
+        </member>
+        <member name="M:GameCore.Shape.RegionCircle.#ctor(GameCore.SceneSystem.ScenePoint,System.Single)">
+            <summary>
+            Represents a circular region in a scene, defined by a center point and a radius.
+            Provides geometric properties and methods for containment checks and entity queries within the region.
+            </summary>
+        </member>
+        <member name="P:GameCore.Shape.RegionCircle.Center">
+            <summary>
+            Gets the center point of the circle.
+            </summary>
+        </member>
+        <member name="P:GameCore.Shape.RegionCircle.Position">
+            <summary>
+            Gets the position of the circle (same as the center).
+            </summary>
+        </member>
+        <member name="P:GameCore.Shape.RegionCircle.Radius">
+            <summary>
+            Gets the radius of the circle.
+            </summary>
+        </member>
+        <member name="M:GameCore.Shape.RegionCircle.Contains(GameCore.SceneSystem.ScenePoint)">
+            <summary>
+            Determines whether the specified point is contained within the circle.
+            </summary>
+            <param name="point">The point to check for containment.</param>
+            <returns>
+                <c>true</c> if the point is within the circle and in the same scene; otherwise, <c>false</c>.</returns>
+        </member>
+        <member name="M:GameCore.Shape.RegionCircle.ToString">
+            <summary>
+            Returns a string representation of the circle region.
+            </summary>
+            <returns>A string describing the circle's position and radius.</returns>
+        </member>
+        <member name="P:GameCore.Shape.RegionCircle.Diameter">
+            <summary>
+            Gets the diameter of the circle.
+            </summary>
+        </member>
+        <member name="P:GameCore.Shape.RegionCircle.Circumference">
+            <summary>
+            Gets the circumference of the circle.
+            </summary>
+        </member>
+        <member name="P:GameCore.Shape.RegionCircle.Area">
+            <summary>
+            Gets the area of the circle.
+            </summary>
+        </member>
+        <member name="M:GameCore.Shape.RegionCircle.FilterEntities(System.Func{GameCore.EntitySystem.Entity,System.Boolean})">
+            <summary>
+            Returns all entities within the circle that satisfy the specified condition.
+            </summary>
+            <param name="condition">A predicate to filter entities; if <c>null</c>, all entities within the circle are returned.</param>
+            <returns>An enumerable of entities within the circle that match the condition, or <c>null</c> if none found.</returns>
+        </member>
+        <member name="M:GameCore.Shape.RegionCircle.FilterEntities``1(System.Func{GameCore.EntitySystem.Entity,``0})">
+            <summary>
+            Returns all entities within the circle that can be transformed to the specified type and satisfy the given condition.
+            </summary>
+            <typeparam name="TMorph">
+            The target type to which entities are transformed. Only entities for which the <paramref name="condition" /> returns a non-null value are included.
+            </typeparam>
+            <param name="condition">
+            A transformation function that takes an <see cref="T:GameCore.EntitySystem.Entity" /> and returns a <typeparamref name="TMorph" /> instance or <c>null</c>.
+            If <c>null</c> is returned, the entity is excluded from the result.
+            </param>
+            <returns>
+            An enumerable of <typeparamref name="TMorph" /> instances representing entities within the circle that match the transformation condition,
+            or <c>null</c> if none are found.
+            </returns>
+        </member>
+        <member name="M:GameCore.Shape.RegionCircle.Contains(GameCore.EntitySystem.Entity)">
+            <summary />
+            <param name="entity" />
+            <returns />
+        </member>
+        <member name="T:GameCore.Shape.RegionRectangle">
+            <summary>
+            Represents a rectangular region in a scene, defined by a position and size.
+            Provides geometric properties and methods for containment checks and entity queries within the region.
+            </summary>
+        </member>
+        <member name="M:GameCore.Shape.RegionRectangle.#ctor(GameCore.SceneSystem.ScenePoint,System.Numerics.Vector2)">
+            <summary>
+            Represents a rectangular region in a scene, defined by a position and size.
+            Provides geometric properties and methods for containment checks and entity queries within the region.
+            </summary>
+        </member>
+        <member name="M:GameCore.Shape.RegionRectangle.#ctor(GameCore.SceneSystem.ScenePoint,System.Single,System.Single)">
+            <summary>
+            Initializes a new instance of the <see cref="T:GameCore.Shape.RegionRectangle" /> class with the specified position, width, and height.
+            </summary>
+            <param name="position">The position of the rectangle (top-left corner).</param>
+            <param name="width">The width of the rectangle.</param>
+            <param name="height">The height of the rectangle.</param>
+        </member>
+        <member name="P:GameCore.Shape.RegionRectangle.Position">
+            <summary>
+            Gets the position of the rectangle (top-left corner).
+            </summary>
+        </member>
+        <member name="P:GameCore.Shape.RegionRectangle.Size">
+            <summary>
+            Gets the size of the rectangle as a <see cref="T:System.Numerics.Vector2" /> (X: width, Y: height).
+            </summary>
+        </member>
+        <member name="M:GameCore.Shape.RegionRectangle.Contains(GameCore.SceneSystem.ScenePoint)">
+            <summary>
+            Determines whether the specified point is contained within the rectangle.
+            </summary>
+            <param name="point">The point to check for containment.</param>
+            <returns>
+                <c>true</c> if the point is within the rectangle and in the same scene; otherwise, <c>false</c>.</returns>
+        </member>
+        <member name="M:GameCore.Shape.RegionRectangle.ToString">
+            <summary>
+            Returns a string representation of the rectangle region.
+            </summary>
+            <returns>A string describing the rectangle's position and size.</returns>
+        </member>
+        <member name="M:GameCore.Shape.RegionRectangle.Contains(GameCore.EntitySystem.Entity)">
+            <summary>
+            Determines whether the specified entity is contained within the rectangle.
+            </summary>
+            <param name="entity">The entity to check for containment.</param>
+            <returns>
+                <c>true</c> if the entity is within the rectangle; otherwise, <c>false</c>.</returns>
+        </member>
+        <member name="M:GameCore.Shape.RegionRectangle.FilterEntities(System.Func{GameCore.EntitySystem.Entity,System.Boolean})">
+            <summary>
+            Returns all entities within the rectangle that satisfy the specified condition.
+            </summary>
+            <param name="condition">A predicate to filter entities; if <c>null</c>, all entities within the rectangle are returned.</param>
+            <returns>An enumerable of entities within the rectangle that match the condition, or <c>null</c> if none found.</returns>
+        </member>
+        <member name="M:GameCore.Shape.RegionRectangle.FilterEntities``1(System.Func{GameCore.EntitySystem.Entity,``0})">
+            <summary>
+            Returns all entities within the rectangle that can be transformed to the specified type and satisfy the given condition.
+            </summary>
+            <typeparam name="TMorph">
+            The target type to which entities are transformed. Only entities for which the <paramref name="condition" /> returns a non-null value are included.
+            </typeparam>
+            <param name="condition">
+            A transformation function that takes an <see cref="T:GameCore.EntitySystem.Entity" /> and returns a <typeparamref name="TMorph" /> instance or <c>null</c>.
+            If <c>null</c> is returned, the entity is excluded from the result.
+            </param>
+            <returns>
+            An enumerable of <typeparamref name="TMorph" /> instances representing entities within the rectangle that match the transformation condition,
+            or <c>null</c> if none are found.
+            </returns>
+        </member>
+        <member name="P:GameCore.Shape.RegionRectangle.Height">
+            <summary>
+            Gets the height of the rectangle.
+            </summary>
+        </member>
+        <member name="P:GameCore.Shape.RegionRectangle.Width">
+            <summary>
+            Gets the width of the rectangle.
+            </summary>
+        </member>
+        <member name="P:GameCore.Shape.RegionRectangle.Center">
+            <summary>
+            Gets the center point of the rectangle.
+            </summary>
+        </member>
+        <member name="P:GameCore.Shape.RegionRectangle.TopLeft">
+            <summary>
+            Gets the top-left corner of the rectangle.
+            </summary>
+        </member>
+        <member name="P:GameCore.Shape.RegionRectangle.TopRight">
+            <summary>
+            Gets the top-right corner of the rectangle.
+            </summary>
+        </member>
+        <member name="P:GameCore.Shape.RegionRectangle.BottomLeft">
+            <summary>
+            Gets the bottom-left corner of the rectangle.
+            </summary>
+        </member>
+        <member name="P:GameCore.Shape.RegionRectangle.BottomRight">
+            <summary>
+            Gets the bottom-right corner of the rectangle.
+            </summary>
+        </member>
+    </members>
+</doc>

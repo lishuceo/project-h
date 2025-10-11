@@ -1,0 +1,911 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<doc>
+    <assembly>
+        <name>GameCore</name>
+    </assembly>
+    <members>
+        <member name="T:GameCore.Timers.Awaitable`1">
+            <summary>
+            Represents an abstract awaitable task that can be used with async/await patterns while integrating with the game's thinking and tick systems.
+            </summary>
+            <typeparam name="TResult">The type of result produced by this awaitable task.</typeparam>
+            <remarks>
+            This class bridges the gap between the game's tick-based execution model and C#'s async/await functionality.
+            It provides a foundation for creating game-specific awaitable operations such as delays, animations, and other
+            time-based tasks that need to execute over multiple game frames. The class implements both the game's IThinker
+            interface for tick-based processing and the .NET INotifyCompletion interface for async/await support.
+            </remarks>
+            <param name="token">Optional cancellation token to monitor for cancellation requests.</param>
+            <param name="allowSynchronousStop">Whether the task can be stopped immediately or must wait for the next tick finalizer.</param>
+        </member>
+        <member name="M:GameCore.Timers.Awaitable`1.#ctor(System.Nullable{System.Threading.CancellationToken},System.Boolean)">
+            <summary>
+            Represents an abstract awaitable task that can be used with async/await patterns while integrating with the game's thinking and tick systems.
+            </summary>
+            <typeparam name="TResult">The type of result produced by this awaitable task.</typeparam>
+            <remarks>
+            This class bridges the gap between the game's tick-based execution model and C#'s async/await functionality.
+            It provides a foundation for creating game-specific awaitable operations such as delays, animations, and other
+            time-based tasks that need to execute over multiple game frames. The class implements both the game's IThinker
+            interface for tick-based processing and the .NET INotifyCompletion interface for async/await support.
+            </remarks>
+            <param name="token">Optional cancellation token to monitor for cancellation requests.</param>
+            <param name="allowSynchronousStop">Whether the task can be stopped immediately or must wait for the next tick finalizer.</param>
+        </member>
+        <member name="M:GameCore.Timers.Awaitable`1.Start">
+            <summary>
+            Starts the awaitable task and begins processing if necessary.
+            </summary>
+            <remarks>
+            This method initiates the task execution and determines whether it needs to continue thinking
+            on subsequent frames. If the task can complete immediately, it will be stopped synchronously
+            or scheduled for finalization depending on the allowSynchronousStop setting.
+            </remarks>
+        </member>
+        <member name="M:GameCore.Timers.Awaitable`1.GetAwaiter">
+            <summary>
+            Gets the awaiter for this awaitable task, enabling async/await syntax.
+            </summary>
+            <returns>This awaitable instance, which serves as its own awaiter.</returns>
+            <remarks>
+            This method is required for async/await support and allows the awaitable to be used
+            directly in await expressions without requiring a separate awaiter object.
+            </remarks>
+        </member>
+        <member name="M:GameCore.Timers.Awaitable`1.GameCore#BaseInterface#IThinker#Think(System.Int32)">
+            <summary>
+            Processes the thinking logic for this awaitable on each game tick.
+            </summary>
+            <param name="delta">The time delta since the last tick in milliseconds.</param>
+            <remarks>
+            This method is called by the game's thinking system on each frame while the task is active.
+            It delegates to the abstract ThinkAction method for specific processing and checks if
+            the task should finish after each update.
+            </remarks>
+        </member>
+        <member name="M:GameCore.Timers.Awaitable`1.ThinkAction(System.Int32)">
+            <summary>
+            Performs the specific thinking action for this awaitable task.
+            </summary>
+            <param name="delta">The time delta since the last tick in milliseconds.</param>
+            <remarks>
+            This abstract method must be implemented by derived classes to define what happens
+            during each tick while the awaitable is active. This is where the core logic for
+            progress tracking, countdown timers, or other time-based operations should be implemented.
+            </remarks>
+        </member>
+        <member name="M:GameCore.Timers.Awaitable`1.ThinkFinish">
+            <summary>
+            Determines whether this awaitable task should finish execution.
+            </summary>
+            <returns>True if the task should complete; otherwise, false to continue thinking.</returns>
+            <remarks>
+            This abstract method must be implemented by derived classes to define the completion
+            condition for the awaitable. It's called after each ThinkAction to determine if the
+            task has reached its completion criteria.
+            </remarks>
+        </member>
+        <member name="M:GameCore.Timers.Awaitable`1.GetResult">
+            <summary>
+            Gets the result value of this awaitable task.
+            </summary>
+            <returns>The result produced by this awaitable task.</returns>
+            <remarks>
+            This abstract method must be implemented by derived classes to provide the final
+            result of the awaitable operation. It's called when the async/await operation completes.
+            </remarks>
+        </member>
+        <member name="P:GameCore.Timers.Awaitable`1.Result">
+            <summary>
+            Gets the result of the task, either the actual result if completed or the current status.
+            </summary>
+            <value>A TaskResult containing either the result value or the current task status.</value>
+            <remarks>
+            This property provides a way to access the result without blocking. If the task is completed,
+            it returns the actual result; otherwise, it returns the current task status.
+            </remarks>
+        </member>
+        <member name="M:GameCore.Timers.Awaitable`1.ContinueWith(System.Action{GameCore.Timers.Awaitable{`0}})">
+            <summary />
+            <param name="continuationAction" />
+            <returns />
+        </member>
+        <member name="F:GameCore.Timers.Awaitable`1.continuation">
+            <summary />
+        </member>
+        <member name="M:GameCore.Timers.Awaitable`1.System#Runtime#CompilerServices#INotifyCompletion#OnCompleted(System.Action)">
+            <summary>
+            Schedules a continuation action to be executed when the awaitable completes.
+            </summary>
+            <param name="continuation">The action to execute upon completion.</param>
+            <remarks>
+            This method is part of the INotifyCompletion interface and is used by the async/await
+            infrastructure to schedule code that should run after the awaitable completes.
+            </remarks>
+        </member>
+        <member name="M:GameCore.Timers.Awaitable`1.Stop(System.Boolean)">
+            <summary>
+            Stops the awaitable task and disables thinking.
+            </summary>
+            <param name="completed">True if the task is stopping because it completed successfully; false for cancellation.</param>
+            <returns>True if the stop operation was initiated successfully; otherwise, false.</returns>
+            <remarks>
+            This method extends the base Task stop behavior by also disabling the thinking process
+            to prevent unnecessary tick processing after the task has been stopped.
+            </remarks>
+        </member>
+        <member name="M:GameCore.Timers.Awaitable`1.StopSynchronous(System.Boolean)">
+            <summary>
+            Immediately stops the awaitable task, disables thinking, and executes any pending continuation.
+            </summary>
+            <param name="completed">True if the task completed successfully; false if it was cancelled.</param>
+            <returns>True if the task was stopped successfully; otherwise, false.</returns>
+            <remarks>
+            This method performs the actual stopping logic including disabling thinking, executing
+            the continuation callback if the task completed successfully, and cleaning up resources.
+            </remarks>
+        </member>
+        <member name="T:GameCore.Timers.Delay">
+            <summary>
+            Represents an awaitable delay that can be used to pause execution for a specified duration in game time or real time.
+            </summary>
+            <remarks>
+            This class provides a way to create delays in game logic that can be adjusted based on frame timing.
+            The delay can be paused, resumed, and configured to account for frame delta time variations.
+            It integrates seamlessly with async/await patterns while working with the game's tick system.
+            </remarks>
+            <example>
+            Basic usage:
+            <code>
+            // Wait for 2 seconds
+            await new Delay(TimeSpan.FromSeconds(2));
+            
+            // Wait with real-time adjustment
+            var delay = new Delay(TimeSpan.FromSeconds(5)) { AdjustByFrameDelta = true };
+            await delay;
+            
+            // Wait using milliseconds directly
+            await new Delay(2000); // 2 seconds
+            
+            </code></example>
+        </member>
+        <member name="F:GameCore.Timers.Delay.remainingTime">
+            <summary />
+        </member>
+        <member name="P:GameCore.Timers.Delay.AdjustByFrameDelta">
+            <summary>
+            Gets or sets a value indicating whether the delay should be adjusted based on the frame delta time.
+            </summary>
+            <value>True to adjust by frame delta time; false to use fixed frame duration.</value>
+            <remarks>
+                <list type="bullet">
+                    <item>
+                        <description>When set to <c>false</c>, the delay counts each game tick as a fixed duration based on <see cref="F:GameCore.GameSystem.Game.FramePerSecond" />.</description>
+                    </item>
+                    <item>
+                        <description>When set to <c>true</c>, the delay is adjusted by the delta time of each frame, making it more accurate to real time.</description>
+                    </item>
+                </list>
+            However, setting this to true may cause jittery behavior if the frame rate is inconsistent.
+            </remarks>
+            <example>
+                <code>
+            var delay = new Delay(TimeSpan.FromSeconds(5)) { AdjustByFrameDelta = true };
+            </code>
+            </example>
+        </member>
+        <member name="M:GameCore.Timers.Delay.#ctor(System.TimeSpan,System.Nullable{System.Threading.CancellationToken},System.Int32,System.Boolean)">
+            <summary>
+            Initializes a new instance of the Delay class with a TimeSpan duration.
+            </summary>
+            <param name="time">The duration to delay execution.</param>
+            <param name="token">Optional cancellation token to monitor for cancellation requests.</param>
+            <param name="adjustment">Optional time adjustment in milliseconds to add to the delay duration.</param>
+            <param name="allowSynchronousStop">Whether the delay can be stopped immediately or must wait for the next tick finalizer.</param>
+            <remarks>
+            This constructor converts the TimeSpan to milliseconds and delegates to the milliseconds constructor.
+            The delay starts immediately upon construction.
+            </remarks>
+        </member>
+        <member name="M:GameCore.Timers.Delay.#ctor(System.Int32,System.Nullable{System.Threading.CancellationToken},System.Int32,System.Boolean)">
+            <summary>
+            Initializes a new instance of the Delay class with a duration in milliseconds.
+            </summary>
+            <param name="timeInMilliseconds">The duration to delay execution in milliseconds.</param>
+            <param name="token">Optional cancellation token to monitor for cancellation requests.</param>
+            <param name="adjustment">Optional time adjustment in milliseconds to add to the delay duration.</param>
+            <param name="allowSynchronousStop">Whether the delay can be stopped immediately or must wait for the next tick finalizer.</param>
+            <remarks>
+            The delay starts immediately upon construction. The adjustment parameter can be used to fine-tune
+            the delay duration, which is useful for synchronization or timing corrections.
+            </remarks>
+        </member>
+        <member name="M:GameCore.Timers.Delay.Pause(System.Boolean)">
+            <summary>
+            Pauses or resumes the delay execution.
+            </summary>
+            <param name="on">True to pause the delay; false to resume it.</param>
+            <remarks>
+            When paused, the delay will stop counting down and remain at its current remaining time.
+            This method has no effect if the delay has already completed.
+            Pausing a delay effectively stops its thinking process until resumed.
+            </remarks>
+        </member>
+        <member name="M:GameCore.Timers.Delay.SetRemainingTime(System.TimeSpan)">
+            <summary>
+            Sets the remaining time for the delay to a new value.
+            </summary>
+            <param name="remainingTime">The new remaining time for the delay.</param>
+            <returns>True if the remaining time was successfully set; false if the delay has already completed.</returns>
+            <remarks>
+            This method allows you to modify the remaining time of an active delay, which can be useful
+            for extending or shortening delays based on game events or conditions. The method has no
+            effect if the delay has already completed.
+            </remarks>
+        </member>
+        <member name="M:GameCore.Timers.Delay.ThinkAction(System.Int32)">
+            <summary>
+            Performs the delay countdown logic on each game tick.
+            </summary>
+            <param name="delta">The time delta since the last tick in milliseconds.</param>
+            <remarks>
+            This method is called automatically by the thinking system. It decrements the remaining time
+            either by the actual frame delta (if AdjustByFrameDelta is true) or by the fixed frame duration.
+            </remarks>
+        </member>
+        <member name="M:GameCore.Timers.Delay.ThinkFinish">
+            <summary>
+            Determines whether the delay should finish execution.
+            </summary>
+            <returns>True if the delay time has elapsed; otherwise, false.</returns>
+            <remarks>
+            This method is called after each ThinkAction to determine if the delay has reached
+            its completion condition (remaining time &lt;= 0).
+            </remarks>
+        </member>
+        <member name="P:GameCore.Timers.Delay.RemainingTime">
+            <summary>
+            Gets the remaining time before the delay completes.
+            </summary>
+            <value>A TimeSpan representing the remaining delay duration.</value>
+            <remarks>
+            This property provides real-time access to how much time is left in the delay.
+            Once the delay completes, this value will be zero or negative.
+            </remarks>
+        </member>
+        <member name="P:GameCore.Timers.Delay.Priority">
+            <summary>
+            Gets the priority value used for scheduling this delay in the thinking system.
+            </summary>
+            <value>A priority value based on the remaining time modulo the frame duration, or null if not applicable.</value>
+            <remarks>
+            This property is used internally by the game's scheduling system to optimize the order
+            of delay processing. Lower values indicate higher priority.
+            </remarks>
+        </member>
+        <member name="M:GameCore.Timers.Delay.GetResult">
+            <summary>
+            Gets the result value of the delay when it completes.
+            </summary>
+            <returns>The remaining time in milliseconds when the delay finished (typically zero or negative).</returns>
+            <remarks>
+            This method is called by the await mechanism when the delay completes. The returned value
+            represents how much time was remaining when the delay finished, which can be useful for
+            timing calculations or detecting early completion.
+            </remarks>
+        </member>
+        <member name="T:GameCore.Timers.DelayTill">
+            <summary>
+            Represents an awaitable operation that waits until a specified condition becomes true.
+            </summary>
+            <remarks>
+            This class provides a way to pause execution until a custom condition is satisfied.
+            The condition is checked every game tick until it returns true. This is useful for
+            waiting on game state changes, entity conditions, or other dynamic criteria.
+            </remarks>
+        </member>
+        <member name="F:GameCore.Timers.DelayTill.condition">
+            <summary />
+        </member>
+        <member name="M:GameCore.Timers.DelayTill.#ctor(System.Func{System.Boolean},System.Nullable{System.Threading.CancellationToken},System.Boolean)">
+            <summary>
+            Initializes a new instance of the <see cref="T:GameCore.Timers.DelayTill" /> class with the specified condition.
+            </summary>
+            <param name="condition">A function that returns true when the wait condition is satisfied.</param>
+            <param name="token">An optional cancellation token to cancel the wait operation.</param>
+            <param name="allowSynchronousStop">Whether the operation can complete synchronously if the condition is already true.</param>
+            <remarks>
+            The condition function will be called every game tick until it returns true or the operation is cancelled.
+            </remarks>
+        </member>
+        <member name="M:GameCore.Timers.DelayTill.GetResult">
+            <summary>
+            Gets the result of the conditional wait operation.
+            </summary>
+            <returns>Always returns <c>true</c> when the condition is satisfied.</returns>
+        </member>
+        <member name="M:GameCore.Timers.DelayTill.ThinkAction(System.Int32)">
+            <summary>
+            Performs no action during each tick - the condition checking is handled in <see cref="M:GameCore.Timers.DelayTill.ThinkFinish" />.
+            </summary>
+            <param name="delta">The time delta for this tick (unused).</param>
+        </member>
+        <member name="M:GameCore.Timers.DelayTill.ThinkFinish">
+            <summary>
+            Determines whether the conditional wait should finish by evaluating the condition.
+            </summary>
+            <returns>The result of the condition function.</returns>
+        </member>
+        <member name="T:GameCore.Timers.DelayTillWithTimeout">
+            <summary>
+            Represents an awaitable operation that waits until a specified condition becomes true or a timeout expires.
+            </summary>
+            <remarks>
+            This class combines conditional waiting with timeout functionality. It will complete when either:
+            - The specified condition returns true, or
+            - The timeout period expires
+            
+            The remaining time when the operation completes indicates whether the condition was met (positive value)
+            or the timeout expired (zero or negative value). This is useful for operations that need to wait for
+            game state changes but have a maximum wait time to prevent infinite blocking.
+            </remarks>
+        </member>
+        <member name="F:GameCore.Timers.DelayTillWithTimeout.condition">
+            <summary />
+        </member>
+        <member name="F:GameCore.Timers.DelayTillWithTimeout.remainingTime">
+            <summary />
+        </member>
+        <member name="P:GameCore.Timers.DelayTillWithTimeout.AdjustByFrameDelta">
+            <summary>
+            Gets or sets a value indicating whether the delay should be adjusted based on the frame delta time.
+            </summary>
+            <remarks>
+                <list type="-">
+                    <item>- When set to <c>false</c>, the delay counts each game tick as a fixed duration based on <see cref="F:GameCore.GameSystem.Game.FramePerSecond" />.</item>
+                    <item>- When set to <c>true</c>, the delay is adjusted by the delta time of each frame, making it more accurate to real time.</item>
+              However, this may cause jittery behavior if the frame rate is inconsistent.
+              </list>
+            </remarks>
+            <example>
+                <code>
+            var delay = new Delay(TimeSpan.FromSeconds(5)) { AdjustByFrameDelta = true };
+            </code>
+            </example>
+        </member>
+        <member name="M:GameCore.Timers.DelayTillWithTimeout.#ctor(System.Func{System.Boolean},System.TimeSpan,System.Nullable{System.Threading.CancellationToken},System.Int32,System.Boolean)">
+            <summary>
+            Initializes a new instance of the <see cref="T:GameCore.Timers.DelayTillWithTimeout" /> class with the specified condition and timeout.
+            </summary>
+            <param name="condition">A function that returns true when the wait condition is satisfied.</param>
+            <param name="time">The maximum time to wait before timing out.</param>
+            <param name="token">An optional cancellation token to cancel the wait operation.</param>
+            <param name="adjustment">An optional adjustment value, in milliseconds, to modify the timeout duration.</param>
+            <param name="allowSynchronousStop">Whether the operation can complete synchronously if the condition is already true.</param>
+            <remarks>
+            The operation will complete when either the condition becomes true or the timeout expires.
+            Use <see cref="M:GameCore.Timers.DelayTillWithTimeout.GetResult" /> to determine which case occurred by checking if the remaining time is positive.
+            </remarks>
+        </member>
+        <member name="M:GameCore.Timers.DelayTillWithTimeout.ThinkFinish">
+            <summary>
+            Determines whether the conditional wait with timeout should finish.
+            </summary>
+            <returns>
+                <c>true</c> if the timeout has expired or the condition is satisfied; otherwise, <c>false</c>.</returns>
+        </member>
+        <member name="M:GameCore.Timers.DelayTillWithTimeout.ThinkAction(System.Int32)">
+            <summary>
+            Updates the remaining time during each tick of the wait operation.
+            </summary>
+            <param name="delta">The time delta for this tick.</param>
+            <remarks>
+            The time reduction depends on the <see cref="P:GameCore.Timers.DelayTillWithTimeout.AdjustByFrameDelta" /> setting.
+            </remarks>
+        </member>
+        <member name="M:GameCore.Timers.DelayTillWithTimeout.GetResult">
+            <summary>
+            Gets the remaining time when the operation completes.
+            </summary>
+            <returns>
+            The remaining time in milliseconds. A positive value indicates the condition was satisfied before timeout;
+            zero or negative indicates the timeout expired.
+            </returns>
+        </member>
+        <member name="T:GameCore.Timers.EventWaiter">
+            <summary>
+            Represents an abstract base class for awaitable event waiters that can wait for specific events to occur.
+            </summary>
+            <remarks>
+            This class provides a foundation for creating awaitable operations that complete when specific events
+            are triggered. It integrates with the async/await pattern while working with the game's task system.
+            Derived classes should implement the specific event subscription and un-subscription logic.
+            </remarks>
+        </member>
+        <member name="F:GameCore.Timers.EventWaiter.continuation">
+            <summary />
+        </member>
+        <member name="M:GameCore.Timers.EventWaiter.#ctor">
+            <summary>
+            Initializes a new instance of the EventWaiter class and starts waiting for the event.
+            </summary>
+            <remarks>
+            The event waiter starts immediately upon construction and will remain active until
+            the target event occurs or the operation is cancelled.
+            </remarks>
+        </member>
+        <member name="M:GameCore.Timers.EventWaiter.System#Runtime#CompilerServices#INotifyCompletion#OnCompleted(System.Action)">
+            <summary>
+            Schedules a continuation action to be executed when the event occurs.
+            </summary>
+            <param name="continuation">The action to execute when the event is triggered.</param>
+            <remarks>
+            This method is part of the INotifyCompletion interface and is used by the async/await
+            infrastructure to schedule code that should run after the event waiter completes.
+            </remarks>
+        </member>
+        <member name="M:GameCore.Timers.EventWaiter.GetAwaiter">
+            <summary>
+            Gets the awaiter for this event waiter, enabling async/await syntax.
+            </summary>
+            <returns>This event waiter instance, which serves as its own awaiter.</returns>
+            <remarks>
+            This method is required for async/await support and allows the event waiter to be used
+            directly in await expressions.
+            </remarks>
+        </member>
+        <member name="M:GameCore.Timers.EventWaiter.GetResult">
+            <summary>
+            Gets the result of the event wait operation.
+            </summary>
+            <remarks>
+            This method is called when the await operation completes. Since event waiters typically
+            don't return specific values, this method performs no action.
+            </remarks>
+        </member>
+        <member name="M:GameCore.Timers.EventWaiter.StopSynchronous(System.Boolean)">
+            <summary>
+            Immediately stops the event waiter and executes any pending continuation.
+            </summary>
+            <param name="completed">True if the event waiter completed successfully; false if it was cancelled.</param>
+            <returns>True if the event waiter was stopped successfully; otherwise, false.</returns>
+            <remarks>
+            This method performs the actual stopping logic including executing the continuation
+            callback if the operation completed successfully and cleaning up resources.
+            </remarks>
+        </member>
+        <member name="M:GameCore.Timers.EventWaiter.ClearUpEvent">
+            <summary>
+            Clears up event subscriptions and releases event-related resources.
+            </summary>
+            <remarks>
+            This abstract method must be implemented by derived classes to define how event
+            subscriptions are cleaned up when the waiter is stopped or cancelled. This prevents
+            memory leaks and ensures proper resource management.
+            </remarks>
+        </member>
+        <member name="M:GameCore.Timers.EventWaiter.Stop(System.Boolean)">
+            <summary>
+            Stops the event waiter and cleans up event subscriptions.
+            </summary>
+            <param name="completed">True if the event waiter is stopping because it completed successfully; false for cancellation.</param>
+            <returns>True if the stop operation was initiated successfully; otherwise, false.</returns>
+            <remarks>
+            This method extends the base Task stop behavior by also cleaning up event subscriptions
+            before proceeding with the normal stop process.
+            </remarks>
+        </member>
+        <member name="T:GameCore.Timers.EventWaiter`1">
+            <summary>
+            Represents an abstract base class for event waiters that are associated with a specific target object.
+            </summary>
+            <typeparam name="T">The type of target object that this event waiter is associated with.</typeparam>
+            <remarks>
+            This generic version of EventWaiter provides a convenient way to create event waiters that are
+            tied to specific objects, such as entities, components, or other game objects. The target object
+            is automatically cleared when the event waiter is cleaned up to prevent memory leaks.
+            </remarks>
+            <param name="target">The target object that this event waiter is associated with.</param>
+        </member>
+        <member name="M:GameCore.Timers.EventWaiter`1.#ctor(`0)">
+            <summary>
+            Represents an abstract base class for event waiters that are associated with a specific target object.
+            </summary>
+            <typeparam name="T">The type of target object that this event waiter is associated with.</typeparam>
+            <remarks>
+            This generic version of EventWaiter provides a convenient way to create event waiters that are
+            tied to specific objects, such as entities, components, or other game objects. The target object
+            is automatically cleared when the event waiter is cleaned up to prevent memory leaks.
+            </remarks>
+            <param name="target">The target object that this event waiter is associated with.</param>
+        </member>
+        <member name="F:GameCore.Timers.EventWaiter`1.Target">
+            <summary>
+            Gets the target object that this event waiter is associated with.
+            </summary>
+            <value>The target object, or null if the event waiter has been cleaned up.</value>
+            <remarks>
+            This property provides access to the target object for derived classes to use in their
+            event subscription logic. The target is automatically set to null during cleanup.
+            </remarks>
+        </member>
+        <member name="M:GameCore.Timers.EventWaiter`1.ClearUpEvent">
+            <summary>
+            Clears the target reference to prevent memory leaks.
+            </summary>
+            <remarks>
+            This implementation of ClearUpEvent sets the Target to null, which helps prevent
+            memory leaks by breaking the reference to the target object. Derived classes can
+            override this method to provide additional cleanup logic while still calling the base implementation.
+            </remarks>
+        </member>
+        <member name="T:GameCore.Timers.NeverEndingTask">
+            <summary>
+            Represents a task that never completes, designed for scenarios where indefinite waiting is required.
+            </summary>
+            <remarks>
+            This class provides a way to create awaitable operations that intentionally never complete.
+            It's useful for scenarios where you need to block execution indefinitely, such as waiting
+            for external events that may never occur, or creating placeholder tasks in testing scenarios.
+            Since this task never completes, awaiting it will block the calling code indefinitely unless
+            cancelled through other means.
+            </remarks>
+            <example>
+                <code>
+            // This will wait forever (use with caution)
+            await new NeverEndingTask();
+            
+            // More practical usage with cancellation
+            var cts = new CancellationTokenSource();
+            var task = new NeverEndingTask();
+            // Cancel after some condition
+            cts.Cancel(); // This won't affect NeverEndingTask directly
+            </code>
+            </example>
+        </member>
+        <member name="M:GameCore.Timers.NeverEndingTask.GetAwaiter">
+            <summary>
+            Gets the awaiter for this never-ending task, enabling async/await syntax.
+            </summary>
+            <returns>This task instance, which serves as its own awaiter.</returns>
+            <remarks>
+            This method is required for async/await support. Since the task never completes,
+            any code awaiting this task will block indefinitely unless interrupted by external means.
+            </remarks>
+        </member>
+        <member name="M:GameCore.Timers.NeverEndingTask.GetResult">
+            <summary>
+            Gets the result of the never-ending task.
+            </summary>
+            <remarks>
+            Since this task never completes, this method should never be called under normal circumstances.
+            If called, it performs no action as there is no meaningful result to return from a task
+            that never finishes.
+            </remarks>
+        </member>
+        <member name="M:GameCore.Timers.NeverEndingTask.System#Runtime#CompilerServices#INotifyCompletion#OnCompleted(System.Action)">
+            <summary>
+            Schedules a continuation action to be executed when the task completes.
+            </summary>
+            <param name="continuation">The action to execute upon completion.</param>
+            <remarks>
+            Since this task never completes, the continuation will never be executed.
+            This method is part of the INotifyCompletion interface but performs no action
+            for a never-ending task.
+            </remarks>
+        </member>
+        <member name="T:GameCore.Timers.NextTick">
+            <summary>
+            Represents an awaitable operation that completes after the next game tick occurs.
+            </summary>
+            <remarks>
+            This class is useful when you need to delay execution by exactly one frame or game tick.
+            It's commonly used to ensure operations happen after all current frame processing is complete,
+            or to break up long-running operations across multiple frames.
+            </remarks>
+        </member>
+        <member name="F:GameCore.Timers.NextTick.ticked">
+            <summary />
+        </member>
+        <member name="M:GameCore.Timers.NextTick.#ctor(System.Nullable{System.Threading.CancellationToken})">
+            <summary>
+            Initializes a new instance of the <see cref="T:GameCore.Timers.NextTick" /> class.
+            </summary>
+            <param name="token">An optional cancellation token to cancel the wait operation.</param>
+            <remarks>
+            The operation will complete after the next game tick unless cancelled via the token.
+            </remarks>
+        </member>
+        <member name="M:GameCore.Timers.NextTick.GetResult">
+            <summary>
+            Gets the result of the next tick operation.
+            </summary>
+            <returns>Always returns <c>true</c> when the next tick completes.</returns>
+        </member>
+        <member name="M:GameCore.Timers.NextTick.ThinkAction(System.Int32)">
+            <summary>
+            Marks that a tick has occurred during the think operation.
+            </summary>
+            <param name="delta">The time delta for this tick (unused in this implementation).</param>
+        </member>
+        <member name="M:GameCore.Timers.NextTick.ThinkFinish">
+            <summary>
+            Determines whether the next tick operation should finish.
+            </summary>
+            <returns>
+                <c>true</c> if a tick has occurred; otherwise, <c>false</c>.</returns>
+        </member>
+        <member name="T:GameCore.Timers.SyncedDelay">
+            <summary>
+            A specialized timer that provides server-side precise timing with client-side time synchronization.
+            Used for scenarios where server needs precise control while clients need to display timing information.
+            </summary>
+            <remarks>
+                <para>
+            This class is designed for use cases like Buff durations, where:
+            - Server side uses precise <see cref="T:GameCore.Timers.Delay" /> for timing control and game logic
+            - Client side gets synchronized timing information for UI display
+            </para>
+                <para>
+            This class is lighter weight and focused specifically on the timing display use case 
+            rather than full cooldown management functionality.
+            </para>
+            </remarks>
+            <example>
+            Basic usage for Buff duration:
+            <code>
+            // Create a synced delay
+            var syncedDelay = new SyncedDelay(TimeSpan.FromSeconds(10), cooldownHost, cooldownHash);
+            
+            // Server: Start timing and await completion
+            await syncedDelay.WaitForCompletion();
+            
+            // Both sides: Get timing information
+            var remaining = syncedDelay.RemainingTime;
+            var duration = syncedDelay.Duration;
+            </code></example>
+        </member>
+        <member name="F:GameCore.Timers.SyncedDelay.cooldownHost">
+            <summary />
+        </member>
+        <member name="F:GameCore.Timers.SyncedDelay.cooldownHash">
+            <summary />
+        </member>
+        <member name="F:GameCore.Timers.SyncedDelay.duration">
+            <summary />
+        </member>
+        <member name="F:GameCore.Timers.SyncedDelay.cancellationToken">
+            <summary />
+        </member>
+        <member name="F:GameCore.Timers.SyncedDelay.adjustment">
+            <summary />
+        </member>
+        <member name="P:GameCore.Timers.SyncedDelay.Duration">
+            <summary>
+            Gets the total duration of this synced delay.
+            </summary>
+            <value>The original duration specified when the delay was created.</value>
+        </member>
+        <member name="P:GameCore.Timers.SyncedDelay.RemainingTime">
+            <summary>
+            Gets the remaining time before the delay completes.
+            </summary>
+            <value>A <see cref="T:System.TimeSpan" /> representing the remaining duration, or null if not started or paused.</value>
+            <remarks>
+                <para>
+            On the server side, this returns the precise remaining time from the internal <see cref="T:GameCore.Timers.Delay" /> object.
+            On the client side, this returns the synchronized time from the cooldown system.
+            </para>
+                <para>
+            When paused, this property returns null on the client side to indicate that 
+            the timing display should be hidden.
+            </para>
+            </remarks>
+        </member>
+        <member name="P:GameCore.Timers.SyncedDelay.IsRunning">
+            <summary>
+            Gets a value indicating whether the delay is currently running.
+            </summary>
+            <value>True if the delay is running; false if it has completed, been stopped, or not yet started.</value>
+        </member>
+        <member name="P:GameCore.Timers.SyncedDelay.IsCompleted">
+            <summary>
+            Gets a value indicating whether the delay has completed.
+            </summary>
+            <value>True if the delay has finished; otherwise, false.</value>
+        </member>
+        <member name="M:GameCore.Timers.SyncedDelay.#ctor(System.TimeSpan,GameCore.BaseInterface.ICooldownHost,System.Int64,System.Nullable{System.Threading.CancellationToken},System.Int32)">
+            <summary>
+            Initializes a new instance of the <see cref="T:GameCore.Timers.SyncedDelay" /> class.
+            </summary>
+            <param name="duration">The duration for the delay.</param>
+            <param name="cooldownHost">The cooldown host for client synchronization.</param>
+            <param name="cooldownHash">The unique hash for the cooldown synchronization.</param>
+            <param name="cancellationToken">Optional cancellation token to monitor for cancellation requests.</param>
+            <param name="adjustment">Optional time adjustment in milliseconds to add to the duration.</param>
+            <exception cref="T:System.ArgumentNullException">Thrown when <paramref name="cooldownHost" /> is null.</exception>
+            <exception cref="T:System.ArgumentOutOfRangeException">Thrown when <paramref name="duration" /> is negative.</exception>
+        </member>
+        <member name="M:GameCore.Timers.SyncedDelay.WaitForCompletion">
+            <summary>
+            Starts the delay and returns a task that completes when the delay finishes.
+            </summary>
+            <returns>A task that represents the delay operation. The result is the remaining time in milliseconds when completed.</returns>
+            <remarks>
+                <para>
+            On the server side, this creates the internal <see cref="T:GameCore.Timers.Delay" /> object and sets up 
+            cooldown synchronization for clients. The returned task will complete when the delay finishes.
+            </para>
+                <para>
+            On the client side, this returns an already completed task since client-side timing 
+            is controlled by server synchronization.
+            </para>
+            </remarks>
+        </member>
+        <member name="M:GameCore.Timers.SyncedDelay.Pause(System.Boolean)">
+            <summary>
+            Pauses or resumes the delay execution.
+            </summary>
+            <param name="paused">True to pause the delay; false to resume it.</param>
+            <remarks>
+                <para>
+            When paused, the server-side <see cref="T:GameCore.Timers.Delay" /> stops counting down and the 
+            cooldown synchronization is cleared from clients.
+            When resumed, cooldown synchronization is restarted with the current remaining time.
+            </para>
+                <para>
+            This method has no effect if the delay has not been started or has already completed.
+            </para>
+            </remarks>
+        </member>
+        <member name="M:GameCore.Timers.SyncedDelay.SetRemainingTime(System.TimeSpan)">
+            <summary>
+            Sets the remaining time for the delay to a new value.
+            </summary>
+            <param name="remainingTime">The new remaining time for the delay.</param>
+            <returns>True if the remaining time was successfully set; false if the delay has not started or has completed.</returns>
+            <remarks>
+            This method allows modification of the remaining time of an active delay.
+            Both the server-side delay and client-side synchronization are updated.
+            </remarks>
+        </member>
+        <member name="M:GameCore.Timers.SyncedDelay.Stop">
+            <summary>
+            Stops the delay immediately.
+            </summary>
+            <remarks>
+            This cancels the server-side delay and clears the client-side cooldown synchronization.
+            </remarks>
+        </member>
+        <member name="M:GameCore.Timers.SyncedDelay.ToString">
+            <summary>
+            Returns a string representation of the synced delay.
+            </summary>
+            <returns>A string containing the delay's duration and remaining time information.</returns>
+        </member>
+        <member name="T:GameCore.Timers.Timer">
+            <summary>
+            Handles recurring events in an application.
+            </summary>
+        </member>
+        <member name="F:GameCore.Timers.Timer._interval">
+            <summary />
+        </member>
+        <member name="F:GameCore.Timers.Timer._enabled">
+            <summary />
+        </member>
+        <member name="F:GameCore.Timers.Timer._initializing">
+            <summary />
+        </member>
+        <member name="F:GameCore.Timers.Timer._delayedEnable">
+            <summary />
+        </member>
+        <member name="F:GameCore.Timers.Timer._onIntervalElapsed">
+            <summary />
+        </member>
+        <member name="F:GameCore.Timers.Timer._autoReset">
+            <summary />
+        </member>
+        <member name="F:GameCore.Timers.Timer._synchronizingObject">
+            <summary />
+        </member>
+        <member name="F:GameCore.Timers.Timer._disposed">
+            <summary />
+        </member>
+        <member name="F:GameCore.Timers.Timer._timer">
+            <summary />
+        </member>
+        <member name="F:GameCore.Timers.Timer._cancellationTokenSource">
+            <summary />
+        </member>
+        <member name="F:GameCore.Timers.Timer._timerTask">
+            <summary />
+        </member>
+        <member name="M:GameCore.Timers.Timer.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:GameCore.Timers.Timer" /> class, with the properties
+            set to initial values.
+            </summary>
+        </member>
+        <member name="M:GameCore.Timers.Timer.#ctor(System.Double)">
+            <summary>
+            Initializes a new instance of the <see cref="T:GameCore.Timers.Timer" /> class, setting the <see cref="P:GameCore.Timers.Timer.Interval" /> property to the specified period.
+            </summary>
+            <param name="interval">
+            The time, in milliseconds, between events. The value must be greater than zero and less than or equal to <see cref="F:System.Int32.MaxValue" />.
+            </param>
+        </member>
+        <member name="M:GameCore.Timers.Timer.#ctor(System.TimeSpan)">
+            <summary>
+            Initializes a new instance of the <see cref="T:GameCore.Timers.Timer" /> class, setting the <see cref="P:GameCore.Timers.Timer.Interval" /> property to the specified period.
+            </summary>
+            <param name="interval">
+            The time between events. The value in milliseconds must be greater than zero and less than or equal to <see cref="F:System.Int32.MaxValue" />.
+            </param>
+        </member>
+        <member name="P:GameCore.Timers.Timer.AutoReset">
+            <summary>
+            Gets or sets a value indicating whether the Timer raises the Tick event each time the specified
+            Interval has elapsed, when Enabled is set to true.
+            </summary>
+        </member>
+        <member name="P:GameCore.Timers.Timer.Enabled">
+            <summary>
+            Gets or sets a value indicating whether the <see cref="T:GameCore.Timers.Timer" />
+            is able to raise events at a defined interval.
+            The default value by design is false, don't change it.
+            </summary>
+        </member>
+        <member name="P:GameCore.Timers.Timer.Interval">
+            <summary>
+            Gets or sets the interval on which to raise events.
+            </summary>
+        </member>
+        <member name="E:GameCore.Timers.Timer.Elapsed">
+            <summary>
+            Occurs when the <see cref="P:GameCore.Timers.Timer.Interval" /> has
+            elapsed.
+            </summary>
+        </member>
+        <member name="P:GameCore.Timers.Timer.Site">
+            <summary>
+            Sets the enable property in design mode to true by default.
+            </summary>
+        </member>
+        <member name="P:GameCore.Timers.Timer.SynchronizingObject">
+            <summary>
+            Gets or sets the object used to marshal event-handler calls that are issued when
+            an interval has elapsed.
+            </summary>
+        </member>
+        <member name="M:GameCore.Timers.Timer.BeginInit">
+            <summary>
+            Notifies the object that initialization is beginning and tells it to stand by.
+            </summary>
+        </member>
+        <member name="M:GameCore.Timers.Timer.Close">
+            <summary>
+            Disposes of the resources (other than memory) used by
+            the <see cref="T:GameCore.Timers.Timer" />.
+            </summary>
+        </member>
+        <member name="M:GameCore.Timers.Timer.Dispose(System.Boolean)">
+            <inheritdoc />
+        </member>
+        <member name="M:GameCore.Timers.Timer.EndInit">
+            <summary>
+            Notifies the object that initialization is complete.
+            </summary>
+        </member>
+        <member name="M:GameCore.Timers.Timer.Start">
+            <summary>
+            Starts the timing by setting <see cref="P:GameCore.Timers.Timer.Enabled" /> to <see langword="true" />.
+            </summary>
+        </member>
+        <member name="M:GameCore.Timers.Timer.Stop">
+            <summary>
+            Stops the timing by setting <see cref="P:GameCore.Timers.Timer.Enabled" /> to <see langword="false" />.
+            </summary>
+        </member>
+    </members>
+</doc>

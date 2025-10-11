@@ -1,0 +1,890 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>GameData</name>
+    </assembly>
+    <members>
+        <member name="T:GameData.Extension.ExtensionMethods">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:GameData.Extension.ExtensionMethods.GetHashCode(System.Enum,System.Boolean)">
+            <summary>
+            
+            </summary>
+            <param name="en"></param>
+            <param name="deterministic"></param>
+            <returns></returns>
+        </member>
+        <member name="M:GameData.Extension.ExtensionMethods.GetFullName(System.Enum)">
+            <summary>
+            
+            </summary>
+            <param name="en"></param>
+            <returns></returns>
+        </member>
+        <member name="M:GameData.Extension.ExtensionMethods.GetHashCode(System.Type,System.Boolean)">
+            <summary>
+            
+            </summary>
+            <param name="type"></param>
+            <param name="deterministic"></param>
+            <returns></returns>
+        </member>
+        <member name="M:GameData.Extension.ExtensionMethods.GetFullNameWithGeneric(System.Type)">
+            <summary>
+            
+            </summary>
+            <param name="type"></param>
+            <returns></returns>
+        </member>
+        <member name="F:GameData.Extension.ExtensionMethods._typeHashCodes">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:GameData.Extension.ExtensionMethods.GetHashCode(System.String,System.Boolean)">
+            <summary>
+            
+            </summary>
+            <param name="str"></param>
+            <param name="deterministic"></param>
+            <returns></returns>
+        </member>
+        <member name="M:GameData.Extension.ExtensionMethods.GetHashCode(System.ReadOnlySpan{System.Byte},System.Boolean)">
+            <summary>
+            
+            </summary>
+            <param name="bytes"></param>
+            <param name="_"></param>
+            <returns></returns>
+        </member>
+        <member name="T:GameData.Extension.HashCodeDeterministic">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:GameData.Extension.HashCodeDeterministic.s_seed">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:GameData.Extension.HashCodeDeterministic.Prime1">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:GameData.Extension.HashCodeDeterministic.Prime2">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:GameData.Extension.HashCodeDeterministic.Prime3">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:GameData.Extension.HashCodeDeterministic.Prime4">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:GameData.Extension.HashCodeDeterministic.Prime5">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:GameData.Extension.HashCodeDeterministic._v1">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:GameData.Extension.HashCodeDeterministic._v2">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:GameData.Extension.HashCodeDeterministic._v3">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:GameData.Extension.HashCodeDeterministic._v4">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:GameData.Extension.HashCodeDeterministic._queue1">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:GameData.Extension.HashCodeDeterministic._queue2">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:GameData.Extension.HashCodeDeterministic._queue3">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:GameData.Extension.HashCodeDeterministic._length">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:GameData.Extension.HashCodeDeterministic.Combine``1(``0)">
+            <summary>
+            
+            </summary>
+            <typeparam name="T1"></typeparam>
+            <param name="value1"></param>
+            <returns></returns>
+        </member>
+        <member name="M:GameData.Extension.HashCodeDeterministic.Combine``2(``0,``1)">
+            <summary>
+            
+            </summary>
+            <typeparam name="T1"></typeparam>
+            <typeparam name="T2"></typeparam>
+            <param name="value1"></param>
+            <param name="value2"></param>
+            <returns></returns>
+        </member>
+        <member name="M:GameData.Extension.HashCodeDeterministic.Combine``3(``0,``1,``2)">
+            <summary>
+            
+            </summary>
+            <typeparam name="T1"></typeparam>
+            <typeparam name="T2"></typeparam>
+            <typeparam name="T3"></typeparam>
+            <param name="value1"></param>
+            <param name="value2"></param>
+            <param name="value3"></param>
+            <returns></returns>
+        </member>
+        <member name="M:GameData.Extension.HashCodeDeterministic.Combine``4(``0,``1,``2,``3)">
+            <summary>
+            
+            </summary>
+            <typeparam name="T1"></typeparam>
+            <typeparam name="T2"></typeparam>
+            <typeparam name="T3"></typeparam>
+            <typeparam name="T4"></typeparam>
+            <param name="value1"></param>
+            <param name="value2"></param>
+            <param name="value3"></param>
+            <param name="value4"></param>
+            <returns></returns>
+        </member>
+        <member name="M:GameData.Extension.HashCodeDeterministic.Combine``5(``0,``1,``2,``3,``4)">
+            <summary>
+            
+            </summary>
+            <typeparam name="T1"></typeparam>
+            <typeparam name="T2"></typeparam>
+            <typeparam name="T3"></typeparam>
+            <typeparam name="T4"></typeparam>
+            <typeparam name="T5"></typeparam>
+            <param name="value1"></param>
+            <param name="value2"></param>
+            <param name="value3"></param>
+            <param name="value4"></param>
+            <param name="value5"></param>
+            <returns></returns>
+        </member>
+        <member name="M:GameData.Extension.HashCodeDeterministic.Combine``6(``0,``1,``2,``3,``4,``5)">
+            <summary>
+            
+            </summary>
+            <typeparam name="T1"></typeparam>
+            <typeparam name="T2"></typeparam>
+            <typeparam name="T3"></typeparam>
+            <typeparam name="T4"></typeparam>
+            <typeparam name="T5"></typeparam>
+            <typeparam name="T6"></typeparam>
+            <param name="value1"></param>
+            <param name="value2"></param>
+            <param name="value3"></param>
+            <param name="value4"></param>
+            <param name="value5"></param>
+            <param name="value6"></param>
+            <returns></returns>
+        </member>
+        <member name="M:GameData.Extension.HashCodeDeterministic.Combine``7(``0,``1,``2,``3,``4,``5,``6)">
+            <summary>
+            
+            </summary>
+            <typeparam name="T1"></typeparam>
+            <typeparam name="T2"></typeparam>
+            <typeparam name="T3"></typeparam>
+            <typeparam name="T4"></typeparam>
+            <typeparam name="T5"></typeparam>
+            <typeparam name="T6"></typeparam>
+            <typeparam name="T7"></typeparam>
+            <param name="value1"></param>
+            <param name="value2"></param>
+            <param name="value3"></param>
+            <param name="value4"></param>
+            <param name="value5"></param>
+            <param name="value6"></param>
+            <param name="value7"></param>
+            <returns></returns>
+        </member>
+        <member name="M:GameData.Extension.HashCodeDeterministic.Combine``8(``0,``1,``2,``3,``4,``5,``6,``7)">
+            <summary>
+            
+            </summary>
+            <typeparam name="T1"></typeparam>
+            <typeparam name="T2"></typeparam>
+            <typeparam name="T3"></typeparam>
+            <typeparam name="T4"></typeparam>
+            <typeparam name="T5"></typeparam>
+            <typeparam name="T6"></typeparam>
+            <typeparam name="T7"></typeparam>
+            <typeparam name="T8"></typeparam>
+            <param name="value1"></param>
+            <param name="value2"></param>
+            <param name="value3"></param>
+            <param name="value4"></param>
+            <param name="value5"></param>
+            <param name="value6"></param>
+            <param name="value7"></param>
+            <param name="value8"></param>
+            <returns></returns>
+        </member>
+        <member name="M:GameData.Extension.HashCodeDeterministic.Add``1(``0)">
+            <summary>
+            
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="value"></param>
+            <returns></returns>
+        </member>
+        <member name="M:GameData.Extension.HashCodeDeterministic.Add``1(``0,System.Collections.Generic.IEqualityComparer{``0})">
+            <summary>
+            
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="value"></param>
+            <param name="comparer"></param>
+            <returns></returns>
+        </member>
+        <member name="M:GameData.Extension.HashCodeDeterministic.AddBytes(System.ReadOnlySpan{System.Byte})">
+            <summary>Adds a span of bytes to the hash code.</summary>
+            <param name = "value">The span.</param>
+            <remarks>
+            This method does not guarantee that the result of adding a span of bytes will match
+            the result of adding the same bytes individually.
+            </remarks>
+        </member>
+        <member name="M:GameData.Extension.HashCodeDeterministic.ToHashCode">
+            <summary>
+            
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:GameData.IGameDataCategory`1">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:GameData.IGameDataCategory`1.TypeHashCode">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:GameData.GameDataCategory`1">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:GameData.GameDataCategory`1.GameData#IGameDataCategory{TSelf}#TypeHashCode">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:GameData.GameDataCategory`1.#ctor(GameData.IGameLink{`0})">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:GameData.GameDataCategory`1.Link">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:GameData.GameDataCategory`1.catalog">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:GameData.GameDataCategory`1.Catalog">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:GameData.GameDataCategory`1.Name">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:GameData.GameDataCategory`1.GameData#IGameData#Link">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:GameData.GameDataCategory`1.Get``1(GameData.IGameLink{``0})">
+            <summary>
+            
+            </summary>
+            <typeparam name="V"></typeparam>
+            <param name="gameLink"></param>
+            <returns></returns>
+        </member>
+        <member name="M:GameData.GameDataCategory`1.GetLink(System.Int32)">
+            <summary>
+            
+            </summary>
+            <param name="hashCode"></param>
+            <returns></returns>
+        </member>
+        <member name="M:GameData.GameDataCategory`1.GetData(System.Int32)">
+            <summary>
+            
+            </summary>
+            <param name="hashCode"></param>
+            <returns></returns>
+        </member>
+        <member name="M:GameData.GameDataCategory`1.GetLinkByHashLocal(System.Int32)">
+            <summary>
+            
+            </summary>
+            <param name="hashCodeLocal"></param>
+            <returns></returns>
+        </member>
+        <member name="M:GameData.GameDataCategory`1.ToString">
+            <summary>
+            
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:GameData.GameLink`2">
+            <summary>
+            表示数编表的泛型结构体，提供对特定游戏数据类型的类型安全引用。
+            </summary>
+            <typeparam name = "TCategory">数据分类类型，必须继承自 <see cref = "T:GameData.GameDataCategory`1"/> 并实现 <see cref = "T:GameData.IGameDataCategory`1"/></typeparam>
+            <typeparam name = "V">具体数据类型，必须是 TCategory 的子类型并实现 <see cref = "T:GameData.IGameData`1"/></typeparam>
+            <remarks>
+            <para>
+            GameLink 是星火引擎数据驱动系统的核心组件，作为轻量级的值类型结构体，
+            提供对数编表（GameData）的高效、类型安全的引用机制。它是实现数据与逻辑解耦的关键桥梁。
+            </para>
+            
+            <para><strong>核心特性：</strong></para>
+            <list type="bullet">
+            <item><description><strong>值类型结构体</strong> - 内存开销极小，适合大量使用</description></item>
+            <item><description><strong>类型安全</strong> - 泛型设计确保编译时类型检查</description></item>
+            <item><description><strong>全局唯一性</strong> - 通过哈希码机制确保全局唯一标识</description></item>
+            <item><description><strong>延迟加载</strong> - 只在访问 Data 属性时进行实际数据查找</description></item>
+            <item><description><strong>多种构造方式</strong> - 支持字符串ID、UTF8字节数组和哈希码构造</description></item>
+            <item><description><strong>序列化友好</strong> - 可安全地进行序列化和网络传输</description></item>
+            </list>
+            
+            <para><strong>哈希码机制：</strong></para>
+            <para>
+            GameLink 使用双重哈希码设计确保全局唯一性：
+            </para>
+            <code>
+            全局HashCode = 本地HashCode ⊕ 类型HashCode
+            </code>
+            <para>
+            这种设计确保：
+            </para>
+            <list type="bullet">
+            <item><description>不同类型的数据不会产生哈希冲突</description></item>
+            <item><description>相同ID的不同类型数据可以安全共存</description></item>
+            <item><description>实现O(1)时间复杂度的高效查找</description></item>
+            </list>
+            
+            <para><strong>使用场景：</strong></para>
+            <list type="bullet">
+            <item><description>游戏对象配置引用 - 单位、技能、物品等通过 GameLink 关联配置数据</description></item>
+            <item><description>数据编辑器生成 - 自动生成的静态引用，便于全局访问</description></item>
+            <item><description>网络同步 - 通过哈希码在客户端和服务端之间同步数据引用</description></item>
+            <item><description>动态数据查找 - 运行时通过ID或哈希码动态创建引用</description></item>
+            </list>
+            
+            <para><strong>典型用法：</strong></para>
+            <code>
+            // 1. 通过字符串ID创建
+            var heroLink = new GameLink&lt;GameDataUnit, GameDataUnit&gt;("HostTestHero");
+            
+            // 2. 通过UTF8字节数组创建（推荐用于静态定义，性能更好）
+            var heroLink2 = new GameLink&lt;GameDataUnit, GameDataUnit&gt;("HostTestHero"u8);
+            
+            // 3. 通过哈希码创建
+            var heroLink3 = new GameLink&lt;GameDataUnit, GameDataUnit&gt;(12345);
+            
+            // 4. 访问数据（延迟加载）
+            var heroData = heroLink.Data; // 可能为 null
+            
+            // 5. 安全的数据访问
+            if (heroLink.Data is GameDataUnit hero)
+            {
+                // 使用hero数据
+            }
+            </code>
+            </remarks>
+        </member>
+        <member name="M:GameData.GameLink`2.#ctor(System.Int32)">
+            <summary>
+            表示数编表的泛型结构体，提供对特定游戏数据类型的类型安全引用。
+            </summary>
+            <typeparam name = "TCategory">数据分类类型，必须继承自 <see cref = "T:GameData.GameDataCategory`1"/> 并实现 <see cref = "T:GameData.IGameDataCategory`1"/></typeparam>
+            <typeparam name = "V">具体数据类型，必须是 TCategory 的子类型并实现 <see cref = "T:GameData.IGameData`1"/></typeparam>
+            <remarks>
+            <para>
+            GameLink 是星火引擎数据驱动系统的核心组件，作为轻量级的值类型结构体，
+            提供对数编表（GameData）的高效、类型安全的引用机制。它是实现数据与逻辑解耦的关键桥梁。
+            </para>
+            
+            <para><strong>核心特性：</strong></para>
+            <list type="bullet">
+            <item><description><strong>值类型结构体</strong> - 内存开销极小，适合大量使用</description></item>
+            <item><description><strong>类型安全</strong> - 泛型设计确保编译时类型检查</description></item>
+            <item><description><strong>全局唯一性</strong> - 通过哈希码机制确保全局唯一标识</description></item>
+            <item><description><strong>延迟加载</strong> - 只在访问 Data 属性时进行实际数据查找</description></item>
+            <item><description><strong>多种构造方式</strong> - 支持字符串ID、UTF8字节数组和哈希码构造</description></item>
+            <item><description><strong>序列化友好</strong> - 可安全地进行序列化和网络传输</description></item>
+            </list>
+            
+            <para><strong>哈希码机制：</strong></para>
+            <para>
+            GameLink 使用双重哈希码设计确保全局唯一性：
+            </para>
+            <code>
+            全局HashCode = 本地HashCode ⊕ 类型HashCode
+            </code>
+            <para>
+            这种设计确保：
+            </para>
+            <list type="bullet">
+            <item><description>不同类型的数据不会产生哈希冲突</description></item>
+            <item><description>相同ID的不同类型数据可以安全共存</description></item>
+            <item><description>实现O(1)时间复杂度的高效查找</description></item>
+            </list>
+            
+            <para><strong>使用场景：</strong></para>
+            <list type="bullet">
+            <item><description>游戏对象配置引用 - 单位、技能、物品等通过 GameLink 关联配置数据</description></item>
+            <item><description>数据编辑器生成 - 自动生成的静态引用，便于全局访问</description></item>
+            <item><description>网络同步 - 通过哈希码在客户端和服务端之间同步数据引用</description></item>
+            <item><description>动态数据查找 - 运行时通过ID或哈希码动态创建引用</description></item>
+            </list>
+            
+            <para><strong>典型用法：</strong></para>
+            <code>
+            // 1. 通过字符串ID创建
+            var heroLink = new GameLink&lt;GameDataUnit, GameDataUnit&gt;("HostTestHero");
+            
+            // 2. 通过UTF8字节数组创建（推荐用于静态定义，性能更好）
+            var heroLink2 = new GameLink&lt;GameDataUnit, GameDataUnit&gt;("HostTestHero"u8);
+            
+            // 3. 通过哈希码创建
+            var heroLink3 = new GameLink&lt;GameDataUnit, GameDataUnit&gt;(12345);
+            
+            // 4. 访问数据（延迟加载）
+            var heroData = heroLink.Data; // 可能为 null
+            
+            // 5. 安全的数据访问
+            if (heroLink.Data is GameDataUnit hero)
+            {
+                // 使用hero数据
+            }
+            </code>
+            </remarks>
+        </member>
+        <member name="M:GameData.GameLink`2.#ctor(System.String)">
+            <summary>
+            通过字符串标识符初始化 GameLink 实例。
+            </summary>
+            <param name = "id">字符串标识符，将自动计算哈希码</param>
+            <remarks>
+            该构造函数会自动计算字符串的哈希码，并将其作为本地哈希码使用。
+            建议对于固定的字符串引用使用 UTF8 字节数组构造函数以获得更好的性能。
+            </remarks>
+        </member>
+        <member name="M:GameData.GameLink`2.#ctor(System.ReadOnlySpan{System.Byte})">
+            <summary>
+            通过 UTF8 字节数组初始化 GameLink 实例。
+            </summary>
+            <param name = "id">UTF8 编码的字节数组标识符</param>
+            <remarks>
+            这是创建静态 GameLink 引用的推荐方式，特别是在 ScopeData 等静态类中定义时。
+            UTF8 字面量（如 "id"u8）在编译时处理，性能优于字符串构造函数。
+            </remarks>
+            <example>
+            <code>
+            public static readonly GameLink&lt;GameDataUnit, GameDataUnit&gt; Hero = new("Hero"u8);
+            </code>
+            </example>
+        </member>
+        <member name="P:GameData.GameLink`2.Data">
+            <summary>
+            获取与此链接关联的游戏数据实例。
+            </summary>
+            <value>
+            返回对应的游戏数据实例，如果数据不存在则返回 <c>null</c>。
+            </value>
+            <remarks>
+            <para>
+            这是一个延迟加载属性，只有在首次访问时才会进行实际的数据查找。
+            查找过程通过 <see cref = "M:GameData.GameDataCategory`1.Get``1(GameData.IGameLink{``0})"/> 方法完成，
+            时间复杂度为 O(1)。
+            </para>
+            <para>
+            <strong>重要提示：</strong>返回值可能为 <c>null</c>，这种情况可能发生在：
+            </para>
+            <list type="bullet">
+            <item><description>对应的数据尚未创建或注册</description></item>
+            <item><description>数据已被销毁或移除</description></item>
+            <item><description>链接指向的ID或哈希码无效</description></item>
+            </list>
+            <para>
+            建议在使用前进行空值检查：
+            </para>
+            <code>
+            if (link.Data is var data &amp; &amp; data != null)
+            {
+                // 安全使用数据
+            }
+            </code>
+            </remarks>
+        </member>
+        <member name="P:GameData.GameLink`2.Id">
+            <summary>
+            获取此链接的字符串标识符。
+            </summary>
+            <value>
+            字符串标识符，如果链接是通过哈希码创建的则可能为 <c>null</c>。
+            </value>
+            <remarks>
+            字符串标识符主要用于调试、日志记录和人类可读的引用。
+            在全局范围内应当是唯一的，但系统不强制执行此约束。
+            </remarks>
+        </member>
+        <member name="P:GameData.GameLink`2.HashCode">
+            <summary>
+            获取此链接的全局唯一哈希码。
+            </summary>
+            <value>
+            由本地哈希码和类型哈希码组合而成的全局唯一标识符。
+            </value>
+            <remarks>
+            <para>
+            全局哈希码是通过 <see cref = "M:GameData.Extension.HashCodeDeterministic.Combine``2(``0,``1)"/> 方法
+            将本地哈希码和类型哈希码组合而成的。这确保了：
+            </para>
+            <list type="bullet">
+            <item><description>不同类型的相同本地哈希码不会冲突</description></item>
+            <item><description>每个 GameLink 在全局范围内具有唯一标识</description></item>
+            <item><description>支持高效的数据查找和比较操作</description></item>
+            </list>
+            <para>
+            此哈希码用于：
+            </para>
+            <list type="bullet">
+            <item><description>数据字典中的键值</description></item>
+            <item><description>网络同步中的数据标识</description></item>
+            <item><description>GameLink 实例的相等性比较</description></item>
+            </list>
+            </remarks>
+        </member>
+        <member name="P:GameData.GameLink`2.HashCodeLocal">
+            <summary>
+            获取此链接在其数据分类中的本地哈希码。
+            </summary>
+            <value>
+            本地哈希码，通常由ID字符串或直接指定的数值生成。
+            </value>
+            <remarks>
+            本地哈希码是在特定数据分类（TCategory）范围内的标识符。
+            它与分类哈希码组合形成全局唯一的哈希码。
+            这种设计允许不同分类的数据使用相同的本地标识符而不产生冲突。
+            </remarks>
+        </member>
+        <member name="P:GameData.GameLink`2.GameData#IGameLink#Data">
+            <summary>
+            显式实现 <see cref = "P:GameData.IGameLink.Data"/> 接口。
+            </summary>
+        </member>
+        <member name="M:GameData.GameLink`2.Equals(System.Object)">
+            <summary>
+            确定指定的对象是否等于当前的 GameLink 实例。
+            </summary>
+            <param name = "obj">要与当前实例比较的对象</param>
+            <returns>如果指定的对象是 <see cref = "T:GameData.IGameLink"/> 且具有相同的 <see cref = "P:GameData.GameLink`2.HashCode"/>，则为 <c>true</c>；否则为 <c>false</c></returns>
+            <remarks>
+            <para>
+            相等性比较基于全局哈希码，这确保了：
+            </para>
+            <list type="bullet">
+            <item><description>不同类型的 GameLink 不会被视为相等（即使具有相同的本地哈希码）</description></item>
+            <item><description>高效的比较操作（O(1) 时间复杂度）</description></item>
+            <item><description>与 <see cref = "M:GameData.GameLink`2.GetHashCode"/> 方法的一致性</description></item>
+            </list>
+            <para>
+            支持与任何实现 <see cref = "T:GameData.IGameLink"/> 接口的对象进行比较，
+            包括不同泛型参数的 GameLink 实例。
+            </para>
+            </remarks>
+        </member>
+        <member name="M:GameData.GameLink`2.GetHashCode">
+            <summary>
+            返回此 GameLink 实例的哈希码。
+            </summary>
+            <returns>32位有符号整数哈希码</returns>
+            <remarks>
+            返回的哈希码与 <see cref = "P:GameData.GameLink`2.HashCode"/> 属性相同，
+            确保了与 <see cref = "M:GameData.GameLink`2.Equals(System.Object)"/> 方法的一致性。
+            这使得 GameLink 可以安全地用作字典键或集合元素。
+            </remarks>
+        </member>
+        <member name="M:GameData.GameLink`2.op_Equality(GameData.GameLink{`0,`1},GameData.IGameLink)">
+            <summary>
+            确定两个 GameLink 实例是否相等。
+            </summary>
+            <param name = "left">要比较的第一个 GameLink 实例</param>
+            <param name = "right">要比较的 IGameLink 实例</param>
+            <returns>如果两个实例相等则为 <c>true</c>，否则为 <c>false</c></returns>
+        </member>
+        <member name="M:GameData.GameLink`2.op_Inequality(GameData.GameLink{`0,`1},GameData.IGameLink)">
+            <summary>
+            确定两个 GameLink 实例是否不相等。
+            </summary>
+            <param name = "left">要比较的第一个 GameLink 实例</param>
+            <param name = "right">要比较的 IGameLink 实例</param>
+            <returns>如果两个实例不相等则为 <c>true</c>，否则为 <c>false</c></returns>
+        </member>
+        <member name="M:GameData.GameLink`2.op_Equality(GameData.IGameLink,GameData.GameLink{`0,`1})">
+            <summary>
+            确定两个 GameLink 实例是否相等。
+            </summary>
+            <param name = "left">要比较的 IGameLink 实例</param>
+            <param name = "right">要比较的 GameLink 实例</param>
+            <returns>如果两个实例相等则为 <c>true</c>，否则为 <c>false</c></returns>
+        </member>
+        <member name="M:GameData.GameLink`2.op_Inequality(GameData.IGameLink,GameData.GameLink{`0,`1})">
+            <summary>
+            确定两个 GameLink 实例是否不相等。
+            </summary>
+            <param name = "left">要比较的 IGameLink 实例</param>
+            <param name = "right">要比较的 GameLink 实例</param>
+            <returns>如果两个实例不相等则为 <c>true</c>，否则为 <c>false</c></returns>
+        </member>
+        <member name="M:GameData.GameLink`2.op_Equality(GameData.GameLink{`0,`1},GameData.IGameLink{`0})">
+            <summary>
+            确定两个 GameLink 实例是否相等。
+            </summary>
+            <param name = "left">要比较的第一个 GameLink 实例</param>
+            <param name = "right">要比较的泛型 IGameLink 实例</param>
+            <returns>如果两个实例相等则为 <c>true</c>，否则为 <c>false</c></returns>
+        </member>
+        <member name="M:GameData.GameLink`2.op_Inequality(GameData.GameLink{`0,`1},GameData.IGameLink{`0})">
+            <summary>
+            确定两个 GameLink 实例是否不相等。
+            </summary>
+            <param name = "left">要比较的第一个 GameLink 实例</param>
+            <param name = "right">要比较的泛型 IGameLink 实例</param>
+            <returns>如果两个实例不相等则为 <c>true</c>，否则为 <c>false</c></returns>
+        </member>
+        <member name="M:GameData.GameLink`2.op_Equality(GameData.IGameLink{`0},GameData.GameLink{`0,`1})">
+            <summary>
+            确定两个 GameLink 实例是否相等。
+            </summary>
+            <param name = "left">要比较的泛型 IGameLink 实例</param>
+            <param name = "right">要比较的 GameLink 实例</param>
+            <returns>如果两个实例相等则为 <c>true</c>，否则为 <c>false</c></returns>
+        </member>
+        <member name="M:GameData.GameLink`2.op_Inequality(GameData.IGameLink{`0},GameData.GameLink{`0,`1})">
+            <summary>
+            确定两个 GameLink 实例是否不相等。
+            </summary>
+            <param name = "left">要比较的泛型 IGameLink 实例</param>
+            <param name = "right">要比较的 GameLink 实例</param>
+            <returns>如果两个实例不相等则为 <c>true</c>，否则为 <c>false</c></returns>
+        </member>
+        <member name="M:GameData.GameLink`2.ToString">
+            <summary>
+            返回此 GameLink 实例的字符串表示形式。
+            </summary>
+            <returns>包含类型信息和标识符的字符串</returns>
+            <remarks>
+            <para>
+            字符串格式优先显示最易读的标识符：
+            </para>
+            <list type="number">
+            <item><description>如果存在字符串 Id，显示为 "GameLink&lt;类型&gt;: Id"</description></item>
+            <item><description>如果没有 Id 但存在 Data 且有名称，显示为 "GameLink&lt;类型&gt;: 数据名称"</description></item>
+            <item><description>如果都没有，显示为 "GameLink&lt;类型&gt;: #哈希码"</description></item>
+            </list>
+            <para>
+            这种格式设计便于调试和日志记录，能够快速识别 GameLink 的类型和引用的数据。
+            </para>
+            </remarks>
+        </member>
+        <member name="T:GameData.IGameData">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:GameData.IGameData.catalogGlobal">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:GameData.IGameData.Get(System.Int32)">
+            <summary>
+            
+            </summary>
+            <param name="hashCode"></param>
+            <returns></returns>
+        </member>
+        <member name="P:GameData.IGameData.Link">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:GameData.IGameData.Name">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:GameData.IGameData.FriendlyName">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:GameData.IGameData.Create``1(System.String,System.ReadOnlySpan{System.Byte})">
+            <summary>
+            
+            </summary>
+            <typeparam name="TGameData"></typeparam>
+            <param name="inherit"></param>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:GameData.IGameData.SetTemplate(System.String,System.Func{System.ReadOnlySpan{System.Byte},GameData.IGameData})">
+            <summary>
+            
+            </summary>
+            <param name="templateName"></param>
+            <param name="template"></param>
+            <returns></returns>
+        </member>
+        <member name="F:GameData.IGameData._templates">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:GameData.IGameData`1">
+            <summary>
+            Represents game data interface.
+            </summary>
+            <typeparam name = "T">The GameData type.</typeparam>
+        </member>
+        <member name="P:GameData.IGameData`1.Link">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:GameData.IGameData`1.Name">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:GameData.IGameLink">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:GameData.IGameLink.Id">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:GameData.IGameLink.HashCode">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:GameData.IGameLink.HashCodeLocal">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:GameData.IGameLink.Data">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:GameData.IGameLink.FriendlyName">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:GameData.IGameLink`1">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:GameData.IGameLink`1.Data">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:GameData.Interface.IGameObject">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:GameData.Interface.IGameObject.Link">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:GameData.Interface.IGameObject.Cache">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:GameData.Interface.IGameObject`1">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:GameData.Interface.IGameObject`1.GameData#Interface#IGameObject#Link">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:GameData.Interface.IGameObject`1.GameData#Interface#IGameObject#Cache">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:GameData.Interface.IGameObject`1.Link">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:GameData.Interface.IGameObject`1.Cache">
+            <summary>
+            
+            </summary>
+        </member>
+    </members>
+</doc>

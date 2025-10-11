@@ -1,0 +1,46 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<doc>
+    <assembly>
+        <name>GameCore</name>
+    </assembly>
+    <members>
+        <member name="T:GameCore.CollisionSystem.Data.Struct.Footprint">
+            <summary />
+        </member>
+        <member name="M:GameCore.CollisionSystem.Data.Struct.Footprint.#ctor(System.Int16,System.Int16,GameCore.CollisionSystem.Data.Enum.CollisionType)">
+            <summary />
+        </member>
+        <member name="P:GameCore.CollisionSystem.Data.Struct.Footprint.CollisionType">
+            <summary />
+        </member>
+        <member name="P:GameCore.CollisionSystem.Data.Struct.Footprint.Width">
+            <summary />
+        </member>
+        <member name="P:GameCore.CollisionSystem.Data.Struct.Footprint.Height">
+            <summary />
+        </member>
+        <member name="T:GameCore.CollisionSystem.Data.Struct.Footprint.Block">
+            <summary />
+            <summary />
+        </member>
+        <member name="M:GameCore.CollisionSystem.Data.Struct.Footprint.Block.#ctor(System.Int16,System.Int16)">
+            <summary />
+            <summary />
+        </member>
+        <member name="P:GameCore.CollisionSystem.Data.Struct.Footprint.Block.X">
+            <summary />
+        </member>
+        <member name="P:GameCore.CollisionSystem.Data.Struct.Footprint.Block.Y">
+            <summary />
+        </member>
+        <member name="F:GameCore.CollisionSystem.Data.Struct.Footprint.footprint">
+            <summary />
+        </member>
+        <member name="P:GameCore.CollisionSystem.Data.Struct.Footprint.Blocks">
+            <summary />
+        </member>
+        <member name="P:GameCore.CollisionSystem.Data.Struct.Footprint.Item(System.Int16,System.Int16)">
+            <summary />
+        </member>
+    </members>
+</doc>

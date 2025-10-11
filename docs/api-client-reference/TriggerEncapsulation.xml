@@ -1,0 +1,2267 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>TriggerEncapsulation</name>
+    </assembly>
+    <members>
+        <member name="T:TriggerEncapsulation.BuffUtility">
+            <summary>
+            Buff 相关的便利功能
+            </summary>
+        </member>
+        <member name="F:TriggerEncapsulation.BuffUtility.InternalBuffAddEffectLink">
+            <summary>
+            内部使用的添加Buff效果数编Link
+            </summary>
+        </member>
+        <member name="T:TriggerEncapsulation.UnitBuffExtensions">
+            <summary>
+            Unit扩展方法，提供便利的Buff添加功能
+            </summary>
+        </member>
+        <member name="T:TriggerEncapsulation.BuffManagerExtensions">
+            <summary>
+            BuffManager扩展方法，提供便利的Buff添加功能
+            </summary>
+        </member>
+        <member name="T:TriggerEncapsulation.Event.EventServerMessage">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:TriggerEncapsulation.Event.EventServerMessage.#ctor(System.Byte[])">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:TriggerEncapsulation.Event.EventServerMessage.Message">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:TriggerEncapsulation.Event.EventClientMessage">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:TriggerEncapsulation.Event.EventClientMessage.#ctor(GameCore.PlayerAndUsers.Player,System.Byte[])">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:TriggerEncapsulation.Event.EventClientMessage.Player">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:TriggerEncapsulation.Event.EventClientMessage.Message">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:TriggerEncapsulation.Messaging.ExtendableEnumJsonConverterFactory">
+            <summary>
+            可扩展枚举JSON转换器工厂
+            为所有实现IExtendedEnum的类型提供自动序列化支持
+            </summary>
+        </member>
+        <member name="M:TriggerEncapsulation.Messaging.ExtendableEnumJsonConverterFactory.CanConvert(System.Type)">
+            <summary>
+            
+            </summary>
+            <param name="typeToConvert"></param>
+            <returns></returns>
+        </member>
+        <member name="M:TriggerEncapsulation.Messaging.ExtendableEnumJsonConverterFactory.CreateConverter(System.Type,System.Text.Json.JsonSerializerOptions)">
+            <summary>
+            
+            </summary>
+            <param name="typeToConvert"></param>
+            <param name="options"></param>
+            <returns></returns>
+        </member>
+        <member name="T:TriggerEncapsulation.Messaging.ExtendableEnumJsonConverter`1">
+            <summary>
+            泛型可扩展枚举JSON转换器
+            处理具体类型的可扩展枚举序列化和反序列化
+            </summary>
+            <typeparam name = "T">可扩展枚举类型</typeparam>
+        </member>
+        <member name="M:TriggerEncapsulation.Messaging.ExtendableEnumJsonConverter`1.Read(System.Text.Json.Utf8JsonReader@,System.Type,System.Text.Json.JsonSerializerOptions)">
+            <summary>
+            
+            </summary>
+            <param name="reader"></param>
+            <param name="typeToConvert"></param>
+            <param name="options"></param>
+            <returns></returns>
+        </member>
+        <member name="M:TriggerEncapsulation.Messaging.ExtendableEnumJsonConverter`1.Write(System.Text.Json.Utf8JsonWriter,`0,System.Text.Json.JsonSerializerOptions)">
+            <summary>
+            
+            </summary>
+            <param name="writer"></param>
+            <param name="value"></param>
+            <param name="options"></param>
+            <returns></returns>
+        </member>
+        <member name="T:TriggerEncapsulation.Messaging.MessageBuilder`1">
+            <summary>
+            流畅的消息构建器，提供链式API来创建和发送消息
+            
+            <para><strong>架构设计说明：</strong></para>
+            <list type="bullet">
+            <item><description><strong>客户端</strong>：简化设计，主要职责是向服务器发送消息</description></item>
+            <item><description><strong>服务器端</strong>：完全功能，支持广播、队列、可靠传输等高级特性</description></item>
+            </list>
+            
+            <para>这种设计反映了典型的C/S架构模式，其中：</para>
+            <list type="bullet">
+            <item><description>客户端：轻量级消息发送者</description></item>
+            <item><description>服务器：重型消息处理中心</description></item>
+            </list>
+            </summary>
+            <typeparam name = "T">消息数据类型</typeparam>
+        </member>
+        <member name="F:TriggerEncapsulation.Messaging.MessageBuilder`1._message">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:TriggerEncapsulation.Messaging.MessageBuilder`1.#ctor(`0)">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:TriggerEncapsulation.Messaging.MessageBuilder`1.Create(`0)">
+            <summary>
+            创建消息构建器
+            </summary>
+        </member>
+        <member name="M:TriggerEncapsulation.Messaging.MessageBuilder`1.WithPriority(TriggerEncapsulation.Messaging.MessagePriority)">
+            <summary>
+            设置消息优先级
+            </summary>
+        </member>
+        <member name="M:TriggerEncapsulation.Messaging.MessageBuilder`1.WithTimeout(System.TimeSpan)">
+            <summary>
+            设置消息超时时间
+            </summary>
+        </member>
+        <member name="M:TriggerEncapsulation.Messaging.MessageBuilder`1.ToPlayersWhere(System.Func{GameCore.PlayerAndUsers.Player,System.Boolean})">
+            <summary>
+            客户端版本：不执行实际过滤，仅为API一致性
+            </summary>
+        </member>
+        <member name="M:TriggerEncapsulation.Messaging.MessageBuilder`1.ToPlayers(GameCore.PlayerAndUsers.Player[])">
+            <summary>
+            客户端版本：不执行实际玩家选择，仅为API一致性
+            </summary>
+        </member>
+        <member name="M:TriggerEncapsulation.Messaging.MessageBuilder`1.ToPlayer(GameCore.PlayerAndUsers.Player)">
+            <summary>
+            客户端版本：不执行实际玩家选择，仅为API一致性
+            </summary>
+        </member>
+        <member name="M:TriggerEncapsulation.Messaging.MessageBuilder`1.ToOnlinePlayers">
+            <summary>
+            客户端版本：不执行实际玩家选择，仅为API一致性
+            </summary>
+        </member>
+        <member name="M:TriggerEncapsulation.Messaging.MessageBuilder`1.SendToServer">
+            <summary>
+            发送消息到服务器（客户端功能）
+            </summary>
+        </member>
+        <member name="M:TriggerEncapsulation.Messaging.MessageBuilder`1.SendToServerAsync">
+            <summary>
+            异步发送消息到服务器（客户端功能）
+            </summary>
+        </member>
+        <member name="M:TriggerEncapsulation.Messaging.MessageBuilder`1.Build">
+            <summary>
+            获取构建的消息（用于高级操作）
+            </summary>
+        </member>
+        <member name="T:TriggerEncapsulation.Messaging.MessageBuilder">
+            <summary>
+            消息构建器静态工厂
+            
+            <para><strong>使用模式：</strong></para>
+            <list type="bullet">
+            <item><description><strong>客户端</strong>：主要使用 SendToServerAsync() 方法</description></item>
+            <item><description><strong>服务器端</strong>：使用完整的广播和目标选择功能</description></item>
+            </list>
+            </summary>
+        </member>
+        <member name="M:TriggerEncapsulation.Messaging.MessageBuilder.Create``1(``0)">
+            <summary>
+            创建消息构建器
+            </summary>
+        </member>
+        <member name="M:TriggerEncapsulation.Messaging.MessageBuilder.SendToServerAsync``1(``0,TriggerEncapsulation.Messaging.MessagePriority)">
+            <summary>
+            快速发送消息到服务器（客户端功能）
+            </summary>
+        </member>
+        <member name="T:TriggerEncapsulation.Messaging.ReliableMessageSender">
+            <summary>
+            可靠消息发送器，支持确认和重试
+            </summary>
+        </member>
+        <member name="F:TriggerEncapsulation.Messaging.ReliableMessageSender._pendingMessages">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:TriggerEncapsulation.Messaging.ReliableMessageSender._retryTimer">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:TriggerEncapsulation.Messaging.ReliableMessageSender._defaultTimeout">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:TriggerEncapsulation.Messaging.ReliableMessageSender._maxRetryDelay">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:TriggerEncapsulation.Messaging.ReliableMessageSender._maxRetries">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:TriggerEncapsulation.Messaging.ReliableMessageSender._maxPendingMessages">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:TriggerEncapsulation.Messaging.ReliableMessageSender._disposed">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:TriggerEncapsulation.Messaging.ReliableMessageSender.#ctor">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:TriggerEncapsulation.Messaging.ReliableMessageSender.SendReliableAsync``1(``0,GameCore.PlayerAndUsers.Player,System.Nullable{System.TimeSpan})">
+            <summary>
+            可靠发送消息
+            </summary>
+        </member>
+        <member name="M:TriggerEncapsulation.Messaging.ReliableMessageSender.OnMessageAcknowledged(System.Guid)">
+            <summary>
+            处理消息确认
+            </summary>
+        </member>
+        <member name="M:TriggerEncapsulation.Messaging.ReliableMessageSender.Dispose">
+            <summary>
+            
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:TriggerEncapsulation.Messaging.ReliableMessage`1">
+            <summary>
+            可靠消息数据结构
+            </summary>
+        </member>
+        <member name="F:TriggerEncapsulation.Messaging.ReliableMessage`1._data">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:TriggerEncapsulation.Messaging.ReliableMessage`1.Id">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:TriggerEncapsulation.Messaging.ReliableMessage`1.Data">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:TriggerEncapsulation.Messaging.ReliableMessage`1.RequireAck">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:TriggerEncapsulation.Messaging.ReliableMessage`1.Timestamp">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:TriggerEncapsulation.Messaging.ReliableMessage`1.SendToAsync(GameCore.PlayerAndUsers.Player)">
+            <summary>
+            
+            </summary>
+            <param name="recipient"></param>
+            <returns></returns>
+        </member>
+        <member name="T:TriggerEncapsulation.Messaging.MessageAcknowledgment">
+            <summary>
+            消息确认数据结构
+            </summary>
+        </member>
+        <member name="P:TriggerEncapsulation.Messaging.MessageAcknowledgment.MessageId">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:TriggerEncapsulation.Messaging.MessageAcknowledgment.Success">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:TriggerEncapsulation.Messaging.MessageAcknowledgment.ErrorMessage">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:TriggerEncapsulation.Messaging.IReliableMessage">
+            <summary>
+            可靠消息接口
+            </summary>
+        </member>
+        <member name="P:TriggerEncapsulation.Messaging.IReliableMessage.Id">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:TriggerEncapsulation.Messaging.IReliableMessage.Timestamp">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:TriggerEncapsulation.Messaging.IReliableMessage.SendToAsync(GameCore.PlayerAndUsers.Player)">
+            <summary>
+            
+            </summary>
+            <param name="recipient"></param>
+            <returns></returns>
+        </member>
+        <member name="T:TriggerEncapsulation.Messaging.PendingReliableMessage">
+            <summary>
+            待处理的可靠消息
+            </summary>
+        </member>
+        <member name="P:TriggerEncapsulation.Messaging.PendingReliableMessage.Message">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:TriggerEncapsulation.Messaging.PendingReliableMessage.Recipient">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:TriggerEncapsulation.Messaging.PendingReliableMessage.Timeout">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:TriggerEncapsulation.Messaging.PendingReliableMessage.Retries">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:TriggerEncapsulation.Messaging.PendingReliableMessage.TaskCompletionSource">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:TriggerEncapsulation.Messaging.MessageQueueManager">
+            <summary>
+            消息队列管理器，支持优先级和批处理
+            </summary>
+        </member>
+        <member name="F:TriggerEncapsulation.Messaging.MessageQueueManager._queues">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:TriggerEncapsulation.Messaging.MessageQueueManager._maxBatchSize">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:TriggerEncapsulation.Messaging.MessageQueueManager._lockObject">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:TriggerEncapsulation.Messaging.MessageQueueManager._disposed">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:TriggerEncapsulation.Messaging.MessageQueueManager.#ctor">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:TriggerEncapsulation.Messaging.MessageQueueManager.DoesThink">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:TriggerEncapsulation.Messaging.MessageQueueManager.EnqueueMessage(TriggerEncapsulation.Messaging.ITypedMessage)">
+            <summary>
+            将消息加入队列
+            </summary>
+        </member>
+        <member name="M:TriggerEncapsulation.Messaging.MessageQueueManager.Dispose">
+            <summary>
+            
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:TriggerEncapsulation.Messaging.MessageQueueManager.Think(System.Int32)">
+            <summary>
+            
+            </summary>
+            <param name="delta"></param>
+            <returns></returns>
+        </member>
+        <member name="T:TriggerEncapsulation.Messaging.ProtoCustomMessage">
+            <summary>
+            表示自定义协议消息，用于在客户端和服务器之间传递任意格式的数据
+            </summary>
+            <remarks>
+            <para>
+            <see cref = "T:TriggerEncapsulation.Messaging.ProtoCustomMessage"/> 是一个通用的消息传输容器，支持双向通信：
+            </para>
+            <list type="bullet">
+            <item><description><strong>客户端到服务器</strong>：使用 <see cref = "M:TriggerEncapsulation.Messaging.ProtoCustomMessage.SendToServer"/> 方法发送消息</description></item>
+            <item><description><strong>服务器到客户端</strong>：使用 <see cref = "!:Broadcast(Func&lt;Player, bool&gt;? )"/> 或 <see cref = "!:SendTo(Player, Func&lt;Player, bool&gt;? )"/> 方法发送消息</description></item>
+            </list>
+            <para>
+            <strong>消息处理流程：</strong>
+            </para>
+            <list type="number">
+            <item><description>发送方创建 <see cref = "T:TriggerEncapsulation.Messaging.ProtoCustomMessage"/> 实例并设置 <see cref = "P:TriggerEncapsulation.Messaging.ProtoCustomMessage.Message"/> 属性</description></item>
+            <item><description>调用相应的发送方法（<see cref = "M:TriggerEncapsulation.Messaging.ProtoCustomMessage.SendToServer"/>、<see cref = "!:Broadcast(Func&lt;Player, bool&gt;? )"/> 或 <see cref = "!:SendTo(Player, Func&lt;Player, bool&gt;? )"/>）</description></item>
+            <item><description>接收方的 <see cref = "M:TriggerEncapsulation.Messaging.ProtoCustomMessage.Handle"/> 或 <see cref = "!:Handle(Player)"/> 方法被自动调用</description></item>
+            <item><description>消息内容通过相应的事件（<see cref = "T:TriggerEncapsulation.Event.EventServerMessage"/> 或 <see cref = "T:TriggerEncapsulation.Event.EventClientMessage"/>）分发给监听器</description></item>
+            </list>
+            <para>
+            <strong>使用示例：</strong>
+            </para>
+            <code>
+            // 服务器端广播消息
+            var message = new ProtoCustomMessage { Message = Encoding.UTF8.GetBytes("Hello World") };
+            message.Broadcast();
+            
+            // 客户端发送消息到服务器
+            var clientMessage = new ProtoCustomMessage { Message = jsonBytes };
+            clientMessage.SendToServer();
+            </code>
+            <para>
+            <strong>注意事项：</strong>
+            </para>
+            <list type="bullet">
+            <item><description>消息内容需要自行进行序列化和反序列化</description></item>
+            <item><description>建议使用 JSON、MessagePack 或其他标准化格式进行数据编码</description></item>
+            <item><description>消息大小应该合理控制，避免网络传输压力</description></item>
+            <item><description>服务器端的广播操作会发送给所有在线玩家，注意性能影响</description></item>
+            </list>
+            </remarks>
+            <seealso cref = "T:GameCore.ProtocolServerTransient.IProtocolServerTransient"/>
+            <seealso cref = "T:GameCore.ProtocolClientTransient.IProtocolClientTransient"/>
+            <seealso cref = "T:TriggerEncapsulation.Event.EventServerMessage"/>
+            <seealso cref = "T:TriggerEncapsulation.Event.EventClientMessage"/>
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:TriggerEncapsulation.Messaging.ProtoCustomMessage.Message">
+            <summary>
+            获取或设置消息的字节数据内容
+            </summary>
+            <value>
+            包含实际消息数据的字节数组。可以是任意格式的数据，
+            如 JSON 字符串的 UTF-8 编码、序列化的二进制数据等。
+            </value>
+            <remarks>
+            <para>
+            消息内容的格式和编码完全由应用程序决定。常见的做法包括：
+            </para>
+            <list type="bullet">
+            <item><description><strong>JSON</strong>：易于调试和跨平台兼容</description></item>
+            <item><description><strong>MessagePack</strong>：高效的二进制格式</description></item>
+            <item><description><strong>Protocol Buffers</strong>：Google 的序列化格式</description></item>
+            <item><description><strong>自定义二进制格式</strong>：最大化性能优化</description></item>
+            </list>
+            <para>
+            建议在消息前添加类型标识符，以便接收方能够正确解析不同类型的消息。
+            </para>
+            </remarks>
+            <example>
+            <code>
+            // 使用 JSON 格式
+            var data = new { Type = "PlayerUpdate", PlayerId = 123, Health = 100 };
+            var json = JsonSerializer.Serialize(data);
+            var message = new ProtoCustomMessage { Message = Encoding.UTF8.GetBytes(json) };
+            
+            // 使用自定义二进制格式
+            var buffer = new byte[8];
+            BitConverter.GetBytes(messageType).CopyTo(buffer, 0);
+            BitConverter.GetBytes(playerId).CopyTo(buffer, 4);
+            var message = new ProtoCustomMessage { Message = buffer };
+            </code>
+            </example>
+        </member>
+        <member name="M:TriggerEncapsulation.Messaging.ProtoCustomMessage.Handle">
+            <summary>
+            处理从服务器接收到的自定义消息
+            </summary>
+            <remarks>
+            <para>
+            此方法在客户端自动被调用，当从服务器接收到 <see cref = "T:TriggerEncapsulation.Messaging.ProtoCustomMessage"/> 时执行。
+            该方法会触发 <see cref = "T:TriggerEncapsulation.Event.EventServerMessage"/> 事件，将消息内容传递给注册的监听器。
+            </para>
+            <para>
+            <strong>事件处理流程：</strong>
+            </para>
+            <list type="number">
+            <item><description>网络层接收到消息并识别为 <see cref = "T:TriggerEncapsulation.Messaging.ProtoCustomMessage"/> 类型</description></item>
+            <item><description>框架自动调用此 <see cref = "M:TriggerEncapsulation.Messaging.ProtoCustomMessage.Handle"/> 方法</description></item>
+            <item><description>方法获取 <see cref = "T:TriggerEncapsulation.Event.EventServerMessage"/> 事件发布器</description></item>
+            <item><description>触发事件，将 <see cref = "P:TriggerEncapsulation.Messaging.ProtoCustomMessage.Message"/> 内容传递给所有监听器</description></item>
+            </list>
+            <para>
+            应用程序应该注册 <see cref = "T:TriggerEncapsulation.Event.EventServerMessage"/> 事件的监听器来处理具体的消息内容。
+            </para>
+            </remarks>
+            <example>
+            <code>
+            // 注册消息监听器
+            var trigger = new Trigger&amp;lt;EventServerMessage&amp;gt;(OnServerMessageReceived);
+            trigger.Register(Game.Instance);
+            
+            private static async Task&amp;lt;bool&amp;gt; OnServerMessageReceived(object sender, EventServerMessage eventArgs)
+            {
+                var messageBytes = eventArgs.Message;
+                var json = Encoding.UTF8.GetString(messageBytes);
+                var data = JsonSerializer.Deserialize&amp;lt;GameStateUpdate&amp;gt;(json);
+                // 处理消息数据...
+                return true;
+            }
+            </code>
+            </example>
+            <seealso cref = "T:TriggerEncapsulation.Event.EventServerMessage"/>
+        </member>
+        <member name="M:TriggerEncapsulation.Messaging.ProtoCustomMessage.SendToServer">
+            <summary>
+            将自定义消息发送到服务器
+            </summary>
+            <returns>
+            如果消息成功发送则返回 <c>true</c>；否则返回 <c>false</c>
+            </returns>
+            <remarks>
+            <para>
+            此方法用于从客户端向服务器发送自定义消息。消息会通过网络传输层发送，
+            并在服务器端触发相应的 <see cref = "!:Handle(Player)"/> 方法。
+            </para>
+            <para>
+            <strong>发送流程：</strong>
+            </para>
+            <list type="number">
+            <item><description>客户端调用 <see cref = "M:TriggerEncapsulation.Messaging.ProtoCustomMessage.SendToServer"/> 方法</description></item>
+            <item><description>框架将消息打包并通过网络发送到服务器</description></item>
+            <item><description>服务器接收消息并调用 <see cref = "!:Handle(Player)"/> 方法</description></item>
+            <item><description>服务器端触发 <see cref = "T:TriggerEncapsulation.Event.EventClientMessage"/> 事件</description></item>
+            </list>
+            <para>
+            <strong>返回值说明：</strong>
+            </para>
+            <list type="bullet">
+            <item><description><c>true</c>：消息已成功提交到网络发送队列</description></item>
+            <item><description><c>false</c>：发送失败，可能是网络断开或其他错误</description></item>
+            </list>
+            <para>
+            注意：返回 <c>true</c> 只表示消息已提交发送，不保证服务器已成功接收。
+            </para>
+            </remarks>
+            <example>
+            <code>
+            // 发送玩家操作消息
+            var playerAction = new { Action = "Move", X = 10.5f, Y = 20.3f };
+            var json = JsonSerializer.Serialize(playerAction);
+            var message = new ProtoCustomMessage { Message = Encoding.UTF8.GetBytes(json) };
+            
+            if (message.SendToServer())
+            {
+                Console.WriteLine("消息发送成功");
+            }
+            else
+            {
+                Console.WriteLine("消息发送失败");
+            }
+            </code>
+            </example>
+            <seealso cref = "!:Handle(Player)"/>
+        </member>
+        <member name="M:TriggerEncapsulation.Messaging.ProtoCustomMessage.GameCore#BaseInterface#IGameClass#OnRegisterGameClass">
+            <summary>
+            注册游戏类时的回调方法
+            </summary>
+            <remarks>
+            在客户端注册消息处理器，建立类型哈希到处理方法的映射。
+            </remarks>
+        </member>
+        <member name="T:TriggerEncapsulation.Messaging.MessagePriority">
+            <summary>
+            消息优先级枚举
+            </summary>
+        </member>
+        <member name="T:TriggerEncapsulation.Messaging.ITypedMessage">
+            <summary>
+            强类型消息接口
+            </summary>
+        </member>
+        <member name="P:TriggerEncapsulation.Messaging.ITypedMessage.MessageType">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:TriggerEncapsulation.Messaging.ITypedMessage.Priority">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:TriggerEncapsulation.Messaging.ITypedMessage.Timeout">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:TriggerEncapsulation.Messaging.ITypedMessage.Timestamp">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:TriggerEncapsulation.Messaging.ITypedMessage.Serialize">
+            <summary>
+            
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:TriggerEncapsulation.Messaging.TypedMessage`1">
+            <summary>
+            强类型消息基类，提供自动序列化和类型安全的消息传递
+            </summary>
+            <typeparam name = "T">消息数据类型</typeparam>
+        </member>
+        <member name="P:TriggerEncapsulation.Messaging.TypedMessage`1.Data">
+            <summary>
+            消息数据
+            </summary>
+        </member>
+        <member name="P:TriggerEncapsulation.Messaging.TypedMessage`1.Priority">
+            <summary>
+            消息优先级
+            </summary>
+        </member>
+        <member name="P:TriggerEncapsulation.Messaging.TypedMessage`1.Timeout">
+            <summary>
+            消息超时时间（可选）
+            </summary>
+        </member>
+        <member name="P:TriggerEncapsulation.Messaging.TypedMessage`1.Timestamp">
+            <summary>
+            消息时间戳
+            </summary>
+        </member>
+        <member name="P:TriggerEncapsulation.Messaging.TypedMessage`1.MessageType">
+            <summary>
+            消息类型名称
+            </summary>
+        </member>
+        <member name="P:TriggerEncapsulation.Messaging.TypedMessage`1.MessageId">
+            <summary>
+            消息ID（用于追踪和去重）
+            </summary>
+        </member>
+        <member name="M:TriggerEncapsulation.Messaging.TypedMessage`1.#ctor(`0)">
+            <summary>
+            创建强类型消息
+            </summary>
+            <param name = "data">消息数据</param>
+        </member>
+        <member name="M:TriggerEncapsulation.Messaging.TypedMessage`1.#ctor">
+            <summary>
+            创建空的强类型消息（需要手动设置Data）
+            </summary>
+        </member>
+        <member name="M:TriggerEncapsulation.Messaging.TypedMessage`1.Serialize">
+            <summary>
+            序列化消息为字节数组
+            </summary>
+        </member>
+        <member name="M:TriggerEncapsulation.Messaging.TypedMessage`1.Deserialize(System.Byte[])">
+            <summary>
+            从字节数组反序列化消息
+            </summary>
+        </member>
+        <member name="M:TriggerEncapsulation.Messaging.TypedMessage`1.SendToServer">
+            <summary>
+            客户端发送消息到服务器
+            </summary>
+        </member>
+        <member name="M:TriggerEncapsulation.Messaging.TypedMessage`1.SendToServerAsync">
+            <summary>
+            异步发送消息到服务器
+            </summary>
+        </member>
+        <member name="M:TriggerEncapsulation.Messaging.TypedMessage`1.ToString">
+            <summary>
+            
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:TriggerEncapsulation.Messaging.TypedMessageEnvelope">
+            <summary>
+            消息信封，用于包装序列化数据
+            </summary>
+        </member>
+        <member name="P:TriggerEncapsulation.Messaging.TypedMessageEnvelope.MessageType">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:TriggerEncapsulation.Messaging.TypedMessageEnvelope.Priority">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:TriggerEncapsulation.Messaging.TypedMessageEnvelope.Timeout">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:TriggerEncapsulation.Messaging.TypedMessageEnvelope.Timestamp">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:TriggerEncapsulation.Messaging.TypedMessageEnvelope.MessageId">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:TriggerEncapsulation.Messaging.TypedMessageEnvelope.Data">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:TriggerEncapsulation.Messaging.MessageSerializerOptions">
+            <summary>
+            消息序列化选项
+            </summary>
+        </member>
+        <member name="F:TriggerEncapsulation.Messaging.MessageSerializerOptions.Default">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:TriggerEncapsulation.Messaging.TimeSpanJsonConverter">
+            <summary>
+            TimeSpan 的自定义 JSON 转换器
+            </summary>
+        </member>
+        <member name="M:TriggerEncapsulation.Messaging.TimeSpanJsonConverter.Read(System.Text.Json.Utf8JsonReader@,System.Type,System.Text.Json.JsonSerializerOptions)">
+            <summary>
+            
+            </summary>
+            <param name="reader"></param>
+            <param name="typeToConvert"></param>
+            <param name="options"></param>
+            <returns></returns>
+        </member>
+        <member name="M:TriggerEncapsulation.Messaging.TimeSpanJsonConverter.Write(System.Text.Json.Utf8JsonWriter,System.TimeSpan,System.Text.Json.JsonSerializerOptions)">
+            <summary>
+            
+            </summary>
+            <param name="writer"></param>
+            <param name="value"></param>
+            <param name="options"></param>
+            <returns></returns>
+        </member>
+        <member name="T:TriggerEncapsulation.Messaging.NullableTimeSpanJsonConverter">
+            <summary>
+            TimeSpan? 的自定义 JSON 转换器
+            </summary>
+        </member>
+        <member name="M:TriggerEncapsulation.Messaging.NullableTimeSpanJsonConverter.Read(System.Text.Json.Utf8JsonReader@,System.Type,System.Text.Json.JsonSerializerOptions)">
+            <summary>
+            
+            </summary>
+            <param name="reader"></param>
+            <param name="typeToConvert"></param>
+            <param name="options"></param>
+            <returns></returns>
+        </member>
+        <member name="M:TriggerEncapsulation.Messaging.NullableTimeSpanJsonConverter.Write(System.Text.Json.Utf8JsonWriter,System.Nullable{System.TimeSpan},System.Text.Json.JsonSerializerOptions)">
+            <summary>
+            
+            </summary>
+            <param name="writer"></param>
+            <param name="value"></param>
+            <param name="options"></param>
+            <returns></returns>
+        </member>
+        <member name="T:TriggerEncapsulation.Messaging.DateTimeJsonConverter">
+            <summary>
+            DateTime 的自定义 JSON 转换器
+            </summary>
+        </member>
+        <member name="M:TriggerEncapsulation.Messaging.DateTimeJsonConverter.Read(System.Text.Json.Utf8JsonReader@,System.Type,System.Text.Json.JsonSerializerOptions)">
+            <summary>
+            
+            </summary>
+            <param name="reader"></param>
+            <param name="typeToConvert"></param>
+            <param name="options"></param>
+            <returns></returns>
+        </member>
+        <member name="M:TriggerEncapsulation.Messaging.DateTimeJsonConverter.Write(System.Text.Json.Utf8JsonWriter,System.DateTime,System.Text.Json.JsonSerializerOptions)">
+            <summary>
+            
+            </summary>
+            <param name="writer"></param>
+            <param name="value"></param>
+            <param name="options"></param>
+            <returns></returns>
+        </member>
+        <member name="T:TriggerEncapsulation.Messaging.EntityJsonConverter">
+            <summary>
+            Entity 的自定义 JSON 转换器，将 Entity/Unit 对象序列化为 ProtoEntity 结构体
+            </summary>
+        </member>
+        <member name="M:TriggerEncapsulation.Messaging.EntityJsonConverter.Read(System.Text.Json.Utf8JsonReader@,System.Type,System.Text.Json.JsonSerializerOptions)">
+            <summary>
+            
+            </summary>
+            <param name="reader"></param>
+            <param name="typeToConvert"></param>
+            <param name="options"></param>
+            <returns></returns>
+        </member>
+        <member name="M:TriggerEncapsulation.Messaging.EntityJsonConverter.Write(System.Text.Json.Utf8JsonWriter,GameCore.EntitySystem.Entity,System.Text.Json.JsonSerializerOptions)">
+            <summary>
+            
+            </summary>
+            <param name="writer"></param>
+            <param name="value"></param>
+            <param name="options"></param>
+            <returns></returns>
+        </member>
+        <member name="T:TriggerEncapsulation.Messaging.IActorScopeJsonConverter">
+            <summary>
+            IActorScope 的自定义 JSON 转换器，将 IActorScope 对象序列化为 ProtoActorScope 结构体
+            </summary>
+        </member>
+        <member name="M:TriggerEncapsulation.Messaging.IActorScopeJsonConverter.Read(System.Text.Json.Utf8JsonReader@,System.Type,System.Text.Json.JsonSerializerOptions)">
+            <summary>
+            
+            </summary>
+            <param name="reader"></param>
+            <param name="typeToConvert"></param>
+            <param name="options"></param>
+            <returns></returns>
+        </member>
+        <member name="M:TriggerEncapsulation.Messaging.IActorScopeJsonConverter.Write(System.Text.Json.Utf8JsonWriter,GameCore.ActorSystem.IActorScope,System.Text.Json.JsonSerializerOptions)">
+            <summary>
+            
+            </summary>
+            <param name="writer"></param>
+            <param name="value"></param>
+            <param name="options"></param>
+            <returns></returns>
+        </member>
+        <member name="T:TriggerEncapsulation.Messaging.AbilityJsonConverter">
+            <summary>
+            Ability 的自定义 JSON 转换器，将 Ability 对象序列化为 ProtoAbility 结构体
+            </summary>
+        </member>
+        <member name="M:TriggerEncapsulation.Messaging.AbilityJsonConverter.Read(System.Text.Json.Utf8JsonReader@,System.Type,System.Text.Json.JsonSerializerOptions)">
+            <summary>
+            
+            </summary>
+            <param name="reader"></param>
+            <param name="typeToConvert"></param>
+            <param name="options"></param>
+            <returns></returns>
+        </member>
+        <member name="M:TriggerEncapsulation.Messaging.AbilityJsonConverter.Write(System.Text.Json.Utf8JsonWriter,GameCore.AbilitySystem.Ability,System.Text.Json.JsonSerializerOptions)">
+            <summary>
+            
+            </summary>
+            <param name="writer"></param>
+            <param name="value"></param>
+            <param name="options"></param>
+            <returns></returns>
+        </member>
+        <member name="T:TriggerEncapsulation.Messaging.IAttachedObjectJsonConverter">
+            <summary>
+            IAttachedObject 的自定义 JSON 转换器，将 IAttachedObject 对象序列化为 ProtoIAttachedObject 结构体
+            </summary>
+        </member>
+        <member name="M:TriggerEncapsulation.Messaging.IAttachedObjectJsonConverter.Read(System.Text.Json.Utf8JsonReader@,System.Type,System.Text.Json.JsonSerializerOptions)">
+            <summary>
+            
+            </summary>
+            <param name="reader"></param>
+            <param name="typeToConvert"></param>
+            <param name="options"></param>
+            <returns></returns>
+        </member>
+        <member name="M:TriggerEncapsulation.Messaging.IAttachedObjectJsonConverter.Write(System.Text.Json.Utf8JsonWriter,GameCore.BaseInterface.IAttachedObject,System.Text.Json.JsonSerializerOptions)">
+            <summary>
+            
+            </summary>
+            <param name="writer"></param>
+            <param name="value"></param>
+            <param name="options"></param>
+            <returns></returns>
+        </member>
+        <member name="T:TriggerEncapsulation.Messaging.ICooldownHostJsonConverter">
+            <summary>
+            ICooldownHost 的自定义 JSON 转换器，将 ICooldownHost 对象序列化为 ProtoICooldownHost 结构体
+            </summary>
+        </member>
+        <member name="M:TriggerEncapsulation.Messaging.ICooldownHostJsonConverter.Read(System.Text.Json.Utf8JsonReader@,System.Type,System.Text.Json.JsonSerializerOptions)">
+            <summary>
+            
+            </summary>
+            <param name="reader"></param>
+            <param name="typeToConvert"></param>
+            <param name="options"></param>
+            <returns></returns>
+        </member>
+        <member name="M:TriggerEncapsulation.Messaging.ICooldownHostJsonConverter.Write(System.Text.Json.Utf8JsonWriter,GameCore.BaseInterface.ICooldownHost,System.Text.Json.JsonSerializerOptions)">
+            <summary>
+            
+            </summary>
+            <param name="writer"></param>
+            <param name="value"></param>
+            <param name="options"></param>
+            <returns></returns>
+        </member>
+        <member name="T:TriggerEncapsulation.Messaging.IExtendedEnumJsonConverter">
+            <summary>
+            IExtendedEnum 的自定义 JSON 转换器，将 IExtendedEnum 对象序列化为 ProtoIExtendedEnum 结构体
+            </summary>
+        </member>
+        <member name="M:TriggerEncapsulation.Messaging.IExtendedEnumJsonConverter.Read(System.Text.Json.Utf8JsonReader@,System.Type,System.Text.Json.JsonSerializerOptions)">
+            <summary>
+            
+            </summary>
+            <param name="reader"></param>
+            <param name="typeToConvert"></param>
+            <param name="options"></param>
+            <returns></returns>
+        </member>
+        <member name="M:TriggerEncapsulation.Messaging.IExtendedEnumJsonConverter.Write(System.Text.Json.Utf8JsonWriter,GameCore.BaseInterface.IExtendedEnum,System.Text.Json.JsonSerializerOptions)">
+            <summary>
+            
+            </summary>
+            <param name="writer"></param>
+            <param name="value"></param>
+            <param name="options"></param>
+            <returns></returns>
+        </member>
+        <member name="T:TriggerEncapsulation.Messaging.IGameLinkJsonConverter">
+            <summary>
+            IGameLink 的自定义 JSON 转换器，将 IGameLink 对象序列化为 ProtoIGameLink 结构体
+            </summary>
+        </member>
+        <member name="M:TriggerEncapsulation.Messaging.IGameLinkJsonConverter.Read(System.Text.Json.Utf8JsonReader@,System.Type,System.Text.Json.JsonSerializerOptions)">
+            <summary>
+            
+            </summary>
+            <param name="reader"></param>
+            <param name="typeToConvert"></param>
+            <param name="options"></param>
+            <returns></returns>
+        </member>
+        <member name="M:TriggerEncapsulation.Messaging.IGameLinkJsonConverter.Write(System.Text.Json.Utf8JsonWriter,GameData.IGameLink,System.Text.Json.JsonSerializerOptions)">
+            <summary>
+            
+            </summary>
+            <param name="writer"></param>
+            <param name="value"></param>
+            <param name="options"></param>
+            <returns></returns>
+        </member>
+        <member name="T:TriggerEncapsulation.Messaging.InventoryJsonConverter">
+            <summary>
+            Inventory 的自定义 JSON 转换器，将 Inventory 对象序列化为 ProtoInventory 结构体
+            </summary>
+        </member>
+        <member name="M:TriggerEncapsulation.Messaging.InventoryJsonConverter.Read(System.Text.Json.Utf8JsonReader@,System.Type,System.Text.Json.JsonSerializerOptions)">
+            <summary>
+            
+            </summary>
+            <param name="reader"></param>
+            <param name="typeToConvert"></param>
+            <param name="options"></param>
+            <returns></returns>
+        </member>
+        <member name="M:TriggerEncapsulation.Messaging.InventoryJsonConverter.Write(System.Text.Json.Utf8JsonWriter,GameCore.Container.Inventory,System.Text.Json.JsonSerializerOptions)">
+            <summary>
+            
+            </summary>
+            <param name="writer"></param>
+            <param name="value"></param>
+            <param name="options"></param>
+            <returns></returns>
+        </member>
+        <member name="T:TriggerEncapsulation.Messaging.InventorySlotJsonConverter">
+            <summary>
+            InventorySlot 的自定义 JSON 转换器，将 InventorySlot 对象序列化为 ProtoInventorySlot 结构体
+            </summary>
+        </member>
+        <member name="M:TriggerEncapsulation.Messaging.InventorySlotJsonConverter.Read(System.Text.Json.Utf8JsonReader@,System.Type,System.Text.Json.JsonSerializerOptions)">
+            <summary>
+            
+            </summary>
+            <param name="reader"></param>
+            <param name="typeToConvert"></param>
+            <param name="options"></param>
+            <returns></returns>
+        </member>
+        <member name="M:TriggerEncapsulation.Messaging.InventorySlotJsonConverter.Write(System.Text.Json.Utf8JsonWriter,GameCore.Container.InventorySlot,System.Text.Json.JsonSerializerOptions)">
+            <summary>
+            
+            </summary>
+            <param name="writer"></param>
+            <param name="value"></param>
+            <param name="options"></param>
+            <returns></returns>
+        </member>
+        <member name="T:TriggerEncapsulation.Messaging.ItemJsonConverter">
+            <summary>
+            Item 的自定义 JSON 转换器，将 Item 对象序列化为 ProtoItem 结构体
+            </summary>
+        </member>
+        <member name="M:TriggerEncapsulation.Messaging.ItemJsonConverter.Read(System.Text.Json.Utf8JsonReader@,System.Type,System.Text.Json.JsonSerializerOptions)">
+            <summary>
+            
+            </summary>
+            <param name="reader"></param>
+            <param name="typeToConvert"></param>
+            <param name="options"></param>
+            <returns></returns>
+        </member>
+        <member name="M:TriggerEncapsulation.Messaging.ItemJsonConverter.Write(System.Text.Json.Utf8JsonWriter,GameCore.ItemSystem.Item,System.Text.Json.JsonSerializerOptions)">
+            <summary>
+            
+            </summary>
+            <param name="writer"></param>
+            <param name="value"></param>
+            <param name="options"></param>
+            <returns></returns>
+        </member>
+        <member name="T:TriggerEncapsulation.Messaging.PlayerJsonConverter">
+            <summary>
+            Player 的自定义 JSON 转换器，将 Player 对象序列化为 ProtoPlayer 结构体
+            </summary>
+        </member>
+        <member name="M:TriggerEncapsulation.Messaging.PlayerJsonConverter.Read(System.Text.Json.Utf8JsonReader@,System.Type,System.Text.Json.JsonSerializerOptions)">
+            <summary>
+            
+            </summary>
+            <param name="reader"></param>
+            <param name="typeToConvert"></param>
+            <param name="options"></param>
+            <returns></returns>
+        </member>
+        <member name="M:TriggerEncapsulation.Messaging.PlayerJsonConverter.Write(System.Text.Json.Utf8JsonWriter,GameCore.PlayerAndUsers.Player,System.Text.Json.JsonSerializerOptions)">
+            <summary>
+            
+            </summary>
+            <param name="writer"></param>
+            <param name="value"></param>
+            <param name="options"></param>
+            <returns></returns>
+        </member>
+        <member name="T:TriggerEncapsulation.Messaging.SceneJsonConverter">
+            <summary>
+            Scene 的自定义 JSON 转换器，将 Scene 对象序列化为 ProtoScene 结构体
+            </summary>
+        </member>
+        <member name="M:TriggerEncapsulation.Messaging.SceneJsonConverter.Read(System.Text.Json.Utf8JsonReader@,System.Type,System.Text.Json.JsonSerializerOptions)">
+            <summary>
+            
+            </summary>
+            <param name="reader"></param>
+            <param name="typeToConvert"></param>
+            <param name="options"></param>
+            <returns></returns>
+        </member>
+        <member name="M:TriggerEncapsulation.Messaging.SceneJsonConverter.Write(System.Text.Json.Utf8JsonWriter,GameCore.SceneSystem.Scene,System.Text.Json.JsonSerializerOptions)">
+            <summary>
+            
+            </summary>
+            <param name="writer"></param>
+            <param name="value"></param>
+            <param name="options"></param>
+            <returns></returns>
+        </member>
+        <member name="T:TriggerEncapsulation.Messaging.ScenePointJsonConverter">
+            <summary>
+            ScenePoint 的自定义 JSON 转换器，将 ScenePoint 对象序列化为 ProtoScenePoint 结构体
+            </summary>
+        </member>
+        <member name="M:TriggerEncapsulation.Messaging.ScenePointJsonConverter.Read(System.Text.Json.Utf8JsonReader@,System.Type,System.Text.Json.JsonSerializerOptions)">
+            <summary>
+            
+            </summary>
+            <param name="reader"></param>
+            <param name="typeToConvert"></param>
+            <param name="options"></param>
+            <returns></returns>
+        </member>
+        <member name="M:TriggerEncapsulation.Messaging.ScenePointJsonConverter.Write(System.Text.Json.Utf8JsonWriter,GameCore.SceneSystem.ScenePoint,System.Text.Json.JsonSerializerOptions)">
+            <summary>
+            
+            </summary>
+            <param name="writer"></param>
+            <param name="value"></param>
+            <param name="options"></param>
+            <returns></returns>
+        </member>
+        <member name="T:TriggerEncapsulation.Messaging.TypedMessageMetrics">
+            <summary>
+            消息指标收集器
+            </summary>
+        </member>
+        <member name="F:TriggerEncapsulation.Messaging.TypedMessageMetrics._stats">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:TriggerEncapsulation.Messaging.TypedMessageMetrics.RecordMessageSent(System.String,System.Int32,System.Int32)">
+            <summary>
+            
+            </summary>
+            <param name="messageType"></param>
+            <param name="recipientCount"></param>
+            <param name="messageSize"></param>
+            <returns></returns>
+        </member>
+        <member name="M:TriggerEncapsulation.Messaging.TypedMessageMetrics.RecordMessageReceived(System.String,System.Int32)">
+            <summary>
+            
+            </summary>
+            <param name="messageType"></param>
+            <param name="messageSize"></param>
+            <returns></returns>
+        </member>
+        <member name="M:TriggerEncapsulation.Messaging.TypedMessageMetrics.GetStats">
+            <summary>
+            
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:TriggerEncapsulation.Messaging.TypedMessageMetrics.Reset">
+            <summary>
+            
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:TriggerEncapsulation.Messaging.MessageStats">
+            <summary>
+            消息统计信息
+            </summary>
+        </member>
+        <member name="P:TriggerEncapsulation.Messaging.MessageStats.SentCount">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:TriggerEncapsulation.Messaging.MessageStats.ReceivedCount">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:TriggerEncapsulation.Messaging.MessageStats.TotalRecipients">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:TriggerEncapsulation.Messaging.MessageStats.TotalBytes">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:TriggerEncapsulation.Messaging.MessageStats.AverageMessageSize">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:TriggerEncapsulation.Messaging.MessageStats.AverageRecipientsPerMessage">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:TriggerEncapsulation.Messaging.MessageHandlerAttribute">
+            <summary>
+            消息处理器特性，用于自动注册消息处理方法
+            </summary>
+        </member>
+        <member name="P:TriggerEncapsulation.Messaging.MessageHandlerAttribute.Priority">
+            <summary>
+            消息处理优先级
+            </summary>
+        </member>
+        <member name="P:TriggerEncapsulation.Messaging.MessageHandlerAttribute.IsAsync">
+            <summary>
+            是否异步处理
+            </summary>
+        </member>
+        <member name="P:TriggerEncapsulation.Messaging.MessageHandlerAttribute.Name">
+            <summary>
+            处理器名称（可选，用于调试）
+            </summary>
+        </member>
+        <member name="T:TriggerEncapsulation.Messaging.TypedMessageHandlerDelegate`1">
+            <summary>
+            消息处理委托
+            </summary>
+        </member>
+        <member name="T:TriggerEncapsulation.Messaging.UntypedMessageHandlerDelegate">
+            <summary>
+            无类型的消息处理委托
+            </summary>
+        </member>
+        <member name="T:TriggerEncapsulation.Messaging.TypedMessageHandler">
+            <summary>
+            强类型消息处理器管理器
+            </summary>
+        </member>
+        <member name="F:TriggerEncapsulation.Messaging.TypedMessageHandler._handlers">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:TriggerEncapsulation.Messaging.TypedMessageHandler._messageTypeCache">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:TriggerEncapsulation.Messaging.TypedMessageHandler._initialized">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:TriggerEncapsulation.Messaging.TypedMessageHandler._initLock">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:TriggerEncapsulation.Messaging.TypedMessageHandler.MessageHandlerInfo">
+            <summary>
+            消息处理器信息
+            </summary>
+        </member>
+        <member name="P:TriggerEncapsulation.Messaging.TypedMessageHandler.MessageHandlerInfo.Handler">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:TriggerEncapsulation.Messaging.TypedMessageHandler.MessageHandlerInfo.Priority">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:TriggerEncapsulation.Messaging.TypedMessageHandler.MessageHandlerInfo.Name">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:TriggerEncapsulation.Messaging.TypedMessageHandler.MessageHandlerInfo.IsAsync">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:TriggerEncapsulation.Messaging.TypedMessageHandler.Initialize">
+            <summary>
+            初始化消息处理器系统
+            </summary>
+        </member>
+        <member name="M:TriggerEncapsulation.Messaging.TypedMessageHandler.Register``1(TriggerEncapsulation.Messaging.TypedMessageHandlerDelegate{``0},TriggerEncapsulation.Messaging.MessagePriority,System.String)">
+            <summary>
+            手动注册消息处理器
+            </summary>
+        </member>
+        <member name="F:TriggerEncapsulation.Messaging.TypedMessageHandler.serverMessageTrigger">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:TriggerEncapsulation.Messaging.TypedMessageHandler.__FakeFunc16">
+            <summary>
+            注册ProtoCustomMessage的处理器
+            </summary>
+        </member>
+        <member name="M:TriggerEncapsulation.Messaging.TypedMessageHandler.__FakeFunc17">
+            <summary>
+            处理来自服务器的消息
+            </summary>
+        </member>
+        <member name="M:TriggerEncapsulation.Messaging.TypedMessageHandler.__FakeFunc18">
+            <summary>
+            处理强类型消息
+            </summary>
+        </member>
+        <member name="M:TriggerEncapsulation.Messaging.TypedMessageHandler.GetHandlerStats">
+            <summary>
+            获取处理器统计信息
+            </summary>
+        </member>
+        <member name="M:TriggerEncapsulation.Messaging.TypedMessageHandler.RemoveHandlers``1">
+            <summary>
+            移除指定类型的所有处理器
+            </summary>
+        </member>
+        <member name="M:TriggerEncapsulation.Messaging.TypedMessageHandler.ClearAllHandlers">
+            <summary>
+            清除所有处理器
+            </summary>
+        </member>
+        <member name="T:TriggerEncapsulation.UIProperty.PlayerUIPropertyExtensions">
+            <summary>
+            Player类的UI属性扩展方法
+            提供客户端设置UI属性的功能
+            </summary>
+        </member>
+        <member name="M:TriggerEncapsulation.UIProperty.PlayerUIPropertyExtensions.SetUIPropertyAsync``1(GameCore.PlayerAndUsers.Player,GameCore.PlayerAndUsers.PropertyPlayerUI,``0)">
+            <summary>
+            客户端设置UI属性
+            </summary>
+            <typeparam name = "TValue">属性值类型</typeparam>
+            <param name = "player">玩家实例</param>
+            <param name = "property">UI属性</param>
+            <param name = "value">属性值</param>
+            <returns>是否成功发送请求</returns>
+        </member>
+        <member name="M:TriggerEncapsulation.UIProperty.PlayerUIPropertyExtensions.SetUIPropertiesAsync(GameCore.PlayerAndUsers.Player,System.Collections.Generic.Dictionary{GameCore.PlayerAndUsers.PropertyPlayerUI,System.Object})">
+            <summary>
+            客户端批量设置UI属性
+            </summary>
+            <param name = "player">玩家实例</param>
+            <param name = "properties">要设置的属性集合</param>
+            <returns>是否成功发送请求</returns>
+        </member>
+        <member name="M:TriggerEncapsulation.UIProperty.PlayerUIPropertyExtensions.SetUIPropertyJsonAsync(GameCore.PlayerAndUsers.Player,GameCore.PlayerAndUsers.PropertyPlayerUI,System.Object)">
+            <summary>
+            客户端设置UI属性（便捷方法，自动序列化为JSON）
+            </summary>
+            <param name = "player">玩家实例</param>
+            <param name = "property">UI属性</param>
+            <param name = "value">属性值（将被序列化为JSON）</param>
+            <returns>是否成功发送请求</returns>
+        </member>
+        <member name="M:TriggerEncapsulation.UIProperty.PlayerUIPropertyExtensions.GetUIPropertyAs``1(GameCore.PlayerAndUsers.Player,GameCore.PlayerAndUsers.PropertyPlayerUI,``0)">
+            <summary>
+            客户端获取UI属性并反序列化为指定类型
+            </summary>
+            <typeparam name = "TValue">目标类型</typeparam>
+            <param name = "player">玩家实例</param>
+            <param name = "property">UI属性</param>
+            <param name = "defaultValue">默认值</param>
+            <returns>属性值</returns>
+        </member>
+        <member name="M:TriggerEncapsulation.UIProperty.PlayerUIPropertyExtensions.GetUIPropertyFromJson``1(GameCore.PlayerAndUsers.Player,GameCore.PlayerAndUsers.PropertyPlayerUI,``0)">
+            <summary>
+            客户端获取UI属性的JSON字符串并反序列化
+            </summary>
+            <typeparam name = "TValue">目标类型</typeparam>
+            <param name = "player">玩家实例</param>
+            <param name = "property">UI属性</param>
+            <param name = "defaultValue">默认值</param>
+            <returns>反序列化后的属性值</returns>
+        </member>
+        <member name="T:TriggerEncapsulation.UIProperty.UIPropertySetRequest">
+            <summary>
+            UI属性设置请求消息
+            </summary>
+        </member>
+        <member name="P:TriggerEncapsulation.UIProperty.UIPropertySetRequest.Property">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:TriggerEncapsulation.UIProperty.UIPropertySetRequest.Value">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:TriggerEncapsulation.UIProperty.UIPropertySetRequest.ValueType">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:TriggerEncapsulation.UIProperty.UIPropertyBatchSetRequest">
+            <summary>
+            UI属性批量设置请求消息
+            </summary>
+        </member>
+        <member name="P:TriggerEncapsulation.UIProperty.UIPropertyBatchSetRequest.Requests">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:TriggerEncapsulation.UIProperty.UIPropertyMessageHandler">
+            <summary>
+            UI属性消息处理器
+            负责处理来自客户端的UI属性设置请求
+            </summary>
+        </member>
+        <member name="F:TriggerEncapsulation.UIProperty.UIPropertyMessageHandler._initialized">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:TriggerEncapsulation.UIProperty.UIPropertyMessageHandler.Initialize">
+            <summary>
+            初始化UI属性消息处理器
+            </summary>
+        </member>
+        <member name="T:TriggerEncapsulation.UIProperty.UIPropertyUsageExample">
+            <summary>
+            UI属性系统使用示例
+            展示如何在TriggerEncapsulation库中使用UI属性扩展功能
+            </summary>
+        </member>
+        <member name="M:TriggerEncapsulation.UIProperty.UIPropertyUsageExample.Initialize">
+            <summary>
+            初始化示例 - 注册必要的处理器
+            </summary>
+        </member>
+        <member name="M:TriggerEncapsulation.UIProperty.UIPropertyUsageExample.ClientUsageExample">
+            <summary>
+            客户端使用示例
+            </summary>
+        </member>
+        <member name="M:TriggerEncapsulation.UIProperty.UIPropertyUsageExample.RestoreUIState">
+            <summary>
+            客户端UI状态恢复示例
+            </summary>
+        </member>
+        <member name="M:TriggerEncapsulation.UIProperty.UIPropertyUsageExample.BadUsageExamples">
+            <summary>
+            错误使用示例 - 展示应该避免的做法
+            </summary>
+        </member>
+        <member name="T:TriggerEncapsulation.Collection.DisposableObjectGroup`1">
+            <summary>
+            Represents a group of disposable objects that extends <see cref = "T:GameCore.Collection.IterationSafeHashSet`1"/>.
+            This class ensures that objects marked as disposed are automatically removed during iteration.
+            </summary>
+            <typeparam name = "T">The type of elements in the group, which must inherit from <see cref = "T:GameCore.BaseType.DisposableObject"/>.</typeparam>
+        </member>
+        <member name="M:TriggerEncapsulation.Collection.DisposableObjectGroup`1.YieldCondition(`0)">
+            <summary>
+            
+            </summary>
+            <param name="item"></param>
+            <returns></returns>
+        </member>
+        <member name="T:TriggerEncapsulation.Collection.PlayerGroup">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:TriggerEncapsulation.Collection.UnitGroup">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:TriggerEncapsulation.Util">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:TriggerEncapsulation.Util._triggerUserDataSlot">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:TriggerEncapsulation.Util.ObjectUserDataSet(System.Object,System.String,System.Object)">
+            <summary>
+            
+            </summary>
+            <param name="obj"></param>
+            <param name="key"></param>
+            <param name="value"></param>
+            <returns></returns>
+        </member>
+        <member name="M:TriggerEncapsulation.Util.UserDataSet``1(``0,System.String,System.Object)">
+            <summary>
+            
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="obj"></param>
+            <param name="key"></param>
+            <param name="value"></param>
+            <returns></returns>
+        </member>
+        <member name="M:TriggerEncapsulation.Util.ObjectUserDataGet(System.Object,System.String)">
+            <summary>
+            
+            </summary>
+            <param name="obj"></param>
+            <param name="key"></param>
+            <returns></returns>
+        </member>
+        <member name="M:TriggerEncapsulation.Util.UserDataGet``1(``0,System.String)">
+            <summary>
+            
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="obj"></param>
+            <param name="key"></param>
+            <returns></returns>
+        </member>
+        <member name="M:TriggerEncapsulation.Util.ObjectUserDataRemove(System.Object,System.String)">
+            <summary>
+            
+            </summary>
+            <param name="obj"></param>
+            <param name="key"></param>
+            <returns></returns>
+        </member>
+        <member name="M:TriggerEncapsulation.Util.UserDataRemove``1(``0,System.String)">
+            <summary>
+            
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="obj"></param>
+            <param name="key"></param>
+            <returns></returns>
+        </member>
+        <member name="M:TriggerEncapsulation.Util.ObjectUserDataCopyTo(System.Object,System.Object)">
+            <summary>
+            
+            </summary>
+            <param name="obj"></param>
+            <param name="targetObj"></param>
+            <returns></returns>
+        </member>
+        <member name="M:TriggerEncapsulation.Util.UserDataCopyTo``2(``0,``1)">
+            <summary>
+            
+            </summary>
+            <typeparam name="T"></typeparam>
+            <typeparam name="V"></typeparam>
+            <param name="obj"></param>
+            <param name="targetObj"></param>
+            <returns></returns>
+        </member>
+        <member name="M:TriggerEncapsulation.Util.ObjectUserDataCapture(System.Object)">
+            <summary>
+            
+            </summary>
+            <param name="obj"></param>
+            <returns></returns>
+        </member>
+        <member name="M:TriggerEncapsulation.Util.UserDataGetAll``1(``0)">
+            <summary>
+            
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="obj"></param>
+            <returns></returns>
+        </member>
+        <member name="F:TriggerEncapsulation.Util.userDataEmptyValue">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:TriggerEncapsulation.Util.ObjectUserDataClear(System.Object)">
+            <summary>
+            
+            </summary>
+            <param name="obj"></param>
+            <returns></returns>
+        </member>
+        <member name="M:TriggerEncapsulation.Util.UserDataClear``1(``0)">
+            <summary>
+            
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="obj"></param>
+            <returns></returns>
+        </member>
+        <member name="T:TriggerEncapsulation.Commands.CommandBuilder">
+            <summary>
+            Command构建器，提供流式API来简化Command的创建和配置
+            </summary>
+            <remarks>
+            这个构建器解决了Command系统中常见的问题：
+            - 重复的构建代码
+            - 容易出错的参数组合
+            - Index和Type的不匹配
+            - Flag和Player的错误设置
+            </remarks>
+        </member>
+        <member name="F:TriggerEncapsulation.Commands.CommandBuilder._command">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:TriggerEncapsulation.Commands.CommandBuilder.#ctor">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:TriggerEncapsulation.Commands.CommandBuilder.Create">
+            <summary>
+            创建新的Command构建器
+            </summary>
+            <returns>新的CommandBuilder实例</returns>
+        </member>
+        <member name="M:TriggerEncapsulation.Commands.CommandBuilder.WithIndex(GameCore.OrderSystem.CommandIndex)">
+            <summary>
+            设置命令索引
+            </summary>
+            <param name = "index">命令索引</param>
+            <returns>CommandBuilder实例，支持链式调用</returns>
+        </member>
+        <member name="M:TriggerEncapsulation.Commands.CommandBuilder.WithType(GameCore.BaseType.ComponentTag)">
+            <summary>
+            设置组件类型
+            </summary>
+            <param name = "type">组件类型</param>
+            <returns>CommandBuilder实例，支持链式调用</returns>
+        </member>
+        <member name="M:TriggerEncapsulation.Commands.CommandBuilder.WithFlag(GameCore.OrderSystem.CommandFlag)">
+            <summary>
+            设置命令标志
+            </summary>
+            <param name = "flag">命令标志</param>
+            <returns>CommandBuilder实例，支持链式调用</returns>
+        </member>
+        <member name="M:TriggerEncapsulation.Commands.CommandBuilder.WithPlayer(GameCore.PlayerAndUsers.Player)">
+            <summary>
+            设置玩家
+            </summary>
+            <param name = "player">玩家实例</param>
+            <returns>CommandBuilder实例，支持链式调用</returns>
+        </member>
+        <member name="M:TriggerEncapsulation.Commands.CommandBuilder.WithTarget(GameCore.BaseInterface.ICommandTarget)">
+            <summary>
+            设置目标
+            </summary>
+            <param name = "target">目标</param>
+            <returns>CommandBuilder实例，支持链式调用</returns>
+        </member>
+        <member name="M:TriggerEncapsulation.Commands.CommandBuilder.WithAbility(GameData.IGameLink{GameCore.AbilitySystem.Data.GameDataAbility})">
+            <summary>
+            设置技能链接
+            </summary>
+            <param name = "abilityLink">技能链接</param>
+            <returns>CommandBuilder实例，支持链式调用</returns>
+        </member>
+        <member name="M:TriggerEncapsulation.Commands.CommandBuilder.WithItem(GameCore.ItemSystem.Item)">
+            <summary>
+            设置物品
+            </summary>
+            <param name = "item">物品实例</param>
+            <returns>CommandBuilder实例，支持链式调用</returns>
+        </member>
+        <member name="M:TriggerEncapsulation.Commands.CommandBuilder.WithToggle(GameData.IGameLink{GameCore.AbilitySystem.Data.GameDataAbility})">
+            <summary>
+            设置技能切换命令（智能切换）
+            </summary>
+            <param name = "abilityLink">技能链接</param>
+            <returns>CommandBuilder实例，支持链式调用</returns>
+        </member>
+        <member name="M:TriggerEncapsulation.Commands.CommandBuilder.WithTurnOn(GameData.IGameLink{GameCore.AbilitySystem.Data.GameDataAbility})">
+            <summary>
+            设置技能开启命令
+            </summary>
+            <param name = "abilityLink">技能链接</param>
+            <returns>CommandBuilder实例，支持链式调用</returns>
+        </member>
+        <member name="M:TriggerEncapsulation.Commands.CommandBuilder.WithTurnOff(GameData.IGameLink{GameCore.AbilitySystem.Data.GameDataAbility})">
+            <summary>
+            设置技能关闭命令
+            </summary>
+            <param name = "abilityLink">技能链接</param>
+            <returns>CommandBuilder实例，支持链式调用</returns>
+        </member>
+        <member name="M:TriggerEncapsulation.Commands.CommandBuilder.WithPickUp(GameCore.ItemSystem.IPickUpItem)">
+            <summary>
+            设置物品拾取命令
+            </summary>
+            <param name = "item">要拾取的物品</param>
+            <returns>CommandBuilder实例，支持链式调用</returns>
+        </member>
+        <member name="M:TriggerEncapsulation.Commands.CommandBuilder.WithDrop(GameCore.ItemSystem.ItemPickable)">
+            <summary>
+            设置物品丢弃命令
+            </summary>
+            <param name = "item">要丢弃的物品</param>
+            <returns>CommandBuilder实例，支持链式调用</returns>
+        </member>
+        <member name="M:TriggerEncapsulation.Commands.CommandBuilder.WithUse(GameCore.ItemSystem.Item)">
+            <summary>
+            设置物品使用命令
+            </summary>
+            <param name = "item">要使用的物品</param>
+            <returns>CommandBuilder实例，支持链式调用</returns>
+        </member>
+        <member name="M:TriggerEncapsulation.Commands.CommandBuilder.AsUser(GameCore.PlayerAndUsers.Player)">
+            <summary>
+            配置为用户命令（客户端玩家操作）
+            </summary>
+            <param name = "player">玩家，如果为null则使用Player.LocalPlayer</param>
+            <returns>CommandBuilder实例，支持链式调用</returns>
+        </member>
+        <member name="M:TriggerEncapsulation.Commands.CommandBuilder.AsAI(GameCore.PlayerAndUsers.Player)">
+            <summary>
+            配置为AI命令（服务端AI操作）
+            </summary>
+            <param name = "player">AI控制的玩家</param>
+            <returns>CommandBuilder实例，支持链式调用</returns>
+        </member>
+        <member name="M:TriggerEncapsulation.Commands.CommandBuilder.AsSystem">
+            <summary>
+            配置为系统命令（服务端系统操作，无权限限制）
+            </summary>
+            <returns>CommandBuilder实例，支持链式调用</returns>
+        </member>
+        <member name="M:TriggerEncapsulation.Commands.CommandBuilder.ToAngle(GameCore.BaseType.Angle)">
+            <summary>
+            设置角度目标
+            </summary>
+            <param name = "angle">角度</param>
+            <returns>CommandBuilder实例，支持链式调用</returns>
+        </member>
+        <member name="M:TriggerEncapsulation.Commands.CommandBuilder.ToAngle(System.Single)">
+            <summary>
+            设置角度目标（以度为单位）
+            </summary>
+            <param name = "degrees">角度（度）</param>
+            <returns>CommandBuilder实例，支持链式调用</returns>
+        </member>
+        <member name="M:TriggerEncapsulation.Commands.CommandBuilder.ToUnit(GameCore.EntitySystem.Unit)">
+            <summary>
+            设置单位目标
+            </summary>
+            <param name = "unit">目标单位</param>
+            <returns>CommandBuilder实例，支持链式调用</returns>
+        </member>
+        <member name="M:TriggerEncapsulation.Commands.CommandBuilder.ToPosition(GameCore.SceneSystem.ScenePoint)">
+            <summary>
+            设置位置目标
+            </summary>
+            <param name = "position">目标位置</param>
+            <returns>CommandBuilder实例，支持链式调用</returns>
+        </member>
+        <member name="M:TriggerEncapsulation.Commands.CommandBuilder.Build">
+            <summary>
+            构建Command对象
+            </summary>
+            <returns>配置好的Command实例</returns>
+        </member>
+        <member name="M:TriggerEncapsulation.Commands.CommandBuilder.Execute(GameCore.EntitySystem.Entity,System.Boolean)">
+            <summary>
+            构建并立即对指定单位执行命令
+            </summary>
+            <param name = "unit">执行命令的单位</param>
+            <param name = "testOnly">是否仅测试而不实际执行</param>
+            <returns>命令执行结果</returns>
+        </member>
+        <member name="M:TriggerEncapsulation.Commands.CommandBuilder.Execute``1(GameCore.EntitySystem.Entity,System.Boolean)">
+            <summary>
+            构建并立即对指定单位执行命令（泛型版本）
+            </summary>
+            <typeparam name = "T">返回类型</typeparam>
+            <param name = "unit">执行命令的单位</param>
+            <param name = "testOnly">是否仅测试而不实际执行</param>
+            <returns>命令执行结果</returns>
+        </member>
+        <member name="M:TriggerEncapsulation.Commands.CommandBuilder.Validate">
+            <summary>
+            验证当前配置的Command是否有效
+            </summary>
+            <returns>验证结果和错误信息</returns>
+        </member>
+        <member name="M:TriggerEncapsulation.Commands.CommandBuilder.op_Implicit(TriggerEncapsulation.Commands.CommandBuilder)~GameCore.OrderSystem.Command">
+            <summary>
+            隐式转换为Command
+            </summary>
+            <param name = "builder">CommandBuilder实例</param>
+        </member>
+        <member name="T:TriggerEncapsulation.Commands.CommandContext">
+            <summary>
+            命令上下文，提供特定环境下的命令创建便利方法
+            </summary>
+            <remarks>
+            CommandContext封装了特定场景下的Player和Flag设置，使得在特定上下文中
+            创建命令时不需要重复设置这些参数。支持以下场景：
+            - 用户操作上下文（客户端）
+            - AI操作上下文（服务端）
+            - 系统操作上下文（服务端）
+            </remarks>
+        </member>
+        <member name="M:TriggerEncapsulation.Commands.CommandContext.ApplyContext(TriggerEncapsulation.Commands.CommandBuilder)">
+            <summary>
+            应用上下文设置到CommandBuilder
+            </summary>
+            <param name = "builder">CommandBuilder实例</param>
+            <returns>应用了上下文设置的CommandBuilder</returns>
+        </member>
+        <member name="M:TriggerEncapsulation.Commands.CommandContext.CastAbility(GameData.IGameLink{GameCore.AbilitySystem.Data.GameDataAbility},GameCore.BaseInterface.ICommandTarget)">
+            <summary>
+            在当前上下文中创建技能释放命令
+            </summary>
+            <param name = "abilityLink">技能链接</param>
+            <param name = "target">技能目标</param>
+            <returns>配置好的CommandBuilder</returns>
+        </member>
+        <member name="M:TriggerEncapsulation.Commands.CommandContext.MoveInDirection(GameCore.BaseType.Angle)">
+            <summary>
+            在当前上下文中创建向量移动命令
+            </summary>
+            <param name = "angle">移动角度</param>
+            <returns>配置好的CommandBuilder</returns>
+        </member>
+        <member name="M:TriggerEncapsulation.Commands.CommandContext.MoveInDirection(System.Single)">
+            <summary>
+            在当前上下文中创建向量移动命令（以度为单位）
+            </summary>
+            <param name = "degrees">移动角度（度）</param>
+            <returns>配置好的CommandBuilder</returns>
+        </member>
+        <member name="M:TriggerEncapsulation.Commands.CommandContext.MoveTo(GameCore.SceneSystem.ScenePoint)">
+            <summary>
+            在当前上下文中创建位置移动命令
+            </summary>
+            <param name = "position">目标位置</param>
+            <returns>配置好的CommandBuilder</returns>
+        </member>
+        <member name="M:TriggerEncapsulation.Commands.CommandContext.AttackTarget(GameCore.EntitySystem.Unit)">
+            <summary>
+            在当前上下文中创建攻击命令
+            </summary>
+            <param name = "target">攻击目标</param>
+            <returns>配置好的CommandBuilder</returns>
+        </member>
+        <member name="M:TriggerEncapsulation.Commands.CommandContext.StopMovement">
+            <summary>
+            在当前上下文中创建停止移动命令
+            </summary>
+            <returns>配置好的CommandBuilder</returns>
+        </member>
+        <member name="M:TriggerEncapsulation.Commands.CommandContext.Stop">
+            <summary>
+            在当前上下文中创建停止所有动作命令
+            </summary>
+            <returns>配置好的CommandBuilder</returns>
+        </member>
+        <member name="M:TriggerEncapsulation.Commands.CommandContext.ForUser(GameCore.PlayerAndUsers.Player)">
+            <summary>
+            创建用户操作上下文（客户端）
+            </summary>
+            <param name = "player">玩家，如果为null则使用Player.LocalPlayer</param>
+            <returns>用户命令上下文</returns>
+        </member>
+        <member name="M:TriggerEncapsulation.Commands.CommandContext.ForAI(GameCore.PlayerAndUsers.Player)">
+            <summary>
+            创建AI操作上下文（服务端）
+            </summary>
+            <param name = "player">AI控制的玩家</param>
+            <returns>AI命令上下文</returns>
+        </member>
+        <member name="M:TriggerEncapsulation.Commands.CommandContext.ForSystem">
+            <summary>
+            创建系统操作上下文（服务端，无权限限制）
+            </summary>
+            <returns>系统命令上下文</returns>
+        </member>
+        <member name="T:TriggerEncapsulation.Commands.UserCommandContext">
+            <summary>
+            用户命令上下文（客户端玩家操作）
+            </summary>
+        </member>
+        <member name="F:TriggerEncapsulation.Commands.UserCommandContext._player">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:TriggerEncapsulation.Commands.UserCommandContext.#ctor(GameCore.PlayerAndUsers.Player)">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:TriggerEncapsulation.Commands.UserCommandContext.ApplyContext(TriggerEncapsulation.Commands.CommandBuilder)">
+            <summary>
+            
+            </summary>
+            <param name="builder"></param>
+            <returns></returns>
+        </member>
+        <member name="T:TriggerEncapsulation.Commands.AICommandContext">
+            <summary>
+            AI命令上下文（服务端AI操作）
+            </summary>
+        </member>
+        <member name="F:TriggerEncapsulation.Commands.AICommandContext._player">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:TriggerEncapsulation.Commands.AICommandContext.#ctor(GameCore.PlayerAndUsers.Player)">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:TriggerEncapsulation.Commands.AICommandContext.ApplyContext(TriggerEncapsulation.Commands.CommandBuilder)">
+            <summary>
+            
+            </summary>
+            <param name="builder"></param>
+            <returns></returns>
+        </member>
+        <member name="T:TriggerEncapsulation.Commands.SystemCommandContext">
+            <summary>
+            系统命令上下文（服务端系统操作）
+            </summary>
+        </member>
+        <member name="M:TriggerEncapsulation.Commands.SystemCommandContext.ApplyContext(TriggerEncapsulation.Commands.CommandBuilder)">
+            <summary>
+            
+            </summary>
+            <param name="builder"></param>
+            <returns></returns>
+        </member>
+        <member name="T:TriggerEncapsulation.Commands.CommandContextExtensions">
+            <summary>
+            命令上下文的便利扩展方法
+            </summary>
+        </member>
+        <member name="M:TriggerEncapsulation.Commands.CommandContextExtensions.AsUser(GameCore.EntitySystem.Entity,GameCore.PlayerAndUsers.Player)">
+            <summary>
+            为Entity创建用户命令上下文
+            </summary>
+            <param name = "entity">实体（通常是Unit）</param>
+            <param name = "player">玩家，如果为null则使用entity的Owner</param>
+            <returns>绑定到实体的用户命令上下文</returns>
+        </member>
+        <member name="M:TriggerEncapsulation.Commands.CommandContextExtensions.AsAI(GameCore.EntitySystem.Entity,GameCore.PlayerAndUsers.Player)">
+            <summary>
+            为Entity创建AI命令上下文
+            </summary>
+            <param name = "entity">实体（通常是Unit）</param>
+            <param name = "player">AI控制的玩家，如果为null则使用entity的Owner</param>
+            <returns>绑定到实体的AI命令上下文</returns>
+        </member>
+        <member name="M:TriggerEncapsulation.Commands.CommandContextExtensions.AsSystem(GameCore.EntitySystem.Entity)">
+            <summary>
+            为Entity创建系统命令上下文
+            </summary>
+            <param name = "entity">实体</param>
+            <returns>绑定到实体的系统命令上下文</returns>
+        </member>
+        <member name="T:TriggerEncapsulation.Commands.BoundCommandContext">
+            <summary>
+            绑定到特定实体的命令上下文
+            </summary>
+            <remarks>
+            这个类将CommandContext绑定到特定的Entity，使得可以直接调用Execute方法
+            而不需要每次都指定目标实体
+            </remarks>
+        </member>
+        <member name="F:TriggerEncapsulation.Commands.BoundCommandContext._entity">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:TriggerEncapsulation.Commands.BoundCommandContext._context">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:TriggerEncapsulation.Commands.BoundCommandContext.#ctor(GameCore.EntitySystem.Entity,TriggerEncapsulation.Commands.CommandContext)">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:TriggerEncapsulation.Commands.BoundCommandContext.CastAbility(GameData.IGameLink{GameCore.AbilitySystem.Data.GameDataAbility},GameCore.BaseInterface.ICommandTarget)">
+            <summary>
+            在绑定实体上施放技能
+            </summary>
+            <param name = "abilityLink">技能链接</param>
+            <param name = "target">技能目标</param>
+            <returns>命令执行结果</returns>
+        </member>
+        <member name="M:TriggerEncapsulation.Commands.BoundCommandContext.MoveInDirection(GameCore.BaseType.Angle)">
+            <summary>
+            让绑定实体向指定角度移动
+            </summary>
+            <param name = "angle">移动角度</param>
+            <returns>命令执行结果</returns>
+        </member>
+        <member name="M:TriggerEncapsulation.Commands.BoundCommandContext.MoveInDirection(System.Single)">
+            <summary>
+            让绑定实体向指定角度移动（以度为单位）
+            </summary>
+            <param name = "degrees">移动角度（度）</param>
+            <returns>命令执行结果</returns>
+        </member>
+        <member name="M:TriggerEncapsulation.Commands.BoundCommandContext.MoveTo(GameCore.SceneSystem.ScenePoint)">
+            <summary>
+            让绑定实体移动到指定位置
+            </summary>
+            <param name = "position">目标位置</param>
+            <returns>命令执行结果</returns>
+        </member>
+        <member name="M:TriggerEncapsulation.Commands.BoundCommandContext.AttackTarget(GameCore.EntitySystem.Unit)">
+            <summary>
+            让绑定实体攻击目标
+            </summary>
+            <param name = "target">攻击目标</param>
+            <returns>命令执行结果</returns>
+        </member>
+        <member name="M:TriggerEncapsulation.Commands.BoundCommandContext.StopMovement">
+            <summary>
+            让绑定实体停止移动
+            </summary>
+            <returns>命令执行结果</returns>
+        </member>
+        <member name="M:TriggerEncapsulation.Commands.BoundCommandContext.Stop">
+            <summary>
+            让绑定实体停止所有动作
+            </summary>
+            <returns>命令执行结果</returns>
+        </member>
+        <member name="T:TriggerEncapsulation.Commands.CommandExtensions">
+            <summary>
+            Command系统的扩展方法，提供常见命令的快捷创建方式
+            </summary>
+            <remarks>
+            这些扩展方法封装了最常用的命令模式，包括：
+            - 技能释放
+            - 单位移动
+            - 攻击指令
+            - 停止指令
+            每个方法都会自动设置正确的Index、Type等参数组合
+            </remarks>
+        </member>
+        <member name="M:TriggerEncapsulation.Commands.CommandExtensions.CastAbility(GameCore.EntitySystem.Entity,GameData.IGameLink{GameCore.AbilitySystem.Data.GameDataAbility},GameCore.BaseInterface.ICommandTarget,System.Boolean,GameCore.PlayerAndUsers.Player)">
+            <summary>
+            对单位下达技能释放命令
+            </summary>
+            <param name = "unit">执行技能的单位</param>
+            <param name = "abilityLink">技能链接</param>
+            <param name = "target">技能目标（可以是单位、位置、角度等）</param>
+            <param name = "asUser">是否作为用户命令执行</param>
+            <param name = "player">命令的玩家（如果为null且asUser为true，则使用LocalPlayer）</param>
+            <returns>命令执行结果</returns>
+        </member>
+        <member name="M:TriggerEncapsulation.Commands.CommandExtensions.ToggleAbility(GameCore.EntitySystem.Entity,GameData.IGameLink{GameCore.AbilitySystem.Data.GameDataAbility},System.Boolean,GameCore.PlayerAndUsers.Player)">
+            <summary>
+            对单位下达技能切换命令（智能切换）
+            </summary>
+            <param name = "unit">执行切换的单位</param>
+            <param name = "abilityLink">技能链接</param>
+            <param name = "asUser">是否作为用户命令执行</param>
+            <param name = "player">命令的玩家</param>
+            <returns>命令执行结果</returns>
+        </member>
+        <member name="M:TriggerEncapsulation.Commands.CommandExtensions.TurnOnAbility(GameCore.EntitySystem.Entity,GameData.IGameLink{GameCore.AbilitySystem.Data.GameDataAbility},System.Boolean,GameCore.PlayerAndUsers.Player)">
+            <summary>
+            对单位下达技能开启命令
+            </summary>
+            <param name = "unit">执行开启的单位</param>
+            <param name = "abilityLink">技能链接</param>
+            <param name = "asUser">是否作为用户命令执行</param>
+            <param name = "player">命令的玩家</param>
+            <returns>命令执行结果</returns>
+        </member>
+        <member name="M:TriggerEncapsulation.Commands.CommandExtensions.TurnOffAbility(GameCore.EntitySystem.Entity,GameData.IGameLink{GameCore.AbilitySystem.Data.GameDataAbility},System.Boolean,GameCore.PlayerAndUsers.Player)">
+            <summary>
+            对单位下达技能关闭命令
+            </summary>
+            <param name = "unit">执行关闭的单位</param>
+            <param name = "abilityLink">技能链接</param>
+            <param name = "asUser">是否作为用户命令执行</param>
+            <param name = "player">命令的玩家</param>
+            <returns>命令执行结果</returns>
+        </member>
+        <member name="M:TriggerEncapsulation.Commands.CommandExtensions.MoveInDirection(GameCore.EntitySystem.Entity,GameCore.BaseType.Angle,System.Boolean,GameCore.PlayerAndUsers.Player)">
+            <summary>
+            对单位下达向量移动命令
+            </summary>
+            <param name = "unit">移动的单位</param>
+            <param name = "angle">移动角度</param>
+            <param name = "asUser">是否作为用户命令执行</param>
+            <param name = "player">命令的玩家</param>
+            <returns>命令执行结果</returns>
+        </member>
+        <member name="M:TriggerEncapsulation.Commands.CommandExtensions.MoveInDirection(GameCore.EntitySystem.Entity,System.Single,System.Boolean,GameCore.PlayerAndUsers.Player)">
+            <summary>
+            对单位下达向量移动命令（以度为单位）
+            </summary>
+            <param name = "unit">移动的单位</param>
+            <param name = "degrees">移动角度（度）</param>
+            <param name = "asUser">是否作为用户命令执行</param>
+            <param name = "player">命令的玩家</param>
+            <returns>命令执行结果</returns>
+        </member>
+        <member name="M:TriggerEncapsulation.Commands.CommandExtensions.MoveTo(GameCore.EntitySystem.Entity,GameCore.SceneSystem.ScenePoint,System.Boolean,GameCore.PlayerAndUsers.Player)">
+            <summary>
+            对单位下达移动到指定位置的命令
+            </summary>
+            <param name = "unit">移动的单位</param>
+            <param name = "position">目标位置</param>
+            <param name = "asUser">是否作为用户命令执行</param>
+            <param name = "player">命令的玩家</param>
+            <returns>命令执行结果</returns>
+        </member>
+        <member name="M:TriggerEncapsulation.Commands.CommandExtensions.StopMovement(GameCore.EntitySystem.Entity,System.Boolean,GameCore.PlayerAndUsers.Player)">
+            <summary>
+            对单位下达停止移动命令
+            </summary>
+            <param name = "unit">停止的单位</param>
+            <param name = "asUser">是否作为用户命令执行</param>
+            <param name = "player">命令的玩家</param>
+            <returns>命令执行结果</returns>
+        </member>
+        <member name="M:TriggerEncapsulation.Commands.CommandExtensions.AttackTarget(GameCore.EntitySystem.Entity,GameCore.EntitySystem.Unit,System.Boolean,GameCore.PlayerAndUsers.Player)">
+            <summary>
+            对单位下达攻击目标命令
+            </summary>
+            <param name = "unit">攻击的单位</param>
+            <param name = "target">攻击目标</param>
+            <param name = "asUser">是否作为用户命令执行</param>
+            <param name = "player">命令的玩家</param>
+            <returns>命令执行结果</returns>
+        </member>
+        <member name="M:TriggerEncapsulation.Commands.CommandExtensions.Stop(GameCore.EntitySystem.Entity,System.Boolean,GameCore.PlayerAndUsers.Player)">
+            <summary>
+            对单位下达停止所有动作的命令
+            </summary>
+            <param name = "unit">停止的单位</param>
+            <param name = "asUser">是否作为用户命令执行</param>
+            <param name = "player">命令的玩家</param>
+            <returns>命令执行结果</returns>
+        </member>
+        <member name="M:TriggerEncapsulation.Commands.CommandExtensions.PickUpItem(GameCore.EntitySystem.Entity,GameCore.ItemSystem.IPickUpItem,System.Boolean,GameCore.PlayerAndUsers.Player)">
+            <summary>
+            对单位下达拾取物品命令
+            </summary>
+            <param name = "unit">执行拾取的单位</param>
+            <param name = "item">要拾取的物品</param>
+            <param name = "asUser">是否作为用户命令执行</param>
+            <param name = "player">命令的玩家</param>
+            <returns>命令执行结果</returns>
+        </member>
+        <member name="M:TriggerEncapsulation.Commands.CommandExtensions.DropItem(GameCore.EntitySystem.Entity,GameCore.ItemSystem.ItemPickable,System.Boolean,GameCore.PlayerAndUsers.Player)">
+            <summary>
+            对单位下达丢弃物品命令
+            </summary>
+            <param name = "unit">执行丢弃的单位</param>
+            <param name = "item">要丢弃的物品</param>
+            <param name = "asUser">是否作为用户命令执行</param>
+            <param name = "player">命令的玩家</param>
+            <returns>命令执行结果</returns>
+        </member>
+        <member name="M:TriggerEncapsulation.Commands.CommandExtensions.UseItem(GameCore.EntitySystem.Entity,GameCore.ItemSystem.Item,System.Boolean,GameCore.PlayerAndUsers.Player)">
+            <summary>
+            对单位下达使用物品命令
+            </summary>
+            <param name = "unit">执行使用的单位</param>
+            <param name = "item">要使用的物品</param>
+            <param name = "asUser">是否作为用户命令执行</param>
+            <param name = "player">命令的玩家</param>
+            <returns>命令执行结果</returns>
+        </member>
+        <member name="M:TriggerEncapsulation.Commands.CommandExtensions.CastAbilityWithMainUnit(GameCore.PlayerAndUsers.Player,GameData.IGameLink{GameCore.AbilitySystem.Data.GameDataAbility},GameCore.BaseInterface.ICommandTarget,System.Boolean)">
+            <summary>
+            让玩家的主控单位施放技能
+            </summary>
+            <param name = "player">玩家</param>
+            <param name = "abilityLink">技能链接</param>
+            <param name = "target">技能目标</param>
+            <param name = "asUser">是否作为用户命令执行</param>
+            <returns>命令执行结果，如果玩家没有主控单位则返回错误</returns>
+        </member>
+        <member name="M:TriggerEncapsulation.Commands.CommandExtensions.MoveMainUnitInDirection(GameCore.PlayerAndUsers.Player,GameCore.BaseType.Angle,System.Boolean)">
+            <summary>
+            让玩家的主控单位移动
+            </summary>
+            <param name = "player">玩家</param>
+            <param name = "angle">移动角度</param>
+            <param name = "asUser">是否作为用户命令执行</param>
+            <returns>命令执行结果</returns>
+        </member>
+        <member name="M:TriggerEncapsulation.Commands.CommandExtensions.MoveMainUnitTo(GameCore.PlayerAndUsers.Player,GameCore.SceneSystem.ScenePoint,System.Boolean)">
+            <summary>
+            让玩家的主控单位移动到指定位置
+            </summary>
+            <param name = "player">玩家</param>
+            <param name = "position">目标位置</param>
+            <param name = "asUser">是否作为用户命令执行</param>
+            <returns>命令执行结果</returns>
+        </member>
+        <member name="M:TriggerEncapsulation.Commands.CommandExtensions.StopMainUnit(GameCore.PlayerAndUsers.Player,System.Boolean)">
+            <summary>
+            让玩家的主控单位停止移动
+            </summary>
+            <param name = "player">玩家</param>
+            <param name = "asUser">是否作为用户命令执行</param>
+            <returns>命令执行结果</returns>
+        </member>
+        <member name="M:TriggerEncapsulation.Commands.CommandExtensions.CastAbility(GameData.IGameLink{GameCore.AbilitySystem.Data.GameDataAbility})">
+            <summary>
+            创建技能释放命令构建器的快捷方法
+            </summary>
+            <param name = "abilityLink">技能链接</param>
+            <returns>预配置的CommandBuilder</returns>
+        </member>
+        <member name="M:TriggerEncapsulation.Commands.CommandExtensions.MoveInDirection(GameCore.BaseType.Angle)">
+            <summary>
+            创建向量移动命令构建器的快捷方法
+            </summary>
+            <param name = "angle">移动角度</param>
+            <returns>预配置的CommandBuilder</returns>
+        </member>
+        <member name="M:TriggerEncapsulation.Commands.CommandExtensions.MoveTo(GameCore.SceneSystem.ScenePoint)">
+            <summary>
+            创建位置移动命令构建器的快捷方法
+            </summary>
+            <param name = "position">目标位置</param>
+            <returns>预配置的CommandBuilder</returns>
+        </member>
+        <member name="M:TriggerEncapsulation.Commands.CommandExtensions.AttackTarget(GameCore.EntitySystem.Unit)">
+            <summary>
+            创建攻击命令构建器的快捷方法
+            </summary>
+            <param name = "target">攻击目标</param>
+            <returns>预配置的CommandBuilder</returns>
+        </member>
+        <member name="M:TriggerEncapsulation.Commands.CommandExtensions.StopMovement">
+            <summary>
+            创建停止移动命令构建器的快捷方法
+            </summary>
+            <returns>预配置的CommandBuilder</returns>
+        </member>
+        <member name="M:TriggerEncapsulation.Commands.CommandExtensions.Stop">
+            <summary>
+            创建停止所有动作命令构建器的快捷方法
+            </summary>
+            <returns>预配置的CommandBuilder</returns>
+        </member>
+    </members>
+</doc>

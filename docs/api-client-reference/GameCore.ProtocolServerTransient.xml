@@ -1,0 +1,204 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<doc>
+    <assembly>
+        <name>GameCore</name>
+    </assembly>
+    <members>
+        <member name="T:GameCore.ProtocolServerTransient.IProtocolServerTransient">
+            <summary>
+            定义服务器瞬态协议的基础接口，用于处理临时性的服务器到客户端消息
+            </summary>
+            <remarks>
+            瞬态协议用于传输不需要持久化的临时数据，如视觉效果、音效触发、临时状态变化等。
+            这些消息通常具有即时性，不需要重传或状态同步。
+            </remarks>
+        </member>
+        <member name="F:GameCore.ProtocolServerTransient.IProtocolServerTransient.Handlers">
+            <summary />
+        </member>
+        <member name="P:GameCore.ProtocolServerTransient.IProtocolServerTransient.FrozenHandlers">
+            <summary />
+        </member>
+        <member name="M:GameCore.ProtocolServerTransient.IProtocolServerTransient.Handle(System.Int32,System.ReadOnlySpan{System.Byte})">
+            <summary>
+            处理接收到的瞬态协议消息
+            </summary>
+            <param name="TypeHash">消息类型的哈希值</param>
+            <param name="bytes">消息的字节数据</param>
+            <returns>如果成功处理消息则返回 <c>true</c>；否则返回 <c>false</c></returns>
+            <remarks>
+            此方法查找对应类型的处理器并执行消息处理逻辑。
+            </remarks>
+        </member>
+        <member name="M:GameCore.ProtocolServerTransient.IProtocolServerTransient.Handle">
+            <summary>
+            处理特定的协议消息
+            </summary>
+            <remarks>
+            派生类需要实现此方法来定义具体的消息处理逻辑。
+            </remarks>
+        </member>
+        <member name="T:GameCore.ProtocolServerTransient.IProtocolServerTransient`1">
+            <summary>
+            定义泛型服务器瞬态协议接口，提供类型安全的消息处理功能
+            </summary>
+            <typeparam name="TSelf">实现此接口的具体协议类型</typeparam>
+            <remarks>
+            此接口结合了字节序列化、协议处理和游戏类注册功能，为瞬态消息提供完整的处理框架。
+            实现类型必须是非托管类型以确保高效的序列化性能。
+            </remarks>
+        </member>
+        <member name="P:GameCore.ProtocolServerTransient.IProtocolServerTransient`1.TypeHash">
+            <summary>
+            获取协议类型的哈希值
+            </summary>
+            <remarks>
+            用于在消息处理器字典中标识和查找特定的协议类型。
+            </remarks>
+        </member>
+        <member name="M:GameCore.ProtocolServerTransient.IProtocolServerTransient`1.GameCore#BaseInterface#IGameClass#OnRegisterGameClass">
+            <summary>
+            注册游戏类时的回调方法
+            </summary>
+            <remarks>
+            在客户端注册消息处理器，建立类型哈希到处理方法的映射。
+            </remarks>
+        </member>
+        <member name="M:GameCore.ProtocolServerTransient.IProtocolServerTransient`1.Handle(System.ReadOnlySpan{System.Byte})">
+            <summary>
+            处理从字节数据反序列化的协议消息
+            </summary>
+            <param name="bytes">包含协议数据的字节跨度</param>
+            <remarks>
+            此方法负责反序列化字节数据并调用具体的消息处理逻辑。
+            </remarks>
+        </member>
+        <member name="T:GameCore.ProtocolServerTransient.ProtoActorScopeTransientCreation">
+            <summary />
+        </member>
+        <member name="M:GameCore.ProtocolServerTransient.ProtoActorScopeTransientCreation.#ctor">
+            <summary />
+        </member>
+        <member name="P:GameCore.ProtocolServerTransient.ProtoActorScopeTransientCreation.ProtoLink">
+            <summary />
+        </member>
+        <member name="P:GameCore.ProtocolServerTransient.ProtoActorScopeTransientCreation.ProtoPlayer">
+            <summary />
+        </member>
+        <member name="P:GameCore.ProtocolServerTransient.ProtoActorScopeTransientCreation.ProtoEntityOrScenePoint">
+            <summary />
+        </member>
+        <member name="P:GameCore.ProtocolServerTransient.ProtoActorScopeTransientCreation.ProtoSource">
+            <summary />
+        </member>
+        <member name="P:GameCore.ProtocolServerTransient.ProtoActorScopeTransientCreation.Facing">
+            <summary />
+        </member>
+        <member name="P:GameCore.ProtocolServerTransient.ProtoActorScopeTransientCreation.Scale">
+            <summary />
+        </member>
+        <member name="P:GameCore.ProtocolServerTransient.ProtoActorScopeTransientCreation.Volume">
+            <summary />
+        </member>
+        <member name="P:GameCore.ProtocolServerTransient.ProtoActorScopeTransientCreation.Radius">
+            <summary />
+        </member>
+        <member name="P:GameCore.ProtocolServerTransient.ProtoActorScopeTransientCreation.Link">
+            <summary />
+        </member>
+        <member name="P:GameCore.ProtocolServerTransient.ProtoActorScopeTransientCreation.Player">
+            <summary />
+        </member>
+        <member name="P:GameCore.ProtocolServerTransient.ProtoActorScopeTransientCreation.Target">
+            <summary />
+        </member>
+        <member name="P:GameCore.ProtocolServerTransient.ProtoActorScopeTransientCreation.Source">
+            <summary />
+        </member>
+        <member name="P:GameCore.ProtocolServerTransient.ProtoActorScopeTransientCreation.GameCore#ActorSystem#IActorScopeContext#IsValid">
+            <summary />
+        </member>
+        <member name="M:GameCore.ProtocolServerTransient.ProtoActorScopeTransientCreation.#ctor(GameCore.ActorSystem.IActorScopeContext)">
+            <summary />
+        </member>
+        <member name="M:GameCore.ProtocolServerTransient.ProtoActorScopeTransientCreation.Handle">
+            <summary />
+            <returns />
+        </member>
+        <member name="T:GameCore.ProtocolServerTransient.ProtoCmdResultNotify">
+            <summary>
+            表示命令结果通知的瞬态协议消息，用于向客户端传递命令执行结果
+            </summary>
+            <param name="cmdResult">命令执行的结果</param>
+            <remarks>
+            此协议消息用于在服务器执行命令后向客户端发送执行结果的通知。
+            客户端接收到此消息后会触发相应的游戏事件，允许 UI 和其他系统响应命令结果。
+            这是游戏中命令反馈机制的重要组成部分。
+            </remarks>
+        </member>
+        <member name="M:GameCore.ProtocolServerTransient.ProtoCmdResultNotify.#ctor(GameCore.BaseType.CmdResult)">
+            <summary>
+            表示命令结果通知的瞬态协议消息，用于向客户端传递命令执行结果
+            </summary>
+            <param name="cmdResult">命令执行的结果</param>
+            <remarks>
+            此协议消息用于在服务器执行命令后向客户端发送执行结果的通知。
+            客户端接收到此消息后会触发相应的游戏事件，允许 UI 和其他系统响应命令结果。
+            这是游戏中命令反馈机制的重要组成部分。
+            </remarks>
+        </member>
+        <member name="P:GameCore.ProtocolServerTransient.ProtoCmdResultNotify.CmdResult">
+            <summary>
+            获取或设置命令执行的结果
+            </summary>
+            <remarks>
+            使用可扩展枚举包装的命令结果，支持动态添加新的结果类型。
+            结果包含成功、失败以及各种具体的错误信息。
+            </remarks>
+        </member>
+        <member name="M:GameCore.ProtocolServerTransient.ProtoCmdResultNotify.Handle">
+            <summary>
+            处理接收到的命令结果通知消息
+            </summary>
+            <remarks>
+            在客户端处理此协议消息，触发 <see cref="T:GameCore.Event.EventGameCmdResultNotify" /> 事件。
+            这允许游戏的各个系统响应命令执行结果，如显示错误信息、更新 UI 状态等。
+            </remarks>
+        </member>
+        <member name="T:GameCore.ProtocolServerTransient.ProtoScopeAction">
+            <summary />
+        </member>
+        <member name="M:GameCore.ProtocolServerTransient.ProtoScopeAction.#ctor">
+            <summary />
+        </member>
+        <member name="P:GameCore.ProtocolServerTransient.ProtoScopeAction.ProtoActorScope">
+            <summary />
+        </member>
+        <member name="P:GameCore.ProtocolServerTransient.ProtoScopeAction.Action">
+            <summary />
+        </member>
+        <member name="M:GameCore.ProtocolServerTransient.ProtoScopeAction.Handle">
+            <summary />
+            <returns />
+        </member>
+        <member name="T:GameCore.ProtocolServerTransient.ProtoSyncIdListChange">
+            <summary />
+        </member>
+        <member name="T:GameCore.ProtocolServerTransient.ProtoSyncIdListChange.ModifyType">
+            <summary />
+        </member>
+        <member name="P:GameCore.ProtocolServerTransient.ProtoSyncIdListChange.Type">
+            <summary />
+        </member>
+        <member name="P:GameCore.ProtocolServerTransient.ProtoSyncIdListChange.Attached">
+            <summary />
+        </member>
+        <member name="P:GameCore.ProtocolServerTransient.ProtoSyncIdListChange.Property">
+            <summary />
+        </member>
+        <member name="M:GameCore.ProtocolServerTransient.ProtoSyncIdListChange.Handle">
+            <summary />
+            <returns />
+        </member>
+    </members>
+</doc>

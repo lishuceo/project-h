@@ -1,0 +1,83 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<doc>
+    <assembly>
+        <name>GameCore</name>
+    </assembly>
+    <members>
+        <member name="T:GameCore.ProtocolClientTransient.IProtocolClientTransient">
+            <summary />
+        </member>
+        <member name="T:GameCore.ProtocolClientTransient.IProtocolClientTransient`1">
+            <summary />
+        </member>
+        <member name="P:GameCore.ProtocolClientTransient.IProtocolClientTransient`1.TypeHash">
+            <summary />
+        </member>
+        <member name="M:GameCore.ProtocolClientTransient.IProtocolClientTransient`1.GameCore#BaseInterface#IGameClass#OnRegisterGameClass">
+            <summary />
+            <returns />
+        </member>
+        <member name="T:GameCore.ProtocolClientTransient.ProtocolClientTransientExtension">
+            <summary />
+        </member>
+        <member name="M:GameCore.ProtocolClientTransient.ProtocolClientTransientExtension.SendToServer``1(``0@)">
+            <summary />
+            <typeparam name="TSelf" />
+            <param name="self" />
+            <returns />
+        </member>
+        <member name="T:GameCore.ProtocolClientTransient.ProtoClientCommand">
+            <summary />
+        </member>
+        <member name="P:GameCore.ProtocolClientTransient.ProtoClientCommand.ProtoEntity">
+            <summary />
+        </member>
+        <member name="P:GameCore.ProtocolClientTransient.ProtoClientCommand.AbilityLink">
+            <summary />
+        </member>
+        <member name="P:GameCore.ProtocolClientTransient.ProtoClientCommand.Index">
+            <summary />
+        </member>
+        <member name="P:GameCore.ProtocolClientTransient.ProtoClientCommand.Type">
+            <summary />
+        </member>
+        <member name="P:GameCore.ProtocolClientTransient.ProtoClientCommand.Flag">
+            <summary />
+        </member>
+        <member name="P:GameCore.ProtocolClientTransient.ProtoClientCommand.Target">
+            <summary />
+        </member>
+        <member name="P:GameCore.ProtocolClientTransient.ProtoClientCommand.Item">
+            <summary />
+        </member>
+        <member name="M:GameCore.ProtocolClientTransient.ProtoClientCommand.#ctor(GameCore.EntitySystem.Entity,GameCore.OrderSystem.Command)">
+            <summary />
+        </member>
+        <member name="T:GameCore.ProtocolClientTransient.ProtoClientEventKey">
+            <summary />
+        </member>
+        <member name="P:GameCore.ProtocolClientTransient.ProtoClientEventKey.Modifiers">
+            <summary>
+            The virtual key modifiers, such as Shift, Ctrl, or Alt, that were pressed when the event occurred.
+            </summary>
+        </member>
+        <member name="P:GameCore.ProtocolClientTransient.ProtoClientEventKey.PointerButtons">
+            <summary>
+            The pointer buttons that were pressed when the event occurred. For mouse events, this indicates which mouse buttons were pressed. For finger events, differentiate between fingers by using the touching ID.
+            </summary>
+        </member>
+        <member name="P:GameCore.ProtocolClientTransient.ProtoClientEventKey.Key">
+            <summary>
+            The virtual key that triggered the event.
+            </summary>
+        </member>
+        <member name="P:GameCore.ProtocolClientTransient.ProtoClientEventKey.IsRepeat">
+            <summary>
+            Indicates whether the event was triggered by a key long press.
+            </summary>
+        </member>
+        <member name="P:GameCore.ProtocolClientTransient.ProtoClientEventKey.IsKeyDown">
+            <summary />
+        </member>
+    </members>
+</doc>

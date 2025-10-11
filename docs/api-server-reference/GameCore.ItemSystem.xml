@@ -1,0 +1,1018 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<doc>
+    <assembly>
+        <name>GameCore</name>
+    </assembly>
+    <members>
+        <member name="T:GameCore.ItemSystem.Data.GameDataItem">
+            <summary>
+            Represents the base data class for item configurations, defining common properties and creation methods for all item types.
+            </summary>
+            <remarks>
+            This abstract class provides the foundation for all item data types in the game, including display information,
+            unit associations, quality and level settings, and filtering capabilities. It defines the common interface for
+            creating item instances and their associated units in the game world.
+            </remarks>
+            <summary />
+            <summary />
+            <summary />
+        </member>
+        <member name="P:GameCore.ItemSystem.Data.GameDataItem.DisplayName">
+            <summary>
+            Gets or sets the localized display name for this item.
+            </summary>
+            <remarks>
+            This name is shown to players in the user interface and supports localization
+            for different languages and regions.
+            </remarks>
+        </member>
+        <member name="P:GameCore.ItemSystem.Data.GameDataItem.Description">
+            <summary>
+            Gets or sets the localized description text for this item.
+            </summary>
+            <remarks>
+            This description provides detailed information about the item's purpose, effects,
+            and usage. It supports localization for different languages and regions.
+            </remarks>
+        </member>
+        <member name="P:GameCore.ItemSystem.Data.GameDataItem.Icon">
+            <summary>
+            Gets or sets the icon used to represent this item in the user interface.
+            </summary>
+            <remarks>
+            The icon provides a visual representation of the item for display in inventories,
+            tooltips, and other UI elements.
+            </remarks>
+        </member>
+        <member name="P:GameCore.ItemSystem.Data.GameDataItem.Unit">
+            <summary>
+            Gets or sets the unit data that defines the physical representation of this item in the game world.
+            </summary>
+            <remarks>
+            Every item is associated with a unit that provides its 3D model, collision, animations,
+            and other physical properties when the item exists as an object in the game world.
+            </remarks>
+        </member>
+        <member name="P:GameCore.ItemSystem.Data.GameDataItem.Quality">
+            <summary>
+            Gets or sets the default quality level for items created from this data.
+            </summary>
+            <remarks>
+            Quality represents the tier or rarity of the item, affecting its properties and value.
+            Individual item instances can have their quality modified after creation.
+            </remarks>
+        </member>
+        <member name="P:GameCore.ItemSystem.Data.GameDataItem.Level">
+            <summary>
+            Gets or sets the default level for items created from this data.
+            </summary>
+            <remarks>
+            Level represents the upgrade tier or enhancement level of the item.
+            Individual item instances can have their level modified after creation.
+            </remarks>
+        </member>
+        <member name="P:GameCore.ItemSystem.Data.GameDataItem.Filter">
+            <summary>
+            Gets or sets the targeting filters that determine which entities can interact with this item.
+            </summary>
+            <remarks>
+            These filters control pickup eligibility, usage restrictions, and other interaction rules
+            based on entity properties, states, and other criteria.
+            </remarks>
+        </member>
+        <member name="M:GameCore.ItemSystem.Data.GameDataItem.CreateItem(GameCore.SceneSystem.ScenePoint,GameCore.PlayerAndUsers.Player)">
+            <summary>
+            Creates an item instance at the specified location in the game world.
+            </summary>
+            <param name="scene">The scene position where the item should be created.</param>
+            <param name="player">The player that will own the item, or null to use the default player.</param>
+            <returns>A new item instance attached to a unit at the specified location.</returns>
+            <remarks>
+            This method creates both the physical unit representation and the item component,
+            providing a complete item that exists in the game world and can be interacted with.
+            </remarks>
+        </member>
+        <member name="M:GameCore.ItemSystem.Data.GameDataItem.CreateItemUnit(GameCore.SceneSystem.ScenePoint,GameCore.PlayerAndUsers.Player)">
+            <summary>
+            Creates the unit that will represent this item in the game world.
+            </summary>
+            <param name="scene">The scene position where the unit should be created.</param>
+            <param name="player">The player that will own the unit, or null to use the default player.</param>
+            <returns>A new unit instance configured according to this item's unit data.</returns>
+            <exception cref="T:System.IO.InvalidDataException">Thrown when the unit data is invalid or null.</exception>
+            <remarks>
+            This method creates the physical representation of the item as a unit in the game world,
+            which provides 3D model, collision, and other physical properties.
+            </remarks>
+        </member>
+        <member name="P:GameCore.ItemSystem.Data.GameDataItem.SyncType">
+            <summary />
+        </member>
+        <member name="P:GameCore.ItemSystem.Data.GameDataItem.Categories">
+            <summary />
+        </member>
+        <member name="P:GameCore.ItemSystem.Data.GameDataItem.GameCore#BaseInterface#IAttachedData#Categories">
+            <summary />
+        </member>
+        <member name="M:GameCore.ItemSystem.Data.GameDataItem.GameCore#BaseInterface#IAttachedData#Replicate(GameCore.BaseInterface.ICooldownHost,System.Nullable{System.Int32})">
+            <summary />
+            <param name="host" />
+            <param name="syncId" />
+            <returns />
+        </member>
+        <member name="M:GameCore.ItemSystem.Data.GameDataItem.ReplicateItem(GameCore.EntitySystem.Unit,System.Nullable{System.Int32})">
+            <summary />
+            <param name="unit" />
+            <param name="syncId" />
+            <returns />
+        </member>
+        <member name="M:GameCore.ItemSystem.Data.GameDataItem.CreateItem(GameCore.EntitySystem.Unit)">
+            <summary />
+            <param name="unit" />
+            <returns />
+        </member>
+        <member name="F:GameCore.ItemSystem.Data.GameDataItem.aggregator">
+            <summary />
+        </member>
+        <member name="F:GameCore.ItemSystem.Data.GameDataItem.aggregatorWeakReference">
+            <summary />
+        </member>
+        <member name="P:GameCore.ItemSystem.Data.GameDataItem.Events#IEventSender#Aggregator">
+            <summary />
+        </member>
+        <member name="P:GameCore.ItemSystem.Data.GameDataItem.AggregatorWeakReference">
+            <summary />
+        </member>
+        <member name="T:GameCore.ItemSystem.Data.GameDataItemMod">
+            <summary />
+            <summary />
+            <summary />
+        </member>
+        <member name="P:GameCore.ItemSystem.Data.GameDataItemMod.Modifications">
+            <summary />
+        </member>
+        <member name="P:GameCore.ItemSystem.Data.GameDataItemMod.Requirements">
+            <summary />
+        </member>
+        <member name="M:GameCore.ItemSystem.Data.GameDataItemMod.CreateItem(GameCore.EntitySystem.Unit)">
+            <summary />
+            <param name="unit" />
+            <returns />
+        </member>
+        <member name="P:GameCore.ItemSystem.Data.GameDataItemMod.Responses">
+            <summary />
+        </member>
+        <member name="M:GameCore.ItemSystem.Data.GameDataItemMod.ReplicateItem(GameCore.EntitySystem.Unit,System.Nullable{System.Int32})">
+            <summary />
+            <param name="unit" />
+            <param name="syncId" />
+            <returns />
+        </member>
+        <member name="T:GameCore.ItemSystem.Data.GameDataItemPickable">
+            <summary />
+            <summary />
+        </member>
+        <member name="P:GameCore.ItemSystem.Data.GameDataItemPickable.StackStart">
+            <summary />
+        </member>
+        <member name="P:GameCore.ItemSystem.Data.GameDataItemPickable.StackMax">
+            <summary />
+        </member>
+        <member name="P:GameCore.ItemSystem.Data.GameDataItemPickable.CanDrop">
+            <summary />
+        </member>
+        <member name="P:GameCore.ItemSystem.Data.GameDataItemPickable.CanSell">
+            <summary />
+        </member>
+        <member name="P:GameCore.ItemSystem.Data.GameDataItemPickable.RemoveOnDrop">
+            <summary />
+        </member>
+        <member name="P:GameCore.ItemSystem.Data.GameDataItemPickable.CanStack">
+            <summary />
+        </member>
+        <member name="P:GameCore.ItemSystem.Data.GameDataItemPickable.CanAbsorb">
+            <summary>
+            Automatically absorb the stack of another item, only if the item is stackable
+            </summary>
+        </member>
+        <member name="P:GameCore.ItemSystem.Data.GameDataItemPickable.KillOnDepleted">
+            <summary />
+        </member>
+        <member name="M:GameCore.ItemSystem.Data.GameDataItemPickable.CreateItem(GameCore.EntitySystem.Unit)">
+            <summary />
+            <param name="unit" />
+            <returns />
+        </member>
+        <member name="M:GameCore.ItemSystem.Data.GameDataItemPickable.ReplicateItem(GameCore.EntitySystem.Unit,System.Nullable{System.Int32})">
+            <summary />
+            <param name="unit" />
+            <param name="syncId" />
+            <returns />
+        </member>
+        <member name="T:GameCore.ItemSystem.Data.GameDataItemPowerUp">
+            <summary />
+        </member>
+        <member name="P:GameCore.ItemSystem.Data.GameDataItemPowerUp.Effect">
+            <summary />
+        </member>
+        <member name="P:GameCore.ItemSystem.Data.GameDataItemPowerUp.KillOnPowerUp">
+            <summary />
+        </member>
+        <member name="M:GameCore.ItemSystem.Data.GameDataItemPowerUp.CreateItem(GameCore.EntitySystem.Unit)">
+            <summary />
+            <param name="unit" />
+            <returns />
+        </member>
+        <member name="T:GameCore.ItemSystem.Data.GameDataItemQuality">
+            <summary>
+            定义物品品质的视觉表现和特效配置，包括颜色、图标装饰和地面特效等品质相关的显示属性。
+            </summary>
+            <remarks>
+            物品品质系统通过此配置类为不同品质等级的物品提供统一的视觉标识。品质配置影响物品在UI中的显示效果，
+            包括名称颜色、图标装饰以及物品掉落在地面时的视觉特效。高品质物品通常配置更加醒目的视觉效果以突出其稀有性。
+            </remarks>
+        </member>
+        <member name="P:GameCore.ItemSystem.Data.GameDataItemQuality.Color">
+            <summary>
+            获取或设置此品质对应的显示颜色，用于物品名称和相关UI元素的着色。
+            </summary>
+            <remarks>
+            此颜色将应用于物品名称文本、品质标识等UI元素，为玩家提供直观的品质识别。
+            通常低品质使用灰白色，高品质使用金色、紫色等醒目颜色。
+            </remarks>
+        </member>
+        <member name="P:GameCore.ItemSystem.Data.GameDataItemQuality.BackgroundImage">
+            <summary>
+            获取或设置此品质的背景装饰图标，用于物品图标的背景层显示。
+            </summary>
+            <remarks>
+            背景图标通常显示在物品图标的后方，为不同品质提供视觉区分。
+            可以是简单的色彩背景、纹理图案或装饰性边框等。
+            </remarks>
+        </member>
+        <member name="P:GameCore.ItemSystem.Data.GameDataItemQuality.BorderImage">
+            <summary>
+            获取或设置此品质的边框装饰图标，用于物品图标的边框层显示。
+            </summary>
+            <remarks>
+            边框图标显示在物品图标的最前层，通常用于突出显示高品质物品。
+            可以是发光效果、华丽边框或特殊形状的装饰框等。
+            </remarks>
+        </member>
+        <member name="P:GameCore.ItemSystem.Data.GameDataItemQuality.ActorArray">
+            <summary>
+            获取或设置物品掉落在地面时的附属视觉特效Actor列表，用于提供品质相关的地面显示效果。
+            </summary>
+            <remarks>
+                <para>这些Actor通常包含粒子系统、光效、动画等视觉组件，在物品作为地面对象存在时自动激活。</para>
+                <para>不同品质的物品可以配置不同强度和样式的特效：</para>
+                <list type="bullet">
+                    <item>
+                        <description>普通品质：无特效或简单光点</description>
+                    </item>
+                    <item>
+                        <description>稀有品质：彩色光环或闪烁效果</description>
+                    </item>
+                    <item>
+                        <description>史诗品质：华丽光柱或旋转特效</description>
+                    </item>
+                    <item>
+                        <description>传说品质：复杂粒子系统和动态光效</description>
+                    </item>
+                </list>
+                <para>这些特效有助于玩家在游戏世界中快速识别和定位高价值物品。</para>
+            </remarks>
+        </member>
+        <member name="T:GameCore.ItemSystem.IPickUpItem">
+            <summary>
+            Defines an interface for items that can be picked up and added to inventories.
+            </summary>
+            <remarks>
+            This interface provides the contract for items that support pickup interactions with inventory systems.
+            It includes validation to check if pickup is possible and methods to perform the actual pickup operation.
+            Range checking is handled separately by the calling systems, allowing this interface to focus on
+            item-specific pickup logic and inventory compatibility.
+            </remarks>
+        </member>
+        <member name="M:GameCore.ItemSystem.IPickUpItem.CanPickUp(GameCore.Container.InventoryManager)">
+            <summary>
+            Determines whether the item can be picked up by the specified inventory manager.
+            </summary>
+            <param name="manager">The inventory manager attempting to pick up the item.</param>
+            <returns>
+                <c>true</c> if the item can be picked up; otherwise, <c>false</c>.</returns>
+            <remarks>
+            This method performs validation checks such as inventory space, item compatibility,
+            and other pickup requirements. Range checking is explicitly ignored and should be
+            handled by the calling system before invoking this method.
+            </remarks>
+        </member>
+        <member name="M:GameCore.ItemSystem.IPickUpItem.PickUp(GameCore.Container.InventoryManager,System.Boolean)">
+            <summary>
+            Attempts to pick up the item and add it to the specified inventory manager.
+            </summary>
+            <param name="manager">The inventory manager that will receive the item.</param>
+            <param name="isRequest">Whether this is a request operation (for validation) or an actual pickup.</param>
+            <returns>
+                <c>true</c> if the pickup was successful; otherwise, <c>false</c>.</returns>
+            <remarks>
+            This method performs the actual pickup operation, transferring the item to the inventory.
+            Range checking is explicitly ignored and should be handled by the calling system.
+            When <paramref name="isRequest" /> is true, this may perform a dry-run validation without
+            actually modifying the item or inventory state.
+            </remarks>
+        </member>
+        <member name="P:GameCore.ItemSystem.IPickUpItem.IsValid">
+            <summary>
+            Gets a value indicating whether this item is still valid and can participate in pickup operations.
+            </summary>
+            <remarks>
+            Invalid items (such as destroyed or disposed items) should not be available for pickup.
+            This property allows the pickup system to filter out items that are no longer active.
+            </remarks>
+        </member>
+        <member name="T:GameCore.ItemSystem.Item">
+            <summary>
+            Represents the base class for all items in the game, providing common functionality for quality, level, and category management.
+            </summary>
+            <remarks>
+            Items are components attached to units that represent equipment, consumables, and other game objects.
+            They support quality and level progression, categorization for filtering and organization, and integration
+            with the property and event systems. Items can be synchronized between server and client for multiplayer
+            functionality and participate in the cooldown system for ability-based items.
+            </remarks>
+            <summary />
+            <summary />
+            <summary />
+            <summary />
+            <summary />
+            <summary />
+            <summary />
+            <summary />
+            <summary />
+            <summary />
+            <summary />
+        </member>
+        <member name="F:GameCore.ItemSystem.Item.quality">
+            <summary />
+        </member>
+        <member name="F:GameCore.ItemSystem.Item.level">
+            <summary />
+        </member>
+        <member name="M:GameCore.ItemSystem.Item.ToString">
+            <summary>
+            Returns a string representation of this item including its type and friendly name.
+            </summary>
+            <returns>A formatted string describing this item.</returns>
+        </member>
+        <member name="P:GameCore.ItemSystem.Item.Link">
+            <summary>
+            Gets the game data link that defines this item's configuration and properties.
+            </summary>
+        </member>
+        <member name="P:GameCore.ItemSystem.Item.Cache">
+            <summary>
+            Gets the cached game data for this item, providing access to configuration properties.
+            </summary>
+        </member>
+        <member name="M:GameCore.ItemSystem.Item.#ctor(GameCore.EntitySystem.Unit,GameData.IGameLink{GameCore.ItemSystem.Data.GameDataItem})">
+            <summary>
+            Initializes a new item instance and attaches it to the specified unit.
+            </summary>
+            <param name="entity">The unit that will own this item.</param>
+            <param name="link">The game data link defining this item's properties.</param>
+            <exception cref="T:System.ArgumentException">Thrown when the provided link has invalid data.</exception>
+            <remarks>
+            This constructor sets up the item with its initial quality and level from the data configuration,
+            configures synchronization settings, and registers the item with the host's attached objects system.
+            </remarks>
+        </member>
+        <member name="P:GameCore.ItemSystem.Item.Unit">
+            <summary>
+            Gets the unit that owns this item.
+            </summary>
+            <remarks>
+            Items are always attached to units, which serve as their hosts and provide context
+            for item functionality and interactions.
+            </remarks>
+        </member>
+        <member name="P:GameCore.ItemSystem.Item.Quality">
+            <summary>
+            Gets or sets the quality level of this item.
+            </summary>
+            <remarks>
+            Quality represents the tier or rarity of the item, affecting its properties and value.
+            Changes to quality trigger quality change events and are synchronized between server and client.
+            On the client side, this property can only be set internally through replication.
+            </remarks>
+        </member>
+        <member name="P:GameCore.ItemSystem.Item.Level">
+            <summary>
+            Gets or sets the level of this item.
+            </summary>
+            <remarks>
+            Level represents the upgrade tier or enhancement level of the item, typically affecting
+            its effectiveness and properties. Changes to level trigger level change events and are
+            synchronized between server and client. On the client side, this property can only be
+            set internally through replication.
+            </remarks>
+        </member>
+        <member name="P:GameCore.ItemSystem.Item.Categories">
+            <summary>
+            Gets the list of categories this item belongs to.
+            </summary>
+            <remarks>
+            Categories are used for filtering, organizing, and applying rules to items.
+            They help determine compatibility with inventories, abilities, and other game systems.
+            </remarks>
+        </member>
+        <member name="M:GameCore.ItemSystem.Item.HasCategory(GameCore.Struct.ItemCategory)">
+            <summary>
+            Determines whether this item belongs to the specified category.
+            </summary>
+            <param name="category">The category to check for.</param>
+            <returns>
+                <c>true</c> if the item has the specified category; otherwise, <c>false</c>.</returns>
+            <remarks>
+            This method provides a convenient way to check item compatibility and filtering rules
+            based on category membership.
+            </remarks>
+        </member>
+        <member name="P:GameCore.ItemSystem.Item.QualityConfiguration">
+            <summary>
+            获取当前物品品质对应的配置数据，用于确定品质相关的视觉表现和特效。
+            </summary>
+            <remarks>
+                <para>此属性根据物品的<see cref="P:GameCore.ItemSystem.Item.Quality" />值从全局品质配置列表中查找对应的配置。</para>
+                <para>查找规则：</para>
+                <list type="bullet">
+                    <item>
+                        <description>使用<see cref="P:GameCore.ItemSystem.Item.Quality" />值作为索引在<see cref="P:GameCore.GameSystem.Data.GameDataGameplay.ItemQualityList" />中查找</description>
+                    </item>
+                    <item>
+                        <description>如果索引超出范围，返回列表中的最后一个配置</description>
+                    </item>
+                    <item>
+                        <description>如果全局配置列表为空或null，返回null（物品将不显示品质特效）</description>
+                    </item>
+                </list>
+                <para>此属性为只读计算属性，每次访问时动态获取最新的配置数据。</para>
+            </remarks>
+        </member>
+        <member name="F:GameCore.ItemSystem.Item.QualityActors">
+            <summary>
+            存储当前激活的品质特效Actor列表，仅在客户端使用。
+            </summary>
+        </member>
+        <member name="M:GameCore.ItemSystem.Item.UpdateQualityActors">
+            <summary>
+            更新物品的品质视觉特效，根据当前状态决定是否显示品质相关的Actor。
+            </summary>
+            <remarks>
+                <para>此方法会根据物品当前状态自动管理品质特效的显示：</para>
+                <list type="bullet">
+                    <item>
+                        <description>如果物品单位有效且存活，清除旧特效并创建新特效</description>
+                    </item>
+                    <item>
+                        <description>如果物品单位无效或已死亡，仅清除特效</description>
+                    </item>
+                </list>
+                <para>子类可以重写此方法来实现特定的品质特效逻辑（如ItemPickable只在地面时显示）。</para>
+            </remarks>
+        </member>
+        <member name="M:GameCore.ItemSystem.Item.ClearQualityActors">
+            <summary />
+            <returns />
+        </member>
+        <member name="M:GameCore.ItemSystem.Item.CreateQualityActors">
+            <summary />
+            <returns />
+        </member>
+        <member name="P:GameCore.ItemSystem.Item.GameCore#BaseInterface#IAttachedObject#Host">
+            <summary />
+        </member>
+        <member name="M:GameCore.ItemSystem.Item.DisposeManaged">
+            <summary />
+            <returns />
+        </member>
+        <member name="P:GameCore.ItemSystem.Item.SyncId">
+            <summary />
+        </member>
+        <member name="M:GameCore.ItemSystem.Item.ReplicateFromKeyValue(System.Enum,System.ReadOnlySpan{System.Byte})">
+            <summary />
+            <param name="propertyEnum" />
+            <param name="value" />
+            <returns />
+        </member>
+        <member name="P:GameCore.ItemSystem.Item.GameCore#BaseInterface#ICooldownOwner#CooldownHost">
+            <summary />
+        </member>
+        <member name="P:GameCore.ItemSystem.Item.GameCore#BaseInterface#ICooldownOwner#LazyCooldownPool">
+            <summary />
+        </member>
+        <member name="P:GameCore.ItemSystem.Item.GameCore#DisplayInfo#IDisplayInfo#Cache">
+            <summary />
+        </member>
+        <member name="P:GameCore.ItemSystem.Item.GameCore#DisplayInfo#IDisplayInfo#Level">
+            <summary />
+        </member>
+        <member name="P:GameCore.ItemSystem.Item.GameCore#DisplayInfo#IDisplayInfo#Quality">
+            <summary />
+        </member>
+        <member name="F:GameCore.ItemSystem.Item.disposedValue">
+            <summary />
+        </member>
+        <member name="M:GameCore.ItemSystem.Item.Dispose(System.Boolean)">
+            <summary />
+            <param name="disposing" />
+            <returns />
+        </member>
+        <member name="P:GameCore.ItemSystem.Item.Aggregator">
+            <summary />
+        </member>
+        <member name="P:GameCore.ItemSystem.Item.AggregatorWeakReference">
+            <summary />
+        </member>
+        <member name="M:GameCore.ItemSystem.Item.Publish``1(``0)">
+            <summary />
+            <typeparam name="TEvent" />
+            <param name="eventToPublish" />
+            <returns />
+        </member>
+        <member name="M:GameCore.ItemSystem.Item.GetPublisher``1">
+            <summary />
+            <typeparam name="TEvent" />
+            <returns />
+        </member>
+        <member name="P:GameCore.ItemSystem.Item.GameCore#Interface#IExecutionContext#Ability">
+            <summary />
+        </member>
+        <member name="P:GameCore.ItemSystem.Item.EffectCaster">
+            <summary />
+        </member>
+        <member name="P:GameCore.ItemSystem.Item.GameCore#Interface#IExecutionContext#Caster">
+            <summary />
+        </member>
+        <member name="P:GameCore.ItemSystem.Item.GameCore#Interface#IExecutionContext#Item">
+            <summary />
+        </member>
+        <member name="P:GameCore.ItemSystem.Item.GameCore#Interface#IExecutionContext#FactoryParent">
+            <summary />
+        </member>
+        <member name="P:GameCore.ItemSystem.Item.GameCore#Interface#IExecutionContext#Order">
+            <summary />
+        </member>
+        <member name="M:GameCore.ItemSystem.Item.GetProperty``1(GameCore.EntitySystem.PropertyItem)">
+            <summary />
+            <typeparam name="TValue" />
+            <param name="property" />
+            <returns />
+        </member>
+        <member name="M:GameCore.ItemSystem.Item.GameCore#CostSystem#ISpendable#CheckAffordable">
+            <summary />
+            <returns />
+        </member>
+        <member name="P:GameCore.ItemSystem.Item.Position">
+            <summary />
+        </member>
+        <member name="P:GameCore.ItemSystem.Item.GameCore#BaseInterface#ITarget#Facing">
+            <summary />
+        </member>
+        <member name="P:GameCore.ItemSystem.Item.ApproachableTarget">
+            <summary />
+        </member>
+        <member name="M:GameCore.ItemSystem.Item.GameCore#BaseInterface#ITarget#IsValidTargetTo(GameCore.EntitySystem.Entity,System.Boolean)">
+            <summary />
+            <param name="caster" />
+            <param name="isRequest" />
+            <returns />
+        </member>
+        <member name="M:GameCore.ItemSystem.Item.CanBeSeen(GameCore.EntitySystem.Entity)">
+            <summary />
+            <param name="caster" />
+            <returns />
+        </member>
+        <member name="P:GameCore.ItemSystem.Item.InteractRadius">
+            <summary />
+        </member>
+        <member name="M:GameCore.ItemSystem.Item.AngleTo(GameCore.BaseInterface.ITarget)">
+            <summary />
+            <param name="target" />
+            <returns />
+        </member>
+        <member name="F:GameCore.ItemSystem.Item.placedItem">
+            <summary />
+        </member>
+        <member name="P:GameCore.ItemSystem.Item.PlacedItem">
+            <summary />
+        </member>
+        <member name="T:GameCore.ItemSystem.ItemExtension">
+            <summary>
+            Provides extension methods for entity-based item component access.
+            </summary>
+            <remarks>
+            This class enables exclusive access to item components on entities, allowing the use of
+            Entity.GetComponent&lt;Item&gt;() syntax to retrieve item components by their tag.
+            </remarks>
+        </member>
+        <member name="M:GameCore.ItemSystem.ItemExtension.GetComponent``1(GameCore.EntitySystem.Entity)">
+            <summary>
+            Gets an item component of the specified type from the entity.
+            </summary>
+            <typeparam name="TComponent">The type of item component to retrieve.</typeparam>
+            <param name="entity">The entity to search for the item component.</param>
+            <returns>The item component if found; otherwise, null.</returns>
+            <remarks>
+            This extension method provides a convenient way to access item components on entities
+            using generic type parameters and the standard component access pattern.
+            </remarks>
+        </member>
+        <member name="T:GameCore.ItemSystem.ItemMod">
+            <summary />
+            <summary>
+            Represents a modifier item that can be equipped and provides dynamic property modifications and abilities to the host unit.
+            </summary>
+            <remarks>
+            ItemMod is an advanced item type that can grant abilities, modify unit properties, and provide dynamic effects
+            based on the equipped slot and current game state. Unlike static items, ItemMods have complex requirements,
+            stack-based effects, and can enable/disable themselves based on conditions. They integrate with the modification
+            system to provide property bonuses and state changes, and can grant temporary abilities while equipped.
+            The item can have different effects based on which slot type it's equipped in, supporting versatile equipment systems.
+            </remarks>
+            <summary />
+            <summary />
+            <summary />
+            <summary />
+            <summary />
+        </member>
+        <member name="M:GameCore.ItemSystem.ItemMod.ReplicateFromKeyValue(System.Enum,System.ReadOnlySpan{System.Byte})">
+            <summary />
+            <param name="key" />
+            <param name="value" />
+            <returns />
+        </member>
+        <member name="P:GameCore.ItemSystem.ItemMod.IsEnabled">
+            <summary>
+            Gets a value indicating whether this item mod is currently enabled and providing its effects.
+            </summary>
+            <value>True if the item mod meets all requirements and is actively providing benefits; otherwise, false.</value>
+            <remarks>
+            An enabled item mod actively applies its property modifications, state changes, and grants its ability.
+            The enabled state depends on meeting all base requirements plus any additional item-specific requirements.
+            </remarks>
+        </member>
+        <member name="P:GameCore.ItemSystem.ItemMod.EffectCaster">
+            <summary>
+            Gets the entity that serves as the caster for effects granted by this item mod.
+            </summary>
+            <value>The carrying unit if the item is being carried, otherwise the owning unit.</value>
+            <remarks>
+            This property determines which entity is considered the source for abilities and effects
+            granted by this item mod. It's important for targeting, ownership, and effect attribution.
+            </remarks>
+        </member>
+        <member name="P:GameCore.ItemSystem.ItemMod.MeetRequirement">
+            <summary>
+            Gets a value indicating whether this item mod meets all requirements for activation.
+            </summary>
+            <value>True if all base and carrier-specific requirements are met; otherwise, false.</value>
+            <remarks>
+            Item mods can have additional requirements beyond basic item requirements, such as
+            unit level, stats, or other conditions that must be met by the carrying unit.
+            </remarks>
+        </member>
+        <member name="P:GameCore.ItemSystem.ItemMod.Stack">
+            <summary>
+            Gets or sets the stack count for this item mod.
+            </summary>
+            <value>The number of identical item mods stacked together.</value>
+            <remarks>
+            Stack count affects the magnitude of property modifications and other effects.
+            When the stack count changes, all modifications are updated to reflect the new values.
+            </remarks>
+        </member>
+        <member name="M:GameCore.ItemSystem.ItemMod.#ctor(GameCore.EntitySystem.Unit,GameData.IGameLink{GameCore.ItemSystem.Data.GameDataItemMod},System.Boolean)">
+            <summary>
+            Initializes a new item mod instance with the specified configuration.
+            </summary>
+            <param name="entity">The unit that will own this item mod.</param>
+            <param name="link">The game data link defining this item mod's properties and effects.</param>
+            <param name="initializeModificationData">Whether to immediately initialize modification managers for all slot types.</param>
+            <remarks>
+            This constructor sets up modification managers for each slot type defined in the item's configuration.
+            If initializeModificationData is true, all managers are immediately initialized; otherwise, they
+            are created but not activated until needed.
+            </remarks>
+        </member>
+        <member name="M:GameCore.ItemSystem.ItemMod.TestRequirement(GameCore.EntitySystem.Unit)">
+            <summary>
+            Tests whether this item mod meets all requirements for the specified unit.
+            </summary>
+            <param name="unit">The unit to test requirements against.</param>
+            <returns>True if the unit meets all requirements for this item mod; otherwise, false.</returns>
+            <remarks>
+            This method checks both the base item requirements and any additional requirements
+            specific to this item mod type, such as level, stats, or class restrictions.
+            </remarks>
+        </member>
+        <member name="P:GameCore.ItemSystem.ItemMod.ActiveAbility">
+            <summary>
+            Gets the ability currently granted by this item mod, if any.
+            </summary>
+            <value>The active ability instance, or null if no ability is currently granted.</value>
+            <remarks>
+            Item mods can grant temporary abilities while equipped. The ability is automatically
+            created when the item mod is properly equipped and meets requirements, and destroyed
+            when conditions change. On the client side, this property reflects the server state.
+            </remarks>
+        </member>
+        <member name="P:GameCore.ItemSystem.ItemMod.ActiveModificationManager">
+            <summary>
+            Gets the modification manager currently active for this item mod based on its equipped slot.
+            </summary>
+            <value>The active modification manager, or null if the item is not equipped in a supported slot.</value>
+            <remarks>
+            The active modification manager determines which set of property modifications and effects
+            are currently being applied. This can change when the item is moved between different slots.
+            </remarks>
+        </member>
+        <member name="M:GameCore.ItemSystem.ItemMod.GetModificationManager(GameCore.Container.ItemSlotType)">
+            <summary>
+            Gets the modification manager for the specified slot type.
+            </summary>
+            <param name="slotType">The slot type to get the modification manager for.</param>
+            <returns>The modification manager for the specified slot type, or null if not found.</returns>
+            <remarks>
+            This method allows access to modification managers for specific slot types, which is useful
+            for inspecting potential effects before equipping the item in different slots.
+            </remarks>
+        </member>
+        <member name="M:GameCore.ItemSystem.ItemMod.__FakeFunc10">
+            <inheritdoc />
+        </member>
+        <member name="M:GameCore.ItemSystem.ItemMod.__FakeFunc11">
+            <summary>
+            HostedActors 是指物品被携带或装备时，基于物品的修改器数据为物品的拥有者动态创建的附属 Actor。
+            SelfActors 是指物品本身作为单位时，附属在物品单位上的 Actor。
+            它们不可能同时存在，因为物品要么被携带（此时显示为持有者身上的 HostedActors），要么作为单位存在（此时显示 SelfActors）。
+            </summary>
+        </member>
+        <member name="P:GameCore.ItemSystem.ItemMod.HostedActors">
+            <summary />
+        </member>
+        <member name="M:GameCore.ItemSystem.ItemMod.CreateSelfActors">
+            <summary>
+            物品本身是一种单位，因此它可能有自己的附属 Actor。
+            当物品被丢弃后，这些附属 Actor 需要被重新创建，以恢复物品的视觉表现。
+            参考 <see cref="!:ClearSelfActors" /> 方法的说明。
+            </summary>
+        </member>
+        <member name="M:GameCore.ItemSystem.ItemMod.__FakeFunc12">
+            <inheritdoc />
+        </member>
+        <member name="P:GameCore.ItemSystem.ItemMod.GameCore#DisplayInfo#IDisplayInfo#Stack">
+            <summary />
+        </member>
+        <member name="P:GameCore.ItemSystem.ItemMod.GameCore#DisplayInfo#IDisplayInfo#Cooldown">
+            <summary />
+        </member>
+        <member name="P:GameCore.ItemSystem.ItemMod.GameCore#DisplayInfo#IDisplayInfo#CoolDownMax">
+            <summary />
+        </member>
+        <member name="P:GameCore.ItemSystem.ItemMod.GameCore#DisplayInfo#IDisplayInfo#ChargeCooldown">
+            <summary />
+        </member>
+        <member name="P:GameCore.ItemSystem.ItemMod.GameCore#DisplayInfo#IDisplayInfo#ChargeCooldownMax">
+            <summary />
+        </member>
+        <member name="M:GameCore.ItemSystem.ItemMod.DisposeManaged">
+            <summary />
+            <returns />
+        </member>
+        <member name="P:GameCore.ItemSystem.ItemMod.GameData#Interface#IGameObject#Link">
+            <summary />
+        </member>
+        <member name="P:GameCore.ItemSystem.ItemMod.GameData#Interface#IGameObject#Cache">
+            <summary />
+        </member>
+        <member name="P:GameCore.ItemSystem.ItemMod.Link">
+            <summary />
+        </member>
+        <member name="P:GameCore.ItemSystem.ItemMod.Cache">
+            <summary />
+        </member>
+        <member name="M:GameCore.ItemSystem.ItemMod.GetProperty``1(GameCore.EntitySystem.PropertyItemMod)">
+            <summary />
+            <typeparam name="TValue" />
+            <param name="property" />
+            <returns />
+        </member>
+        <member name="T:GameCore.ItemSystem.ItemMod.SeedAccessor">
+            <summary />
+            <summary />
+        </member>
+        <member name="F:GameCore.ItemSystem.ItemMod.SeedAccessor.modSeedDic">
+            <summary />
+        </member>
+        <member name="F:GameCore.ItemSystem.ItemMod.SeedAccessor.item">
+            <summary />
+        </member>
+        <member name="M:GameCore.ItemSystem.ItemMod.SeedAccessor.#ctor(GameCore.ItemSystem.ItemMod)">
+            <summary />
+        </member>
+        <member name="P:GameCore.ItemSystem.ItemMod.SeedAccessor.Item(GameCore.Container.ItemSlotType)">
+            <summary />
+        </member>
+        <member name="F:GameCore.ItemSystem.ItemMod.modSeed">
+            <summary />
+        </member>
+        <member name="P:GameCore.ItemSystem.ItemMod.ModSeed">
+            <summary />
+        </member>
+        <member name="T:GameCore.ItemSystem.ItemPickable">
+            <summary />
+            <summary />
+            <summary />
+            <summary />
+            <summary />
+            <summary />
+            <summary />
+        </member>
+        <member name="F:GameCore.ItemSystem.ItemPickable._stack">
+            <summary />
+        </member>
+        <member name="F:GameCore.ItemSystem.ItemPickable.slot">
+            <summary />
+        </member>
+        <member name="P:GameCore.ItemSystem.ItemPickable.Stack">
+            <summary />
+        </member>
+        <member name="P:GameCore.ItemSystem.ItemPickable.CanStack">
+            <summary />
+        </member>
+        <member name="P:GameCore.ItemSystem.ItemPickable.AbsorbEnabled">
+            <summary />
+        </member>
+        <member name="M:GameCore.ItemSystem.ItemPickable.AddStack(System.Int32)">
+            <summary />
+            <param name="stack" />
+            <returns />
+        </member>
+        <member name="M:GameCore.ItemSystem.ItemPickable.CanAbsorb(GameCore.ItemSystem.ItemPickable)">
+            <summary>
+            Check if the item can absorb the stack of another item
+            </summary>
+            <param name="inItem">Item to be absorbed</param>
+            <returns />
+        </member>
+        <member name="M:GameCore.ItemSystem.ItemPickable.Absorb(GameCore.ItemSystem.ItemPickable)">
+            <summary>
+            Absorb the stack of another item
+            </summary>
+            <param name="inItem">Item to be absorbed</param>
+            <returns>The amount of stack absorbed</returns>
+        </member>
+        <member name="P:GameCore.ItemSystem.ItemPickable.MeetRequirement">
+            <summary />
+        </member>
+        <member name="M:GameCore.ItemSystem.ItemPickable.TestRequirement(GameCore.EntitySystem.Unit)">
+            <summary />
+            <param name="_" />
+            <returns />
+        </member>
+        <member name="P:GameCore.ItemSystem.ItemPickable.Slot">
+            <summary />
+        </member>
+        <member name="P:GameCore.ItemSystem.ItemPickable.SlotType">
+            <summary />
+        </member>
+        <member name="P:GameCore.ItemSystem.ItemPickable.Carrier">
+            <summary />
+        </member>
+        <member name="P:GameCore.ItemSystem.ItemPickable.Position">
+            <summary />
+        </member>
+        <member name="M:GameCore.ItemSystem.ItemPickable.CanBeSeen(GameCore.EntitySystem.Entity)">
+            <summary />
+            <param name="caster" />
+            <returns />
+        </member>
+        <member name="M:GameCore.ItemSystem.ItemPickable.Drop(GameCore.Container.ReasonItemDrop,GameCore.Container.InventorySlot)">
+            <summary />
+            <param name="reason" />
+            <param name="swapSource" />
+            <returns />
+        </member>
+        <member name="E:GameCore.ItemSystem.ItemPickable.Assigned">
+            <summary />
+        </member>
+        <member name="E:GameCore.ItemSystem.ItemPickable.Dropped">
+            <summary />
+        </member>
+        <member name="M:GameCore.ItemSystem.ItemPickable.UpdateQualityActors">
+            <summary>
+            重写品质特效更新逻辑，仅在物品掉落在地面时显示品质特效。
+            </summary>
+            <remarks>
+                <para>可拾取物品的品质特效显示规则：</para>
+                <list type="bullet">
+                    <item>
+                        <description>物品在地面时（<see cref="P:GameCore.ItemSystem.ItemPickable.Carrier" /> 为 null）：显示品质特效</description>
+                    </item>
+                    <item>
+                        <description>物品在背包中时：不显示品质特效（清除所有特效）</description>
+                    </item>
+                    <item>
+                        <description>物品单位死亡或无效时：清除所有特效</description>
+                    </item>
+                </list>
+                <para>这种设计确保玩家只在需要识别地面物品品质时才看到特效，避免背包中的物品产生不必要的视觉干扰。</para>
+            </remarks>
+        </member>
+        <member name="M:GameCore.ItemSystem.ItemPickable.ReplicateFromKeyValue(System.Enum,System.ReadOnlySpan{System.Byte})">
+            <summary />
+            <param name="propertyEnum" />
+            <param name="value" />
+            <returns />
+        </member>
+        <member name="F:GameCore.ItemSystem.ItemPickable.disposedValue">
+            <summary />
+        </member>
+        <member name="P:GameCore.ItemSystem.ItemPickable.AppliedInventoryStates">
+            <summary />
+        </member>
+        <member name="M:GameCore.ItemSystem.ItemPickable.Dispose(System.Boolean)">
+            <summary />
+            <param name="disposing" />
+            <returns />
+        </member>
+        <member name="P:GameCore.ItemSystem.ItemPickable.StackMax">
+            <summary />
+        </member>
+        <member name="P:GameCore.ItemSystem.ItemPickable.Link">
+            <summary />
+        </member>
+        <member name="P:GameCore.ItemSystem.ItemPickable.Cache">
+            <summary />
+        </member>
+        <member name="M:GameCore.ItemSystem.ItemPickable.#ctor(GameCore.EntitySystem.Unit,GameData.IGameLink{GameCore.ItemSystem.Data.GameDataItemPickable})">
+            <summary />
+        </member>
+        <member name="M:GameCore.ItemSystem.ItemPickable.CanPickUp(GameCore.Container.InventoryManager)">
+            <summary />
+            <param name="manager" />
+            <returns />
+        </member>
+        <member name="M:GameCore.ItemSystem.ItemPickable.PickUp(GameCore.Container.InventoryManager,System.Boolean)">
+            <summary />
+            <param name="manager" />
+            <param name="isRequest" />
+            <returns />
+        </member>
+        <member name="M:GameCore.ItemSystem.ItemPickable.GameCore#CostSystem#ISpendable#CheckAffordable">
+            <summary />
+            <returns />
+        </member>
+        <member name="T:GameCore.ItemSystem.ItemPowerUp">
+            <summary />
+            <summary />
+            <summary />
+        </member>
+        <member name="P:GameCore.ItemSystem.ItemPowerUp.Used">
+            <summary />
+        </member>
+        <member name="P:GameCore.ItemSystem.ItemPowerUp.Link">
+            <summary />
+        </member>
+        <member name="P:GameCore.ItemSystem.ItemPowerUp.Cache">
+            <summary />
+        </member>
+        <member name="M:GameCore.ItemSystem.ItemPowerUp.#ctor(GameCore.EntitySystem.Unit,GameData.IGameLink{GameCore.ItemSystem.Data.GameDataItemPowerUp})">
+            <summary />
+        </member>
+        <member name="M:GameCore.ItemSystem.ItemPowerUp.CanPickUp(GameCore.Container.InventoryManager)">
+            <summary />
+            <param name="manager" />
+            <returns />
+        </member>
+        <member name="M:GameCore.ItemSystem.ItemPowerUp.PickUp(GameCore.Container.InventoryManager,System.Boolean)">
+            <summary />
+            <param name="manager" />
+            <param name="isRequest" />
+            <returns />
+        </member>
+        <member name="T:GameCore.ItemSystem.Struct.ItemAssignEventArgs">
+            <summary />
+        </member>
+        <member name="M:GameCore.ItemSystem.Struct.ItemAssignEventArgs.#ctor(GameCore.ItemSystem.ItemPickable,GameCore.Container.InventorySlot,GameCore.Container.ReasonItemAssign)">
+            <summary />
+        </member>
+        <member name="T:GameCore.ItemSystem.Struct.ItemDropEventArgs">
+            <summary />
+        </member>
+        <member name="M:GameCore.ItemSystem.Struct.ItemDropEventArgs.#ctor(GameCore.ItemSystem.ItemPickable,GameCore.Container.InventorySlot,GameCore.Container.ReasonItemDrop)">
+            <summary />
+        </member>
+    </members>
+</doc>

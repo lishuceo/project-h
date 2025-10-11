@@ -1,0 +1,120 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<doc>
+    <assembly>
+        <name>GameCore</name>
+    </assembly>
+    <members>
+        <member name="T:GameCore.RewardSystem.Data.GameDataReward">
+            <summary />
+        </member>
+        <member name="P:GameCore.RewardSystem.Data.GameDataReward.Validators">
+            <summary />
+        </member>
+        <member name="P:GameCore.RewardSystem.Data.GameDataReward.Weight">
+            <summary />
+        </member>
+        <member name="P:GameCore.RewardSystem.Data.GameDataReward.Cost">
+            <summary />
+        </member>
+        <member name="P:GameCore.RewardSystem.Data.GameDataReward.MaxRewardTimes">
+            <summary />
+        </member>
+        <member name="M:GameCore.RewardSystem.Data.GameDataReward.Execute(GameCore.Interface.IExecutableObject)">
+            <summary />
+            <param name="context" />
+            <returns />
+        </member>
+        <member name="M:GameCore.RewardSystem.Data.GameDataReward.Validate(GameCore.Interface.IExecutableObject)">
+            <summary />
+            <param name="context" />
+            <returns />
+        </member>
+        <member name="M:GameCore.RewardSystem.Data.GameDataReward.CreateReward(GameCore.BaseInterface.ITarget,GameCore.Interface.IExecutionContext)">
+            <summary />
+            <param name="defaultTarget" />
+            <param name="context" />
+            <returns />
+        </member>
+        <member name="T:GameCore.RewardSystem.Data.GameDataRewardEffect">
+            <summary />
+        </member>
+        <member name="P:GameCore.RewardSystem.Data.GameDataRewardEffect.Effect">
+            <summary />
+        </member>
+        <member name="M:GameCore.RewardSystem.Data.GameDataRewardEffect.Execute(GameCore.Interface.IExecutableObject)">
+            <summary />
+            <param name="context" />
+            <returns />
+        </member>
+        <member name="T:GameCore.RewardSystem.Data.GameDataRewardItem">
+            <summary />
+        </member>
+        <member name="P:GameCore.RewardSystem.Data.GameDataRewardItem.Item">
+            <summary />
+        </member>
+        <member name="P:GameCore.RewardSystem.Data.GameDataRewardItem.Amount">
+            <summary />
+        </member>
+        <member name="P:GameCore.RewardSystem.Data.GameDataRewardItem.Stack">
+            <summary />
+        </member>
+        <member name="P:GameCore.RewardSystem.Data.GameDataRewardItem.Level">
+            <summary />
+        </member>
+        <member name="P:GameCore.RewardSystem.Data.GameDataRewardItem.Quality">
+            <summary />
+        </member>
+        <member name="M:GameCore.RewardSystem.Data.GameDataRewardItem.Execute(GameCore.Interface.IExecutableObject)">
+            <summary />
+            <param name="context" />
+            <returns />
+        </member>
+        <member name="T:GameCore.RewardSystem.Data.GameDataRewardAttached">
+            <summary />
+        </member>
+        <member name="T:GameCore.RewardSystem.Reward">
+            <summary />
+            <summary />
+        </member>
+        <member name="M:GameCore.RewardSystem.Reward.#ctor(GameData.IGameLink{GameCore.RewardSystem.Data.GameDataReward},GameCore.BaseInterface.ITarget,GameCore.Interface.IExecutionContext)">
+            <summary />
+        </member>
+        <member name="P:GameCore.RewardSystem.Reward.Parent">
+            <summary />
+        </member>
+        <member name="P:GameCore.RewardSystem.Reward.Shared">
+            <summary />
+        </member>
+        <member name="P:GameCore.RewardSystem.Reward.Source">
+            <summary />
+        </member>
+        <member name="P:GameCore.RewardSystem.Reward.GameCore#Interface#IExecutableObject#LocVarUnit">
+            <summary />
+        </member>
+        <member name="P:GameCore.RewardSystem.Reward.GameCore#Interface#IExecutableObject#LocVarPoint">
+            <summary />
+        </member>
+        <member name="P:GameCore.RewardSystem.Reward.GameCore#Interface#IExecutableObject#PersistIndex">
+            <summary />
+        </member>
+        <member name="P:GameCore.RewardSystem.Reward.DefaultTarget">
+            <summary />
+        </member>
+        <member name="P:GameCore.RewardSystem.Reward.Link">
+            <summary />
+        </member>
+        <member name="P:GameCore.RewardSystem.Reward.Cache">
+            <summary />
+        </member>
+        <member name="P:GameCore.RewardSystem.Reward.GameCore#Interface#IExecutableObject#Cache">
+            <summary />
+        </member>
+        <member name="P:GameCore.RewardSystem.Reward.GameData#Interface#IGameObject#Cache">
+            <summary />
+        </member>
+        <member name="M:GameCore.RewardSystem.Reward.Validate">
+            <summary />
+            <returns />
+        </member>
+    </members>
+</doc>

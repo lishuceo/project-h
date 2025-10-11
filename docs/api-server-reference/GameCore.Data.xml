@@ -1,0 +1,62 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<doc>
+    <assembly>
+        <name>GameCore</name>
+    </assembly>
+    <members>
+        <member name="T:GameCore.Data.GameDataDamageType">
+            <summary />
+        </member>
+        <member name="P:GameCore.Data.GameDataDamageType.TextTagSyncType">
+            <summary />
+        </member>
+        <member name="P:GameCore.Data.GameDataDamageType.CustomFormular">
+            <summary />
+        </member>
+        <member name="P:GameCore.Data.GameDataDamageType.CustomFormularIsCritical">
+            <summary />
+        </member>
+        <member name="T:GameCore.Data.GameDataUnitProperty">
+            <summary />
+        </member>
+        <member name="P:GameCore.Data.GameDataUnitProperty.SyncType">
+            <summary />
+        </member>
+        <member name="P:GameCore.Data.GameDataUnitProperty.UseCustomFormula">
+            <summary />
+        </member>
+        <member name="P:GameCore.Data.GameDataUnitProperty.CustomFormula">
+            <summary />
+        </member>
+        <member name="T:GameCore.Data.IGameDataMorph">
+            <summary>
+            Defines the interface for morph transformation data, allowing entities to change into different unit types.
+            </summary>
+            <remarks>
+            This interface provides configuration for morphing abilities that can transform one unit type into another.
+            Morphing is commonly used for shape-shifting abilities, unit upgrades, or transformation effects.
+            The transformation maintains certain properties while changing the unit's fundamental type and capabilities.
+            </remarks>
+        </member>
+        <member name="P:GameCore.Data.IGameDataMorph.MorphUnit">
+            <summary>
+            Gets the game data link for the unit type that this morph will transform the entity into.
+            </summary>
+            <remarks>
+            This defines the target unit type for the morphing transformation. The entity will change
+            from its current unit type to the type specified by this link, gaining new abilities,
+            models, and properties defined by the target unit data.
+            </remarks>
+        </member>
+        <member name="P:GameCore.Data.IGameDataMorph.MorphFlags">
+            <summary>
+            Gets the flags that control how the morphing transformation behaves.
+            </summary>
+            <remarks>
+            These flags determine various aspects of the morphing process, such as whether certain
+            properties are preserved, how the transformation is visually presented, and what
+            restrictions or conditions apply during the morph operation.
+            </remarks>
+        </member>
+    </members>
+</doc>

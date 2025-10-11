@@ -1,0 +1,1170 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<doc>
+    <assembly>
+        <name>GameCore</name>
+    </assembly>
+    <members>
+        <member name="T:GameCore.Components.Component">
+            <summary>
+            Base class for all components that can be attached to entities, providing common lifecycle management and disposal functionality.
+            </summary>
+            <remarks>
+            Components are modular pieces of functionality that can be attached to entities to provide specific behaviors or capabilities.
+            This class handles the basic component lifecycle including creation, validation, and proper disposal.
+            All components are automatically managed by their host entity.
+            </remarks>
+            <summary />
+        </member>
+        <member name="F:GameCore.Components.Component.disposedValue">
+            <summary />
+        </member>
+        <member name="F:GameCore.Components.Component.hostDisposedValue">
+            <summary />
+        </member>
+        <member name="M:GameCore.Components.Component.#ctor(GameCore.EntitySystem.Entity)">
+            <summary>
+            Initializes a new component and associates it with the specified host entity.
+            </summary>
+            <param name="host">The entity that will own this component.</param>
+        </member>
+        <member name="P:GameCore.Components.Component.IsValid">
+            <summary>
+            Gets a value indicating whether this component is still valid and has not been disposed.
+            </summary>
+        </member>
+        <member name="P:GameCore.Components.Component.Host">
+            <summary>
+            Gets the entity that owns this component.
+            </summary>
+        </member>
+        <member name="P:GameCore.Components.Component.SyncId">
+            <summary>
+            Gets the synchronization identifier for this component, used for networking and replication.
+            </summary>
+        </member>
+        <member name="M:GameCore.Components.Component.Destroy(System.Boolean)">
+            <summary>
+            Destroys this component and removes it from its host entity.
+            </summary>
+            <param name="isHostDispose">Indicates whether this destruction is part of the host entity being disposed.</param>
+        </member>
+        <member name="M:GameCore.Components.Component.Dispose(System.Boolean)">
+            <summary>
+            Performs the disposal of this component.
+            </summary>
+            <param name="disposing">True if called from Dispose method; false if called from finalizer.</param>
+        </member>
+        <member name="M:GameCore.Components.Component.DisposeManaged">
+            <summary>
+            Disposes managed resources. Override this method to clean up managed resources specific to derived components.
+            </summary>
+        </member>
+        <member name="M:GameCore.Components.Component.DisposeUnmanaged">
+            <summary>
+            Disposes unmanaged resources. Override this method to clean up unmanaged resources specific to derived components.
+            </summary>
+        </member>
+        <member name="M:GameCore.Components.Component.System#IDisposable#Dispose">
+            <summary>
+            Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.
+            </summary>
+        </member>
+        <member name="P:GameCore.Components.Component.GameCore#BaseInterface#IPropertyOwner#PropertyHost">
+            <summary />
+        </member>
+        <member name="M:GameCore.Components.Component.GetProperty``1(GameCore.BaseType.PropertyAttachedObject)">
+            <summary />
+            <typeparam name="TValue" />
+            <param name="property" />
+            <returns />
+        </member>
+        <member name="T:GameCore.Components.Component`1">
+            <summary>
+            Generic base class for typed components that automatically manage their registration in component sets.
+            </summary>
+            <typeparam name="TComponent">The specific component type, used for type-safe component set management.</typeparam>
+            <remarks>
+            This class extends the base Component to provide type-safe component set management.
+            Components of the same type are automatically grouped together in sets on their host entity,
+            enabling efficient querying and management of similar components.
+            </remarks>
+        </member>
+        <member name="M:GameCore.Components.Component`1.#ctor(GameCore.EntitySystem.Entity)">
+            <summary>
+            Initializes a new typed component and registers it in the appropriate component set on the host entity.
+            </summary>
+            <param name="host">The entity that will own this component.</param>
+            <exception cref="T:System.InvalidOperationException">Thrown when the component type hierarchy is invalid.</exception>
+        </member>
+        <member name="M:GameCore.Components.Component`1.DisposeManaged">
+            <summary>
+            Disposes managed resources and removes this component from its type set on the host entity.
+            </summary>
+        </member>
+        <member name="T:GameCore.Components.Data.GameDataMover">
+            <summary />
+        </member>
+        <member name="P:GameCore.Components.Data.GameDataMover.DoStaticCollision">
+            <summary />
+        </member>
+        <member name="P:GameCore.Components.Data.GameDataMover.StaticMask">
+            <summary />
+        </member>
+        <member name="P:GameCore.Components.Data.GameDataMover.DoImpactEntity">
+            <summary />
+        </member>
+        <member name="P:GameCore.Components.Data.GameDataMover.ImpactSearchFilter">
+            <summary />
+        </member>
+        <member name="P:GameCore.Components.Data.GameDataMover.ImpactSearchRadius">
+            <summary />
+        </member>
+        <member name="P:GameCore.Components.Data.GameDataMover.FinishArriveRadius">
+            <summary />
+        </member>
+        <member name="P:GameCore.Components.Data.GameDataMover.CompleteEffect">
+            <summary />
+        </member>
+        <member name="P:GameCore.Components.Data.GameDataMover.FinalEffect">
+            <summary />
+        </member>
+        <member name="P:GameCore.Components.Data.GameDataMover.ImpactMaxCount">
+            <summary />
+        </member>
+        <member name="P:GameCore.Components.Data.GameDataMover.ImpactEffect">
+            <summary />
+        </member>
+        <member name="P:GameCore.Components.Data.GameDataMover.ImpactSameTargetInterval">
+            <summary />
+        </member>
+        <member name="P:GameCore.Components.Data.GameDataMover.AllowSpellModification">
+            <summary />
+        </member>
+        <member name="P:GameCore.Components.Data.GameDataMover.ImpactUnitLocVar">
+            <summary />
+        </member>
+        <member name="P:GameCore.Components.Data.GameDataMover.KillOnRemoval">
+            <summary />
+        </member>
+        <member name="P:GameCore.Components.Data.GameDataMover.MissileScaling">
+            <summary />
+        </member>
+        <member name="P:GameCore.Components.Data.GameDataMover.ActorArray">
+            <summary />
+        </member>
+        <member name="M:GameCore.Components.Data.GameDataMover.CreateMover(GameCore.Interface.IExecutionContext,GameCore.EntitySystem.Entity,GameCore.BaseInterface.ITarget,GameCore.BaseInterface.ITarget,GameCore.EntitySystem.Entity)">
+            <summary />
+            <param name="context" />
+            <param name="host" />
+            <param name="launchSite" />
+            <param name="target" />
+            <param name="launchEntity" />
+            <returns />
+        </member>
+        <member name="T:GameCore.Components.Data.GameDataMoverOrbit">
+            <summary />
+        </member>
+        <member name="P:GameCore.Components.Data.GameDataMoverOrbit.OrbitAngularVelocity">
+            <summary />
+        </member>
+        <member name="P:GameCore.Components.Data.GameDataMoverOrbit.OrbitRadius">
+            <summary />
+        </member>
+        <member name="P:GameCore.Components.Data.GameDataMoverOrbit.OrbitRelativeToTargetFacing">
+            <summary />
+        </member>
+        <member name="P:GameCore.Components.Data.GameDataMoverOrbit.SelfRotationRate">
+            <summary />
+        </member>
+        <member name="P:GameCore.Components.Data.GameDataMoverOrbit.SelfRotationRelativeToTarget">
+            <summary />
+        </member>
+        <member name="P:GameCore.Components.Data.GameDataMoverOrbit.InitialFacing">
+            <summary />
+        </member>
+        <member name="P:GameCore.Components.Data.GameDataMoverOrbit.OrbitHeight">
+            <summary />
+        </member>
+        <member name="P:GameCore.Components.Data.GameDataMoverOrbit.HeightRelativeToTarget">
+            <summary />
+        </member>
+        <member name="P:GameCore.Components.Data.GameDataMoverOrbit.AlwaysVisibleToOrbitTarget">
+            <summary />
+        </member>
+        <member name="M:GameCore.Components.Data.GameDataMoverOrbit.CreateMover(GameCore.Interface.IExecutionContext,GameCore.EntitySystem.Entity,GameCore.BaseInterface.ITarget,GameCore.BaseInterface.ITarget,GameCore.EntitySystem.Entity)">
+            <summary />
+            <param name="context" />
+            <param name="host" />
+            <param name="launchSite" />
+            <param name="target" />
+            <param name="launchEntity" />
+            <returns />
+        </member>
+        <member name="M:GameCore.Components.Data.GameDataMoverOrbit.CreateMover(GameCore.Interface.IExecutionContext,GameCore.EntitySystem.Entity,GameCore.EntitySystem.Entity)">
+            <summary />
+            <param name="context" />
+            <param name="host" />
+            <param name="target" />
+            <returns />
+        </member>
+        <member name="T:GameCore.Components.Data.GameDataMoverTarget">
+            <summary />
+        </member>
+        <member name="P:GameCore.Components.Data.GameDataMoverTarget.Speed">
+            <summary />
+        </member>
+        <member name="P:GameCore.Components.Data.GameDataMoverTarget.Acceleration">
+            <summary />
+        </member>
+        <member name="P:GameCore.Components.Data.GameDataMoverTarget.MinSpeed">
+            <summary />
+        </member>
+        <member name="P:GameCore.Components.Data.GameDataMoverTarget.MaxSpeed">
+            <summary />
+        </member>
+        <member name="P:GameCore.Components.Data.GameDataMoverTarget.LaunchHeight">
+            <summary />
+        </member>
+        <member name="P:GameCore.Components.Data.GameDataMoverTarget.TargetHeight">
+            <summary />
+        </member>
+        <member name="P:GameCore.Components.Data.GameDataMoverTarget.TargetHeightIsAbsolute">
+            <summary />
+        </member>
+        <member name="P:GameCore.Components.Data.GameDataMoverTarget.ParabolaApex">
+            <summary />
+        </member>
+        <member name="P:GameCore.Components.Data.GameDataMoverTarget.ParabolaLandingHeight">
+            <summary />
+        </member>
+        <member name="P:GameCore.Components.Data.GameDataMoverTarget.TurnToDirection">
+            <summary />
+        </member>
+        <member name="P:GameCore.Components.Data.GameDataMoverTarget.TurnToVelocity">
+            <summary />
+        </member>
+        <member name="P:GameCore.Components.Data.GameDataMoverTarget.StickToGround">
+            <summary />
+        </member>
+        <member name="M:GameCore.Components.Data.GameDataMoverTarget.CreateMover(GameCore.Interface.IExecutionContext,GameCore.EntitySystem.Entity,GameCore.BaseInterface.ITarget,GameCore.BaseInterface.ITarget,GameCore.EntitySystem.Entity)">
+            <summary />
+            <param name="context" />
+            <param name="host" />
+            <param name="launchSite" />
+            <param name="target" />
+            <param name="launchEntity" />
+            <returns />
+        </member>
+        <member name="T:GameCore.Components.Data.IGameDataMover">
+            <summary />
+        </member>
+        <member name="P:GameCore.Components.Data.IGameDataMover.DoStaticCollision">
+            <summary />
+        </member>
+        <member name="P:GameCore.Components.Data.IGameDataMover.StaticMask">
+            <summary />
+        </member>
+        <member name="P:GameCore.Components.Data.IGameDataMover.DoImpactEntity">
+            <summary />
+        </member>
+        <member name="P:GameCore.Components.Data.IGameDataMover.ImpactSearchFilter">
+            <summary />
+        </member>
+        <member name="P:GameCore.Components.Data.IGameDataMover.ImpactSearchRadius">
+            <summary />
+        </member>
+        <member name="P:GameCore.Components.Data.IGameDataMover.FinishArriveRadius">
+            <summary />
+        </member>
+        <member name="P:GameCore.Components.Data.IGameDataMover.CompleteEffect">
+            <summary />
+        </member>
+        <member name="P:GameCore.Components.Data.IGameDataMover.FinalEffect">
+            <summary />
+        </member>
+        <member name="P:GameCore.Components.Data.IGameDataMover.ImpactMaxCount">
+            <summary />
+        </member>
+        <member name="P:GameCore.Components.Data.IGameDataMover.ImpactEffect">
+            <summary />
+        </member>
+        <member name="P:GameCore.Components.Data.IGameDataMover.ImpactSameTargetInterval">
+            <summary />
+        </member>
+        <member name="P:GameCore.Components.Data.IGameDataMover.AllowSpellModification">
+            <summary />
+        </member>
+        <member name="P:GameCore.Components.Data.IGameDataMover.ImpactUnitLocVar">
+            <summary />
+        </member>
+        <member name="P:GameCore.Components.Data.IGameDataMover.KillOnRemoval">
+            <summary />
+        </member>
+        <member name="P:GameCore.Components.Data.IGameDataMover.MissileScaling">
+            <summary />
+        </member>
+        <member name="P:GameCore.Components.Data.IGameDataMover.ActorArray">
+            <summary />
+        </member>
+        <member name="T:GameCore.Components.Data.IGameDataMoverOrbit">
+            <summary>
+            Defines the configuration interface for orbital movement data, extending basic mover functionality with orbit-specific properties.
+            </summary>
+            <remarks>
+            This interface provides configuration for movers that orbit around specific target entities in circular patterns.
+            It supports complex orbital behaviors including self-rotation during orbit, offset calculations relative to target facing,
+            height control, and visibility management between orbiting entity and orbit target.
+            </remarks>
+        </member>
+        <member name="P:GameCore.Components.Data.IGameDataMoverOrbit.OrbitAngularVelocity">
+            <summary>
+            The orbital angular velocity that controls how fast the entity orbits around the target.
+            </summary>
+            <remarks>
+            This defines the angular velocity for orbital movement around the target, measured in degrees per second.
+            Positive values create counterclockwise orbit, negative values create clockwise orbit.
+            </remarks>
+        </member>
+        <member name="P:GameCore.Components.Data.IGameDataMoverOrbit.OrbitRadius">
+            <summary>
+            The orbit radius that defines the distance from the target center to the orbiting entity.
+            </summary>
+            <remarks>
+            This determines how far from the target the entity will orbit. The radius can be dynamic,
+            allowing for spiral movements or changing orbital distances over time.
+            </remarks>
+        </member>
+        <member name="P:GameCore.Components.Data.IGameDataMoverOrbit.OrbitRelativeToTargetFacing">
+            <summary>
+            Whether the orbital angle should be offset by the orbit target's facing direction.
+            </summary>
+            <remarks>
+            When true, the orbital position will be calculated relative to the target's current facing direction,
+            causing the orbit to rotate with the target. When false, the orbit maintains fixed world coordinates.
+            </remarks>
+        </member>
+        <member name="P:GameCore.Components.Data.IGameDataMoverOrbit.SelfRotationRate">
+            <summary>
+            The self-rotation rate that controls how fast the orbiting entity rotates around its own axis.
+            </summary>
+            <remarks>
+            This defines the angular velocity for the entity's self-rotation while orbiting, measured in degrees per second.
+            Self-rotation is independent of orbital movement and can create spinning effects during orbit.
+            </remarks>
+        </member>
+        <member name="P:GameCore.Components.Data.IGameDataMoverOrbit.SelfRotationRelativeToTarget">
+            <summary>
+            Whether the entity's self-rotation should be offset by the orbit target's facing direction.
+            </summary>
+            <remarks>
+            When true, the entity's self-rotation will be relative to the orbit target's current facing direction,
+            creating synchronized rotational behavior. When false, self-rotation uses absolute world coordinates.
+            </remarks>
+        </member>
+        <member name="P:GameCore.Components.Data.IGameDataMoverOrbit.InitialFacing">
+            <summary>
+            The initial facing direction for the orbiting entity when it begins orbital movement.
+            </summary>
+            <remarks>
+            When specified, determines the starting orientation of the orbiting entity. If null, the entity
+            retains its current facing direction when orbit begins. This can be used to ensure consistent
+            starting positions for orbital effects or formations.
+            </remarks>
+        </member>
+        <member name="P:GameCore.Components.Data.IGameDataMoverOrbit.OrbitHeight">
+            <summary>
+            The orbital height that defines the vertical offset of the orbiting entity relative to the target.
+            </summary>
+            <remarks>
+            This controls the height at which the entity orbits around the target. Combined with <see cref="P:GameCore.Components.Data.IGameDataMoverOrbit.HeightRelativeToTarget" />,
+            it allows for both absolute and relative height positioning in orbital movement patterns.
+            </remarks>
+        </member>
+        <member name="P:GameCore.Components.Data.IGameDataMoverOrbit.HeightRelativeToTarget">
+            <summary>
+            Whether the orbit height is calculated relative to the target's height.
+            </summary>
+            <remarks>
+            When true, <see cref="P:GameCore.Components.Data.IGameDataMoverOrbit.OrbitHeight" /> represents an offset relative to the target's current height position.
+            When false, it represents an absolute world height coordinate for the orbital plane.
+            </remarks>
+        </member>
+        <member name="P:GameCore.Components.Data.IGameDataMoverOrbit.AlwaysVisibleToOrbitTarget">
+            <summary>
+            Whether the orbiting entity should always remain visible to the orbit target.
+            </summary>
+            <remarks>
+            When true, even if the orbiting entity is of another team or faction, it will remain visible to the target.
+            </remarks>
+        </member>
+        <member name="T:GameCore.Components.Data.IGameDataMoverTarget">
+            <summary>
+            Defines the configuration interface for movement target data, extending basic mover functionality with target-specific properties.
+            </summary>
+            <remarks>
+            This interface provides configuration for movers that move toward specific targets, including speed control,
+            trajectory settings for parabolic movement, directional behavior, and ground alignment. It supports complex
+            movement patterns like projectile arcs, homing behaviors, and physics-based motion with acceleration limits.
+            </remarks>
+        </member>
+        <member name="P:GameCore.Components.Data.IGameDataMoverTarget.Speed">
+            <summary>
+            Gets the base movement speed function for the mover.
+            </summary>
+            <remarks>
+            This defines the primary speed at which the mover approaches its target.
+            The function allows for dynamic speed calculation based on execution context.
+            </remarks>
+        </member>
+        <member name="P:GameCore.Components.Data.IGameDataMoverTarget.Acceleration">
+            <summary>
+            Gets the acceleration function that determines how quickly the mover reaches its target speed.
+            </summary>
+            <remarks>
+            When specified, the mover will gradually accelerate to its target speed rather than instantly
+            achieving it. This provides more realistic and smooth movement behavior.
+            </remarks>
+        </member>
+        <member name="P:GameCore.Components.Data.IGameDataMoverTarget.MinSpeed">
+            <summary>
+            Gets the minimum speed function that constrains the lower bound of movement speed.
+            </summary>
+            <remarks>
+            This ensures the mover maintains a minimum velocity even when slowing down or when
+            other factors would reduce its speed below this threshold.
+            </remarks>
+        </member>
+        <member name="P:GameCore.Components.Data.IGameDataMoverTarget.MaxSpeed">
+            <summary>
+            Gets the maximum speed function that constrains the upper bound of movement speed.
+            </summary>
+            <remarks>
+            This caps the mover's velocity to prevent excessive speed, even when acceleration
+            or other factors would increase speed beyond this limit.
+            </remarks>
+        </member>
+        <member name="P:GameCore.Components.Data.IGameDataMoverTarget.LaunchHeight">
+            <summary>
+            Gets the launch height function for parabolic movement trajectories.
+            </summary>
+            <remarks>
+            When specified, the mover will begin its trajectory at this height above its starting position,
+            creating an arc-like movement pattern suitable for projectiles or jumping behaviors.
+            </remarks>
+        </member>
+        <member name="P:GameCore.Components.Data.IGameDataMoverTarget.TargetHeight">
+            <summary>
+            Gets the target height function that defines the vertical position of the destination.
+            </summary>
+            <remarks>
+            This determines the final height where the mover should arrive. Combined with launch height,
+            it helps define the overall trajectory shape for parabolic movement.
+            </remarks>
+        </member>
+        <member name="P:GameCore.Components.Data.IGameDataMoverTarget.TargetHeightIsAbsolute">
+            <summary>
+            Gets a value indicating whether the target height is an absolute world position or relative offset.
+            </summary>
+            <remarks>
+            When true, <see cref="P:GameCore.Components.Data.IGameDataMoverTarget.TargetHeight" /> represents an absolute world coordinate.
+            When false, it represents an offset relative to the target's position.
+            </remarks>
+        </member>
+        <member name="P:GameCore.Components.Data.IGameDataMoverTarget.ParabolaApex">
+            <summary>
+            Gets the parabola apex function that defines the highest point of the movement arc.
+            </summary>
+            <remarks>
+            This controls the peak height of parabolic trajectories, allowing fine-tuning of arc shape
+            for different visual and gameplay effects.
+            </remarks>
+        </member>
+        <member name="P:GameCore.Components.Data.IGameDataMoverTarget.ParabolaLandingHeight">
+            <summary>
+            Gets the parabola landing height function that defines where the arc intersects the ground.
+            </summary>
+            <remarks>
+            This determines the final ground level for parabolic movement, useful for projectiles
+            that need to account for terrain height differences.
+            </remarks>
+        </member>
+        <member name="P:GameCore.Components.Data.IGameDataMoverTarget.TurnToDirection">
+            <summary>
+            Gets a value indicating whether the mover should rotate to face its movement direction.
+            </summary>
+            <remarks>
+            When true, the mover will automatically orient itself to face the direction it's moving,
+            providing natural-looking movement behavior for units and projectiles.
+            </remarks>
+        </member>
+        <member name="P:GameCore.Components.Data.IGameDataMoverTarget.TurnToVelocity">
+            <summary>
+            Gets a value indicating whether the mover should rotate to face its velocity vector.
+            </summary>
+            <remarks>
+            Similar to <see cref="P:GameCore.Components.Data.IGameDataMoverTarget.TurnToDirection" /> but uses the actual velocity vector, which may
+            differ from movement direction when acceleration or external forces are applied.
+            </remarks>
+        </member>
+        <member name="P:GameCore.Components.Data.IGameDataMoverTarget.StickToGround">
+            <summary>
+            Gets a value indicating whether the mover should maintain contact with the ground during movement.
+            </summary>
+            <remarks>
+            When true, the mover will follow terrain contours and stay grounded rather than
+            moving in straight lines through the air. This is useful for ground-based units.
+            </remarks>
+        </member>
+        <member name="T:GameCore.Components.Mover">
+            <summary>
+            TODO: Make Mover unique per entity
+            </summary>
+            <param name="host" />
+            <param name="context" />
+            <summary />
+        </member>
+        <member name="M:GameCore.Components.Mover.#ctor(GameCore.EntitySystem.Entity,GameCore.Interface.IExecutionContext)">
+            <summary>
+            TODO: Make Mover unique per entity
+            </summary>
+            <param name="host" />
+            <param name="context" />
+        </member>
+        <member name="P:GameCore.Components.Mover.LaunchEntity">
+            <summary />
+        </member>
+        <member name="P:GameCore.Components.Mover.LaunchSite">
+            <summary />
+        </member>
+        <member name="P:GameCore.Components.Mover.Target">
+            <summary />
+        </member>
+        <member name="P:GameCore.Components.Mover.Cache">
+            <summary />
+        </member>
+        <member name="P:GameCore.Components.Mover.DoStaticCollision">
+            <summary />
+        </member>
+        <member name="P:GameCore.Components.Mover.StaticMask">
+            <summary />
+        </member>
+        <member name="P:GameCore.Components.Mover.DoImpactEntity">
+            <summary />
+        </member>
+        <member name="P:GameCore.Components.Mover.ImpactSearchFilter">
+            <summary />
+        </member>
+        <member name="P:GameCore.Components.Mover.ImpactSearchRadius">
+            <summary />
+        </member>
+        <member name="P:GameCore.Components.Mover.FinishArriveRadius">
+            <summary />
+        </member>
+        <member name="P:GameCore.Components.Mover.CompleteEffect">
+            <summary />
+        </member>
+        <member name="P:GameCore.Components.Mover.FinalEffect">
+            <summary />
+        </member>
+        <member name="P:GameCore.Components.Mover.ImpactMaxCount">
+            <summary />
+        </member>
+        <member name="P:GameCore.Components.Mover.ImpactEffect">
+            <summary />
+        </member>
+        <member name="P:GameCore.Components.Mover.ImpactSameTargetInterval">
+            <summary />
+        </member>
+        <member name="P:GameCore.Components.Mover.AllowSpellModification">
+            <summary />
+        </member>
+        <member name="P:GameCore.Components.Mover.ImpactUnitLocVar">
+            <summary />
+        </member>
+        <member name="P:GameCore.Components.Mover.KillOnRemoval">
+            <summary />
+        </member>
+        <member name="P:GameCore.Components.Mover.MissileScaling">
+            <summary />
+        </member>
+        <member name="P:GameCore.Components.Mover.ActorArray">
+            <summary />
+        </member>
+        <member name="M:GameCore.Components.Mover.#ctor(GameCore.EntitySystem.Entity,GameCore.Components.Data.IGameDataMover,GameCore.Interface.IExecutionContext)">
+            <summary />
+        </member>
+        <member name="E:GameCore.Components.Mover.OnMoveComplete">
+            <summary />
+        </member>
+        <member name="E:GameCore.Components.Mover.OnMoveStart">
+            <summary />
+        </member>
+        <member name="E:GameCore.Components.Mover.OnMoveStop">
+            <summary />
+        </member>
+        <member name="E:GameCore.Components.Mover.OnMoveCollide">
+            <summary />
+        </member>
+        <member name="E:GameCore.Components.Mover.OnMoveImpact">
+            <summary />
+        </member>
+        <member name="F:GameCore.Components.Mover.Context">
+            <summary />
+        </member>
+        <member name="F:GameCore.Components.Mover._viewMover">
+            <summary />
+        </member>
+        <member name="M:GameCore.Components.Mover.Stop(System.Boolean)">
+            <summary />
+            <param name="complete" />
+            <returns />
+        </member>
+        <member name="M:GameCore.Components.Mover.Destroy">
+            <summary />
+            <returns />
+        </member>
+        <member name="M:GameCore.Components.Mover.ToString">
+            <summary />
+            <returns />
+        </member>
+        <member name="F:GameCore.Components.Mover.completed">
+            <summary />
+        </member>
+        <member name="M:GameCore.Components.Mover.DisposeManaged">
+            <summary />
+            <returns />
+        </member>
+        <member name="M:GameCore.Components.Mover.DisposeUnmanaged">
+            <summary />
+            <returns />
+        </member>
+        <member name="T:GameCore.Components.MoverOrbit">
+            <summary />
+            <summary />
+        </member>
+        <member name="P:GameCore.Components.MoverOrbit.Cache">
+            <summary />
+        </member>
+        <member name="M:GameCore.Components.MoverOrbit.#ctor(GameCore.EntitySystem.Entity,GameCore.Interface.IExecutionContext)">
+            <summary />
+        </member>
+        <member name="M:GameCore.Components.MoverOrbit.#ctor(GameCore.EntitySystem.Entity,GameCore.Components.Data.IGameDataMoverOrbit,GameCore.Interface.IExecutionContext)">
+            <summary />
+        </member>
+        <member name="P:GameCore.Components.MoverOrbit.OrbitAngularVelocity">
+            <summary />
+        </member>
+        <member name="P:GameCore.Components.MoverOrbit.OrbitRadius">
+            <summary />
+        </member>
+        <member name="P:GameCore.Components.MoverOrbit.OrbitRelativeToTargetFacing">
+            <summary />
+        </member>
+        <member name="P:GameCore.Components.MoverOrbit.SelfRotationRate">
+            <summary />
+        </member>
+        <member name="P:GameCore.Components.MoverOrbit.SelfRotationRelativeToTarget">
+            <summary />
+        </member>
+        <member name="P:GameCore.Components.MoverOrbit.InitialFacing">
+            <summary />
+        </member>
+        <member name="P:GameCore.Components.MoverOrbit.OrbitHeight">
+            <summary />
+        </member>
+        <member name="P:GameCore.Components.MoverOrbit.HeightRelativeToTarget">
+            <summary />
+        </member>
+        <member name="P:GameCore.Components.MoverOrbit.AlwaysVisibleToOrbitTarget">
+            <summary />
+        </member>
+        <member name="P:GameCore.Components.MoverOrbit.EngineInterface#BaseInterface#IMoverDataOrbit#OrbitAngularVelocity">
+            <summary />
+        </member>
+        <member name="P:GameCore.Components.MoverOrbit.EngineInterface#BaseInterface#IMoverDataOrbit#OrbitRadius">
+            <summary />
+        </member>
+        <member name="P:GameCore.Components.MoverOrbit.EngineInterface#BaseInterface#IMoverDataOrbit#SelfRotationRate">
+            <summary />
+        </member>
+        <member name="P:GameCore.Components.MoverOrbit.EngineInterface#BaseInterface#IMoverDataOrbit#InitialFacing">
+            <summary />
+        </member>
+        <member name="T:GameCore.Components.MoverTarget">
+            <summary />
+            <summary />
+        </member>
+        <member name="P:GameCore.Components.MoverTarget.Cache">
+            <summary />
+        </member>
+        <member name="M:GameCore.Components.MoverTarget.#ctor(GameCore.EntitySystem.Entity,GameCore.Interface.IExecutionContext)">
+            <summary />
+        </member>
+        <member name="M:GameCore.Components.MoverTarget.#ctor(GameCore.EntitySystem.Entity,GameCore.Components.Data.IGameDataMoverTarget,GameCore.Interface.IExecutionContext)">
+            <summary />
+        </member>
+        <member name="P:GameCore.Components.MoverTarget.Speed">
+            <summary />
+        </member>
+        <member name="P:GameCore.Components.MoverTarget.Acceleration">
+            <summary />
+        </member>
+        <member name="P:GameCore.Components.MoverTarget.MinSpeed">
+            <summary />
+        </member>
+        <member name="P:GameCore.Components.MoverTarget.MaxSpeed">
+            <summary />
+        </member>
+        <member name="P:GameCore.Components.MoverTarget.LaunchHeight">
+            <summary />
+        </member>
+        <member name="P:GameCore.Components.MoverTarget.TargetHeight">
+            <summary />
+        </member>
+        <member name="P:GameCore.Components.MoverTarget.TargetHeightIsAbsolute">
+            <summary />
+        </member>
+        <member name="P:GameCore.Components.MoverTarget.ParabolaApex">
+            <summary />
+        </member>
+        <member name="P:GameCore.Components.MoverTarget.ParabolaLandingHeight">
+            <summary />
+        </member>
+        <member name="P:GameCore.Components.MoverTarget.TurnToDirection">
+            <summary />
+        </member>
+        <member name="P:GameCore.Components.MoverTarget.TurnToVelocity">
+            <summary />
+        </member>
+        <member name="P:GameCore.Components.MoverTarget.StickToGround">
+            <summary />
+        </member>
+        <member name="P:GameCore.Components.MoverTarget.EngineInterface#BaseInterface#IMoverDataTarget#Speed">
+            <summary />
+        </member>
+        <member name="P:GameCore.Components.MoverTarget.EngineInterface#BaseInterface#IMoverDataTarget#Acceleration">
+            <summary />
+        </member>
+        <member name="P:GameCore.Components.MoverTarget.EngineInterface#BaseInterface#IMoverDataTarget#MinSpeed">
+            <summary />
+        </member>
+        <member name="P:GameCore.Components.MoverTarget.EngineInterface#BaseInterface#IMoverDataTarget#MaxSpeed">
+            <summary />
+        </member>
+        <member name="T:GameCore.Components.ObjectManager`2">
+            <summary />
+        </member>
+        <member name="M:GameCore.Components.ObjectManager`2.#ctor(GameCore.EntitySystem.Entity,GameCore.BaseType.ComponentTag)">
+            <summary />
+        </member>
+        <member name="P:GameCore.Components.ObjectManager`2.ObjectType">
+            <summary />
+        </member>
+        <member name="T:GameCore.Components.ObjectManager`2.LinkManager">
+            <summary />
+            <summary />
+        </member>
+        <member name="M:GameCore.Components.ObjectManager`2.LinkManager.#ctor(System.Comparison{`0},GameData.IGameLink{`1})">
+            <summary />
+            <summary />
+        </member>
+        <member name="F:GameCore.Components.ObjectManager`2.LinkManager.LinkedObjects">
+            <summary />
+        </member>
+        <member name="P:GameCore.Components.ObjectManager`2.LinkManager.Link">
+            <summary />
+        </member>
+        <member name="P:GameCore.Components.ObjectManager`2.LinkManager.HasAnyEnabled">
+            <summary />
+        </member>
+        <member name="P:GameCore.Components.ObjectManager`2.LinkManager.HasAnyInstanceEnabled">
+            <summary />
+        </member>
+        <member name="M:GameCore.Components.ObjectManager`2.LinkManager.Add(`0)">
+            <summary />
+            <param name="obj" />
+            <returns />
+        </member>
+        <member name="M:GameCore.Components.ObjectManager`2.LinkManager.FirstOrDefault">
+            <summary />
+            <returns />
+        </member>
+        <member name="M:GameCore.Components.ObjectManager`2.LinkManager.GetAll">
+            <summary>
+            This will duplicate the collection.
+            </summary>
+            <returns />
+        </member>
+        <member name="M:GameCore.Components.ObjectManager`2.LinkManager.YieldAll">
+            <summary />
+            <returns />
+        </member>
+        <member name="M:GameCore.Components.ObjectManager`2.LinkManager.Remove(`0)">
+            <summary />
+            <param name="attached" />
+            <returns />
+        </member>
+        <member name="M:GameCore.Components.ObjectManager`2.LinkManager.IsEmpty">
+            <summary />
+            <returns />
+        </member>
+        <member name="F:GameCore.Components.ObjectManager`2.LinkManager.wasActivated">
+            <summary />
+        </member>
+        <member name="M:GameCore.Components.ObjectManager`2.LinkManager.RiseLinkStateChangedEvent(System.Boolean)">
+            <summary />
+            <param name="newState" />
+            <returns />
+        </member>
+        <member name="E:GameCore.Components.ObjectManager`2.LinkManager.OnLinkActivated">
+            <summary />
+        </member>
+        <member name="E:GameCore.Components.ObjectManager`2.LinkManager.OnLinkDeactivated">
+            <summary />
+        </member>
+        <member name="M:GameCore.Components.ObjectManager`2.IsEnabled(GameData.IGameLink{`1})">
+            <summary />
+            <param name="link" />
+            <returns />
+        </member>
+        <member name="F:GameCore.Components.ObjectManager`2.linkDisabledCounter">
+            <summary />
+        </member>
+        <member name="F:GameCore.Components.ObjectManager`2.categoryDisabledCounter">
+            <summary />
+        </member>
+        <member name="M:GameCore.Components.ObjectManager`2.LinkDisabledCount(GameData.IGameLink{`1})">
+            <summary />
+            <param name="link" />
+            <returns />
+        </member>
+        <member name="M:GameCore.Components.ObjectManager`2.CategoriesDisabledCount(System.Collections.IEnumerable)">
+            <summary />
+            <param name="categories" />
+            <returns />
+        </member>
+        <member name="P:GameCore.Components.ObjectManager`2.Objects">
+            <summary />
+        </member>
+        <member name="P:GameCore.Components.ObjectManager`2.ObjectsByCategory">
+            <summary />
+        </member>
+        <member name="M:GameCore.Components.ObjectManager`2.Get(GameData.IGameLink{`1})">
+            <summary />
+            <param name="link" />
+            <returns />
+        </member>
+        <member name="M:GameCore.Components.ObjectManager`2.GetAll">
+            <summary>
+            This will duplicate the collection.
+            </summary>
+            <returns />
+        </member>
+        <member name="M:GameCore.Components.ObjectManager`2.GetAll(GameData.IGameLink{`1})">
+            <summary>
+            This will duplicate the collection.
+            </summary>
+            <returns />
+        </member>
+        <member name="M:GameCore.Components.ObjectManager`2.Get``1(GameData.IGameLink{`1})">
+            <summary />
+            <typeparam name="TAttachedObjectDescendant" />
+            <param name="link" />
+            <returns />
+        </member>
+        <member name="M:GameCore.Components.ObjectManager`2.Get(System.Func{`0,System.Boolean})">
+            <summary />
+            <param name="condition" />
+            <returns />
+        </member>
+        <member name="M:GameCore.Components.ObjectManager`2.YieldAll">
+            <summary />
+            <returns />
+        </member>
+        <member name="M:GameCore.Components.ObjectManager`2.Get``1(System.Func{``0,System.Boolean})">
+            <summary />
+            <typeparam name="TAttachedObjectDescendant" />
+            <param name="condition" />
+            <returns />
+        </member>
+        <member name="M:GameCore.Components.ObjectManager`2.GetOne(System.Func{`0,System.Boolean})">
+            <summary />
+            <param name="condition" />
+            <returns />
+        </member>
+        <member name="M:GameCore.Components.ObjectManager`2.GetOne``1(System.Func{``0,System.Boolean})">
+            <summary />
+            <typeparam name="TAttachedObjectDescendant" />
+            <param name="condition" />
+            <returns />
+        </member>
+        <member name="M:GameCore.Components.ObjectManager`2.ProcessEnabledConfig(System.Collections.Generic.IEnumerable{GameData.IGameLink{`1}},System.Collections.IEnumerable,System.Collections.Generic.IEnumerable{GameData.IGameLink{`1}},System.Collections.IEnumerable)">
+            <summary />
+            <param name="linksToEnable" />
+            <param name="categoriesToEnable" />
+            <param name="linksToDisable" />
+            <param name="categoriesToDisable" />
+            <returns />
+        </member>
+        <member name="M:GameCore.Components.ObjectManager`2.Add(`0)">
+            <summary />
+            <param name="attached" />
+            <returns />
+        </member>
+        <member name="M:GameCore.Components.ObjectManager`2.NotifyLinkStateChanged(GameData.IGameLink{`1})">
+            <summary />
+            <param name="link" />
+            <returns />
+        </member>
+        <member name="E:GameCore.Components.ObjectManager`2.OnLinkAttached">
+            <summary />
+        </member>
+        <member name="E:GameCore.Components.ObjectManager`2.OnLinkDetached">
+            <summary />
+        </member>
+        <member name="E:GameCore.Components.ObjectManager`2.OnLinkActivated">
+            <summary />
+        </member>
+        <member name="E:GameCore.Components.ObjectManager`2.OnLinkDeactivated">
+            <summary />
+        </member>
+        <member name="E:GameCore.Components.ObjectManager`2.OnObjectAttached">
+            <summary />
+        </member>
+        <member name="E:GameCore.Components.ObjectManager`2.OnObjectRefresh">
+            <summary />
+        </member>
+        <member name="M:GameCore.Components.ObjectManager`2.Remove(`0)">
+            <summary />
+            <param name="attached" />
+            <returns />
+        </member>
+        <member name="F:GameCore.Components.ObjectManager`2.disposedValue">
+            <summary />
+        </member>
+        <member name="M:GameCore.Components.ObjectManager`2.Dispose(System.Boolean)">
+            <summary />
+            <param name="disposing" />
+            <returns />
+        </member>
+        <member name="M:GameCore.Components.ObjectManager`2.ToString">
+            <summary>
+            Returns a string representation of this ObjectManager including its type, object count, and host information.
+            </summary>
+            <returns>A formatted string describing this ObjectManager.</returns>
+        </member>
+        <member name="T:GameCore.Components.TagComponent">
+            <summary>
+            Unique tag component, which is used to identify the component by a tag.
+            At most one component of each tag can be attached to an entity.
+            Component type can be descendent of each class.
+            </summary>
+        </member>
+        <member name="M:GameCore.Components.TagComponent.#ctor(GameCore.EntitySystem.Entity,GameCore.BaseType.ComponentTag)">
+            <summary />
+        </member>
+        <member name="P:GameCore.Components.TagComponent.Tag">
+            <summary />
+        </member>
+        <member name="M:GameCore.Components.TagComponent.DisposeManaged">
+            <summary />
+            <returns />
+        </member>
+        <member name="T:GameCore.Components.Turnable">
+            <summary />
+        </member>
+        <member name="M:GameCore.Components.Turnable.#ctor(GameCore.EntitySystem.Entity)">
+            <summary />
+        </member>
+        <member name="M:GameCore.Components.Turnable.CanTurn">
+            <summary />
+            <returns />
+        </member>
+        <member name="M:GameCore.Components.Turnable.AllowApproachOrder">
+            <summary />
+            <returns />
+        </member>
+        <member name="M:GameCore.Components.Turnable.CreateInstance(GameCore.EntitySystem.Entity)">
+            <summary />
+            <param name="content" />
+            <returns />
+        </member>
+        <member name="P:GameCore.Components.Turnable.TurnSpeed">
+            <summary />
+        </member>
+        <member name="T:GameCore.Components.TurnableExtension">
+            <summary />
+        </member>
+        <member name="M:GameCore.Components.TurnableExtension.GetComponent``1(GameCore.EntitySystem.Entity)">
+            <summary />
+            <typeparam name="TComponent" />
+            <param name="entity" />
+            <returns />
+        </member>
+        <member name="T:GameCore.Components.UnitPropertyComplex">
+            <summary>
+            Manages complex unit properties, including initialization, calculation, and dependency tracking.
+            Provides methods for setting, adding, and retrieving property values, as well as registering property formulas and dependencies.
+            </summary>
+        </member>
+        <member name="M:GameCore.Components.UnitPropertyComplex.OnRegisterGameClass">
+            <summary>
+            Registers the game class and hooks up property setup to the gameplay settings initialization event.
+            </summary>
+        </member>
+        <member name="M:GameCore.Components.UnitPropertyComplex.SetupAllProperties(GameCore.GameSystem.Data.GameDataGameMode)">
+            <summary>
+            Sets up all unit properties by registering each property data from the catalog.
+            </summary>
+            <param name="_">The game mode (unused).</param>
+        </member>
+        <member name="F:GameCore.Components.UnitPropertyComplex.hostUnit">
+            <summary />
+        </member>
+        <member name="F:GameCore.Components.UnitPropertyComplex.initialPropertyData">
+            <summary />
+        </member>
+        <member name="F:GameCore.Components.UnitPropertyComplex.finalValueCache">
+            <summary />
+        </member>
+        <member name="F:GameCore.Components.UnitPropertyComplex.propertySubTypeValues">
+            <summary />
+        </member>
+        <member name="F:GameCore.Components.UnitPropertyComplex.formulaMap">
+            <summary />
+        </member>
+        <member name="F:GameCore.Components.UnitPropertyComplex.affectedPropertiesMap">
+            <summary />
+        </member>
+        <member name="M:GameCore.Components.UnitPropertyComplex.GetFormula(GameData.IGameLink{GameCore.Data.GameDataUnitProperty})">
+            <summary>
+            Gets the formula associated with the specified property, if any.
+            </summary>
+            <param name="property">The property to get the formula for.</param>
+            <returns>The <see cref="T:GameCore.Struct.UnitPropertyFormula" /> if found; otherwise, <c>null</c>.</returns>
+        </member>
+        <member name="M:GameCore.Components.UnitPropertyComplex.GetFinal(GameData.IGameLink{GameCore.Data.GameDataUnitProperty})">
+            <summary>
+            Gets the final value of the specified property, calculating it if necessary.
+            </summary>
+            <param name="property">The property to retrieve.</param>
+            <returns>The final value of the property, or 0 if not set.</returns>
+        </member>
+        <member name="M:GameCore.Components.UnitPropertyComplex.GetFinalOrNull(GameData.IGameLink{GameCore.Data.GameDataUnitProperty})">
+            <summary>
+            Gets the final value of the property if it is set or initialized; otherwise, returns <c>null</c>.
+            </summary>
+            <param name="property">The property to retrieve.</param>
+            <returns>The final value if set or initialized; otherwise, <c>null</c>.</returns>
+        </member>
+        <member name="M:GameCore.Components.UnitPropertyComplex.RegisterPropertyData(GameCore.Data.GameDataUnitProperty)">
+            <summary>
+            Registers property data and its formula for the specified property.
+            </summary>
+            <param name="cache">The property data to register.</param>
+        </member>
+        <member name="M:GameCore.Components.UnitPropertyComplex.RegisterPropertyData(GameData.IGameLink{GameCore.Data.GameDataUnitProperty})">
+            <summary>
+            Registers property data and its formula for the specified property link.
+            </summary>
+            <param name="link">The property link to register.</param>
+        </member>
+        <member name="M:GameCore.Components.UnitPropertyComplex.RegisterFormula(GameData.IGameLink{GameCore.Data.GameDataUnitProperty},GameCore.Struct.UnitPropertyFormula)">
+            <summary>
+            Registers a formula for the specified property and tracks its dependencies.
+            </summary>
+            <param name="property">The property to register the formula for.</param>
+            <param name="formula">The formula to register.</param>
+        </member>
+        <member name="M:GameCore.Components.UnitPropertyComplex.RegisterDependency(GameData.IGameLink{GameCore.Data.GameDataUnitProperty},GameData.IGameLink{GameCore.Data.GameDataUnitProperty})">
+            <summary>
+            Registers a dependency between two properties.
+            </summary>
+            <param name="property">The dependent property.</param>
+            <param name="dependency">The property it depends on.</param>
+            <returns>
+                <c>true</c> if the dependency was added; otherwise, <c>false</c>.</returns>
+        </member>
+        <member name="M:GameCore.Components.UnitPropertyComplex.#ctor(GameCore.EntitySystem.Entity)">
+            <summary>
+            Initializes a new instance of the <see cref="T:GameCore.Components.UnitPropertyComplex" /> class for the specified host entity.
+            </summary>
+            <param name="host">The host entity.</param>
+            <exception cref="T:System.Exception">Thrown if the host does not implement <see cref="T:GameCore.BaseInterface.IPropertyHost" />.</exception>
+        </member>
+        <member name="F:GameCore.Components.UnitPropertyComplex.disposedValue">
+            <summary />
+        </member>
+        <member name="M:GameCore.Components.UnitPropertyComplex.Dispose(System.Boolean)">
+            <summary>
+            Disposes the resources used by the component.
+            </summary>
+            <param name="disposing">Indicates whether the method is called from Dispose.</param>
+        </member>
+        <member name="M:GameCore.Components.UnitPropertyComplex.CreateInstance(GameCore.EntitySystem.Entity)">
+            <summary>
+            Creates a new instance of <see cref="T:GameCore.Components.UnitPropertyComplex" /> for the specified entity.
+            </summary>
+            <param name="content">The entity to attach the component to.</param>
+            <returns>A new <see cref="T:GameCore.Components.UnitPropertyComplex" /> instance.</returns>
+        </member>
+        <member name="T:GameCore.Components.UnitPropertyComplexExtension">
+            <summary>
+            Extension methods for working with <see cref="T:GameCore.Components.UnitPropertyComplex" /> components on entities.
+            </summary>
+        </member>
+        <member name="M:GameCore.Components.UnitPropertyComplexExtension.GetComponent``1(GameCore.EntitySystem.Entity)">
+            <summary>
+            Gets the <see cref="T:GameCore.Components.UnitPropertyComplex" /> component from the entity, if present.
+            </summary>
+            <typeparam name="TComponent">The type of the component.</typeparam>
+            <param name="entity">The entity to query.</param>
+            <returns>The component if found; otherwise, <c>null</c>.</returns>
+        </member>
+        <member name="M:GameCore.Components.UnitPropertyComplexExtension.GetOrCreateComponent``1(GameCore.EntitySystem.Entity)">
+            <summary>
+            Gets or creates the <see cref="T:GameCore.Components.UnitPropertyComplex" /> component on the entity.
+            </summary>
+            <typeparam name="TComponent">The type of the component.</typeparam>
+            <param name="entity">The entity to query or attach to.</param>
+            <returns>The component instance.</returns>
+        </member>
+        <member name="M:GameCore.Components.UnitPropertyComplexExtension.GetUnitPropertyFinal(GameCore.EntitySystem.Entity,GameData.IGameLink{GameCore.Data.GameDataUnitProperty})">
+            <summary>
+            Gets the final value of a unit property for the entity, if available.
+            </summary>
+            <param name="entity">The entity to query.</param>
+            <param name="property">The property to retrieve.</param>
+            <returns>The final value if available; otherwise, <c>null</c>.</returns>
+        </member>
+        <member name="T:GameCore.Components.Walkable">
+            <summary />
+            <summary />
+        </member>
+        <member name="M:GameCore.Components.Walkable.#ctor(GameCore.EntitySystem.Entity)">
+            <summary />
+        </member>
+        <member name="M:GameCore.Components.Walkable.CanWalk">
+            <summary />
+            <returns />
+        </member>
+        <member name="M:GameCore.Components.Walkable.AllowApproachOrder">
+            <summary />
+            <returns />
+        </member>
+        <member name="M:GameCore.Components.Walkable.CreateInstance(GameCore.EntitySystem.Entity)">
+            <summary />
+            <param name="content" />
+            <returns />
+        </member>
+        <member name="T:GameCore.Components.WalkableExtension">
+            <summary />
+        </member>
+        <member name="M:GameCore.Components.WalkableExtension.GetComponent``1(GameCore.EntitySystem.Entity)">
+            <summary />
+            <typeparam name="TComponent" />
+            <param name="entity" />
+            <returns />
+        </member>
+    </members>
+</doc>

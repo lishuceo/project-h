@@ -1,0 +1,2468 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>GameUI</name>
+    </assembly>
+    <members>
+        <member name="T:GameUI.Control.UIRoot">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="P:GameUI.Control.UIRoot.Instance">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="F:GameUI.Control.UIRoot.children">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="P:GameUI.Control.UIRoot.Children">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="P:GameUI.Control.UIRoot.GameUI#Interface#INode#Children">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="P:GameUI.Control.UIRoot.DataContext">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="M:GameUI.Control.UIRoot.#ctor">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="M:GameUI.Control.UIRoot.AddChild(GameUI.Control.Control)">
+        <summary>
+        
+        </summary>
+        <param name="child"></param>
+        <returns></returns>
+        </member>
+        <member name="T:GameUI.Control.Control">
+        <summary>
+        
+        </summary>
+        <summary>
+        
+        </summary>
+        <summary>
+        Represents a base class for UI controls in the game UI system. Provides core logic for managing control hierarchy, data context, and interaction with the underlying game data.
+        </summary>
+        <remarks>
+        This class implements <see cref = "T:GameData.Interface.IGameObject`1"/> and <see cref = "T:GameUI.Interface.INodeChild"/> interfaces, enabling integration with the game data layer and UI tree structure.
+        </remarks>
+        <summary>
+        
+        </summary>
+        <summary>
+        
+        </summary>
+        <summary>
+        
+        </summary>
+        <summary>
+        
+        </summary>
+        <summary>
+        
+        </summary>
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="T:GameUI.Control.Primitive.Button">
+        <summary>
+        表示 UI 按钮控件。
+        </summary>
+        <remarks>
+        按钮控件默认不会转发鼠标事件（PointerClicked, PointerDoubleClicked, PointerPressed,
+        PointerReleased, PointerEntered, PointerExited）到父控件或游戏场景，
+        防止点击按钮时意外触发游戏场景中的操作。如果需要按钮转发某些鼠标事件，
+        可以手动设置 <see cref = "P:GameUI.Control.Control.RoutedEvents"/> 属性。
+        </remarks>
+        <summary>
+        
+        </summary>
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="P:GameUI.Control.Primitive.Button.DefaultTemplate">
+        <summary>
+        获取按钮的默认模板链接。
+        </summary>
+        </member>
+        <member name="M:GameUI.Control.Primitive.Button.#ctor(GameData.IGameLink{GameUI.Control.Data.GameDataControlButton})">
+        <summary>
+        使用指定模板链接初始化按钮实例。
+        </summary>
+        <param name = "link">按钮模板数据链接。</param>
+        </member>
+        <member name="M:GameUI.Control.Primitive.Button.#ctor">
+        <summary>
+        使用默认模板初始化按钮实例。
+        </summary>
+        <remarks>
+        构造函数会自动设置按钮不转发任何鼠标事件，防止点击按钮时触发游戏场景中的操作。
+        </remarks>
+        </member>
+        <member name="M:GameUI.Control.Primitive.Button.OnKeyboardAcceleratorInvokedInternal(GameUI.Control.Struct.KeyboardAccelerator)">
+        <summary>
+        
+        </summary>
+        <param name="accelerator"></param>
+        <returns></returns>
+        </member>
+        <member name="F:GameUI.Control.Primitive.Button.imageHover">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="P:GameUI.Control.Primitive.Button.ImageHover">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="F:GameUI.Control.Primitive.Button.imagePressed">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="P:GameUI.Control.Primitive.Button.ImagePressed">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="T:GameUI.Control.Primitive.Canvas">
+        <summary>
+        画布控件类，提供2D图形绘制功能
+        </summary>
+        <remarks>
+        <para>Canvas类继承自Control，提供了丰富的2D绘图API，包括：</para>
+        <list type="bullet">
+        <item><description>基础图形绘制（线条、圆形、矩形、三角形等）</description></item>
+        <item><description>图像绘制和变换操作</description></item>
+        <item><description>复杂路径绘制（包括贝塞尔曲线、圆弧等）</description></item>
+        <item><description>颜色和样式管理</description></item>
+        </list>
+        <para>该类采用partial class设计，功能分布在多个文件中：</para>
+        <list type="table">
+        <item><term>Canvas.cs</term><description>基础类定义和构造函数</description></item>
+        <item><term>Canvas.Draw.cs</term><description>基础绘制方法</description></item>
+        <item><term>Canvas.DrawPath.cs</term><description>路径绘制功能</description></item>
+        <item><term>Canvas.Properties.cs</term><description>绘制属性管理</description></item>
+        </list>
+        </remarks>
+        <example>
+        <code>
+        // 创建画布实例
+        var canvas = new Canvas();
+        
+        // 设置绘制属性
+        canvas.StrokePaint = new SolidPaint(Color.Red);
+        canvas.FillPaint = new SolidPaint(Color.Blue);
+        canvas.StrokeSize = 2.0f;
+        
+        // 绘制基础图形
+        canvas.DrawRectangle(10, 10, 100, 50);
+        canvas.FillCircle(60, 35, 20);
+        </code>
+        </example>
+        <summary>
+        
+        </summary>
+        <summary>
+        
+        </summary>
+        <summary>
+        
+        </summary>
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="P:GameUI.Control.Primitive.Canvas.DefaultTemplate">
+        <summary>
+        获取Canvas控件的默认模板链接
+        </summary>
+        <value>返回指向GameDataControlCanvas类型的默认游戏链接</value>
+        </member>
+        <member name="M:GameUI.Control.Primitive.Canvas.#ctor(GameData.IGameLink{GameUI.Control.Data.GameDataControlCanvas})">
+        <summary>
+        使用指定的游戏链接初始化Canvas实例
+        </summary>
+        <param name = "link">指向GameDataControlCanvas数据的游戏链接</param>
+        <remarks>
+        此构造函数将创建一个与指定数据链接绑定的Canvas控件，
+        控件类型设置为SCEImportGUI.ControlType.Canvas
+        </remarks>
+        </member>
+        <member name="M:GameUI.Control.Primitive.Canvas.#ctor">
+        <summary>
+        使用默认模板初始化Canvas实例
+        </summary>
+        <remarks>
+        此构造函数使用DefaultTemplate作为数据源创建Canvas控件，
+        适用于不需要特定数据绑定的场景
+        </remarks>
+        </member>
+        <member name="M:GameUI.Control.Primitive.Canvas.DrawImage(GameCore.ResourceType.Image,System.Single,System.Single,System.Single,System.Single)">
+        <summary>
+        在指定位置和尺寸绘制图像
+        </summary>
+        <param name = "image">要绘制的图像资源</param>
+        <param name = "x">图像左上角的X坐标</param>
+        <param name = "y">图像左上角的Y坐标</param>
+        <param name = "width">图像显示宽度</param>
+        <param name = "height">图像显示高度</param>
+        <remarks>
+        <para>此方法将图像绘制到画布的指定位置。如果图像路径为空，则不执行绘制操作。</para>
+        <para>图像会被缩放以适应指定的宽度和高度。</para>
+        </remarks>
+        <example>
+        <code>
+        var image = new Image("path/to/image.png");
+        canvas.DrawImage(image, 10, 10, 100, 80);
+        </code>
+        </example>
+        </member>
+        <member name="M:GameUI.Control.Primitive.Canvas.DrawImage(GameCore.ResourceType.Image,System.Single,System.Single)">
+        <summary>
+        在指定位置绘制图像（原始尺寸）
+        </summary>
+        <param name = "image">要绘制的图像资源</param>
+        <param name = "x">图像左上角的X坐标</param>
+        <param name = "y">图像左上角的Y坐标</param>
+        <remarks>
+        <para>此方法将图像以原始尺寸绘制到画布的指定位置。</para>
+        <para>如果图像路径为空，则不执行绘制操作。</para>
+        </remarks>
+        <example>
+        <code>
+        var image = new Image("path/to/image.png");
+        canvas.DrawImage(image, 10, 10); // 在(10,10)位置绘制原尺寸图像
+        </code>
+        </example>
+        </member>
+        <member name="M:GameUI.Control.Primitive.Canvas.DrawImage(GameCore.ResourceType.Image,System.Single,System.Single,System.Single,System.Single,System.Single,System.Single,System.Single,System.Single)">
+        <summary>
+        绘制图像的指定区域到画布的指定位置和尺寸
+        </summary>
+        <param name = "image">要绘制的图像资源</param>
+        <param name = "sourceX">源图像裁剪区域的X坐标</param>
+        <param name = "sourceY">源图像裁剪区域的Y坐标</param>
+        <param name = "sourceWidth">源图像裁剪区域的宽度</param>
+        <param name = "sourceHeight">源图像裁剪区域的高度</param>
+        <param name = "x">目标位置的X坐标</param>
+        <param name = "y">目标位置的Y坐标</param>
+        <param name = "width">目标绘制宽度</param>
+        <param name = "height">目标绘制高度</param>
+        <remarks>
+        <para>此方法允许选择图像的指定区域，并将其缩放绘制到目标区域。</para>
+        <para>如果图像路径为空，则不执行绘制操作。</para>
+        <para>源区域和目标区域可以有不同的尺寸，图像会自动缩放以适应。</para>
+        </remarks>
+        <example>
+        <code>
+        var spriteSheet = new Image("sprites.png");
+        // 从精灵表中裁剪(32,0,32,32)区域，绘制到(10,10,64,64)位置并放大
+        canvas.DrawImage(spriteSheet, 32, 0, 32, 32, 10, 10, 64, 64);
+        </code>
+        </example>
+        </member>
+        <member name="M:GameUI.Control.Primitive.Canvas.DrawImage(GameCore.ResourceType.Image,System.Drawing.RectangleF,System.Drawing.RectangleF)">
+        <summary>
+        使用矩形结构体绘制图像的指定区域到画布的指定位置和尺寸
+        </summary>
+        <param name = "image">要绘制的图像资源</param>
+        <param name = "sourceRect">源图像的裁剪区域</param>
+        <param name = "destRect">目标绘制区域</param>
+        <remarks>
+        <para>此方法是DrawImage多参数重载的便利版本，使用RectangleF结构体简化参数传递。</para>
+        <para>如果图像路径为空，则不执行绘制操作。</para>
+        <para>源区域和目标区域可以有不同的尺寸，图像会自动缩放以适应。</para>
+        <para>此重载特别适合AI代码生成，因为参数更直观易理解。</para>
+        </remarks>
+        <example>
+        <code>
+        var spriteSheet = new Image("sprites.png");
+        var sourceRect = new RectangleF(32, 0, 32, 32); // 从精灵表裁剪32x32区域
+        var destRect = new RectangleF(10, 10, 64, 64);   // 绘制到64x64区域并放大
+        canvas.DrawImage(spriteSheet, sourceRect, destRect);
+        </code>
+        </example>
+        </member>
+        <member name="M:GameUI.Control.Primitive.Canvas.DrawLine(System.Single,System.Single,System.Single,System.Single)">
+        <summary>
+        绘制从起点到终点的直线
+        </summary>
+        <param name = "x1">起点的X坐标</param>
+        <param name = "y1">起点的Y坐标</param>
+        <param name = "x2">终点的X坐标</param>
+        <param name = "y2">终点的Y坐标</param>
+        <remarks>
+        直线的颜色由StrokePaint属性决定，线宽由StrokeSize属性决定
+        </remarks>
+        <example>
+        <code>
+        canvas.StrokePaint = Color.Red;
+        canvas.StrokeSize = 2.0f;
+        canvas.DrawLine(0, 0, 100, 100);
+        </code>
+        </example>
+        </member>
+        <member name="M:GameUI.Control.Primitive.Canvas.DrawCircle(System.Single,System.Single,System.Single)">
+        <summary>
+        绘制圆形轮廓
+        </summary>
+        <param name = "centerX">圆心的X坐标</param>
+        <param name = "centerY">圆心的Y坐标</param>
+        <param name = "radius">圆的半径</param>
+        <remarks>
+        只绘制圆形的轮廓，不填充内部。轮廓颜色由StrokePaint属性决定，线宽由StrokeSize属性决定
+        </remarks>
+        <example>
+        <code>
+        canvas.StrokePaint = Color.Blue;
+        canvas.DrawCircle(50, 50, 25);
+        </code>
+        </example>
+        </member>
+        <member name="M:GameUI.Control.Primitive.Canvas.DrawCircle(System.Drawing.PointF,System.Single)">
+        <summary>
+        绘制圆形轮廓
+        </summary>
+        <param name = "center">圆心坐标</param>
+        <param name = "radius">圆的半径</param>
+        <remarks>
+        只绘制圆形的轮廓，不填充内部。轮廓颜色由StrokePaint属性决定，线宽由StrokeSize属性决定
+        </remarks>
+        <example>
+        <code>
+        canvas.StrokePaint = Color.Blue;
+        canvas.DrawCircle(new PointF(50, 50), 25);
+        </code>
+        </example>
+        </member>
+        <member name="M:GameUI.Control.Primitive.Canvas.DrawCircle(System.Drawing.PointF,System.Single,System.Single,System.Single,System.Boolean)">
+        <summary>
+        绘制圆弧轮廓
+        </summary>
+        <param name = "center">圆心坐标</param>
+        <param name = "radius">圆的半径</param>
+        <param name = "startAngle">起始角度（以度为单位）</param>
+        <param name = "endAngle">结束角度（以度为单位）</param>
+        <param name = "clockwise">是否顺时针绘制</param>
+        <remarks>
+        <para>绘制圆形的一段弧形轮廓。角度以度为单位，0度指向右侧（正X轴方向）。</para>
+        <para>轮廓颜色由StrokePaint属性决定，线宽由StrokeSize属性决定。</para>
+        </remarks>
+        <example>
+        <code>
+        canvas.StrokePaint = Color.Green;
+        // 绘制从45度到135度的圆弧（四分之一圆）
+        canvas.DrawCircle(new PointF(50, 50), 30, 45, 135, true);
+        </code>
+        </example>
+        </member>
+        <member name="M:GameUI.Control.Primitive.Canvas.DrawTriangle(System.Single,System.Single,System.Single,System.Single,System.Single,System.Single)">
+        <summary>
+        绘制三角形轮廓
+        </summary>
+        <param name = "x1">第一个顶点的X坐标</param>
+        <param name = "y1">第一个顶点的Y坐标</param>
+        <param name = "x2">第二个顶点的X坐标</param>
+        <param name = "y2">第二个顶点的Y坐标</param>
+        <param name = "x3">第三个顶点的X坐标</param>
+        <param name = "y3">第三个顶点的Y坐标</param>
+        <remarks>
+        通过连接三个顶点来绘制三角形轮廓。轮廓颜色由StrokePaint属性决定，线宽由StrokeSize属性决定
+        </remarks>
+        <example>
+        <code>
+        canvas.StrokePaint = Color.Green;
+        canvas.DrawTriangle(50, 10, 10, 90, 90, 90);
+        </code>
+        </example>
+        </member>
+        <member name="M:GameUI.Control.Primitive.Canvas.DrawRectangle(System.Single,System.Single,System.Single,System.Single)">
+        <summary>
+        绘制矩形轮廓
+        </summary>
+        <param name = "x">矩形左上角的X坐标</param>
+        <param name = "y">矩形左上角的Y坐标</param>
+        <param name = "width">矩形的宽度</param>
+        <param name = "height">矩形的高度</param>
+        <remarks>
+        只绘制矩形的轮廓，不填充内部。轮廓颜色由StrokePaint属性决定，线宽由StrokeSize属性决定
+        </remarks>
+        <example>
+        <code>
+        canvas.StrokePaint = Color.Black;
+        canvas.DrawRectangle(10, 10, 100, 50);
+        </code>
+        </example>
+        </member>
+        <member name="M:GameUI.Control.Primitive.Canvas.DrawEllipse(System.Single,System.Single,System.Single,System.Single)">
+        <summary>
+        绘制椭圆轮廓
+        </summary>
+        <param name = "centerX">椭圆中心的X坐标</param>
+        <param name = "centerY">椭圆中心的Y坐标</param>
+        <param name = "radiusX">椭圆的X轴半径</param>
+        <param name = "radiusY">椭圆的Y轴半径</param>
+        <remarks>
+        <para>只绘制椭圆的轮廓，不填充内部。轮廓颜色由StrokePaint属性决定，线宽由StrokeWidth属性决定。</para>
+        <para>椭圆通过指定不同的X轴和Y轴半径来创建，当两个半径相等时等效于圆形。</para>
+        <para>椭圆的轴与坐标轴平行，如需旋转椭圆请结合变换方法使用。</para>
+        </remarks>
+        <example>
+        <code>
+        canvas.StrokePaint = new SolidPaint(Color.Blue);
+        canvas.StrokeWidth = 2.0f;
+        canvas.DrawEllipse(100, 50, 60, 30); // 绘制横向椭圆轮廓
+        </code>
+        </example>
+        </member>
+        <member name="M:GameUI.Control.Primitive.Canvas.DrawEllipse(System.Drawing.PointF,System.Single,System.Single)">
+        <summary>
+        绘制椭圆轮廓
+        </summary>
+        <param name = "center">椭圆中心坐标</param>
+        <param name = "radiusX">椭圆的X轴半径</param>
+        <param name = "radiusY">椭圆的Y轴半径</param>
+        <remarks>
+        <para>只绘制椭圆的轮廓，不填充内部。轮廓颜色由StrokePaint属性决定，线宽由StrokeWidth属性决定。</para>
+        <para>这是DrawEllipse方法的重载版本，使用PointF结构体表示中心点，提供更简洁的API。</para>
+        </remarks>
+        <example>
+        <code>
+        canvas.StrokePaint = new SolidPaint(Color.Green);
+        canvas.DrawEllipse(new PointF(100, 50), 40, 25); // 绘制椭圆轮廓
+        </code>
+        </example>
+        </member>
+        <member name="M:GameUI.Control.Primitive.Canvas.FillCircle(System.Single,System.Single,System.Single)">
+        <summary>
+        绘制填充的圆形
+        </summary>
+        <param name = "centerX">圆心的X坐标</param>
+        <param name = "centerY">圆心的Y坐标</param>
+        <param name = "radius">圆的半径</param>
+        <remarks>
+        绘制实心圆形。填充颜色由FillPaint属性决定
+        </remarks>
+        <example>
+        <code>
+        canvas.FillPaint = Color.Red;
+        canvas.FillCircle(50, 50, 25);
+        </code>
+        </example>
+        </member>
+        <member name="M:GameUI.Control.Primitive.Canvas.FillEllipse(System.Single,System.Single,System.Single,System.Single)">
+        <summary>
+        绘制填充的椭圆
+        </summary>
+        <param name = "centerX">椭圆中心的X坐标</param>
+        <param name = "centerY">椭圆中心的Y坐标</param>
+        <param name = "radiusX">椭圆的X轴半径</param>
+        <param name = "radiusY">椭圆的Y轴半径</param>
+        <remarks>
+        <para>绘制实心椭圆。填充颜色由FillPaint属性决定。</para>
+        <para>椭圆通过指定不同的X轴和Y轴半径来创建，当两个半径相等时等效于圆形。</para>
+        <para>椭圆的轴与坐标轴平行，如需旋转椭圆请结合变换方法使用。</para>
+        <para>此方法特别适用于创建自然的形状，如云朵、鸟类身体、眼睛等有机形状。</para>
+        </remarks>
+        <example>
+        <code>
+        canvas.FillPaint = new SolidPaint(Color.Yellow);
+        canvas.FillEllipse(100, 50, 60, 30); // 绘制横向椭圆
+        
+        // 结合渐变创建更丰富的效果
+        canvas.FillPaint = new RadialGradientPaint(
+        new PointF(100, 50), 0, 60,
+        Color.LightBlue, Color.DarkBlue);
+        canvas.FillEllipse(100, 50, 60, 30);
+        </code>
+        </example>
+        </member>
+        <member name="M:GameUI.Control.Primitive.Canvas.FillEllipse(System.Drawing.PointF,System.Single,System.Single)">
+        <summary>
+        绘制填充的椭圆
+        </summary>
+        <param name = "center">椭圆中心坐标</param>
+        <param name = "radiusX">椭圆的X轴半径</param>
+        <param name = "radiusY">椭圆的Y轴半径</param>
+        <remarks>
+        <para>绘制实心椭圆。填充颜色由FillPaint属性决定。</para>
+        <para>这是FillEllipse方法的重载版本，使用PointF结构体表示中心点，提供更简洁的API。</para>
+        <para>特别适合在AI代码生成场景中使用，减少参数传递的复杂性。</para>
+        </remarks>
+        <example>
+        <code>
+        canvas.FillPaint = new SolidPaint(Color.Pink);
+        var center = new PointF(100, 50);
+        canvas.FillEllipse(center, 40, 25); // 绘制椭圆
+        </code>
+        </example>
+        </member>
+        <member name="M:GameUI.Control.Primitive.Canvas.FillTriangle(System.Single,System.Single,System.Single,System.Single,System.Single,System.Single)">
+        <summary>
+        绘制填充的三角形
+        </summary>
+        <param name = "x1">第一个顶点的X坐标</param>
+        <param name = "y1">第一个顶点的Y坐标</param>
+        <param name = "x2">第二个顶点的X坐标</param>
+        <param name = "y2">第二个顶点的Y坐标</param>
+        <param name = "x3">第三个顶点的X坐标</param>
+        <param name = "y3">第三个顶点的Y坐标</param>
+        <remarks>
+        绘制实心三角形。填充颜色由FillPaint属性决定
+        </remarks>
+        <example>
+        <code>
+        canvas.FillPaint = Color.Blue;
+        canvas.FillTriangle(50, 10, 10, 90, 90, 90);
+        </code>
+        </example>
+        </member>
+        <member name="M:GameUI.Control.Primitive.Canvas.FillRectangle(System.Single,System.Single,System.Single,System.Single)">
+        <summary>
+        绘制填充的矩形
+        </summary>
+        <param name = "x">矩形左上角的X坐标</param>
+        <param name = "y">矩形左上角的Y坐标</param>
+        <param name = "width">矩形的宽度</param>
+        <param name = "height">矩形的高度</param>
+        <remarks>
+        绘制实心矩形。填充颜色由FillPaint属性决定
+        </remarks>
+        <example>
+        <code>
+        canvas.FillPaint = new SolidPaint(Color.Yellow);
+        canvas.FillRectangle(10, 10, 100, 50);
+        </code>
+        </example>
+        </member>
+        <member name="M:GameUI.Control.Primitive.Canvas.ClipRect(System.Single,System.Single,System.Single,System.Single)">
+        <summary>
+        设置矩形裁剪区域
+        </summary>
+        <param name = "x">裁剪矩形左上角的X坐标</param>
+        <param name = "y">裁剪矩形左上角的Y坐标</param>
+        <param name = "width">裁剪矩形的宽度</param>
+        <param name = "height">裁剪矩形的高度</param>
+        <remarks>
+        <para>设置一个矩形裁剪区域，只有在此区域内的绘制内容才会显示。</para>
+        <para>此操作会影响后续所有的绘制操作，直到调用ResetState()或设置新的裁剪区域。</para>
+        <para>裁剪区域可以用来创建窗口效果或限制绘制范围。</para>
+        </remarks>
+        <example>
+        <code>
+        canvas.ClipRect(10, 10, 100, 100); // 设置裁剪区域
+        canvas.FillCircle(50, 50, 40); // 只有在裁剪区域内的部分会显示
+        </code>
+        </example>
+        </member>
+        <member name="M:GameUI.Control.Primitive.Canvas.SubtractFromClip(System.Single,System.Single,System.Single,System.Single)">
+        <summary>
+        从当前裁剪区域中移除指定的矩形区域
+        </summary>
+        <param name = "x">要移除的矩形左上角X坐标</param>
+        <param name = "y">要移除的矩形左上角Y坐标</param>
+        <param name = "width">要移除的矩形宽度</param>
+        <param name = "height">要移除的矩形高度</param>
+        <remarks>
+        <para>此方法从当前的裁剪区域中减去指定的矩形，创建一个镂空效果。</para>
+        <para>在被减去的区域内，后续的绘制操作将不会显示。</para>
+        <para>这可以用来创建复杂的裁剪形状或遮罩效果。</para>
+        </remarks>
+        <example>
+        <code>
+        canvas.ClipRect(0, 0, 200, 200); // 设置大的裁剪区域
+        canvas.SubtractFromClip(50, 50, 100, 100); // 在中间挖一个洞
+        canvas.FillRectangle(0, 0, 200, 200); // 绘制会显示边框效果
+        </code>
+        </example>
+        </member>
+        <member name="M:GameUI.Control.Primitive.Canvas.Rotate(System.Single)">
+        <summary>
+        旋转画布坐标系
+        </summary>
+        <param name = "degrees">旋转角度（以度为单位）</param>
+        <remarks>
+        <para>围绕原点旋转画布坐标系。正值表示顺时针旋转，负值表示逆时针旋转。</para>
+        <para>此变换会影响后续所有绘制操作的坐标。</para>
+        <para>⚠️ 注意：此方法使用角度制（度数）</para>
+        </remarks>
+        <example>
+        <code>
+        canvas.Rotate(45); // 顺时针旋转45度
+        canvas.DrawRectangle(0, 0, 50, 50); // 绘制的矩形会倾斜45度
+        </code>
+        </example>
+        </member>
+        <member name="M:GameUI.Control.Primitive.Canvas.RotateDegrees(System.Single)">
+        <summary>
+        以度为单位旋转画布坐标系（AI友好的明确方法）
+        </summary>
+        <param name = "degrees">旋转角度，以度为单位（0-360度）</param>
+        <remarks>
+        <para>这是Rotate方法的语义明确版本，专门标明使用角度制。</para>
+        <para>围绕原点旋转画布坐标系。正值表示顺时针旋转，负值表示逆时针旋转。</para>
+        <para>角度会自动标准化到合理范围内，避免过大的数值。</para>
+        <para>对于AI代码生成场景，此方法比Rotate()更加语义明确，避免角度制/弧度制混淆。</para>
+        </remarks>
+        <example>
+        <code>
+        canvas.RotateDegrees(45f);   // 顺时针旋转45度
+        canvas.RotateDegrees(-90f);  // 逆时针旋转90度
+        canvas.RotateDegrees(720f);  // 旋转720度（等效于0度，完整转两圈）
+        </code>
+        </example>
+        </member>
+        <member name="M:GameUI.Control.Primitive.Canvas.RotateRadians(System.Single)">
+        <summary>
+        以弧度为单位旋转画布坐标系（AI友好的明确方法）
+        </summary>
+        <param name = "radians">旋转角度，以弧度为单位（0到2π弧度）</param>
+        <remarks>
+        <para>使用弧度制旋转画布坐标系，更适合数学计算。</para>
+        <para>围绕原点旋转画布坐标系。正值表示顺时针旋转，负值表示逆时针旋转。</para>
+        <para>1弧度 ≈ 57.3度，π弧度 = 180度，2π弧度 = 360度。</para>
+        <para>对于AI代码生成场景，此方法提供明确的弧度制接口，避免与角度制混淆。</para>
+        </remarks>
+        <example>
+        <code>
+        canvas.RotateRadians(Math.PI / 4);    // 旋转π/4弧度（45度）
+        canvas.RotateRadians(-Math.PI / 2);   // 旋转-π/2弧度（-90度）
+        canvas.RotateRadians(Math.PI * 2);    // 旋转2π弧度（360度）
+        </code>
+        </example>
+        </member>
+        <member name="M:GameUI.Control.Primitive.Canvas.Scale(System.Single,System.Single)">
+        <summary>
+        缩放画布坐标系
+        </summary>
+        <param name = "scaleX">X轴缩放因子</param>
+        <param name = "scaleY">Y轴缩放因子</param>
+        <remarks>
+        <para>缩放画布坐标系。值大于1会放大，值小于1会缩小。</para>
+        <para>此变换会影响后续所有绘制操作的尺寸和位置。</para>
+        <para>使用new关键字隐藏基类的Scale方法。</para>
+        </remarks>
+        <example>
+        <code>
+        canvas.Scale(2.0f, 1.5f); // X轴放大2倍，Y轴放大1.5倍
+        canvas.DrawCircle(25, 25, 10); // 实际绘制的圆会变为椭圆
+        </code>
+        </example>
+        </member>
+        <member name="M:GameUI.Control.Primitive.Canvas.Translate(System.Single,System.Single)">
+        <summary>
+        平移画布坐标系
+        </summary>
+        <param name = "deltaX">X轴平移距离</param>
+        <param name = "deltaY">Y轴平移距离</param>
+        <remarks>
+        <para>平移画布坐标系原点。正值向右/向下移动，负值向左/向上移动。</para>
+        <para>此变换会影响后续所有绘制操作的位置。</para>
+        </remarks>
+        <example>
+        <code>
+        canvas.Translate(50, 30); // 原点向右移动50，向下移动30
+        canvas.DrawCircle(0, 0, 10); // 实际绘制位置为(50, 30)
+        </code>
+        </example>
+        </member>
+        <member name="M:GameUI.Control.Primitive.Canvas.Transform(System.Single,System.Single,System.Single,System.Single,System.Single,System.Single)">
+        <summary>
+        应用2D变换矩阵
+        </summary>
+        <param name = "a">变换矩阵的m11分量（X轴缩放）</param>
+        <param name = "b">变换矩阵的m12分量（X轴倾斜）</param>
+        <param name = "c">变换矩阵的m21分量（Y轴倾斜）</param>
+        <param name = "d">变换矩阵的m22分量（Y轴缩放）</param>
+        <param name = "e">变换矩阵的m31分量（X轴平移）</param>
+        <param name = "f">变换矩阵的m32分量（Y轴平移）</param>
+        <remarks>
+        <para>应用一个3x2仿射变换矩阵到画布坐标系。</para>
+        <para>变换矩阵的格式为:</para>
+        <code>
+        [ a  c  e ]   [ x ]
+        [ b  d  f ] × [ y ]
+        [ 0  0  1 ]   [ 1 ]
+        </code>
+        <para>此方法会与当前变换矩阵相乘，实现复合变换效果。</para>
+        </remarks>
+        <example>
+        <code>
+        // 应用缩放和平移的复合变换
+        canvas.Transform(2.0f, 0, 0, 2.0f, 50, 25); // 放大2倍并平移(50,25)
+        canvas.DrawRectangle(0, 0, 50, 50); // 实际绘制的矩形会被变换
+        </code>
+        </example>
+        </member>
+        <member name="M:GameUI.Control.Primitive.Canvas.ConcatenateTransform(System.Numerics.Matrix3x2)">
+        <summary>
+        连接指定的变换矩阵到当前变换
+        </summary>
+        <param name = "transform">要连接的3x2变换矩阵</param>
+        <remarks>
+        <para>将指定的变换矩阵与当前的变换矩阵相乘，实现复合变换。</para>
+        <para>新的变换会应用到当前变换之后，影响后续所有的绘制操作。</para>
+        <para>这是应用复杂变换（如组合旋转、缩放、平移）的推荐方法。</para>
+        </remarks>
+        <example>
+        <code>
+        var matrix = System.Numerics.Matrix3x2.CreateRotation(MathF.PI / 4); // 45度旋转
+        matrix *= System.Numerics.Matrix3x2.CreateScale(1.5f); // 然后缩放1.5倍
+        canvas.ConcatenateTransform(matrix);
+        canvas.DrawRectangle(0, 0, 50, 50); // 绘制变换后的矩形
+        </code>
+        </example>
+        </member>
+        <member name="M:GameUI.Control.Primitive.Canvas.ResetTransform">
+        <summary>
+        重置变换矩阵为单位矩阵
+        </summary>
+        <remarks>
+        <para>将当前的变换矩阵重置为单位矩阵，取消所有的旋转、缩放和平移变换。</para>
+        <para>调用此方法后，坐标系将恢复到初始状态。</para>
+        <para>这对于在应用临时变换后恢复原始坐标系很有用。</para>
+        </remarks>
+        <example>
+        <code>
+        canvas.Rotate(45); // 旋转坐标系
+        canvas.Scale(2, 2); // 缩放坐标系
+        canvas.DrawRectangle(0, 0, 50, 50); // 绘制变换后的矩形
+        
+        canvas.ResetTransform(); // 重置变换
+        canvas.DrawRectangle(0, 0, 50, 50); // 绘制正常的矩形
+        </code>
+        </example>
+        </member>
+        <member name="M:GameUI.Control.Primitive.Canvas.SaveState">
+        <summary>
+        保存当前画布状态到状态栈
+        </summary>
+        <remarks>
+        <para>将当前的画布状态（包括变换矩阵、裁剪区域、绘制属性等）推入状态栈。</para>
+        <para>保存的状态可以通过调用RestoreState()方法恢复。</para>
+        <para>状态栈支持嵌套保存，后保存的状态会先恢复（LIFO原则）。</para>
+        <para>这对于在局部区域应用临时设置后恢复原始状态很有用。</para>
+        </remarks>
+        <example>
+        <code>
+        canvas.SaveState(); // 保存当前状态
+        
+        canvas.Rotate(45); // 应用临时变换
+        canvas.StrokePaint = Color.Red; // 应用临时颜色
+        canvas.DrawRectangle(0, 0, 50, 50); // 绘制变换后的矩形
+        
+        canvas.RestoreState(); // 恢复到保存的状态
+        canvas.DrawRectangle(100, 0, 50, 50); // 绘制正常的矩形
+        </code>
+        </example>
+        </member>
+        <member name="M:GameUI.Control.Primitive.Canvas.RestoreState">
+        <summary>
+        从状态栈恢复之前保存的画布状态
+        </summary>
+        <remarks>
+        <para>从状态栈中弹出最近保存的画布状态并应用到当前画布。</para>
+        <para>恢复的状态包括变换矩阵、裁剪区域、绘制属性等所有画布设置。</para>
+        <para>必须与SaveState()方法配对使用，确保状态栈平衡。</para>
+        <para>如果状态栈为空时调用此方法，行为是未定义的。</para>
+        </remarks>
+        <example>
+        <code>
+        canvas.SaveState(); // 保存当前状态
+        
+        canvas.Rotate(45); // 应用临时变换
+        canvas.StrokePaint = Color.Red; // 应用临时颜色
+        canvas.DrawRectangle(0, 0, 50, 50); // 绘制变换后的矩形
+        
+        canvas.RestoreState(); // 恢复到保存的状态
+        canvas.DrawRectangle(100, 0, 50, 50); // 绘制正常的矩形
+        </code>
+        </example>
+        </member>
+        <member name="M:GameUI.Control.Primitive.Canvas.ResetState">
+        <summary>
+        重置画布状态
+        </summary>
+        <remarks>
+        清除画布上的所有绘制内容，并重置坐标变换状态
+        </remarks>
+        <example>
+        <code>
+        canvas.DrawRectangle(0, 0, 100, 100);
+        canvas.ResetState(); // 清除刚才绘制的矩形，并重置坐标变换状态
+        </code>
+        </example>
+        </member>
+        <member name="M:GameUI.Control.Primitive.Canvas.DrawSquare(System.Single,System.Single,System.Single)">
+        <summary>
+        绘制正方形轮廓
+        </summary>
+        <param name = "x">正方形左上角的X坐标</param>
+        <param name = "y">正方形左上角的Y坐标</param>
+        <param name = "size">正方形的边长</param>
+        <remarks>
+        <para>这是DrawRectangle方法的便利版本，专门用于绘制正方形。</para>
+        <para>轮廓颜色由StrokePaint属性决定，线宽由StrokeSize属性决定。</para>
+        <para>此方法对AI代码生成特别友好，减少了参数数量和出错概率。</para>
+        </remarks>
+        <example>
+        <code>
+        canvas.StrokePaint = new SolidPaint(Color.Black);
+        canvas.DrawSquare(10, 10, 50); // 绘制50x50的正方形轮廓
+        </code>
+        </example>
+        </member>
+        <member name="M:GameUI.Control.Primitive.Canvas.FillSquare(System.Single,System.Single,System.Single)">
+        <summary>
+        绘制填充的正方形
+        </summary>
+        <param name = "x">正方形左上角的X坐标</param>
+        <param name = "y">正方形左上角的Y坐标</param>
+        <param name = "size">正方形的边长</param>
+        <remarks>
+        <para>这是FillRectangle方法的便利版本，专门用于绘制实心正方形。</para>
+        <para>填充颜色由FillPaint属性决定。</para>
+        <para>此方法对AI代码生成特别友好，语义更清晰，参数更简单。</para>
+        </remarks>
+        <example>
+        <code>
+        canvas.FillPaint = new SolidPaint(Color.Blue);
+        canvas.FillSquare(10, 10, 50); // 绘制50x50的蓝色实心正方形
+        </code>
+        </example>
+        </member>
+        <member name="M:GameUI.Control.Primitive.Canvas.SetColors(System.Drawing.Color,System.Drawing.Color)">
+        <summary>
+        同时设置填充和描边颜色
+        </summary>
+        <param name = "fillColor">填充颜色</param>
+        <param name = "strokeColor">描边颜色</param>
+        <remarks>
+        <para>这是一个便利方法，同时设置FillPaint和StrokePaint为指定的实心颜色。</para>
+        <para>减少了AI代码生成时的重复操作，提高了代码的可读性。</para>
+        <para>此方法会创建新的SolidPaint实例，适合快速设置基本颜色。</para>
+        </remarks>
+        <example>
+        <code>
+        // 一次性设置填充和描边颜色
+        canvas.SetColors(Color.Blue, Color.Red);
+        
+        // 然后可以直接绘制图形
+        canvas.FillRectangle(10, 10, 100, 50);  // 蓝色填充
+        canvas.DrawRectangle(10, 70, 100, 50);  // 红色边框
+        </code>
+        </example>
+        </member>
+        <member name="M:GameUI.Control.Primitive.Canvas.DrawPath(GameUI.Graphics.PathF)">
+        <summary>
+        绘制完整路径的轮廓
+        </summary>
+        <param name = "path">要绘制的路径对象</param>
+        <remarks>
+        <para>根据PathF对象中定义的路径操作序列绘制完整的路径轮廓。</para>
+        <para>支持的路径操作包括：移动、直线、二次贝塞尔曲线、三次贝塞尔曲线、圆弧和路径闭合。</para>
+        <para>如果路径为空或包含0个操作，则不执行任何绘制。</para>
+        <para>绘制使用当前的StrokePaint和StrokeSize设置。</para>
+        </remarks>
+        <example>
+        <code>
+        var path = new PathF();
+        path.MoveTo(10, 10);
+        path.LineTo(100, 10);
+        path.LineTo(100, 100);
+        path.Close();
+        
+        canvas.StrokePaint = new SolidPaint(Color.Blue);
+        canvas.StrokeSize = 2.0f;
+        canvas.DrawPath(path); // 绘制蓝色矩形轮廓
+        </code>
+        </example>
+        </member>
+        <member name="M:GameUI.Control.Primitive.Canvas.FillPath(GameUI.Graphics.PathF,System.Nullable{GameUI.Control.Enum.WindingMode})">
+        <summary>
+        填充路径
+        </summary>
+        <param name = "path">要填充的路径对象</param>
+        <param name = "windingMode">可选的路径缠绕模式，为null时使用DefaultPathWinding</param>
+        <remarks>
+        <para>根据PathF对象中定义的路径操作序列填充封闭区域。</para>
+        <para>支持的路径操作包括：移动、直线、二次贝塞尔曲线、三次贝塞尔曲线、圆弧和路径闭合。</para>
+        <para>如果路径为空或包含0个操作，则不执行任何填充。</para>
+        <para>填充使用当前的FillPaint设置。</para>
+        <para>缠绕模式决定了复杂路径的填充规则：</para>
+        <list type="bullet">
+        <item><description>NonZero: 非零缠绕规则，适用于大多数普通形状</description></item>
+        <item><description>EvenOdd: 奇偶规则，常用于创建镂空效果</description></item>
+        </list>
+        <para>如果提供了windingMode参数，会临时使用该模式进行填充，之后恢复到DefaultPathWinding。</para>
+        </remarks>
+        <example>
+        <code>
+        var path = new PathF();
+        path.MoveTo(10, 10);
+        path.LineTo(100, 10);
+        path.LineTo(100, 100);
+        path.LineTo(10, 100);
+        path.Close();
+        
+        canvas.FillPaint = new SolidPaint(Color.Blue);
+        canvas.FillPath(path); // 使用默认缠绕模式填充
+        
+        // 或者指定特定的缠绕模式
+        canvas.FillPath(path, WindingMode.EvenOdd); // 使用奇偶规则填充
+        </code>
+        </example>
+        </member>
+        <member name="T:GameUI.Control.Primitive.Canvas.BezierSegment">
+        <summary>
+        贝塞尔曲线段结构体
+        </summary>
+        <remarks>
+        用于表示一个三次贝塞尔曲线段，包含起点、两个控制点和终点
+        </remarks>
+        </member>
+        <member name="F:GameUI.Control.Primitive.Canvas.BezierSegment.Start">
+        <summary>贝塞尔曲线的起始点</summary>
+        </member>
+        <member name="F:GameUI.Control.Primitive.Canvas.BezierSegment.Control1">
+        <summary>第一个控制点</summary>
+        </member>
+        <member name="F:GameUI.Control.Primitive.Canvas.BezierSegment.Control2">
+        <summary>第二个控制点</summary>
+        </member>
+        <member name="F:GameUI.Control.Primitive.Canvas.BezierSegment.End">
+        <summary>贝塞尔曲线的结束点</summary>
+        </member>
+        <member name="M:GameUI.Control.Primitive.Canvas.DisposeManaged">
+        <summary>
+        释放Canvas特定的托管资源
+        </summary>
+        <remarks>
+        <para>此方法重写基类的DisposeManaged方法，用于释放Canvas特有的资源。</para>
+        <para>主要执行以下清理操作：</para>
+        <list type="bullet">
+        <item><description>清理Canvas特定的事件订阅</description></item>
+        <item><description>调用基类的DisposeManaged方法</description></item>
+        </list>
+        <para>继承类如需额外的资源清理，应重写此方法并确保调用base.DisposeManaged()。</para>
+        </remarks>
+        </member>
+        <member name="F:GameUI.Control.Primitive.Canvas.defaultPathWinding">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="P:GameUI.Control.Primitive.Canvas.DefaultPathWinding">
+        <summary>
+        获取或设置路径的默认缠绕模式
+        </summary>
+        <value>路径的缠绕模式，默认为NonZero</value>
+        <remarks>
+        <para>缠绕模式决定了复杂路径的填充规则：</para>
+        <list type="bullet">
+        <item><description>NonZero: 非零缠绕规则，适用于大多数情况</description></item>
+        <item><description>EvenOdd: 奇偶规则，用于创建镂空效果</description></item>
+        </list>
+        <para>该属性仅接受NonZero和EvenOdd两个值，设置其他值会抛出异常。</para>
+        </remarks>
+        <exception cref = "T:System.ArgumentOutOfRangeException">当设置的值不是NonZero或EvenOdd时抛出</exception>
+        <example>
+        <code>
+        canvas.DefaultPathWinding = WindingMode.EvenOdd;
+        // 现在所有路径填充都会使用奇偶规则
+        </code>
+        </example>
+        </member>
+        <member name="F:GameUI.Control.Primitive.Canvas.fillPaint">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="P:GameUI.Control.Primitive.Canvas.FillPaint">
+        <summary>
+        获取或设置用于填充图形的画笔
+        </summary>
+        <value>填充画笔，默认为白色实心画笔</value>
+        <remarks>
+        <para>此属性控制所有填充操作（如FillRectangle、FillCircle、FillPath等）使用的画笔。</para>
+        <para>支持的画笔类型：</para>
+        <list type="bullet">
+        <item><description>SolidPaint: 实心颜色画笔</description></item>
+        <item><description>GradientPaint: 渐变画笔（线性、径向、盒式）</description></item>
+        </list>
+        <para>当设置新画笔时，会自动将其应用到底层渲染系统。</para>
+        </remarks>
+        <exception cref = "T:System.ArgumentException">当设置的画笔类型不受支持时抛出</exception>
+        <example>
+        <code>
+        // 设置实心颜色
+        canvas.FillPaint = new SolidPaint(Color.Red);
+        
+        // 设置线性渐变
+        canvas.FillPaint = new LinearGradientPaint(
+        new PointF(0, 0), new PointF(100, 0),
+        Color.Blue, Color.Green);
+        
+        canvas.FillRectangle(10, 10, 100, 50);
+        </code>
+        </example>
+        </member>
+        <member name="F:GameUI.Control.Primitive.Canvas.strokePaint">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="P:GameUI.Control.Primitive.Canvas.StrokePaint">
+        <summary>
+        获取或设置用于绘制图形轮廓的画笔
+        </summary>
+        <value>描边画笔，默认为黑色实心画笔</value>
+        <remarks>
+        <para>此属性控制所有线条和轮廓绘制操作（如DrawLine、DrawCircle、DrawRectangle等）使用的画笔。</para>
+        <para>支持的画笔类型：</para>
+        <list type="bullet">
+        <item><description>SolidPaint: 实心颜色画笔</description></item>
+        <item><description>GradientPaint: 渐变画笔（线性、径向、盒式）</description></item>
+        </list>
+        <para>当设置新画笔时，会自动将其应用到底层渲染系统。</para>
+        <para>如果设置的画笔与当前画笔相同，则不会执行任何操作以提高性能。</para>
+        </remarks>
+        <exception cref = "T:System.ArgumentException">当设置的画笔类型不受支持时抛出</exception>
+        <example>
+        <code>
+        // 设置实心颜色
+        canvas.StrokePaint = new SolidPaint(Color.Blue);
+        canvas.DrawCircle(50, 50, 25); // 绘制蓝色轮廓圆形
+        
+        // 设置线性渐变
+        canvas.StrokePaint = new LinearGradientPaint(
+        new PointF(0, 0), new PointF(100, 0),
+        Color.Red, Color.Green);
+        canvas.DrawLine(0, 0, 100, 100);
+        </code>
+        </example>
+        </member>
+        <member name="F:GameUI.Control.Primitive.Canvas.strokeWidth">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="P:GameUI.Control.Primitive.Canvas.StrokeWidth">
+        <summary>
+        设置或获取用于绘制图形轮廓的线条宽度
+        </summary>
+        <value>线条宽度，默认为1.0像素</value>
+        <remarks>
+        <para>此属性控制所有线条和轮廓绘制操作的线条粗细。</para>
+        <para>值必须大于0。较大的值会产生更粗的线条。</para>
+        <para>当属性值发生变化时，会自动将新宽度设置到底层渲染系统。</para>
+        <para>如果设置的宽度与当前宽度相同，则不会执行任何操作以提高性能。</para>
+        </remarks>
+        <example>
+        <code>
+        canvas.StrokeSize = 2.5f;
+        canvas.DrawCircle(50, 50, 25); // 绘制2.5像素宽的圆形轮廓
+        
+        canvas.StrokeSize = 0.5f;
+        canvas.DrawLine(0, 0, 100, 100); // 绘制0.5像素宽的细线
+        </code>
+        </example>
+        </member>
+        <member name="F:GameUI.Control.Primitive.Canvas.lineCap">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="P:GameUI.Control.Primitive.Canvas.LineCap">
+        <summary>
+        获取或设置线条端点的样式
+        </summary>
+        <value>线条端点样式，默认为Butt（平头端点）</value>
+        <remarks>
+        <para>此属性控制线条两端的形状：</para>
+        <list type="bullet">
+        <item><description>Butt: 平头端点，线条在端点处平齐截止</description></item>
+        <item><description>Round: 圆形端点，线条端点为半圆形</description></item>
+        <item><description>Square: 方形端点，线条端点向外延伸半个线宽</description></item>
+        </list>
+        <para>该属性影响所有线条绘制操作的外观。</para>
+        </remarks>
+        <example>
+        <code>
+        canvas.LineCap = LineCap.Round;
+        canvas.StrokeSize = 10f;
+        canvas.DrawLine(10, 10, 100, 10); // 绘制带圆形端点的粗线
+        </code>
+        </example>
+        </member>
+        <member name="F:GameUI.Control.Primitive.Canvas.lineJoin">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="P:GameUI.Control.Primitive.Canvas.LineJoin">
+        <summary>
+        获取或设置线条连接处的样式
+        </summary>
+        <value>线条连接样式，默认为Miter（斜接连接）</value>
+        <remarks>
+        <para>此属性控制两条线段相交时连接点的形状：</para>
+        <list type="bullet">
+        <item><description>Miter: 斜接连接，线条在连接处以尖角相接</description></item>
+        <item><description>Round: 圆形连接，线条在连接处以圆弧相接</description></item>
+        <item><description>Bevel: 斜切连接，线条在连接处以平角相接</description></item>
+        </list>
+        <para>该属性影响路径和多边形绘制时转角的外观。</para>
+        </remarks>
+        <example>
+        <code>
+        canvas.LineJoin = LineJoin.Round;
+        canvas.StrokeSize = 8f;
+        canvas.DrawTriangle(50, 10, 10, 90, 90, 90); // 绘制带圆角连接的三角形
+        </code>
+        </example>
+        </member>
+        <member name="F:GameUI.Control.Primitive.Canvas.miterLimit">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="P:GameUI.Control.Primitive.Canvas.MiterLimit">
+        <summary>
+        获取或设置斜接限制值
+        </summary>
+        <value>斜接限制值，默认为10.0</value>
+        <remarks>
+        <para>当LineJoin设置为Miter时，此属性控制斜接连接的最大长度。</para>
+        <para>当两条线段的夹角很小时，斜接连接可能会变得很长。</para>
+        <para>如果斜接长度超过 (线宽 * MiterLimit)，则会自动切换为斜切连接。</para>
+        <para>较大的值允许更尖锐的角度，较小的值会更早切换为斜切连接。</para>
+        </remarks>
+        <example>
+        <code>
+        canvas.LineJoin = LineJoin.Miter;
+        canvas.MiterLimit = 5.0f; // 限制斜接长度
+        canvas.StrokeSize = 4f;
+        // 绘制尖角形状，过尖的角会自动变为斜切
+        </code>
+        </example>
+        </member>
+        <member name="F:GameUI.Control.Primitive.Canvas.alpha">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="P:GameUI.Control.Primitive.Canvas.Alpha">
+        <summary>
+        获取或设置全局透明度
+        </summary>
+        <value>透明度值，范围为0.0到1.0，默认为1.0（完全不透明）</value>
+        <remarks>
+        <para>此属性控制画布上所有绘制操作的全局透明度：</para>
+        <list type="bullet">
+        <item><description>1.0: 完全不透明</description></item>
+        <item><description>0.5: 半透明</description></item>
+        <item><description>0.0: 完全透明（不可见）</description></item>
+        </list>
+        <para>全局透明度会与颜色自身的alpha值相乘，影响最终的渲染效果。</para>
+        <para>该属性影响所有后续的绘制操作，包括填充、描边和图像绘制。</para>
+        </remarks>
+        <example>
+        <code>
+        canvas.Alpha = 0.7f; // 设置70%不透明度
+        canvas.FillPaint = new SolidPaint(Color.Red);
+        canvas.FillRectangle(10, 10, 100, 50); // 绘制半透明红色矩形
+        </code>
+        </example>
+        </member>
+        <member name="F:GameUI.Control.Primitive.Canvas.blendMode">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="P:GameUI.Control.Primitive.Canvas.BlendMode">
+        <summary>
+        获取或设置混合模式
+        </summary>
+        <value>混合模式，默认为SourceOver</value>
+        <remarks>
+        <para>混合模式决定了新绘制的内容如何与已有内容混合：</para>
+        <list type="bullet">
+        <item><description>SourceOver: 标准混合模式，新内容覆盖在已有内容之上</description></item>
+        <item><description>SourceIn: 只在已有内容区域内绘制新内容</description></item>
+        <item><description>SourceOut: 只在已有内容区域外绘制新内容</description></item>
+        <item><description>SourceAtop: 新内容只替换已有内容的非透明部分</description></item>
+        <item><description>Multiply: 颜色相乘混合，产生更暗的颜色</description></item>
+        <item><description>Screen: 颜色相加混合，产生更亮的颜色</description></item>
+        <item><description>Overlay: 覆盖混合，结合相乘和相加效果</description></item>
+        </list>
+        <para>不同的混合模式可以创建各种特殊的视觉效果。</para>
+        </remarks>
+        <example>
+        <code>
+        canvas.BlendMode = BlendMode.Multiply;
+        canvas.FillPaint = new SolidPaint(Color.FromArgb(128, 255, 0, 0)); // 半透明红色
+        canvas.FillRectangle(0, 0, 100, 100); // 与背景相乘混合
+        </code>
+        </example>
+        </member>
+        <member name="F:GameUI.Control.Primitive.Canvas.resolution">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="F:GameUI.Control.Primitive.Canvas.autoUpdateResolutionOnResize">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="P:GameUI.Control.Primitive.Canvas.Resolution">
+        <summary>
+        获取或设置画布的分辨率
+        </summary>
+        <value>画布分辨率，默认为300x150</value>
+        <remarks>
+        <para>画布分辨率决定了绘制的精度和质量。</para>
+        <para>更高的分辨率提供更好的绘制质量，但会消耗更多的内存和处理资源。</para>
+        <para>当AutoUpdateResolutionOnResize为true时，分辨率会自动根据控件大小调整。</para>
+        <para>手动设置此属性会覆盖自动调整的行为。</para>
+        </remarks>
+        <example>
+        <code>
+        canvas.Resolution = new SizeF(800, 600); // 设置高分辨率
+        canvas.AutoUpdateResolutionOnResize = false; // 禁用自动调整
+        </code>
+        </example>
+        </member>
+        <member name="P:GameUI.Control.Primitive.Canvas.AutoUpdateResolutionOnResize">
+        <summary>
+        获取或设置是否在控件大小改变时自动更新分辨率
+        </summary>
+        <value>是否自动更新分辨率，默认为true</value>
+        <remarks>
+        <para>当此属性为true时，画布分辨率会自动根据控件大小和坐标模式进行调整：</para>
+        <list type="bullet">
+        <item><description>DesignResolution模式：分辨率 = 控件大小 / 设备像素比</description></item>
+        <item><description>CanvasResolution模式：分辨率 = 控件大小</description></item>
+        </list>
+        <para>设置为false时，分辨率保持固定值，不会自动调整。</para>
+        <para>自动调整有助于在不同设备和缩放比例下保持一致的绘制质量。</para>
+        </remarks>
+        <example>
+        <code>
+        canvas.AutoUpdateResolutionOnResize = false; // 禁用自动调整
+        canvas.Resolution = new SizeF(1920, 1080); // 设置固定分辨率
+        </code>
+        </example>
+        </member>
+        <member name="F:GameUI.Control.Primitive.Canvas.coordinateMode">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="P:GameUI.Control.Primitive.Canvas.CoordinateMode">
+        <summary>
+        获取或设置画布的坐标模式
+        </summary>
+        <value>坐标模式，默认为DesignResolution</value>
+        <remarks>
+        <para>坐标模式决定了画布如何处理坐标系统和像素比例：</para>
+        <list type="bullet">
+        <item><description>DesignResolution: 使用设计分辨率坐标系统，与框架其他控件一致，AI友好</description></item>
+        <item><description>CanvasResolution: 使用Canvas原始分辨率坐标系统，适用于像素级精确绘制</description></item>
+        </list>
+        <para>DesignResolution模式会自动处理设备像素比例，确保在不同设备上的一致性。</para>
+        <para>CanvasResolution模式提供1:1的像素精确控制，适合精密绘制需求。</para>
+        </remarks>
+        <example>
+        <code>
+        canvas.CoordinateMode = CanvasCoordinateMode.CanvasResolution;
+        // 现在坐标系统将直接映射到画布像素
+        canvas.DrawPixel(100, 100); // 在第100行第100列绘制像素
+        </code>
+        </example>
+        </member>
+        <member name="F:GameUI.Control.Primitive.Canvas.pixelRatio">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="T:GameUI.Control.Primitive.Input">
+        <summary>
+        表示 UI 输入框控件。
+        </summary>
+        <summary>
+        
+        </summary>
+        <summary>
+        
+        </summary>
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="P:GameUI.Control.Primitive.Input.DefaultTemplate">
+        <summary>
+        获取输入框的默认模板链接。
+        </summary>
+        </member>
+        <member name="M:GameUI.Control.Primitive.Input.#ctor(GameData.IGameLink{GameUI.Control.Data.GameDataControlInput})">
+        <summary>
+        使用指定模板链接初始化输入框实例。
+        </summary>
+        <param name = "link">输入框模板数据链接。</param>
+        </member>
+        <member name="M:GameUI.Control.Primitive.Input.#ctor">
+        <summary>
+        使用默认模板初始化输入框实例。
+        </summary>
+        </member>
+        <member name="F:GameUI.Control.Primitive.Input.OnInputTextChangedHandler">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="E:GameUI.Control.Primitive.Input.OnInputTextChanged">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="F:GameUI.Control.Primitive.Input.OnGotFocusHandler">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="E:GameUI.Control.Primitive.Input.OnGotFocus">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="F:GameUI.Control.Primitive.Input.OnLostFocusHandler">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="E:GameUI.Control.Primitive.Input.OnLostFocus">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="F:GameUI.Control.Primitive.Input.OnInputKeyDownHandler">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="E:GameUI.Control.Primitive.Input.OnInputKeyDown">
+        <summary>
+        在输入框获得焦点的前提下，按下键盘按键时触发。
+        </summary>
+        <remarks>
+        注意：此事件与全局键盘事件 <see cref = "!:GameCore.Platform.Urho.Input.OnKeyDown"/> 不同，专门用于输入框控件。
+        输入框在进行输入时会屏蔽全局按键事件，只有此事件会触发。
+        </remarks>
+        </member>
+        <member name="F:GameUI.Control.Primitive.Input.OnInputKeyUpHandler">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="E:GameUI.Control.Primitive.Input.OnInputKeyUp">
+        <summary>
+        在输入框获得焦点的前提下，松开键盘按键时触发。
+        </summary>
+        <remarks>
+        注意：此事件与全局键盘事件 <see cref = "!:GameCore.Platform.Urho.Input.OnKeyUp"/> 不同，专门用于输入框控件。
+        输入框在进行输入时会屏蔽全局按键事件，只有此事件会触发。
+        </remarks>
+        </member>
+        <member name="M:GameUI.Control.Primitive.Input.DisposeManaged">
+        <summary>
+        
+        </summary>
+        <returns></returns>
+        </member>
+        <member name="F:GameUI.Control.Primitive.Input.text">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="P:GameUI.Control.Primitive.Input.Text">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="F:GameUI.Control.Primitive.Input.font">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="P:GameUI.Control.Primitive.Input.Font">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="F:GameUI.Control.Primitive.Input.fontSize">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="P:GameUI.Control.Primitive.Input.FontSize">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="F:GameUI.Control.Primitive.Input.textColor">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="P:GameUI.Control.Primitive.Input.TextColor">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="T:GameUI.Control.Primitive.Label">
+        <summary>
+        表示 UI 文本标签控件。
+        </summary>
+        <remarks>
+        <para><strong>文字对齐方式设置：</strong></para>
+        <para>Label 控件提供两套对齐属性来控制不同层面的对齐效果：</para>
+        <list type="bullet">
+        <item>
+        <term>控件位置对齐</term>
+        <description>使用 <see cref = "P:GameUI.Control.Control.HorizontalAlignment"/> 和 <see cref = "P:GameUI.Control.Control.VerticalAlignment"/>
+        来控制 Label 控件本身在父容器中的位置。</description>
+        </item>
+        <item>
+        <term>文字内容对齐</term>
+        <description>使用 <see cref = "P:GameUI.Control.Control.HorizontalContentAlignment"/> 和 <see cref = "P:GameUI.Control.Control.VerticalContentAlignment"/>
+        来控制文字在 Label 控件内部的对齐方式。这是设置文字左对齐、居中、右对齐的正确方法。</description>
+        </item>
+        </list>
+        <para><strong>示例用法：</strong></para>
+        <code>
+        var titleLabel = new Label()
+        {
+        Text = "标题文本",
+        // 控件在父容器中居中
+        HorizontalAlignment = HorizontalAlignment.Center,
+        VerticalAlignment = VerticalAlignment.Top,
+        // 文字在Label内部居中显示
+        HorizontalContentAlignment = HorizontalContentAlignment.Center,
+        VerticalContentAlignment = VerticalContentAlignment.Center
+        };
+        
+        var leftAlignedLabel = new Label()
+        {
+        Text = "左对齐文本",
+        // 文字在Label内部左对齐
+        HorizontalContentAlignment = HorizontalContentAlignment.Left,
+        VerticalContentAlignment = VerticalContentAlignment.Top
+        };
+        </code>
+        </remarks>
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="P:GameUI.Control.Primitive.Label.DefaultTemplate">
+        <summary>
+        获取标签的默认模板链接。
+        </summary>
+        </member>
+        <member name="M:GameUI.Control.Primitive.Label.#ctor(GameData.IGameLink{GameUI.Control.Data.GameDataControlLabel})">
+        <summary>
+        使用指定模板链接初始化标签实例。
+        </summary>
+        <param name = "link">标签模板数据链接。</param>
+        </member>
+        <member name="M:GameUI.Control.Primitive.Label.#ctor">
+        <summary>
+        使用默认模板初始化标签实例。
+        </summary>
+        </member>
+        <member name="F:GameUI.Control.Primitive.Label.text">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="P:GameUI.Control.Primitive.Label.Text">
+        <summary>
+        获取或设置标签显示的文本内容。
+        </summary>
+        <remarks>
+        <para>要控制文本的对齐方式，请使用以下属性：</para>
+        <list type="bullet">
+        <item><see cref = "P:GameUI.Control.Control.HorizontalContentAlignment"/> - 控制文字的水平对齐（左对齐、居中、右对齐）</item>
+        <item><see cref = "P:GameUI.Control.Control.VerticalContentAlignment"/> - 控制文字的垂直对齐（顶部、居中、底部对齐）</item>
+        </list>
+        <para>注意：<see cref = "P:GameUI.Control.Control.HorizontalAlignment"/> 和 <see cref = "P:GameUI.Control.Control.VerticalAlignment"/> 控制的是 Label 控件本身在父容器中的位置，
+        而非文字在 Label 内部的对齐方式。</para>
+        </remarks>
+        </member>
+        <member name="F:GameUI.Control.Primitive.Label.font">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="P:GameUI.Control.Primitive.Label.Font">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="F:GameUI.Control.Primitive.Label.fontSize">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="P:GameUI.Control.Primitive.Label.FontSize">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="F:GameUI.Control.Primitive.Label.textColor">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="P:GameUI.Control.Primitive.Label.TextColor">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="F:GameUI.Control.Primitive.Label.lineSpacingRatio">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="P:GameUI.Control.Primitive.Label.LineSpacingRatio">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="F:GameUI.Control.Primitive.Label.textWrap">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="P:GameUI.Control.Primitive.Label.TextWrap">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="F:GameUI.Control.Primitive.Label.bold">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="P:GameUI.Control.Primitive.Label.Bold">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="F:GameUI.Control.Primitive.Label.italic">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="P:GameUI.Control.Primitive.Label.Italic">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="F:GameUI.Control.Primitive.Label.strokeSize">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="P:GameUI.Control.Primitive.Label.StrokeSize">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="F:GameUI.Control.Primitive.Label.strokeColor">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="P:GameUI.Control.Primitive.Label.StrokeColor">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="F:GameUI.Control.Primitive.Label.shadowOffset">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="P:GameUI.Control.Primitive.Label.ShadowOffset">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="F:GameUI.Control.Primitive.Label.shadowColor">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="P:GameUI.Control.Primitive.Label.ShadowColor">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="F:GameUI.Control.Primitive.Label.textTrimming">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="P:GameUI.Control.Primitive.Label.TextTrimming">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="T:GameUI.Control.Primitive.Panel">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="M:GameUI.Control.Primitive.Panel.#ctor(GameData.IGameLink{GameUI.Control.Data.GameDataControlPanel})">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="M:GameUI.Control.Primitive.Panel.#ctor(GameData.IGameLink{GameUI.Control.Data.GameDataControlPanel},ClientCaller.SCEImportGUI.ControlType)">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="P:GameUI.Control.Primitive.Panel.DefaultTemplate">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="M:GameUI.Control.Primitive.Panel.#ctor">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="T:GameUI.Control.Primitive.PanelScrollable">
+        <summary>
+        
+        </summary>
+        <summary>
+        
+        </summary>
+        <summary>
+        
+        </summary>
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="M:GameUI.Control.Primitive.PanelScrollable.#ctor(GameData.IGameLink{GameUI.Control.Data.GameDataControlPanel})">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="P:GameUI.Control.Primitive.PanelScrollable.DefaultTemplate">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="M:GameUI.Control.Primitive.PanelScrollable.#ctor">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="M:GameUI.Control.Primitive.PanelScrollable.BringItemIntoView(System.Int32)">
+        <summary>
+        
+        </summary>
+        <param name="itemIndex"></param>
+        <returns></returns>
+        </member>
+        <member name="E:GameUI.Control.Primitive.PanelScrollable.OnScrollChanged">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="M:GameUI.Control.Primitive.PanelScrollable.DisposeManaged">
+        <summary>
+        
+        </summary>
+        <returns></returns>
+        </member>
+        <member name="F:GameUI.Control.Primitive.PanelScrollable.scrollEnabled">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="P:GameUI.Control.Primitive.PanelScrollable.ScrollEnabled">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="F:GameUI.Control.Primitive.PanelScrollable.scrollOrientation">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="P:GameUI.Control.Primitive.PanelScrollable.ScrollOrientation">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="F:GameUI.Control.Primitive.PanelScrollable.scrollBarSize">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="P:GameUI.Control.Primitive.PanelScrollable.ScrollBarSize">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="F:GameUI.Control.Primitive.PanelScrollable.scrollBarColor">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="P:GameUI.Control.Primitive.PanelScrollable.ScrollBarColor">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="F:GameUI.Control.Primitive.PanelScrollable.scrollBarValue">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="P:GameUI.Control.Primitive.PanelScrollable.ScrollBarValue">
+        <summary>
+        In percentage, 0-1
+        </summary>
+        </member>
+        <member name="T:GameUI.Control.Primitive.Particle">
+        <summary>
+        
+        </summary>
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="M:GameUI.Control.Primitive.Particle.#ctor(GameData.IGameLink{GameUI.Control.Data.GameDataControlParticle})">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="P:GameUI.Control.Primitive.Particle.DefaultTemplate">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="M:GameUI.Control.Primitive.Particle.#ctor">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="F:GameUI.Control.Primitive.Particle.resource">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="P:GameUI.Control.Primitive.Particle.Resource">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="F:GameUI.Control.Primitive.Particle.isPlaying">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="P:GameUI.Control.Primitive.Particle.IsPlaying">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="F:GameUI.Control.Primitive.Particle.speed">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="P:GameUI.Control.Primitive.Particle.Speed">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="F:GameUI.Control.Primitive.Particle.particleScale">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="P:GameUI.Control.Primitive.Particle.ParticleScale">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="F:GameUI.Control.Primitive.Particle.particleView">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="P:GameUI.Control.Primitive.Particle.ParticleView">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="T:GameUI.Control.Primitive.Progress">
+        <summary>
+        
+        </summary>
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="M:GameUI.Control.Primitive.Progress.#ctor(GameData.IGameLink{GameUI.Control.Data.GameDataControlProgress})">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="P:GameUI.Control.Primitive.Progress.DefaultTemplate">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="M:GameUI.Control.Primitive.Progress.#ctor">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="F:GameUI.Control.Primitive.Progress.value">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="P:GameUI.Control.Primitive.Progress.Value">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="F:GameUI.Control.Primitive.Progress.progressionMode">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="P:GameUI.Control.Primitive.Progress.ProgressionMode">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="F:GameUI.Control.Primitive.Progress.progressRotation">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="P:GameUI.Control.Primitive.Progress.ProgressRotation">
+        <summary>
+        Only works for ProgressionMode.Clockwise and ProgressionMode.CounterClockwise, set the rotation of the progress bar fill.
+        </summary>
+        </member>
+        <member name="T:GameUI.Control.Primitive.Spine">
+        <summary>
+        
+        </summary>
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="M:GameUI.Control.Primitive.Spine.#ctor(GameData.IGameLink{GameUI.Control.Data.GameDataControlSpine})">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="P:GameUI.Control.Primitive.Spine.DefaultTemplate">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="M:GameUI.Control.Primitive.Spine.#ctor">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="F:GameUI.Control.Primitive.Spine.isLooping">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="P:GameUI.Control.Primitive.Spine.IsLooping">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="F:GameUI.Control.Primitive.Spine.resource">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="P:GameUI.Control.Primitive.Spine.Resource">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="F:GameUI.Control.Primitive.Spine.animation">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="P:GameUI.Control.Primitive.Spine.Animation">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="T:GameUI.Control.Primitive.Sprites">
+        <summary>
+        
+        </summary>
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="M:GameUI.Control.Primitive.Sprites.#ctor(GameData.IGameLink{GameUI.Control.Data.GameDataControlSprites})">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="P:GameUI.Control.Primitive.Sprites.DefaultTemplate">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="M:GameUI.Control.Primitive.Sprites.#ctor">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="F:GameUI.Control.Primitive.Sprites.isLooping">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="P:GameUI.Control.Primitive.Sprites.IsLooping">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="F:GameUI.Control.Primitive.Sprites.isPlaying">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="P:GameUI.Control.Primitive.Sprites.IsPlaying">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="F:GameUI.Control.Primitive.Sprites.intervalMillisecond">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="P:GameUI.Control.Primitive.Sprites.IntervalMillisecond">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="P:GameUI.Control.Primitive.Sprites.FramePerSecond">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="T:GameUI.Control.Primitive.Struct.InputEventArgs">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="M:GameUI.Control.Primitive.Struct.InputEventArgs.#ctor(System.String,GameUI.Control.Enum.UpdateSourceTrigger)">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="P:GameUI.Control.Primitive.Struct.InputEventArgs.Text">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="P:GameUI.Control.Primitive.Struct.InputEventArgs.UpdateSourceTrigger">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="T:GameUI.Control.Primitive.Struct.InputKeyEventArgs">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="M:GameUI.Control.Primitive.Struct.InputKeyEventArgs.#ctor(GameCore.Platform.SDL.VirtualKey,GameCore.Platform.SDL.PointerButtons,GameCore.Platform.Urho.VirtualKeyModifiers)">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="P:GameUI.Control.Primitive.Struct.InputKeyEventArgs.Modifiers">
+        <summary>
+        The virtual key modifiers, such as Shift, Ctrl, or Alt, that were pressed when the event occurred.
+        </summary>
+        </member>
+        <member name="P:GameUI.Control.Primitive.Struct.InputKeyEventArgs.PointerButtons">
+        <summary>
+        The pointer buttons that were pressed when the event occurred. For mouse events, this indicates which mouse buttons were pressed. For finger events, differentiate between fingers by using the touching ID.
+        </summary>
+        </member>
+        <member name="P:GameUI.Control.Primitive.Struct.InputKeyEventArgs.Key">
+        <summary>
+        The virtual key that triggered the event.
+        </summary>
+        </member>
+        <member name="T:GameUI.Control.Primitive.Struct.ScrollChangedEventArgs">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="M:GameUI.Control.Primitive.Struct.ScrollChangedEventArgs.#ctor(System.Single)">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="P:GameUI.Control.Primitive.Struct.ScrollChangedEventArgs.ScrollValue">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="T:GameUI.Control.Primitive.Struct.SizeChangedEventArgs">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="M:GameUI.Control.Primitive.Struct.SizeChangedEventArgs.#ctor(System.Int32,System.Int32)">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="P:GameUI.Control.Primitive.Struct.SizeChangedEventArgs.WidthDP">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="P:GameUI.Control.Primitive.Struct.SizeChangedEventArgs.HeightDP">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="P:GameUI.Control.Primitive.Struct.SizeChangedEventArgs.Size">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="T:GameUI.Control.Primitive.VirtualizingPanel">
+        <summary>
+        
+        </summary>
+        <summary>
+        
+        </summary>
+        <summary>
+        
+        </summary>
+        <summary>
+        
+        </summary>
+        <summary>
+        
+        </summary>
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="P:GameUI.Control.Primitive.VirtualizingPanel.DefaultTemplate">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="M:GameUI.Control.Primitive.VirtualizingPanel.#ctor">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="P:GameUI.Control.Primitive.VirtualizingPanel.MeasureDirty">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="P:GameUI.Control.Primitive.VirtualizingPanel.ArrangeDirty">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="P:GameUI.Control.Primitive.VirtualizingPanel.MeasureInProgress">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="P:GameUI.Control.Primitive.VirtualizingPanel.ArrangeInProgress">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="M:GameUI.Control.Primitive.VirtualizingPanel.#ctor(GameData.IGameLink{GameUI.Control.Data.GameDataControlVirtualizingPanel})">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="M:GameUI.Control.Primitive.VirtualizingPanel.InvalidateMeasure">
+        <summary>
+        Invalidates the measurement state for the element.
+        This has the effect of also invalidating the arrange state for the element.
+        The element will be queued for an update layout for size and position.
+        For virtualizing panels, this will start the virtualization process.
+        </summary>
+        </member>
+        <member name="M:GameUI.Control.Primitive.VirtualizingPanel.InvalidateArrange">
+        <summary>
+        Invalidates the arrange state of the element, marking it as requiring a new layout pass.
+        For virtualizing panels, this will start the virtualization process.
+        </summary>
+        </member>
+        <member name="M:GameUI.Control.Primitive.VirtualizingPanel.GenerateChildren">
+        <summary>
+        
+        </summary>
+        <returns></returns>
+        </member>
+        <member name="M:GameUI.Control.Primitive.VirtualizingPanel.OnScrollInternal(System.Object,GameUI.Control.Primitive.Struct.ScrollChangedEventArgs)">
+        <summary>
+        
+        </summary>
+        <param name="__"></param>
+        <param name="_"></param>
+        <returns></returns>
+        </member>
+        <member name="M:GameUI.Control.Primitive.VirtualizingPanel.DisposeManaged">
+        <summary>
+        
+        </summary>
+        <returns></returns>
+        </member>
+        <member name="M:GameUI.Control.Primitive.VirtualizingPanel.TickFinalizer">
+        <summary>
+        
+        </summary>
+        <returns></returns>
+        </member>
+        <member name="P:GameUI.Control.Primitive.VirtualizingPanel.CachedChildren">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="F:GameUI.Control.Primitive.VirtualizingPanel.CacheStartIndex">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="F:GameUI.Control.Primitive.VirtualizingPanel.RecyclePool">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="F:GameUI.Control.Primitive.VirtualizingPanel.PendingVirtualizationChildren">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="F:GameUI.Control.Primitive.VirtualizingPanel.arrangedOnce">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="M:GameUI.Control.Primitive.VirtualizingPanel.GetChildByItem(System.Int32)">
+        <summary>
+        
+        </summary>
+        <param name="itemIndex"></param>
+        <returns></returns>
+        </member>
+        <member name="M:GameUI.Control.Primitive.VirtualizingPanel.CachedRangeToRecycle(System.Int32,System.Int32)">
+        <summary>
+        Recycles a range of cached child elements, preparing them for reuse.
+        </summary>
+        <remarks>This method removes the specified range of child elements from the cache, detaches them from
+        their parent,  and adds them to a recycling pool for future reuse. It also resets the item index of each
+        recycled child  and removes them from the pending virtualization list.</remarks>
+        <param name = "start">The zero-based index of the first child element in the range to recycle.</param>
+        <param name = "count">The number of child elements to recycle, starting from the <paramref name = "start"/> index.</param>
+        </member>
+        <member name="M:GameUI.Control.Primitive.VirtualizingPanel.GetOrRecycleOrGenerateChildByItem(System.Int32)">
+        <summary>
+        
+        </summary>
+        <param name="itemIndex"></param>
+        <returns></returns>
+        </member>
+        <member name="M:GameUI.Control.Primitive.VirtualizingPanel.ClearCache">
+        <summary>
+        
+        </summary>
+        <returns></returns>
+        </member>
+        <member name="F:GameUI.Control.Primitive.VirtualizingPanel.viewportSize">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="F:GameUI.Control.Primitive.VirtualizingPanel.pageItemCount">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="F:GameUI.Control.Primitive.VirtualizingPanel.cacheItemMaxCount">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="F:GameUI.Control.Primitive.VirtualizingPanel.cacheBeforeViewportItemCount">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="F:GameUI.Control.Primitive.VirtualizingPanel.cacheAfterViewportItemCount">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="F:GameUI.Control.Primitive.VirtualizingPanel.logicItemsTotalSize">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="M:GameUI.Control.Primitive.VirtualizingPanel.Measure">
+        <summary>
+        
+        </summary>
+        <returns></returns>
+        </member>
+        <member name="M:GameUI.Control.Primitive.VirtualizingPanel.Arrange">
+        <summary>
+        
+        </summary>
+        <returns></returns>
+        </member>
+        <member name="F:GameUI.Control.Primitive.VirtualizingPanel.PendingVirtualizationChildrenSwapPool">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="F:GameUI.Control.Primitive.VirtualizingPanel.ReferenceItem">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="F:GameUI.Control.Primitive.VirtualizingPanel.BeforeViewportPlaceHolder">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="F:GameUI.Control.Primitive.VirtualizingPanel.AfterViewportPlaceHolder">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="F:GameUI.Control.Primitive.VirtualizingPanel.cacheLength">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="F:GameUI.Control.Primitive.VirtualizingPanel.itemSize">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="F:GameUI.Control.Primitive.VirtualizingPanel.arrangeOnScroll">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="P:GameUI.Control.Primitive.VirtualizingPanel.CacheLengthUnit">
+        <summary>
+        Use this property to configure the unit portion of the before
+        and after cache sizes.
+        </summary>
+        </member>
+        <member name="P:GameUI.Control.Primitive.VirtualizingPanel.ItemSize">
+        <summary>
+        The item size used for virtualization. This value is used to determine the size of the items in the panel, if not specified, the size will be determined by the first item in the panel.
+        </summary>
+        </member>
+        <member name="P:GameUI.Control.Primitive.VirtualizingPanel.ReferenceItemSize">
+        <summary>
+        Gets the size of the first child element in the collection, based on the current scroll orientation.
+        </summary>
+        </member>
+        <member name="P:GameUI.Control.Primitive.VirtualizingPanel.ViewportSize">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="P:GameUI.Control.Primitive.VirtualizingPanel.PageItemCount">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="P:GameUI.Control.Primitive.VirtualizingPanel.CacheItemMaxCount">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="P:GameUI.Control.Primitive.VirtualizingPanel.CacheBeforeViewportItemCount">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="P:GameUI.Control.Primitive.VirtualizingPanel.CacheAfterViewportItemCount">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="P:GameUI.Control.Primitive.VirtualizingPanel.LogicItemsTotalSize">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="P:GameUI.Control.Primitive.VirtualizingPanel.IsVirtualizing">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="P:GameUI.Control.Primitive.VirtualizingPanel.ArrangeOnScroll">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="P:GameUI.Control.Primitive.VirtualizingPanel.ItemsSource">
+        <summary>
+        
+        </summary>
+        </member>
+        <member name="M:GameUI.Control.Data.Struct.InputEvents.ApplyTo(GameUI.Control.Primitive.Input)">
+        <summary>
+        
+        </summary>
+        <param name="control"></param>
+        <returns></returns>
+        </member>
+        <member name="M:GameUI.Control.Data.Struct.PanelScrollableEvents.ApplyTo(GameUI.Control.Primitive.PanelScrollable)">
+        <summary>
+        
+        </summary>
+        <param name="panelScrollable"></param>
+        <returns></returns>
+        </member>
+        <member name="M:GameUI.Control.Extensions.BuilderExtensions.Text(GameUI.Control.Primitive.Label,System.String)">
+        <summary>
+        
+        </summary>
+        <param name="label"></param>
+        <param name="text"></param>
+        <returns></returns>
+        </member>
+        <member name="M:GameUI.Control.Extensions.BuilderExtensions.TextColor(GameUI.Control.Primitive.Label,System.Drawing.Color)">
+        <summary>
+        
+        </summary>
+        <param name="label"></param>
+        <param name="color"></param>
+        <returns></returns>
+        </member>
+        <member name="M:GameUI.Control.Extensions.BuilderExtensions.FontSize(GameUI.Control.Primitive.Label,System.Int32)">
+        <summary>
+        
+        </summary>
+        <param name="label"></param>
+        <param name="size"></param>
+        <returns></returns>
+        </member>
+        <member name="M:GameUI.Control.Extensions.BuilderExtensions.Bold(GameUI.Control.Primitive.Label,System.Boolean)">
+        <summary>
+        
+        </summary>
+        <param name="label"></param>
+        <param name="bold"></param>
+        <returns></returns>
+        </member>
+        <member name="M:GameUI.Control.Extensions.BuilderExtensions.Italic(GameUI.Control.Primitive.Label,System.Boolean)">
+        <summary>
+        
+        </summary>
+        <param name="label"></param>
+        <param name="italic"></param>
+        <returns></returns>
+        </member>
+        <member name="M:GameUI.Control.Extensions.BuilderExtensions.Scrollable(GameUI.Control.Primitive.PanelScrollable,System.Boolean)">
+        <summary>
+        启用滚动
+        </summary>
+        </member>
+        <member name="M:GameUI.Control.Extensions.BuilderExtensions.VScroll(GameUI.Control.Primitive.PanelScrollable)">
+        <summary>
+        设置垂直滚动
+        </summary>
+        </member>
+        <member name="M:GameUI.Control.Extensions.BuilderExtensions.HScroll(GameUI.Control.Primitive.PanelScrollable)">
+        <summary>
+        设置水平滚动
+        </summary>
+        </member>
+        <member name="M:GameUI.Control.Extensions.BuilderExtensions.ScrollBar(GameUI.Control.Primitive.PanelScrollable,System.Single,System.Nullable{System.Drawing.Color})">
+        <summary>
+        设置滚动条样式
+        </summary>
+        </member>
+        <member name="M:GameUI.Control.Extensions.BuilderExtensions.ScrollTo(GameUI.Control.Primitive.PanelScrollable,System.Single)">
+        <summary>
+        设置滚动位置（0-1之间）
+        </summary>
+        </member>
+        <member name="M:GameUI.Examples.DrawPathExample.#ctor(GameUI.Control.Primitive.Canvas)">
+        <summary>
+        DrawPath 方法使用示例
+        </summary>
+        </member>
+        <member name="M:GameUI.Graphics.GradientPaint.Apply(GameUI.Control.Primitive.Canvas,GameUI.Graphics.Enum.PaintApply)">
+        <summary>
+        将此渐变画笔应用到指定的画布上进行填充或描边操作
+        </summary>
+        <param name = "canvas">要应用渐变的画布</param>
+        <param name = "apply">指定是将渐变应用于填充还是描边操作</param>
+        <exception cref = "T:System.InvalidOperationException">
+        当画布无效或渐变创建失败时抛出。
+        </exception>
+        </member>
+    </members>
+</doc>

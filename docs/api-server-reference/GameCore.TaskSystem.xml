@@ -1,0 +1,198 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<doc>
+    <assembly>
+        <name>GameCore</name>
+    </assembly>
+    <members>
+        <member name="T:GameCore.TaskSystem.Task">
+            <summary>
+            Represents an abstract base class for asynchronous tasks that can be executed, monitored, and cancelled within the game framework.
+            </summary>
+            <remarks>
+            The Task class provides a foundation for implementing long-running operations that need to be executed over multiple game ticks.
+            Unlike standard .NET tasks, these tasks are integrated with the game's tick system and provide cancellation support through
+            cancellation tokens. Tasks can be started, stopped, and monitored through events. The class supports both synchronous and
+            asynchronous stopping mechanisms depending on the allowSynchronousStop parameter.
+            </remarks>
+            <param name="token">Optional cancellation token to monitor for cancellation requests.</param>
+            <param name="allowSynchronousStop">Whether the task can be stopped immediately or must wait for the next tick finalizer.</param>
+        </member>
+        <member name="M:GameCore.TaskSystem.Task.#ctor(System.Nullable{System.Threading.CancellationToken},System.Boolean)">
+            <summary>
+            Represents an abstract base class for asynchronous tasks that can be executed, monitored, and cancelled within the game framework.
+            </summary>
+            <remarks>
+            The Task class provides a foundation for implementing long-running operations that need to be executed over multiple game ticks.
+            Unlike standard .NET tasks, these tasks are integrated with the game's tick system and provide cancellation support through
+            cancellation tokens. Tasks can be started, stopped, and monitored through events. The class supports both synchronous and
+            asynchronous stopping mechanisms depending on the allowSynchronousStop parameter.
+            </remarks>
+            <param name="token">Optional cancellation token to monitor for cancellation requests.</param>
+            <param name="allowSynchronousStop">Whether the task can be stopped immediately or must wait for the next tick finalizer.</param>
+        </member>
+        <member name="F:GameCore.TaskSystem.Task.cancellationToken">
+            <summary />
+        </member>
+        <member name="F:GameCore.TaskSystem.Task.tokenRegistration">
+            <summary />
+        </member>
+        <member name="F:GameCore.TaskSystem.Task.allowSynchronousStop">
+            <summary />
+        </member>
+        <member name="P:GameCore.TaskSystem.Task.Status">
+            <summary>
+            Gets the current status of the task.
+            </summary>
+            <value>The current task status indicating whether it's waiting, running, completed, or cancelled.</value>
+            <remarks>
+            Setting the status triggers appropriate events (OnStarted, OnCompleted, OnStopped) and manages
+            the task's lifecycle transitions. The status changes are monitored by the task system.
+            </remarks>
+        </member>
+        <member name="F:GameCore.TaskSystem.Task.status">
+            <summary />
+        </member>
+        <member name="E:GameCore.TaskSystem.Task.OnStarted">
+            <summary>
+            Occurs when the task starts running.
+            </summary>
+            <remarks>
+            This event is raised when the task transitions from WaitingForActivation to Running status.
+            Subscribers can use this event to perform initialization or logging when a task begins execution.
+            </remarks>
+        </member>
+        <member name="E:GameCore.TaskSystem.Task.OnStopped">
+            <summary>
+            Occurs when the task stops running, regardless of whether it completed successfully or was cancelled.
+            </summary>
+            <remarks>
+            This event is raised for both successful completion and cancellation scenarios. It's useful
+            for cleanup operations that need to occur regardless of how the task ended.
+            </remarks>
+        </member>
+        <member name="E:GameCore.TaskSystem.Task.OnCompleted">
+            <summary>
+            Occurs when the task completes successfully.
+            </summary>
+            <remarks>
+            This event is raised only when the task finishes its work successfully (not when cancelled).
+            It's raised before the OnStopped event for completed tasks.
+            </remarks>
+        </member>
+        <member name="M:GameCore.TaskSystem.Task.Start">
+            <summary>
+            Starts the execution of the task.
+            </summary>
+            <remarks>
+            This method transitions the task from WaitingForActivation to Running status. If a cancellation
+            token was provided, it registers a callback to handle cancellation requests. The method has no
+            effect if the task is not in the WaitingForActivation state.
+            </remarks>
+        </member>
+        <member name="M:GameCore.TaskSystem.Task.Cancel">
+            <summary>
+            Cancels the task execution.
+            </summary>
+            <remarks>
+            This is a convenience method that calls Stop(false) to cancel the task. The actual stopping
+            behavior depends on the allowSynchronousStop parameter set during construction.
+            </remarks>
+        </member>
+        <member name="M:GameCore.TaskSystem.Task.Stop(System.Boolean)">
+            <summary>
+            Stops the task execution, either due to completion or cancellation.
+            </summary>
+            <param name="completed">True if the task is stopping because it completed successfully; false for cancellation.</param>
+            <returns>True if the stop operation was initiated successfully; otherwise, false.</returns>
+            <remarks>
+            The behavior depends on the allowSynchronousStop setting. If synchronous stopping is allowed,
+            the task stops immediately. Otherwise, the stop operation is deferred to the next tick finalizer
+            for completed tasks, or marked as pending cancel for cancelled tasks.
+            </remarks>
+        </member>
+        <member name="F:GameCore.TaskSystem.Task.pendingCancel">
+            <summary />
+        </member>
+        <member name="M:GameCore.TaskSystem.Task.StopSynchronous(System.Boolean)">
+            <summary>
+            Immediately stops the task and performs cleanup operations.
+            </summary>
+            <param name="completed">True if the task completed successfully; false if it was cancelled.</param>
+            <returns>True if the task was stopped successfully; otherwise, false.</returns>
+            <remarks>
+            This method performs the actual stopping logic including unregistering cancellation tokens,
+            updating the status, and clearing event handlers. It's called either immediately (for synchronous stops)
+            or during tick finalization (for asynchronous stops).
+            </remarks>
+        </member>
+        <member name="M:GameCore.TaskSystem.Task.TickFinalizer">
+            <summary>
+            Finalizes the task state during the tick finalizer phase.
+            </summary>
+            <remarks>
+            This method is called by the game's tick finalizer system to handle deferred task stopping.
+            It checks for pending cancellation or cancellation token requests and performs the appropriate
+            stopping action. For tasks that don't have pending cancellation, it assumes successful completion.
+            </remarks>
+        </member>
+        <member name="P:GameCore.TaskSystem.Task.IsCompleted">
+            <summary>
+            Gets a value indicating whether the task has completed successfully.
+            </summary>
+            <value>True if the task status is RanToCompletion; otherwise, false.</value>
+        </member>
+        <member name="P:GameCore.TaskSystem.Task.IsEnded">
+            <summary>
+            Gets a value indicating whether the task has finished execution (either completed, cancelled, or faulted).
+            </summary>
+            <value>True if the task is in a terminal state; otherwise, false.</value>
+            <remarks>
+            This property is useful for determining if a task is no longer active and can be cleaned up
+            or removed from tracking collections.
+            </remarks>
+        </member>
+        <member name="T:GameCore.TaskSystem.TaskResult`1">
+            <summary />
+        </member>
+        <member name="P:GameCore.TaskSystem.TaskResult`1.Value">
+            <summary />
+        </member>
+        <member name="P:GameCore.TaskSystem.TaskResult`1.Result">
+            <summary />
+        </member>
+        <member name="P:GameCore.TaskSystem.TaskResult`1.Error">
+            <summary />
+        </member>
+        <member name="P:GameCore.TaskSystem.TaskResult`1.IsSuccess">
+            <summary />
+        </member>
+        <member name="M:GameCore.TaskSystem.TaskResult`1.#ctor(`0)">
+            <summary />
+        </member>
+        <member name="M:GameCore.TaskSystem.TaskResult`1.op_Implicit(`0)~GameCore.TaskSystem.TaskResult{`0}">
+            <summary />
+        </member>
+        <member name="M:GameCore.TaskSystem.TaskResult`1.#ctor(System.Threading.Tasks.TaskStatus)">
+            <summary>
+            Constructor for error result
+            </summary>
+            <param name="error">Can only pass values that are not TaskStatus.RanToCompletion</param>
+            <exception cref="T:System.ArgumentException" />
+        </member>
+        <member name="M:GameCore.TaskSystem.TaskResult`1.op_Implicit(System.Threading.Tasks.TaskStatus)~GameCore.TaskSystem.TaskResult{`0}">
+            <summary />
+        </member>
+        <member name="M:GameCore.TaskSystem.TaskResult`1.op_True(GameCore.TaskSystem.TaskResult{`0})">
+            <summary />
+        </member>
+        <member name="M:GameCore.TaskSystem.TaskResult`1.op_False(GameCore.TaskSystem.TaskResult{`0})">
+            <summary />
+        </member>
+        <member name="M:GameCore.TaskSystem.TaskResult`1.op_LogicalNot(GameCore.TaskSystem.TaskResult{`0})">
+            <summary />
+        </member>
+        <member name="M:GameCore.TaskSystem.TaskResult`1.op_BitwiseAnd(GameCore.TaskSystem.TaskResult{`0},GameCore.TaskSystem.TaskResult{`0})">
+            <summary />
+        </member>
+    </members>
+</doc>

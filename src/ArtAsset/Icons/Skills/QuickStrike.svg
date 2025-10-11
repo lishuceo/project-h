@@ -1,0 +1,44 @@
+<svg width="64" height="64" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
+  <!-- 背景圆环 -->
+  <circle cx="32" cy="32" r="30" fill="#0f3460" stroke="#16537e" stroke-width="2"/>
+  
+  <!-- 疾风剑主图案 -->
+  <!-- 剑身（倾斜突刺状态） -->
+  <g transform="translate(32, 32) rotate(-30)">
+    <rect x="-2" y="-20" width="4" height="25" fill="#e6e6e6" rx="1"/>
+    <rect x="-3" y="-20" width="6" height="3" fill="#ffffff"/>
+    <!-- 剑尖 -->
+    <polygon points="0,-22 3,-20 -3,-20" fill="#ffffff"/>
+    
+    <!-- 护手 -->
+    <rect x="-6" y="5" width="12" height="3" fill="#8b4513" rx="1"/>
+    
+    <!-- 剑柄 -->
+    <rect x="-1.5" y="8" width="3" height="8" fill="#654321"/>
+  </g>
+  
+  <!-- 疾风效果 -->
+  <g opacity="0.7">
+    <!-- 风旋1 -->
+    <path d="M 15 25 Q 20 20 25 25 Q 20 30 15 25" fill="none" stroke="#87ceeb" stroke-width="2"/>
+    <!-- 风旋2 -->
+    <path d="M 39 35 Q 44 30 49 35 Q 44 40 39 35" fill="none" stroke="#87ceeb" stroke-width="2"/>
+    <!-- 风旋3 -->
+    <path d="M 25 45 Q 30 40 35 45 Q 30 50 25 45" fill="none" stroke="#87ceeb" stroke-width="1.5"/>
+  </g>
+  
+  <!-- 速度轨迹 -->
+  <g opacity="0.8">
+    <path d="M 10 15 Q 25 20 45 10" fill="none" stroke="#00ffff" stroke-width="2" stroke-dasharray="3,2"/>
+    <path d="M 8 20 Q 23 25 43 15" fill="none" stroke="#40e0d0" stroke-width="1.5" stroke-dasharray="2,1"/>
+  </g>
+  
+  <!-- 闪电般的速度线 -->
+  <g opacity="0.9">
+    <line x1="12" y1="18" x2="18" y2="22" stroke="#ffffff" stroke-width="2" stroke-linecap="round"/>
+    <line x1="14" y1="15" x2="20" y2="19" stroke="#ffffff" stroke-width="1.5" stroke-linecap="round"/>
+    <line x1="42" y1="12" x2="48" y2="16" stroke="#ffffff" stroke-width="2" stroke-linecap="round"/>
+    <line x1="44" y1="9" x2="50" y2="13" stroke="#ffffff" stroke-width="1.5" stroke-linecap="round"/>
+  </g>
+</svg>
+

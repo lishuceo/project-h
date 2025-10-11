@@ -1,0 +1,1307 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<doc>
+    <assembly>
+        <name>GameCore</name>
+    </assembly>
+    <members>
+        <member name="F:GameCore.EntitySystem.Data.Enum.ViewActorType.Unit">
+            <summary>
+            Normal creature, has most of the features.
+            </summary>
+        </member>
+        <member name="F:GameCore.EntitySystem.Data.Enum.ViewActorType.Projectile">
+            <summary>
+            Cannot walk, can have mover, destroyed after killed.
+            </summary>
+        </member>
+        <member name="F:GameCore.EntitySystem.Data.Enum.ViewActorType.Block">
+            <summary>
+            Cannot walk, cannot have mover, but have customized static collision footprint.
+            </summary>
+        </member>
+        <member name="F:GameCore.EntitySystem.Data.Enum.ViewActorType.Building">
+            <summary>
+            Creature but cannot walk, can have customized dynamic collision footprint.
+            </summary>
+        </member>
+        <member name="F:GameCore.EntitySystem.Data.Enum.ViewActorType.Destructible">
+            <summary>
+            Cannot walk, cannot have mover, cannot have footprint.
+            </summary>
+        </member>
+        <member name="T:GameCore.EntitySystem.Data.GameDataUnit">
+            <summary />
+            <summary />
+            <summary />
+        </member>
+        <member name="P:GameCore.EntitySystem.Data.GameDataUnit.DisplayName">
+            <summary />
+        </member>
+        <member name="P:GameCore.EntitySystem.Data.GameDataUnit.Description">
+            <summary />
+        </member>
+        <member name="P:GameCore.EntitySystem.Data.GameDataUnit.Icon">
+            <summary />
+        </member>
+        <member name="P:GameCore.EntitySystem.Data.GameDataUnit.Filter">
+            <summary />
+        </member>
+        <member name="P:GameCore.EntitySystem.Data.GameDataUnit.State">
+            <summary />
+        </member>
+        <member name="P:GameCore.EntitySystem.Data.GameDataUnit.AttackableRadius">
+            <summary />
+        </member>
+        <member name="P:GameCore.EntitySystem.Data.GameDataUnit.CollisionRadius">
+            <summary />
+        </member>
+        <member name="P:GameCore.EntitySystem.Data.GameDataUnit.DynamicCollisionMask">
+            <summary />
+        </member>
+        <member name="P:GameCore.EntitySystem.Data.GameDataUnit.Abilities">
+            <summary />
+        </member>
+        <member name="P:GameCore.EntitySystem.Data.GameDataUnit.Responses">
+            <summary />
+        </member>
+        <member name="P:GameCore.EntitySystem.Data.GameDataUnit.Inventories">
+            <summary />
+        </member>
+        <member name="P:GameCore.EntitySystem.Data.GameDataUnit.Properties">
+            <summary />
+        </member>
+        <member name="P:GameCore.EntitySystem.Data.GameDataUnit.VitalProperties">
+            <summary />
+        </member>
+        <member name="P:GameCore.EntitySystem.Data.GameDataUnit.UpdateFlags">
+            <summary />
+        </member>
+        <member name="P:GameCore.EntitySystem.Data.GameDataUnit.Model">
+            <summary />
+        </member>
+        <member name="P:GameCore.EntitySystem.Data.GameDataUnit.Particle">
+            <summary />
+        </member>
+        <member name="P:GameCore.EntitySystem.Data.GameDataUnit.TacticalAI">
+            <summary />
+        </member>
+        <member name="P:GameCore.EntitySystem.Data.GameDataUnit.Footprint">
+            <summary />
+        </member>
+        <member name="P:GameCore.EntitySystem.Data.GameDataUnit.Leveling">
+            <summary />
+        </member>
+        <member name="P:GameCore.EntitySystem.Data.GameDataUnit.ActorArray">
+            <summary />
+        </member>
+        <member name="P:GameCore.EntitySystem.Data.GameDataUnit.PrimitiveShape">
+            <summary>
+            单位的基本几何形状配置（单个形状）
+            </summary>
+            <remarks>
+            当单位没有复杂模型时，可以使用基本几何形状作为临时表现。
+            这些形状会在客户端自动创建并附着到单位上。
+            如果同时设置了PrimitiveShape和CompositeShapes，将优先使用CompositeShapes。
+            </remarks>
+        </member>
+        <member name="P:GameCore.EntitySystem.Data.GameDataUnit.CompositeShapes">
+            <summary>
+            单位的复合几何形状配置（多个形状组合）
+            </summary>
+            <remarks>
+            用于创建由多个基本形状组成的复杂表现，如机器人、建筑等。
+            数组中的形状会按照Priority排序后依次创建。
+            </remarks>
+        </member>
+        <member name="P:GameCore.EntitySystem.Data.GameDataUnit.ViewActorType">
+            <summary />
+        </member>
+        <member name="P:GameCore.EntitySystem.Data.GameDataUnit.ScaleVector">
+            <summary />
+        </member>
+        <member name="P:GameCore.EntitySystem.Data.GameDataUnit.Rotation">
+            <summary />
+        </member>
+        <member name="P:GameCore.EntitySystem.Data.GameDataUnit.MiniMapIcon">
+            <summary />
+        </member>
+        <member name="P:GameCore.EntitySystem.Data.GameDataUnit.StatusBarSetting">
+            <summary />
+        </member>
+        <member name="P:GameCore.EntitySystem.Data.GameDataUnit.DeathRemovalDelay">
+            <summary>
+            The unit will be removed after this time when it is dead, it can still be revived during this time, the delay will be reset after revived. Does not work if the unit have a static footprint. Set to null means no delay.
+            </summary>
+        </member>
+        <member name="P:GameCore.EntitySystem.Data.GameDataUnit.DeathProcedure">
+            <summary />
+        </member>
+        <member name="P:GameCore.EntitySystem.Data.GameDataUnit.ImpactActors">
+            <summary />
+        </member>
+        <member name="P:GameCore.EntitySystem.Data.GameDataUnit.GameData#IGameData{GameCore#ActorSystem#Data#IGameDataActorScopeOwner}#Link">
+            <summary />
+        </member>
+        <member name="F:GameCore.EntitySystem.Data.GameDataUnit.filterCache">
+            <summary />
+        </member>
+        <member name="P:GameCore.EntitySystem.Data.GameDataUnit.FilterCache">
+            <summary />
+        </member>
+        <member name="P:GameCore.EntitySystem.Data.GameDataUnit.PhysicsAttributes">
+            <summary />
+        </member>
+        <member name="M:GameCore.EntitySystem.Data.GameDataUnit.ClearFilterCache">
+            <summary />
+            <returns />
+        </member>
+        <member name="M:GameCore.EntitySystem.Data.GameDataUnit.CreateUnit(GameCore.PlayerAndUsers.Player,GameCore.SceneSystem.ScenePoint,GameCore.BaseType.Angle,GameCore.Interface.IExecutionContext,System.Boolean)">
+            <summary />
+            <param name="player" />
+            <param name="scenePoint" />
+            <param name="facing" />
+            <param name="creationContext" />
+            <param name="useDefaultAI" />
+            <returns />
+        </member>
+        <member name="F:GameCore.EntitySystem.Data.GameDataUnit.aggregator">
+            <summary />
+        </member>
+        <member name="F:GameCore.EntitySystem.Data.GameDataUnit.aggregatorWeakReference">
+            <summary />
+        </member>
+        <member name="P:GameCore.EntitySystem.Data.GameDataUnit.Events#IEventSender#Aggregator">
+            <summary />
+        </member>
+        <member name="P:GameCore.EntitySystem.Data.GameDataUnit.AggregatorWeakReference">
+            <summary />
+        </member>
+        <member name="P:GameCore.EntitySystem.Data.GameDataUnit.SyncType">
+            <summary />
+        </member>
+        <member name="P:GameCore.EntitySystem.Data.GameDataUnit.DebugDrawSettings">
+            <summary />
+        </member>
+        <member name="T:GameCore.EntitySystem.Data.Struct.DeathProcedure">
+            <summary />
+        </member>
+        <member name="P:GameCore.EntitySystem.Data.Struct.DeathProcedure.Mode">
+            <summary />
+        </member>
+        <member name="P:GameCore.EntitySystem.Data.Struct.DeathProcedure.SinkHeightDelta">
+            <summary />
+        </member>
+        <member name="T:GameCore.EntitySystem.Data.Struct.StatusBarSetting">
+            <summary />
+        </member>
+        <member name="P:GameCore.EntitySystem.Data.Struct.StatusBarSetting.DefaultOn">
+            <summary>
+            Indicates whether the status bar is on by default.
+            </summary>
+        </member>
+        <member name="P:GameCore.EntitySystem.Data.Struct.StatusBarSetting.DefaultStatusBar">
+            <summary>
+            If the unit does not meet any relationship specified in the OverrideByRelationShip dictionary, the default status bar will be used.
+            </summary>
+        </member>
+        <member name="P:GameCore.EntitySystem.Data.Struct.StatusBarSetting.OverrideByRelationShip">
+            <summary>
+            If the player meets any relationship specified in the OverrideByRelationShip dictionary, the corresponding status bar will be used, <see cref="F:GameCore.PlayerAndUsers.Enum.PlayerUnitRelationShip.MainUnit" /> has higher priority than <see cref="F:GameCore.PlayerAndUsers.Enum.PlayerUnitRelationShip.Player" />.
+            </summary>
+        </member>
+        <member name="T:GameCore.EntitySystem.Data.Struct.UpdateFlags">
+            <summary>
+            Defines configuration flags that control how an entity is updated and behaves in the game world.
+            </summary>
+            <remarks>
+            These flags determine which systems and capabilities are enabled for an entity, affecting performance
+            and functionality. They are typically set based on the entity's data configuration and determine
+            which components and behaviors are active.
+            </remarks>
+        </member>
+        <member name="P:GameCore.EntitySystem.Data.Struct.UpdateFlags.Walkable">
+            <summary>
+            Gets or sets a value indicating whether the entity can walk or move through the world.
+            </summary>
+            <remarks>
+            When true, the entity will have walking/movement capabilities enabled and can respond to movement commands.
+            </remarks>
+        </member>
+        <member name="P:GameCore.EntitySystem.Data.Struct.UpdateFlags.Turnable">
+            <summary>
+            Gets or sets a value indicating whether the entity can turn or rotate.
+            </summary>
+            <remarks>
+            When true, the entity can change its facing direction in response to commands or game logic.
+            </remarks>
+        </member>
+        <member name="P:GameCore.EntitySystem.Data.Struct.UpdateFlags.AllowMover">
+            <summary>
+            Gets or sets a value indicating whether the entity can have mover components attached.
+            </summary>
+            <remarks>
+            When true, the entity supports advanced movement systems like projectiles, guided movement, or special mover behaviors.
+            </remarks>
+        </member>
+        <member name="P:GameCore.EntitySystem.Data.Struct.UpdateFlags.DisableClientUpdate">
+            <summary>
+            Gets or sets a value indicating whether client-side updates should be disabled for this entity.
+            </summary>
+            <remarks>
+            When true, the entity will not perform certain update operations on the client side,
+            typically used for performance optimization.
+            </remarks>
+        </member>
+        <member name="T:GameCore.EntitySystem.Entity">
+            <summary />
+            <summary />
+            <summary>
+            Base class for all scene object that can can be interact dynamically. 
+            </summary>
+            <remarks>
+            Entity represents any interactive object in the game world such as units, buildings, items, or effects.
+            It provides fundamental functionality for positioning, ownership, visibility, and lifecycle management.
+            All entities exist within a scene and are associated with a player. They support hierarchical relationships
+            through parent-child attachments and can be targeted by other game systems.
+            </remarks>
+            <summary />
+            <summary />
+            <summary />
+            <summary />
+            <summary />
+            <summary />
+            <summary />
+            <summary />
+            <summary />
+            <summary />
+            <summary />
+            <summary />
+        </member>
+        <member name="P:GameCore.EntitySystem.Entity.GameCore#Interface#IActor#ViewAsyncActor">
+            <summary />
+        </member>
+        <member name="P:GameCore.EntitySystem.Entity.DefaultModel">
+            <summary />
+        </member>
+        <member name="M:GameCore.EntitySystem.Entity.GetById(System.Int32)">
+            <summary>
+            Retrieves an entity by its unique identifier.
+            </summary>
+            <param name="entityId">The unique identifier of the entity to retrieve.</param>
+            <returns>The entity with the specified ID, or null if not found.</returns>
+        </member>
+        <member name="P:GameCore.EntitySystem.Entity.BearingSnapshot">
+            <summary>
+            We set/get bearings via _viewActor, but we also have a snapshot of the bearings.
+            So that after the unit is destroyed, we can still get the last known position and facing.
+            </summary>
+            <remarks>
+            This snapshot preserves the last known state of the entity's position and facing direction
+            even after the entity has been destroyed or is no longer valid. This is useful for
+            effects, death animations, or other systems that need to reference the entity's final state.
+            </remarks>
+        </member>
+        <member name="F:GameCore.EntitySystem.Entity._parent">
+            <summary />
+        </member>
+        <member name="P:GameCore.EntitySystem.Entity.ShouldIgnoreDamage">
+            <summary>
+            Gets a value indicating whether this entity should ignore incoming damage.
+            </summary>
+            <remarks>
+            By default, entities do not ignore damage. Derived classes can override this property
+            to implement damage immunity based on states, effects, or other conditions.
+            </remarks>
+        </member>
+        <member name="P:GameCore.EntitySystem.Entity.Scene">
+            <summary>
+            Gets the scene that contains this entity.
+            </summary>
+            <value>The scene object where this entity is located.</value>
+        </member>
+        <member name="P:GameCore.EntitySystem.Entity.CanReceiveCommandRequest">
+            <summary>
+            Gets a value indicating whether this entity can receive command requests from players or AI systems.
+            </summary>
+            <remarks>
+            This property determines if the entity can be given orders such as move, attack, or use abilities.
+            Derived classes may override this to implement specific logic for command reception.
+            </remarks>
+        </member>
+        <member name="P:GameCore.EntitySystem.Entity.Facing">
+            <summary>
+            Gets the facing direction of this entity.
+            </summary>
+            <value>The angle representing the direction this entity is facing.</value>
+            <remarks>
+            On the client side, facing can only be read, not modified. If the entity is not valid,
+            returns the cached facing from the bearing snapshot.
+            </remarks>
+        </member>
+        <member name="P:GameCore.EntitySystem.Entity.IsValid">
+            <summary>
+            Gets a value indicating whether this entity is valid and can be used.
+            </summary>
+            <value>True if the entity is valid; otherwise, false.</value>
+            <remarks>
+            On the client side, an entity is valid if its view actor exists. The client
+            relies on the server to manage the detailed validity of entities.
+            </remarks>
+        </member>
+        <member name="P:GameCore.EntitySystem.Entity.IsAlive">
+            <summary>
+            Gets a value indicating whether this entity is alive and functional.
+            </summary>
+            <value>True if the entity is alive; otherwise, false.</value>
+            <remarks>
+            By default, an entity is considered alive if it is valid. Derived classes
+            such as Unit may override this to provide more specific life state logic.
+            </remarks>
+        </member>
+        <member name="M:GameCore.EntitySystem.Entity.#ctor(GameCore.PlayerAndUsers.Player,EngineInterface.GoInterface.IViewActor)">
+            <summary />
+        </member>
+        <member name="F:GameCore.EntitySystem.Entity._viewActor">
+            <summary />
+        </member>
+        <member name="M:GameCore.EntitySystem.Entity.UpdateActor">
+            <summary />
+            <returns />
+        </member>
+        <member name="M:GameCore.EntitySystem.Entity.UpdateParentage">
+            <summary />
+            <returns />
+        </member>
+        <member name="M:GameCore.EntitySystem.Entity.MoveTo(GameCore.SceneSystem.ScenePoint)">
+            <summary>
+            Sync Blink
+            </summary>
+            <returns />
+        </member>
+        <member name="P:GameCore.EntitySystem.Entity.Position">
+            <summary>
+            Gets the current position of this entity in the scene.
+            </summary>
+            <value>The scene point representing this entity's position.</value>
+            <remarks>
+            If the entity has a parent, returns the parent's position. Otherwise, returns
+            the entity's own position from its view actor, or the cached position if invalid.
+            </remarks>
+        </member>
+        <member name="M:GameCore.EntitySystem.Entity.SetPosition(GameCore.SceneSystem.ScenePoint,System.Boolean,System.Boolean)">
+            <summary>
+            Sets the position of this entity to the specified scene point.
+            </summary>
+            <param name="scenePoint">The target position to move this entity to.</param>
+            <param name="sync">Whether to synchronize the position immediately (blink/teleport).</param>
+            <param name="syncDistance">Whether to synchronize over distance for smooth movement.</param>
+            <returns>True if the position was set successfully; otherwise, false.</returns>
+            <remarks>
+            Entities with parents cannot have their position set directly. If the target scene
+            is different from the current scene, this method will attempt to switch scenes first.
+            On the server, the target scene must be loaded for the operation to succeed.
+            </remarks>
+        </member>
+        <member name="M:GameCore.EntitySystem.Entity.IsAncestorOf(GameCore.EntitySystem.Entity)">
+            <summary>
+            Checks if this entity is an ancestor of another entity in the parent-child hierarchy.
+            </summary>
+            <param name="other">The entity to check for descendant relationship.</param>
+            <returns>True if this entity is an ancestor of the other entity; otherwise, false.</returns>
+            <remarks>
+            This method traverses up the parent chain of the other entity to determine if
+            this entity appears anywhere in that chain. Returns true if the entities are the same.
+            </remarks>
+        </member>
+        <member name="P:GameCore.EntitySystem.Entity.Parent">
+            <summary>
+            Gets or sets the parent entity in the attachment hierarchy.
+            </summary>
+            <value>The parent entity, or null if this entity has no parent.</value>
+            <remarks>
+            Setting the parent creates an attachment relationship where this entity will follow
+            the parent's transformations. Setting to null detaches the entity. Circular
+            parent-child relationships are prevented by throwing an exception.
+            </remarks>
+            <exception cref="T:System.InvalidOperationException">
+            Thrown when attempting to set a parent that would create a circular reference.
+            </exception>
+        </member>
+        <member name="P:GameCore.EntitySystem.Entity.TagComponents">
+            <summary>
+            Gets the collection of tag components attached to this entity.
+            </summary>
+            <remarks>
+            Tag components are singleton components identified by a unique tag. Each entity
+            can have at most one component of each tag type.
+            </remarks>
+        </member>
+        <member name="M:GameCore.EntitySystem.Entity.GetTagComponent(GameCore.BaseType.ComponentTag)">
+            <summary>
+            Retrieves a tag component of any type by its tag identifier.
+            </summary>
+            <param name="tag">The tag identifier of the component to retrieve.</param>
+            <returns>The tag component if found; otherwise, null.</returns>
+        </member>
+        <member name="M:GameCore.EntitySystem.Entity.GetTagComponent``1(GameCore.BaseType.ComponentTag)">
+            <summary>
+            Retrieves a tag component of a specific type by its tag identifier.
+            </summary>
+            <typeparam name="TComponent">The specific type of tag component to retrieve.</typeparam>
+            <param name="tag">The tag identifier of the component to retrieve.</param>
+            <returns>The tag component of the specified type if found; otherwise, null.</returns>
+        </member>
+        <member name="M:GameCore.EntitySystem.Entity.HasTagComponent(GameCore.BaseType.ComponentTag)">
+            <summary>
+            Checks if this entity has a tag component with the specified tag.
+            </summary>
+            <param name="tag">The tag identifier to check for.</param>
+            <returns>True if the entity has a component with the specified tag; otherwise, false.</returns>
+        </member>
+        <member name="P:GameCore.EntitySystem.Entity.ComponentSets">
+            <summary />
+        </member>
+        <member name="M:GameCore.EntitySystem.Entity.GetComponentSetInternal``1">
+            <summary />
+            <typeparam name="TComponent" />
+            <returns />
+        </member>
+        <member name="M:GameCore.EntitySystem.Entity.GetComponentSet``1">
+            <summary>
+            Get component set of the entity.
+            This create a read-only set of the component set.
+            </summary>
+            <typeparam name="TComponent" />
+            <returns />
+        </member>
+        <member name="P:GameCore.EntitySystem.Entity.EntityId">
+            <summary>
+            Gets the unique identifier for this entity.
+            </summary>
+            <value>The entity's unique identifier used for synchronization and referencing.</value>
+        </member>
+        <member name="P:GameCore.EntitySystem.Entity.Player">
+            <summary>
+            Gets the player that owns this entity.
+            </summary>
+            <value>The player object representing the owner of this entity.</value>
+        </member>
+        <member name="P:GameCore.EntitySystem.Entity.Filters">
+            <summary>
+            Gets the set of unit filters that apply to this entity for targeting and selection purposes.
+            </summary>
+            <value>A set of unit filters, or null if no specific filters apply.</value>
+            <remarks>
+            This property is typically overridden by derived classes to provide entity-specific
+            filtering capabilities for targeting systems, AI, and other game mechanics.
+            </remarks>
+        </member>
+        <member name="P:GameCore.EntitySystem.Entity.SyncId">
+            <summary>
+            Gets the synchronization identifier for this entity.
+            </summary>
+            <value>The entity's synchronization ID, which is the same as its EntityId.</value>
+        </member>
+        <member name="P:GameCore.EntitySystem.Entity.SyncIdType">
+            <summary>
+            Gets the type of synchronization ID used by this entity.
+            </summary>
+            <value>The synchronization ID type for entities.</value>
+        </member>
+        <member name="P:GameCore.EntitySystem.Entity.GameCore#Interface#IActorSync#Host">
+            <summary />
+        </member>
+        <member name="P:GameCore.EntitySystem.Entity.GameCore#Interface#IActorSync#ViewActor">
+            <summary />
+        </member>
+        <member name="P:GameCore.EntitySystem.Entity.ApproachableTarget">
+            <summary>
+            Gets an interface for approaching this entity as a target.
+            </summary>
+            <value>The approachable target interface for this entity.</value>
+            <remarks>
+            This interface is used by movement and pathfinding systems to determine
+            how other entities can approach and interact with this entity.
+            </remarks>
+        </member>
+        <member name="M:GameCore.EntitySystem.Entity.Kill(GameCore.BaseType.DeathType,GameCore.Interface.IExecutionContext)">
+            <summary>
+            Kills this entity with the specified death type and execution context.
+            </summary>
+            <param name="deathType">The type of death that occurred (default: Normal).</param>
+            <param name="context">The execution context that caused the death, if any.</param>
+            <remarks>
+            This method triggers the EntityDeath event before destroying the entity.
+            It provides a way to distinguish between different types of entity destruction
+            for proper event handling and effects.
+            </remarks>
+        </member>
+        <member name="M:GameCore.EntitySystem.Entity.System#IDisposable#Dispose">
+            <summary>
+            Releases all resources used by this entity.
+            </summary>
+            <remarks>
+            This method implements the IDisposable pattern for proper resource cleanup.
+            It should not be called directly; use Destroy() instead.
+            </remarks>
+        </member>
+        <member name="M:GameCore.EntitySystem.Entity.IsValidTargetTo(GameCore.EntitySystem.Entity,System.Boolean)">
+            <summary>
+            Determines if this entity is a valid target for the specified caster.
+            </summary>
+            <param name="caster">The entity attempting to target this entity.</param>
+            <param name="isRequest">Whether this is a targeting request that requires visibility.</param>
+            <returns>True if this entity can be targeted by the caster; otherwise, false.</returns>
+            <remarks>
+            For an entity to be a valid target, it must be in the same scene as the caster.
+            If this is a targeting request, the entity must also be visible to the caster.
+            </remarks>
+        </member>
+        <member name="M:GameCore.EntitySystem.Entity.SameScene(GameCore.BaseInterface.ITarget)">
+            <summary>
+            Checks if this entity is in the same scene as the specified target.
+            </summary>
+            <param name="target">The target to compare scenes with.</param>
+            <returns>True if both entities are in the same scene; otherwise, false.</returns>
+        </member>
+        <member name="M:GameCore.EntitySystem.Entity.CanBeSeen(GameCore.EntitySystem.Entity)">
+            <summary>
+            Determines if this entity can be seen by the specified caster entity.
+            </summary>
+            <param name="caster">The entity attempting to see this entity.</param>
+            <returns>True if this entity is visible to the caster; otherwise, false.</returns>
+            <remarks>
+            Visibility rules differ between server and client. On the server, it uses the
+            view actor's visibility system. On the client, it considers player relationships
+            and local player privileges.
+            </remarks>
+        </member>
+        <member name="M:GameCore.EntitySystem.Entity.AngleTo(GameCore.BaseInterface.ITarget)">
+            <summary>
+            Calculates the angle from this entity to the specified target.
+            </summary>
+            <param name="target">The target to calculate the angle to.</param>
+            <returns>The angle to the target, or null if they are in different scenes.</returns>
+            <remarks>
+            If the entities are at the same position or are the same entity, returns the
+            current facing direction. Otherwise, calculates the angle based on their positions.
+            </remarks>
+        </member>
+        <member name="M:GameCore.EntitySystem.Entity.VectorTargetPosition(GameCore.BaseInterface.ITarget,System.Double)">
+            <summary>
+            Calculates a position at a specified vector length in the direction of the target.
+            </summary>
+            <param name="target">The target to calculate the vector towards.</param>
+            <param name="vectorLength">The length of the vector from this entity's position.</param>
+            <returns>The calculated scene point, or null if the target is in a different scene.</returns>
+            <remarks>
+            This method is useful for positioning effects, projectiles, or other objects
+            at a specific distance in the direction of a target. The vector length is
+            adjusted by this entity's interaction radius.
+            </remarks>
+        </member>
+        <member name="M:GameCore.EntitySystem.Entity.GetFilterTags(GameCore.EntitySystem.Entity,System.Collections.Generic.HashSet{GameCore.BaseType.UnitFilterTag}@)">
+            <summary>
+            Populates the provided tag set with filter tags that describe this entity's relationship to the caster.
+            </summary>
+            <param name="caster">The entity requesting the filter information.</param>
+            <param name="tags">The set to populate with applicable filter tags.</param>
+            <remarks>
+            This method determines relationship tags (Self, Player, Alliance, Enemy, Neutral) and
+            visibility tags based on the relationship between this entity and the caster.
+            The tags are used by targeting systems, AI, and other game mechanics for filtering.
+            </remarks>
+        </member>
+        <member name="M:GameCore.EntitySystem.Entity.CanBeControlledBy(GameCore.PlayerAndUsers.Player)">
+            <summary />
+            <param name="player" />
+            <returns />
+        </member>
+        <member name="P:GameCore.EntitySystem.Entity.GameCore#Interface#IActor#Scope">
+            <summary />
+        </member>
+        <member name="P:GameCore.EntitySystem.Entity.GameCore#Interface#IActor#Parent">
+            <summary />
+        </member>
+        <member name="M:GameCore.EntitySystem.Entity.GameCore#Interface#IActor#Attach(GameCore.Interface.IActor,System.Nullable{EngineCommon.UTF8String})">
+            <summary />
+            <param name="child" />
+            <param name="socket" />
+            <returns />
+        </member>
+        <member name="M:GameCore.EntitySystem.Entity.GameCore#Interface#IActor#AttachTo(GameCore.Interface.IActor,System.Nullable{EngineCommon.UTF8String})">
+            <summary />
+            <param name="parent" />
+            <param name="socket" />
+            <returns />
+        </member>
+        <member name="M:GameCore.EntitySystem.Entity.GameCore#Interface#IActor#Detach(System.Boolean)">
+            <summary />
+            <param name="resetBearings" />
+            <returns />
+        </member>
+        <member name="M:GameCore.EntitySystem.Entity.GameCore#Interface#IActor#Destroy(System.Boolean)">
+            <summary />
+            <param name="_" />
+            <returns />
+        </member>
+        <member name="M:GameCore.EntitySystem.Entity.GameCore#Interface#IActor#Kill">
+            <summary />
+            <returns />
+        </member>
+        <member name="P:GameCore.EntitySystem.Entity.HighlightAggregator">
+            <summary />
+        </member>
+        <member name="P:GameCore.EntitySystem.Entity.TintColorAggregators">
+            <summary />
+        </member>
+        <member name="M:GameCore.EntitySystem.Entity.InitializeHighlightAggregator">
+            <summary />
+            <returns />
+        </member>
+        <member name="M:GameCore.EntitySystem.Entity.SetHighlight(GameCore.Drawing.HdrColor,System.Object,System.Double)">
+            <summary />
+            <param name="color" />
+            <param name="key" />
+            <param name="weight" />
+            <returns />
+        </member>
+        <member name="M:GameCore.EntitySystem.Entity.ClearHighlight(System.Object)">
+            <summary />
+            <param name="key" />
+            <returns />
+        </member>
+        <member name="M:GameCore.EntitySystem.Entity.ClearAllHighlights">
+            <summary />
+            <returns />
+        </member>
+        <member name="M:GameCore.EntitySystem.Entity.AnimateHighlight(GameCore.Drawing.HdrColor,System.TimeSpan,System.Boolean,System.Nullable{GameCore.Animation.Enum.RepeatBehavior},System.Object,System.Double)">
+            <summary />
+            <param name="color" />
+            <param name="blendTime" />
+            <param name="autoReverse" />
+            <param name="repeatBehavior" />
+            <param name="key" />
+            <param name="weight" />
+            <returns />
+        </member>
+        <member name="M:GameCore.EntitySystem.Entity.AnimateHighlight(GameCore.Drawing.HdrColor,GameCore.Drawing.HdrColor,System.TimeSpan,System.Boolean,System.Nullable{GameCore.Animation.Enum.RepeatBehavior},System.Object,System.Double)">
+            <summary />
+            <param name="from" />
+            <param name="to" />
+            <param name="blendTime" />
+            <param name="autoReverse" />
+            <param name="repeatBehavior" />
+            <param name="key" />
+            <param name="weight" />
+            <returns />
+        </member>
+        <member name="M:GameCore.EntitySystem.Entity.InitializeTintColorAggregators">
+            <summary />
+            <returns />
+        </member>
+        <member name="M:GameCore.EntitySystem.Entity.SetTintColor(GameCore.Drawing.HdrColor,GameCore.ActorSystem.Enum.TintColorType,System.Object,System.Double)">
+            <summary />
+            <param name="color" />
+            <param name="tintColorType" />
+            <param name="key" />
+            <param name="weight" />
+            <returns />
+        </member>
+        <member name="M:GameCore.EntitySystem.Entity.ClearTintColorByKey(System.Object,GameCore.ActorSystem.Enum.TintColorType)">
+            <summary />
+            <param name="key" />
+            <param name="tintColorType" />
+            <returns />
+        </member>
+        <member name="M:GameCore.EntitySystem.Entity.ResetTintColorByType(GameCore.ActorSystem.Enum.TintColorType)">
+            <summary />
+            <param name="tintColorType" />
+            <returns />
+        </member>
+        <member name="M:GameCore.EntitySystem.Entity.ClearTintColor">
+            <summary />
+            <returns />
+        </member>
+        <member name="M:GameCore.EntitySystem.Entity.AnimateTintColor(GameCore.Drawing.HdrColor,GameCore.ActorSystem.Enum.TintColorType,System.TimeSpan,System.Boolean,System.Nullable{GameCore.Animation.Enum.RepeatBehavior},System.Object,System.Double)">
+            <summary />
+            <param name="color" />
+            <param name="tintColorType" />
+            <param name="blendTime" />
+            <param name="autoReverse" />
+            <param name="repeatBehavior" />
+            <param name="key" />
+            <param name="weight" />
+            <returns />
+        </member>
+        <member name="M:GameCore.EntitySystem.Entity.AnimateTintColor(GameCore.Drawing.HdrColor,GameCore.Drawing.HdrColor,GameCore.ActorSystem.Enum.TintColorType,System.TimeSpan,System.Boolean,System.Nullable{GameCore.Animation.Enum.RepeatBehavior},System.Object,System.Double)">
+            <summary />
+            <param name="from" />
+            <param name="to" />
+            <param name="tintColorType" />
+            <param name="blendTime" />
+            <param name="autoReverse" />
+            <param name="repeatBehavior" />
+            <param name="key" />
+            <param name="weight" />
+            <returns />
+        </member>
+        <member name="M:GameCore.EntitySystem.Entity.InitializeColorAggregators">
+            <summary />
+            <returns />
+        </member>
+        <member name="M:GameCore.EntitySystem.Entity.ClearAllColorEffects">
+            <summary />
+            <returns />
+        </member>
+        <member name="P:GameCore.EntitySystem.Entity.Context">
+            <summary />
+        </member>
+        <member name="P:GameCore.EntitySystem.Entity.SourceSite">
+            <summary />
+        </member>
+        <member name="P:GameCore.EntitySystem.Entity.EnsuredSourceSite">
+            <summary />
+        </member>
+        <member name="F:GameCore.EntitySystem.Entity._clientActors">
+            <summary />
+        </member>
+        <member name="P:GameCore.EntitySystem.Entity.ClientActors">
+            <summary />
+        </member>
+        <member name="P:GameCore.EntitySystem.Entity.GameCore#ActorSystem#IActorScope#Id">
+            <summary />
+        </member>
+        <member name="M:GameCore.EntitySystem.Entity.GameCore#ActorSystem#IActorScope#Destroy">
+            <summary />
+            <returns />
+        </member>
+        <member name="M:GameCore.EntitySystem.Entity.GameCore#ActorSystem#IActorScope#Kill">
+            <summary />
+            <returns />
+        </member>
+        <member name="P:GameCore.EntitySystem.Entity.Target">
+            <summary />
+        </member>
+        <member name="P:GameCore.EntitySystem.Entity.GameCore#ActorSystem#IActorScopeContext#OverrideLink">
+            <summary />
+        </member>
+        <member name="P:GameCore.EntitySystem.Entity.GameCore#ActorSystem#IActorScopeContext#Link">
+            <summary />
+        </member>
+        <member name="P:GameCore.EntitySystem.Entity.GameCore#ActorSystem#IActorScopeContext#Facing">
+            <summary />
+        </member>
+        <member name="P:GameCore.EntitySystem.Entity.GameCore#ActorSystem#IActorScopeOwner#ActorScope">
+            <summary />
+        </member>
+        <member name="P:GameCore.EntitySystem.Entity.GameCore#ActorSystem#IActorScopeContext#Scale">
+            <summary />
+        </member>
+        <member name="P:GameCore.EntitySystem.Entity.GameCore#ActorSystem#IActorScopeContext#Volume">
+            <summary />
+        </member>
+        <member name="P:GameCore.EntitySystem.Entity.GameCore#BaseInterface#ICooldownHost#ViewActor">
+            <summary />
+        </member>
+        <member name="P:GameCore.EntitySystem.Entity.GameCore#BaseInterface#ICooldownHost#LazyAttachedChildren">
+            <summary />
+        </member>
+        <member name="P:GameCore.EntitySystem.Entity.GameCore#BaseInterface#ICooldownHost#SyncIds">
+            <summary />
+        </member>
+        <member name="P:GameCore.EntitySystem.Entity.GameCore#BaseInterface#ICooldownOwner#LazyCooldownPool">
+            <summary />
+        </member>
+        <member name="M:GameCore.EntitySystem.Entity.DisposeManaged">
+            <summary />
+            <returns />
+        </member>
+        <member name="M:GameCore.EntitySystem.Entity.DisposeUnmanaged(System.Boolean)">
+            <summary />
+            <param name="finalizing" />
+            <returns />
+        </member>
+        <member name="F:GameCore.EntitySystem.Entity.aggregator">
+            <summary />
+        </member>
+        <member name="F:GameCore.EntitySystem.Entity.aggregatorWeakReference">
+            <summary />
+        </member>
+        <member name="P:GameCore.EntitySystem.Entity.Events#IEventSender#Aggregator">
+            <summary />
+        </member>
+        <member name="P:GameCore.EntitySystem.Entity.AggregatorWeakReference">
+            <summary />
+        </member>
+        <member name="M:GameCore.EntitySystem.Entity.Publish``1(``0)">
+            <summary />
+            <typeparam name="TEvent" />
+            <param name="eventToPublish" />
+            <returns />
+        </member>
+        <member name="M:GameCore.EntitySystem.Entity.GetPublisher``1">
+            <summary />
+            <typeparam name="TEvent" />
+            <returns />
+        </member>
+        <member name="P:GameCore.EntitySystem.Entity.CreationContext">
+            <summary />
+        </member>
+        <member name="P:GameCore.EntitySystem.Entity.Creator">
+            <summary />
+        </member>
+        <member name="P:GameCore.EntitySystem.Entity.GameCore#Interface#IExecutionContext#Level">
+            <summary />
+        </member>
+        <member name="P:GameCore.EntitySystem.Entity.GameCore#Interface#IExecutionContext#Ability">
+            <summary />
+        </member>
+        <member name="P:GameCore.EntitySystem.Entity.GameCore#Interface#IExecutionContext#Item">
+            <summary />
+        </member>
+        <member name="P:GameCore.EntitySystem.Entity.GameCore#Interface#IExecutionContext#Caster">
+            <summary />
+        </member>
+        <member name="P:GameCore.EntitySystem.Entity.GameCore#Interface#IExecutionContext#FactoryParent">
+            <summary />
+        </member>
+        <member name="P:GameCore.EntitySystem.Entity.GameCore#Interface#IExecutionContext#Order">
+            <summary />
+        </member>
+        <member name="P:GameCore.EntitySystem.Entity.GameCore#BaseInterface#IPropertyOwner#PropertyHost">
+            <summary />
+        </member>
+        <member name="M:GameCore.EntitySystem.Entity.GameCore#BaseInterface#IPropertyHost#GetPropertyWithHash``1(System.Int64)">
+            <summary />
+            <typeparam name="T" />
+            <param name="propertyHash" />
+            <returns />
+        </member>
+        <member name="M:GameCore.EntitySystem.Entity.GameCore#BaseInterface#IPropertyHost#GetPropertiesWithHash(System.Boolean)">
+            <summary />
+            <param name="modifiedOnly" />
+            <returns />
+        </member>
+        <member name="M:GameCore.EntitySystem.Entity.GameCore#BaseInterface#IPropertyHost#GetBytesPropertiesWithHash(System.Boolean)">
+            <summary />
+            <param name="modifiedOnly" />
+            <returns />
+        </member>
+        <member name="F:GameCore.EntitySystem.Entity.syncIds">
+            <summary />
+        </member>
+        <member name="P:GameCore.EntitySystem.Entity.GameCore#BaseInterface#ITarget#Facing">
+            <summary />
+        </member>
+        <member name="F:GameCore.EntitySystem.Entity._stateCounter">
+            <summary />
+        </member>
+        <member name="M:GameCore.EntitySystem.Entity.AddState(GameCore.EntitySystem.Enum.EntityState)">
+            <summary />
+            <param name="state" />
+            <returns />
+        </member>
+        <member name="M:GameCore.EntitySystem.Entity.RemoveState(GameCore.EntitySystem.Enum.EntityState)">
+            <summary />
+            <param name="state" />
+            <returns />
+        </member>
+        <member name="M:GameCore.EntitySystem.Entity.HasState(GameCore.EntitySystem.Enum.EntityState)">
+            <summary />
+            <param name="state" />
+            <returns />
+        </member>
+        <member name="M:GameCore.EntitySystem.Entity.AddImmunity(GameCore.EntitySystem.Enum.EntityState)">
+            <summary />
+            <param name="state" />
+            <returns />
+        </member>
+        <member name="M:GameCore.EntitySystem.Entity.RemoveImmunity(GameCore.EntitySystem.Enum.EntityState)">
+            <summary />
+            <param name="state" />
+            <returns />
+        </member>
+        <member name="M:GameCore.EntitySystem.Entity.HasImmunity(GameCore.EntitySystem.Enum.EntityState)">
+            <summary />
+            <param name="state" />
+            <returns />
+        </member>
+        <member name="T:GameCore.EntitySystem.Enum.EEntityState">
+            <summary>
+            Defines states that can be applied to entities to track their current conditions and behaviors.
+            </summary>
+            <remarks>
+            Entity states are used to track temporary conditions that affect entity behavior, such as movement states,
+            combat states, or special conditions. This enum is extendable, allowing additional states to be defined
+            in other parts of the codebase.
+            </remarks>
+        </member>
+        <member name="F:GameCore.EntitySystem.Enum.EEntityState.IsChangingPosition">
+            <summary>
+            Indicates that the entity is currently in the process of changing its position.
+            </summary>
+            <remarks>
+            This state is typically set when an entity begins moving and cleared when movement completes.
+            It can be used to trigger position change events and manage movement-related behaviors.
+            </remarks>
+        </member>
+        <member name="T:GameCore.EntitySystem.Enum.EPropertyEntity">
+            <summary>
+            Defines property types that can be associated with entities for networking and state management.
+            </summary>
+            <remarks>
+            These properties represent data that can be synchronized between server and client or tracked
+            for entities. This enum is extendable, allowing additional property types to be defined elsewhere.
+            </remarks>
+        </member>
+        <member name="F:GameCore.EntitySystem.Enum.EPropertyEntity.Components">
+            <summary>
+            Represents component-related properties for the entity.
+            </summary>
+            <remarks>
+            This property type is used to track and synchronize information about the entity's components,
+            such as component state changes or component-specific data.
+            </remarks>
+        </member>
+        <member name="F:GameCore.EntitySystem.Enum.EntityState.IsChangingPosition">
+            <summary>
+            Indicates that the entity is currently in the process of changing its position.
+            </summary>
+            <remarks>
+            This state is typically set when an entity begins moving and cleared when movement completes.
+            It can be used to trigger position change events and manage movement-related behaviors.
+            </remarks>
+        </member>
+        <member name="F:GameCore.EntitySystem.Enum.PropertyEntity.Components">
+            <summary>
+            Represents component-related properties for the entity.
+            </summary>
+            <remarks>
+            This property type is used to track and synchronize information about the entity's components,
+            such as component state changes or component-specific data.
+            </remarks>
+        </member>
+        <member name="F:GameCore.EntitySystem.EPropertyUnit.Level">
+            <summary>
+            The current level of the unit.
+            </summary>
+        </member>
+        <member name="F:GameCore.EntitySystem.EPropertyUnit.Experience">
+            <summary>
+            The experience points gained since the last level up.
+            </summary>
+        </member>
+        <member name="F:GameCore.EntitySystem.EPropertyUnit.ExperienceToNextLevel">
+            <summary>
+            The total experience points required to advance from the current level to the next level.
+            </summary>
+        </member>
+        <member name="T:GameCore.EntitySystem.Team">
+            <summary>
+            Represents a team that groups players together for shared objectives, visibility, and game mechanics.
+            </summary>
+            <remarks>
+            Teams provide a way to organize players into groups that share common goals, resources, and visibility.
+            Players on the same team typically have allied relationships and can cooperate in various game systems.
+            Each team has a unique identifier and manages its member players automatically.
+            </remarks>
+        </member>
+        <member name="M:GameCore.EntitySystem.Team.ToString">
+            <summary>
+            Returns a string representation of this team.
+            </summary>
+            <returns>A formatted string containing the team identifier.</returns>
+        </member>
+        <member name="F:GameCore.EntitySystem.Team._players">
+            <summary />
+        </member>
+        <member name="P:GameCore.EntitySystem.Team.Id">
+            <summary>
+            Gets the unique identifier for this team.
+            </summary>
+            <value>The team's unique integer identifier.</value>
+        </member>
+        <member name="M:GameCore.EntitySystem.Team.GetAllPlayers">
+            <summary>
+            Gets an array containing all players currently on this team.
+            </summary>
+            <returns>An array of all players belonging to this team.</returns>
+            <remarks>
+            This method creates a new array each time it's called to prevent external modification
+            of the internal player collection. The returned array represents a snapshot of the
+            team membership at the time of the call.
+            </remarks>
+        </member>
+        <member name="M:GameCore.EntitySystem.Team.AddPlayer(GameCore.PlayerAndUsers.Player)">
+            <summary>
+            Adds a player to this team.
+            </summary>
+            <param name="player">The player to add to this team.</param>
+            <remarks>
+            If the player is already on this team, no action is taken. If the player belongs
+            to another team, they will be automatically removed from their current team before
+            being added to this one. On the server side, the player's Team property will be
+            updated to reference this team.
+            </remarks>
+        </member>
+        <member name="F:GameCore.EntitySystem.Team._teams">
+            <summary />
+        </member>
+        <member name="F:GameCore.EntitySystem.Team._viewTeam">
+            <summary />
+        </member>
+        <member name="M:GameCore.EntitySystem.Team.#ctor(System.Int32)">
+            <summary>
+            Initializes a new team with the specified identifier.
+            </summary>
+            <param name="id">The unique identifier for this team.</param>
+            <exception cref="T:System.ArgumentException">
+            Thrown when the team ID is not registered with the host system.
+            </exception>
+            <remarks>
+            This constructor is private and should only be called through GetOrCreateById.
+            The team must be pre-registered with the view system before it can be created.
+            </remarks>
+        </member>
+        <member name="M:GameCore.EntitySystem.Team.GetById(System.Int32)">
+            <summary>
+            Retrieves an existing team by its identifier.
+            </summary>
+            <param name="id">The unique identifier of the team to retrieve.</param>
+            <returns>The team with the specified ID, or <c>null</c> if no team exists with that ID.</returns>
+            <remarks>
+            This method only returns existing teams that have already been created.
+            Use GetOrCreateById if you need to ensure a team exists.
+            </remarks>
+        </member>
+        <member name="M:GameCore.EntitySystem.Team.GetOrCreateById(System.Int32)">
+            <summary>
+            Retrieves an existing team by its identifier, or creates a new one if it doesn't exist.
+            </summary>
+            <param name="id">The unique identifier of the team to retrieve or create.</param>
+            <returns>The existing team with the specified ID, or a newly created team if none existed.</returns>
+            <exception cref="T:System.ArgumentException">
+            Thrown when attempting to create a team with an ID that is not registered with the host system.
+            </exception>
+            <remarks>
+            This method ensures that a team with the specified ID exists, creating it if necessary.
+            The team ID must be pre-registered with the view system for creation to succeed.
+            </remarks>
+        </member>
+        <member name="T:GameCore.EntitySystem.Unit">
+            <summary />
+            <summary />
+            <summary>
+            Represents a game unit entity with advanced capabilities including abilities, inventories, vitals, and level progression.
+            </summary>
+            <remarks>
+            Unit extends the base Entity class to provide game-specific functionality such as:
+            - Ability system integration for spells and skills
+            - Inventory management for items and equipment  
+            - Vital properties like health and mana
+            - Leveling and experience systems
+            - State management for unit conditions
+            - Combat and interaction capabilities
+            This class serves as the foundation for characters, NPCs, creatures, and other interactive game objects.
+            </remarks>
+            <summary />
+            <summary />
+            <summary />
+            <summary />
+            <summary />
+            <summary />
+            <summary />
+            <summary />
+            <summary />
+            <summary />
+            <summary />
+            <summary />
+            <summary />
+            <summary />
+        </member>
+        <member name="P:GameCore.EntitySystem.Unit.DefaultModel">
+            <summary />
+        </member>
+        <member name="M:GameCore.EntitySystem.Unit.ReplicateFromCoreActor(EngineInterface.GoInterface.IViewActor,System.Int32)">
+            <summary />
+            <param name="viewActor" />
+            <param name="linkHash" />
+            <returns />
+        </member>
+        <member name="M:GameCore.EntitySystem.Unit.#ctor(GameData.IGameLink{GameCore.EntitySystem.Data.GameDataUnit},GameCore.PlayerAndUsers.Player,EngineInterface.GoInterface.IViewActor)">
+            <summary />
+        </member>
+        <member name="F:GameCore.EntitySystem.Unit._primitiveShapeActors">
+            <summary>
+            单位附着的基本形状Actor列表
+            </summary>
+        </member>
+        <member name="F:GameCore.EntitySystem.Unit.modSeed">
+            <summary />
+        </member>
+        <member name="P:GameCore.EntitySystem.Unit.ModSeed">
+            <summary>
+            Gets or sets the modification seed used for random generation and procedural content.
+            </summary>
+            <remarks>
+            This value is used to ensure consistent random generation for unit properties and behaviors.
+            On the server, it's automatically generated; on the client, it's synchronized from the server.
+            </remarks>
+        </member>
+        <member name="P:GameCore.EntitySystem.Unit.GameCore#BaseInterface#ITarget#Unit">
+            <summary>
+            Gets this unit as a target interface implementation.
+            </summary>
+        </member>
+        <member name="P:GameCore.EntitySystem.Unit.ShouldIgnoreDamage">
+            <summary>
+            Gets a value indicating whether this unit should ignore incoming damage.
+            </summary>
+            <remarks>
+            Units ignore damage when they are dead or when the base entity has damage immunity.
+            </remarks>
+        </member>
+        <member name="P:GameCore.EntitySystem.Unit.InteractRadius">
+            <summary>
+            Gets the radius within which other entities can interact with this unit.
+            </summary>
+        </member>
+        <member name="P:GameCore.EntitySystem.Unit.CanReceiveCommandRequest">
+            <summary>
+            Gets a value indicating whether this unit can receive command requests from players or AI.
+            </summary>
+            <remarks>
+            Units cannot receive commands when they have the UnCommandable state or when the base entity
+            cannot receive commands.
+            </remarks>
+        </member>
+        <member name="M:GameCore.EntitySystem.Unit.GetFilterTags(GameCore.EntitySystem.Entity,System.Collections.Generic.HashSet{GameCore.BaseType.UnitFilterTag}@)">
+            <summary>
+            Populates the provided tag set with filter tags that apply to this unit from the perspective of the given caster.
+            </summary>
+            <param name="caster">The entity requesting the filter information.</param>
+            <param name="tags">The set to populate with applicable filter tags.</param>
+            <remarks>
+            This method combines static filters from the unit's configuration with dynamic filters based on current states.
+            The tags are used for targeting, abilities, and other game systems that need to filter or categorize units.
+            </remarks>
+        </member>
+        <member name="M:GameCore.EntitySystem.Unit.ToString">
+            <summary>
+            Returns a string representation of this unit including its type and friendly name.
+            </summary>
+            <returns>A formatted string describing this unit.</returns>
+        </member>
+        <member name="M:GameCore.EntitySystem.Unit.Dispose(System.Boolean)">
+            <summary>
+            Performs cleanup of unit-specific resources during disposal.
+            </summary>
+            <param name="disposing">True if called from Dispose method; false if called from finalizer.</param>
+        </member>
+        <member name="P:GameCore.EntitySystem.Unit.OrderQueue">
+            <summary />
+        </member>
+        <member name="M:GameCore.EntitySystem.Unit.GameCore#ActorSystem#IActorScope#Destroy">
+            <summary />
+            <returns />
+        </member>
+        <member name="M:GameCore.EntitySystem.Unit.GameCore#ActorSystem#IActorScope#Kill">
+            <summary />
+            <returns />
+        </member>
+        <member name="P:GameCore.EntitySystem.Unit.GameCore#ActorSystem#IActorScopeContext#Link">
+            <summary />
+        </member>
+        <member name="P:GameCore.EntitySystem.Unit.GameCore#BaseInterface#ICooldownOwner#CooldownHost">
+            <summary />
+        </member>
+        <member name="P:GameCore.EntitySystem.Unit.GameCore#DisplayInfo#IDisplayInfo#Cache">
+            <summary />
+        </member>
+        <member name="M:GameCore.EntitySystem.Unit.DisposeManaged">
+            <summary />
+            <returns />
+        </member>
+        <member name="M:GameCore.EntitySystem.Unit.Publish``1(``0)">
+            <summary />
+            <typeparam name="TEvent" />
+            <param name="eventToPublish" />
+            <returns />
+        </member>
+        <member name="M:GameCore.EntitySystem.Unit.GetPublisher``1">
+            <summary />
+            <typeparam name="TEvent" />
+            <returns />
+        </member>
+        <member name="P:GameCore.EntitySystem.Unit.Link">
+            <summary />
+        </member>
+        <member name="P:GameCore.EntitySystem.Unit.Cache">
+            <summary />
+        </member>
+        <member name="P:GameCore.EntitySystem.Unit.UnitLinkAggregator">
+            <summary />
+        </member>
+        <member name="P:GameCore.EntitySystem.Unit.LinkOrigin">
+            <summary />
+        </member>
+        <member name="P:GameCore.EntitySystem.Unit.IsDead">
+            <summary />
+        </member>
+        <member name="P:GameCore.EntitySystem.Unit.IsAlive">
+            <summary />
+        </member>
+        <member name="P:GameCore.EntitySystem.Unit.GameCore#BaseInterface#IPropertyOwner#PropertyHost">
+            <summary />
+        </member>
+        <member name="M:GameCore.EntitySystem.Unit.GetProperty``1(GameCore.EntitySystem.PropertyUnit)">
+            <summary />
+            <typeparam name="TValue" />
+            <param name="property" />
+            <returns />
+        </member>
+        <member name="P:GameCore.EntitySystem.Unit.GameCore#BaseType#IResponseOwner#Host">
+            <summary />
+        </member>
+        <member name="P:GameCore.EntitySystem.Unit.GameCore#BaseType#IResponseOwner#Cache">
+            <summary />
+        </member>
+        <member name="P:GameCore.EntitySystem.Unit.GameCore#BaseType#IResponseOwner#Responses">
+            <summary />
+        </member>
+        <member name="P:GameCore.EntitySystem.Unit.GameCore#BaseType#IResponseOwner#IsActivated">
+            <summary />
+        </member>
+        <member name="M:GameCore.EntitySystem.Unit.HasState(GameCore.BaseType.UnitState)">
+            <summary />
+            <param name="state" />
+            <returns />
+        </member>
+        <member name="M:GameCore.EntitySystem.Unit.GetStates">
+            <summary />
+            <returns />
+        </member>
+        <member name="F:GameCore.EntitySystem.Unit.placedUnit">
+            <summary />
+        </member>
+        <member name="P:GameCore.EntitySystem.Unit.PlacedUnit">
+            <summary />
+        </member>
+        <member name="F:GameCore.EntitySystem.PropertyUnit.Level">
+            <summary>
+            The current level of the unit.
+            </summary>
+        </member>
+        <member name="F:GameCore.EntitySystem.PropertyUnit.Experience">
+            <summary>
+            The experience points gained since the last level up.
+            </summary>
+        </member>
+        <member name="F:GameCore.EntitySystem.PropertyUnit.ExperienceToNextLevel">
+            <summary>
+            The total experience points required to advance from the current level to the next level.
+            </summary>
+        </member>
+    </members>
+</doc>
