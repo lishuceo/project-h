@@ -334,8 +334,8 @@ export class GameScene extends Phaser.Scene {
       return;
     }
 
-    // 使用槽位：获取当前方块并立即补充新方块
-    const tetromino = this.previewSlots.useSlot(slotIndex);
+    // 获取槽位中的方块（但不立即补充新方块）
+    const tetromino = this.previewSlots.getSlot(slotIndex);
     if (!tetromino) {
       console.error('槽位为空！');
       return;
@@ -343,14 +343,15 @@ export class GameScene extends Phaser.Scene {
 
     console.log(`获取到方块: ${tetromino.shape}, 颜色: ${tetromino.color}`);
 
-    // 保存拖动信息（用于取消时恢复）
+    // 保存拖动信息（用于取消或失败时恢复）
     this.currentDraggedTetromino = tetromino;
     this.currentDraggedSlotIndex = slotIndex;
 
-    // 更新UI（现在槽位显示的是新补充的方块）
+    // 清空该槽位（拖动中显示为空）
+    this.previewSlots.setSlot(slotIndex, null);
     this.updatePreviewSlotsUI();
 
-    // 开始拖动（拖的是刚才取出的旧方块）
+    // 开始拖动
     this.dragDropManager.startDrag(tetromino, slotIndex);
     this.stateManager.setState(GameState.DRAGGING);
     
@@ -379,8 +380,16 @@ export class GameScene extends Phaser.Scene {
         const result = this.dragDropManager.endDrag();
 
         if (result.success && result.tetromino && result.position) {
-          // 放置成功，清除拖动信息
+          // 放置成功
           this.placeTetromino(result.tetromino, result.position.x, result.position.y);
+          
+          // 补充该槽位的新方块
+          if (this.currentDraggedSlotIndex >= 0) {
+            this.previewSlots.refillSlotAfterPlace(this.currentDraggedSlotIndex);
+            this.updatePreviewSlotsUI();
+            console.log(`放置成功，槽位${this.currentDraggedSlotIndex + 1}已补充新方块`);
+          }
+          
           this.currentDraggedTetromino = null;
           this.currentDraggedSlotIndex = -1;
 

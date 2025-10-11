@@ -57,6 +57,7 @@ export class PreviewSlots {
   /**
    * 使用指定槽位的方块（使用后立即补充）
    * 参考设计文档7.3节
+   * @deprecated 使用 getSlot() 和 refillSlot() 分开调用以避免刷方块bug
    */
   useSlot(index: number): TetrominoData | null {
     const tetromino = this.getSlot(index);
@@ -64,6 +65,13 @@ export class PreviewSlots {
       this.refillSlot(index);
     }
     return tetromino;
+  }
+
+  /**
+   * 补充指定槽位（放置成功后调用）
+   */
+  refillSlotAfterPlace(index: number): void {
+    this.refillSlot(index);
   }
 
   /**
