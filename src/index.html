@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>三向下落像素俄罗斯方块</title>
+    <style>
+      html, body { height: 100%; margin: 0; background: #0e0f13; color: #e9ecf1; font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial; }
+      #ui { position: fixed; inset: 0; pointer-events: none; }
+      .topbar { position: absolute; top: 8px; left: 8px; right: 8px; display:flex; gap:12px; align-items:center; }
+      .panel { background: rgba(20,24,32,0.75); border: 1px solid rgba(255,255,255,0.08); border-radius: 8px; padding: 8px 12px; }
+      .slots { position: fixed; left: 50%; bottom: 12px; transform: translateX(-50%); display: flex; flex-direction: row; gap: 12px; }
+      .slot { width: 140px; height: 140px; background: rgba(27,33,45,0.9); border: 1px dashed rgba(255,255,255,0.18); border-radius: 10px; display: grid; place-items: center; pointer-events: auto; cursor: grab; touch-action: none; }
+      .hint { position:absolute; left: 12px; bottom: 12px; max-width: 520px; line-height: 1.4; opacity: .9; }
+      .btn { pointer-events: auto; cursor: pointer; user-select: none; }
+    </style>
+  </head>
+  <body>
+    <div id="app"></div>
+    <div id="ui">
+      <div class="topbar">
+        <div class="panel">分数：<span id="score">0</span></div>
+        <div class="panel">状态：<span id="status">空闲</span></div>
+        <div class="panel btn" id="resetBtn">重开</div>
+      </div>
+      <div class="slots">
+        <div class="slot" data-slot="0"><canvas width="120" height="120"></canvas></div>
+        <div class="slot" data-slot="1"><canvas width="120" height="120"></canvas></div>
+        <div class="slot" data-slot="2"><canvas width="120" height="120"></canvas></div>
+      </div>
+      <div class="panel hint">
+        操作：点击右侧任一方块开始拖动，移动到左侧棋盘上松开即可放置。<br>
+        规则：当同色像素集群从最左列连到最右列时触发消除，可能引发连锁。<br>
+        物理：每个像素单独下落，优先下、其次左下/右下，形成三角堆积。
+      </div>
+    </div>
+    <script type="module" src="./main.js"></script>
+  </body>
+</html>
