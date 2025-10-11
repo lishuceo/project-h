@@ -5,7 +5,7 @@ import {
   PIXEL_GRID_HEIGHT,
   CELL_TO_PIXEL_RATIO,
 } from '@/config/constants';
-import { PixelBlock, Color, LogicalCell } from '@/types';
+import { PixelBlock, Color } from '@/types';
 
 /**
  * 网格系统 - 管理逻辑层和物理层的双层网格

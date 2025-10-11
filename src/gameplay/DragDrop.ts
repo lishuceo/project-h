@@ -1,7 +1,6 @@
 import Phaser from 'phaser';
 import { TetrominoData, LogicalCell } from '@/types';
 import { Grid } from '@/core/Grid';
-import { getTetrominoBounds } from '@/core/Tetromino';
 import {
   PIXEL_SIZE,
   CELL_TO_PIXEL_RATIO,
@@ -54,9 +53,13 @@ export class DragDropManager {
       return;
     }
 
+    // 移动端优化：让方块显示在手指上方，避免被遮挡
+    const touchOffsetY = -100; // 向上偏移100像素
+    const adjustedPointerY = pointerY + touchOffsetY;
+
     // 转换为网格坐标
     const gridX = Math.floor((pointerX - GAME_AREA_OFFSET_X) / PIXEL_SIZE);
-    const gridY = Math.floor((pointerY - GAME_AREA_OFFSET_Y) / PIXEL_SIZE);
+    const gridY = Math.floor((adjustedPointerY - GAME_AREA_OFFSET_Y) / PIXEL_SIZE);
     const logicalPos = this.grid.pixelToLogical(gridX, gridY);
 
     this.currentLogicalPos = logicalPos;
@@ -149,10 +152,9 @@ export class DragDropManager {
       return;
     }
 
-    const bounds = getTetrominoBounds(this.draggedTetromino);
     const cellSize = CELL_TO_PIXEL_RATIO * PIXEL_SIZE;
 
-    this.draggedTetromino.cells.forEach((cell, index) => {
+    this.draggedTetromino.cells.forEach(() => {
       const sprite = this.scene.add.rectangle(
         0,
         0,

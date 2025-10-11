@@ -17,20 +17,80 @@ export class StartScene extends Phaser.Scene {
     // 初始化测试数据（仅开发环境）
     initTestData();
 
-    // 初始化 SDK
+    // 设置背景（先显示背景，不阻塞）
+    this.cameras.main.setBackgroundColor(0x1a1a2e);
+
+    // 异步加载SDK数据（不阻塞界面显示）
+    this.loadSDKData();
+
+    // 继续创建UI（不等待SDK）
+    this.createUI();
+
+    // 淡入效果
+    this.cameras.main.fadeIn(800);
+  }
+
+  /**
+   * 异步加载SDK数据（带超时）
+   */
+  private async loadSDKData(): Promise<void> {
     try {
-      await sceSDKManager.initialize();
-      console.log('SDK 初始化完成');
+      // 超时控制（2秒）
+      const timeout = 2000;
+      const loadPromise = (async () => {
+        await sceSDKManager.initialize();
+        return await sceSDKManager.getHighestScore();
+      })();
+
+      const timeoutPromise = new Promise<number>((_, reject) => {
+        setTimeout(() => reject(new Error('加载超时')), timeout);
+      });
+
+      this.highestScore = await Promise.race([loadPromise, timeoutPromise]);
+      console.log('SDK 数据加载完成，最高分:', this.highestScore);
       
-      // 获取最高分
-      this.highestScore = await sceSDKManager.getHighestScore();
+      // 更新最高分显示（如果已经创建）
+      this.updateHighScoreDisplay();
     } catch (error) {
-      console.warn('SDK 初始化失败:', error);
+      console.warn('SDK 加载失败或超时:', error);
       this.highestScore = 0;
     }
+  }
 
-    // 设置背景
-    this.cameras.main.setBackgroundColor(0x1a1a2e);
+  /**
+   * 更新最高分显示
+   */
+  private highScoreTextObj: Phaser.GameObjects.Text | null = null;
+
+  private updateHighScoreDisplay(): void {
+    if (this.highestScore > 0 && !this.highScoreTextObj) {
+      this.highScoreTextObj = this.add.text(
+        SCREEN_WIDTH / 2,
+        420,
+        `最高分: ${this.highestScore}`,
+        {
+          fontSize: '28px',
+          color: '#ffff00',
+          fontFamily: 'Arial',
+          fontStyle: 'bold'
+        }
+      );
+      this.highScoreTextObj.setOrigin(0.5);
+      this.highScoreTextObj.setAlpha(0);
+      
+      // 淡入动画
+      this.tweens.add({
+        targets: this.highScoreTextObj,
+        alpha: 1,
+        duration: 500
+      });
+    }
+  }
+
+  /**
+   * 创建UI
+   */
+  private createUI(): void {
 
     // 创建渐变背景效果（装饰）
     this.createBackgroundDecoration();
@@ -57,28 +117,14 @@ export class StartScene extends Phaser.Scene {
     });
 
     // 副标题
-    const subtitleText = this.add.text(SCREEN_WIDTH / 2, 340, '超爽、解压', {
+    const subtitleText = this.add.text(SCREEN_WIDTH / 2, 340, '超爽的物理效果', {
       fontSize: '24px',
       color: '#00ffff',
       fontFamily: 'Arial'
     });
     subtitleText.setOrigin(0.5);
 
-    // 最高分显示
-    if (this.highestScore > 0) {
-      const highScoreText = this.add.text(
-        SCREEN_WIDTH / 2, 
-        420, 
-        `最高分: ${this.highestScore}`,
-        {
-          fontSize: '28px',
-          color: '#ffff00',
-          fontFamily: 'Arial',
-          fontStyle: 'bold'
-        }
-      );
-      highScoreText.setOrigin(0.5);
-    }
+    // 最高分会在SDK加载完成后异步显示（见 updateHighScoreDisplay）
 
     // 开始游戏按钮
     this.createButton(

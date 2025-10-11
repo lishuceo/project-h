@@ -23,7 +23,7 @@ export class RankingScene extends Phaser.Scene {
     this.loadingText = this.add.text(
       SCREEN_WIDTH / 2,
       SCREEN_HEIGHT / 2,
-      '加载排行榜中...',
+      '加载中...',
       {
         fontSize: '32px',
         color: '#ffffff',
@@ -32,8 +32,22 @@ export class RankingScene extends Phaser.Scene {
     );
     this.loadingText.setOrigin(0.5);
 
-    // 加载数据
+    // 加载动画（点点点）
+    let dotCount = 0;
+    const loadingInterval = this.time.addEvent({
+      delay: 500,
+      callback: () => {
+        dotCount = (dotCount + 1) % 4;
+        this.loadingText.setText('加载中' + '.'.repeat(dotCount));
+      },
+      loop: true
+    });
+
+    // 加载数据（带超时）
     await this.loadRankingData();
+
+    // 停止加载动画
+    loadingInterval.remove();
 
     // 清除加载提示
     this.loadingText.destroy();
@@ -46,16 +60,39 @@ export class RankingScene extends Phaser.Scene {
   }
 
   /**
-   * 加载排行榜数据
+   * 加载排行榜数据（带超时和并行加载）
    */
   private async loadRankingData(): Promise<void> {
     try {
-      this.rankings = await sceSDKManager.getRankings(10); // 获取前10名
-      this.playerRank = await sceSDKManager.getPlayerRank();
-      this.highestScore = await sceSDKManager.getHighestScore();
+      // 设置3秒超时
+      const timeout = 3000;
+      
+      // 并行加载所有数据（提高速度）
+      const loadPromise = Promise.all([
+        sceSDKManager.getRankings(10),
+        sceSDKManager.getPlayerRank(),
+        sceSDKManager.getHighestScore()
+      ]);
+
+      // 添加超时控制
+      const timeoutPromise = new Promise<any>((_, reject) => {
+        setTimeout(() => reject(new Error('加载超时')), timeout);
+      });
+
+      const results = await Promise.race([loadPromise, timeoutPromise]);
+      
+      // 解构结果
+      this.rankings = results[0] || [];
+      this.playerRank = results[1] || -1;
+      this.highestScore = results[2] || 0;
+      
       console.log('排行榜数据加载完成');
     } catch (error) {
-      console.error('加载排行榜数据失败:', error);
+      console.warn('加载排行榜数据失败或超时:', error);
+      // 即使失败也继续显示界面（显示空数据）
+      this.rankings = [];
+      this.playerRank = -1;
+      this.highestScore = 0;
     }
   }
 

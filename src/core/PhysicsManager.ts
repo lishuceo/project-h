@@ -1,6 +1,6 @@
 import { PixelBlock } from '@/types';
 import { Grid } from './Grid';
-import { PIXEL_GRID_HEIGHT, PIXEL_GRID_WIDTH } from '@/config/constants';
+import { PIXEL_GRID_HEIGHT } from '@/config/constants';
 
 /**
  * 物理管理器 - 实现三方向下落物理系统
