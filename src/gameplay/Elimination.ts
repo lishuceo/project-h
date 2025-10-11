@@ -115,12 +115,16 @@ export class EliminationSystem {
         if (x === 0) cluster.touchesLeft = true;
         if (x === PIXEL_GRID_WIDTH - 1) cluster.touchesRight = true;
         
-        // 检查四个方向的相邻像素
+        // 检查八个方向的相邻像素（包括对角线）
         const neighbors = [
-          {x: x - 1, y: y}, // 左
-          {x: x + 1, y: y}, // 右
-          {x: x, y: y - 1}, // 上
-          {x: x, y: y + 1}  // 下
+          {x: x - 1, y: y},     // 左
+          {x: x + 1, y: y},     // 右
+          {x: x, y: y - 1},     // 上
+          {x: x, y: y + 1},     // 下
+          {x: x - 1, y: y - 1}, // 左上
+          {x: x + 1, y: y - 1}, // 右上
+          {x: x - 1, y: y + 1}, // 左下
+          {x: x + 1, y: y + 1}  // 右下
         ];
         
         for (const {x: nx, y: ny} of neighbors) {
