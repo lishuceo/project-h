@@ -1,7 +1,7 @@
 {
-  "name": "tetris-innovative",
+  "name": "pixel-quicksand",
   "version": "0.1.0",
-  "description": "创新俄罗斯方块游戏 - 三方向下落物理系统",
+  "description": "像素流沙 - 三方向下落物理系统",
   "type": "module",
   "scripts": {
     "dev": "vite",

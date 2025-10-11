@@ -1,5 +1,7 @@
 import Phaser from 'phaser';
+import { StartScene } from './scenes/StartScene';
 import { GameScene } from './scenes/GameScene';
+import { RankingScene } from './scenes/RankingScene';
 import { SCREEN_WIDTH, SCREEN_HEIGHT } from './config/constants';
 
 /**
@@ -11,7 +13,7 @@ const config: Phaser.Types.Core.GameConfig = {
   height: SCREEN_HEIGHT,
   parent: 'game-container',
   backgroundColor: '#1a1a2e',
-  scene: [GameScene],
+  scene: [StartScene, GameScene, RankingScene], // 场景顺序：开始 → 游戏 → 排行榜
   physics: {
     default: 'arcade',
     arcade: {
@@ -28,8 +30,9 @@ const config: Phaser.Types.Core.GameConfig = {
 // 创建游戏实例
 const game = new Phaser.Game(config);
 
-console.log('创新俄罗斯方块游戏启动');
+console.log('🎮 像素流沙 - Pixel Quicksand');
 console.log('游戏尺寸:', SCREEN_WIDTH, 'x', SCREEN_HEIGHT);
+console.log('三方向下落物理系统启动成功！');
 
 // 导出游戏实例（用于调试）
 (window as any).game = game;

@@ -1,0 +1,16 @@
+{
+    "token": "ec44ff92-b1dc-46b0-b22f-c42ed7d8d91c",
+    "data": {
+        "projectID": "pixel_quicksand",
+        "tapID": 463846535,
+        "title": "像素流沙",
+        "outDirectory": ".",
+        "screenOrientation": "portrait",
+        "description": "创新方块游戏，三方向下落物理系统，像素块如流沙般自然堆积。支持排行榜和连锁消除。",
+        "tags": ["休闲", "益智", "方块", "排行榜"],
+        "versionName": "1.0.0",
+        "banner": ["tap_assets/banner.jpg"],
+        "icon": ["tap_assets/icon.jpg"],
+        "screenshots": ["tap_assets/a.jpg", "tap_assets/b.jpg"]
+    }
+} 

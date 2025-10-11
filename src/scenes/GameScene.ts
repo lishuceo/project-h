@@ -8,8 +8,9 @@ import { PreviewSlots } from '@/gameplay/PreviewSlots';
 import { EliminationSystem } from '@/gameplay/Elimination';
 import { ScoringSystem } from '@/gameplay/Scoring';
 import { DragDropManager } from '@/gameplay/DragDrop';
+import { sceSDKManager } from '@/sdk/SceSDKManager';
 import { GameState, PixelBlock, TetrominoData } from '@/types';
-import { CELL_TO_PIXEL_RATIO, SCREEN_WIDTH, GAME_AREA_OFFSET_X, GAME_AREA_OFFSET_Y } from '@/config/constants';
+import { CELL_TO_PIXEL_RATIO, SCREEN_WIDTH, GAME_AREA_OFFSET_Y } from '@/config/constants';
 
 /**
  * 主游戏场景
@@ -36,6 +37,12 @@ export class GameScene extends Phaser.Scene {
   private currentDraggedTetromino: TetrominoData | null = null;
   private currentDraggedSlotIndex: number = -1;
 
+  // 自动保存相关
+  private lastSaveTime: number = 0;
+  private sessionStartHighestScore: number = 0;
+  private autoSaveInterval: number = 3 * 60 * 1000; // 3分钟（毫秒）
+  private isSaving: boolean = false;
+
   constructor() {
     super({ key: 'GameScene' });
   }
@@ -51,6 +58,9 @@ export class GameScene extends Phaser.Scene {
     this.eliminationSystem = new EliminationSystem(this.grid);
     this.scoringSystem = new ScoringSystem();
     this.dragDropManager = new DragDropManager(this, this.grid);
+
+    // 初始化自动保存相关数据
+    this.initAutoSave();
 
     // 设置背景
     this.cameras.main.setBackgroundColor(0x1a1a2e);
@@ -166,6 +176,9 @@ export class GameScene extends Phaser.Scene {
           // 正式记录分数（增加连锁）
           this.scoringSystem.addEliminationScore(totalCells, true);
           console.log(`消除 ${totalCells} 格 (${totalPixels}像素)，得分 ${score}`);
+
+          // 检查是否需要自动保存
+          this.checkAutoSave();
 
         // 重新检查稳定性并触发重力
         this.physicsManager.recheckStability();
@@ -561,22 +574,28 @@ export class GameScene extends Phaser.Scene {
   /**
    * 显示游戏结束界面
    */
-  private showGameOver(): void {
+  private async showGameOver(): Promise<void> {
     const centerX = SCREEN_WIDTH / 2;
     const centerY = 600;
+    const finalScore = this.scoringSystem.score;
+
+    // 上传分数并获取结果
+    const uploadResult = await sceSDKManager.uploadScore(finalScore);
+    const rankings = await sceSDKManager.getRankings(5); // 获取前5名
+    const playerRank = await sceSDKManager.getPlayerRank();
 
     // 半透明背景
     this.add.rectangle(
       centerX,
       centerY,
-      600,
-      400,
+      700,
+      800,
       0x000000,
-      0.8
+      0.9
     );
 
     // 游戏结束文本
-    const gameOverText = this.add.text(centerX, centerY - 100, '游戏结束', {
+    const gameOverText = this.add.text(centerX, centerY - 350, '游戏结束', {
       fontSize: '48px',
       color: '#ff0000',
       fontFamily: 'Arial',
@@ -587,8 +606,8 @@ export class GameScene extends Phaser.Scene {
     // 最终分数
     const finalScoreText = this.add.text(
       centerX,
-      centerY - 20,
-      `最终分数: ${this.scoringSystem.score}`,
+      centerY - 270,
+      `本次分数: ${finalScore}`,
       {
         fontSize: '32px',
         color: '#ffffff',
@@ -597,8 +616,114 @@ export class GameScene extends Phaser.Scene {
     );
     finalScoreText.setOrigin(0.5);
 
+    // 最高分显示
+    const highestScoreText = this.add.text(
+      centerX,
+      centerY - 220,
+      `最高分: ${uploadResult.currentHighest}`,
+      {
+        fontSize: '28px',
+        color: '#ffff00',
+        fontFamily: 'Arial',
+        fontStyle: 'bold',
+      }
+    );
+    highestScoreText.setOrigin(0.5);
+
+    // 新记录提示
+    if (uploadResult.isNewRecord) {
+      const newRecordText = this.add.text(
+        centerX,
+        centerY - 170,
+        '🎉 新纪录！ 🎉',
+        {
+          fontSize: '24px',
+          color: '#00ff00',
+          fontFamily: 'Arial',
+          fontStyle: 'bold',
+        }
+      );
+      newRecordText.setOrigin(0.5);
+
+      // 闪烁动画
+      this.tweens.add({
+        targets: newRecordText,
+        alpha: 0.3,
+        duration: 500,
+        yoyo: true,
+        repeat: -1,
+        ease: 'Sine.easeInOut'
+      });
+    }
+
+    // 玩家排名
+    if (playerRank > 0) {
+      const rankText = this.add.text(
+        centerX,
+        centerY - 140,
+        `你的排名: 第 ${playerRank} 名`,
+        {
+          fontSize: '22px',
+          color: '#00ffff',
+          fontFamily: 'Arial',
+        }
+      );
+      rankText.setOrigin(0.5);
+    }
+
+    // 排行榜标题
+    const rankTitleText = this.add.text(
+      centerX,
+      centerY - 90,
+      '── 排行榜 TOP 5 ──',
+      {
+        fontSize: '24px',
+        color: '#ffffff',
+        fontFamily: 'Arial',
+        fontStyle: 'bold',
+      }
+    );
+    rankTitleText.setOrigin(0.5);
+
+    // 显示排行榜
+    if (rankings.length > 0) {
+      rankings.forEach((ranking, index) => {
+        const yPos = centerY - 40 + index * 50;
+        
+        // 排名颜色
+        let rankColor = '#ffffff';
+        if (ranking.rank === 1) rankColor = '#ffd700'; // 金色
+        else if (ranking.rank === 2) rankColor = '#c0c0c0'; // 银色
+        else if (ranking.rank === 3) rankColor = '#cd7f32'; // 铜色
+
+        const rankItemText = this.add.text(
+          centerX,
+          yPos,
+          `${ranking.rank}. ${ranking.username}: ${ranking.score}`,
+          {
+            fontSize: '20px',
+            color: rankColor,
+            fontFamily: 'Arial',
+          }
+        );
+        rankItemText.setOrigin(0.5);
+      });
+    } else {
+      const noDataText = this.add.text(
+        centerX,
+        centerY,
+        '暂无排行榜数据',
+        {
+          fontSize: '18px',
+          color: '#888888',
+          fontFamily: 'Arial',
+        }
+      );
+      noDataText.setOrigin(0.5);
+    }
+
     // 重新开始按钮
-    const restartButton = this.add.text(centerX, centerY + 60, '重新开始', {
+    const restartButton = this.add.text(centerX - 120, centerY + 280, '再来一局', {
       fontSize: '28px',
       color: '#00ff00',
       fontFamily: 'Arial',
@@ -607,8 +732,109 @@ export class GameScene extends Phaser.Scene {
     restartButton.setOrigin(0.5);
     restartButton.setInteractive({ useHandCursor: true });
     restartButton.on('pointerdown', () => {
-      this.scene.restart();
+      this.cameras.main.fadeOut(500);
+      this.time.delayedCall(500, () => {
+        this.scene.restart();
+      });
     });
+
+    // 悬停效果
+    restartButton.on('pointerover', () => {
+      restartButton.setScale(1.1);
+    });
+    restartButton.on('pointerout', () => {
+      restartButton.setScale(1.0);
+    });
+
+    // 返回首页按钮
+    const homeButton = this.add.text(centerX + 120, centerY + 280, '返回首页', {
+      fontSize: '28px',
+      color: '#00aaff',
+      fontFamily: 'Arial',
+      fontStyle: 'bold',
+    });
+    homeButton.setOrigin(0.5);
+    homeButton.setInteractive({ useHandCursor: true });
+    homeButton.on('pointerdown', () => {
+      this.cameras.main.fadeOut(500);
+      this.time.delayedCall(500, () => {
+        this.scene.start('StartScene');
+      });
+    });
+
+    // 悬停效果
+    homeButton.on('pointerover', () => {
+      homeButton.setScale(1.1);
+    });
+    homeButton.on('pointerout', () => {
+      homeButton.setScale(1.0);
+    });
+  }
+
+  /**
+   * 初始化自动保存数据
+   */
+  private initAutoSave(): void {
+    // 记录游戏开始时的最高分
+    sceSDKManager.getHighestScore().then(score => {
+      this.sessionStartHighestScore = score;
+      console.log(`游戏开始，当前最高分: ${this.sessionStartHighestScore}`);
+    }).catch(error => {
+      console.warn('获取最高分失败:', error);
+      this.sessionStartHighestScore = 0;
+    });
+
+    // 初始化保存时间为当前时间
+    this.lastSaveTime = Date.now();
+  }
+
+  /**
+   * 检查并执行自动保存
+   * 条件：
+   * 1. 当前分数超过最高分
+   * 2. 距离上次保存超过3分钟
+   */
+  private checkAutoSave(): void {
+    // 避免重复保存
+    if (this.isSaving) {
+      return;
+    }
+
+    const currentScore = this.scoringSystem.score;
+    const currentTime = Date.now();
+    const timeSinceLastSave = currentTime - this.lastSaveTime;
+
+    // 检查条件1：当前分数是否超过最高分
+    const hasNewRecord = currentScore > this.sessionStartHighestScore;
+
+    // 检查条件2：是否超过3分钟
+    const shouldSave = timeSinceLastSave >= this.autoSaveInterval;
+
+    if (hasNewRecord && shouldSave) {
+      console.log(`🔄 触发自动保存：当前分数 ${currentScore} > 最高分 ${this.sessionStartHighestScore}，距上次保存 ${Math.floor(timeSinceLastSave / 1000)}秒`);
+      
+      this.isSaving = true;
+
+      // 异步保存到云端（不阻塞游戏）
+      // 传入 sessionStartHighestScore 避免重复查询
+      sceSDKManager.saveHighestScore(currentScore, this.sessionStartHighestScore)
+        .then(success => {
+          if (success) {
+            console.log(`✅ 自动保存成功！分数 ${currentScore} 已保存到云端`);
+            // 更新会话最高分和保存时间
+            this.sessionStartHighestScore = currentScore;
+            this.lastSaveTime = Date.now();
+          } else {
+            console.log(`⏭️ 自动保存跳过（分数未超过已知最高分）`);
+          }
+        })
+        .catch(error => {
+          console.error('自动保存失败:', error);
+        })
+        .finally(() => {
+          this.isSaving = false;
+        });
+    }
   }
 }
 
