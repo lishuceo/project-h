@@ -192,12 +192,12 @@ export class SceSDKManager {
 
     try {
       // 检查API是否存在
-      if (typeof window.SceSDK.cloud.get_rank !== 'function') {
-        console.warn('get_rank API 不可用');
+      if (typeof window.SceSDK.cloud.get_user_rank !== 'function') {
+        console.warn('get_user_rank API 不可用');
         return -1;
       }
 
-      const rank = await window.SceSDK.cloud.get_rank('highest_score');
+      const rank = await window.SceSDK.cloud.get_user_rank('highest_score');
       console.log('玩家当前排名:', rank);
       return rank || -1;
     } catch (error) {

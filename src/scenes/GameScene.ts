@@ -10,7 +10,7 @@ import { ScoringSystem } from '@/gameplay/Scoring';
 import { DragDropManager } from '@/gameplay/DragDrop';
 import { sceSDKManager } from '@/sdk/SceSDKManager';
 import { GameState, PixelBlock, TetrominoData } from '@/types';
-import { CELL_TO_PIXEL_RATIO, SCREEN_WIDTH, GAME_AREA_OFFSET_Y } from '@/config/constants';
+import { CELL_TO_PIXEL_RATIO, SCREEN_WIDTH, GAME_AREA_OFFSET_Y, LOGICAL_GRID_HEIGHT, LOGICAL_GRID_WIDTH, PIXEL_SIZE } from '@/config/constants';
 
 /**
  * 主游戏场景
@@ -213,8 +213,8 @@ export class GameScene extends Phaser.Scene {
    * 检查方块是否可以放置在任意位置
    */
   private canPlaceAnywhere(tetromino: TetrominoData): boolean {
-    for (let y = 0; y < 22; y++) {
-      for (let x = 0; x < 12; x++) {
+    for (let y = 0; y < LOGICAL_GRID_HEIGHT; y++) {
+      for (let x = 0; x < LOGICAL_GRID_WIDTH; x++) {
         if (this.canPlaceTetromino(tetromino, x, y)) {
           return true;
         }
@@ -258,9 +258,11 @@ export class GameScene extends Phaser.Scene {
    * 创建预览槽位UI
    */
   private createPreviewSlotsUI(): void {
-    const slotY = GAME_AREA_OFFSET_Y + 1200; // 游戏区域底部 + 100px间距
-    const slotSize = 140; // 放大槽位 (原100)
-    const slotSpacing = 40; // 槽位之间的间距
+    // 游戏区域底部位置：GAME_AREA_OFFSET_Y + GAME_AREA_HEIGHT
+    const gameAreaBottom = GAME_AREA_OFFSET_Y + (LOGICAL_GRID_HEIGHT * CELL_TO_PIXEL_RATIO * PIXEL_SIZE);
+    const slotY = gameAreaBottom + 120; // 游戏区域底部 + 60px间距
+    const slotSize = 180; // 放大槽位（原140）
+    const slotSpacing = 50; // 槽位之间的间距
     
     // 计算3个槽位的总宽度并居中
     const totalWidth = slotSize * 3 + slotSpacing * 2;
@@ -286,8 +288,8 @@ export class GameScene extends Phaser.Scene {
       this.previewSlotsUI.push(container);
 
       // 槽位编号文本
-      const label = this.add.text(0, slotSize / 2 + 20, `槽位${i + 1}`, {
-        fontSize: '14px',
+      const label = this.add.text(0, slotSize / 2 + 25, `槽位${i + 1}`, {
+        fontSize: '16px',
         color: '#ffffff',
         fontFamily: 'Arial',
       });
@@ -319,9 +321,9 @@ export class GameScene extends Phaser.Scene {
         item.destroy();
       });
 
-      // 绘制方块预览（槽位放大后，方块也相应放大）
-      const cellSize = 28; // 放大方块格子 (原20)
-      const offset = -42; // 调整居中偏移 (原-30)
+      // 绘制方块预览（槽位180px，方块也相应放大）
+      const cellSize = 36; // 放大方块格子（槽位180 / 5 ≈ 36）
+      const offset = -54; // 调整居中偏移（让方块在槽位中居中）
       tetromino.cells.forEach((cell) => {
         const rect = this.add.rectangle(
           cell.x * cellSize + offset,
@@ -330,7 +332,7 @@ export class GameScene extends Phaser.Scene {
           cellSize - 2,
           tetromino.color
         );
-        rect.setStrokeStyle(1.5, 0xffffff, 0.6); // 稍微加粗边框
+        rect.setStrokeStyle(2, 0xffffff, 0.7); // 加粗边框
         container.add(rect);
       });
     });

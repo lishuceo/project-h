@@ -1,16 +1,16 @@
 // 网格常量（参考设计文档第3章）
 export const LOGICAL_GRID_WIDTH = 12;
-export const LOGICAL_GRID_HEIGHT = 22;
+export const LOGICAL_GRID_HEIGHT = 15; // 减少到15行（原22行的2/3）
 export const CELL_TO_PIXEL_RATIO = 10;
 export const PIXEL_GRID_WIDTH = LOGICAL_GRID_WIDTH * CELL_TO_PIXEL_RATIO; // 120
-export const PIXEL_GRID_HEIGHT = LOGICAL_GRID_HEIGHT * CELL_TO_PIXEL_RATIO; // 220
+export const PIXEL_GRID_HEIGHT = LOGICAL_GRID_HEIGHT * CELL_TO_PIXEL_RATIO; // 150
 
 // 预览槽位常量
 export const PREVIEW_SLOTS = 3;
 
 // 物理常量
 export const PHYSICS_TIME_STEP = 1 / 60; // 60 FPS
-export const PIXEL_SIZE = 5; // 每个像素块在屏幕上的实际像素大小
+export const PIXEL_SIZE = 6; // 每个像素块在屏幕上的实际像素大小（放大到6px）
 
 // 动画常量
 export const ELIMINATION_ANIM_DURATION = 1000; // 毫秒

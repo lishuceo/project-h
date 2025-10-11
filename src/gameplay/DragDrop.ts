@@ -53,18 +53,18 @@ export class DragDropManager {
       return;
     }
 
-    // 移动端优化：让方块显示在手指上方，避免被遮挡
-    const touchOffsetY = -100; // 向上偏移100像素
-    const adjustedPointerY = pointerY + touchOffsetY;
+    // 移动端优化：对触摸位置应用向上偏移
+    const TOUCH_OFFSET_Y = -100; // 向上偏移100px
+    const adjustedPointerY = pointerY + TOUCH_OFFSET_Y;
 
-    // 转换为网格坐标
+    // 转换为网格坐标（基于偏移后的位置）
     const gridX = Math.floor((pointerX - GAME_AREA_OFFSET_X) / PIXEL_SIZE);
     const gridY = Math.floor((adjustedPointerY - GAME_AREA_OFFSET_Y) / PIXEL_SIZE);
     const logicalPos = this.grid.pixelToLogical(gridX, gridY);
 
     this.currentLogicalPos = logicalPos;
 
-    // 更新精灵位置和颜色反馈
+    // 更新精灵位置和颜色反馈（不需要额外偏移，logicalPos已经是偏移后的）
     this.updateDragSprites(logicalPos);
   }
 
@@ -204,6 +204,7 @@ export class DragDropManager {
         const screenX = GAME_AREA_OFFSET_X + pixelPos.x * PIXEL_SIZE;
         const screenY = GAME_AREA_OFFSET_Y + pixelPos.y * PIXEL_SIZE;
 
+        // 不需要额外偏移，logicalPos已经是偏移后的位置
         sprite.setPosition(
           screenX + cellSize / 2,
           screenY + cellSize / 2
