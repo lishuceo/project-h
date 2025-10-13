@@ -155,6 +155,21 @@ export class Grid {
   }
 
   /**
+   * 获取像素块总数
+   */
+  getTotalPixelCount(): number {
+    let count = 0;
+    for (let y = 0; y < PIXEL_GRID_HEIGHT; y++) {
+      for (let x = 0; x < PIXEL_GRID_WIDTH; x++) {
+        if (this.pixelGrid[y][x] !== null) {
+          count++;
+        }
+      }
+    }
+    return count;
+  }
+
+  /**
    * 清空网格
    */
   clear(): void {

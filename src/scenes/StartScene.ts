@@ -126,11 +126,11 @@ export class StartScene extends Phaser.Scene {
 
     // 最高分会在SDK加载完成后异步显示（见 updateHighScoreDisplay）
 
-    // 开始游戏按钮
+    // 开始游戏按钮（普通模式）
     this.createButton(
       SCREEN_WIDTH / 2,
-      550,
-      '开始游戏',
+      500,
+      '🎮 普通模式',
       0x00cc00,
       () => {
         // 淡出效果
@@ -141,11 +141,26 @@ export class StartScene extends Phaser.Scene {
       }
     );
 
+    // 每日挑战按钮
+    this.createButton(
+      SCREEN_WIDTH / 2,
+      600,
+      '⭐ 每日挑战',
+      0xff9800,
+      () => {
+        // 淡出效果
+        this.cameras.main.fadeOut(500);
+        this.time.delayedCall(500, () => {
+          this.scene.start('DailyChallengeScene');
+        });
+      }
+    );
+
     // 排行榜按钮
     this.createButton(
       SCREEN_WIDTH / 2,
-      680,
-      '排行榜',
+      700,
+      '📊 排行榜',
       0x0066ff,
       () => {
         // 淡出效果

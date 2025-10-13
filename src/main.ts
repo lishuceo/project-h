@@ -1,6 +1,7 @@
 import Phaser from 'phaser';
 import { StartScene } from './scenes/StartScene';
 import { GameScene } from './scenes/GameScene';
+import { DailyChallengeScene } from './scenes/DailyChallengeScene';
 import { RankingScene } from './scenes/RankingScene';
 import { SCREEN_WIDTH, SCREEN_HEIGHT } from './config/constants';
 
@@ -13,7 +14,7 @@ const config: Phaser.Types.Core.GameConfig = {
   height: SCREEN_HEIGHT,
   parent: 'game-container',
   backgroundColor: '#1a1a2e',
-  scene: [StartScene, GameScene, RankingScene], // 场景顺序：开始 → 游戏 → 排行榜
+  scene: [StartScene, GameScene, DailyChallengeScene, RankingScene], // 场景顺序：开始 → 游戏 → 每日挑战 → 排行榜
   physics: {
     default: 'arcade',
     arcade: {

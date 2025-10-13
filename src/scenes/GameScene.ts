@@ -17,19 +17,19 @@ import { CELL_TO_PIXEL_RATIO, SCREEN_WIDTH, GAME_AREA_OFFSET_Y, LOGICAL_GRID_HEI
  * 参考设计文档第10章
  */
 export class GameScene extends Phaser.Scene {
-  private grid!: Grid;
-  private physicsManager!: PhysicsManager;
-  private pixelRenderer!: PixelRenderer;
-  private eliminationAnimation!: EliminationAnimation;
-  private stateManager!: GameStateManager;
-  private previewSlots!: PreviewSlots;
-  private eliminationSystem!: EliminationSystem;
-  private scoringSystem!: ScoringSystem;
-  private dragDropManager!: DragDropManager;
+  protected grid!: Grid;
+  protected physicsManager!: PhysicsManager;
+  protected pixelRenderer!: PixelRenderer;
+  protected eliminationAnimation!: EliminationAnimation;
+  protected stateManager!: GameStateManager;
+  protected previewSlots!: PreviewSlots;
+  protected eliminationSystem!: EliminationSystem;
+  protected scoringSystem!: ScoringSystem;
+  protected dragDropManager!: DragDropManager;
   
-  private scoreText!: Phaser.GameObjects.Text;
-  private stateText!: Phaser.GameObjects.Text;
-  private chainText!: Phaser.GameObjects.Text;
+  protected scoreText!: Phaser.GameObjects.Text;
+  protected stateText!: Phaser.GameObjects.Text;
+  protected chainText!: Phaser.GameObjects.Text;
   private previewSlotsUI: Phaser.GameObjects.Container[] = [];
   private nextGroupId: number = 1;
   
@@ -43,8 +43,8 @@ export class GameScene extends Phaser.Scene {
   private autoSaveInterval: number = 3 * 60 * 1000; // 3分钟（毫秒）
   private isSaving: boolean = false;
 
-  constructor() {
-    super({ key: 'GameScene' });
+  constructor(key: string = 'GameScene') {
+    super({ key });
   }
 
   create(): void {
@@ -197,7 +197,7 @@ export class GameScene extends Phaser.Scene {
    * 检查游戏结束
    * 参考设计文档第11章
    */
-  private checkGameOver(): void {
+  protected checkGameOver(): void {
     const canPlace = this.previewSlots.hasAnyPlaceableBlock((tetromino) => {
       return this.canPlaceAnywhere(tetromino);
     });
@@ -212,7 +212,7 @@ export class GameScene extends Phaser.Scene {
   /**
    * 检查方块是否可以放置在任意位置
    */
-  private canPlaceAnywhere(tetromino: TetrominoData): boolean {
+  protected canPlaceAnywhere(tetromino: TetrominoData): boolean {
     for (let y = 0; y < LOGICAL_GRID_HEIGHT; y++) {
       for (let x = 0; x < LOGICAL_GRID_WIDTH; x++) {
         if (this.canPlaceTetromino(tetromino, x, y)) {
@@ -341,7 +341,7 @@ export class GameScene extends Phaser.Scene {
   /**
    * 槽位点击处理
    */
-  private onSlotClicked(slotIndex: number): void {
+  protected onSlotClicked(slotIndex: number): void {
     console.log(`点击槽位 ${slotIndex + 1}`);
     
     if (!this.stateManager.canPlayerPlaceBlock()) {
@@ -497,7 +497,7 @@ export class GameScene extends Phaser.Scene {
    * 放置方块
    * 参考设计文档6.3.3节
    */
-  private placeTetromino(
+  protected placeTetromino(
     tetromino: TetrominoData,
     logicalX: number,
     logicalY: number
