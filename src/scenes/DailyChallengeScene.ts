@@ -9,6 +9,7 @@ import { ChallengeTimer } from '../challenge/Timer';
 import { DailyChallengeData, ChallengeResult, PixelBlockData } from '../types/challenge';
 import { GameState, PixelBlock, TetrominoData } from '../types';
 import { LevelGenerator } from '../challenge/LevelGenerator';
+import { PreviewSlots } from '../gameplay/PreviewSlots';
 
 export class DailyChallengeScene extends GameScene {
   // 挑战相关
@@ -66,6 +67,21 @@ export class DailyChallengeScene extends GameScene {
     super.create();
     
     console.log('✅ 父类初始化完成');
+    
+    // 🎯 关键修复：用种子化的PreviewSlots替换父类创建的随机PreviewSlots
+    // 这样每次重启都会得到相同的方块序列，确保公平竞技！
+    // 🎯 重要：传入关卡使用的颜色，确保玩家方块只使用关卡中存在的颜色，避免无解！
+    this.previewSlots = new PreviewSlots(
+      this.challengeData.seed, 
+      this.challengeData.availableColors
+    );
+    console.log('🎯 已启用种子化方块系统，确保公平竞技');
+    console.log('🎨 玩家可用颜色:', this.challengeData.availableColors);
+    
+    // 🐛 关键修复：替换PreviewSlots后，必须重新更新UI显示！
+    // 否则UI显示的是旧的随机方块，但实际使用的是新的种子方块
+    this.updatePreviewSlotsUI();
+    console.log('✅ 预览槽位UI已更新，显示种子化方块');
     
     // 隐藏父类的UI元素（避免与挑战UI重叠）
     this.hideParentUI();

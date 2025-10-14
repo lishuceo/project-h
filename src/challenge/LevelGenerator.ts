@@ -24,8 +24,12 @@ export class LevelGenerator {
     const difficulty = this.getDifficulty(dayOfWeek);
     console.log(`📊 难度: ${difficulty} (${dayOfWeek === 0 || dayOfWeek === 6 ? '周末' : '工作日'})`);
     
-    // 生成初始布局
-    const initialLayout = this.generateLayout(random, difficulty);
+    // 🎯 先选择关卡使用的颜色
+    const colorCount = difficulty === 1 ? 2 : difficulty === 2 ? 3 : 4;
+    const availableColors = this.selectColors(random, colorCount);
+    
+    // 生成初始布局（使用选定的颜色）
+    const initialLayout = this.generateLayoutWithColors(random, difficulty, availableColors);
     console.log(`📦 生成了 ${initialLayout.length} 个像素块`);
     
     // 计算合理的步数限制
@@ -43,25 +47,23 @@ export class LevelGenerator {
       initialLayout,
       maxSteps,
       timeLimit: undefined, // 暂不限制时间
-      checksum
+      checksum,
+      availableColors  // 🎯 返回可用颜色，确保玩家能完成关卡
     };
   }
   
   /**
-   * 生成初始布局
+   * 生成初始布局（使用指定的颜色）
    * 策略：创建复杂的多层结构，需要策略性消除
    */
-  private generateLayout(
+  private generateLayoutWithColors(
     random: SeededRandom, 
-    difficulty: 1 | 2 | 3
+    difficulty: 1 | 2 | 3,
+    colors: Color[]
   ): PixelBlockData[] {
     const pixels: PixelBlockData[] = [];
     
-    // 根据难度决定颜色数量
-    const colorCount = difficulty === 1 ? 2 : difficulty === 2 ? 3 : 4;
-    const colors = this.selectColors(random, colorCount);
-    
-    console.log(`🏗️ 生成 ${colorCount} 层结构`);
+    console.log(`🏗️ 生成 ${colors.length} 层结构`);
     
     // 策略：生成多层结构，需要先消除外层才能接触内层
     for (let i = 0; i < colors.length; i++) {
@@ -75,7 +77,7 @@ export class LevelGenerator {
         const leftSmall = this.generateSmallPile(random, color, 'left', layer);
         const rightSmall = this.generateSmallPile(random, color, 'right', layer);
         pixels.push(...leftSmall, ...rightSmall);
-        console.log(`  目标层（红色）: ${leftSmall.length + rightSmall.length}像素块`);
+        console.log(`  目标层: ${leftSmall.length + rightSmall.length}像素块`);
       } else {
         // 上层（障碍层）：完整的横跨布局
         const barrier = this.generateBarrier(random, color, layer, difficulty);

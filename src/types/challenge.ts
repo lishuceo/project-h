@@ -30,6 +30,9 @@ export interface DailyChallengeData {
   maxSteps?: number;         // 最大步数限制（可选）
   timeLimit?: number;        // 时间限制（秒，可选）
   
+  // 🎯 新增：玩家可用的颜色（确保能完成关卡）
+  availableColors: Color[];  // 关卡中使用的颜色，玩家方块只从这些颜色中生成
+  
   // 提供的方块池（未来扩展，可选）
   availableShapes?: string[];  // 限定可用的方块形状
 }

@@ -203,6 +203,45 @@ export class BagSystem {
 }
 
 /**
+ * 基于种子的Bag系统（用于每日挑战）
+ * 相同种子 → 相同方块序列 → 完全公平
+ */
+export class SeededBagSystem {
+  private bag: ShapeType[] = [];
+  private random: any; // SeededRandom类型
+  private bagCount: number = 0;
+
+  constructor(random: any) {
+    this.random = random;
+  }
+
+  getNextShape(): ShapeType {
+    if (this.bag.length === 0) {
+      this.refillBag();
+    }
+    return this.bag.pop()!;
+  }
+
+  private refillBag(): void {
+    this.bagCount++;
+    console.log(`🎲 生成第 ${this.bagCount} 个Bag (种子化)`);
+    
+    this.bag = [
+      ShapeType.I,
+      ShapeType.O,
+      ShapeType.T,
+      ShapeType.L,
+      ShapeType.J,
+      ShapeType.S,
+      ShapeType.Z,
+    ];
+    
+    // 🎯 使用种子随机数洗牌（确定性）
+    this.bag = this.random.shuffle([...this.bag]);
+  }
+}
+
+/**
  * 随机选择颜色
  */
 export function randomColor(): Color {

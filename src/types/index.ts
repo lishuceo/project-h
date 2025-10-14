@@ -4,8 +4,6 @@ export enum Color {
   BLUE = 0x0000ff,
   GREEN = 0x00ff00,
   YELLOW = 0xffff00,
-  PURPLE = 0xff00ff,  // 保留定义但不使用
-  WHITE = 0xffffff,   // 保留定义但不使用
 }
 
 // 方块形状枚举

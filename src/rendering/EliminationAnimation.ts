@@ -218,8 +218,6 @@ export class EliminationAnimation {
       [Color.YELLOW]: 0xffff66,
       [Color.GREEN]: 0x66ff66,
       [Color.BLUE]: 0x6666ff,
-      [Color.PURPLE]: 0xff66ff,  // 未使用
-      [Color.WHITE]: 0xffffff,   // 未使用
     };
     return colors[originalColor] || 0xffffff;
   }

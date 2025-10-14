@@ -307,7 +307,7 @@ export class GameScene extends Phaser.Scene {
   /**
    * 更新预览槽位UI
    */
-  private updatePreviewSlotsUI(): void {
+  protected updatePreviewSlotsUI(): void {
     const slots = this.previewSlots.getAllSlots();
 
     slots.forEach((tetromino, index) => {
