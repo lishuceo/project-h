@@ -48,6 +48,9 @@ export class GameScene extends Phaser.Scene {
   }
 
   create(): void {
+    // 🐛 修复：清空预览槽位UI数组（避免场景重启时引用旧的已销毁Container）
+    this.previewSlotsUI = [];
+    
     // 初始化核心系统
     this.grid = new Grid();
     this.physicsManager = new PhysicsManager(this.grid);
