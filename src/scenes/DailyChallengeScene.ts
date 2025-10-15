@@ -6,7 +6,7 @@
 import { GameScene } from './GameScene';
 import { ChallengeManager } from '../challenge/ChallengeManager';
 import { ChallengeTimer } from '../challenge/Timer';
-import { DailyChallengeData, ChallengeResult, PixelBlockData } from '../types/challenge';
+import { DailyChallengeData, ChallengeResult, ChallengeRecord, PixelBlockData } from '../types/challenge';
 import { GameState, PixelBlock, TetrominoData } from '../types';
 import { LevelGenerator } from '../challenge/LevelGenerator';
 import { PreviewSlots } from '../gameplay/PreviewSlots';
@@ -448,7 +448,7 @@ export class DailyChallengeScene extends GameScene {
   /**
    * 挑战完成
    */
-  private onChallengeCompleted(): void {
+  private async onChallengeCompleted(): Promise<void> {
     const result: ChallengeResult = {
       challengeId: this.currentChallengeId,
       completed: true,
@@ -476,8 +476,12 @@ export class DailyChallengeScene extends GameScene {
       console.log(`🔓 挑战${nextChallengeId}解锁状态:`, nextUnlocked);
     }
 
-    // 显示完成界面
-    this.showCompletionScreen(result);
+    // 获取全球排名（异步）
+    console.log('🔄 获取全球排名中...');
+    const updatedRecord = await this.challengeManager.updateChallengeRank(this.currentChallengeId);
+
+    // 显示完成界面（包含排名信息）
+    this.showCompletionScreen(result, updatedRecord);
   }
   
   /**
@@ -566,19 +570,19 @@ export class DailyChallengeScene extends GameScene {
   /**
    * 显示完成界面
    */
-  private showCompletionScreen(result: ChallengeResult): void {
+  private showCompletionScreen(result: ChallengeResult, record?: ChallengeRecord | null): void {
     // 创建遮罩
     this.overlayGraphics = this.add.graphics();
     this.overlayGraphics.fillStyle(0x000000, 0.85);
     this.overlayGraphics.fillRect(0, 0, this.cameras.main.width, this.cameras.main.height);
     this.overlayGraphics.setDepth(1000);
-    
+
     // 创建UI容器
     this.completionUI = this.add.container(this.cameras.main.centerX, this.cameras.main.centerY);
     this.completionUI.setDepth(1001);
-    
+
     // 标题
-    const title = this.add.text(0, -200, '🎉 挑战完成！', {
+    const title = this.add.text(0, -220, '🎉 挑战完成！', {
       fontSize: '48px',
       color: '#ffdd00',
       fontFamily: 'Arial',
@@ -586,37 +590,66 @@ export class DailyChallengeScene extends GameScene {
     });
     title.setOrigin(0.5);
     this.completionUI.add(title);
-    
+
     // 星级
     const starsText = '⭐'.repeat(result.stars);
-    const stars = this.add.text(0, -130, starsText, {
+    const stars = this.add.text(0, -150, starsText, {
       fontSize: '64px'
     });
     stars.setOrigin(0.5);
     this.completionUI.add(stars);
-    
-    // 统计信息
-    const stats = this.add.text(0, -30, 
-      `⏱️ 用时: ${this.timer.formatTime()}\n` +
-      `🚶 步数: ${result.stepsUsed}\n` +
-      `🏆 得分: ${result.score}`, 
-      {
-        fontSize: '28px',
-        color: '#ffffff',
-        align: 'center',
-        lineSpacing: 15,
-        fontFamily: 'Arial'
-      }
-    );
-    stats.setOrigin(0.5);
-    this.completionUI.add(stats);
-    
+
+    // 全球排名（如果有）
+    if (record && record.globalRank && record.totalPlayers) {
+      const rankText = this.add.text(0, -70,
+        `🌍 全球排名: ${record.globalRank} / ${record.totalPlayers}`, {
+        fontSize: '32px',
+        color: '#ffd700',
+        fontFamily: 'Arial',
+        fontStyle: 'bold'
+      });
+      rankText.setOrigin(0.5);
+      this.completionUI.add(rankText);
+
+      // 统计信息（位置下移）
+      const stats = this.add.text(0, 10,
+        `⏱️ 用时: ${this.timer.formatTime()}\n` +
+        `🚶 步数: ${result.stepsUsed}\n` +
+        `🏆 得分: ${result.score}`,
+        {
+          fontSize: '24px',
+          color: '#ffffff',
+          align: 'center',
+          lineSpacing: 12,
+          fontFamily: 'Arial'
+        }
+      );
+      stats.setOrigin(0.5);
+      this.completionUI.add(stats);
+    } else {
+      // 没有排名数据，正常显示统计信息
+      const stats = this.add.text(0, -30,
+        `⏱️ 用时: ${this.timer.formatTime()}\n` +
+        `🚶 步数: ${result.stepsUsed}\n` +
+        `🏆 得分: ${result.score}`,
+        {
+          fontSize: '28px',
+          color: '#ffffff',
+          align: 'center',
+          lineSpacing: 15,
+          fontFamily: 'Arial'
+        }
+      );
+      stats.setOrigin(0.5);
+      this.completionUI.add(stats);
+    }
+
     // 按钮
-    this.createButton(this.completionUI, -120, 120, '🔄 再来一次', () => {
+    this.createButton(this.completionUI, -120, 140, '🔄 再来一次', () => {
       this.restartChallenge();
     });
-    
-    this.createButton(this.completionUI, 120, 120, '📊 查看记录', () => {
+
+    this.createButton(this.completionUI, 120, 140, '📊 查看记录', () => {
       this.returnToMenu();
     });
   }

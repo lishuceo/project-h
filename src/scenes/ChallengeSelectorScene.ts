@@ -17,7 +17,7 @@ export class ChallengeSelectorScene extends Phaser.Scene {
     super({ key: 'ChallengeSelectorScene' });
   }
 
-  create(): void {
+  async create(): Promise<void> {
     console.log('🎮 挑战选择场景启动');
 
     // 初始化挑战管理器
@@ -42,8 +42,28 @@ export class ChallengeSelectorScene extends Phaser.Scene {
     // 创建UI
     this.createUI();
 
+    // 后台更新所有已完成挑战的排名（不阻塞UI显示）
+    this.updateRanksInBackground();
+
     // 淡入效果
     this.cameras.main.fadeIn(500);
+  }
+
+  /**
+   * 后台更新排名
+   */
+  private async updateRanksInBackground(): Promise<void> {
+    try {
+      console.log('🔄 后台更新排名中...');
+      await this.challengeManager.updateAllRanks();
+
+      // 排名更新完成后，重新创建UI以显示最新排名
+      console.log('✅ 排名更新完成，刷新UI');
+      this.children.removeAll(true); // 清除所有现有UI
+      this.createUI(); // 重新创建UI
+    } catch (error) {
+      console.error('❌ 更新排名失败:', error);
+    }
   }
 
   /**
@@ -196,30 +216,99 @@ export class ChallengeSelectorScene extends Phaser.Scene {
       if (record?.completed) {
         statusText = `✅ 已完成 | 最佳: ${record.bestScore}分 ${record.bestStars}星`;
         statusColor = '#4ade80';
+
+        // 如果有全球排名，显示排名信息
+        if (record.globalRank && record.totalPlayers) {
+          const rankText = this.add.text(0, -45,
+            `🌍 全球排名: ${record.globalRank} / ${record.totalPlayers}`, {
+            fontSize: '20px',
+            color: '#ffd700',
+            fontFamily: 'Arial',
+            fontStyle: 'bold'
+          });
+          rankText.setOrigin(0.5);
+          container.add(rankText);
+
+          // 调整完成状态文本位置
+          const status = this.add.text(0, -15, statusText, {
+            fontSize: '16px',
+            color: statusColor,
+            fontFamily: 'Arial'
+          });
+          status.setOrigin(0.5);
+          container.add(status);
+
+          // 关卡信息（只在已解锁时显示）
+          const infoText = this.add.text(0, 15,
+            `目标: 清除所有方块 | 步数限制: ${challenge.maxSteps}`, {
+            fontSize: '14px',
+            color: '#94a3b8',
+            fontFamily: 'Arial'
+          });
+          infoText.setOrigin(0.5);
+          container.add(infoText);
+        } else {
+          // 没有排名数据，正常显示
+          const status = this.add.text(0, -20, statusText, {
+            fontSize: '18px',
+            color: statusColor,
+            fontFamily: 'Arial'
+          });
+          status.setOrigin(0.5);
+          container.add(status);
+
+          // 关卡信息
+          const infoText = this.add.text(0, 15,
+            `目标: 清除所有方块 | 步数限制: ${challenge.maxSteps}`, {
+            fontSize: '16px',
+            color: '#94a3b8',
+            fontFamily: 'Arial'
+          });
+          infoText.setOrigin(0.5);
+          container.add(infoText);
+        }
       } else if (record && !record.completed) {
         statusText = `已尝试 ${record.attempts} 次`;
         statusColor = '#fbbf24';
+
+        const status = this.add.text(0, -20, statusText, {
+          fontSize: '18px',
+          color: statusColor,
+          fontFamily: 'Arial'
+        });
+        status.setOrigin(0.5);
+        container.add(status);
+
+        // 关卡信息
+        const infoText = this.add.text(0, 15,
+          `目标: 清除所有方块 | 步数限制: ${challenge.maxSteps}`, {
+          fontSize: '16px',
+          color: '#94a3b8',
+          fontFamily: 'Arial'
+        });
+        infoText.setOrigin(0.5);
+        container.add(infoText);
       } else {
         statusText = '等待挑战';
+
+        const status = this.add.text(0, -20, statusText, {
+          fontSize: '18px',
+          color: statusColor,
+          fontFamily: 'Arial'
+        });
+        status.setOrigin(0.5);
+        container.add(status);
+
+        // 关卡信息
+        const infoText = this.add.text(0, 15,
+          `目标: 清除所有方块 | 步数限制: ${challenge.maxSteps}`, {
+          fontSize: '16px',
+          color: '#94a3b8',
+          fontFamily: 'Arial'
+        });
+        infoText.setOrigin(0.5);
+        container.add(infoText);
       }
-
-      const status = this.add.text(0, -20, statusText, {
-        fontSize: '18px',
-        color: statusColor,
-        fontFamily: 'Arial'
-      });
-      status.setOrigin(0.5);
-      container.add(status);
-
-      // 关卡信息（只在已解锁时显示）
-      const infoText = this.add.text(0, 15,
-        `目标: 清除所有方块 | 步数限制: ${challenge.maxSteps}`, {
-        fontSize: '16px',
-        color: '#94a3b8',
-        fontFamily: 'Arial'
-      });
-      infoText.setOrigin(0.5);
-      container.add(infoText);
     }
 
     // 开始按钮

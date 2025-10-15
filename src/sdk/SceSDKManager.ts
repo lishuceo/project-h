@@ -197,9 +197,19 @@ export class SceSDKManager {
         return -1;
       }
 
-      const rank = await window.SceSDK.cloud.get_user_rank('highest_score');
+      // 使用对象参数格式（与 get_top_rank 一致）
+      const rankResult = await window.SceSDK.cloud.get_user_rank({ key: 'highest_score' });
+
+      // 处理返回值：可能是数字或对象
+      let rank = -1;
+      if (typeof rankResult === 'number') {
+        rank = rankResult;
+      } else if (rankResult && typeof rankResult === 'object') {
+        rank = rankResult.rank || rankResult.value || -1;
+      }
+
       console.log('玩家当前排名:', rank);
-      return rank || -1;
+      return rank > 0 ? rank : -1;
     } catch (error) {
       console.warn('获取排名失败:', error);
       return -1;

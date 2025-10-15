@@ -64,6 +64,8 @@ export interface ChallengeRecord {
   attempts: number;          // 尝试次数
   completed: boolean;        // 是否完成过
   timestamp: string;         // 最后完成时间
+  globalRank?: number;       // 全球排名（动态更新）
+  totalPlayers?: number;     // 总参与人数
 }
 
 /**
