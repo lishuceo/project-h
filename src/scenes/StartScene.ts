@@ -3,6 +3,14 @@ import { sceSDKManager } from '@/sdk/SceSDKManager';
 import { SCREEN_WIDTH, SCREEN_HEIGHT } from '@/config/constants';
 import { initTestData } from '@/utils/initTestData';
 import { Color } from '@/types';
+import { ChallengeManager } from '@/challenge/ChallengeManager';
+
+// 全局类型声明
+declare global {
+  interface Window {
+    challengeManager: ChallengeManager;
+  }
+}
 
 /**
  * 游戏开始场景（封面）
@@ -17,6 +25,9 @@ export class StartScene extends Phaser.Scene {
   async create(): Promise<void> {
     // 初始化测试数据（仅开发环境）
     initTestData();
+
+    // 暴露 ChallengeManager 到全局（方便调试）
+    window.challengeManager = ChallengeManager.getInstance();
 
     // 设置清新的渐变背景
     this.createGradientBackground();

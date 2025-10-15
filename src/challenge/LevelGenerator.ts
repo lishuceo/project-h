@@ -169,13 +169,13 @@ export class LevelGenerator {
   private calculateMaxSteps(layout: PixelBlockData[], difficulty: number): number {
     // 估算：每100个像素块（约1个逻辑格子）需要0.2步来清除
     const estimatedSteps = Math.ceil(layout.length / 100 * 0.2);
-    
-    // 根据难度调整宽松度
-    const multiplier = difficulty === 1 ? 3.0 : difficulty === 2 ? 2.5 : 2.0;
+
+    // 根据难度调整宽松度（翻倍后更宽松，避免卡死用户）
+    const multiplier = difficulty === 1 ? 6.0 : difficulty === 2 ? 5.0 : 4.0;
     const maxSteps = Math.ceil(estimatedSteps * multiplier);
-    
-    // 至少10步
-    return Math.max(10, maxSteps);
+
+    // 至少20步（从10翻倍到20）
+    return Math.max(20, maxSteps);
   }
   
   /**
