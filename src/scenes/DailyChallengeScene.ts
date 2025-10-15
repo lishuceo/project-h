@@ -10,6 +10,7 @@ import { DailyChallengeData, ChallengeResult, ChallengeRecord, PixelBlockData } 
 import { GameState, PixelBlock, TetrominoData } from '../types';
 import { LevelGenerator } from '../challenge/LevelGenerator';
 import { PreviewSlots } from '../gameplay/PreviewSlots';
+import { vibrationManager } from '@/utils/VibrationManager';
 import { SCREEN_WIDTH, UI_COLORS } from '../config/constants';
 
 export class DailyChallengeScene extends GameScene {
@@ -420,6 +421,10 @@ export class DailyChallengeScene extends GameScene {
     if (remainingPixels === 0) {
       console.log('🎉 挑战完成！所有像素块已清除！');
       this.timer.stop();
+
+      // 震动反馈：挑战成功
+      vibrationManager.vibrateSuccess();
+
       this.onChallengeCompleted();
       return;
     }
@@ -644,12 +649,12 @@ export class DailyChallengeScene extends GameScene {
       this.completionUI.add(stats);
     }
 
-    // 按钮
-    this.createButton(this.completionUI, -120, 140, '🔄 再来一次', () => {
+    // 按钮（退出按钮更明显）
+    this.createButton(this.completionUI, -120, 140, '再来一次', 0x64748b, '20px', () => {
       this.restartChallenge();
     });
 
-    this.createButton(this.completionUI, 120, 140, '📊 查看记录', () => {
+    this.createButton(this.completionUI, 120, 140, '✓ 返回', 0x4ade80, '24px', () => {
       this.returnToMenu();
     });
   }
@@ -702,41 +707,71 @@ export class DailyChallengeScene extends GameScene {
     stats.setOrigin(0.5);
     this.completionUI.add(stats);
     
-    // 按钮
-    this.createButton(this.completionUI, -120, 100, '🔄 再来一次', () => {
+    // 按钮（退出按钮更明显）
+    this.createButton(this.completionUI, -120, 100, '再来一次', 0x64748b, '20px', () => {
       this.restartChallenge();
     });
-    
-    this.createButton(this.completionUI, 120, 100, '← 返回菜单', () => {
+
+    this.createButton(this.completionUI, 120, 100, '✓ 返回', 0x4ade80, '24px', () => {
       this.returnToMenu();
     });
   }
   
   /**
-   * 创建按钮
+   * 创建按钮（支持自定义样式）
    */
   private createButton(
     container: Phaser.GameObjects.Container,
     x: number,
     y: number,
     text: string,
+    color: number,
+    fontSize: string,
     callback: () => void
   ): void {
-    const bg = this.add.rectangle(x, y, 200, 50, 0x4CAF50);
+    const buttonWidth = 200;
+    const buttonHeight = 60;
+
+    // 计算悬停颜色（略微变亮）
+    const hoverColor = this.lightenColor(color, 0.15);
+
+    const bg = this.add.rectangle(x, y, buttonWidth, buttonHeight, color);
     bg.setInteractive({ useHandCursor: true });
     bg.on('pointerdown', callback);
-    bg.on('pointerover', () => bg.setFillStyle(0x66BB6A));
-    bg.on('pointerout', () => bg.setFillStyle(0x4CAF50));
-    
+    bg.on('pointerover', () => {
+      bg.setFillStyle(hoverColor);
+      label.setScale(1.05);
+    });
+    bg.on('pointerout', () => {
+      bg.setFillStyle(color);
+      label.setScale(1.0);
+    });
+
     const label = this.add.text(x, y, text, {
-      fontSize: '20px',
+      fontSize: fontSize,
       color: '#ffffff',
-      fontFamily: 'Arial'
+      fontFamily: 'Arial',
+      fontStyle: 'bold'
     });
     label.setOrigin(0.5);
-    
+
     container.add(bg);
     container.add(label);
+  }
+
+  /**
+   * 颜色变亮工具函数
+   */
+  private lightenColor(color: number, amount: number): number {
+    const r = ((color >> 16) & 0xFF);
+    const g = ((color >> 8) & 0xFF);
+    const b = (color & 0xFF);
+
+    const newR = Math.min(255, Math.floor(r + (255 - r) * amount));
+    const newG = Math.min(255, Math.floor(g + (255 - g) * amount));
+    const newB = Math.min(255, Math.floor(b + (255 - b) * amount));
+
+    return (newR << 16) | (newG << 8) | newB;
   }
   
   /**

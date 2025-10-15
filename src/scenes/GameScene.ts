@@ -9,6 +9,7 @@ import { EliminationSystem } from '@/gameplay/Elimination';
 import { ScoringSystem } from '@/gameplay/Scoring';
 import { DragDropManager } from '@/gameplay/DragDrop';
 import { sceSDKManager } from '@/sdk/SceSDKManager';
+import { vibrationManager } from '@/utils/VibrationManager';
 import { GameState, PixelBlock, TetrominoData } from '@/types';
 import { CELL_TO_PIXEL_RATIO, SCREEN_WIDTH, GAME_AREA_OFFSET_Y, LOGICAL_GRID_HEIGHT, LOGICAL_GRID_WIDTH, PIXEL_SIZE, UI_COLORS } from '@/config/constants';
 
@@ -174,14 +175,23 @@ export class GameScene extends Phaser.Scene {
       const nextChainLevel = this.scoringSystem.chainLevel + 1; // 下一个连锁等级
       const score = baseScore * nextChainLevel;
 
+      // 震动反馈：根据连锁等级决定震动类型
+      if (nextChainLevel > 1) {
+        // 连消：中等震动
+        vibrationManager.vibrateCombo();
+      } else {
+        // 普通消除：短震动
+        vibrationManager.vibrateElimination();
+      }
+
       // 播放消除动画（传递分数和连锁信息）
       this.eliminationAnimation.playEliminationAnimation(
-        allPixelsToEliminate, 
-        score, 
-        nextChainLevel, 
+        allPixelsToEliminate,
+        score,
+        nextChainLevel,
         () => {
           // 动画完成后的回调：删除像素块并触发重力
-          
+
           // 删除像素块
           eliminationResults.forEach((result) => {
             this.eliminationSystem.eliminatePixels(result.pixels);
@@ -657,10 +667,13 @@ export class GameScene extends Phaser.Scene {
     this.previewSlots.setSlot(slotIndex, null);
     this.updatePreviewSlotsUI();
 
+    // 震动反馈：拾取方块
+    vibrationManager.vibratePickup();
+
     // 开始拖动
     this.dragDropManager.startDrag(tetromino, slotIndex);
     this.stateManager.setState(GameState.DRAGGING);
-    
+
     console.log(`拖动槽位${slotIndex + 1}的方块: ${tetromino.shape}, 状态已切换到DRAGGING`);
   }
 
@@ -686,22 +699,25 @@ export class GameScene extends Phaser.Scene {
         const result = this.dragDropManager.endDrag();
 
         if (result.success && result.tetromino && result.position) {
+          // 震动反馈：放下方块
+          vibrationManager.vibrateDrop();
+
           // 放置成功
           this.placeTetromino(result.tetromino, result.position.x, result.position.y);
-          
+
           // 补充该槽位的新方块
           if (this.currentDraggedSlotIndex >= 0) {
             this.previewSlots.refillSlotAfterPlace(this.currentDraggedSlotIndex);
             this.updatePreviewSlotsUI();
             console.log(`放置成功，槽位${this.currentDraggedSlotIndex + 1}已补充新方块`);
           }
-          
+
           this.currentDraggedTetromino = null;
           this.currentDraggedSlotIndex = -1;
 
           // 切换到物理运行状态
           this.stateManager.setState(GameState.PHYSICS_RUNNING);
-          
+
           console.log('放置成功，方块开始下落');
         } else {
           // 放置失败，把方块放回槽位
