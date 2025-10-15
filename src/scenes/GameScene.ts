@@ -10,7 +10,7 @@ import { ScoringSystem } from '@/gameplay/Scoring';
 import { DragDropManager } from '@/gameplay/DragDrop';
 import { sceSDKManager } from '@/sdk/SceSDKManager';
 import { GameState, PixelBlock, TetrominoData } from '@/types';
-import { CELL_TO_PIXEL_RATIO, SCREEN_WIDTH, GAME_AREA_OFFSET_Y, LOGICAL_GRID_HEIGHT, LOGICAL_GRID_WIDTH, PIXEL_SIZE } from '@/config/constants';
+import { CELL_TO_PIXEL_RATIO, SCREEN_WIDTH, GAME_AREA_OFFSET_Y, LOGICAL_GRID_HEIGHT, LOGICAL_GRID_WIDTH, PIXEL_SIZE, UI_COLORS } from '@/config/constants';
 
 /**
  * 主游戏场景
@@ -65,8 +65,8 @@ export class GameScene extends Phaser.Scene {
     // 初始化自动保存相关数据
     this.initAutoSave();
 
-    // 设置背景
-    this.cameras.main.setBackgroundColor(0x1a1a2e);
+    // 设置背景（Supercell风格深蓝紫）
+    this.cameras.main.setBackgroundColor(UI_COLORS.BG_PRIMARY);
 
     // 渲染游戏区域
     this.pixelRenderer.renderBorder();
@@ -93,6 +93,19 @@ export class GameScene extends Phaser.Scene {
 
     // 更新UI
     this.updateUI();
+
+    // ⚠️ 安全检查：如果有拖动中的方块但状态不是DRAGGING，自动恢复
+    if (this.currentDraggedTetromino !== null && !this.stateManager.is(GameState.DRAGGING)) {
+      console.warn('⚠️ 检测到方块丢失：状态异常，自动恢复方块到槽位');
+      if (this.currentDraggedSlotIndex >= 0) {
+        this.previewSlots.setSlot(this.currentDraggedSlotIndex, this.currentDraggedTetromino);
+        this.updatePreviewSlotsUI();
+        console.log(`✅ 已恢复方块到槽位 ${this.currentDraggedSlotIndex + 1}`);
+      }
+      this.currentDraggedTetromino = null;
+      this.currentDraggedSlotIndex = -1;
+      this.dragDropManager.cancelDrag();
+    }
   }
 
   /**
@@ -227,46 +240,243 @@ export class GameScene extends Phaser.Scene {
   }
 
   /**
-   * 创建UI
+   * 创建UI（Dark + Neon 卡片式设计）
    */
   private createUI(): void {
-    // 分数显示
-    this.scoreText = this.add.text(100, 30, '分数: 0', {
+    // 创建顶部信息栏容器
+    const infoBarY = 40;
+    const cardWidth = (SCREEN_WIDTH - 48) / 2; // 16px 边距 + 16px 间距
+
+    // 左侧卡片 - 分数
+    const scoreCard = this.add.graphics();
+    scoreCard.fillStyle(UI_COLORS.BG_SECONDARY, 1);
+    scoreCard.fillRoundedRect(16, infoBarY, cardWidth, 72, 12);
+    scoreCard.lineStyle(2, UI_COLORS.BORDER_GLOW, 0.3);
+    scoreCard.strokeRoundedRect(16, infoBarY, cardWidth, 72, 12);
+
+    // 分数标签
+    this.add.text(32, infoBarY + 16, '分数', {
+      fontSize: '16px',
+      color: '#9aa4b2',
+      fontFamily: 'Arial',
+    });
+
+    // 分数数值（大号、醒目）
+    this.scoreText = this.add.text(32, infoBarY + 36, '0', {
       fontSize: '32px',
       color: '#ffffff',
-      fontFamily: 'Arial',
-      fontStyle: 'bold',
+      fontFamily: 'Arial, sans-serif',
+      fontStyle: '700',
     });
 
-    // 状态显示
-    this.stateText = this.add.text(100, 70, '状态: 空闲', {
+    // 右侧卡片 - 状态/连锁
+    const statusCard = this.add.graphics();
+    statusCard.fillStyle(UI_COLORS.BG_SECONDARY, 1);
+    statusCard.fillRoundedRect(cardWidth + 32, infoBarY, cardWidth, 72, 12);
+    statusCard.lineStyle(2, UI_COLORS.BORDER_GLOW, 0.3);
+    statusCard.strokeRoundedRect(cardWidth + 32, infoBarY, cardWidth, 72, 12);
+
+    // 状态标签
+    this.add.text(cardWidth + 48, infoBarY + 16, '状态', {
+      fontSize: '16px',
+      color: '#9aa4b2',
+      fontFamily: 'Arial',
+    });
+
+    // 状态文本
+    this.stateText = this.add.text(cardWidth + 48, infoBarY + 36, '空闲', {
       fontSize: '20px',
-      color: '#aaaaaa',
+      color: '#ffffff',
       fontFamily: 'Arial',
     });
 
-    // 连锁显示
-    this.chainText = this.add.text(SCREEN_WIDTH - 200, 30, '', {
+    // 连锁显示（浮动提示，初始隐藏）
+    this.chainText = this.add.text(SCREEN_WIDTH / 2, infoBarY + 130, '', {
       fontSize: '28px',
-      color: '#ffff00',
+      color: '#fbbf24',
       fontFamily: 'Arial',
       fontStyle: 'bold',
     });
+    this.chainText.setOrigin(0.5, 0.5);
+    this.chainText.setVisible(false);
 
     // 预览槽位UI
     this.createPreviewSlotsUI();
+
+    // 底部按钮栏
+    this.createBottomButtons();
   }
 
   /**
-   * 创建预览槽位UI
+   * 创建底部按钮栏（扁平简洁设计，靠两侧）
+   */
+  private createBottomButtons(): void {
+    const buttonY = 1180; // 底部位置（调整为更靠下，距离底部约100px）
+    const leftX = 80; // 左侧按钮位置
+    const rightX = SCREEN_WIDTH - 80; // 右侧按钮位置
+
+    // 返回按钮（左侧 - 次要操作）
+    this.createIconOnlyButton(
+      leftX,
+      buttonY,
+      '←',
+      UI_COLORS.TEXT_SECONDARY, // 中灰蓝（次要）
+      () => {
+        this.cameras.main.fadeOut(300);
+        this.time.delayedCall(300, () => {
+          this.scene.start('StartScene');
+        });
+      }
+    );
+
+    // 重新开始按钮（右侧 - 主要操作）
+    this.createIconOnlyButton(
+      rightX,
+      buttonY,
+      '↻',
+      UI_COLORS.ACCENT_PRIMARY, // 霓虹蓝（主要）
+      () => {
+        this.cameras.main.fadeOut(300);
+        this.time.delayedCall(300, () => {
+          this.scene.restart();
+        });
+      }
+    );
+  }
+
+  /**
+   * 创建纯图标按钮（Dark + Neon 霓虹风格）
+   */
+  protected createIconOnlyButton(
+    x: number,
+    y: number,
+    icon: string,
+    color: number,
+    callback: () => void
+  ): Phaser.GameObjects.Container {
+    const container = this.add.container(x, y);
+    const buttonRadius = 32;
+
+    // 深色阴影
+    const shadow = this.add.circle(3, 3, buttonRadius, UI_COLORS.SHADOW_DEEP, 0.5);
+    shadow.setName('shadow');
+
+    // 外发光层（霓虹效果）
+    const glow = this.add.circle(0, 0, buttonRadius + 4, color, 0.25);
+    glow.setName('glow');
+
+    // 主按钮背景（扁平纯色）
+    const bg = this.add.graphics();
+    bg.fillStyle(UI_COLORS.BG_SECONDARY, 1);
+    bg.fillCircle(0, 0, buttonRadius);
+
+    // 霓虹边框
+    bg.lineStyle(2, color, 0.6);
+    bg.strokeCircle(0, 0, buttonRadius);
+    bg.setName('bg');
+
+    // 图标（带阴影）
+    const iconText = this.add.text(0, 0, icon, {
+      fontSize: '28px',
+      color: '#ffffff',
+      fontFamily: 'Arial, sans-serif',
+      fontStyle: 'bold'
+    });
+    iconText.setOrigin(0.5);
+    iconText.setName('icon');
+
+    container.add([shadow, glow, bg, iconText]);
+
+    // 交互区域
+    const hitArea = new Phaser.Geom.Circle(0, 0, buttonRadius);
+    container.setInteractive(hitArea, Phaser.Geom.Circle.Contains);
+    container.input!.cursor = 'pointer';
+
+    // 点击效果（0.96 scale + 120ms spring）
+    container.on('pointerdown', () => {
+      this.tweens.add({
+        targets: container,
+        scaleX: 0.96,
+        scaleY: 0.96,
+        duration: 60,
+        ease: 'Quad.easeOut',
+        yoyo: true,
+        yoyoDuration: 120,
+        yoyoEase: 'Back.easeOut',
+        onComplete: callback
+      });
+    });
+
+    // 悬停效果（霓虹发光增强）
+    container.on('pointerover', () => {
+      const bgGraphics = container.getByName('bg') as Phaser.GameObjects.Graphics;
+      if (bgGraphics) {
+        bgGraphics.clear();
+        bgGraphics.fillStyle(UI_COLORS.BG_TERTIARY, 1); // 悬浮时背景更亮
+        bgGraphics.fillCircle(0, 0, buttonRadius);
+        bgGraphics.lineStyle(2, color, 1); // 边框更亮
+        bgGraphics.strokeCircle(0, 0, buttonRadius);
+      }
+
+      // 悬浮缩放
+      this.tweens.add({
+        targets: container,
+        scaleX: 1.05,
+        scaleY: 1.05,
+        duration: 200,
+        ease: 'Back.easeOut'
+      });
+
+      // 发光脉冲动画
+      const glowCircle = container.getByName('glow') as Phaser.GameObjects.Arc;
+      if (glowCircle) {
+        this.tweens.add({
+          targets: glowCircle,
+          scaleX: 1.3,
+          scaleY: 1.3,
+          alpha: 0,
+          duration: 500,
+          ease: 'Cubic.easeOut',
+          onComplete: () => {
+            glowCircle.setScale(1);
+            glowCircle.setAlpha(0.25);
+          }
+        });
+      }
+    });
+
+    container.on('pointerout', () => {
+      const bgGraphics = container.getByName('bg') as Phaser.GameObjects.Graphics;
+      if (bgGraphics) {
+        bgGraphics.clear();
+        bgGraphics.fillStyle(UI_COLORS.BG_SECONDARY, 1);
+        bgGraphics.fillCircle(0, 0, buttonRadius);
+        bgGraphics.lineStyle(2, color, 0.6);
+        bgGraphics.strokeCircle(0, 0, buttonRadius);
+      }
+
+      this.tweens.add({
+        targets: container,
+        scaleX: 1.0,
+        scaleY: 1.0,
+        duration: 200,
+        ease: 'Back.easeIn'
+      });
+    });
+
+    return container;
+  }
+
+  /**
+   * 创建预览槽位UI（现代化设计）
    */
   private createPreviewSlotsUI(): void {
     // 游戏区域底部位置：GAME_AREA_OFFSET_Y + GAME_AREA_HEIGHT
     const gameAreaBottom = GAME_AREA_OFFSET_Y + (LOGICAL_GRID_HEIGHT * CELL_TO_PIXEL_RATIO * PIXEL_SIZE);
-    const slotY = gameAreaBottom + 120; // 游戏区域底部 + 120px间距
+    const slotY = gameAreaBottom + 165; // 游戏区域底部 + 165px间距（调整为更靠下）
     const slotSize = 160; // 槽位大小（适配新屏幕）
     const slotSpacing = 30; // 槽位之间的间距
-    
+
     // 计算3个槽位的总宽度并居中
     const totalWidth = slotSize * 3 + slotSpacing * 2;
     const startX = (SCREEN_WIDTH - totalWidth) / 2 + slotSize / 2; // 居中对齐，加上半个槽位偏移
@@ -277,27 +487,107 @@ export class GameScene extends Phaser.Scene {
       // 创建槽位容器
       const container = this.add.container(slotX, slotY);
 
-      // 槽位背景
-      const bg = this.add.rectangle(0, 0, slotSize, slotSize, 0x2a2a4e, 0.8);
-      bg.setStrokeStyle(2, 0xffffff, 0.5);
-      bg.setInteractive({ useHandCursor: true });
+      // 深色阴影
+      const shadowBg = this.add.graphics();
+      shadowBg.fillStyle(UI_COLORS.SHADOW_DEEP, 0.4);
+      shadowBg.fillRoundedRect(-slotSize/2 + 4, -slotSize/2 + 4, slotSize, slotSize, 16);
+      shadowBg.setName('shadow');
+
+      // 主背景（霓虹风格）
+      const mainBg = this.add.graphics();
+      mainBg.fillStyle(UI_COLORS.BG_SECONDARY, 1);
+      mainBg.fillRoundedRect(-slotSize/2, -slotSize/2, slotSize, slotSize, 16);
+
+      // 霓虹边框
+      mainBg.lineStyle(2, UI_COLORS.BORDER_GLOW, 0.4);
+      mainBg.strokeRoundedRect(-slotSize/2, -slotSize/2, slotSize, slotSize, 16);
+
+      mainBg.setName('mainBg');
+
+      // 外发光效果（悬停状态，初始隐藏）
+      const glowBg = this.add.graphics();
+      glowBg.lineStyle(4, UI_COLORS.BORDER_GLOW, 0);
+      glowBg.strokeRoundedRect(-slotSize/2 - 2, -slotSize/2 - 2, slotSize + 4, slotSize + 4, 14);
+      glowBg.setName('glow');
+
+      container.add([shadowBg, mainBg, glowBg]);
+
+      // 交互区域（透明矩形，用于检测点击）
+      const hitArea = this.add.rectangle(0, 0, slotSize, slotSize, 0x000000, 0);
+      hitArea.setInteractive({ useHandCursor: true });
+
+      // 悬停效果
+      hitArea.on('pointerover', () => {
+        const glow = container.getByName('glow') as Phaser.GameObjects.Graphics;
+        if (glow) {
+          glow.clear();
+          glow.lineStyle(4, UI_COLORS.BORDER_GLOW, 0.6);
+          glow.strokeRoundedRect(-slotSize/2 - 2, -slotSize/2 - 2, slotSize + 4, slotSize + 4, 14);
+        }
+
+        this.tweens.add({
+          targets: container,
+          y: slotY - 8,
+          scaleX: 1.05,
+          scaleY: 1.05,
+          duration: 150,
+          ease: 'Back.easeOut'
+        });
+      });
+
+      hitArea.on('pointerout', () => {
+        const glow = container.getByName('glow') as Phaser.GameObjects.Graphics;
+        if (glow) {
+          glow.clear();
+          glow.lineStyle(4, UI_COLORS.BORDER_GLOW, 0);
+          glow.strokeRoundedRect(-slotSize/2 - 2, -slotSize/2 - 2, slotSize + 4, slotSize + 4, 14);
+        }
+
+        this.tweens.add({
+          targets: container,
+          y: slotY,
+          scaleX: 1.0,
+          scaleY: 1.0,
+          duration: 150,
+          ease: 'Back.easeIn'
+        });
+      });
 
       // 槽位点击事件
-      bg.on('pointerdown', () => {
+      hitArea.on('pointerdown', () => {
         this.onSlotClicked(i);
       });
 
-      container.add(bg);
-      this.previewSlotsUI.push(container);
+      container.add(hitArea);
 
-      // 槽位编号文本
-      const label = this.add.text(0, slotSize / 2 + 25, `槽位${i + 1}`, {
-        fontSize: '16px',
+      // 槽位编号（简洁扁平风格）
+      const labelBg = this.add.graphics();
+      const btnWidth = 50;
+      const btnY = slotSize/2 + 20;
+
+      // 阴影
+      labelBg.fillStyle(UI_COLORS.SHADOW_DEEP, 0.4);
+      labelBg.fillCircle(0, btnY + 3, btnWidth/2);
+
+      // 圆形背景（霓虹风格）
+      labelBg.fillStyle(UI_COLORS.BG_TERTIARY, 1);
+      labelBg.fillCircle(0, btnY, btnWidth/2);
+
+      // 霓虹边框
+      labelBg.lineStyle(2, UI_COLORS.BORDER_GLOW, 0.5);
+      labelBg.strokeCircle(0, btnY, btnWidth/2);
+
+      const label = this.add.text(0, btnY, `${i + 1}`, {
+        fontSize: '24px',
         color: '#ffffff',
-        fontFamily: 'Arial',
+        fontFamily: 'Arial, sans-serif',
+        fontStyle: 'bold'
       });
       label.setOrigin(0.5);
-      container.add(label);
+
+      container.add([labelBg, label]);
+
+      this.previewSlotsUI.push(container);
     }
 
     // 更新槽位显示
@@ -314,10 +604,11 @@ export class GameScene extends Phaser.Scene {
       const container = this.previewSlotsUI[index];
       if (!container || !tetromino) return;
 
-      // 清除旧的方块显示（保留前2个：背景和文本）
-      // 从后往前删除，避免索引问题
+      // 清除旧的方块显示
+      // 新的容器结构：shadowBg, mainBg, glowBg, hitArea, labelBg, label (共6个固定元素)
+      // 从第7个元素开始删除（索引6开始）
       const itemsToRemove: Phaser.GameObjects.GameObject[] = [];
-      for (let i = 2; i < container.length; i++) {
+      for (let i = 6; i < container.length; i++) {
         itemsToRemove.push(container.list[i]);
       }
       itemsToRemove.forEach(item => {
@@ -326,11 +617,33 @@ export class GameScene extends Phaser.Scene {
 
       // 绘制方块预览（槽位160px，方块也相应放大）
       const cellSize = 32; // 方块格子大小（槽位160 / 5 ≈ 32）
-      const offset = -48; // 调整居中偏移（让方块在槽位中居中）
+
+      // 计算方块的边界框以实现真正的居中
+      let minX = Infinity, maxX = -Infinity;
+      let minY = Infinity, maxY = -Infinity;
+      tetromino.cells.forEach(cell => {
+        minX = Math.min(minX, cell.x);
+        maxX = Math.max(maxX, cell.x);
+        minY = Math.min(minY, cell.y);
+        maxY = Math.max(maxY, cell.y);
+      });
+
+      // 计算方块的实际宽度和高度（包括边界）
+      const blockWidth = (maxX - minX + 1) * cellSize;
+      const blockHeight = (maxY - minY + 1) * cellSize;
+
+      // 计算方块的中心点（相对于方块自身坐标系）
+      const blockCenterX = (minX + maxX) / 2 * cellSize + cellSize / 2;
+      const blockCenterY = (minY + maxY) / 2 * cellSize + cellSize / 2;
+
+      // 计算偏移量使方块居中在槽位中（容器中心为0,0）
+      const offsetX = -blockCenterX;
+      const offsetY = -blockCenterY;
+
       tetromino.cells.forEach((cell) => {
         const rect = this.add.rectangle(
-          cell.x * cellSize + offset,
-          cell.y * cellSize + offset,
+          cell.x * cellSize + offsetX + cellSize / 2,
+          cell.y * cellSize + offsetY + cellSize / 2,
           cellSize - 2,
           cellSize - 2,
           tetromino.color
@@ -346,7 +659,13 @@ export class GameScene extends Phaser.Scene {
    */
   protected onSlotClicked(slotIndex: number): void {
     console.log(`点击槽位 ${slotIndex + 1}`);
-    
+
+    // ⚠️ 安全检查1：确保当前没有正在拖动的方块
+    if (this.currentDraggedTetromino !== null) {
+      console.warn('已有方块正在拖动，忽略点击');
+      return;
+    }
+
     if (!this.stateManager.canPlayerPlaceBlock()) {
       console.log('当前状态不允许放置方块:', this.stateManager.state);
       return;
@@ -355,7 +674,7 @@ export class GameScene extends Phaser.Scene {
     // 获取槽位中的方块（但不立即补充新方块）
     const tetromino = this.previewSlots.getSlot(slotIndex);
     if (!tetromino) {
-      console.error('槽位为空！');
+      console.error('槽位为空！这可能是之前拖动未正确恢复导致的');
       return;
     }
 
@@ -541,7 +860,7 @@ export class GameScene extends Phaser.Scene {
    * 更新UI显示
    */
   private updateUI(): void {
-    this.scoreText.setText(`分数: ${this.scoringSystem.score}`);
+    this.scoreText.setText(`${this.scoringSystem.score}`);
 
     const chainLevel = this.scoringSystem.chainLevel;
     if (chainLevel > 1) {
@@ -573,7 +892,7 @@ export class GameScene extends Phaser.Scene {
         stateStr = state;
     }
 
-    this.stateText.setText(`状态: ${stateStr}`);
+    this.stateText.setText(`${stateStr}`);
   }
 
   /**

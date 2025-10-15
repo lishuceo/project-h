@@ -1,9 +1,9 @@
-// 颜色枚举（当前使用4种颜色）
+// 颜色枚举（霓虹配色 - Dark + Neon）
 export enum Color {
-  RED = 0xff0000,
-  BLUE = 0x0000ff,
-  GREEN = 0x00ff00,
-  YELLOW = 0xffff00,
+  RED = 0xf87171,    // 霓虹红
+  BLUE = 0x60a5fa,   // 霓虹蓝
+  GREEN = 0x4ade80,  // 霓虹绿
+  YELLOW = 0xfbbf24, // 霓虹黄
 }
 
 // 方块形状枚举

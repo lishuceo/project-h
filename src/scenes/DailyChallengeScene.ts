@@ -10,6 +10,7 @@ import { DailyChallengeData, ChallengeResult, PixelBlockData } from '../types/ch
 import { GameState, PixelBlock, TetrominoData } from '../types';
 import { LevelGenerator } from '../challenge/LevelGenerator';
 import { PreviewSlots } from '../gameplay/PreviewSlots';
+import { SCREEN_WIDTH, UI_COLORS } from '../config/constants';
 
 export class DailyChallengeScene extends GameScene {
   // 挑战相关
@@ -144,12 +145,10 @@ export class DailyChallengeScene extends GameScene {
     console.log(`✅ 成功加载 ${loaded} 个像素块`);
     console.log('🎨 颜色统计:', Array.from(colorStats.entries()).map(([color, count]) => {
       let colorName = '未知';
-      if (color === 0xff0000) colorName = '红色';
-      if (color === 0x0000ff) colorName = '蓝色';
-      if (color === 0x00ff00) colorName = '绿色';
-      if (color === 0xffff00) colorName = '黄色';
-      if (color === 0xff00ff) colorName = '紫色';
-      if (color === 0xffffff) colorName = '白色';
+      if (color === 0xf87171) colorName = '霓虹红';
+      if (color === 0x60a5fa) colorName = '霓虹蓝';
+      if (color === 0x4ade80) colorName = '霓虹绿';
+      if (color === 0xfbbf24) colorName = '霓虹黄';
       return `${colorName}(${count}个)`;
     }));
     
@@ -159,76 +158,162 @@ export class DailyChallengeScene extends GameScene {
   }
   
   /**
-   * 创建挑战UI
+   * 创建挑战UI（现代化设计）
    */
   private createChallengeUI(): void {
-    const uiY = 20;
-    const lineHeight = 30;
-    
-    // 日期和难度在一行
+    // 创建头部容器（简洁扁平）
+    const headerBg = this.add.graphics();
+
+    // 柔和阴影
+    headerBg.fillStyle(UI_COLORS.SHADOW_DEEP, 0.3);
+    headerBg.fillRoundedRect(14, 14, SCREEN_WIDTH - 28, 100, 12);
+
+    // 主背景（扁平纯色）
+    headerBg.fillStyle(UI_COLORS.CARD_BG, 1);
+    headerBg.fillRoundedRect(10, 10, SCREEN_WIDTH - 20, 100, 12);
+
+    // 细边框
+    headerBg.lineStyle(1, UI_COLORS.BORDER_GLOW, 0.5);
+    headerBg.strokeRoundedRect(10, 10, SCREEN_WIDTH - 20, 100, 12);
+
+    // 日期和难度（左侧）
+    const dateContainer = this.add.container(30, 30);
+
+    // 图标背景圆
+    const dateIconBg = this.add.circle(0, 0, 18, UI_COLORS.ACCENT_PRIMARY, 0.2);
+    const dateIcon = this.add.text(0, 0, '📅', { fontSize: '20px' });
+    dateIcon.setOrigin(0.5);
+
     const stars = '⭐'.repeat(this.challengeData.difficulty);
-    this.add.text(20, uiY, `📅 ${this.challengeData.date}  难度: ${stars}`, {
-      fontSize: '18px',
-      color: '#ffffff',
-      fontFamily: 'Arial'
-    });
-    
-    // 计时器
-    this.timerText = this.add.text(20, uiY + lineHeight, '⏱️ 00:00', {
-      fontSize: '22px',
-      color: '#4CAF50',
-      fontFamily: 'Arial',
+    const dateText = this.add.text(30, 0, `${this.challengeData.date}`, {
+      fontSize: '16px',
+      color: '#e2e8f0',
+      fontFamily: 'Arial, sans-serif',
       fontStyle: 'bold'
     });
-    
-    // 步数
+    dateText.setOrigin(0, 0.5);
+
+    const difficultyText = this.add.text(30, 20, `难度: ${stars}`, {
+      fontSize: '14px',
+      color: '#fbbf24',
+      fontFamily: 'Arial, sans-serif'
+    });
+    difficultyText.setOrigin(0, 0.5);
+
+    dateContainer.add([dateIconBg, dateIcon, dateText, difficultyText]);
+
+    // 状态卡片行
+    const statsY = 65;
+
+    // 计时器卡片（绿色背景）
+    this.createStatCard(30, statsY, 210, '⏱️', '00:00', 0x2d5a3d, 'timer');
+
+    // 步数卡片（蓝色背景）
     const maxSteps = this.challengeData.maxSteps || '∞';
-    this.stepsText = this.add.text(180, uiY + lineHeight, `🚶 步数: 0 / ${maxSteps}`, {
-      fontSize: '18px',
-      color: '#2196F3',
-      fontFamily: 'Arial'
-    });
-    
-    // 进度（剩余像素块）
-    this.progressText = this.add.text(420, uiY + lineHeight, '📦 剩余: ???', {
-      fontSize: '18px',
-      color: '#FF9800',
-      fontFamily: 'Arial'
-    });
-    
-    // 返回按钮（移到屏幕底部）
-    const backButton = this.add.text(20, 1220, '← 返回菜单', {
-      fontSize: '18px',
-      color: '#ffffff',
-      fontFamily: 'Arial',
-      backgroundColor: '#f44336',
-      padding: { x: 10, y: 5 }
-    });
-    backButton.setInteractive({ useHandCursor: true });
-    backButton.on('pointerdown', () => {
-      this.returnToMenu();
-    });
-    
-    // 重新开始按钮
-    const restartButton = this.add.text(200, 1220, '🔄 重新开始', {
-      fontSize: '18px',
-      color: '#ffffff',
-      fontFamily: 'Arial',
-      backgroundColor: '#2196F3',
-      padding: { x: 10, y: 5 }
-    });
-    restartButton.setInteractive({ useHandCursor: true });
-    restartButton.on('pointerdown', () => {
-      this.restartChallenge();
-    });
-    
+    this.createStatCard(255, statsY, 210, '🚶', `0/${maxSteps}`, 0x2d4a5a, 'steps');
+
+    // 剩余卡片（橙色背景）
+    this.createStatCard(480, statsY, 210, '📦', '剩余: 17格', 0x5a4a2d, 'progress');
+
+    // 底部图标按钮
+    this.createBottomChallengeButtons();
+
     // 初始化进度显示
     this.updateProgress();
-    
+
     // 开发模式快捷键
     this.setupDevKeys();
   }
+
+  /**
+   * 创建现代状态卡片
+   */
+  private createStatCard(
+    x: number,
+    y: number,
+    width: number,
+    icon: string,
+    value: string,
+    accentColor: number,
+    cardType: 'timer' | 'steps' | 'progress'
+  ): Phaser.GameObjects.Container {
+    const container = this.add.container(x, y);
+
+    // 卡片背景（更鲜艳的色彩块）
+    const bg = this.add.graphics();
+
+    // 阴影
+    bg.fillStyle(0x000000, 0.3);
+    bg.fillRoundedRect(2, 2, width, 36, 8);
+
+    // 主背景（实色，不透明）
+    bg.fillStyle(accentColor, 1);
+    bg.fillRoundedRect(0, 0, width, 36, 8);
+
+    // 无边框或极细边框
+    bg.lineStyle(1, 0x000000, 0.2);
+    bg.strokeRoundedRect(0, 0, width, 36, 8);
+
+    // 图标
+    const iconText = this.add.text(12, 18, icon, {
+      fontSize: '20px'
+    });
+    iconText.setOrigin(0, 0.5);
+
+    // 数值文本
+    const valueText = this.add.text(42, 18, value, {
+      fontSize: '18px',
+      color: '#f1f5f9',
+      fontFamily: 'Arial, sans-serif',
+      fontStyle: 'bold'
+    });
+    valueText.setOrigin(0, 0.5);
+
+    container.add([bg, iconText, valueText]);
+
+    // 保存引用以便更新
+    if (cardType === 'timer') {
+      this.timerText = valueText;
+    } else if (cardType === 'steps') {
+      this.stepsText = valueText;
+    } else if (cardType === 'progress') {
+      this.progressText = valueText;
+    }
+
+    return container;
+  }
   
+  /**
+   * 创建底部挑战按钮（扁平简洁设计，靠两侧）
+   */
+  private createBottomChallengeButtons(): void {
+    const buttonY = 1180; // 底部位置（调整为更靠下，距离底部约100px）
+    const leftX = 80; // 左侧按钮位置
+    const rightX = 720 - 80; // 右侧按钮位置（SCREEN_WIDTH - 80）
+
+    // 返回按钮（左侧 - 仅图标）
+    this.createIconOnlyButton(
+      leftX,
+      buttonY,
+      '←',
+      0x555555, // 灰色
+      () => {
+        this.returnToMenu();
+      }
+    );
+
+    // 重新开始按钮（右侧 - 仅图标）
+    this.createIconOnlyButton(
+      rightX,
+      buttonY,
+      '↻',
+      0x4a90e2, // 蓝色
+      () => {
+        this.restartChallenge();
+      }
+    );
+  }
+
   /**
    * 设置开发模式快捷键
    */

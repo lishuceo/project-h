@@ -284,7 +284,7 @@ export class ChallengeManager {
   /**
    * 上传成绩到排行榜（需要SDK）
    */
-  private async uploadToLeaderboard(result: ChallengeResult): Promise<void> {
+  private async uploadToLeaderboard(_result: ChallengeResult): Promise<void> {
     // TODO: 集成SDK后实现
     console.log('📤 准备上传成绩到排行榜...');
     console.log('⚠️ SDK未集成，跳过上传');

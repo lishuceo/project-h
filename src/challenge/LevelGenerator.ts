@@ -5,6 +5,7 @@
 
 import { SeededRandom } from '../utils/seedRandom';
 import { DailyChallengeData, PixelBlockData, StarThresholds } from '../types/challenge';
+import { PIXEL_GRID_WIDTH, PIXEL_GRID_HEIGHT } from '../config/constants';
 import { Color } from '../types';
 
 export class LevelGenerator {
@@ -58,7 +59,7 @@ export class LevelGenerator {
    */
   private generateLayoutWithColors(
     random: SeededRandom, 
-    difficulty: 1 | 2 | 3,
+    _difficulty: 1 | 2 | 3,
     colors: Color[]
   ): PixelBlockData[] {
     const pixels: PixelBlockData[] = [];
@@ -80,55 +81,13 @@ export class LevelGenerator {
         console.log(`  目标层: ${leftSmall.length + rightSmall.length}像素块`);
       } else {
         // 上层（障碍层）：完整的横跨布局
-        const barrier = this.generateBarrier(random, color, layer, difficulty);
+        const barrier = this.generateBarrier(random, color, layer);
         pixels.push(...barrier);
         console.log(`  障碍层 ${i}: ${barrier.length}像素块`);
       }
     }
     
     console.log(`✅ 总共生成 ${pixels.length} 个像素块`);
-    return pixels;
-  }
-  
-  /**
-   * 生成一个色块堆（左侧或右侧）- 已弃用，保留用于参考
-   */
-  private generatePile(
-    random: SeededRandom,
-    color: Color,
-    side: 'left' | 'right',
-    difficulty: number,
-    layerIndex: number
-  ): PixelBlockData[] {
-    const pixels: PixelBlockData[] = [];
-    
-    // 确定基础位置
-    const baseX = side === 'left' ? 0 : 100;
-    
-    // 根据层级调整Y坐标（避免重叠）
-    const baseY = 140 - layerIndex * 40;
-    
-    // 根据难度决定堆积大小
-    const widthRange = difficulty === 1 ? [30, 40] : difficulty === 2 ? [25, 35] : [20, 30];
-    const heightRange = difficulty === 1 ? [30, 40] : difficulty === 2 ? [25, 35] : [20, 30];
-    
-    const width = random.nextInt(widthRange[0], widthRange[1]);
-    const height = random.nextInt(heightRange[0], heightRange[1]);
-    
-    // 生成矩形堆积（简化版，实际可以更复杂）
-    for (let dy = 0; dy < height; dy++) {
-      for (let dx = 0; dx < width; dx++) {
-        const x = side === 'left' ? (baseX + dx) : (baseX + 20 - width + dx);
-        const y = baseY - dy;
-        
-        // 边界检查（网格高度150）
-        if (x >= 0 && x < 120 && y >= 0 && y < 150) {
-          // 生成完整的矩形，不要镂空
-          pixels.push({ x, y, color });
-        }
-      }
-    }
-    
     return pixels;
   }
   
@@ -142,20 +101,20 @@ export class LevelGenerator {
     layer: number
   ): PixelBlockData[] {
     const pixels: PixelBlockData[] = [];
-    const baseY = 145 - layer * 15; // 底部（网格高度150，从145开始）
+    const baseY = (PIXEL_GRID_HEIGHT - 5) - layer * 15; // 底部（从接近底部开始）
     
     // 小块：宽10-20，高20-30
     const width = random.nextInt(10, 20);
     const height = random.nextInt(20, 30);
     
-    const baseX = side === 'left' ? 0 : (120 - width);
+    const baseX = side === 'left' ? 0 : (PIXEL_GRID_WIDTH - width);
     
     for (let dy = 0; dy < height; dy++) {
       for (let dx = 0; dx < width; dx++) {
         const x = baseX + dx;
         const y = baseY - dy;
         
-        if (x >= 0 && x < 120 && y >= 0 && y < 150) {
+        if (x >= 0 && x < PIXEL_GRID_WIDTH && y >= 0 && y < PIXEL_GRID_HEIGHT) {
           pixels.push({ x, y, color });
         }
       }
@@ -171,26 +130,25 @@ export class LevelGenerator {
   private generateBarrier(
     random: SeededRandom,
     color: Color,
-    layer: number,
-    difficulty: number
+    layer: number
   ): PixelBlockData[] {
     const pixels: PixelBlockData[] = [];
     
     // 障碍层的Y位置（从底层往上叠加）
-    const baseY = 145 - layer * 20; // 每层间隔20像素
+    const baseY = (PIXEL_GRID_HEIGHT - 5) - layer * 20; // 每层间隔20像素
     const height = random.nextInt(8, 15); // 障碍层高度
     
     // 横跨的宽度（留一些间隙）
-    const gapLeft = random.nextInt(15, 25);
-    const gapRight = random.nextInt(15, 25);
+    const gapLeft = random.nextInt(Math.floor(PIXEL_GRID_WIDTH * 0.12), Math.floor(PIXEL_GRID_WIDTH * 0.21));
+    const gapRight = random.nextInt(Math.floor(PIXEL_GRID_WIDTH * 0.12), Math.floor(PIXEL_GRID_WIDTH * 0.21));
     const startX = gapLeft;
-    const endX = 120 - gapRight;
+    const endX = PIXEL_GRID_WIDTH - gapRight;
     
     for (let dy = 0; dy < height; dy++) {
       for (let x = startX; x < endX; x++) {
         const y = baseY - dy;
         
-        if (y >= 0 && y < 150) {
+        if (y >= 0 && y < PIXEL_GRID_HEIGHT) {
           // 添加一些随机镂空，制造不规则形状
           if (random.boolean(0.9)) {
             pixels.push({ x, y, color });
@@ -200,26 +158,6 @@ export class LevelGenerator {
     }
     
     console.log(`  第${layer}层障碍: ${pixels.length}像素块 (baseY=${baseY})`);
-    return pixels;
-  }
-  
-  /**
-   * 生成桥梁（中间的零散像素块）- 已弃用
-   */
-  private generateBridge(
-    random: SeededRandom, 
-    color: Color,
-    difficulty: number
-  ): PixelBlockData[] {
-    const pixels: PixelBlockData[] = [];
-    const count = random.nextInt(30, 60);
-    
-    for (let i = 0; i < count; i++) {
-      const x = random.nextInt(45, 75);  // 中间区域
-      const y = random.nextInt(100, 145); // 适配网格高度150
-      pixels.push({ x, y, color });
-    }
-    
     return pixels;
   }
   
@@ -268,10 +206,10 @@ export class LevelGenerator {
     
     // 调试日志
     console.log(`🎨 选择的颜色:`, selected.map(c => {
-      if (c === Color.RED) return '红色';
-      if (c === Color.BLUE) return '蓝色';
-      if (c === Color.GREEN) return '绿色';
-      if (c === Color.YELLOW) return '黄色';
+      if (c === Color.RED) return '霓虹红';
+      if (c === Color.BLUE) return '霓虹蓝';
+      if (c === Color.GREEN) return '霓虹绿';
+      if (c === Color.YELLOW) return '霓虹黄';
       return '未知';
     }));
     

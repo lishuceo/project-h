@@ -74,12 +74,14 @@ export class GameStateManager {
   /**
    * 检查玩家是否可以放置方块
    * 参考设计文档10.3节
+   *
+   * ⚠️ 重要：不允许在ELIMINATING状态下拖动方块
+   * 原因：消除动画期间拖动会导致状态混乱，方块可能丢失
    */
   canPlayerPlaceBlock(): boolean {
     return this.isAnyOf(
       GameState.IDLE,
-      GameState.PHYSICS_RUNNING,
-      GameState.ELIMINATING
+      GameState.PHYSICS_RUNNING
     );
   }
 }

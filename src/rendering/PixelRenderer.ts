@@ -27,11 +27,12 @@ export class PixelRenderer {
   }
 
   /**
-   * 渲染网格线（调试用）
+   * 渲染网格线（极弱化，只用于辅助定位）
    */
   renderGrid(): void {
-    this.graphics.clear();
-    this.graphics.lineStyle(1, 0x444444, 0.3);
+    // 注意：不要在这里 clear()，否则会清除边框
+    // 使用极细、极淡的线条（1px、20-25%透明度）
+    this.graphics.lineStyle(1, 0x2a3344, 0.2);
 
     // 绘制垂直线
     for (let x = 0; x <= PIXEL_GRID_WIDTH; x += 10) {
@@ -57,16 +58,55 @@ export class PixelRenderer {
   }
 
   /**
-   * 渲染游戏区域边框
+   * 渲染游戏区域边框（与候选区一致的霓虹风格 - 外边框）
    */
   renderBorder(): void {
-    this.graphics.lineStyle(3, 0xffffff, 1);
-    this.graphics.strokeRect(
-      GAME_AREA_OFFSET_X,
-      GAME_AREA_OFFSET_Y,
-      PIXEL_GRID_WIDTH * PIXEL_SIZE,
-      PIXEL_GRID_HEIGHT * PIXEL_SIZE
+    // 先清除之前的绘制
+    this.graphics.clear();
+
+    const x = GAME_AREA_OFFSET_X;
+    const y = GAME_AREA_OFFSET_Y;
+    const width = PIXEL_GRID_WIDTH * PIXEL_SIZE;
+    const height = PIXEL_GRID_HEIGHT * PIXEL_SIZE;
+    const borderRadius = 8; // 小圆角
+    const borderWidth = 2;
+    const padding = 4; // 边框内边距，确保边框在游戏区域外
+
+    // 外框的实际位置（向外扩展）
+    const outerX = x - padding - borderWidth / 2;
+    const outerY = y - padding - borderWidth / 2;
+    const outerWidth = width + padding * 2 + borderWidth;
+    const outerHeight = height + padding * 2 + borderWidth;
+
+    // 1. 深色阴影（与候选区一致）
+    const shadowLayer = this.scene.add.graphics();
+    shadowLayer.fillStyle(0x000000, 0.4);
+    shadowLayer.fillRoundedRect(
+      outerX + 4,
+      outerY + 4,
+      outerWidth,
+      outerHeight,
+      borderRadius
     );
+    shadowLayer.setDepth(-3);
+
+    // 2. 主背景（深色，与候选区一致）
+    const bgLayer = this.scene.add.graphics();
+    bgLayer.fillStyle(0x1a1f2e, 1);
+    bgLayer.fillRoundedRect(x, y, width, height, borderRadius - 4);
+    bgLayer.setDepth(-2);
+
+    // 3. 霓虹边框（蓝色发光，与候选区一致）
+    const mainBorder = this.scene.add.graphics();
+    mainBorder.lineStyle(2, 0x1b9cff, 0.3); // 霓虹蓝边框
+    mainBorder.strokeRoundedRect(
+      outerX,
+      outerY,
+      outerWidth,
+      outerHeight,
+      borderRadius
+    );
+    mainBorder.setDepth(-1);
   }
 
   /**
@@ -90,7 +130,7 @@ export class PixelRenderer {
   }
 
   /**
-   * 渲染单个像素块
+   * 渲染单个像素块（霓虹风格 + 微弱发光）
    */
   private renderPixel(pixel: PixelBlock): void {
     let sprite = this.pixelSprites.get(pixel);
@@ -118,8 +158,8 @@ export class PixelRenderer {
       sprite.setFillStyle(pixel.color);
     }
 
-    // 添加微弱的边框效果
-    sprite.setStrokeStyle(1, 0x000000, 0.3);
+    // 霓虹风格：深色边框 + 微弱内发光
+    sprite.setStrokeStyle(1, 0x000000, 0.4);
   }
 
   /**
