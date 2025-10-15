@@ -65,8 +65,8 @@ export class GameScene extends Phaser.Scene {
     // 初始化自动保存相关数据
     this.initAutoSave();
 
-    // 设置背景（Supercell风格深蓝紫）
-    this.cameras.main.setBackgroundColor(UI_COLORS.BG_PRIMARY);
+    // 创建蓝色渐变背景
+    this.createGradientBackground();
 
     // 渲染游戏区域
     this.pixelRenderer.renderBorder();
@@ -560,33 +560,6 @@ export class GameScene extends Phaser.Scene {
 
       container.add(hitArea);
 
-      // 槽位编号（简洁扁平风格）
-      const labelBg = this.add.graphics();
-      const btnWidth = 50;
-      const btnY = slotSize/2 + 20;
-
-      // 阴影
-      labelBg.fillStyle(UI_COLORS.SHADOW_DEEP, 0.4);
-      labelBg.fillCircle(0, btnY + 3, btnWidth/2);
-
-      // 圆形背景（霓虹风格）
-      labelBg.fillStyle(UI_COLORS.BG_TERTIARY, 1);
-      labelBg.fillCircle(0, btnY, btnWidth/2);
-
-      // 霓虹边框
-      labelBg.lineStyle(2, UI_COLORS.BORDER_GLOW, 0.5);
-      labelBg.strokeCircle(0, btnY, btnWidth/2);
-
-      const label = this.add.text(0, btnY, `${i + 1}`, {
-        fontSize: '24px',
-        color: '#ffffff',
-        fontFamily: 'Arial, sans-serif',
-        fontStyle: 'bold'
-      });
-      label.setOrigin(0.5);
-
-      container.add([labelBg, label]);
-
       this.previewSlotsUI.push(container);
     }
 
@@ -605,10 +578,10 @@ export class GameScene extends Phaser.Scene {
       if (!container || !tetromino) return;
 
       // 清除旧的方块显示
-      // 新的容器结构：shadowBg, mainBg, glowBg, hitArea, labelBg, label (共6个固定元素)
-      // 从第7个元素开始删除（索引6开始）
+      // 新的容器结构：shadowBg, mainBg, glowBg, hitArea (共4个固定元素)
+      // 从第5个元素开始删除（索引4开始）
       const itemsToRemove: Phaser.GameObjects.GameObject[] = [];
-      for (let i = 6; i < container.length; i++) {
+      for (let i = 4; i < container.length; i++) {
         itemsToRemove.push(container.list[i]);
       }
       itemsToRemove.forEach(item => {
@@ -1093,6 +1066,20 @@ export class GameScene extends Phaser.Scene {
     homeButton.on('pointerout', () => {
       homeButton.setScale(1.0);
     });
+  }
+
+  /**
+   * 创建蓝色渐变背景
+   */
+  private createGradientBackground(): void {
+    const bg = this.add.graphics();
+    bg.fillGradientStyle(
+      0x4a7a9e, 0x4a7a9e,  // 顶部：深蓝灰（调暗）
+      0x5e8ba8, 0x5e8ba8,  // 底部：浅蓝灰（调暗）
+      1
+    );
+    bg.fillRect(0, 0, SCREEN_WIDTH, 1280);
+    bg.setDepth(-100);
   }
 
   /**

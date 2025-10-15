@@ -58,7 +58,7 @@ export class PixelRenderer {
   }
 
   /**
-   * 渲染游戏区域边框（与候选区一致的霓虹风格 - 外边框）
+   * 渲染游戏区域边框（深色背景 + 简洁边框）
    */
   renderBorder(): void {
     // 先清除之前的绘制
@@ -68,45 +68,19 @@ export class PixelRenderer {
     const y = GAME_AREA_OFFSET_Y;
     const width = PIXEL_GRID_WIDTH * PIXEL_SIZE;
     const height = PIXEL_GRID_HEIGHT * PIXEL_SIZE;
-    const borderRadius = 8; // 小圆角
-    const borderWidth = 2;
-    const padding = 4; // 边框内边距，确保边框在游戏区域外
+    const borderRadius = 6; // 小圆角
 
-    // 外框的实际位置（向外扩展）
-    const outerX = x - padding - borderWidth / 2;
-    const outerY = y - padding - borderWidth / 2;
-    const outerWidth = width + padding * 2 + borderWidth;
-    const outerHeight = height + padding * 2 + borderWidth;
-
-    // 1. 深色阴影（与候选区一致）
-    const shadowLayer = this.scene.add.graphics();
-    shadowLayer.fillStyle(0x000000, 0.4);
-    shadowLayer.fillRoundedRect(
-      outerX + 4,
-      outerY + 4,
-      outerWidth,
-      outerHeight,
-      borderRadius
-    );
-    shadowLayer.setDepth(-3);
-
-    // 2. 主背景（深色，与候选区一致）
+    // 1. 深色背景层（用于凸显方块）
     const bgLayer = this.scene.add.graphics();
-    bgLayer.fillStyle(0x1a1f2e, 1);
-    bgLayer.fillRoundedRect(x, y, width, height, borderRadius - 4);
+    bgLayer.fillStyle(0x1a1f2e, 1); // 深蓝灰色背景
+    bgLayer.fillRoundedRect(x, y, width, height, borderRadius);
     bgLayer.setDepth(-2);
 
-    // 3. 霓虹边框（蓝色发光，与候选区一致）
-    const mainBorder = this.scene.add.graphics();
-    mainBorder.lineStyle(2, 0x1b9cff, 0.3); // 霓虹蓝边框
-    mainBorder.strokeRoundedRect(
-      outerX,
-      outerY,
-      outerWidth,
-      outerHeight,
-      borderRadius
-    );
-    mainBorder.setDepth(-1);
+    // 2. 简洁的白色边框
+    const borderLayer = this.scene.add.graphics();
+    borderLayer.lineStyle(2, 0xffffff, 0.3); // 2px白色半透明边框
+    borderLayer.strokeRoundedRect(x, y, width, height, borderRadius);
+    borderLayer.setDepth(-1);
   }
 
   /**

@@ -1,7 +1,8 @@
 import Phaser from 'phaser';
 import { sceSDKManager } from '@/sdk/SceSDKManager';
-import { SCREEN_WIDTH, SCREEN_HEIGHT } from '@/config/constants';
+import { SCREEN_WIDTH, SCREEN_HEIGHT, UI_COLORS } from '@/config/constants';
 import { initTestData } from '@/utils/initTestData';
+import { Color } from '@/types';
 
 /**
  * 游戏开始场景（封面）
@@ -17,8 +18,8 @@ export class StartScene extends Phaser.Scene {
     // 初始化测试数据（仅开发环境）
     initTestData();
 
-    // 设置背景（先显示背景，不阻塞）
-    this.cameras.main.setBackgroundColor(0x1a1a2e);
+    // 设置清新的渐变背景
+    this.createGradientBackground();
 
     // 异步加载SDK数据（不阻塞界面显示）
     this.loadSDKData();
@@ -66,18 +67,18 @@ export class StartScene extends Phaser.Scene {
     if (this.highestScore > 0 && !this.highScoreTextObj) {
       this.highScoreTextObj = this.add.text(
         SCREEN_WIDTH / 2,
-        420,
+        380,
         `最高分: ${this.highestScore}`,
         {
-          fontSize: '28px',
-          color: '#ffff00',
+          fontSize: '24px',
+          color: '#fef3c7',
           fontFamily: 'Arial',
           fontStyle: 'bold'
         }
       );
       this.highScoreTextObj.setOrigin(0.5);
       this.highScoreTextObj.setAlpha(0);
-      
+
       // 淡入动画
       this.tweens.add({
         targets: this.highScoreTextObj,
@@ -88,84 +89,85 @@ export class StartScene extends Phaser.Scene {
   }
 
   /**
-   * 创建UI
+   * 创建UI（扁平纯色风格）
    */
   private createUI(): void {
 
-    // 创建渐变背景效果（装饰）
+    // 创建背景装饰（霓虹色系）
     this.createBackgroundDecoration();
 
-    // 游戏标题
-    const titleText = this.add.text(SCREEN_WIDTH / 2, 250, '像素流沙', {
-      fontSize: '72px',
+    // 游戏标题（白色，在中等背景上清晰）
+    const titleText = this.add.text(SCREEN_WIDTH / 2, 220, '像素流沙', {
+      fontSize: '64px',
       color: '#ffffff',
       fontFamily: 'Arial',
       fontStyle: 'bold',
-      stroke: '#000000',
-      strokeThickness: 8
+      stroke: '#1e3a5f',
+      strokeThickness: 4
     });
     titleText.setOrigin(0.5);
 
-    // 标题闪光效果
+    // 标题轻微呼吸效果
     this.tweens.add({
       targets: titleText,
-      alpha: 0.7,
-      duration: 1500,
+      scale: 1.05,
+      duration: 2000,
       yoyo: true,
       repeat: -1,
       ease: 'Sine.easeInOut'
     });
 
     // 副标题
-    const subtitleText = this.add.text(SCREEN_WIDTH / 2, 340, '超爽的物理效果', {
-      fontSize: '24px',
-      color: '#00ffff',
+    const subtitleText = this.add.text(SCREEN_WIDTH / 2, 310, '超爽的物理效果', {
+      fontSize: '22px',
+      color: '#e0f2fe',
       fontFamily: 'Arial'
     });
     subtitleText.setOrigin(0.5);
 
     // 最高分会在SDK加载完成后异步显示（见 updateHighScoreDisplay）
 
+    // 按钮Y坐标起始位置
+    const buttonStartY = 460;
+    const buttonSpacing = 110;
+
     // 开始游戏按钮（普通模式）
-    this.createButton(
+    this.createFlatButton(
       SCREEN_WIDTH / 2,
-      500,
+      buttonStartY,
       '🎮 普通模式',
-      0x00cc00,
+      0x4ade80, // 霓虹绿
       () => {
-        // 淡出效果
-        this.cameras.main.fadeOut(500);
-        this.time.delayedCall(500, () => {
+        this.cameras.main.fadeOut(300);
+        this.time.delayedCall(300, () => {
           this.scene.start('GameScene');
         });
       }
     );
 
     // 每日挑战按钮
-    this.createButton(
+    this.createFlatButton(
       SCREEN_WIDTH / 2,
-      600,
+      buttonStartY + buttonSpacing,
       '⭐ 每日挑战',
-      0xff9800,
+      0xfbbf24, // 霓虹黄
       () => {
-        // 淡出效果
-        this.cameras.main.fadeOut(500);
-        this.time.delayedCall(500, () => {
+        this.cameras.main.fadeOut(300);
+        this.time.delayedCall(300, () => {
           this.scene.start('DailyChallengeScene');
         });
       }
     );
 
     // 排行榜按钮
-    this.createButton(
+    this.createFlatButton(
       SCREEN_WIDTH / 2,
-      700,
+      buttonStartY + buttonSpacing * 2,
       '📊 排行榜',
-      0x0066ff,
+      0x60a5fa, // 霓虹蓝
       () => {
-        // 淡出效果
-        this.cameras.main.fadeOut(500);
-        this.time.delayedCall(500, () => {
+        this.cameras.main.fadeOut(300);
+        this.time.delayedCall(300, () => {
           this.scene.start('RankingScene');
         });
       }
@@ -178,20 +180,17 @@ export class StartScene extends Phaser.Scene {
       'Powered by Phaser & SCE SDK',
       {
         fontSize: '16px',
-        color: '#888888',
+        color: '#e2e8f0',
         fontFamily: 'Arial'
       }
     );
     copyrightText.setOrigin(0.5);
-
-    // 淡入效果
-    this.cameras.main.fadeIn(800);
   }
 
   /**
-   * 创建按钮
+   * 创建扁平风格按钮（纯色+投影）
    */
-  private createButton(
+  private createFlatButton(
     x: number,
     y: number,
     text: string,
@@ -199,92 +198,237 @@ export class StartScene extends Phaser.Scene {
     callback: () => void
   ): Phaser.GameObjects.Container {
     const container = this.add.container(x, y);
+    const buttonWidth = 300;
+    const buttonHeight = 70;
+    const cornerRadius = 12;
 
-    // 按钮背景
-    const bg = this.add.rectangle(0, 0, 320, 80, color, 1);
-    bg.setStrokeStyle(4, 0xffffff, 0.8);
-    
-    // 按钮文本
+    // 深色投影（偏移）
+    const shadow = this.add.graphics();
+    shadow.fillStyle(0x000000, 0.5);
+    shadow.fillRoundedRect(
+      -buttonWidth / 2 + 6,
+      -buttonHeight / 2 + 6,
+      buttonWidth,
+      buttonHeight,
+      cornerRadius
+    );
+    shadow.setName('shadow');
+
+    // 按钮主体（纯色）
+    const bg = this.add.graphics();
+    bg.fillStyle(color, 1);
+    bg.fillRoundedRect(
+      -buttonWidth / 2,
+      -buttonHeight / 2,
+      buttonWidth,
+      buttonHeight,
+      cornerRadius
+    );
+    bg.setName('bg');
+
+    // 按钮文本（白色 + 投影）
     const buttonText = this.add.text(0, 0, text, {
-      fontSize: '36px',
+      fontSize: '28px',
       color: '#ffffff',
       fontFamily: 'Arial',
-      fontStyle: 'bold'
+      fontStyle: 'bold',
+      shadow: {
+        offsetX: 0,
+        offsetY: 1,
+        color: '#000000',
+        blur: 3,
+        fill: true
+      }
     });
     buttonText.setOrigin(0.5);
+    buttonText.setName('text');
 
-    container.add([bg, buttonText]);
-    container.setSize(320, 80);
+    container.add([shadow, bg, buttonText]);
+    container.setSize(buttonWidth, buttonHeight);
     container.setInteractive({ useHandCursor: true });
 
-    // 悬停效果
+    // 悬停效果（轻微上浮+投影增强）
     container.on('pointerover', () => {
       this.tweens.add({
         targets: container,
-        scaleX: 1.1,
-        scaleY: 1.1,
-        duration: 200,
-        ease: 'Back.easeOut'
+        y: y - 5,
+        scaleX: 1.03,
+        scaleY: 1.03,
+        duration: 150,
+        ease: 'Quad.easeOut'
       });
-      bg.setStrokeStyle(4, 0xffff00, 1);
+
+      // 投影增强
+      const shadowGraphics = container.getByName('shadow') as Phaser.GameObjects.Graphics;
+      if (shadowGraphics) {
+        shadowGraphics.clear();
+        shadowGraphics.fillStyle(0x000000, 0.7);
+        shadowGraphics.fillRoundedRect(
+          -buttonWidth / 2 + 8,
+          -buttonHeight / 2 + 8,
+          buttonWidth,
+          buttonHeight,
+          cornerRadius
+        );
+      }
+
+      // 按钮变亮
+      const bgGraphics = container.getByName('bg') as Phaser.GameObjects.Graphics;
+      if (bgGraphics) {
+        bgGraphics.clear();
+        bgGraphics.fillStyle(this.lightenColor(color, 0.15), 1);
+        bgGraphics.fillRoundedRect(
+          -buttonWidth / 2,
+          -buttonHeight / 2,
+          buttonWidth,
+          buttonHeight,
+          cornerRadius
+        );
+      }
     });
 
     container.on('pointerout', () => {
       this.tweens.add({
         targets: container,
+        y: y,
         scaleX: 1.0,
         scaleY: 1.0,
-        duration: 200,
-        ease: 'Back.easeIn'
+        duration: 150,
+        ease: 'Quad.easeIn'
       });
-      bg.setStrokeStyle(4, 0xffffff, 0.8);
+
+      // 投影还原
+      const shadowGraphics = container.getByName('shadow') as Phaser.GameObjects.Graphics;
+      if (shadowGraphics) {
+        shadowGraphics.clear();
+        shadowGraphics.fillStyle(0x000000, 0.5);
+        shadowGraphics.fillRoundedRect(
+          -buttonWidth / 2 + 6,
+          -buttonHeight / 2 + 6,
+          buttonWidth,
+          buttonHeight,
+          cornerRadius
+        );
+      }
+
+      // 按钮颜色还原
+      const bgGraphics = container.getByName('bg') as Phaser.GameObjects.Graphics;
+      if (bgGraphics) {
+        bgGraphics.clear();
+        bgGraphics.fillStyle(color, 1);
+        bgGraphics.fillRoundedRect(
+          -buttonWidth / 2,
+          -buttonHeight / 2,
+          buttonWidth,
+          buttonHeight,
+          cornerRadius
+        );
+      }
     });
 
-    // 点击效果
+    // 点击效果（按下感）
     container.on('pointerdown', () => {
       this.tweens.add({
         targets: container,
-        scaleX: 0.95,
-        scaleY: 0.95,
-        duration: 100,
+        y: y + 2,
+        scaleX: 0.98,
+        scaleY: 0.98,
+        duration: 80,
         yoyo: true,
+        yoyoDuration: 120,
+        ease: 'Quad.easeOut',
         onComplete: callback
       });
+
+      // 投影缩小
+      const shadowGraphics = container.getByName('shadow') as Phaser.GameObjects.Graphics;
+      if (shadowGraphics) {
+        shadowGraphics.clear();
+        shadowGraphics.fillStyle(0x000000, 0.3);
+        shadowGraphics.fillRoundedRect(
+          -buttonWidth / 2 + 3,
+          -buttonHeight / 2 + 3,
+          buttonWidth,
+          buttonHeight,
+          cornerRadius
+        );
+      }
     });
 
     return container;
   }
 
   /**
-   * 创建背景装饰
+   * 颜色变亮工具函数
+   */
+  private lightenColor(color: number, amount: number): number {
+    const r = ((color >> 16) & 0xFF);
+    const g = ((color >> 8) & 0xFF);
+    const b = (color & 0xFF);
+
+    const newR = Math.min(255, Math.floor(r + (255 - r) * amount));
+    const newG = Math.min(255, Math.floor(g + (255 - g) * amount));
+    const newB = Math.min(255, Math.floor(b + (255 - b) * amount));
+
+    return (newR << 16) | (newG << 8) | newB;
+  }
+
+  /**
+   * 创建清新的渐变背景
+   */
+  private createGradientBackground(): void {
+    // 使用Graphics创建渐变背景（调暗的蓝灰色渐变）
+    const bg = this.add.graphics();
+
+    // Phaser的fillGradientStyle创建垂直渐变
+    // 参数：左上色、右上色、左下色、右下色、透明度
+    bg.fillGradientStyle(
+      0x4a7a9e, 0x4a7a9e,  // 顶部：深蓝灰（调暗）
+      0x5e8ba8, 0x5e8ba8,  // 底部：浅蓝灰（调暗）
+      1
+    );
+    bg.fillRect(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
+    bg.setDepth(-100); // 置于最底层
+  }
+
+  /**
+   * 创建背景装饰（霓虹色系，柔和融入背景）
    */
   private createBackgroundDecoration(): void {
-    // 创建一些随机的装饰方块
-    for (let i = 0; i < 15; i++) {
+    // 霓虹色系
+    const neonColors = [
+      Color.RED,    // 0xf87171
+      Color.BLUE,   // 0x60a5fa
+      Color.GREEN,  // 0x4ade80
+      Color.YELLOW, // 0xfbbf24
+    ];
+
+    // 创建随机漂浮的装饰方块
+    for (let i = 0; i < 10; i++) {
       const x = Phaser.Math.Between(50, SCREEN_WIDTH - 50);
       const y = Phaser.Math.Between(50, SCREEN_HEIGHT - 50);
-      const size = Phaser.Math.Between(20, 50);
-      const colors = [0xff0000, 0x0000ff, 0x00ff00, 0xffff00];
-      const color = Phaser.Utils.Array.GetRandom(colors);
+      const size = Phaser.Math.Between(30, 60);
+      const color = Phaser.Utils.Array.GetRandom(neonColors);
 
-      const rect = this.add.rectangle(x, y, size, size, color, 0.1);
+      const rect = this.add.rectangle(x, y, size, size, color, 1.0); // 完全不透明
       rect.setRotation(Phaser.Math.Between(0, 360) * (Math.PI / 180));
+      rect.setDepth(-50); // 设置在背景渐变之上，但在所有UI元素之下
 
       // 漂浮动画
       this.tweens.add({
         targets: rect,
-        y: y + Phaser.Math.Between(-30, 30),
-        duration: Phaser.Math.Between(2000, 4000),
+        y: y + Phaser.Math.Between(-50, 50),
+        duration: Phaser.Math.Between(4000, 7000),
         yoyo: true,
         repeat: -1,
         ease: 'Sine.easeInOut'
       });
 
-      // 旋转动画
+      // 缓慢旋转
       this.tweens.add({
         targets: rect,
         rotation: rect.rotation + Math.PI * 2,
-        duration: Phaser.Math.Between(5000, 10000),
+        duration: Phaser.Math.Between(10000, 18000),
         repeat: -1,
         ease: 'Linear'
       });
