@@ -601,10 +601,6 @@ export class GameScene extends Phaser.Scene {
         maxY = Math.max(maxY, cell.y);
       });
 
-      // 计算方块的实际宽度和高度（包括边界）
-      const blockWidth = (maxX - minX + 1) * cellSize;
-      const blockHeight = (maxY - minY + 1) * cellSize;
-
       // 计算方块的中心点（相对于方块自身坐标系）
       const blockCenterX = (minX + maxX) / 2 * cellSize + cellSize / 2;
       const blockCenterY = (minY + maxY) / 2 * cellSize + cellSize / 2;

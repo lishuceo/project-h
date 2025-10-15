@@ -19,20 +19,21 @@ export class DailyChallengeScene extends GameScene {
   private timer!: ChallengeTimer;
   private stepCount: number = 0;
   private levelGenerator!: LevelGenerator;
-  
+  private currentChallengeId: 1 | 2 | 3 = 1; // 当前挑战ID
+
   // 性能优化：缓存像素块总数
   private cachedPixelCount: number = 0;
   private lastCountUpdateTime: number = 0;
-  
+
   // 挑战UI
   private timerText!: Phaser.GameObjects.Text;
   private stepsText!: Phaser.GameObjects.Text;
   private progressText!: Phaser.GameObjects.Text;
-  
+
   // 遮罩层（用于完成/失败界面）
   private overlayGraphics: Phaser.GameObjects.Graphics | null = null;
   private completionUI: Phaser.GameObjects.Container | null = null;
-  
+
   constructor() {
     super('DailyChallengeScene');
   }
@@ -40,23 +41,27 @@ export class DailyChallengeScene extends GameScene {
   /**
    * 重写create方法
    */
-  create(): void {
+  create(data?: { challengeId?: 1 | 2 | 3 }): void {
     console.log('🎮 每日挑战场景启动');
-    
+
+    // 获取传入的挑战ID
+    this.currentChallengeId = data?.challengeId || 1;
+    console.log(`🎯 当前挑战ID: ${this.currentChallengeId}`);
+
     // 重置状态
     this.stepCount = 0;
     this.overlayGraphics = null;
     this.completionUI = null;
     this.cachedPixelCount = 0;
     this.lastCountUpdateTime = 0;
-    
+
     // 初始化挑战管理器
     this.challengeManager = ChallengeManager.getInstance();
     this.levelGenerator = new LevelGenerator();
-    
-    // 获取今日挑战
-    this.challengeData = this.challengeManager.getTodayChallenge();
-    console.log(`📅 今日挑战: ${this.challengeData.date}`);
+
+    // 获取指定的挑战
+    this.challengeData = this.challengeManager.getTodayChallenge(this.currentChallengeId);
+    console.log(`📅 挑战 ${this.currentChallengeId}: ${this.challengeData.date}`);
     console.log(`🎲 种子: ${this.challengeData.seed}`);
     console.log(`⭐ 难度: ${this.challengeData.difficulty}`);
     console.log(`🔐 校验和: ${this.challengeData.checksum}`);
@@ -445,6 +450,7 @@ export class DailyChallengeScene extends GameScene {
    */
   private onChallengeCompleted(): void {
     const result: ChallengeResult = {
+      challengeId: this.currentChallengeId,
       completed: true,
       timeUsed: this.timer.getElapsedTime(),
       stepsUsed: this.stepCount,
@@ -452,12 +458,24 @@ export class DailyChallengeScene extends GameScene {
       stars: this.calculateStars(),
       checksum: this.challengeData.checksum
     };
-    
+
     console.log('🏆 挑战结果:', result);
-    
+
     // 保存记录
     this.challengeManager.saveResult(result);
-    
+
+    // 验证保存
+    const savedRecord = this.challengeManager.getTodayRecord(this.currentChallengeId);
+    console.log('✅ 保存后验证 - 挑战记录:', savedRecord);
+    console.log('✅ 保存后验证 - 挑战是否完成:', savedRecord?.completed);
+
+    // 检查下一个挑战是否解锁
+    if (this.currentChallengeId < 3) {
+      const nextChallengeId = (this.currentChallengeId + 1) as 1 | 2 | 3;
+      const nextUnlocked = this.challengeManager.isChallengeUnlocked(nextChallengeId);
+      console.log(`🔓 挑战${nextChallengeId}解锁状态:`, nextUnlocked);
+    }
+
     // 显示完成界面
     this.showCompletionScreen(result);
   }
@@ -467,6 +485,7 @@ export class DailyChallengeScene extends GameScene {
    */
   private onChallengeFailed(reason: string): void {
     const result: ChallengeResult = {
+      challengeId: this.currentChallengeId,
       completed: false,
       timeUsed: this.timer.getElapsedTime(),
       stepsUsed: this.stepCount,
@@ -474,10 +493,10 @@ export class DailyChallengeScene extends GameScene {
       stars: 1,
       checksum: this.challengeData.checksum
     };
-    
+
     // 保存尝试记录
     this.challengeManager.saveResult(result);
-    
+
     // 显示失败界面
     this.showFailureScreen(reason);
   }
@@ -709,10 +728,10 @@ export class DailyChallengeScene extends GameScene {
   }
   
   /**
-   * 返回菜单
+   * 返回挑战选择
    */
   private returnToMenu(): void {
-    console.log('← 返回菜单');
-    this.scene.start('StartScene');
+    console.log('← 返回挑战选择');
+    this.scene.start('ChallengeSelectorScene');
   }
 }

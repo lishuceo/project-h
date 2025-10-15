@@ -11,38 +11,39 @@ import { Color } from '../types';
 export class LevelGenerator {
   /**
    * 生成每日挑战关卡
-   * @param seed 随机种子（基于日期）
+   * @param seed 随机种子（基于日期和挑战ID）
    * @param date 日期字符串
+   * @param challengeId 挑战ID（1=简单，2=中等，3=困难）
    * @returns 完整的挑战数据
    */
-  public generate(seed: number, date: string): DailyChallengeData {
-    console.log(`🎲 开始生成关卡 [日期: ${date}, 种子: ${seed}]`);
-    
+  public generate(seed: number, date: string, challengeId: 1 | 2 | 3 = 1): DailyChallengeData {
+    console.log(`🎲 开始生成关卡 [日期: ${date}, 种子: ${seed}, 挑战ID: ${challengeId}]`);
+
     const random = new SeededRandom(seed);
-    
-    // 根据日期决定难度（周末更难）
-    const dayOfWeek = new Date(date).getUTCDay();
-    const difficulty = this.getDifficulty(dayOfWeek);
-    console.log(`📊 难度: ${difficulty} (${dayOfWeek === 0 || dayOfWeek === 6 ? '周末' : '工作日'})`);
-    
+
+    // 使用传入的challengeId作为难度
+    const difficulty = challengeId;
+    console.log(`📊 难度: ${difficulty} (挑战${challengeId})`);
+
     // 🎯 先选择关卡使用的颜色
     const colorCount = difficulty === 1 ? 2 : difficulty === 2 ? 3 : 4;
     const availableColors = this.selectColors(random, colorCount);
-    
+
     // 生成初始布局（使用选定的颜色）
     const initialLayout = this.generateLayoutWithColors(random, difficulty, availableColors);
     console.log(`📦 生成了 ${initialLayout.length} 个像素块`);
-    
+
     // 计算合理的步数限制
     const maxSteps = this.calculateMaxSteps(initialLayout, difficulty);
     console.log(`🎯 步数限制: ${maxSteps} 步`);
-    
+
     // 计算校验和
     const checksum = this.calculateChecksum(initialLayout);
     console.log(`🔐 校验和: ${checksum}`);
-    
+
     return {
       date,
+      challengeId,
       seed,
       difficulty,
       initialLayout,
@@ -161,17 +162,6 @@ export class LevelGenerator {
     return pixels;
   }
   
-  /**
-   * 根据星期几决定难度
-   */
-  private getDifficulty(dayOfWeek: number): 1 | 2 | 3 {
-    // 周一周二：简单
-    if (dayOfWeek === 1 || dayOfWeek === 2) return 1;
-    // 周三周四周五：中等
-    if (dayOfWeek >= 3 && dayOfWeek <= 5) return 2;
-    // 周六周日：困难
-    return 3;
-  }
   
   /**
    * 计算合理的步数限制

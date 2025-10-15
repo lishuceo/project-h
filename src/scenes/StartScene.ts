@@ -1,6 +1,6 @@
 import Phaser from 'phaser';
 import { sceSDKManager } from '@/sdk/SceSDKManager';
-import { SCREEN_WIDTH, SCREEN_HEIGHT, UI_COLORS } from '@/config/constants';
+import { SCREEN_WIDTH, SCREEN_HEIGHT } from '@/config/constants';
 import { initTestData } from '@/utils/initTestData';
 import { Color } from '@/types';
 
@@ -145,7 +145,7 @@ export class StartScene extends Phaser.Scene {
       }
     );
 
-    // 每日挑战按钮
+    // 每日挑战按钮 - 改为导航到挑战选择场景
     this.createFlatButton(
       SCREEN_WIDTH / 2,
       buttonStartY + buttonSpacing,
@@ -154,7 +154,7 @@ export class StartScene extends Phaser.Scene {
       () => {
         this.cameras.main.fadeOut(300);
         this.time.delayedCall(300, () => {
-          this.scene.start('DailyChallengeScene');
+          this.scene.start('ChallengeSelectorScene');
         });
       }
     );

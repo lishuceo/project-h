@@ -1,6 +1,7 @@
 import Phaser from 'phaser';
 import { sceSDKManager, RankingItem } from '@/sdk/SceSDKManager';
-import { SCREEN_WIDTH, SCREEN_HEIGHT, UI_COLORS } from '@/config/constants';
+import { SCREEN_WIDTH, SCREEN_HEIGHT } from '@/config/constants';
+import { BackButton } from '@/ui/BackButton';
 
 /**
  * 排行榜场景
@@ -324,97 +325,13 @@ export class RankingScene extends Phaser.Scene {
   }
 
   /**
-   * 创建返回按钮（扁平风格+投影）
+   * 创建返回按钮
    */
   private createBackButton(): void {
-    const buttonY = SCREEN_HEIGHT - 120;
-    const container = this.add.container(SCREEN_WIDTH / 2, buttonY);
-    const buttonWidth = 300;
-    const buttonHeight = 70;
-    const cornerRadius = 12;
-
-    // 深色投影
-    const shadow = this.add.graphics();
-    shadow.fillStyle(0x000000, 0.5);
-    shadow.fillRoundedRect(
-      -buttonWidth / 2 + 6,
-      -buttonHeight / 2 + 6,
-      buttonWidth,
-      buttonHeight,
-      cornerRadius
-    );
-
-    // 按钮主体（蓝色）
-    const bg = this.add.graphics();
-    bg.fillStyle(0x60a5fa, 1);
-    bg.fillRoundedRect(
-      -buttonWidth / 2,
-      -buttonHeight / 2,
-      buttonWidth,
-      buttonHeight,
-      cornerRadius
-    );
-    bg.setName('bg');
-
-    // 按钮文本（白色+投影）
-    const buttonText = this.add.text(0, 0, '← 返回首页', {
-      fontSize: '28px',
-      color: '#ffffff',
-      fontFamily: 'Arial',
-      fontStyle: 'bold',
-      shadow: {
-        offsetX: 0,
-        offsetY: 1,
-        color: '#000000',
-        blur: 3,
-        fill: true
-      }
-    });
-    buttonText.setOrigin(0.5);
-
-    container.add([shadow, bg, buttonText]);
-    container.setSize(buttonWidth, buttonHeight);
-    container.setInteractive({ useHandCursor: true });
-
-    // 悬停效果
-    container.on('pointerover', () => {
-      this.tweens.add({
-        targets: container,
-        y: buttonY - 5,
-        scaleX: 1.03,
-        scaleY: 1.03,
-        duration: 150,
-        ease: 'Quad.easeOut'
-      });
-    });
-
-    container.on('pointerout', () => {
-      this.tweens.add({
-        targets: container,
-        y: buttonY,
-        scaleX: 1.0,
-        scaleY: 1.0,
-        duration: 150,
-        ease: 'Quad.easeIn'
-      });
-    });
-
-    // 点击返回
-    container.on('pointerdown', () => {
-      this.tweens.add({
-        targets: container,
-        y: buttonY + 2,
-        scaleX: 0.98,
-        scaleY: 0.98,
-        duration: 80,
-        yoyo: true,
-        yoyoDuration: 120,
-        onComplete: () => {
-          this.cameras.main.fadeOut(300);
-          this.time.delayedCall(300, () => {
-            this.scene.start('StartScene');
-          });
-        }
+    BackButton.create(this, 80, 1180, () => {
+      this.cameras.main.fadeOut(300);
+      this.time.delayedCall(300, () => {
+        this.scene.start('StartScene');
       });
     });
   }
