@@ -73,9 +73,9 @@ export class ChallengeSelectorScene extends Phaser.Scene {
     // 创建渐变背景
     this.createGradientBackground();
 
-    // 标题
-    const title = this.add.text(SCREEN_WIDTH / 2, 120, '每日挑战', {
-      fontSize: '48px',
+    // 标题 - 放大
+    const title = this.add.text(SCREEN_WIDTH / 2, 219, '每日挑战', {
+      fontSize: '64px', // 放大
       color: '#ffffff',
       fontFamily: 'Arial',
       fontStyle: 'bold',
@@ -84,18 +84,18 @@ export class ChallengeSelectorScene extends Phaser.Scene {
     });
     title.setOrigin(0.5);
 
-    // 日期显示
+    // 日期显示 - 放大
     const today = this.challenges[0].date;
-    const dateText = this.add.text(SCREEN_WIDTH / 2, 180, `${today}`, {
-      fontSize: '20px',
+    const dateText = this.add.text(SCREEN_WIDTH / 2, 329, `${today}`, {
+      fontSize: '28px', // 放大
       color: '#e0f2fe',
       fontFamily: 'Arial'
     });
     dateText.setOrigin(0.5);
 
-    // 创建3个挑战卡片
-    const cardY = 350; // 从350开始，避免和日期文本重叠
-    const cardSpacing = 290;
+    // 创建3个挑战卡片 - 更紧凑的布局
+    const cardY = 550; // 调整起始位置
+    const cardSpacing = 380; // 缩小间距，让卡片更紧凑
 
     this.challenges.forEach((challenge, index) => {
       this.createChallengeCard(
@@ -120,8 +120,8 @@ export class ChallengeSelectorScene extends Phaser.Scene {
     challengeId: 1 | 2 | 3
   ): void {
     const container = this.add.container(x, y);
-    const cardWidth = 660;
-    const cardHeight = 240;
+    const cardWidth = 900; // 增加宽度
+    const cardHeight = 320; // 增加高度
     const cornerRadius = 16;
 
     // 设置container的边界，确保内容不被裁剪
@@ -155,15 +155,15 @@ export class ChallengeSelectorScene extends Phaser.Scene {
 
     container.add(bg);
 
-    // 难度标识
+    // 难度标识 - 继续放大
     const difficultyLabels = ['简单', '中等', '困难'];
     const difficultyColors = [0x4ade80, 0xfbbf24, 0xf87171]; // 绿、黄、红
     const stars = '⭐'.repeat(challenge.difficulty);
 
-    const difficultyBadge = this.add.container(-cardWidth / 2 + 40, -cardHeight / 2 + 40);
-    const badgeBg = this.add.circle(0, 0, 30, difficultyColors[challengeId - 1]);
+    const difficultyBadge = this.add.container(-cardWidth / 2 + 60, -cardHeight / 2 + 60);
+    const badgeBg = this.add.circle(0, 0, 50, difficultyColors[challengeId - 1]); // 继续放大
     const badgeText = this.add.text(0, 0, `${challengeId}`, {
-      fontSize: '24px',
+      fontSize: '40px', // 继续放大
       color: '#ffffff',
       fontFamily: 'Arial',
       fontStyle: 'bold'
@@ -172,10 +172,10 @@ export class ChallengeSelectorScene extends Phaser.Scene {
     difficultyBadge.add([badgeBg, badgeText]);
     container.add(difficultyBadge);
 
-    // 标题
-    const titleText = this.add.text(-cardWidth / 2 + 100, -cardHeight / 2 + 30,
+    // 标题 - 继续放大
+    const titleText = this.add.text(-cardWidth / 2 + 150, -cardHeight / 2 + 50,
       `挑战${challengeId}：${difficultyLabels[challengeId - 1]}`, {
-      fontSize: '28px',
+      fontSize: '44px', // 继续放大
       color: isUnlocked ? '#ffffff' : '#888888',
       fontFamily: 'Arial',
       fontStyle: 'bold'
@@ -183,9 +183,9 @@ export class ChallengeSelectorScene extends Phaser.Scene {
     titleText.setOrigin(0, 0.5);
     container.add(titleText);
 
-    // 星级
-    const starsText = this.add.text(-cardWidth / 2 + 100, -cardHeight / 2 + 70, stars, {
-      fontSize: '20px'
+    // 星级 - 继续放大
+    const starsText = this.add.text(-cardWidth / 2 + 150, -cardHeight / 2 + 105, stars, {
+      fontSize: '34px' // 继续放大
     });
     starsText.setOrigin(0, 0.5);
     container.add(starsText);
@@ -193,16 +193,15 @@ export class ChallengeSelectorScene extends Phaser.Scene {
     // 状态信息
     if (!isUnlocked) {
       // 未解锁：显示大锁图标
-      // 注意：emoji 的实际渲染高度可能大于 fontSize，使用 setOrigin(0.5, 0) 从顶部对齐
-      const lockIcon = this.add.text(0, -30, '🔒', {
-        fontSize: '36px',
-        padding: { top: 10, bottom: 10, left: 0, right: 0 }  // 添加上下 padding
+      const lockIcon = this.add.text(0, -40, '🔒', {
+        fontSize: '60px', // 继续放大
+        padding: { top: 10, bottom: 10, left: 0, right: 0 }
       });
-      lockIcon.setOrigin(0.5, 0);  // 从顶部对齐，避免顶部被切
+      lockIcon.setOrigin(0.5, 0);
       container.add(lockIcon);
 
-      const unlockText = this.add.text(0, 30, `完成挑战${challengeId - 1}后解锁`, {
-        fontSize: '18px',
+      const unlockText = this.add.text(0, 50, `完成挑战${challengeId - 1}后解锁`, {
+        fontSize: '28px', // 继续放大
         color: '#888888',
         fontFamily: 'Arial'
       });
@@ -219,9 +218,9 @@ export class ChallengeSelectorScene extends Phaser.Scene {
 
         // 如果有全球排名，显示排名信息
         if (record.globalRank && record.totalPlayers) {
-          const rankText = this.add.text(0, -45,
+          const rankText = this.add.text(0, -60,
             `🌍 全球排名: ${record.globalRank} / ${record.totalPlayers}`, {
-            fontSize: '20px',
+            fontSize: '32px', // 继续放大
             color: '#ffd700',
             fontFamily: 'Arial',
             fontStyle: 'bold'
@@ -230,8 +229,8 @@ export class ChallengeSelectorScene extends Phaser.Scene {
           container.add(rankText);
 
           // 调整完成状态文本位置
-          const status = this.add.text(0, -15, statusText, {
-            fontSize: '16px',
+          const status = this.add.text(0, -20, statusText, {
+            fontSize: '26px', // 继续放大
             color: statusColor,
             fontFamily: 'Arial'
           });
@@ -239,9 +238,9 @@ export class ChallengeSelectorScene extends Phaser.Scene {
           container.add(status);
 
           // 关卡信息（只在已解锁时显示）
-          const infoText = this.add.text(0, 15,
+          const infoText = this.add.text(0, 25,
             `目标: 清除所有方块 | 步数限制: ${challenge.maxSteps}`, {
-            fontSize: '14px',
+            fontSize: '22px', // 继续放大
             color: '#94a3b8',
             fontFamily: 'Arial'
           });
@@ -249,8 +248,8 @@ export class ChallengeSelectorScene extends Phaser.Scene {
           container.add(infoText);
         } else {
           // 没有排名数据，正常显示
-          const status = this.add.text(0, -20, statusText, {
-            fontSize: '18px',
+          const status = this.add.text(0, -35, statusText, {
+            fontSize: '28px', // 继续放大
             color: statusColor,
             fontFamily: 'Arial'
           });
@@ -258,9 +257,9 @@ export class ChallengeSelectorScene extends Phaser.Scene {
           container.add(status);
 
           // 关卡信息
-          const infoText = this.add.text(0, 15,
+          const infoText = this.add.text(0, 25,
             `目标: 清除所有方块 | 步数限制: ${challenge.maxSteps}`, {
-            fontSize: '16px',
+            fontSize: '24px', // 继续放大
             color: '#94a3b8',
             fontFamily: 'Arial'
           });
@@ -271,8 +270,8 @@ export class ChallengeSelectorScene extends Phaser.Scene {
         statusText = `已尝试 ${record.attempts} 次`;
         statusColor = '#fbbf24';
 
-        const status = this.add.text(0, -20, statusText, {
-          fontSize: '18px',
+        const status = this.add.text(0, -35, statusText, {
+          fontSize: '28px', // 继续放大
           color: statusColor,
           fontFamily: 'Arial'
         });
@@ -280,9 +279,9 @@ export class ChallengeSelectorScene extends Phaser.Scene {
         container.add(status);
 
         // 关卡信息
-        const infoText = this.add.text(0, 15,
+        const infoText = this.add.text(0, 25,
           `目标: 清除所有方块 | 步数限制: ${challenge.maxSteps}`, {
-          fontSize: '16px',
+          fontSize: '24px', // 继续放大
           color: '#94a3b8',
           fontFamily: 'Arial'
         });
@@ -291,8 +290,8 @@ export class ChallengeSelectorScene extends Phaser.Scene {
       } else {
         statusText = '等待挑战';
 
-        const status = this.add.text(0, -20, statusText, {
-          fontSize: '18px',
+        const status = this.add.text(0, -35, statusText, {
+          fontSize: '28px', // 继续放大
           color: statusColor,
           fontFamily: 'Arial'
         });
@@ -300,9 +299,9 @@ export class ChallengeSelectorScene extends Phaser.Scene {
         container.add(status);
 
         // 关卡信息
-        const infoText = this.add.text(0, 15,
+        const infoText = this.add.text(0, 25,
           `目标: 清除所有方块 | 步数限制: ${challenge.maxSteps}`, {
-          fontSize: '16px',
+          fontSize: '24px', // 继续放大
           color: '#94a3b8',
           fontFamily: 'Arial'
         });
@@ -324,8 +323,8 @@ export class ChallengeSelectorScene extends Phaser.Scene {
    */
   private createStartButton(x: number, y: number, challengeId: 1 | 2 | 3, isCompleted: boolean): Phaser.GameObjects.Container {
     const container = this.add.container(x, y);
-    const buttonWidth = 200;
-    const buttonHeight = 60;
+    const buttonWidth = 320; // 继续加宽
+    const buttonHeight = 85; // 继续加高
     const cornerRadius = 10;
 
     // 按钮背景（已完成的挑战使用灰蓝色，未完成的使用亮绿色）
@@ -342,10 +341,10 @@ export class ChallengeSelectorScene extends Phaser.Scene {
     // 按钮文本（根据是否已完成显示不同文字和样式）
     const buttonText = isCompleted ? '再次挑战' : '开始挑战';
     const text = this.add.text(0, 0, buttonText, {
-      fontSize: isCompleted ? '20px' : '24px', // 已完成的字号更小
-      color: isCompleted ? '#e2e8f0' : '#ffffff', // 已完成的颜色更浅
+      fontSize: isCompleted ? '30px' : '34px', // 继续放大
+      color: isCompleted ? '#e2e8f0' : '#ffffff',
       fontFamily: 'Arial',
-      fontStyle: isCompleted ? 'normal' : 'bold' // 已完成的不加粗
+      fontStyle: isCompleted ? 'normal' : 'bold'
     });
     text.setOrigin(0.5);
     text.setName('text');
@@ -421,7 +420,7 @@ export class ChallengeSelectorScene extends Phaser.Scene {
    * 创建返回按钮
    */
   private createBackButton(): void {
-    BackButton.create(this, 80, 1180, () => {
+    BackButton.create(this, 100, 2200, () => { // 与GameScene保持一致
       this.cameras.main.fadeOut(300);
       this.time.delayedCall(300, () => {
         this.scene.start('StartScene');

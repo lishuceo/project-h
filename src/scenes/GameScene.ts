@@ -11,7 +11,7 @@ import { DragDropManager } from '@/gameplay/DragDrop';
 import { sceSDKManager } from '@/sdk/SceSDKManager';
 import { vibrationManager } from '@/utils/VibrationManager';
 import { GameState, PixelBlock, TetrominoData } from '@/types';
-import { CELL_TO_PIXEL_RATIO, SCREEN_WIDTH, GAME_AREA_OFFSET_Y, LOGICAL_GRID_HEIGHT, LOGICAL_GRID_WIDTH, PIXEL_SIZE, UI_COLORS } from '@/config/constants';
+import { CELL_TO_PIXEL_RATIO, SCREEN_WIDTH, SCREEN_HEIGHT, GAME_AREA_OFFSET_Y, LOGICAL_GRID_HEIGHT, LOGICAL_GRID_WIDTH, PIXEL_SIZE, UI_COLORS } from '@/config/constants';
 
 /**
  * 主游戏场景
@@ -253,27 +253,27 @@ export class GameScene extends Phaser.Scene {
    * 创建UI（Dark + Neon 卡片式设计）
    */
   private createUI(): void {
-    // 创建顶部信息栏容器
-    const infoBarY = 40;
+    // 创建顶部信息栏容器（避开刘海区域）
+    const infoBarY = 150; // 从100调整到150，确保避开刘海
     const cardWidth = (SCREEN_WIDTH - 48) / 2; // 16px 边距 + 16px 间距
 
     // 左侧卡片 - 分数
     const scoreCard = this.add.graphics();
     scoreCard.fillStyle(UI_COLORS.BG_SECONDARY, 1);
-    scoreCard.fillRoundedRect(16, infoBarY, cardWidth, 72, 12);
+    scoreCard.fillRoundedRect(16, infoBarY, cardWidth, 90, 12); // 增加高度到90
     scoreCard.lineStyle(2, UI_COLORS.BORDER_GLOW, 0.3);
-    scoreCard.strokeRoundedRect(16, infoBarY, cardWidth, 72, 12);
+    scoreCard.strokeRoundedRect(16, infoBarY, cardWidth, 90, 12);
 
     // 分数标签
     this.add.text(32, infoBarY + 16, '分数', {
-      fontSize: '16px',
+      fontSize: '22px', // 继续放大
       color: '#9aa4b2',
       fontFamily: 'Arial',
     });
 
     // 分数数值（大号、醒目）
-    this.scoreText = this.add.text(32, infoBarY + 36, '0', {
-      fontSize: '32px',
+    this.scoreText = this.add.text(32, infoBarY + 50, '0', {
+      fontSize: '42px', // 继续放大，并调整位置避免出框
       color: '#ffffff',
       fontFamily: 'Arial, sans-serif',
       fontStyle: '700',
@@ -282,27 +282,27 @@ export class GameScene extends Phaser.Scene {
     // 右侧卡片 - 状态/连锁
     const statusCard = this.add.graphics();
     statusCard.fillStyle(UI_COLORS.BG_SECONDARY, 1);
-    statusCard.fillRoundedRect(cardWidth + 32, infoBarY, cardWidth, 72, 12);
+    statusCard.fillRoundedRect(cardWidth + 32, infoBarY, cardWidth, 90, 12); // 增加高度到90
     statusCard.lineStyle(2, UI_COLORS.BORDER_GLOW, 0.3);
-    statusCard.strokeRoundedRect(cardWidth + 32, infoBarY, cardWidth, 72, 12);
+    statusCard.strokeRoundedRect(cardWidth + 32, infoBarY, cardWidth, 90, 12);
 
     // 状态标签
     this.add.text(cardWidth + 48, infoBarY + 16, '状态', {
-      fontSize: '16px',
+      fontSize: '22px', // 继续放大
       color: '#9aa4b2',
       fontFamily: 'Arial',
     });
 
     // 状态文本
-    this.stateText = this.add.text(cardWidth + 48, infoBarY + 36, '空闲', {
-      fontSize: '20px',
+    this.stateText = this.add.text(cardWidth + 48, infoBarY + 50, '空闲', {
+      fontSize: '26px', // 继续放大，并调整位置
       color: '#ffffff',
       fontFamily: 'Arial',
     });
 
     // 连锁显示（浮动提示，初始隐藏）
-    this.chainText = this.add.text(SCREEN_WIDTH / 2, infoBarY + 130, '', {
-      fontSize: '28px',
+    this.chainText = this.add.text(SCREEN_WIDTH / 2, infoBarY + 160, '', {
+      fontSize: '36px', // 继续放大
       color: '#fbbf24',
       fontFamily: 'Arial',
       fontStyle: 'bold',
@@ -321,9 +321,9 @@ export class GameScene extends Phaser.Scene {
    * 创建底部按钮栏（扁平简洁设计，靠两侧）
    */
   private createBottomButtons(): void {
-    const buttonY = 1180; // 底部位置（调整为更靠下，距离底部约100px）
-    const leftX = 80; // 左侧按钮位置
-    const rightX = SCREEN_WIDTH - 80; // 右侧按钮位置
+    const buttonY = 2200; // 调整位置，距底部140px
+    const leftX = 100; // 左侧按钮位置
+    const rightX = SCREEN_WIDTH - 100; // 右侧按钮位置
 
     // 返回按钮（左侧 - 次要操作）
     this.createIconOnlyButton(
@@ -365,7 +365,7 @@ export class GameScene extends Phaser.Scene {
     callback: () => void
   ): Phaser.GameObjects.Container {
     const container = this.add.container(x, y);
-    const buttonRadius = 32;
+    const buttonRadius = 48; // 从32增加到48，更容易点击
 
     // 深色阴影
     const shadow = this.add.circle(3, 3, buttonRadius, UI_COLORS.SHADOW_DEEP, 0.5);
@@ -387,7 +387,7 @@ export class GameScene extends Phaser.Scene {
 
     // 图标（带阴影）
     const iconText = this.add.text(0, 0, icon, {
-      fontSize: '28px',
+      fontSize: '40px', // 放大图标
       color: '#ffffff',
       fontFamily: 'Arial, sans-serif',
       fontStyle: 'bold'
@@ -483,9 +483,9 @@ export class GameScene extends Phaser.Scene {
   private createPreviewSlotsUI(): void {
     // 游戏区域底部位置：GAME_AREA_OFFSET_Y + GAME_AREA_HEIGHT
     const gameAreaBottom = GAME_AREA_OFFSET_Y + (LOGICAL_GRID_HEIGHT * CELL_TO_PIXEL_RATIO * PIXEL_SIZE);
-    const slotY = gameAreaBottom + 165; // 游戏区域底部 + 165px间距（调整为更靠下）
-    const slotSize = 160; // 槽位大小（适配新屏幕）
-    const slotSpacing = 30; // 槽位之间的间距
+    const slotY = gameAreaBottom + 280; // 调整间距，更紧凑
+    const slotSize = 310; // 放大槽位，更容易点击
+    const slotSpacing = 50; // 适中间距
 
     // 计算3个槽位的总宽度并居中
     const totalWidth = slotSize * 3 + slotSpacing * 2;
@@ -598,8 +598,8 @@ export class GameScene extends Phaser.Scene {
         item.destroy();
       });
 
-      // 绘制方块预览（槽位160px，方块也相应放大）
-      const cellSize = 32; // 方块格子大小（槽位160 / 5 ≈ 32）
+      // 绘制方块预览（槽位310px，方块也相应放大）
+      const cellSize = 62; // 方块格子大小（槽位310 / 5 = 62）
 
       // 计算方块的边界框以实现真正的居中
       let minX = Infinity, maxX = -Infinity;
@@ -885,7 +885,7 @@ export class GameScene extends Phaser.Scene {
    */
   private async showGameOver(): Promise<void> {
     const centerX = SCREEN_WIDTH / 2;
-    const centerY = 600;
+    const centerY = 1097; // 900 × 1.2188
     const finalScore = this.scoringSystem.score;
 
     // 上传分数并获取结果
@@ -1090,7 +1090,7 @@ export class GameScene extends Phaser.Scene {
       0x5e8ba8, 0x5e8ba8,  // 底部：浅蓝灰（调暗）
       1
     );
-    bg.fillRect(0, 0, SCREEN_WIDTH, 1280);
+    bg.fillRect(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
     bg.setDepth(-100);
   }
 

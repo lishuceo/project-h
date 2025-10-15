@@ -7,13 +7,16 @@ import { RankingScene } from './scenes/RankingScene';
 import { SCREEN_WIDTH, SCREEN_HEIGHT } from './config/constants';
 import { ChallengeManager } from './challenge/ChallengeManager';
 
+// 使用固定的设计分辨率，让 Phaser 的 FIT 模式自动适配
+const gameSize = { width: SCREEN_WIDTH, height: SCREEN_HEIGHT };
+
 /**
  * Phaser游戏配置
  */
 const config: Phaser.Types.Core.GameConfig = {
   type: Phaser.AUTO,
-  width: SCREEN_WIDTH,
-  height: SCREEN_HEIGHT,
+  width: gameSize.width,
+  height: gameSize.height,
   parent: 'game-container',
   backgroundColor: '#1a1a2e',
   scene: [StartScene, GameScene, ChallengeSelectorScene, DailyChallengeScene, RankingScene], // 场景顺序：开始 → 游戏 → 挑战选择 → 每日挑战 → 排行榜
@@ -25,10 +28,10 @@ const config: Phaser.Types.Core.GameConfig = {
     },
   },
   scale: {
-    mode: Phaser.Scale.FIT, // 保持宽高比适配
+    mode: Phaser.Scale.FIT,
     autoCenter: Phaser.Scale.CENTER_BOTH,
-    width: SCREEN_WIDTH,
-    height: SCREEN_HEIGHT,
+    width: gameSize.width,
+    height: gameSize.height,
     parent: 'game-container',
   },
 };
@@ -37,11 +40,13 @@ const config: Phaser.Types.Core.GameConfig = {
 const game = new Phaser.Game(config);
 
 console.log('🎮 像素流沙 - Pixel Quicksand');
-console.log('游戏尺寸:', SCREEN_WIDTH, 'x', SCREEN_HEIGHT);
+console.log('游戏尺寸:', gameSize.width, 'x', gameSize.height);
+console.log('缩放模式: FIT (自动适配所有设备)');
 console.log('三方向下落物理系统启动成功！');
 
-// 导出游戏实例和调试工具（用于调试）
+// 导出游戏实例和调试工具
 (window as any).game = game;
+(window as any).gameSize = gameSize;
 (window as any).debugChallengeStorage = () => {
   ChallengeManager.getInstance().debugShowStorage();
 };

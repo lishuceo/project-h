@@ -68,9 +68,9 @@ export class RankingScene extends Phaser.Scene {
       // 设置3秒超时
       const timeout = 3000;
       
-      // 并行加载所有数据（提高速度）
+      // 并行加载所有数据（提高速度），增加到15名
       const loadPromise = Promise.all([
-        sceSDKManager.getRankings(10),
+        sceSDKManager.getRankings(15),
         sceSDKManager.getPlayerRank(),
         sceSDKManager.getHighestScore()
       ]);
@@ -102,7 +102,7 @@ export class RankingScene extends Phaser.Scene {
    */
   private displayRanking(): void {
     // 标题
-    const titleText = this.add.text(SCREEN_WIDTH / 2, 100, '🏆 排行榜 🏆', {
+    const titleText = this.add.text(SCREEN_WIDTH / 2, 180, '🏆 排行榜 🏆', { // 向上调整
       fontSize: '56px',
       color: '#ffd700',
       fontFamily: 'Arial',
@@ -117,9 +117,9 @@ export class RankingScene extends Phaser.Scene {
       this.createPlayerCard();
     }
 
-    // 排行榜列表
-    const listTitleY = 340; // 标题位置
-    const startY = 410; // 第一名开始位置（标题下方70px）
+    // 排行榜列表 - 向上调整
+    const listTitleY = 500; // 向上调整
+    const startY = 580; // 向上调整，第一名开始位置
     
     if (this.rankings.length > 0) {
       // 排行榜标题
@@ -136,9 +136,9 @@ export class RankingScene extends Phaser.Scene {
       );
       listTitleText.setOrigin(0.5);
 
-      // 显示每个排名
+      // 显示每个排名 - 缩小行间距
       this.rankings.forEach((ranking, index) => {
-        this.createRankingItem(ranking, startY + index * 70);
+        this.createRankingItem(ranking, startY + index * 85); // 从70增加到85，放大每一行
       });
     } else {
       // 无数据提示
@@ -164,7 +164,7 @@ export class RankingScene extends Phaser.Scene {
    * 创建玩家信息卡片
    */
   private createPlayerCard(): void {
-    const cardY = 200;
+    const cardY = 310; // 向上调整
     const cardWidth = 600;
     const cardHeight = 100;
 
@@ -229,9 +229,9 @@ export class RankingScene extends Phaser.Scene {
   private createRankingItem(ranking: RankingItem, y: number): void {
     const container = this.add.container(SCREEN_WIDTH / 2, y);
 
-    // 背景
-    const bgWidth = 650;
-    const bgHeight = 60;
+    // 背景 - 放大
+    const bgWidth = 950; // 增加宽度
+    const bgHeight = 75; // 增加高度
     const bg = this.add.rectangle(0, 0, bgWidth, bgHeight, 0x2a2a4e, 0.6);
     bg.setStrokeStyle(2, 0xffffff, 0.3);
 
@@ -252,41 +252,41 @@ export class RankingScene extends Phaser.Scene {
 
     bg.setFillStyle(bgColor, 0.6);
 
-    // 排名
-    const rankText = this.add.text(-280, 0, `${ranking.rank}`, {
-      fontSize: '32px',
+    // 排名 - 放大
+    const rankText = this.add.text(-420, 0, `${ranking.rank}`, {
+      fontSize: '38px', // 放大字体
       color: rankColor,
       fontFamily: 'Arial',
       fontStyle: 'bold'
     });
     rankText.setOrigin(0.5);
 
-    // 奖牌图标
+    // 奖牌图标 - 放大
     let medalEmoji = '';
     if (ranking.rank === 1) medalEmoji = '🥇';
     else if (ranking.rank === 2) medalEmoji = '🥈';
     else if (ranking.rank === 3) medalEmoji = '🥉';
 
     if (medalEmoji) {
-      const medal = this.add.text(-230, 0, medalEmoji, {
-        fontSize: '28px'
+      const medal = this.add.text(-350, 0, medalEmoji, {
+        fontSize: '36px' // 放大
       });
       medal.setOrigin(0.5);
       container.add(medal);
     }
 
-    // 用户名
+    // 用户名 - 放大
     const username = ranking.username || `玩家${ranking.rank}`;
-    const usernameText = this.add.text(-50, 0, username, {
-      fontSize: '24px',
+    const usernameText = this.add.text(-100, 0, username, {
+      fontSize: '28px', // 放大字体
       color: '#ffffff',
       fontFamily: 'Arial'
     });
     usernameText.setOrigin(0, 0.5);
 
-    // 分数
-    const scoreText = this.add.text(250, 0, `${ranking.score}`, {
-      fontSize: '28px',
+    // 分数 - 放大
+    const scoreText = this.add.text(400, 0, `${ranking.score}`, {
+      fontSize: '32px', // 放大字体
       color: rankColor,
       fontFamily: 'Arial',
       fontStyle: 'bold'
@@ -300,8 +300,8 @@ export class RankingScene extends Phaser.Scene {
       bg.setStrokeStyle(3, 0x00ff00, 1);
       
       // 添加"你"的标识
-      const youText = this.add.text(290, 0, '(你)', {
-        fontSize: '20px',
+      const youText = this.add.text(420, 0, '(你)', {
+        fontSize: '24px', // 放大字体
         color: '#00ff00',
         fontFamily: 'Arial',
         fontStyle: 'bold'
@@ -328,7 +328,7 @@ export class RankingScene extends Phaser.Scene {
    * 创建返回按钮
    */
   private createBackButton(): void {
-    BackButton.create(this, 80, 1180, () => {
+    BackButton.create(this, 100, 2200, () => { // 与GameScene保持一致
       this.cameras.main.fadeOut(300);
       this.time.delayedCall(300, () => {
         this.scene.start('StartScene');

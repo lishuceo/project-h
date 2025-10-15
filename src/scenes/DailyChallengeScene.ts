@@ -167,59 +167,62 @@ export class DailyChallengeScene extends GameScene {
    * 创建挑战UI（现代化设计）
    */
   private createChallengeUI(): void {
-    // 创建头部容器（简洁扁平）
+    // 使用与父类相同的信息栏布局（完全对齐）
+    const infoBarY = 150; // 与GameScene保持一致
+    const cardWidth = (SCREEN_WIDTH - 48) / 2; // 与GameScene保持一致
+
+    // 创建头部信息卡片（使用与父类相同的样式）
     const headerBg = this.add.graphics();
 
-    // 柔和阴影
-    headerBg.fillStyle(UI_COLORS.SHADOW_DEEP, 0.3);
-    headerBg.fillRoundedRect(14, 14, SCREEN_WIDTH - 28, 100, 12);
+    // 左侧卡片 - 计时器
+    headerBg.fillStyle(UI_COLORS.BG_SECONDARY, 1);
+    headerBg.fillRoundedRect(16, infoBarY, cardWidth, 90, 12); // 增加高度到90
+    headerBg.lineStyle(2, UI_COLORS.BORDER_GLOW, 0.3);
+    headerBg.strokeRoundedRect(16, infoBarY, cardWidth, 90, 12);
 
-    // 主背景（扁平纯色）
-    headerBg.fillStyle(UI_COLORS.CARD_BG, 1);
-    headerBg.fillRoundedRect(10, 10, SCREEN_WIDTH - 20, 100, 12);
+    // 右侧卡片 - 步数/进度
+    headerBg.fillStyle(UI_COLORS.BG_SECONDARY, 1);
+    headerBg.fillRoundedRect(cardWidth + 32, infoBarY, cardWidth, 90, 12);
+    headerBg.lineStyle(2, UI_COLORS.BORDER_GLOW, 0.3);
+    headerBg.strokeRoundedRect(cardWidth + 32, infoBarY, cardWidth, 90, 12);
 
-    // 细边框
-    headerBg.lineStyle(1, UI_COLORS.BORDER_GLOW, 0.5);
-    headerBg.strokeRoundedRect(10, 10, SCREEN_WIDTH - 20, 100, 12);
+    // 左侧卡片内容 - 计时器
+    this.add.text(32, infoBarY + 16, '⏱️ 用时', {
+      fontSize: '22px', // 继续放大
+      color: '#9aa4b2',
+      fontFamily: 'Arial',
+    });
 
-    // 日期和难度（左侧）
-    const dateContainer = this.add.container(30, 30);
-
-    // 图标背景圆
-    const dateIconBg = this.add.circle(0, 0, 18, UI_COLORS.ACCENT_PRIMARY, 0.2);
-    const dateIcon = this.add.text(0, 0, '📅', { fontSize: '20px' });
-    dateIcon.setOrigin(0.5);
-
-    const stars = '⭐'.repeat(this.challengeData.difficulty);
-    const dateText = this.add.text(30, 0, `${this.challengeData.date}`, {
-      fontSize: '16px',
-      color: '#e2e8f0',
+    this.timerText = this.add.text(32, infoBarY + 50, '00:00', {
+      fontSize: '36px', // 继续放大字体
+      color: '#ffffff',
       fontFamily: 'Arial, sans-serif',
-      fontStyle: 'bold'
+      fontStyle: '700',
     });
-    dateText.setOrigin(0, 0.5);
 
-    const difficultyText = this.add.text(30, 20, `难度: ${stars}`, {
-      fontSize: '14px',
-      color: '#fbbf24',
-      fontFamily: 'Arial, sans-serif'
+    // 右侧卡片内容 - 步数
+    this.add.text(cardWidth + 48, infoBarY + 16, '🚶 步数', {
+      fontSize: '22px', // 继续放大
+      color: '#9aa4b2',
+      fontFamily: 'Arial',
     });
-    difficultyText.setOrigin(0, 0.5);
 
-    dateContainer.add([dateIconBg, dateIcon, dateText, difficultyText]);
-
-    // 状态卡片行
-    const statsY = 65;
-
-    // 计时器卡片（绿色背景）
-    this.createStatCard(30, statsY, 210, '⏱️', '00:00', 0x2d5a3d, 'timer');
-
-    // 步数卡片（蓝色背景）
     const maxSteps = this.challengeData.maxSteps || '∞';
-    this.createStatCard(255, statsY, 210, '🚶', `0/${maxSteps}`, 0x2d4a5a, 'steps');
+    this.stepsText = this.add.text(cardWidth + 48, infoBarY + 50, `0/${maxSteps}`, {
+      fontSize: '32px', // 继续放大字体
+      color: '#ffffff',
+      fontFamily: 'Arial, sans-serif',
+      fontStyle: '700',
+    });
 
-    // 剩余卡片（橙色背景）
-    this.createStatCard(480, statsY, 210, '📦', '剩余: 17格', 0x5a4a2d, 'progress');
+    // 进度显示（替换连锁显示位置）
+    this.progressText = this.add.text(SCREEN_WIDTH / 2, infoBarY + 140, '剩余: 17格', {
+      fontSize: '28px', // 继续放大字体
+      color: '#fbbf24',
+      fontFamily: 'Arial',
+      fontStyle: 'bold',
+    });
+    this.progressText.setOrigin(0.5);
 
     // 底部图标按钮
     this.createBottomChallengeButtons();
@@ -231,71 +234,14 @@ export class DailyChallengeScene extends GameScene {
     this.setupDevKeys();
   }
 
-  /**
-   * 创建现代状态卡片
-   */
-  private createStatCard(
-    x: number,
-    y: number,
-    width: number,
-    icon: string,
-    value: string,
-    accentColor: number,
-    cardType: 'timer' | 'steps' | 'progress'
-  ): Phaser.GameObjects.Container {
-    const container = this.add.container(x, y);
-
-    // 卡片背景（更鲜艳的色彩块）
-    const bg = this.add.graphics();
-
-    // 阴影
-    bg.fillStyle(0x000000, 0.3);
-    bg.fillRoundedRect(2, 2, width, 36, 8);
-
-    // 主背景（实色，不透明）
-    bg.fillStyle(accentColor, 1);
-    bg.fillRoundedRect(0, 0, width, 36, 8);
-
-    // 无边框或极细边框
-    bg.lineStyle(1, 0x000000, 0.2);
-    bg.strokeRoundedRect(0, 0, width, 36, 8);
-
-    // 图标
-    const iconText = this.add.text(12, 18, icon, {
-      fontSize: '20px'
-    });
-    iconText.setOrigin(0, 0.5);
-
-    // 数值文本
-    const valueText = this.add.text(42, 18, value, {
-      fontSize: '18px',
-      color: '#f1f5f9',
-      fontFamily: 'Arial, sans-serif',
-      fontStyle: 'bold'
-    });
-    valueText.setOrigin(0, 0.5);
-
-    container.add([bg, iconText, valueText]);
-
-    // 保存引用以便更新
-    if (cardType === 'timer') {
-      this.timerText = valueText;
-    } else if (cardType === 'steps') {
-      this.stepsText = valueText;
-    } else if (cardType === 'progress') {
-      this.progressText = valueText;
-    }
-
-    return container;
-  }
   
   /**
    * 创建底部挑战按钮（扁平简洁设计，靠两侧）
    */
   private createBottomChallengeButtons(): void {
-    const buttonY = 1180; // 底部位置（调整为更靠下，距离底部约100px）
-    const leftX = 80; // 左侧按钮位置
-    const rightX = 720 - 80; // 右侧按钮位置（SCREEN_WIDTH - 80）
+    const buttonY = 2200; // 调整位置，距底部140px
+    const leftX = 100; // 左侧按钮位置
+    const rightX = SCREEN_WIDTH - 100; // 右侧按钮位置
 
     // 返回按钮（左侧 - 仅图标）
     this.createIconOnlyButton(
@@ -377,12 +323,12 @@ export class DailyChallengeScene extends GameScene {
     
     // 更新挑战UI
     if (this.timer && this.timerText) {
-      this.timerText.setText(`⏱️ ${this.timer.formatTime()}`);
+      this.timerText.setText(this.timer.formatTime());
     }
-    
+
     if (this.stepsText) {
       const maxSteps = this.challengeData.maxSteps || '∞';
-      this.stepsText.setText(`🚶 步数: ${this.stepCount} / ${maxSteps}`);
+      this.stepsText.setText(`${this.stepCount} / ${maxSteps}`);
       
       // 步数接近限制时变红
       if (this.challengeData.maxSteps && this.stepCount >= this.challengeData.maxSteps * 0.8) {
@@ -549,22 +495,22 @@ export class DailyChallengeScene extends GameScene {
    */
   private updateProgress(): void {
     if (!this.progressText) return;
-    
+
     // 【性能优化】缓存像素块总数，避免每帧遍历
     const now = Date.now();
     if (now - this.lastCountUpdateTime < 500) {
       // 使用缓存值
       const logicalCells = Math.ceil(this.cachedPixelCount / 100);
-      this.progressText.setText(`📦 剩余: ${logicalCells} 格`);
+      this.progressText.setText(`剩余: ${logicalCells} 格`);
       return;
     }
-    
+
     // 更新缓存
     this.cachedPixelCount = this.grid.getTotalPixelCount();
     this.lastCountUpdateTime = now;
-    
+
     const logicalCells = Math.ceil(this.cachedPixelCount / 100);
-    this.progressText.setText(`📦 剩余: ${logicalCells} 格`);
+    this.progressText.setText(`剩余: ${logicalCells} 格`);
     
     // 接近完成时变绿
     if (this.cachedPixelCount > 0 && this.cachedPixelCount < 500) {
@@ -586,9 +532,9 @@ export class DailyChallengeScene extends GameScene {
     this.completionUI = this.add.container(this.cameras.main.centerX, this.cameras.main.centerY);
     this.completionUI.setDepth(1001);
 
-    // 标题
+    // 标题 - 放大
     const title = this.add.text(0, -220, '🎉 挑战完成！', {
-      fontSize: '48px',
+      fontSize: '64px', // 放大
       color: '#ffdd00',
       fontFamily: 'Arial',
       fontStyle: 'bold'
@@ -596,19 +542,19 @@ export class DailyChallengeScene extends GameScene {
     title.setOrigin(0.5);
     this.completionUI.add(title);
 
-    // 星级
+    // 星级 - 放大
     const starsText = '⭐'.repeat(result.stars);
     const stars = this.add.text(0, -150, starsText, {
-      fontSize: '64px'
+      fontSize: '80px' // 放大
     });
     stars.setOrigin(0.5);
     this.completionUI.add(stars);
 
-    // 全球排名（如果有）
+    // 全球排名（如果有）- 放大
     if (record && record.globalRank && record.totalPlayers) {
       const rankText = this.add.text(0, -70,
         `🌍 全球排名: ${record.globalRank} / ${record.totalPlayers}`, {
-        fontSize: '32px',
+        fontSize: '40px', // 放大
         color: '#ffd700',
         fontFamily: 'Arial',
         fontStyle: 'bold'
@@ -616,32 +562,32 @@ export class DailyChallengeScene extends GameScene {
       rankText.setOrigin(0.5);
       this.completionUI.add(rankText);
 
-      // 统计信息（位置下移）
+      // 统计信息（位置下移）- 放大
       const stats = this.add.text(0, 10,
         `⏱️ 用时: ${this.timer.formatTime()}\n` +
         `🚶 步数: ${result.stepsUsed}\n` +
         `🏆 得分: ${result.score}`,
         {
-          fontSize: '24px',
+          fontSize: '32px', // 放大
           color: '#ffffff',
           align: 'center',
-          lineSpacing: 12,
+          lineSpacing: 16,
           fontFamily: 'Arial'
         }
       );
       stats.setOrigin(0.5);
       this.completionUI.add(stats);
     } else {
-      // 没有排名数据，正常显示统计信息
+      // 没有排名数据，正常显示统计信息 - 放大
       const stats = this.add.text(0, -30,
         `⏱️ 用时: ${this.timer.formatTime()}\n` +
         `🚶 步数: ${result.stepsUsed}\n` +
         `🏆 得分: ${result.score}`,
         {
-          fontSize: '28px',
+          fontSize: '36px', // 放大
           color: '#ffffff',
           align: 'center',
-          lineSpacing: 15,
+          lineSpacing: 20,
           fontFamily: 'Arial'
         }
       );
@@ -649,12 +595,12 @@ export class DailyChallengeScene extends GameScene {
       this.completionUI.add(stats);
     }
 
-    // 按钮（退出按钮更明显）
-    this.createButton(this.completionUI, -120, 140, '再来一次', 0x64748b, '20px', () => {
+    // 按钮（退出按钮更明显）- 放大
+    this.createButton(this.completionUI, -160, 180, '再来一次', 0x64748b, '28px', () => {
       this.restartChallenge();
     });
 
-    this.createButton(this.completionUI, 120, 140, '✓ 返回', 0x4ade80, '24px', () => {
+    this.createButton(this.completionUI, 160, 180, '✓ 返回', 0x4ade80, '32px', () => {
       this.returnToMenu();
     });
   }
@@ -668,51 +614,51 @@ export class DailyChallengeScene extends GameScene {
     this.overlayGraphics.fillStyle(0x000000, 0.85);
     this.overlayGraphics.fillRect(0, 0, this.cameras.main.width, this.cameras.main.height);
     this.overlayGraphics.setDepth(1000);
-    
+
     // 创建UI容器
     this.completionUI = this.add.container(this.cameras.main.centerX, this.cameras.main.centerY);
     this.completionUI.setDepth(1001);
-    
-    // 标题
+
+    // 标题 - 放大
     const title = this.add.text(0, -150, '💔 挑战失败', {
-      fontSize: '48px',
+      fontSize: '64px', // 放大
       color: '#f44336',
       fontFamily: 'Arial',
       fontStyle: 'bold'
     });
     title.setOrigin(0.5);
     this.completionUI.add(title);
-    
-    // 失败原因
+
+    // 失败原因 - 放大
     const reasonText = this.add.text(0, -80, reason, {
-      fontSize: '24px',
+      fontSize: '32px', // 放大
       color: '#ff9800',
       fontFamily: 'Arial'
     });
     reasonText.setOrigin(0.5);
     this.completionUI.add(reasonText);
-    
-    // 统计信息
-    const stats = this.add.text(0, 0, 
+
+    // 统计信息 - 放大
+    const stats = this.add.text(0, 0,
       `⏱️ 用时: ${this.timer.formatTime()}\n` +
-      `🚶 步数: ${this.stepCount}`, 
+      `🚶 步数: ${this.stepCount}`,
       {
-        fontSize: '24px',
+        fontSize: '32px', // 放大
         color: '#ffffff',
         align: 'center',
-        lineSpacing: 15,
+        lineSpacing: 20,
         fontFamily: 'Arial'
       }
     );
     stats.setOrigin(0.5);
     this.completionUI.add(stats);
-    
-    // 按钮（退出按钮更明显）
-    this.createButton(this.completionUI, -120, 100, '再来一次', 0x64748b, '20px', () => {
+
+    // 按钮（退出按钮更明显）- 放大
+    this.createButton(this.completionUI, -160, 120, '再来一次', 0x64748b, '28px', () => {
       this.restartChallenge();
     });
 
-    this.createButton(this.completionUI, 120, 100, '✓ 返回', 0x4ade80, '24px', () => {
+    this.createButton(this.completionUI, 160, 120, '✓ 返回', 0x4ade80, '32px', () => {
       this.returnToMenu();
     });
   }
@@ -729,8 +675,8 @@ export class DailyChallengeScene extends GameScene {
     fontSize: string,
     callback: () => void
   ): void {
-    const buttonWidth = 200;
-    const buttonHeight = 60;
+    const buttonWidth = 280; // 放大按钮
+    const buttonHeight = 80; // 放大按钮
 
     // 计算悬停颜色（略微变亮）
     const hoverColor = this.lightenColor(color, 0.15);

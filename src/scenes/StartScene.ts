@@ -78,10 +78,10 @@ export class StartScene extends Phaser.Scene {
     if (this.highestScore > 0 && !this.highScoreTextObj) {
       this.highScoreTextObj = this.add.text(
         SCREEN_WIDTH / 2,
-        380,
+        820, // 调整位置，配合按钮下移
         `最高分: ${this.highestScore}`,
         {
-          fontSize: '24px',
+          fontSize: '28px', // 放大字体
           color: '#fef3c7',
           fontFamily: 'Arial',
           fontStyle: 'bold'
@@ -108,8 +108,8 @@ export class StartScene extends Phaser.Scene {
     this.createBackgroundDecoration();
 
     // 游戏标题（白色，在中等背景上清晰）
-    const titleText = this.add.text(SCREEN_WIDTH / 2, 220, '像素流沙', {
-      fontSize: '64px',
+    const titleText = this.add.text(SCREEN_WIDTH / 2, 450, '像素流沙', { // 优化位置，避免过于靠上
+      fontSize: '72px', // 放大字体
       color: '#ffffff',
       fontFamily: 'Arial',
       fontStyle: 'bold',
@@ -129,8 +129,8 @@ export class StartScene extends Phaser.Scene {
     });
 
     // 副标题
-    const subtitleText = this.add.text(SCREEN_WIDTH / 2, 310, '超爽的物理效果', {
-      fontSize: '22px',
+    const subtitleText = this.add.text(SCREEN_WIDTH / 2, 580, '超爽的物理效果', { // 紧凑间距
+      fontSize: '26px', // 放大字体
       color: '#e0f2fe',
       fontFamily: 'Arial'
     });
@@ -138,9 +138,9 @@ export class StartScene extends Phaser.Scene {
 
     // 最高分会在SDK加载完成后异步显示（见 updateHighScoreDisplay）
 
-    // 按钮Y坐标起始位置
-    const buttonStartY = 460;
-    const buttonSpacing = 110;
+    // 按钮Y坐标起始位置 - 调整到接近居中
+    const buttonStartY = 1000; // 向下移动，更接近屏幕中心
+    const buttonSpacing = 130; // 缩小间距，让按钮更紧凑
 
     // 开始游戏按钮（普通模式）
     this.createFlatButton(
@@ -209,8 +209,8 @@ export class StartScene extends Phaser.Scene {
     callback: () => void
   ): Phaser.GameObjects.Container {
     const container = this.add.container(x, y);
-    const buttonWidth = 300;
-    const buttonHeight = 70;
+    const buttonWidth = 486; // 360 × 1.35 继续放大35%
+    const buttonHeight = 115; // 85 × 1.35 继续放大35%
     const cornerRadius = 12;
 
     // 深色投影（偏移）
@@ -239,7 +239,7 @@ export class StartScene extends Phaser.Scene {
 
     // 按钮文本（白色 + 投影）
     const buttonText = this.add.text(0, 0, text, {
-      fontSize: '28px',
+      fontSize: '43px', // 32 × 1.35 继续放大35%
       color: '#ffffff',
       fontFamily: 'Arial',
       fontStyle: 'bold',

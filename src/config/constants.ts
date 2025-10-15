@@ -1,32 +1,32 @@
 // 网格常量（参考设计文档第3章）
 export const LOGICAL_GRID_WIDTH = 11; // 缩小为11列（左右留出空隙）
-export const LOGICAL_GRID_HEIGHT = 10; // 优化为10行（更适合UI布局）
+export const LOGICAL_GRID_HEIGHT = 12; // 从10行增加到12行（更适合长屏手机）
 export const CELL_TO_PIXEL_RATIO = 10;
 export const PIXEL_GRID_WIDTH = LOGICAL_GRID_WIDTH * CELL_TO_PIXEL_RATIO; // 110
-export const PIXEL_GRID_HEIGHT = LOGICAL_GRID_HEIGHT * CELL_TO_PIXEL_RATIO; // 100
+export const PIXEL_GRID_HEIGHT = LOGICAL_GRID_HEIGHT * CELL_TO_PIXEL_RATIO; // 120 (增加了20)
 
 // 预览槽位常量
 export const PREVIEW_SLOTS = 3;
 
 // 物理常量
 export const PHYSICS_TIME_STEP = 1 / 60; // 60 FPS
-export const PIXEL_SIZE = 6; // 每个像素块在屏幕上的实际像素大小（放大到6px）
+export const PIXEL_SIZE = 9.5; // 每个像素块在屏幕上的实际像素大小（9.5px，使游戏区域对齐信息栏宽度）
 
 // 动画常量
 export const ELIMINATION_ANIM_DURATION = 1000; // 毫秒
 export const PARTICLE_LIFETIME = 1000; // 毫秒
 
 // 游戏区域渲染尺寸
-export const GAME_AREA_WIDTH = PIXEL_GRID_WIDTH * PIXEL_SIZE; // 720px
-export const GAME_AREA_HEIGHT = PIXEL_GRID_HEIGHT * PIXEL_SIZE; // 600px (10行 × 10像素 × 6px)
+export const GAME_AREA_WIDTH = PIXEL_GRID_WIDTH * PIXEL_SIZE; // 1045px (110 × 9.5)
+export const GAME_AREA_HEIGHT = PIXEL_GRID_HEIGHT * PIXEL_SIZE; // 1140px (120 × 9.5) - 增加2行
 
-// 屏幕尺寸（9:16标准手机比例）
-export const SCREEN_WIDTH = 720;  // 720px宽度（正好容纳游戏区域）
-export const SCREEN_HEIGHT = 1280; // 16:9比例
+// 屏幕尺寸（19.5:9现代移动端比例，完美适配iPhone 12/13/14系列）
+export const SCREEN_WIDTH = 1080;  // 1080px宽度（Full HD移动端标准）
+export const SCREEN_HEIGHT = 2340; // 19.5:9比例，匹配现代iPhone
 
-// 游戏区域偏移（优化布局：居中对齐）
-export const GAME_AREA_OFFSET_X = (SCREEN_WIDTH - GAME_AREA_WIDTH) / 2;
-export const GAME_AREA_OFFSET_Y = 150; // 顶部留白（增加到150px，让布局更均衡）
+// 游戏区域偏移（优化布局：与信息栏对齐）
+export const GAME_AREA_OFFSET_X = (SCREEN_WIDTH - GAME_AREA_WIDTH) / 2; // 17.5px 左右边距（1080-1045）/2
+export const GAME_AREA_OFFSET_Y = 320; // 顶部留白，避开刘海和信息栏，为进度文本留出空间
 
 // 深色科幻/霓虹街机风格配色方案（Dark + Neon）
 export const UI_COLORS = {

@@ -17,6 +17,8 @@
     html, body {
       width: 100%;
       height: 100%;
+      height: 100vh; /* iOS修复 */
+      height: -webkit-fill-available; /* iOS 15+修复 */
       margin: 0;
       padding: 0;
       overflow: hidden; /* 禁止滚动 */
@@ -24,15 +26,20 @@
       overscroll-behavior: none; /* 禁止过度滚动 */
       -webkit-overflow-scrolling: touch;
       touch-action: none; /* 禁止触摸手势 */
-      background: #1a1a2e; /* 深色背景 */
+      /* 使用游戏场景的渐变背景色 */
+      background: linear-gradient(to bottom, #4a7a9e, #5e8ba8);
     }
-    
+
     #game-container {
       width: 100vw;
       height: 100vh;
+      height: -webkit-fill-available; /* iOS 15+修复 */
       margin: 0;
       padding: 0;
       overflow: hidden;
+      display: flex;
+      justify-content: center;
+      align-items: center;
     }
     
     #game-container canvas {

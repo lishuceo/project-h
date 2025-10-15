@@ -22,7 +22,7 @@ export class BackButton {
     callback: () => void
   ): Phaser.GameObjects.Container {
     const container = scene.add.container(x, y);
-    const buttonRadius = 32;
+    const buttonRadius = 48; // 从32增加到48，与GameScene保持一致
     const color = UI_COLORS.TEXT_SECONDARY; // 中灰蓝（次要操作）
 
     // 深色阴影
@@ -45,7 +45,7 @@ export class BackButton {
 
     // 返回箭头图标（带阴影）
     const iconText = scene.add.text(0, 0, '←', {
-      fontSize: '28px',
+      fontSize: '40px', // 从28px增加到40px，与GameScene保持一致
       color: '#ffffff',
       fontFamily: 'Arial, sans-serif',
       fontStyle: 'bold'
