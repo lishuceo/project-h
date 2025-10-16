@@ -56,7 +56,9 @@ export class ChallengeManager {
     }
 
     // 生成新挑战（种子包含日期和挑战ID）
-    const seed = this.dateToSeed(today) + challengeId * 1000;
+    // 使用更复杂的种子算法，增加每日差异性
+    const dateSeed = this.dateToSeed(today);
+    const seed = (dateSeed * 7919 + challengeId * 104729) % 2147483647;
     const challenge = this.levelGenerator.generate(seed, today, challengeId);
 
     // 缓存挑战数据
@@ -81,9 +83,15 @@ export class ChallengeManager {
    */
   public clearTodayCache(): void {
     const today = this.getTodayDate();
-    const key = `challenge_${today}`;
-    localStorage.removeItem(key);
-    console.log(`🗑️ 已清除今日挑战缓存: ${key}`);
+
+    // 清除今天所有3个挑战的缓存
+    for (let challengeId = 1; challengeId <= 3; challengeId++) {
+      const key = `challenge_${today}_${challengeId}`;
+      localStorage.removeItem(key);
+      console.log(`🗑️ 已清除缓存: ${key}`);
+    }
+
+    console.log(`✅ 已清除今日所有挑战缓存`);
   }
   
   /**
@@ -96,13 +104,12 @@ export class ChallengeManager {
   
   /**
    * 获取今日日期（UTC时间，保证全球统一）
-   * 返回格式：'2025-10-13'
+   * 返回格式：'2025-10-16'
    */
   private getTodayDate(): string {
     const now = new Date();
-    // 使用UTC时间，避免时区差异
-    const utc = new Date(now.getTime() + now.getTimezoneOffset() * 60000);
-    return utc.toISOString().split('T')[0];
+    // 直接使用 toISOString() 获取UTC日期（已经是UTC时间）
+    return now.toISOString().split('T')[0];
   }
   
   /**
