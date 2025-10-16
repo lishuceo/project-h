@@ -216,10 +216,10 @@ export class ChallengeSelectorScene extends Phaser.Scene {
         statusText = `✅ 已完成 | 最佳: ${record.bestScore}分 ${record.bestStars}星`;
         statusColor = '#4ade80';
 
-        // 如果有全球排名，显示排名信息
-        if (record.globalRank && record.totalPlayers) {
+        // 如果有全球排名，显示排名信息（只显示排名）
+        if (record.globalRank) {
           const rankText = this.add.text(0, -60,
-            `🌍 全球排名: ${record.globalRank} / ${record.totalPlayers}`, {
+            `🌍 全球排名: 第 ${record.globalRank} 名`, {
             fontSize: '32px', // 继续放大
             color: '#ffd700',
             fontFamily: 'Arial',

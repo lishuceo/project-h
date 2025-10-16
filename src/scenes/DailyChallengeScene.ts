@@ -550,10 +550,10 @@ export class DailyChallengeScene extends GameScene {
     stars.setOrigin(0.5);
     this.completionUI.add(stars);
 
-    // 全球排名（如果有）- 放大
-    if (record && record.globalRank && record.totalPlayers) {
+    // 全球排名（如果有）- 只显示排名
+    if (record && record.globalRank) {
       const rankText = this.add.text(0, -70,
-        `🌍 全球排名: ${record.globalRank} / ${record.totalPlayers}`, {
+        `🌍 全球排名: 第 ${record.globalRank} 名`, {
         fontSize: '40px', // 放大
         color: '#ffd700',
         fontFamily: 'Arial',

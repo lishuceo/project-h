@@ -551,44 +551,99 @@ export class ChallengeManager {
       // 1. 获取玩家排名
       let playerRank = -1;
       if (typeof window.SceSDK.cloud.get_user_rank === 'function') {
-        // 使用对象参数格式（与 get_top_rank 一致）
+        console.log(`🔍 调用 get_user_rank({ key: "${boardKey}" })...`);
         const rankResult = await window.SceSDK.cloud.get_user_rank({ key: boardKey });
+        console.log(`📦 get_user_rank 原始返回:`, rankResult);
 
-        // 处理返回值：可能是数字、对象或数组
+        // 处理返回值：SCE SDK返回 {result: {rank: X, value: Y}} 这种嵌套格式
         if (typeof rankResult === 'number') {
           playerRank = rankResult;
         } else if (rankResult && typeof rankResult === 'object') {
-          playerRank = rankResult.rank || rankResult.value || -1;
+          // 检查嵌套的result字段
+          if ('result' in rankResult && rankResult.result) {
+            const innerResult = rankResult.result;
+            console.log(`📦 从result字段解析:`, innerResult);
+
+            // ⚠️ 注意: rank字段才是排名，value字段是分数，不要混淆！
+            // SCE SDK的rank是0-based索引: 0=第1名, 1=第2名, -1=未上榜
+            if ('rank' in innerResult) {
+              if (innerResult.rank >= 0) {
+                playerRank = innerResult.rank + 1; // 转换为1-based (0→1, 1→2, ...)
+                console.log(`📊 rank=${innerResult.rank} (0-based) → 第${playerRank}名 (1-based)`);
+              } else {
+                // rank=-1表示未上榜
+                playerRank = -1;
+                console.log(`⚠️ rank=-1，表示未上榜`);
+              }
+            } else if ('ranking' in innerResult && innerResult.ranking >= 0) {
+              playerRank = innerResult.ranking + 1;
+            } else {
+              playerRank = -1;
+              console.log(`⚠️ 无rank字段`);
+            }
+          } else {
+            // 没有嵌套result，直接从第一层取
+            if ('rank' in rankResult && rankResult.rank >= 0) {
+              playerRank = rankResult.rank + 1; // 0-based → 1-based
+            } else if ('ranking' in rankResult && rankResult.ranking >= 0) {
+              playerRank = rankResult.ranking + 1;
+            }
+          }
         }
 
-        console.log(`📊 玩家排名: 第${playerRank}名`);
-      }
-
-      // 2. 获取总参与人数（通过获取排行榜来估算）
-      let totalPlayers = 0;
-      try {
-        const leaderboard = await this.getChallengeLeaderboard(challengeId, 100);
-        // 总人数至少是排行榜最后一名的排名
-        if (leaderboard.length > 0) {
-          totalPlayers = Math.max(leaderboard[leaderboard.length - 1].rank, playerRank);
-        } else {
-          totalPlayers = playerRank > 0 ? playerRank : 1;
-        }
-      } catch (error) {
-        console.warn('获取总人数失败，使用排名作为估算', error);
-        totalPlayers = playerRank > 0 ? playerRank : 1;
-      }
-
-      console.log(`📊 获取到排名: 第${playerRank}名 / 共${totalPlayers}人`);
-
-      // 更新记录中的排名信息
-      if (playerRank > 0) {
-        record.globalRank = playerRank;
-        record.totalPlayers = totalPlayers;
+        console.log(`📊 解析后的玩家排名: 第${playerRank}名`);
       } else {
-        // 如果无法获取排名，使用默认值
-        record.globalRank = 1;
-        record.totalPlayers = 1;
+        console.warn('⚠️ get_user_rank 方法不存在');
+      }
+
+      console.log(`📊 玩家排名结果: 第${playerRank}名`);
+
+      // 更新记录中的排名信息（只保存排名，不保存总人数）
+      if (playerRank > 0) {
+        // SDK返回了有效排名
+        record.globalRank = playerRank;
+        record.totalPlayers = undefined; // 不再显示总人数
+        console.log(`✅ 排名已更新: 第${playerRank}名`);
+      } else {
+        // rank=0或-1，尝试从排行榜推断排名
+        console.log(`⚠️ SDK返回rank=${playerRank}，尝试从排行榜推断...`);
+
+        try {
+          const leaderboard = await this.getChallengeLeaderboard(challengeId, 100);
+          console.log(`📊 排行榜有 ${leaderboard.length} 条记录`);
+
+          if (leaderboard.length > 0) {
+            // 查找玩家在排行榜中的位置（通过分数匹配）
+            const playerScore = record.bestScore;
+            let foundRank = -1;
+
+            for (let i = 0; i < leaderboard.length; i++) {
+              if (leaderboard[i].score === playerScore) {
+                foundRank = leaderboard[i].rank;
+                console.log(`📊 在排行榜中找到匹配分数 ${playerScore}，排名: 第${foundRank}名`);
+                break;
+              }
+            }
+
+            if (foundRank > 0) {
+              record.globalRank = foundRank;
+              console.log(`✅ 使用排行榜推断的排名: 第${foundRank}名`);
+            } else {
+              // 未在榜上找到，可能是榜外或分数不匹配
+              record.globalRank = undefined;
+              console.log(`⚠️ 未在排行榜中找到匹配记录，不显示排名`);
+            }
+          } else {
+            // 排行榜为空
+            record.globalRank = undefined;
+            console.log(`⚠️ 排行榜为空，不显示排名`);
+          }
+        } catch (error) {
+          console.error('❌ 从排行榜推断排名失败:', error);
+          record.globalRank = undefined;
+        }
+
+        record.totalPlayers = undefined;
       }
 
       // 保存更新后的记录

@@ -1,13 +1,13 @@
 {
     "projectID": "pixel_quicksand",
     "tapID": 5099774,
-    "title": "像素流沙",
+    "title": "俄罗斯方块流沙版(网红玩法)",
     "outDirectory": "dist",
     "screenOrientation": "portrait",
-    "description": "创新方块游戏，物理系统，像素块如流沙般自然堆积。支持排行榜和连锁消除。",
-    "tags": ["休闲", "益智", "方块", "排行榜"],
-    "versionName": "1.0.0",
+    "description": "这是一款无广告、免费的，物理玩法的俄罗斯方块，像素块如流沙般自然堆积，支持排行榜和每日挑战。",
+    "tags": ["休闲", "益智", "无广告"],
+    "versionName": "1.1.0",
     "banner": ["tap_assets/1.jpg"],
     "icon": ["tap_assets/icon.jpg"],
-    "screenshots": ["tap_assets/2.jpg", "tap_assets/3.jpg"]
+    "screenshots": ["tap_assets/start.jpg","tap_assets/2.jpg", "tap_assets/3.jpg"]
 }

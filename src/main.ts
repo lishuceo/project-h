@@ -39,7 +39,7 @@ const config: Phaser.Types.Core.GameConfig = {
 // 创建游戏实例
 const game = new Phaser.Game(config);
 
-console.log('🎮 像素流沙 - Pixel Quicksand');
+console.log('🎮 俄罗斯方块流沙版 - Pixel Quicksand');
 console.log('游戏尺寸:', gameSize.width, 'x', gameSize.height);
 console.log('缩放模式: FIT (自动适配所有设备)');
 console.log('三方向下落物理系统启动成功！');

@@ -108,7 +108,7 @@ export class StartScene extends Phaser.Scene {
     this.createBackgroundDecoration();
 
     // 游戏标题（白色，在中等背景上清晰）
-    const titleText = this.add.text(SCREEN_WIDTH / 2, 450, '像素流沙', { // 优化位置，避免过于靠上
+    const titleText = this.add.text(SCREEN_WIDTH / 2, 450, '俄罗斯方块流沙版', { // 优化位置，避免过于靠上
       fontSize: '72px', // 放大字体
       color: '#ffffff',
       fontFamily: 'Arial',
@@ -129,7 +129,7 @@ export class StartScene extends Phaser.Scene {
     });
 
     // 副标题
-    const subtitleText = this.add.text(SCREEN_WIDTH / 2, 580, '超爽的物理效果', { // 紧凑间距
+    const subtitleText = this.add.text(SCREEN_WIDTH / 2, 580, '网红玩法、超爽的物理效果', { // 紧凑间距
       fontSize: '26px', // 放大字体
       color: '#e0f2fe',
       fontFamily: 'Arial'
