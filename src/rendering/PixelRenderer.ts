@@ -84,22 +84,26 @@ export class PixelRenderer {
   }
 
   /**
-   * 渲染所有像素块
+   * 渲染像素块（性能优化：只渲染有变化的像素块）
    */
   renderPixels(): void {
-    const allPixels = this.grid.getAllPixels();
+    // 性能优化：只获取脏标记的像素块
+    const dirtyPixels = this.grid.getDirtyPixelsAndClear();
+    const activePixelsSet = this.grid.getActivePixelsSet();
 
-    // 移除已不存在的像素块的精灵
-    this.pixelSprites.forEach((sprite, pixel) => {
-      if (!allPixels.includes(pixel)) {
-        sprite.destroy();
-        this.pixelSprites.delete(pixel);
+    // 处理脏像素块
+    dirtyPixels.forEach((pixel) => {
+      if (activePixelsSet.has(pixel)) {
+        // 像素块仍然存在，渲染/更新它
+        this.renderPixel(pixel);
+      } else {
+        // 像素块已被移除，删除其精灵
+        const sprite = this.pixelSprites.get(pixel);
+        if (sprite) {
+          sprite.destroy();
+          this.pixelSprites.delete(pixel);
+        }
       }
-    });
-
-    // 渲染所有像素块
-    allPixels.forEach((pixel) => {
-      this.renderPixel(pixel);
     });
   }
 

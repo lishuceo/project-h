@@ -14,9 +14,15 @@ import { PixelBlock, Color } from '@/types';
 export class Grid {
   // 像素网格 (120×220) - 用于物理和渲染
   private pixelGrid: (PixelBlock | null)[][];
-  
+
   // 逻辑网格 (12×22) - 用于规则计算（缓存）
   private logicalGrid: (Color | null)[][];
+
+  // 性能优化：活跃像素块集合（避免每帧遍历整个网格）
+  private activePixels: Set<PixelBlock>;
+
+  // 性能优化：脏标记集合（跟踪需要重新渲染的像素块）
+  private dirtyPixels: Set<PixelBlock>;
 
   constructor() {
     // 初始化像素网格
@@ -28,6 +34,10 @@ export class Grid {
     this.logicalGrid = Array(LOGICAL_GRID_HEIGHT)
       .fill(null)
       .map(() => Array(LOGICAL_GRID_WIDTH).fill(null));
+
+    // 初始化优化集合
+    this.activePixels = new Set();
+    this.dirtyPixels = new Set();
   }
 
   /**
@@ -47,6 +57,21 @@ export class Grid {
     if (!this.isValidPixelPosition(x, y)) {
       return;
     }
+
+    const oldPixel = this.pixelGrid[y][x];
+
+    // 移除旧像素块
+    if (oldPixel) {
+      this.activePixels.delete(oldPixel);
+      this.dirtyPixels.add(oldPixel); // 标记为脏，需要清理渲染
+    }
+
+    // 添加新像素块
+    if (pixel) {
+      this.activePixels.add(pixel);
+      this.dirtyPixels.add(pixel); // 标记为脏，需要渲染
+    }
+
     this.pixelGrid[y][x] = pixel;
   }
 
@@ -140,44 +165,55 @@ export class Grid {
 
   /**
    * 获取所有像素块（用于遍历）
+   * 性能优化：直接返回活跃像素集合的数组，避免遍历整个网格
    */
   getAllPixels(): PixelBlock[] {
-    const pixels: PixelBlock[] = [];
-    for (let y = 0; y < PIXEL_GRID_HEIGHT; y++) {
-      for (let x = 0; x < PIXEL_GRID_WIDTH; x++) {
-        const pixel = this.pixelGrid[y][x];
-        if (pixel) {
-          pixels.push(pixel);
-        }
-      }
+    return Array.from(this.activePixels);
+  }
+
+  /**
+   * 获取活跃像素块集合（用于性能优化的直接访问）
+   */
+  getActivePixelsSet(): Set<PixelBlock> {
+    return this.activePixels;
+  }
+
+  /**
+   * 获取脏标记的像素块集合并清空脏标记
+   */
+  getDirtyPixelsAndClear(): Set<PixelBlock> {
+    const dirty = new Set(this.dirtyPixels);
+    this.dirtyPixels.clear();
+    return dirty;
+  }
+
+  /**
+   * 标记像素块为脏（需要重新渲染）
+   */
+  markPixelDirty(pixel: PixelBlock): void {
+    if (this.activePixels.has(pixel)) {
+      this.dirtyPixels.add(pixel);
     }
-    return pixels;
   }
 
   /**
    * 获取像素块总数
+   * 性能优化：直接返回活跃像素集合的大小
    */
   getTotalPixelCount(): number {
-    let count = 0;
-    for (let y = 0; y < PIXEL_GRID_HEIGHT; y++) {
-      for (let x = 0; x < PIXEL_GRID_WIDTH; x++) {
-        if (this.pixelGrid[y][x] !== null) {
-          count++;
-        }
-      }
-    }
-    return count;
+    return this.activePixels.size;
   }
 
   /**
    * 清空网格
    */
   clear(): void {
-    for (let y = 0; y < PIXEL_GRID_HEIGHT; y++) {
-      for (let x = 0; x < PIXEL_GRID_WIDTH; x++) {
-        this.pixelGrid[y][x] = null;
-      }
-    }
+    // 性能优化：只清空活跃像素块的位置
+    this.activePixels.forEach((pixel) => {
+      this.pixelGrid[pixel.y][pixel.x] = null;
+    });
+    this.activePixels.clear();
+    this.dirtyPixels.clear();
   }
 
   /**

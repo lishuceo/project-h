@@ -10,6 +10,7 @@ import { ScoringSystem } from '@/gameplay/Scoring';
 import { DragDropManager } from '@/gameplay/DragDrop';
 import { sceSDKManager } from '@/sdk/SceSDKManager';
 import { vibrationManager } from '@/utils/VibrationManager';
+import { PerformanceMonitor } from '@/utils/PerformanceMonitor';
 import { GameState, PixelBlock, TetrominoData } from '@/types';
 import { CELL_TO_PIXEL_RATIO, SCREEN_WIDTH, SCREEN_HEIGHT, GAME_AREA_OFFSET_Y, LOGICAL_GRID_HEIGHT, LOGICAL_GRID_WIDTH, PIXEL_SIZE, UI_COLORS } from '@/config/constants';
 
@@ -27,7 +28,8 @@ export class GameScene extends Phaser.Scene {
   protected eliminationSystem!: EliminationSystem;
   protected scoringSystem!: ScoringSystem;
   protected dragDropManager!: DragDropManager;
-  
+  protected performanceMonitor!: PerformanceMonitor;
+
   protected scoreText!: Phaser.GameObjects.Text;
   protected stateText!: Phaser.GameObjects.Text;
   protected chainText!: Phaser.GameObjects.Text;
@@ -62,6 +64,7 @@ export class GameScene extends Phaser.Scene {
     this.eliminationSystem = new EliminationSystem(this.grid);
     this.scoringSystem = new ScoringSystem();
     this.dragDropManager = new DragDropManager(this, this.grid);
+    this.performanceMonitor = new PerformanceMonitor(this);
 
     // 初始化自动保存相关数据
     this.initAutoSave();
@@ -86,14 +89,27 @@ export class GameScene extends Phaser.Scene {
   }
 
   update(): void {
+    // 性能监控：标记更新开始
+    this.performanceMonitor.markUpdateStart();
+
     // 主游戏循环
     this.gameLoop();
+
+    // 性能监控：标记更新结束，标记渲染开始
+    this.performanceMonitor.markUpdateEnd();
+    this.performanceMonitor.markRenderStart();
 
     // 渲染
     this.pixelRenderer.renderPixels();
 
+    // 性能监控：标记渲染结束
+    this.performanceMonitor.markRenderEnd();
+
     // 更新UI
     this.updateUI();
+
+    // 性能监控：更新显示
+    this.performanceMonitor.update(this.grid.getTotalPixelCount());
 
     // ⚠️ 安全检查：如果有拖动中的方块但状态不是DRAGGING，自动恢复
     if (this.currentDraggedTetromino !== null && !this.stateManager.is(GameState.DRAGGING)) {
@@ -579,24 +595,25 @@ export class GameScene extends Phaser.Scene {
 
   /**
    * 更新预览槽位UI
+   * 性能优化：使用对象池，复用Rectangle对象
    */
   protected updatePreviewSlotsUI(): void {
+    const startTime = performance.now();
     const slots = this.previewSlots.getAllSlots();
 
     slots.forEach((tetromino, index) => {
       const container = this.previewSlotsUI[index];
       if (!container || !tetromino) return;
 
-      // 清除旧的方块显示
+      // 性能优化：隐藏旧的方块显示，而非销毁
       // 新的容器结构：shadowBg, mainBg, glowBg, hitArea (共4个固定元素)
-      // 从第5个元素开始删除（索引4开始）
-      const itemsToRemove: Phaser.GameObjects.GameObject[] = [];
+      // 从第5个元素开始隐藏（索引4开始）
       for (let i = 4; i < container.length; i++) {
-        itemsToRemove.push(container.list[i]);
+        const item = container.list[i] as Phaser.GameObjects.Rectangle;
+        if (item) {
+          item.setVisible(false); // 隐藏而非销毁
+        }
       }
-      itemsToRemove.forEach(item => {
-        item.destroy();
-      });
 
       // 绘制方块预览（槽位310px，方块也相应放大）
       const cellSize = 62; // 方块格子大小（槽位310 / 5 = 62）
@@ -619,25 +636,44 @@ export class GameScene extends Phaser.Scene {
       const offsetX = -blockCenterX;
       const offsetY = -blockCenterY;
 
+      // 性能优化：复用已有的Rectangle对象
+      let rectIndex = 0;
       tetromino.cells.forEach((cell) => {
-        const rect = this.add.rectangle(
-          cell.x * cellSize + offsetX + cellSize / 2,
-          cell.y * cellSize + offsetY + cellSize / 2,
-          cellSize - 2,
-          cellSize - 2,
-          tetromino.color
-        );
-        rect.setStrokeStyle(2, 0xffffff, 0.7); // 加粗边框
-        container.add(rect);
+        const existingRectIndex = 4 + rectIndex; // 跳过前4个固定元素
+        let rect = container.list[existingRectIndex] as Phaser.GameObjects.Rectangle;
+
+        const x = cell.x * cellSize + offsetX + cellSize / 2;
+        const y = cell.y * cellSize + offsetY + cellSize / 2;
+
+        if (rect) {
+          // 复用已有对象
+          rect.setPosition(x, y);
+          rect.setSize(cellSize - 2, cellSize - 2);
+          rect.setFillStyle(tetromino.color);
+          rect.setStrokeStyle(2, 0xffffff, 0.7);
+          rect.setVisible(true); // 显示
+        } else {
+          // 创建新对象（首次或对象不足时）
+          rect = this.add.rectangle(x, y, cellSize - 2, cellSize - 2, tetromino.color);
+          rect.setStrokeStyle(2, 0xffffff, 0.7);
+          container.add(rect);
+        }
+        rectIndex++;
       });
     });
+
+    const updateTime = performance.now() - startTime;
+    if (updateTime > 2) { // 只记录耗时较高的更新
+      console.log(`⚡ PreviewSlots 更新耗时: ${updateTime.toFixed(1)}ms`);
+    }
   }
 
   /**
    * 槽位点击处理
    */
   protected onSlotClicked(slotIndex: number): void {
-    console.log(`点击槽位 ${slotIndex + 1}`);
+    const clickTime = performance.now();
+    console.log(`🖱️ 点击槽位 ${slotIndex + 1}`);
 
     // ⚠️ 安全检查1：确保当前没有正在拖动的方块
     if (this.currentDraggedTetromino !== null) {
@@ -657,24 +693,32 @@ export class GameScene extends Phaser.Scene {
       return;
     }
 
-    console.log(`获取到方块: ${tetromino.shape}, 颜色: ${tetromino.color}`);
+    console.log(`  获取方块: ${tetromino.shape}, 颜色: ${tetromino.color}`);
 
     // 保存拖动信息（用于取消或失败时恢复）
     this.currentDraggedTetromino = tetromino;
     this.currentDraggedSlotIndex = slotIndex;
 
     // 清空该槽位（拖动中显示为空）
+    const clearTime = performance.now();
     this.previewSlots.setSlot(slotIndex, null);
     this.updatePreviewSlotsUI();
+    const uiTime = performance.now() - clearTime;
 
     // 震动反馈：拾取方块
     vibrationManager.vibratePickup();
 
     // 开始拖动
+    const dragTime = performance.now();
     this.dragDropManager.startDrag(tetromino, slotIndex);
+    const dragCreateTime = performance.now() - dragTime;
+
     this.stateManager.setState(GameState.DRAGGING);
 
-    console.log(`拖动槽位${slotIndex + 1}的方块: ${tetromino.shape}, 状态已切换到DRAGGING`);
+    const totalTime = performance.now() - clickTime;
+    console.log(`  ├ UI更新: ${uiTime.toFixed(1)}ms`);
+    console.log(`  ├ 拖动创建: ${dragCreateTime.toFixed(1)}ms`);
+    console.log(`  └ 总耗时: ${totalTime.toFixed(1)}ms`);
   }
 
   /**
@@ -771,6 +815,14 @@ export class GameScene extends Phaser.Scene {
       console.log(`稳定: ${stablePixels.length}`);
       console.log(`不稳定: ${unstablePixels.length}`);
       console.log(`活跃集合: ${this.physicsManager.activeCount}`);
+    });
+
+    // P键切换性能监控显示
+    this.input.keyboard?.on('keydown-P', () => {
+      this.performanceMonitor.toggle();
+      const report = this.performanceMonitor.generateReport(this.grid.getTotalPixelCount());
+      console.log('=== 性能监控切换 ===');
+      console.log(report);
     });
   }
 

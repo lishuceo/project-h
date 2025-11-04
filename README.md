@@ -165,13 +165,22 @@ if (正下方为空) {
 
 | 优先级 | 文档 | 用途 | 阅读时间 |
 |-------|------|------|---------|
-| ⭐⭐⭐⭐⭐ | [AI_HANDOFF.md](AI_HANDOFF.md) | **AI会话交接** | 5分钟 |
-| ⭐⭐⭐⭐⭐ | [PROJECT_CONTEXT.md](PROJECT_CONTEXT.md) | 项目完整上下文 | 15分钟 |
+| ⭐⭐⭐⭐⭐ | [AI_HANDOFF.md](docs/AI_HANDOFF.md) | **AI会话交接** | 5分钟 |
+| ⭐⭐⭐⭐⭐ | [PROJECT_CONTEXT.md](docs/PROJECT_CONTEXT.md) | 项目完整上下文 | 15分钟 |
 | ⭐⭐⭐⭐⭐ | [docs/GameDesignDocument.md](docs/GameDesignDocument.md) | 游戏设计规范 | 60分钟 |
-| ⭐⭐⭐⭐ | [ARCHITECTURE.md](ARCHITECTURE.md) | 技术架构说明 | 20分钟 |
-| ⭐⭐⭐⭐ | [DEVELOPMENT_LOG.md](DEVELOPMENT_LOG.md) | 开发历程记录 | 10分钟 |
+| ⭐⭐⭐⭐ | [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md) | 技术架构说明 | 20分钟 |
+| ⭐⭐⭐⭐ | [docs/DEVELOPMENT_LOG.md](docs/DEVELOPMENT_LOG.md) | 开发历程记录 | 10分钟 |
 | ⭐⭐⭐ | [QUICK_START.md](QUICK_START.md) | 快速启动指南 | 3分钟 |
 | ⭐⭐⭐ | [IMPLEMENTATION_SUMMARY.md](IMPLEMENTATION_SUMMARY.md) | 实施总结报告 | 15分钟 |
+
+#### 📁 分类文档
+
+- **功能文档** - [docs/features/](docs/features/)
+  - 每日挑战系统实现
+  - 功能开发指南
+
+- **工程文档** - [docs/engineering/](docs/engineering/)
+  - [性能优化追踪](docs/engineering/PERFORMANCE_OPTIMIZATION.md) - 性能问题分析与优化进度
 
 ### 📝 推荐阅读顺序
 

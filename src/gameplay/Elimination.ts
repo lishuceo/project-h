@@ -48,6 +48,7 @@ export class EliminationSystem {
   
   /**
    * 在像素网格层面查找连通集群
+   * 性能优化：只遍历活跃像素块，而非整个网格
    */
   private findPixelClusters(): Array<{
     color: Color;
@@ -55,101 +56,108 @@ export class EliminationSystem {
     touchesLeft: boolean;
     touchesRight: boolean;
   }> {
-    const visited = new Set<string>();
+    const visited = new Set<PixelBlock>();
     const clusters: Array<{
       color: Color;
       pixels: PixelBlock[];
       touchesLeft: boolean;
       touchesRight: boolean;
     }> = [];
-    
-    // 遍历所有像素块
-    for (let y = 0; y < PIXEL_GRID_HEIGHT; y++) {
-      for (let x = 0; x < PIXEL_GRID_WIDTH; x++) {
-        const pixel = this.grid.getPixel(x, y);
-        const key = `${x},${y}`;
-        
-        if (pixel && !visited.has(key)) {
-          // 发现新的未访问像素块，进行BFS
-          const cluster = this.bfsPixelSearch(x, y, pixel.color, visited);
-          clusters.push(cluster);
-        }
+
+    // 性能优化：只遍历活跃像素块（避免扫描整个 26,400 个网格）
+    const activePixels = this.grid.getActivePixelsSet();
+
+    activePixels.forEach((pixel) => {
+      if (!visited.has(pixel)) {
+        // 发现新的未访问像素块，进行BFS
+        const cluster = this.bfsPixelSearch(pixel.x, pixel.y, pixel.color, visited);
+        clusters.push(cluster);
       }
-    }
-    
+    });
+
     return clusters;
   }
   
   /**
    * 像素层面的BFS搜索
+   * 性能优化：使用 Set<PixelBlock> 代替字符串键，避免字符串拼接和解析
    */
   private bfsPixelSearch(
     startX: number,
     startY: number,
     color: Color,
-    visited: Set<string>
+    visited: Set<PixelBlock>
   ): {
     color: Color;
     pixels: PixelBlock[];
     touchesLeft: boolean;
     touchesRight: boolean;
   } {
-    const queue: Array<{x: number; y: number}> = [{x: startX, y: startY}];
+    const startPixel = this.grid.getPixel(startX, startY);
+    if (!startPixel) {
+      return {
+        color: color,
+        pixels: [],
+        touchesLeft: false,
+        touchesRight: false,
+      };
+    }
+
+    const queue: PixelBlock[] = [startPixel];
     const cluster = {
       color: color,
       pixels: [] as PixelBlock[],
       touchesLeft: false,
-      touchesRight: false
+      touchesRight: false,
     };
-    
-    visited.add(`${startX},${startY}`);
-    
+
+    visited.add(startPixel);
+
     while (queue.length > 0) {
-      const {x, y} = queue.shift()!;
-      const pixel = this.grid.getPixel(x, y);
-      
-      if (pixel) {
-        cluster.pixels.push(pixel);
-        
-        // 检查是否触及边界（像素网格边界）
-        if (x === 0) cluster.touchesLeft = true;
-        if (x === PIXEL_GRID_WIDTH - 1) cluster.touchesRight = true;
-        
-        // 检查八个方向的相邻像素（包括对角线）
-        const neighbors = [
-          {x: x - 1, y: y},     // 左
-          {x: x + 1, y: y},     // 右
-          {x: x, y: y - 1},     // 上
-          {x: x, y: y + 1},     // 下
-          {x: x - 1, y: y - 1}, // 左上
-          {x: x + 1, y: y - 1}, // 右上
-          {x: x - 1, y: y + 1}, // 左下
-          {x: x + 1, y: y + 1}  // 右下
-        ];
-        
-        for (const {x: nx, y: ny} of neighbors) {
-          const key = `${nx},${ny}`;
-          
-          // 边界检查
-          if (nx < 0 || nx >= PIXEL_GRID_WIDTH || ny < 0 || ny >= PIXEL_GRID_HEIGHT) {
-            continue;
-          }
-          
-          // 已访问检查
-          if (visited.has(key)) {
-            continue;
-          }
-          
-          // 颜色匹配检查
-          const neighborPixel = this.grid.getPixel(nx, ny);
-          if (neighborPixel && neighborPixel.color === color) {
-            visited.add(key);
-            queue.push({x: nx, y: ny});
-          }
+      const pixel = queue.shift()!;
+      cluster.pixels.push(pixel);
+
+      // 检查是否触及边界（像素网格边界）
+      if (pixel.x === 0) cluster.touchesLeft = true;
+      if (pixel.x === PIXEL_GRID_WIDTH - 1) cluster.touchesRight = true;
+
+      // 检查八个方向的相邻像素（包括对角线）
+      const neighbors = [
+        { x: pixel.x - 1, y: pixel.y }, // 左
+        { x: pixel.x + 1, y: pixel.y }, // 右
+        { x: pixel.x, y: pixel.y - 1 }, // 上
+        { x: pixel.x, y: pixel.y + 1 }, // 下
+        { x: pixel.x - 1, y: pixel.y - 1 }, // 左上
+        { x: pixel.x + 1, y: pixel.y - 1 }, // 右上
+        { x: pixel.x - 1, y: pixel.y + 1 }, // 左下
+        { x: pixel.x + 1, y: pixel.y + 1 }, // 右下
+      ];
+
+      for (const { x: nx, y: ny } of neighbors) {
+        // 边界检查
+        if (nx < 0 || nx >= PIXEL_GRID_WIDTH || ny < 0 || ny >= PIXEL_GRID_HEIGHT) {
+          continue;
+        }
+
+        // 获取邻接像素块
+        const neighborPixel = this.grid.getPixel(nx, ny);
+        if (!neighborPixel) {
+          continue;
+        }
+
+        // 已访问检查（性能优化：Set.has() 是 O(1)）
+        if (visited.has(neighborPixel)) {
+          continue;
+        }
+
+        // 颜色匹配检查
+        if (neighborPixel.color === color) {
+          visited.add(neighborPixel);
+          queue.push(neighborPixel);
         }
       }
     }
-    
+
     return cluster;
   }
   
