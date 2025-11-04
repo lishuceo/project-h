@@ -170,21 +170,21 @@ export class DailyChallengeScene extends GameScene {
     // 使用与父类相同的信息栏布局（完全对齐）
     const infoBarY = 150; // 与GameScene保持一致
     const cardWidth = (SCREEN_WIDTH - 48) / 2; // 与GameScene保持一致
+    const cardHeight = 110; // 与GameScene保持一致（已放大）
 
-    // 创建头部信息卡片（使用与父类相同的样式）
-    const headerBg = this.add.graphics();
+    // 左侧卡片 - 计时器（独立Graphics对象）
+    const timerCard = this.add.graphics();
+    timerCard.fillStyle(UI_COLORS.BG_SECONDARY, 1);
+    timerCard.fillRoundedRect(16, infoBarY, cardWidth, cardHeight, 12);
+    timerCard.lineStyle(2, UI_COLORS.BORDER_GLOW, 0.3);
+    timerCard.strokeRoundedRect(16, infoBarY, cardWidth, cardHeight, 12);
 
-    // 左侧卡片 - 计时器
-    headerBg.fillStyle(UI_COLORS.BG_SECONDARY, 1);
-    headerBg.fillRoundedRect(16, infoBarY, cardWidth, 90, 12); // 增加高度到90
-    headerBg.lineStyle(2, UI_COLORS.BORDER_GLOW, 0.3);
-    headerBg.strokeRoundedRect(16, infoBarY, cardWidth, 90, 12);
-
-    // 右侧卡片 - 步数/进度
-    headerBg.fillStyle(UI_COLORS.BG_SECONDARY, 1);
-    headerBg.fillRoundedRect(cardWidth + 32, infoBarY, cardWidth, 90, 12);
-    headerBg.lineStyle(2, UI_COLORS.BORDER_GLOW, 0.3);
-    headerBg.strokeRoundedRect(cardWidth + 32, infoBarY, cardWidth, 90, 12);
+    // 右侧卡片 - 步数/进度（独立Graphics对象）
+    const stepsCard = this.add.graphics();
+    stepsCard.fillStyle(UI_COLORS.BG_SECONDARY, 1);
+    stepsCard.fillRoundedRect(cardWidth + 32, infoBarY, cardWidth, cardHeight, 12);
+    stepsCard.lineStyle(2, UI_COLORS.BORDER_GLOW, 0.3);
+    stepsCard.strokeRoundedRect(cardWidth + 32, infoBarY, cardWidth, cardHeight, 12);
 
     // 左侧卡片内容 - 计时器
     this.add.text(32, infoBarY + 16, '⏱️ 用时', {

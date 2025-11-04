@@ -7,7 +7,7 @@
     "description": "这是一款无广告、免费的，物理玩法的俄罗斯方块，像素块如流沙般自然堆积，支持排行榜和每日挑战。",
     "tags": ["休闲", "益智", "竖屏", "解密"],
     "versionName": "1.1.1",
-    "banner": ["tap_assets/1.jpg"],
+    "banner": ["tap_assets/cover.jpg"],
     "icon": ["tap_assets/icon.jpg"],
     "screenshots": ["tap_assets/start.jpg","tap_assets/2.jpg", "tap_assets/3.jpg"]
 }
