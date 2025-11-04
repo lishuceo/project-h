@@ -198,8 +198,9 @@ export class PerformanceMonitor {
     ];
 
     // 添加内存信息（如果可用）
-    if (performance.memory) {
-      const memoryMB = (performance.memory.usedJSHeapSize / 1024 / 1024).toFixed(1);
+    const perfMemory = (performance as any).memory;
+    if (perfMemory) {
+      const memoryMB = (perfMemory.usedJSHeapSize / 1024 / 1024).toFixed(1);
       metrics.push(`内存: ${memoryMB}MB`);
     }
 
@@ -228,8 +229,8 @@ export class PerformanceMonitor {
       renderTime: avgRenderTime,
       updateTime: avgUpdateTime,
       pixelCount: 0, // 需要外部传入
-      memoryUsage: performance.memory
-        ? performance.memory.usedJSHeapSize / 1024 / 1024
+      memoryUsage: (performance as any).memory
+        ? (performance as any).memory.usedJSHeapSize / 1024 / 1024
         : undefined,
     };
   }

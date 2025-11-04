@@ -10,17 +10,28 @@ export class PhysicsManager {
   private grid: Grid;
   private activePixels: Set<PixelBlock>;
 
+  // 性能优化：按 y 坐标分组的桶（避免每帧排序）
+  private pixelBuckets: Map<number, Set<PixelBlock>>;
+
   constructor(grid: Grid) {
     this.grid = grid;
     this.activePixels = new Set();
+    this.pixelBuckets = new Map();
   }
 
   /**
    * 添加像素块到活跃集合
+   * 性能优化：同时添加到对应的 y 坐标桶
    */
   addPixel(pixel: PixelBlock): void {
     this.activePixels.add(pixel);
     pixel.isStable = false;
+
+    // 添加到对应的桶
+    if (!this.pixelBuckets.has(pixel.y)) {
+      this.pixelBuckets.set(pixel.y, new Set());
+    }
+    this.pixelBuckets.get(pixel.y)!.add(pixel);
   }
 
   /**
@@ -33,6 +44,7 @@ export class PhysicsManager {
   /**
    * 更新所有活跃像素块
    * 参考设计文档5.4.2节
+   * 性能优化：使用桶排序代替 Array.sort()，从 O(n log n) 降到 O(n)
    */
   update(): void {
     if (this.activePixels.size === 0) {
@@ -44,38 +56,58 @@ export class PhysicsManager {
       pixel.updatedThisFrame = false;
     });
 
-    // 将活跃像素块转为数组并按Y坐标排序（从下往上）
-    const pixelsToUpdate = Array.from(this.activePixels).sort(
-      (a, b) => b.y - a.y
-    );
-
     let movedCount = 0;
     let stabilizedCount = 0;
 
-    // 从下往上更新
-    for (const pixel of pixelsToUpdate) {
-      // 跳过已稳定或已更新的像素块
-      if (pixel.isStable || pixel.updatedThisFrame) {
-        continue;
+    // 性能优化：按 y 坐标从大到小遍历桶（从下往上）
+    // 找出所有有像素块的 y 坐标，按降序排序（只排序 y 坐标，不是像素块）
+    const yCoords = Array.from(this.pixelBuckets.keys()).sort((a, b) => b - a);
+
+    for (const y of yCoords) {
+      const bucket = this.pixelBuckets.get(y);
+      if (!bucket || bucket.size === 0) {
+        continue; // 该 y 坐标没有像素块，跳过
       }
 
-      const oldY = pixel.y;
-      
-      // 更新该像素块
-      this.updatePixelPhysics(pixel);
+      // 将桶转为数组以便安全遍历（因为 updatePixelPhysics 可能修改桶）
+      const pixelsAtY = Array.from(bucket);
 
-      // 标记为已更新
-      pixel.updatedThisFrame = true;
+      for (const pixel of pixelsAtY) {
+        // 跳过已稳定或已更新的像素块
+        if (pixel.isStable || pixel.updatedThisFrame) {
+          continue;
+        }
 
-      // 统计
-      if (pixel.y !== oldY) {
-        movedCount++;
-      }
+        const oldY = pixel.y;
 
-      // 如果已稳定，从活跃集合中移除
-      if (pixel.isStable) {
-        this.activePixels.delete(pixel);
-        stabilizedCount++;
+        // 更新该像素块
+        this.updatePixelPhysics(pixel);
+
+        // 标记为已更新
+        pixel.updatedThisFrame = true;
+
+        // 如果位置改变，需要更新桶
+        if (pixel.y !== oldY) {
+          bucket.delete(pixel); // 从旧桶移除
+
+          // 添加到新桶
+          if (!this.pixelBuckets.has(pixel.y)) {
+            this.pixelBuckets.set(pixel.y, new Set());
+          }
+          this.pixelBuckets.get(pixel.y)!.add(pixel);
+
+          movedCount++;
+        }
+
+        // 如果已稳定，从活跃集合和桶中移除
+        if (pixel.isStable) {
+          this.activePixels.delete(pixel);
+          const currentBucket = this.pixelBuckets.get(pixel.y);
+          if (currentBucket) {
+            currentBucket.delete(pixel);
+          }
+          stabilizedCount++;
+        }
       }
     }
 
@@ -178,46 +210,59 @@ export class PhysicsManager {
   /**
    * 重新检查所有像素块的稳定性（消除后调用）
    * 参考设计文档8.4节
-   * 
+   *
    * 重要：增量检查，只标记真正失去支撑的像素块
+   * 性能优化：使用桶遍历而非排序
    */
   recheckStability(): void {
     const allPixels = this.grid.getAllPixels();
-    
+
     console.log(`重新检查 ${allPixels.length} 个像素块的稳定性`);
-    
+
     let newUnstableCount = 0;
     let alreadyActive = 0;
     let stableCount = 0;
-    
-    // 从下往上检查每个像素块
-    allPixels.sort((a, b) => b.y - a.y);
-    
-    allPixels.forEach((pixel) => {
-      // 跳过已经在活跃集合中的像素块
-      if (this.activePixels.has(pixel)) {
-        alreadyActive++;
-        return;
-      }
-      
-      // 只检查已稳定的像素块
-      if (!pixel.isStable) {
-        return;
-      }
-      
-      // 检查下方是否真的为空（不包括不稳定的像素块）
-      const hasRealSupport = this.hasRealSupportBelow(pixel.x, pixel.y);
-      
-      if (!hasRealSupport) {
-        // 失去真实支撑，标记为不稳定
-        pixel.isStable = false;
-        this.activePixels.add(pixel);
-        newUnstableCount++;
-      } else {
-        stableCount++;
-      }
-    });
-    
+
+    // 性能优化：从下往上遍历所有可能的 y 坐标（避免排序）
+    for (let y = PIXEL_GRID_HEIGHT - 1; y >= 0; y--) {
+      // 遍历该 y 坐标上的所有像素块
+      allPixels.forEach((pixel) => {
+        if (pixel.y !== y) {
+          return; // 不在当前 y 层，跳过
+        }
+
+        // 跳过已经在活跃集合中的像素块
+        if (this.activePixels.has(pixel)) {
+          alreadyActive++;
+          return;
+        }
+
+        // 只检查已稳定的像素块
+        if (!pixel.isStable) {
+          return;
+        }
+
+        // 检查下方是否真的为空（不包括不稳定的像素块）
+        const hasRealSupport = this.hasRealSupportBelow(pixel.x, pixel.y);
+
+        if (!hasRealSupport) {
+          // 失去真实支撑，标记为不稳定
+          pixel.isStable = false;
+          this.activePixels.add(pixel);
+
+          // 添加到对应的桶
+          if (!this.pixelBuckets.has(pixel.y)) {
+            this.pixelBuckets.set(pixel.y, new Set());
+          }
+          this.pixelBuckets.get(pixel.y)!.add(pixel);
+
+          newUnstableCount++;
+        } else {
+          stableCount++;
+        }
+      });
+    }
+
     console.log(`重新检查结果: 新增不稳定=${newUnstableCount}, 已活跃=${alreadyActive}, 稳定=${stableCount}, 总活跃=${this.activePixels.size}`);
   }
   
@@ -284,6 +329,7 @@ export class PhysicsManager {
    */
   clear(): void {
     this.activePixels.clear();
+    this.pixelBuckets.clear(); // 同时清空桶
   }
 }
 

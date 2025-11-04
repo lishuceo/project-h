@@ -26,8 +26,8 @@
       overscroll-behavior: none; /* 禁止过度滚动 */
       -webkit-overflow-scrolling: touch;
       touch-action: none; /* 禁止触摸手势 */
-      /* 使用游戏场景的渐变背景色 */
-      background: linear-gradient(to bottom, #4a7a9e, #5e8ba8);
+      /* 使用游戏场景的渐变背景色（对应 UI_COLORS.BG_GRADIENT_TOP 和 BG_GRADIENT_BOTTOM） */
+      background: linear-gradient(to bottom, #395395, #5E7FCC);
     }
 
     #game-container {
@@ -40,10 +40,15 @@
       display: flex;
       justify-content: center;
       align-items: center;
+      position: relative; /* 确保子元素可以正确定位 */
     }
-    
+
     #game-container canvas {
       display: block;
+      margin: 0 auto; /* 强制水平居中 */
+      position: relative;
+      left: 0;
+      right: 0;
     }
   </style>
 </head>

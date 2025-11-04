@@ -18,7 +18,7 @@ const config: Phaser.Types.Core.GameConfig = {
   width: gameSize.width,
   height: gameSize.height,
   parent: 'game-container',
-  backgroundColor: '#1a1a2e',
+  backgroundColor: '#395395', // 使用渐变顶部颜色作为主背景（对应 UI_COLORS.BG_GRADIENT_TOP）
   scene: [StartScene, GameScene, ChallengeSelectorScene, DailyChallengeScene, RankingScene], // 场景顺序：开始 → 游戏 → 挑战选择 → 每日挑战 → 排行榜
   physics: {
     default: 'arcade',

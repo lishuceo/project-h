@@ -46,6 +46,12 @@ export class GameScene extends Phaser.Scene {
   private autoSaveInterval: number = 3 * 60 * 1000; // 3分钟（毫秒）
   private isSaving: boolean = false;
 
+  // 性能优化：UI 更新缓存
+  private lastScoreText: string = '';
+  private lastChainText: string = '';
+  private lastStateText: string = '';
+  private lastChainVisible: boolean = false;
+
   constructor(key: string = 'GameScene') {
     super({ key });
   }
@@ -275,21 +281,22 @@ export class GameScene extends Phaser.Scene {
 
     // 左侧卡片 - 分数
     const scoreCard = this.add.graphics();
+    const cardHeight = 110; // 增加卡片高度，留出更多空间
     scoreCard.fillStyle(UI_COLORS.BG_SECONDARY, 1);
-    scoreCard.fillRoundedRect(16, infoBarY, cardWidth, 90, 12); // 增加高度到90
+    scoreCard.fillRoundedRect(16, infoBarY, cardWidth, cardHeight, 12);
     scoreCard.lineStyle(2, UI_COLORS.BORDER_GLOW, 0.3);
-    scoreCard.strokeRoundedRect(16, infoBarY, cardWidth, 90, 12);
+    scoreCard.strokeRoundedRect(16, infoBarY, cardWidth, cardHeight, 12);
 
     // 分数标签
-    this.add.text(32, infoBarY + 16, '分数', {
-      fontSize: '22px', // 继续放大
+    this.add.text(32, infoBarY + 18, '分数', {
+      fontSize: '22px',
       color: '#9aa4b2',
       fontFamily: 'Arial',
     });
 
     // 分数数值（大号、醒目）
-    this.scoreText = this.add.text(32, infoBarY + 50, '0', {
-      fontSize: '42px', // 继续放大，并调整位置避免出框
+    this.scoreText = this.add.text(32, infoBarY + 52, '0', {
+      fontSize: '42px',
       color: '#ffffff',
       fontFamily: 'Arial, sans-serif',
       fontStyle: '700',
@@ -298,20 +305,20 @@ export class GameScene extends Phaser.Scene {
     // 右侧卡片 - 状态/连锁
     const statusCard = this.add.graphics();
     statusCard.fillStyle(UI_COLORS.BG_SECONDARY, 1);
-    statusCard.fillRoundedRect(cardWidth + 32, infoBarY, cardWidth, 90, 12); // 增加高度到90
+    statusCard.fillRoundedRect(cardWidth + 32, infoBarY, cardWidth, cardHeight, 12);
     statusCard.lineStyle(2, UI_COLORS.BORDER_GLOW, 0.3);
-    statusCard.strokeRoundedRect(cardWidth + 32, infoBarY, cardWidth, 90, 12);
+    statusCard.strokeRoundedRect(cardWidth + 32, infoBarY, cardWidth, cardHeight, 12);
 
     // 状态标签
-    this.add.text(cardWidth + 48, infoBarY + 16, '状态', {
-      fontSize: '22px', // 继续放大
+    this.add.text(cardWidth + 48, infoBarY + 18, '状态', {
+      fontSize: '22px',
       color: '#9aa4b2',
       fontFamily: 'Arial',
     });
 
     // 状态文本
-    this.stateText = this.add.text(cardWidth + 48, infoBarY + 50, '空闲', {
-      fontSize: '26px', // 继续放大，并调整位置
+    this.stateText = this.add.text(cardWidth + 48, infoBarY + 52, '空闲', {
+      fontSize: '26px',
       color: '#ffffff',
       fontFamily: 'Arial',
     });
@@ -895,18 +902,32 @@ export class GameScene extends Phaser.Scene {
 
   /**
    * 更新UI显示
+   * 性能优化：只在内容真正改变时更新文本
    */
   private updateUI(): void {
-    this.scoreText.setText(`${this.scoringSystem.score}`);
-
-    const chainLevel = this.scoringSystem.chainLevel;
-    if (chainLevel > 1) {
-      this.chainText.setText(`连锁 x${chainLevel}!`);
-      this.chainText.setVisible(true);
-    } else {
-      this.chainText.setVisible(false);
+    // 性能优化：只在分数改变时更新
+    const currentScore = `${this.scoringSystem.score}`;
+    if (currentScore !== this.lastScoreText) {
+      this.scoreText.setText(currentScore);
+      this.lastScoreText = currentScore;
     }
 
+    // 性能优化：只在连锁状态改变时更新
+    const chainLevel = this.scoringSystem.chainLevel;
+    const chainVisible = chainLevel > 1;
+    const currentChain = chainVisible ? `连锁 x${chainLevel}!` : '';
+
+    if (chainVisible !== this.lastChainVisible) {
+      this.chainText.setVisible(chainVisible);
+      this.lastChainVisible = chainVisible;
+    }
+
+    if (chainVisible && currentChain !== this.lastChainText) {
+      this.chainText.setText(currentChain);
+      this.lastChainText = currentChain;
+    }
+
+    // 性能优化：只在状态改变时更新
     let stateStr = '';
     const state = this.stateManager.state;
     switch (state) {
@@ -929,7 +950,10 @@ export class GameScene extends Phaser.Scene {
         stateStr = state;
     }
 
-    this.stateText.setText(`${stateStr}`);
+    if (stateStr !== this.lastStateText) {
+      this.stateText.setText(`${stateStr}`);
+      this.lastStateText = stateStr;
+    }
   }
 
   /**
@@ -1138,8 +1162,8 @@ export class GameScene extends Phaser.Scene {
   private createGradientBackground(): void {
     const bg = this.add.graphics();
     bg.fillGradientStyle(
-      0x4a7a9e, 0x4a7a9e,  // 顶部：深蓝灰（调暗）
-      0x5e8ba8, 0x5e8ba8,  // 底部：浅蓝灰（调暗）
+      UI_COLORS.BG_GRADIENT_TOP, UI_COLORS.BG_GRADIENT_TOP,      // 顶部
+      UI_COLORS.BG_GRADIENT_BOTTOM, UI_COLORS.BG_GRADIENT_BOTTOM, // 底部
       1
     );
     bg.fillRect(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
