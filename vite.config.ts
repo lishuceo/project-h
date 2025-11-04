@@ -10,7 +10,7 @@ export default defineConfig({
   },
   server: {
     host: '0.0.0.0', // 监听所有网络接口（允许局域网访问）
-    port: 3000,
+    port: 3005,
     open: true,
   },
   build: {
@@ -18,6 +18,14 @@ export default defineConfig({
     outDir: 'dist',
     assetsDir: 'assets',
     sourcemap: true,
+  },
+  test: {
+    globals: true,
+    environment: 'happy-dom',
+    coverage: {
+      provider: 'v8',
+      reporter: ['text', 'json', 'html'],
+    },
   },
 });
 

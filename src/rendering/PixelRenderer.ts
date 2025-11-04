@@ -7,6 +7,7 @@ import {
   PIXEL_GRID_HEIGHT,
   GAME_AREA_OFFSET_X,
   GAME_AREA_OFFSET_Y,
+  UI_COLORS,
 } from '@/config/constants';
 
 /**
@@ -72,7 +73,7 @@ export class PixelRenderer {
 
     // 1. 深色背景层（用于凸显方块）
     const bgLayer = this.scene.add.graphics();
-    bgLayer.fillStyle(0x1a1f2e, 1); // 深蓝灰色背景
+    bgLayer.fillStyle(UI_COLORS.BG_SECONDARY, 1); // 卡片背景色
     bgLayer.fillRoundedRect(x, y, width, height, borderRadius);
     bgLayer.setDepth(-2);
 

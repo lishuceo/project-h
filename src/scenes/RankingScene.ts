@@ -1,6 +1,6 @@
 import Phaser from 'phaser';
 import { sceSDKManager, RankingItem } from '@/sdk/SceSDKManager';
-import { SCREEN_WIDTH, SCREEN_HEIGHT } from '@/config/constants';
+import { SCREEN_WIDTH, SCREEN_HEIGHT, UI_COLORS } from '@/config/constants';
 import { BackButton } from '@/ui/BackButton';
 
 /**
@@ -342,8 +342,8 @@ export class RankingScene extends Phaser.Scene {
   private createGradientBackground(): void {
     const bg = this.add.graphics();
     bg.fillGradientStyle(
-      0x4a7a9e, 0x4a7a9e,  // 顶部：深蓝灰（调暗）
-      0x5e8ba8, 0x5e8ba8,  // 底部：浅蓝灰（调暗）
+      UI_COLORS.BG_GRADIENT_TOP, UI_COLORS.BG_GRADIENT_TOP,      // 顶部
+      UI_COLORS.BG_GRADIENT_BOTTOM, UI_COLORS.BG_GRADIENT_BOTTOM, // 底部
       1
     );
     bg.fillRect(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);

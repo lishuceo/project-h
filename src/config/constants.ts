@@ -32,8 +32,14 @@ export const GAME_AREA_OFFSET_Y = 320; // 顶部留白，避开刘海和信息�
 export const UI_COLORS = {
   // 背景色 - 深色科幻
   BG_PRIMARY: 0x0f1419,      // 极深蓝黑背景
-  BG_SECONDARY: 0x1a1f2e,    // 卡片背景
+  BG_SECONDARY: 0x33395C,    // 卡片背景
   BG_TERTIARY: 0x252a3a,     // 悬浮元素
+
+  // 背景渐变色（参考 BLOCK BLAST）
+  // BG_GRADIENT_TOP: 0x2440B0,    // 渐变顶部：深蓝色
+  // BG_GRADIENT_BOTTOM: 0x3D6ADB, // 渐变底部：稍浅的蓝色
+  BG_GRADIENT_TOP: 0x395395,    // 渐变顶部：深蓝色
+  BG_GRADIENT_BOTTOM: 0x5E7FCC, // 渐变底部：稍浅的蓝色
 
   // 霓虹方块色（降饱和度、提高亮度）
   BLOCK_GREEN: 0x4ade80,     // 霓虹绿
@@ -57,10 +63,20 @@ export const UI_COLORS = {
   // 边框与发光
   BORDER_GRID: 0x2a3344,     // 网格线（25%透明度）
   BORDER_GLOW: 0x1b9cff,     // 霓虹蓝发光
+  BORDER_LOCKED: 0x555555,   // 未解锁边框（中灰）
   GLOW_ALPHA: 0.35,          // 发光透明度
 
   // 特殊颜色
-  CARD_BG: 0x1a1f2e,         // 卡片背景
-  SHADOW_DEEP: 0x000000      // 深色阴影
+  CARD_BG: 0x2a3f5f,           // 卡片背景（默认/已解锁）- 深蓝色，更协调
+  CARD_BG_LOCKED: 0x3d4556,    // 未解锁卡片背景（蓝灰）
+  CARD_BG_COMPLETED: 0x2d5a3d, // 已完成卡片背景（深绿）
+  SHADOW_DEEP: 0x000000,       // 深色阴影
+
+  // 按钮颜色
+  BUTTON_COMPLETED: 0x64748b,  // 已完成按钮（灰蓝）
+  BUTTON_COMPLETED_HOVER: 0x748096, // 已完成按钮悬停
+  BUTTON_COMPLETED_BORDER: 0x475569, // 已完成按钮边框
+  BUTTON_START: 0x4ade80,      // 开始按钮（同 ACCENT_SUCCESS）
+  BUTTON_START_HOVER: 0x66bb6a // 开始按钮悬停
 };
 

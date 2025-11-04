@@ -1,4 +1,5 @@
 import Phaser from 'phaser';
+import { StartScene } from './scenes/StartScene';
 import { GameScene } from './scenes/GameScene';
 import { ChallengeSelectorScene } from './scenes/ChallengeSelectorScene';
 import { DailyChallengeScene } from './scenes/DailyChallengeScene';
@@ -18,7 +19,7 @@ const config: Phaser.Types.Core.GameConfig = {
   height: gameSize.height,
   parent: 'game-container',
   backgroundColor: '#395395', // 使用渐变顶部颜色作为主背景（对应 UI_COLORS.BG_GRADIENT_TOP）
-  scene: [ChallengeSelectorScene, GameScene, DailyChallengeScene, RankingScene], // 场景顺序：挑战选择 → 游戏 → 每日挑战 → 排行榜
+  scene: [StartScene, GameScene, ChallengeSelectorScene, DailyChallengeScene, RankingScene], // 场景顺序：开始 → 游戏 → 挑战选择 → 每日挑战 → 排行榜
   physics: {
     default: 'arcade',
     arcade: {

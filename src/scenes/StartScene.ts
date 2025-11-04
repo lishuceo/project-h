@@ -1,6 +1,6 @@
 import Phaser from 'phaser';
 import { sceSDKManager } from '@/sdk/SceSDKManager';
-import { SCREEN_WIDTH, SCREEN_HEIGHT } from '@/config/constants';
+import { SCREEN_WIDTH, SCREEN_HEIGHT, UI_COLORS } from '@/config/constants';
 import { initTestData } from '@/utils/initTestData';
 import { Color } from '@/types';
 import { ChallengeManager } from '@/challenge/ChallengeManager';
@@ -128,13 +128,14 @@ export class StartScene extends Phaser.Scene {
       ease: 'Sine.easeInOut'
     });
 
-    // 副标题
-    const subtitleText = this.add.text(SCREEN_WIDTH / 2, 580, '网红玩法、超爽的物理效果', { // 紧凑间距
-      fontSize: '26px', // 放大字体
-      color: '#e0f2fe',
-      fontFamily: 'Arial'
+    // 更新日志（替换副标题位置）
+    const changelogText = this.add.text(SCREEN_WIDTH / 2, 580, 'v1.1.1 大幅提升性能、优化发热', {
+      fontSize: '30px',
+      color: '#fbbf24',
+      fontFamily: 'Arial',
+      fontStyle: 'bold'
     });
-    subtitleText.setOrigin(0.5);
+    changelogText.setOrigin(0.5);
 
     // 最高分会在SDK加载完成后异步显示（见 updateHighScoreDisplay）
 
@@ -388,14 +389,14 @@ export class StartScene extends Phaser.Scene {
    * 创建清新的渐变背景
    */
   private createGradientBackground(): void {
-    // 使用Graphics创建渐变背景（调暗的蓝灰色渐变）
+    // 使用Graphics创建渐变背景（参考 BLOCK BLAST 的深蓝色渐变）
     const bg = this.add.graphics();
 
     // Phaser的fillGradientStyle创建垂直渐变
     // 参数：左上色、右上色、左下色、右下色、透明度
     bg.fillGradientStyle(
-      0x4a7a9e, 0x4a7a9e,  // 顶部：深蓝灰（调暗）
-      0x5e8ba8, 0x5e8ba8,  // 底部：浅蓝灰（调暗）
+      UI_COLORS.BG_GRADIENT_TOP, UI_COLORS.BG_GRADIENT_TOP,      // 顶部
+      UI_COLORS.BG_GRADIENT_BOTTOM, UI_COLORS.BG_GRADIENT_BOTTOM, // 底部
       1
     );
     bg.fillRect(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);

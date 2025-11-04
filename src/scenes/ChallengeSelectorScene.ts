@@ -93,9 +93,9 @@ export class ChallengeSelectorScene extends Phaser.Scene {
     });
     dateText.setOrigin(0.5);
 
-    // 创建3个挑战卡片 - 更紧凑的布局
+    // 创建3个挑战卡片
     const cardY = 550; // 调整起始位置
-    const cardSpacing = 380; // 缩小间距，让卡片更紧凑
+    const cardSpacing = 420; // 增加间距，适应更大的卡片（380高度 + 40间隙）
 
     this.challenges.forEach((challenge, index) => {
       this.createChallengeCard(
@@ -120,9 +120,9 @@ export class ChallengeSelectorScene extends Phaser.Scene {
     challengeId: 1 | 2 | 3
   ): void {
     const container = this.add.container(x, y);
-    const cardWidth = 900; // 增加宽度
-    const cardHeight = 320; // 增加高度
-    const cornerRadius = 16;
+    const cardWidth = 980; // 继续增加宽度，给内容更多空间
+    const cardHeight = 380; // 继续增加高度，增加内边距
+    const cornerRadius = 20; // 增大圆角，更现代
 
     // 设置container的边界，确保内容不被裁剪
     container.setSize(cardWidth, cardHeight);
@@ -134,33 +134,37 @@ export class ChallengeSelectorScene extends Phaser.Scene {
     // 卡片背景
     const bg = this.add.graphics();
 
-    // 阴影
-    bg.fillStyle(0x000000, 0.3);
-    bg.fillRoundedRect(-cardWidth / 2 + 4, -cardHeight / 2 + 4, cardWidth, cardHeight, cornerRadius);
+    // 阴影（增大偏移，更柔和）
+    bg.fillStyle(UI_COLORS.SHADOW_DEEP, 0.25);
+    bg.fillRoundedRect(-cardWidth / 2 + 6, -cardHeight / 2 + 6, cardWidth, cardHeight, cornerRadius);
 
     // 主背景（根据状态改变颜色）
     let bgColor = UI_COLORS.CARD_BG;
+    let bgAlpha = 0.85; // 半透明，让渐变背景透过来
+
     if (!isUnlocked) {
-      bgColor = 0x3a3a3a; // 未解锁：灰色
+      bgColor = UI_COLORS.CARD_BG_LOCKED; // 未解锁：灰色
+      bgAlpha = 0.9;
     } else if (record?.completed) {
-      bgColor = 0x2d5a3d; // 已完成：绿色
+      bgColor = UI_COLORS.CARD_BG_COMPLETED; // 已完成：绿色
+      bgAlpha = 0.9;
     }
 
-    bg.fillStyle(bgColor, 1);
+    bg.fillStyle(bgColor, bgAlpha);
     bg.fillRoundedRect(-cardWidth / 2, -cardHeight / 2, cardWidth, cardHeight, cornerRadius);
 
-    // 边框
-    bg.lineStyle(2, isUnlocked ? UI_COLORS.BORDER_GLOW : 0x555555, 0.5);
+    // 边框（更细，更优雅）
+    bg.lineStyle(1.5, isUnlocked ? UI_COLORS.BORDER_GLOW : UI_COLORS.BORDER_LOCKED, 0.4);
     bg.strokeRoundedRect(-cardWidth / 2, -cardHeight / 2, cardWidth, cardHeight, cornerRadius);
 
     container.add(bg);
 
     // 难度标识 - 继续放大
     const difficultyLabels = ['简单', '中等', '困难'];
-    const difficultyColors = [0x4ade80, 0xfbbf24, 0xf87171]; // 绿、黄、红
+    const difficultyColors = [UI_COLORS.ACCENT_SUCCESS, UI_COLORS.ACCENT_WARNING, UI_COLORS.ACCENT_DANGER]; // 绿、黄、红
     const stars = '⭐'.repeat(challenge.difficulty);
 
-    const difficultyBadge = this.add.container(-cardWidth / 2 + 60, -cardHeight / 2 + 60);
+    const difficultyBadge = this.add.container(-cardWidth / 2 + 70, -cardHeight / 2 + 70);
     const badgeBg = this.add.circle(0, 0, 50, difficultyColors[challengeId - 1]); // 继续放大
     const badgeText = this.add.text(0, 0, `${challengeId}`, {
       fontSize: '40px', // 继续放大
@@ -172,8 +176,8 @@ export class ChallengeSelectorScene extends Phaser.Scene {
     difficultyBadge.add([badgeBg, badgeText]);
     container.add(difficultyBadge);
 
-    // 标题 - 继续放大
-    const titleText = this.add.text(-cardWidth / 2 + 150, -cardHeight / 2 + 50,
+    // 标题 - 继续放大（增加左边距）
+    const titleText = this.add.text(-cardWidth / 2 + 160, -cardHeight / 2 + 60,
       `挑战${challengeId}：${difficultyLabels[challengeId - 1]}`, {
       fontSize: '44px', // 继续放大
       color: isUnlocked ? '#ffffff' : '#888888',
@@ -183,8 +187,8 @@ export class ChallengeSelectorScene extends Phaser.Scene {
     titleText.setOrigin(0, 0.5);
     container.add(titleText);
 
-    // 星级 - 继续放大
-    const starsText = this.add.text(-cardWidth / 2 + 150, -cardHeight / 2 + 105, stars, {
+    // 星级 - 继续放大（增加左边距）
+    const starsText = this.add.text(-cardWidth / 2 + 160, -cardHeight / 2 + 115, stars, {
       fontSize: '34px' // 继续放大
     });
     starsText.setOrigin(0, 0.5);
@@ -310,10 +314,10 @@ export class ChallengeSelectorScene extends Phaser.Scene {
       }
     }
 
-    // 开始按钮
+    // 开始按钮（增加底部边距）
     if (isUnlocked) {
       const isCompleted = record?.completed || false;
-      const button = this.createStartButton(0, cardHeight / 2 - 50, challengeId, isCompleted);
+      const button = this.createStartButton(0, cardHeight / 2 - 70, challengeId, isCompleted);
       container.add(button);
     }
   }
@@ -323,18 +327,18 @@ export class ChallengeSelectorScene extends Phaser.Scene {
    */
   private createStartButton(x: number, y: number, challengeId: 1 | 2 | 3, isCompleted: boolean): Phaser.GameObjects.Container {
     const container = this.add.container(x, y);
-    const buttonWidth = 320; // 继续加宽
-    const buttonHeight = 85; // 继续加高
-    const cornerRadius = 10;
+    const buttonWidth = 360; // 更大的按钮，更易点击
+    const buttonHeight = 95; // 更大的按钮，更舒适
+    const cornerRadius = 12; // 更大的圆角，更柔和
 
     // 按钮背景（已完成的挑战使用灰蓝色，未完成的使用亮绿色）
     const bg = this.add.graphics();
-    const bgColor = isCompleted ? 0x64748b : 0x4ade80; // 灰蓝色 vs 绿色
+    const bgColor = isCompleted ? UI_COLORS.BUTTON_COMPLETED : UI_COLORS.BUTTON_START; // 灰蓝色 vs 绿色
     const bgAlpha = isCompleted ? 0.6 : 1.0; // 已完成的半透明
 
     bg.fillStyle(bgColor, bgAlpha);
     bg.fillRoundedRect(-buttonWidth / 2, -buttonHeight / 2, buttonWidth, buttonHeight, cornerRadius);
-    bg.lineStyle(2, isCompleted ? 0x475569 : 0x000000, 0.3);
+    bg.lineStyle(2, isCompleted ? UI_COLORS.BUTTON_COMPLETED_BORDER : UI_COLORS.SHADOW_DEEP, 0.3);
     bg.strokeRoundedRect(-buttonWidth / 2, -buttonHeight / 2, buttonWidth, buttonHeight, cornerRadius);
     bg.setName('bg');
 
@@ -367,13 +371,13 @@ export class ChallengeSelectorScene extends Phaser.Scene {
         bgGraphics.clear();
         if (isCompleted) {
           // 已完成：悬停时略微变亮
-          bgGraphics.fillStyle(0x748096, 0.8);
+          bgGraphics.fillStyle(UI_COLORS.BUTTON_COMPLETED_HOVER, 0.8);
         } else {
           // 未完成：悬停时更亮的绿色
-          bgGraphics.fillStyle(0x66bb6a, 1);
+          bgGraphics.fillStyle(UI_COLORS.BUTTON_START_HOVER, 1);
         }
         bgGraphics.fillRoundedRect(-buttonWidth / 2, -buttonHeight / 2, buttonWidth, buttonHeight, cornerRadius);
-        bgGraphics.lineStyle(2, isCompleted ? 0x475569 : 0x000000, 0.3);
+        bgGraphics.lineStyle(2, isCompleted ? UI_COLORS.BUTTON_COMPLETED_BORDER : UI_COLORS.SHADOW_DEEP, 0.3);
         bgGraphics.strokeRoundedRect(-buttonWidth / 2, -buttonHeight / 2, buttonWidth, buttonHeight, cornerRadius);
       }
     });
@@ -391,7 +395,7 @@ export class ChallengeSelectorScene extends Phaser.Scene {
         bgGraphics.clear();
         bgGraphics.fillStyle(bgColor, bgAlpha);
         bgGraphics.fillRoundedRect(-buttonWidth / 2, -buttonHeight / 2, buttonWidth, buttonHeight, cornerRadius);
-        bgGraphics.lineStyle(2, isCompleted ? 0x475569 : 0x000000, 0.3);
+        bgGraphics.lineStyle(2, isCompleted ? UI_COLORS.BUTTON_COMPLETED_BORDER : UI_COLORS.SHADOW_DEEP, 0.3);
         bgGraphics.strokeRoundedRect(-buttonWidth / 2, -buttonHeight / 2, buttonWidth, buttonHeight, cornerRadius);
       }
     });
@@ -434,8 +438,8 @@ export class ChallengeSelectorScene extends Phaser.Scene {
   private createGradientBackground(): void {
     const bg = this.add.graphics();
     bg.fillGradientStyle(
-      0x4a7a9e, 0x4a7a9e,
-      0x5e8ba8, 0x5e8ba8,
+      UI_COLORS.BG_GRADIENT_TOP, UI_COLORS.BG_GRADIENT_TOP,      // 顶部
+      UI_COLORS.BG_GRADIENT_BOTTOM, UI_COLORS.BG_GRADIENT_BOTTOM, // 底部
       1
     );
     bg.fillRect(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
